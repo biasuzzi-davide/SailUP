@@ -12,16 +12,16 @@
 </head>
 <body>
     <!--Salta al contenuto per screen reader DA NASCONDEREEEE in css-->
-    <a href="#contenuto_principale" class="skip-link">Salta al contenuto</a>
+    <a href="#contenuto_principale" class="skipLink">Salta al contenuto</a>
 
     <header role="banner">
         <div class="logo">
-            <a href="index.html" alt="Home">SailUP</a>
+            <a href="index.html">SailUP</a>
         </div>
 
-        <nav role="navigation" aria-label="Menu principale">
+        <nav>
             <ul>
-                <li lang="en" class="currentLink">Home</a></li>
+                <li class="currentLink"><span lang="en">Home</span></li>
                 <li><a href="catalogo_noleggio.html">Noleggio</a></li>
                 <li><a href="catalogo_esperienze.html">Esperienze</a></li>
                 <li lang="en"><a href="blog.html">Blog</a></li>
@@ -37,20 +37,29 @@
 
         <!--Sezione noleggio-->
         <section aria-labelledby="noleggio-title">
-            <h2 id="noleggio-title">Noleggia la tua Barca</h2>
+            <h3 id="noleggio-title">Noleggia la tua Barca</h3>
             <p>Scegli tra la nostra flotta di gommoni, gozzi e barche a vela. Con o senza patente, trova l'imbarcazione perfetta per la tua giornata in mare.</p>
             <a href="catalogo_noleggio.html" class="button">Scopri la Flotta</a>
         </section>
 
         <!--Sezione esperienze-->
         <section aria-labelledby="esperienze-title">
-            <h2 id="esperienze-title">Vivi le Nostre Esperienze</h2>
-            <p>Lasciati guidare dai nostri skipper esperti in tour indimenticabili verso Capri, Ischia, Procida e la Costiera Amalfitana. Tu pensa solo a rilassarti, al resto ci pensiamo noi.</p>
-            <a href="catalogo_esperienze.html" class="button">Esplora i Tour</a>
+            <h3 id="esperienze-title">Vivi le Nostre Esperienze</h3>
+            <!--Domanda: lang en devo ripeterlo per tutte le parole inglesi?-->
+            <p>Lasciati guidare dai nostri <span lang="en">skipper</span> esperti in <span lang="en">tour</span> indimenticabili verso Capri, Ischia, Procida e la Costiera Amalfitana. Tu pensa solo a rilassarti, al resto ci pensiamo noi.</p>
+            <a href="catalogo_esperienze.html" class="button">Esplora i <span lang="en">Tour</span></a>
         </section>
+
+        <!--Sezione blog-->
+        <section aria-labelledby="blog-title">
+            <h3 id="blog-title">Suggerimenti per le tue avventure</h3>
+            <p>Sei indeciso su cosa visitare? Lasciati ispirare dalle guide presenti nel nostro <span lang="en">blog</span>.</p>
+            <a href="blog.html" class="button">Consulta il <span lang="en">Blog</span></a>
+        </section>
+
     </main>
 
-    <footer role="contentinfo">
+    <footer>
         <p>SailUP S.r.l. - P.IVA: 12345678901</p>
         <p>Sede: Via Caracciolo, 80122 Napoli (NA)</p>
         <nav aria-label="Menu piè di pagina">
