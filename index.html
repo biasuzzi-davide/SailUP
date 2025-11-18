@@ -14,10 +14,26 @@
     <!--Salta al contenuto per screen reader DA NASCONDEREEEE in css-->
     <a href="#contenuto_principale" class="skipLink">Salta al contenuto</a>
 
-    <header role="banner">
+    <header>
         <div class="logo">
             <a href="index.html">SailUP</a>
         </div>
+
+        <!--Menu a tendina inserito come placeholder, da completare una volta capita la logica della selezione lingua
+
+        <div class="langSelector">
+            <span class="currentLang">IT</span>
+            <ul class="dropdownMenu">
+                <li class="nonSelectedLang"><a href="link">EN</a></li>
+                <li class="nonSelectedLang"><a href="link">FR</a></li>
+                <li class="nonSelectedLang"><a href="link">DE</a></li>
+                <li class="nonSelectedLang"><a href="link">SP</a></li>
+            </ul>
+
+            </li>
+        </div>
+
+        Fine menu selezione lingua-->
 
         <nav>
             <ul>
@@ -45,7 +61,7 @@
         <!--Sezione esperienze-->
         <section aria-labelledby="esperienze-title">
             <h3 id="esperienze-title">Vivi le Nostre Esperienze</h3>
-            <!--Domanda: lang en devo ripeterlo per tutte le parole inglesi?-->
+            <!--Domanda: lang en devo ripeterlo per tutte le parole inglesi, e anche per le parole di uso comune in italiano?-->
             <p>Lasciati guidare dai nostri <span lang="en">skipper</span> esperti in <span lang="en">tour</span> indimenticabili verso Capri, Ischia, Procida e la Costiera Amalfitana. Tu pensa solo a rilassarti, al resto ci pensiamo noi.</p>
             <a href="catalogo_esperienze.html" class="button">Esplora i <span lang="en">Tour</span></a>
         </section>
@@ -62,8 +78,9 @@
     <footer>
         <p>SailUP S.r.l. - P.IVA: 12345678901</p>
         <p>Sede: Via Caracciolo, 80122 Napoli (NA)</p>
-        <nav aria-label="Menu piè di pagina">
+        <nav aria-label="Menu legale">
             <ul>
+                <li><a href="FAQ.html">Domande frequenti</a></li>
                 <li><a href="privacy.html">Privacy Policy</a></li>
                 <li><a href="cookie.html">Cookie Policy</a></li>
             </ul>
