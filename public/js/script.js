@@ -1,0 +1,87 @@
+document.addEventListener('DOMContentLoaded', () => {
+    
+    /* ---------------------------------------
+       1. GESTIONE MENU MOBILE (Hamburger)
+       --------------------------------------- */
+    const hamburgerBtn = document.getElementById('hamburger-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    // Selettori per le icone dentro il bottone
+    const openIcon = document.querySelector('.hamburger-icon'); // L'icona "☰"
+    const closeIcon = document.querySelector('.close-icon');    // L'icona "✕"
+
+    if (hamburgerBtn && mobileMenu) {
+        hamburgerBtn.addEventListener('click', () => {
+            const isExpanded = hamburgerBtn.getAttribute('aria-expanded') === 'true';
+            
+            // 1. Toggle stato ARIA per accessibilità
+            hamburgerBtn.setAttribute('aria-expanded', !isExpanded);
+            
+            // 2. Toggle Visibilità Menu 
+            // (Nota: Assicurati che nel CSS esista la regola: #mobile-menu.active { display: block; })
+            mobileMenu.classList.toggle('active');
+            
+            // 3. Toggle Icone usando la classe .hidden definita nel CSS
+            if (!isExpanded) {
+                // Apertura menu
+                openIcon.classList.add('hidden');
+                closeIcon.classList.remove('hidden');
+                document.body.style.overflow = 'hidden'; // Blocca lo scroll della pagina
+            } else {
+                // Chiusura menu
+                openIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+                document.body.style.overflow = ''; // Ripristina lo scroll
+            }
+        });
+    }
+
+    /* ---------------------------------------
+       2. GESTIONE TEMA (Chiaro / Scuro)
+       --------------------------------------- */
+    const themeToggle = document.querySelector('.theme-toggle');
+    const htmlElement = document.documentElement;
+    const sunIcon = document.querySelector('.sun');
+    const moonIcon = document.querySelector('.moon');
+
+    // Controlla preferenza salvata o di sistema
+    const savedTheme = localStorage.getItem('theme');
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    const applyTheme = (theme) => {
+        // Imposta l'attributo dati per il CSS
+        htmlElement.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+        
+        // Aggiorna Icone & Etichette usando la classe .hidden
+        if (theme === 'dark') {
+            // Modo Scuro attivo: Mostra il SOLE (per passare a chiaro), Nascondi la LUNA
+            sunIcon.classList.remove('hidden');
+            moonIcon.classList.add('hidden');
+            themeToggle.setAttribute('aria-label', 'Passa al tema chiaro');
+        } else {
+            // Modo Chiaro attivo: Nascondi il SOLE, Mostra la LUNA (per passare a scuro)
+            sunIcon.classList.add('hidden');
+            moonIcon.classList.remove('hidden');
+            themeToggle.setAttribute('aria-label', 'Passa al tema scuro');
+        }
+    };
+
+    // Inizializzazione all'avvio
+    if (savedTheme) {
+        applyTheme(savedTheme);
+    } else if (systemPrefersDark) {
+        applyTheme('dark');
+    } else {
+        applyTheme('light');
+    }
+
+    // Event Listener al click
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = htmlElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            applyTheme(newTheme);
+        });
+    }
+});
