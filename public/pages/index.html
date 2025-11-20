@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="it" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SailUP - Noleggio Barche ed Esperienze a Napoli</title>
+    <meta name="description" content="Noleggia barche a vela, a motore e gommoni o partecipa a tour ed esperienze uniche nel Golfo di Napoli con SailUP.">
+    <meta name="authors" content="Alberto Reginato, Francesco Marcon">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../css/style.css" media="screen">
+    <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)"> 
+    <!-- ancora mancante  -->
+    <link rel="stylesheet" href="../css/print.css" media="print">
+</head>
+<body>
+    <a href="#main-content" class="skip-to-content">Salta al contenuto</a>
+
+    <header>
+        <div class="header-container">
+            <div class="header">
+                <div class="logo">
+                        <picture>
+                        <source srcset="" type="image/avif"/>
+                        <img alt="Logo SailUP" src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=400&q=80" width="30"/>
+                    </picture>
+                    <h1 lang="en">
+                        <span class="logo-text">Sail<span class="text-accent">UP</span></span>
+                    </h1>
+                </div>
+
+                <nav id="main-menu" aria-label="Menu principale">
+                    <ul>
+                        <li class="current-page">Home</li>
+                        <li><a href="catalogo_noleggio.html">Noleggio</a></li>
+                        <li><a href="catalogo_esperienze.html">Esperienze</a></li>
+                        <li lang="en"><a href="blog.html">Blog</a></li>
+                        <li><a href="chi_siamo.html">Chi Siamo</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-buttons">
+                    <button class="theme-toggle" aria-pressed="false" aria-label="Attiva modalità scura">
+                        <span class="active-icon sun">☀️</span>
+                        <span class="inactive-icon moon">☾</span> 
+                    </button>
+                    <a href="login.html" class="btn-layout">Login</a>
+                </div>
+
+                <button id="hamburger-btn" aria-expanded="false" aria-controls="mobile-menu" aria-label="Menu Mobile">
+                    <span class="hamburger-icon">☰</span>
+                    <span class="close-icon hidden">✕</span>
+                </button>
+            </div>
+
+            <nav id="mobile-menu" aria-label="Menu mobile">
+                <ul>
+                    <li class="current-page">Home</li>
+                    <li><a href="catalogo_noleggio.html">Noleggio</a></li>
+                    <li><a href="catalogo_esperienze.html">Esperienze</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="chi_siamo.html">Chi Siamo</a></li>
+                    <li><a href="login.html" class="menu-login">Login / Registrati</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+   <div class="sr-only" id="breadcrumb-label">
+        <span lang="en">breadcrumb</span>
+    </div>
+    <nav aria-labelledby="breadcrumb-label" id="breadcrumb">
+        <ol>
+            <li><span lang="en" class="">Home</span></li>       <!-- inserire una classe -->
+        </ol>
+    </nav>
+
+    <main id="main-content">
+        
+        <section id="hero" class="section-container">
+            <div>
+                <h1>La tua avventura nel Golfo di Napoli inizia qui</h1>
+                <p>Noleggia barche a vela, a motore e gommoni o lasciati guidare dai nostri skipper in tour indimenticabili.</p>
+                <div class="cta-group">
+                    <a href="catalogo_noleggio.html" class="btn-layout cta-primary">Scopri la Flotta</a>
+                    <a href="catalogo_esperienze.html" class="btn-layout-light">I nostri Tour</a>
+                </div>
+            </div>
+            <img src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=400&q=80" alt="Barca a vela nel golfo di Napoli al tramonto" class="hero-image">
+        </section>
+
+        <section id="featured-fleet" aria-labelledby="rental-title">
+            <div class="section-container">
+                <div class="section-header">
+                    <h2 id="rental-title">La nostra Flotta</h2>
+                    <a href="catalogo_noleggio.html" aria-label="Vedi tutta la flotta">Mostra tutte</a>
+                </div>
+                
+                <div class="cards-wrapper">
+                    <article class="card">
+                        <a href="dettaglio_barca.html">
+                            <img src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=400&q=80" alt="Yacht a motore modello Sunseeker">
+                            <p class="card-title">Sunseeker Predator</p>
+                            <p class="card-subtitle">Motore • 12<abbr title="Metri">m</abbr></p>
+                        </a>
+                    </article>
+                    <article class="card">
+                        <a href="dettaglio_barca.html">
+                            <img src="https://images.unsplash.com/photo-1534669740902-e09e38a6a29f?auto=format&fit=crop&w=400&q=80" alt="Barca a vela Bavaria 46">
+                            <p class="card-title">Bavaria 46</p>
+                            <p class="card-subtitle">Vela • 14<abbr title="Metri">m</abbr></p>
+                        </a>
+                    </article>
+                    <article class="card">
+                        <a href="dettaglio_barca.html">
+                            <img src="https://images.unsplash.com/photo-1534669740902-e09e38a6a29f?auto=format&fit=crop&w=400&q=80" alt="Gommone Sacs per escursioni giornaliere">
+                            <p class="card-title">Sacs Strider</p>
+                            <p class="card-subtitle">Gommone • 8<abbr title="Metri">m</abbr></p>
+                        </a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <div id="quote-section">
+            <blockquote cite="https://mareeletterarie.com/blogs/gazzetta-del-gabbiano/seneca-e-la-rotta-del-vento-navigare-con-consapevolezza">
+                Non esiste vento favorevole per il marinaio che non sa dove andare.
+            </blockquote>
+            <cite>Seneca</cite>
+        </div>
+
+        <section class="section-container" aria-labelledby="experiences-title">
+            <div class="section-header">
+                <h2 id="experiences-title">Esperienze Uniche</h2>
+            </div>
+            <p>Tour indimenticabili verso Capri e Ischia. Tu rilassati, al resto pensiamo noi.</p>
+            <div class="grid-2-col">
+                <a href="catalogo_esperienze.html" class="horizontal-card">
+                    <h3>Tour Capri 🍋</h3>
+                    <p>Giro dell'isola e Faraglioni</p>
+                </a>
+                <a href="catalogo_esperienze.html" class="horizontal-card">
+                    <h3>Tramonto a Ischia 🌅</h3>
+                    <p>Aperitivo in barca</p>
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="section-container footer-content">
+            
+            <div class="footer-col brand-col">
+                <div class="logo footer-logo">
+                    <span class="logo-icon" aria-hidden="true">⚓</span>
+                    <span class="logo-text">Sail<span class="text-accent">UP</span></span>
+                </div>
+                <p class="footer-tagline">
+                    Naviga il Golfo di Napoli con stile e sicurezza. La tua avventura inizia qui.
+                </p>
+            </div>
+
+            <div class="footer-col nav-col">
+                <h3 class="footer-heading">Esplora</h3>
+                <nav aria-label="Menu footer">
+                    <ul class="footer-links">
+                        <li><a href="chi_siamo.html">Chi Siamo</a></li>
+                        <li><a href="catalogo_noleggio.html">La Flotta</a></li>
+                        <li><a href="catalogo_esperienze.html">Esperienze</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="footer-col info-col">
+                <h3 class="footer-heading">Info & Contatti</h3>
+                <ul class="footer-links">
+                    <li><a href="FAQ.html">Domande Frequenti (FAQ)</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="cookie.html">Cookie Policy</a></li>
+                </ul>
+                <address class="footer-address">
+                    <p><strong>SailUP S.r.l.</strong></p>
+                    <p>Via Caracciolo, 80122 Napoli (NA)</p>
+                    <p>P.IVA: 12345678901</p>
+                </address>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="footer-bottom-container">
+                <div class="copyright">
+                    &copy; 2025 SailUP S.r.l. - All rights reserved.
+                </div>
+                
+                <div class="valid-logos">
+                    <img class="valid-code-icon" src="valid-xhtml10.png" alt="XHTML valido">
+                    <img class="valid-code-icon" src="valid-CSS.png" alt="CSS valido">
+                </div>
+
+                <a href="#main-content" class="scroll-to-top" aria-label="Torna all'inizio del contenuto">
+                    <span aria-hidden="true">⬆</span> Top
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,219 @@
+/* =========================================
+   SailUP - STILI MOBILE (Responsive)
+   ========================================= */
+
+/* --- Tipografia Adattiva per Mobile --- */
+@media screen and (max-width: 768px) {
+    :root {
+        /* Ridimensionamento font per schermi piccoli */
+        --fs-sm: 0.85rem;
+        --fs-base: 1rem;
+        --fs-md: 1.2rem;
+        --fs-lg: 1.5rem;
+        --fs-xl: 1.8rem;
+        --fs-xxl: 2.2rem;
+    }
+}
+
+/* --- Layout Generale --- */
+@media screen and (max-width: 768px) {
+    
+    /* Nascondi elementi Desktop */
+    #main-menu, 
+    .header-buttons {
+        display: none !important; /* Forza nascondimento su mobile */
+    }
+
+    /* Header Grid semplificata: Logo a sinistra, Hamburger a destra */
+    .header {
+        grid-template-columns: 1fr auto; 
+        gap: 1rem;
+        padding: 0.5rem 0;
+    }
+
+    /* Logo ridimensionato */
+    .logo img {
+        width: 25px;
+    }
+    .logo h1 {
+        font-size: 1.3rem;
+    }
+
+    /* Hamburger Button visibile */
+    #hamburger-btn {
+        display: flex !important; /* Sovrascrive il display: none del desktop */
+        align-items: center;
+        justify-content: center;
+        padding: 0.5rem;
+        border: 1px solid var(--col-border);
+        border-radius: var(--radius-sm);
+        background-color: transparent;
+        color: var(--col-primary);
+        font-size: 1.5rem;
+    }
+    
+    /* Gestione icone Hamburger */
+    #hamburger-btn .hamburger-icon,
+    #hamburger-btn .close-icon {
+        line-height: 1;
+    }
+    .hidden {
+        display: none;
+    }
+
+    /* --- Menu Mobile (Dropdown) --- */
+    #mobile-menu {
+        /* Di base nascosto via JS/CSS base, ma qui definiamo lo stile quando è attivo */
+        display: none; 
+        width: 100%;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: var(--col-bg);
+        box-shadow: var(--shadow-md);
+        border-bottom: 1px solid var(--col-border);
+        padding: 1rem;
+        z-index: 9999;
+    }
+
+    #mobile-menu.active {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        animation: slideDown 0.3s ease-out;
+    }
+
+    @keyframes slideDown {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .menu-login {
+        color: var(--col-primary) !important; /* Forza il colore primario */
+        font-weight: 700;       /* Opzionale: lo rende grassetto per evidenziarlo */
+        border-top: 2px solid transparent; /* Preparazione per eventuale hover */
+    }
+
+    .menu-login:hover {
+        color: var(--col-accent) !important;
+    }
+
+    #mobile-menu ul {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        padding: 0;
+        margin: 0;
+    }
+
+    #mobile-menu li {
+        border-bottom: 1px solid var(--col-border);
+    }
+    #mobile-menu li:last-child {
+        border-bottom: none;
+    }
+
+    #mobile-menu a {
+        display: block;
+        padding: 0.8rem 0;
+        font-size: var(--fs-md);
+        text-decoration: none;
+        color: var(--col-text);
+        font-weight: 600;
+    }
+    
+    /* Aggiungi bottoni azione dentro il menu mobile per facilità */
+    .mobile-actions {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 2px solid var(--col-border);
+    }
+    
+    /* --- Hero Section Mobile --- */
+    #hero {
+        grid-template-columns: 1fr; /* Colonna singola */
+        gap: 2rem;
+        text-align: center;
+        padding-top: 1rem;
+        min-height: auto;
+    }
+
+    .hero-image {
+        order: -1; /* Immagine sopra il testo */
+        max-height: 30vh;
+    }
+
+    .cta-group {
+        justify-content: center;
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .cta-group .btn-layout, 
+    .cta-group .btn-layout-light {
+        width: 100%; /* Bottoni a tutta larghezza */
+    }
+
+    /* --- Flotta & Card --- */
+    .cards-wrapper {
+        grid-template-columns: 1fr; /* Una card per riga su mobile stretto */
+        gap: 1.5rem;
+    }
+    
+    /* Se lo schermo è un po' più largo (tablet portrait), usa 2 colonne */
+    @media (min-width: 480px) {
+        .cards-wrapper {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    /* --- Esperienze (Grid 2 col -> 1 col) --- */
+    .grid-2-col {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    /* --- Footer Mobile --- */
+    .footer-content {
+        grid-template-columns: 1fr; /* Tutto in una colonna */
+        text-align: center;
+        gap: 2rem;
+        padding: 2rem 1rem;
+    }
+
+    .footer-logo {
+        justify-content: center;
+    }
+
+    .footer-bottom-container {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    /* Breadcrumb scrollabile orizzontalmente se troppo lungo */
+    #breadcrumb ol {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 0.5rem; /* Spazio per scrollbar eventuale */
+    }
+
+    /* Dialogs e Modali (se presenti) */
+    dialog {
+        width: 90%;
+        max-width: none;
+        margin: auto;
+    }
+}
