@@ -23,15 +23,13 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // 3. Toggle Icone usando la classe .hidden definita nel CSS
             if (!isExpanded) {
-                // Apertura menu
                 openIcon.classList.add('hidden');
                 closeIcon.classList.remove('hidden');
                 document.body.style.overflow = 'hidden'; // Blocca lo scroll della pagina
             } else {
-                // Chiusura menu
                 openIcon.classList.remove('hidden');
                 closeIcon.classList.add('hidden');
-                document.body.style.overflow = ''; // Ripristina lo scroll
+                document.body.style.overflow = ''; 
             }
         });
     }
@@ -44,30 +42,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const sunIcon = document.querySelector('.sun');
     const moonIcon = document.querySelector('.moon');
 
-    // Controlla preferenza salvata o di sistema
     const savedTheme = localStorage.getItem('theme');
     const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
     const applyTheme = (theme) => {
-        // Imposta l'attributo dati per il CSS
         htmlElement.setAttribute('data-theme', theme);
         localStorage.setItem('theme', theme);
         
-        // Aggiorna Icone & Etichette usando la classe .hidden
         if (theme === 'dark') {
-            // Modo Scuro attivo: Mostra il SOLE (per passare a chiaro), Nascondi la LUNA
             sunIcon.classList.remove('hidden');
             moonIcon.classList.add('hidden');
             themeToggle.setAttribute('aria-label', 'Passa al tema chiaro');
         } else {
-            // Modo Chiaro attivo: Nascondi il SOLE, Mostra la LUNA (per passare a scuro)
             sunIcon.classList.add('hidden');
             moonIcon.classList.remove('hidden');
             themeToggle.setAttribute('aria-label', 'Passa al tema scuro');
         }
     };
 
-    // Inizializzazione all'avvio
     if (savedTheme) {
         applyTheme(savedTheme);
     } else if (systemPrefersDark) {
@@ -76,7 +68,6 @@ document.addEventListener('DOMContentLoaded', () => {
         applyTheme('light');
     }
 
-    // Event Listener al click
     if (themeToggle) {
         themeToggle.addEventListener('click', () => {
             const currentTheme = htmlElement.getAttribute('data-theme');
