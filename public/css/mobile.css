@@ -1,219 +1,201 @@
-/* =========================================
-   SailUP - STILI MOBILE (Responsive)
-   ========================================= */
-
-/* --- Tipografia Adattiva per Mobile --- */
-@media screen and (max-width: 768px) {
+/* 1. TIPOGRAFIA FLUIDA 
+*/
+@supports (font-size: clamp(1rem, 1vi, 1rem)) {
     :root {
-        /* Ridimensionamento font per schermi piccoli */
-        --fs-sm: 0.85rem;
-        --fs-base: 1rem;
-        --fs-md: 1.2rem;
-        --fs-lg: 1.5rem;
-        --fs-xl: 1.8rem;
-        --fs-xxl: 2.2rem;
+        --fs-sm: clamp(0.8rem, 0.17vi + 0.76rem, 0.89rem);
+        --fs-base: clamp(1rem, 0.34vi + 0.91rem, 1.19rem);
+        --fs-md: clamp(1.25rem, 0.61vi + 1.1rem, 1.58rem);
+        --fs-lg: clamp(1.56rem, 1vi + 1.31rem, 2.11rem);
+        --fs-xl: clamp(1.95rem, 1.56vi + 1.56rem, 2.81rem);
+        --fs-xxl: clamp(2.44rem, 2.38vi + 1.85rem, 3.75rem);
     }
 }
 
-/* --- Layout Generale --- */
-@media screen and (max-width: 768px) {
-    
-    /* Nascondi elementi Desktop */
-    #main-menu, 
-    .header-buttons {
-        display: none !important; /* Forza nascondimento su mobile */
+@supports not (font-size: clamp(1rem, 1vi, 1rem)) {
+    :root {
+        --fs-sm: 0.8rem;
+        --fs-base: 1rem;
+        --fs-md: 1.25rem;
+        --fs-lg: 1.56rem;
+        --fs-xl: 1.95rem;
+        --fs-xxl: 2.44rem;
     }
+}
 
-    /* Header Grid semplificata: Logo a sinistra, Hamburger a destra */
-    .header {
-        grid-template-columns: 1fr auto; 
-        gap: 1rem;
-        padding: 0.5rem 0;
-    }
+/* 2. HEADER & NAVIGAZIONE 
+   Layout: [Logo] ...spazio... [Theme Toggle] [Hamburger]
+*/
 
-    /* Logo ridimensionato */
-    .logo img {
-        width: 25px;
-    }
-    .logo h1 {
-        font-size: 1.3rem;
-    }
+#main-menu {
+    display: none;
+}
 
-    /* Hamburger Button visibile */
-    #hamburger-btn {
-        display: flex !important; /* Sovrascrive il display: none del desktop */
-        align-items: center;
-        justify-content: center;
-        padding: 0.5rem;
-        border: 1px solid var(--col-border);
-        border-radius: var(--radius-sm);
-        background-color: transparent;
-        color: var(--col-primary);
-        font-size: 1.5rem;
-    }
-    
-    /* Gestione icone Hamburger */
-    #hamburger-btn .hamburger-icon,
-    #hamburger-btn .close-icon {
-        line-height: 1;
-    }
-    .hidden {
-        display: none;
-    }
+.header {
+    grid-template-columns: 1fr auto auto; 
+    gap: 0.5rem;
+    align-items: center;
+}
 
-    /* --- Menu Mobile (Dropdown) --- */
-    #mobile-menu {
-        /* Di base nascosto via JS/CSS base, ma qui definiamo lo stile quando è attivo */
-        display: none; 
-        width: 100%;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        background-color: var(--col-bg);
-        box-shadow: var(--shadow-md);
-        border-bottom: 1px solid var(--col-border);
-        padding: 1rem;
-        z-index: 9999;
-    }
+.header-buttons {
+    display: flex;
+    align-items: center;
+    margin-inline: 0; 
+}
 
-    #mobile-menu.active {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        animation: slideDown 0.3s ease-out;
-    }
+.header-buttons .btn-layout,
+.header-buttons .btn-layout-light {
+    display: none; 
+}
 
-    @keyframes slideDown {
-        from { opacity: 0; transform: translateY(-10px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
+.theme-toggle {
+    display: inline-flex;
+    font-size: 1.4rem;
+    padding: 0.5em;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+}
 
-    .menu-login {
-        color: var(--col-primary) !important; /* Forza il colore primario */
-        font-weight: 700;       /* Opzionale: lo rende grassetto per evidenziarlo */
-        border-top: 2px solid transparent; /* Preparazione per eventuale hover */
-    }
+#hamburger-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5em;
+    border-radius: 1em; 
+    cursor: pointer;
+    min-width: 44px;
+    min-height: 44px;
+}
 
-    .menu-login:hover {
-        color: var(--col-accent) !important;
-    }
+/* 3. MOBILE MENU  */
 
-    #mobile-menu ul {
-        list-style: none;
-        display: flex;
-        flex-direction: column;
-        gap: 0;
-        padding: 0;
-        margin: 0;
-    }
+#mobile-menu {
+    display: none;
+    width: 100%;
+    grid-column: 1 / -1; 
+    user-select: none;
+}
 
-    #mobile-menu li {
-        border-bottom: 1px solid var(--col-border);
-    }
-    #mobile-menu li:last-child {
-        border-bottom: none;
-    }
+#mobile-menu.active {
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    margin-top: 1rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--col-border);
+    animation: slideDown 0.3s ease-out;
+}
 
-    #mobile-menu a {
-        display: block;
-        padding: 0.8rem 0;
-        font-size: var(--fs-md);
-        text-decoration: none;
-        color: var(--col-text);
-        font-weight: 600;
-    }
-    
-    /* Aggiungi bottoni azione dentro il menu mobile per facilità */
-    .mobile-actions {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        margin-top: 1rem;
-        padding-top: 1rem;
-        border-top: 2px solid var(--col-border);
-    }
-    
-    /* --- Hero Section Mobile --- */
-    #hero {
-        grid-template-columns: 1fr; /* Colonna singola */
-        gap: 2rem;
-        text-align: center;
-        padding-top: 1rem;
-        min-height: auto;
-    }
+#mobile-menu.active ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5em;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
 
-    .hero-image {
-        order: -1; /* Immagine sopra il testo */
-        max-height: 30vh;
-    }
+#mobile-menu.active ul li {
+    font-family: var(--font-head);
+    font-size: var(--fs-md);
+    text-align: center;
+    color: var(--col-text);
+}
 
-    .cta-group {
-        justify-content: center;
-        flex-direction: column;
-        width: 100%;
-    }
-    
-    .cta-group .btn-layout, 
-    .cta-group .btn-layout-light {
-        width: 100%; /* Bottoni a tutta larghezza */
-    }
+#mobile-menu.active ul li.current-page {
+    font-weight: 700;
+    color: var(--col-primary);
+    border-bottom: 3px solid var(--col-accent);
+}
 
-    /* --- Flotta & Card --- */
-    .cards-wrapper {
-        grid-template-columns: 1fr; /* Una card per riga su mobile stretto */
-        gap: 1.5rem;
-    }
-    
-    /* Se lo schermo è un po' più largo (tablet portrait), usa 2 colonne */
-    @media (min-width: 480px) {
-        .cards-wrapper {
-            grid-template-columns: 1fr 1fr;
-        }
-    }
+#mobile-menu.active ul li a {
+    text-decoration: none;
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+}
 
-    .section-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.5rem;
-    }
+#mobile-menu.active ul li a:hover {
+    text-decoration: underline;
+    color: var(--col-primary);
+}
 
-    /* --- Esperienze (Grid 2 col -> 1 col) --- */
-    .grid-2-col {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-    }
+#mobile-menu .menu-login {
+    font-weight: 600;
+    color: var(--col-primary);
+}
 
-    /* --- Footer Mobile --- */
-    .footer-content {
-        grid-template-columns: 1fr; /* Tutto in una colonna */
-        text-align: center;
-        gap: 2rem;
-        padding: 2rem 1rem;
-    }
+/* 4. LAYOUT CONTENUTI (Mapping Reference) */
 
-    .footer-logo {
-        justify-content: center;
-    }
+#hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 2rem;
+}
 
-    .footer-bottom-container {
-        flex-direction: column;
-        gap: 1rem;
-    }
-    
-    /* Breadcrumb scrollabile orizzontalmente se troppo lungo */
-    #breadcrumb ol {
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        white-space: nowrap;
-        -webkit-overflow-scrolling: touch;
-        padding-bottom: 0.5rem; /* Spazio per scrollbar eventuale */
-    }
+#hero .hero-image {
+    max-width: 20em; 
+    margin: 0 auto;
+    order: -1; 
+}
 
-    /* Dialogs e Modali (se presenti) */
-    dialog {
-        width: 90%;
-        max-width: none;
-        margin: auto;
-    }
+#hero h1 {
+    font-size: var(--fs-xxl);
+}
+#hero p {
+    font-size: var(--fs-md);
+    margin-inline: auto;
+}
+
+.cta-group {
+    flex-direction: column;
+    width: 100%;
+}
+.cta-group .btn-layout,
+.cta-group .btn-layout-light {
+    width: 100%;
+}
+
+#quote-section {
+    padding: 3em 1.5rem;
+}
+#quote-section blockquote {
+    font-size: var(--fs-md);
+}
+
+.cards-wrapper {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+.grid-2-col {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+.horizontal-card {
+    text-align: center;
+    padding: 1.5rem;
+}
+
+/* 5. FOOTER */
+footer .footer-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 2rem;
+}
+
+footer .logo p {
+    font-size: var(--fs-md);
+}
+
+.footer-bottom-container {
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Animazione */
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
