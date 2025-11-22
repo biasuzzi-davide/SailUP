@@ -3,11 +3,11 @@
    ========================================= */
 :root {
   /* --- Palette Colori Nautica --- */
-  --col-primary: #003366; /* Blu Navy Profondo */
-  --col-primary-light: #004d99; /* Blu più chiaro per hover */
+  --col-primary: #0e161d; /* Blu Navy Profondo */
+  --col-primary-light: #FE654F; /* Blu più chiaro per hover */
 
-  --col-accent: #d4af37; /* Oro Classico */
-  --col-accent-hover: #b89628; /* Oro Scuro */
+  --col-accent: #FE654F; /* Oro Classico */
+  --col-accent-hover: #DA4167; /* Oro Scuro */
 
   --col-bg: #ffffff; /* Bianco */
   --col-bg-alt: #f4f8fb; /* Bianco Ghiaccio (sfondo sezioni) */
@@ -35,7 +35,7 @@
 [data-theme="dark"] {
   --col-primary: #80b3ff; 
   --col-primary-light: #4d94ff;
-  --col-accent: #ffd700; 
+  --col-accent: #FE654F; 
   --col-bg: #0f1724; 
   --col-bg-alt: #162030; 
   --col-text: #f0f0f0;
