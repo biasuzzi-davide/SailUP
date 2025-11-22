@@ -1,72 +1,288 @@
 <!DOCTYPE html>
-<html lang="it">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SailUP - La nostra flotta</title>
-    <meta name="description" content="Esplora la nostra flotta, filtra tra le barche proposte per trovare il modello più adatto alle tue esigenze.">
-    <meta name="keywords" content="noleggio barche napoli, affitto barca, noleggio gommone, affitto imbarcazione">
-    <meta name="author" content="Alberto">
-    <link rel="stylesheet" href="css/style.css" media="screen">
-    <link rel="stylesheet" href="css/print.css" media="print">
-</head>
-<body>
-    <!--Salta al contenuto per screen reader DA NASCONDEREEEE in css-->
-    <a href="#contenuto_principale" class="skipLink">Salta al contenuto</a>
-
-    <header>
-        <div class="logo">
-            <a href="index.html">SailUP</a>
-        </div>
-
-        <!--Menu a tendina inserito come placeholder, da completare una volta capita la logica della selezione lingua
+    <html lang="it" data-theme="light">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Noleggio Barche a Napoli | Flotta a Vela e Motore - SailUP</title>
+        <meta name="description" content="Scopri la nostra flotta di barche a noleggio a Napoli. Scegli tra barche a vela, a motore e gommoni, con o senza patente. Prenota la tua avventura oggi!">
+        <meta name="authors" content="Alberto Reginato, Francesco Marcon">
         
-        <div class="langSelector">
-            <span class="currentLang">IT</span>
-            <ul class="dropdownMenu">
-                <li class="nonSelectedLang"><a href="link">EN</a></li>
-                <li class="nonSelectedLang"><a href="link">FR</a></li>
-                <li class="nonSelectedLang"><a href="link">DE</a></li>
-                <li class="nonSelectedLang"><a href="link">SP</a></li>
-            </ul>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+        
+        <link rel="stylesheet" href="../css/style.css" media="screen">
+        <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)"> 
+        <!-- ancora mancante  -->
+        <link rel="stylesheet" href="../css/print.css" media="print">
+    </head>
 
-            </li>
+    <body>
+        <a href="#main-content" class="skip-to-content">Salta al contenuto</a>
+
+        <header>
+            <div class="header-container">
+                <div class="header">
+                    <div class="logo">
+                            <picture>
+                            <source srcset="" type="image/avif"/>
+                            <img alt="Logo SailUP" src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=400&q=80" width="30"/>
+                        </picture>
+                        <h1 lang="en">
+                            <span class="logo-text">Sail<span class="text-accent">UP</span></span>
+                        </h1>
+                    </div>
+
+                    <nav id="main-menu" aria-label="Menu principale">
+                        <ul>
+                            <li lang="en"><a href="index.html">Home</a></li>
+                            <li class="current-page">Noleggio</li>
+                            <li><a href="catalogo_esperienze.html">Esperienze</a></li>
+                            <li lang="en"><a href="blog.html">Blog</a></li>
+                            <li><a href="chi_siamo.html">Chi Siamo</a></li>
+                        </ul>
+                    </nav>
+
+                    <div class="header-buttons">
+                        <button class="theme-toggle" aria-pressed="false" aria-label="Attiva modalità scura">
+                            <span class="active-icon sun">☀️</span>
+                            <span class="inactive-icon moon">🌙</span> 
+                        </button>
+                        <a href="login.html" class="btn-layout">Login</a>
+                    </div>
+
+                    <button id="hamburger-btn" aria-expanded="false" aria-controls="mobile-menu" aria-label="Menu Mobile">
+                        <span class="hamburger-icon">☰</span>
+                        <span class="close-icon hidden">✕</span>
+                    </button>
+                </div>
+
+                <nav id="mobile-menu" aria-label="Menu mobile">
+                    <ul>
+                        <li lang="en"><a href="index.html">Home</a></li>
+                        <li class="current-page">Noleggio</li>
+                        <li><a href="catalogo_esperienze.html">Esperienze</a></li>
+                        <li lang="en"><a href="blog.html">Blog</a></li>
+                        <li><a href="chi_siamo.html">Chi Siamo</a></li>
+                        <li><a href="login.html" class="menu-login">Login / Registrati</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+    <div class="sr-only" id="breadcrumb-label">
+            <span lang="en">breadcrumb</span>
         </div>
-
-        Fine menu selezione lingua-->
-
-        <nav>
-            <ul>
-                <li class="currentLink"><a href="index.html">Noleggio</a></li>
-                <li class="currentLink"><span>Noleggio</span></li>
-                <li><a href="catalogo_esperienze.html">Esperienze</a></li>
-                <li lang="en"><a href="blog.html">Blog</a></li>
-                <li><a href="chi_siamo.html">Chi Siamo</a></li>
-                <li lang="en"><a href="login.html">Login</a></li>
-            </ul>
+        <nav aria-labelledby="breadcrumb-label" id="breadcrumb">
+            <ol>
+                <li><span lang="en" class="breadcrumb-link"><a href="index.html">Home</a></span> > Noleggio</li>       <!-- inserire una classe -->
+            </ol>
         </nav>
-    </header>
 
-    <main id="contenuto_principale">
-        <!--Corretto mettere SailUp come h1 in ogni pagina e di conseguenza il titolo pagina come h2?-->
-        <h1>SailUp</h1>
-        <h2>La nostra flotta</h2>
+        <main id="main-content">
+            <div class="section-container">
+                <h1>La Nostra Flotta a Noleggio</h1>
+                <p>Esplora la nostra selezione di imbarcazioni disponibili per il noleggio nello splendido Golfo di Napoli. Dalle agili barche a vela ai potenti motoscafi, trova il mezzo perfetto per la tua prossima avventura in mare.</p>
+                
+                <!-- Sezione filtri -->
+                <div class="catalog-layout">
+                    <aside class="filters-sidebar">
+                        <h2>Filtra la tua ricerca</h2>
+                        <form action="catalogo_noleggio.php" method="GET">
+                            <fieldset>
+                                <legend>Tipo di Barca</legend>
+                                <div>
+                                    <input type="checkbox" id="vela" name="tipo[]" value="vela">
+                                    <label for="vela">Vela</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" id="motore" name="tipo[]" value="motore">
+                                    <label for="motore">Motore</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" id="gommone" name="tipo[]" value="gommone">
+                                    <label for="gommone">Gommone</label>
+                                </div>
+                            </fieldset>
+                    
+                            <fieldset>
+                                <legend>Patente Nautica</legend>
+                                <div>
+                                    <input type="radio" id="patente_si" name="patente" value="richiesta">
+                                    <label for="patente_si">Richiesta</label>
+                                </div>
+                                <div>
+                                    <input type="radio" id="patente_no" name="patente" value="non_richiesta">
+                                    <label for="patente_no">Non richiesta</label>
+                                </div>
+                                <div>
+                                    <input type="radio" id="patente_ind" name="patente" value="indifferente" checked>
+                                    <label for="patente_ind">Indifferente</label>
+                                </div>
+                            </fieldset>
+                    
+                            <div>
+                                <label for="posti">Numero di Posti (minimo)</label>
+                                <input type="number" id="posti" name="posti" min="1" placeholder="Es. 4">
+                            </div>
+                    
+                            <div>
+                                <label for="data_inizio">Data di inizio</label>
+                                <input type="date" id="data_inizio" name="data_inizio">
+                            </div>
+                    
+                            <div>
+                                <label for="data_fine">Data di fine</label>
+                                <input type="date" id="data_fine" name="data_fine">
+                            </div>
+                    
+                            <div class="filter-group">
+                                <label for="prezzo_max">Prezzo max (€/giorno)</label>
+                                <input type="range" id="prezzo_max" name="prezzo_max" min="100" max="2000" step="50" />
+                            </div>
+                    
+                            <button type="submit" class="btn-layout">Applica Filtri</button>
+                        </form>
+                    </aside>                
+                    
+                    <!-- Brche disponibili per il noleggio -->
+                    <section class="results-grid">
+                        <h2>Le nostre imbarcazioni</h2>
+                        <div class="cards-wrapper">
+                            
+                            <article class="card">
+                                <a href="dettaglio_barca.html">
+                                    <img src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=400&q=80" alt="Yacht a motore Sunseeker Predator ormeggiato">
+                                    <div class="card-content">
+                                        <h3 class="card-title">Sunseeker Predator</h3>
+                                        <p class="card-subtitle">Motore • 12m • Fino a 8 persone</p>
+                                        <p>A partire da <strong>€850</strong> al giorno</p>
+                                    </div>
+                                </a>
+                            </article>
+                    
+                            <article class="card">
+                                <a href="dettaglio_barca.html">
+                                    <img src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=400&q=80" alt="Barca a vela Bavaria 46 con vele spiegate">
+                                    <div class="card-content">
+                                        <h3 class="card-title">Bavaria 46</h3>
+                                        <p class="card-subtitle">Vela • 14m • Fino a 10 persone</p>
+                                        <p>A partire da <strong>€600</strong> al giorno</p>
+                                    </div>
+                                </a>
+                            </article>
+                    
+                            <article class="card">
+                                <a href="dettaglio_barca.html">
+                                    <img src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=400&q=80" alt="Gommone Sacs Strider veloce sull'acqua">
+                                    <div class="card-content">
+                                        <h3 class="card-title">Sacs Strider</h3>
+                                        <p class="card-subtitle">Gommone • 8m • Fino a 6 persone</p>
+                                        <p>A partire da <strong>€350</strong> al giorno</p>
+                                    </div>
+                                </a>
+                            </article>
+                    
+                            <article class="card">
+                                <a href="dettaglio_barca.html">
+                                    <img src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=400&q=80" alt="Barca a vela Jeanneau Sun Odyssey 410">
+                                    <div class="card-content">
+                                        <h3 class="card-title">Jeanneau Sun Odyssey 410</h3>
+                                        <p class="card-subtitle">Vela • 12m • Fino a 8 persone</p>
+                                        <p>A partire da <strong>€550</strong> al giorno</p>
+                                    </div>
+                                </a>
+                            </article>
+                    
+                            <article class="card">
+                                <a href="dettaglio_barca.html">
+                                    <img src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=400&q=80" alt="Yacht a motore Azimut 55 Fly">
+                                    <div class="card-content">
+                                        <h3 class="card-title">Azimut 55 Fly</h3>
+                                        <p class="card-subtitle">Motore • 17m • Fino a 12 persone</p>
+                                        <p>A partire da <strong>€1200</strong> al giorno</p>
+                                    </div>
+                                </a>
+                            </article>
+                    
+                            <article class="card">
+                                <a href="dettaglio_barca.html">
+                                    <img src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=400&q=80" alt="Gommone Joker Boat Clubman 24">
+                                    <div class="card-content">
+                                        <h3 class="card-title">Joker Boat Clubman 24</h3>
+                                        <p class="card-subtitle">Gommone • 7m • Fino a 8 persone</p>
+                                        <p>A partire da <strong>€300</strong> al giorno</p>
+                                    </div>
+                                </a>
+                            </article>
+                        </div>
+                    </section>
 
-    </main>
+                </div>
+            </div>
+        </main>
 
-    <footer>
-        <!--recuperare immagine XHTML e CSS valido-->
-        <img class="imgValidCode" src="logo valid-xhtml10.png" alt="XHTML valido">
-        <img class="imgValidCode" src="logo valid-CSS.png" alt="CSS valido">
-        <p>XHTML valido SailUP S.r.l. - P.IVA: 12345678901 CSS valido</p>
-        <p>Sede: Via Caracciolo, 80122 Napoli (NA)</p>
-        <nav aria-label="Menu legale">
-            <ul>
-                <li><a href="FAQ.html">Domande frequenti</a></li>
-                <li><a href="privacy.html">Privacy Policy</a></li>
-                <li><a href="cookie.html">Cookie Policy</a></li>
-            </ul>
-        </nav>
-    </footer>
-</body>
+        <footer>
+            <div class="section-container footer-content">
+                
+                <div class="footer-col brand-col">
+                    <div class="logo footer-logo">
+                        <span class="logo-icon" aria-hidden="true">⚓</span>
+                        <span class="logo-text"><span lang="en">Sail</span><span class="text-accent" lang="en">UP</span></span>
+                    </div>
+                    <p class="footer-tagline">
+                        Naviga il Golfo di Napoli con stile e sicurezza. La tua avventura inizia qui.
+                    </p>
+                </div>
+
+                <div class="footer-col nav-col">
+                    <h3 class="footer-heading">Esplora</h3>
+                    <nav aria-label="Menu footer">
+                        <ul class="footer-links">
+                            <li lang="en"><a href="index.html">Home</a></li>
+                            <li><a href="catalogo_noleggio.html">Noleggio</a></li>
+                            <li><a href="catalogo_esperienze.html">Esperienze</a></li>
+                            <li lang="en"><a href="blog.html">Blog</a></li>
+                            <li><a href="chi_siamo.html">Chi Siamo</a></li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <div class="footer-col info-col">
+                    <h3 class="footer-heading">Info & Contatti</h3>
+                    <ul class="footer-links">
+                        <li><a href="FAQ.html">Domande Frequenti (FAQ)</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="cookie.html">Cookie Policy</a></li>
+                    </ul>
+                    <address class="footer-address">
+                        <p><strong>SailUP S.r.l.</strong></p>
+                        <p>Via Caracciolo, 80122 Napoli (NA)</p>
+                        <p>P.IVA: 12345678901</p>
+                    </address>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-bottom-container">
+                    <div class="copyright">
+                        &copy; 2025 SailUP S.r.l. - All rights reserved.
+                    </div>
+                    
+                    <div class="valid-logos">
+                        <img class="valid-code-icon" src="valid-xhtml10.png" alt="XHTML valido">
+                        <img class="valid-code-icon" src="valid-CSS.png" alt="CSS valido">
+                    </div>
+
+                    <!-- Area bottone torna su, inizialmente non selezionabile con tab perchè invisibile -->
+                    <a href="#main-content"class="scroll-to-top" id="btnTop" aria-label="Torna all'inizio del contenuto" tabindex="-1">
+                        <span aria-hidden="true">⬆</span> <span lang="en">Top</span>
+                    </a>
+                </div>
+            </div>
+        </footer>
+
+        <script src="../js/script.js"></script>
+
+    </body>
 </html>

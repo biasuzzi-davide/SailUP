@@ -1,8 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    /* ---------------------------------------
-       1. GESTIONE MENU MOBILE (Hamburger)
-       --------------------------------------- */
+/* ---------------------------------------
+   1. GESTIONE MENU MOBILE (Hamburger)
+   --------------------------------------- */
+
     const hamburgerBtn = document.getElementById('hamburger-btn');
     const mobileMenu = document.getElementById('mobile-menu');
     
@@ -34,9 +35,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    /* ---------------------------------------
-       2. GESTIONE TEMA (Chiaro / Scuro)
-       --------------------------------------- */
+/* ---------------------------------------
+    2. GESTIONE TEMA (Chiaro / Scuro)
+   --------------------------------------- */
     const themeToggle = document.querySelector('.theme-toggle');
     const htmlElement = document.documentElement;
     const sunIcon = document.querySelector('.sun');
@@ -74,5 +75,28 @@ document.addEventListener('DOMContentLoaded', () => {
             const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
             applyTheme(newTheme);
         });
+    }
+});
+
+/* ---------------------------------------
+   3. Gestione del bottone top
+   --------------------------------------- */
+
+   document.addEventListener("DOMContentLoaded", function() {
+    var btn = document.getElementById("btnTop");
+
+    window.onscroll = function() {
+        scrollFunction();
+    };
+
+    function scrollFunction() {
+        // Quando vengono superati 150px mostra il bottone e lo rende raggiungibile via tab
+        if (document.body.scrollTop > 150 || document.documentElement.scrollTop > 150) {
+            btn.classList.add("show");
+            btn.setAttribute("tabindex", "0");
+        } else {
+            btn.classList.remove("show");
+            btn.setAttribute("tabindex", "-1");
+        }
     }
 });

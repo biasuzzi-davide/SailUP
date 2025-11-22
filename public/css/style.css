@@ -3,14 +3,14 @@
    ========================================= */
 :root {
   /* --- Palette Colori Nautica --- */
-  --col-primary: #0e161d; /* Blu Navy Profondo */
-  --col-primary-light: #FE654F; /* Blu più chiaro per hover */
+  --col-primary: #030a11; /* Blu Navy Profondo */
+  --col-primary-light: #FE654F; /* Rosso corallo */
 
-  --col-accent: #FE654F; /* Oro Classico */
-  --col-accent-hover: #DA4167; /* Oro Scuro */
+  --col-accent: #FE654F; /* Rosso corallo */
+  --col-accent-hover: #D95340; /* Rosso corallo più scuro per hover */
 
   --col-bg: #ffffff; /* Bianco */
-  --col-bg-alt: #f4f8fb; /* Bianco Ghiaccio (sfondo sezioni) */
+  --col-bg-alt: #F5F2EB; /* Bianco Ghiaccio (sfondo sezioni) */
 
   --col-text: #1a1a1a; /* Testo principale */
   --col-text-inv: #ffffff; /* Testo su sfondo scuro */
@@ -33,11 +33,11 @@
 }
 
 [data-theme="dark"] {
-  --col-primary: #80b3ff; 
-  --col-primary-light: #4d94ff;
+  --col-primary: #F5F2EB; 
+  --col-primary-light: #E2DCCF;
   --col-accent: #FE654F; 
-  --col-bg: #0f1724; 
-  --col-bg-alt: #162030; 
+  --col-bg: #030a11; 
+  --col-bg-alt: #060D16; 
   --col-text: #f0f0f0;
   --col-text-inv: #121212;
   --col-text-muted: #a8a29e;
@@ -187,8 +187,8 @@ img {
   box-shadow: var(--shadow-sm);
 }
 .btn-layout:hover {
-  background-color: var(--col-primary-light);
-  border-color: var(--col-primary-light);
+  background-color: var(--col-accent);
+  border-color: var(--col-accent);
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
@@ -217,7 +217,7 @@ header {
   padding: 0.5rem 0;
 }
 [data-theme="dark"] header {
-  background-color: rgba(15, 23, 36, 0.95);
+  background-color: var(--col-bg);
 }
 
 .header-container {
@@ -562,21 +562,43 @@ footer {
   gap: 1rem;
 }
 
-.scroll-to-top {
-  background-color: var(--col-accent);
-  color: var(--col-primary);
-  padding: 0.5em 1em;
-  border-radius: var(--radius-btn);
-  font-weight: bold;
-  text-decoration: none;
-}
-.scroll-to-top:hover {
-  background-color: var(--col-accent-hover);
-}
-
 .valid-logos img {
   height: 30px;
   display: inline-block;
   filter: grayscale(1) invert(1);
   opacity: 0.6;
 }
+
+/* =========================================
+   8. Bottone torna su
+   ========================================= */
+
+.scroll-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background-color: var(--col-accent);
+  color: var(--col-primary);
+  padding: 0.5em 1em;
+  border-radius: var(--radius-btn);
+  font-weight: bold;
+  text-decoration: none;
+  transition: opacity 0.3s, visibility 0.3s;
+
+  /* Parte per rendere il bottone inizialmente nascosto e non cliccabile */
+  opacity: 0;
+  visibility: hidden; 
+  pointer-events: none;
+}
+
+.scroll-to-top:hover {
+  background-color: var(--col-accent-hover);
+}
+
+/* Parte per rendere il bottone visibile tramite js */
+.scroll-to-top.show {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto; 
+}
+
