@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="it" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SailUP - Noleggio Barche ed Esperienze a Napoli</title>
+    <meta name="description" content="Noleggia barche a vela, a motore e gommoni o partecipa a tour ed esperienze uniche nel Golfo di Napoli con SailUP.">
+    <meta name="authors" content="Alberto Reginato, Francesco Marcon">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../css/style.css" media="screen">
+    <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)"> 
+    <!-- ancora mancante  -->
+    <link rel="stylesheet" href="../css/print.css" media="print">
+</head>
+<body>
+    <a href="#main-content" class="skip-to-content">Salta al contenuto</a>
+
+    <header>
+        <div class="header-container">
+            <div class="header">
+                <div class="logo">
+                        <picture>
+                        <source srcset="" type="image/avif"/>
+                        <img alt="Logo SailUP" src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=400&q=80" width="30"/>
+                    </picture>
+                    <h1 lang="en">
+                        <span class="logo-text">Sail<span class="text-accent">UP</span></span>
+                    </h1>
+                </div>
+
+                <nav id="main-menu">
+                    <ul>
+                        <li lang="en"><a href="index.html">Home</a></li>
+                        <li><a href="catalogo_noleggio.html">Noleggio</a></li>
+                        <li><a href="catalogo_esperienze.html">Esperienze</a></li>
+                        <li lang="en"><a href="blog.html">Blog</a></li>
+                        <li><a href="chi_siamo.html">Chi Siamo</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-buttons">
+                    <button class="theme-toggle" aria-pressed="false" aria-label="Attiva modalità scura">
+                        <span class="active-icon sun">☀️</span>
+                        <span class="inactive-icon moon">🌙</span> 
+                    </button>
+                    <a href="login.html" class="btn-layout">Login</a>
+                </div>
+
+                <button id="hamburger-btn" aria-expanded="false" aria-controls="mobile-menu" aria-label="Menu Mobile">
+                    <span class="hamburger-icon">☰</span>
+                    <span class="close-icon hidden">✕</span>
+                </button>
+            </div>
+
+            <nav id="mobile-menu" aria-label="Menu mobile">
+                <ul>
+                    <li class="current-page">Home</li>
+                    <li><a href="catalogo_noleggio.html">Noleggio</a></li>
+                    <li><a href="catalogo_esperienze.html">Esperienze</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="chi_siamo.html">Chi Siamo</a></li>
+                    <li><a href="login.html" class="menu-login">Login / Registrati</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+   <div class="sr-only" id="breadcrumb-label">
+        <span lang="en">breadcrumb</span>
+    </div>
+    <nav aria-labelledby="breadcrumb-label" id="breadcrumb">
+        <ol>
+            <li><span lang="en" class="breadcrumb-link"><a href="index.html">Home</a></span> > <span lang="en">Login</span></li>
+        </ol>
+    </nav>
+
+    <main id="main-content">
+        <section class="section-container">
+            <main id="main-content" class="login-page">
+                <div class="login-container">
+                    
+                    <div class="login-header">
+                        <h2>Bentornato a Bordo</h2>
+                        <p>Accedi per gestire le tue prenotazioni</p>
+                    </div>
+                    
+            
+                    <form action="" method="POST" class="login-form"> <!-- inserire il nome del file PHP che riceverà i dati -->
+                        
+                        <div class="form-group">
+                            <label for="username"><span lang="en">Email</span>:</label>
+                            <input type="text" id="email" name="email" required 
+                                   autocomplete="email" placeholder="nome@esempio.it">
+                        </div>
+            
+                        <div class="form-group">
+                            <label for="password"><span lang="en">Password</span>:</label>
+                            <div class="password-wrapper">
+                                <input type="password" id="password" name="password" required 
+                                       autocomplete="current-password" placeholder="Inserisci la tua password">
+                                
+                                <button type="button" id="togglePassword" class="icon-btn" aria-label="Mostra password">
+                                    <span id="eyeIcon" aria-hidden="true">👁️</span>
+                                </button>
+                            </div>
+                        </div>
+            
+                        <div class="form-actions">
+                            <label class="checkbox-container">
+                                <input type="checkbox" name="remember_me">
+                                <span class="checkmark"></span>
+                                Ricordami
+                            </label>
+                            <p><a href="" class="text-accent"><span lang="en">Password</span> dimenticata?</a></p> <!-- inserire il nome del file PHP per il recupero password -->
+                        </div>
+            
+                        <button type="submit" class="btn-layout cta-primary">Accedi</button>
+                    </form>
+            
+                    <div class="login-footer">
+                        <p>Non hai un <span lang="en">account</span>? <a href="registrazione.html" class="text-accent">Registrati ora</a></p>
+                        <a href="index.html" class="text-accent">← Torna alla Home</a>
+                    </div>
+                </div>
+            </main>
+        </section>
+    </main>
+
+    <footer>
+        <div class="section-container footer-content">
+            
+            <div class="footer-col brand-col">
+                <div class="logo footer-logo">
+                    <span class="logo-icon" aria-hidden="true">⚓</span>
+                    <span class="logo-text"><span lang="en">Sail</span><span class="text-accent" lang="en">UP</span></span>
+                </div>
+                <p class="footer-tagline">
+                    Naviga il Golfo di Napoli con stile e sicurezza. La tua avventura inizia qui.
+                </p>
+            </div>
+
+            <div class="footer-col nav-col">
+                <h3 class="footer-heading">Esplora</h3>
+                <nav aria-label="Menu footer">
+                    <ul class="footer-links">
+                        <li lang="en"><a href="index.html">Home</a></li>
+                        <li><a href="catalogo_noleggio.html">Noleggio</a></li>
+                        <li><a href="catalogo_esperienze.html">Esperienze</a></li>
+                        <li lang="en"><a href="blog.html">Blog</a></li>
+                        <li><a href="chi_siamo.html">Chi Siamo</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="footer-col info-col">
+                <h3 class="footer-heading">Info & Contatti</h3>
+                <ul class="footer-links">
+                    <li><a href="FAQ.html">Domande Frequenti (FAQ)</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="cookie.html">Cookie Policy</a></li>
+                </ul>
+                <address class="footer-address">
+                    <p><strong>SailUP S.r.l.</strong></p>
+                    <p>Via Caracciolo, 80122 Napoli (NA)</p>
+                    <p>P.IVA: 12345678901</p>
+                </address>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="footer-bottom-container">
+                <div class="copyright">
+                    &copy; 2025 SailUP S.r.l. - All rights reserved.
+                </div>
+                
+                <div class="valid-logos">
+                    <img class="valid-code-icon" src="valid-xhtml10.png" alt="XHTML valido">
+                    <img class="valid-code-icon" src="valid-CSS.png" alt="CSS valido">
+                </div>
+
+                <a href="#main-content" class="scroll-to-top" aria-label="Torna all'inizio del contenuto">
+                    <span aria-hidden="true">⬆</span> Top
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+
+</body>
+</html>
