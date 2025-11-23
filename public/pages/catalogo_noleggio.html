@@ -93,31 +93,31 @@
   </nav>
 
   <main id="main-content">
-    <div class="section-container">
-      <h1>La Nostra Flotta a Noleggio</h1>
-      <p>
-        Esplora la nostra selezione di imbarcazioni disponibili per il
-        noleggio nello splendido Golfo di Napoli. Dalle agili barche a vela ai
-        potenti motoscafi, trova il mezzo perfetto per la tua prossima
-        avventura in mare.
-      </p>
+    <section id="noleggio-hero" class="section-container">
+      <div class="hero-content">
+        <h1>La Nostra Flotta a Noleggio</h1>
+        <p>Dalle agili barche a vela ai potenti motoscafi, trova il mezzo perfetto per la tua prossima avventura nel
+          Golfo di Napoli.</p>
+      </div>
+    </section>
 
-      <!-- Sezione filtri -->
+    <section id="catalogo" class="section-container">
+
       <div class="catalog-layout">
         <aside class="filters-sidebar">
           <h2>Filtra la tua ricerca</h2>
           <form action="catalogo_noleggio.php" method="GET">
             <fieldset>
               <legend>Tipo di Barca</legend>
-              <div>
+              <div class="form-check">
                 <input type="checkbox" id="vela" name="tipo[]" value="vela" />
                 <label for="vela">Vela</label>
               </div>
-              <div>
+              <div class="form-check">
                 <input type="checkbox" id="motore" name="tipo[]" value="motore" />
                 <label for="motore">Motore</label>
               </div>
-              <div>
+              <div class="form-check">
                 <input type="checkbox" id="gommone" name="tipo[]" value="gommone" />
                 <label for="gommone">Gommone</label>
               </div>
@@ -125,125 +125,172 @@
 
             <fieldset>
               <legend>Patente Nautica</legend>
-              <div>
+              <div class="form-check">
                 <input type="radio" id="patente_si" name="patente" value="richiesta" />
                 <label for="patente_si">Richiesta</label>
               </div>
-              <div>
+              <div class="form-check">
                 <input type="radio" id="patente_no" name="patente" value="non_richiesta" />
                 <label for="patente_no">Non richiesta</label>
               </div>
-              <div>
-                <input type="radio" id="patente_ind" name="patente" value="indifferente" checked />
+              <div class="form-check">
+                <input type="radio" id="patente_ind" name="patente" value="indifferente" checked="checked" />
                 <label for="patente_ind">Indifferente</label>
               </div>
             </fieldset>
 
-            <div>
-              <label for="posti">Numero di Posti (minimo)</label>
-              <input type="number" id="posti" name="posti" min="1" placeholder="Es. 4" />
-            </div>
+            <fieldset>
+              <legend>Dettagli di Noleggio</legend>
 
-            <div>
-              <label for="data_inizio">Data di inizio</label>
-              <input type="date" id="data_inizio" name="data_inizio" />
-            </div>
+              <div class="filters-sidebar">
+                <label for="posti">Posti (minimo)</label>
+                <input type="number" id="posti" name="posti" min="1" placeholder="Es. 4" />
+              </div>
 
-            <div>
-              <label for="data_fine">Data di fine</label>
-              <input type="date" id="data_fine" name="data_fine" />
-            </div>
+              <div class="filters-sidebar">
+                <label for="data_inizio">Data inizio</label>
+                <input type="date" id="data_inizio" name="data_inizio" />
+              </div>
 
-            <div class="filter-group">
-              <label for="prezzo_max">Prezzo max (€/giorno)</label>
-              <input type="range" id="prezzo_max" name="prezzo_max" min="100" max="2000" step="50" />
-            </div>
+              <div class="filters-sidebar">
+                <label for="data_fine">Data fine</label>
+                <input type="date" id="data_fine" name="data_fine" />
+              </div>
 
-            <button type="submit" class="btn-layout">Applica Filtri</button>
+              <div class="filters-sidebar">
+                <label for="maxPrice">Prezzo massimo (€/giorno):</label>
+                <input type="number" id="maxPrice" name="maxPrice" placeholder="Costo massimo" min="100" step="100"
+                  aria-label="Filtra per prezzo massimo giornaliero in Euro">
+              </div>
+
+            </fieldset>
+
+            <button type="submit" class="btn-layout full-width">Applica Filtri</button>
           </form>
         </aside>
 
-        <!-- Brche disponibili per il noleggio -->
-        <section class="results-grid">
-          <h2>Le nostre imbarcazioni</h2>
+        <div class="results-grid">
+          <div class="section-header-mobile">
+            <h2>Le nostre imbarcazioni</h2>
+          </div>
+
           <div class="cards-wrapper">
             <article class="card">
-              <a href="dettaglio_barca.html">
+              <a href="dettaglio_barca.html?id=sunseeker" class="card-link-wrapper"
+                aria-label="Dettagli per Sunseeker Predator">
                 <img src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=400&q=80"
                   alt="Yacht a motore Sunseeker Predator ormeggiato" />
                 <div class="card-content">
                   <h3 class="card-title">Sunseeker Predator</h3>
-                  <p class="card-subtitle">Motore • 12m • Fino a 8 persone</p>
-                  <p>A partire da <strong>€850</strong> al giorno</p>
+                  <p class="card-description">Uno yacht sportivo e lussuoso, perfetto per chi cerca velocità e comfort
+                    senza compromessi.</p>
+                  <ul>
+                    <li> Tipo: Motore</li>
+                    <li> Lunghezza: 12m</li>
+                    <li> Posti: 8</li>
+                    <li> Da 850€/giorno</li>
+                  </ul>
                 </div>
               </a>
             </article>
 
             <article class="card">
-              <a href="dettaglio_barca.html">
+              <a href="dettaglio_barca.html?id=bavaria46" class="card-link-wrapper"
+                aria-label="Dettagli per Bavaria 46">
                 <img src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=400&q=80"
                   alt="Barca a vela Bavaria 46 con vele spiegate" />
                 <div class="card-content">
                   <h3 class="card-title">Bavaria 46</h3>
-                  <p class="card-subtitle">Vela • 14m • Fino a 10 persone</p>
-                  <p>A partire da <strong>€600</strong> al giorno</p>
+                  <p class="card-description">L'eleganza della vela unita a spazi ampi. Ideale per crociere rilassanti
+                    in famiglia o con amici.</p>
+                  <ul>
+                    <li> Tipo: Vela</li>
+                    <li> Lunghezza: 14m</li>
+                    <li> Posti: 10</li>
+                    <li> Da 600€/giorno</li>
+                  </ul>
                 </div>
               </a>
             </article>
 
             <article class="card">
-              <a href="dettaglio_barca.html">
+              <a href="dettaglio_barca.html?id=sacs" class="card-link-wrapper" aria-label="Dettagli per Sacs Strider">
                 <img src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=400&q=80"
                   alt="Gommone Sacs Strider veloce sull'acqua" />
                 <div class="card-content">
                   <h3 class="card-title">Sacs Strider</h3>
-                  <p class="card-subtitle">Gommone • 8m • Fino a 6 persone</p>
-                  <p>A partire da <strong>€350</strong> al giorno</p>
+                  <p class="card-description">Agile, veloce e divertente. La scelta migliore per raggiungere rapidamente
+                    le calette più nascoste.</p>
+                  <ul>
+                    <li> Tipo: Gommone</li>
+                    <li> Lunghezza: 8m</li>
+                    <li> Posti: 6</li>
+                    <li> Da 350€/giorno</li>
+                  </ul>
                 </div>
               </a>
             </article>
 
             <article class="card">
-              <a href="dettaglio_barca.html">
+              <a href="dettaglio_barca.html?id=odyssey" class="card-link-wrapper"
+                aria-label="Dettagli per Jeanneau Sun Odyssey 410">
                 <img src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=400&q=80"
                   alt="Barca a vela Jeanneau Sun Odyssey 410" />
                 <div class="card-content">
-                  <h3 class="card-title">Jeanneau Sun Odyssey 410</h3>
-                  <p class="card-subtitle">Vela • 12m • Fino a 8 persone</p>
-                  <p>A partire da <strong>€550</strong> al giorno</p>
+                  <h3 class="card-title">Jeanneau Sun Odyssey</h3>
+                  <p class="card-description">Prestazioni veliche eccellenti e interni moderni per un'esperienza di
+                    navigazione superiore.</p>
+                  <ul>
+                    <li> Tipo: Vela</li>
+                    <li> Lunghezza: 12m</li>
+                    <li> Posti: 8</li>
+                    <li> Da 550€/giorno</li>
+                  </ul>
                 </div>
               </a>
             </article>
 
             <article class="card">
-              <a href="dettaglio_barca.html">
+              <a href="dettaglio_barca.html?id=azimut" class="card-link-wrapper"
+                aria-label="Dettagli per Azimut 55 Fly">
                 <img src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=400&q=80"
                   alt="Yacht a motore Azimut 55 Fly" />
                 <div class="card-content">
                   <h3 class="card-title">Azimut 55 Fly</h3>
-                  <p class="card-subtitle">
-                    Motore • 17m • Fino a 12 persone
-                  </p>
-                  <p>A partire da <strong>€1200</strong> al giorno</p>
+                  <p class="card-description">Il massimo del lusso. Flybridge spazioso e interni raffinati per un
+                    charter esclusivo.</p>
+                  <ul>
+                    <li> Tipo: Motore</li>
+                    <li> Lunghezza: 17m</li>
+                    <li> Posti: 12</li>
+                    <li> Da 1200€/giorno</li>
+                  </ul>
                 </div>
               </a>
             </article>
 
             <article class="card">
-              <a href="dettaglio_barca.html">
+              <a href="dettaglio_barca.html?id=joker" class="card-link-wrapper"
+                aria-label="Dettagli per Joker Boat Clubman 24">
                 <img src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=400&q=80"
                   alt="Gommone Joker Boat Clubman 24" />
                 <div class="card-content">
-                  <h3 class="card-title">Joker Boat Clubman 24</h3>
-                  <p class="card-subtitle">Gommone • 7m • Fino a 8 persone</p>
-                  <p>A partire da <strong>€300</strong> al giorno</p>
+                  <h3 class="card-title">Joker Clubman 24</h3>
+                  <p class="card-description">Pratico e spazioso, ideale per famiglie o gruppi di amici che vogliono
+                    esplorare la costa in libertà.</p>
+                  <ul>
+                    <li> Tipo: Gommone</li>
+                    <li> Lunghezza: 7m</li>
+                    <li> Posti: 8</li>
+                    <li> Da 300€/giorno</li>
+                  </ul>
                 </div>
               </a>
             </article>
           </div>
-        </section>
+        </div>
       </div>
-    </div>
+    </section>
   </main>
 
   <footer>
