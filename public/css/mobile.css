@@ -67,7 +67,9 @@
     min-height: 44px;
 }
 
-/* 3. MOBILE MENU  */
+/* 3. MOBILE MENU 
+   Aggiornato per matchare la logica del Desktop (bordo trasparente)
+*/
 
 #mobile-menu {
     display: none;
@@ -96,29 +98,32 @@
     margin: 0;
 }
 
-#mobile-menu.active ul li {
+#mobile-menu.active ul li a,
+#mobile-menu.active ul li.current-page {
+    display: block;
     font-family: var(--font-head);
     font-size: var(--fs-md);
     text-align: center;
     color: var(--col-text);
+    text-decoration: none;
+    padding: 0.2em 0;
+    
+    /* Bordo presente ma invisibile */
+    border-bottom: 3px solid transparent;
+    
+    transition: border-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+#mobile-menu.active ul li a:hover {
+    color: var(--col-primary);
+    border-bottom-color: var(--col-accent);
 }
 
 #mobile-menu.active ul li.current-page {
     font-weight: 700;
     color: var(--col-primary);
-    border-bottom: 3px solid var(--col-accent);
-}
-
-#mobile-menu.active ul li a {
-    text-decoration: none;
-    color: inherit;
-    font-family: inherit;
-    font-size: inherit;
-}
-
-#mobile-menu.active ul li a:hover {
-    text-decoration: underline;
-    color: var(--col-primary);
+    /* Bordo visibile fisso */
+    border-bottom-color: var(--col-accent);
 }
 
 #mobile-menu .menu-login {
