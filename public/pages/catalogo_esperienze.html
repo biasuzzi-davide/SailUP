@@ -90,7 +90,133 @@
     </ol>
   </nav>
 
-  <main id="main-content"></main>
+  <main id="main-content">
+    <section id="esperienze-hero" class="section-container">
+      <div class="hero-content">
+        <h1>Vivi il Mare, Crea Ricordi Indelebili</h1>
+        <p>Lasciati guidare dai nostri skipper esperti alla scoperta delle meraviglie del Golfo di Napoli. Tour
+          esclusivi, aperitivi al tramonto e giornate da sogno ti aspettano.</p>
+      </div>
+    </section>
+
+    <section id="catalogo" class="section-container">
+
+      <div class="catalog-layout">
+        <aside class="filters-sidebar">
+          <h2>Filtra le esperienze</h2>
+          <form action="catalogo_esperienze.php" method="GET"> <!-- INSERIRE PHP-->
+
+            <fieldset>
+              <legend>Dettagli del Tour</legend>
+              <div class="filters-sidebar">
+                <label for="posti_disponibili">Posti (minimo richiesto)</label>
+                <input type="number" id="posti_disponibili" name="posti_disponibili" min="1" placeholder="Es. 2" />
+              </div>
+
+              <div class="filters-sidebar">
+                <label for="data_esperienza">Data</label>
+                <input type="date" id="data_esperienza" name="data_esperienza" />
+              </div>
+
+              <div class="filters-sidebar">
+                <label for="lingua_guida">Lingua della Guida</label>
+                <select name="lingua_guida" id="lingua_guida">
+                  <option value="indifferente">Indifferente</option>
+                  <option value="italiano">Italiano</option>
+                  <option value="Inglese">Inglese</option>
+                  <option value="francese">Francese</option>
+                </select>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend>Budget</legend>
+              <div class="filters-sidebar">
+                <label for="maxPriceExperience">Prezzo massimo (€/tour):</label>
+                <input type="number" id="maxPriceExperience" name="maxPriceExperience" placeholder="Costo massimo"
+                  min="50" step="50" aria-label="Filtra per prezzo massimo del tour in Euro">
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend>Accessibilità</legend>
+              <div class="filters-sidebar">
+                <input type="checkbox" id="accessibile" name="accessibile" value="true">
+                <label for="accessibile">Adatta a persone con disabilità (Accessibile)</label>
+              </div>
+            </fieldset>
+
+            <button type="submit" class="btn-layout full-width">Applica Filtri</button>
+          </form>
+        </aside>
+
+        <div class="results-grid">
+          <div class="section-header-mobile">
+            <h2>Le Nostre Esperienze Uniche</h2>
+          </div>
+
+          <div class="cards-wrapper">
+            <article class="card">
+              <a href="dettaglio_esperienza.html?id=tour-capri" class="card-link-wrapper"
+                aria-label="Dettagli per Tour di Capri & Grotta Azzurra">
+                <img src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=400&q=80"
+                  alt="Vista dei Faraglioni di Capri da una barca al tramonto">
+                <div class="card-content">
+                  <h3 class="card-title">Tour di Capri & Grotta Azzurra</h3>
+                  <p class="card-description">Un'intera giornata dedicata alla scoperta dell'isola più iconica del
+                    mondo.
+                    Nuota in acque cristalline e ammira i Faraglioni.</p>
+                  <ul>
+                    <li>Posti: 8</li>
+                    <li>Durata: 8 ore</li>
+                    <li>Guida: Italiano</li>
+                    <li>Da 850€</li>
+                  </ul>
+                </div>
+              </a>
+            </article>
+            <article class="card">
+              <a href="dettaglio_esperienza.html?id=aperitivo-ischia" class="card-link-wrapper"
+                aria-label="Dettagli per Aperitivo al Tramonto a Ischia">
+                <img src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=400&q=80"
+                  alt="Aperitivo in barca con vista sul Castello Aragonese di Ischia">
+                <div class="card-content">
+                  <h3 class="card-title">Aperitivo al Tramonto a Ischia</h3>
+                  <p class="card-description">Goditi un aperitivo con prodotti tipici locali mentre il sole tramonta
+                    dietro
+                    il Castello Aragonese. Un'esperienza magica e rilassante.</p>
+                  <ul>
+                    <li>Posti: 6</li>
+                    <li>Durata: 4 ore</li>
+                    <li>Guida: Italiano/Inglese</li>
+                    <li>Da 450€</li>
+                  </ul>
+                </div>
+              </a>
+            </article>
+            <article class="card">
+              <a href="dettaglio_esperienza.html?id=costiera-positano" class="card-link-wrapper"
+                aria-label="Dettagli per Esplorazione della Costiera Amalfitana">
+                <img src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=400&q=80"
+                  alt="Le case colorate di Positano viste dal mare durante un tour in barca">
+                <div class="card-content">
+                  <h3 class="card-title">Esplorazione della Costiera Amalfitana</h3>
+                  <p class="card-description">Naviga lungo la divina costiera, con soste a Positano e Amalfi per
+                    esplorare i
+                    borghi e gustare le prelibatezze locali.</p>
+                  <ul>
+                    <li>Posti: 10</li>
+                    <li>Durata: 8 ore</li>
+                    <li>Guida: Italiano/Inglese</li>
+                    <li>Da 1200€</li>
+                  </ul>
+                </div>
+              </a>
+            </article>
+          </div>
+        </div>
+    </section>
+  </main>
 
   <footer>
     <div class="section-container footer-content">
