@@ -4,13 +4,13 @@
 :root {
   /* --- Palette Colori Nautica --- */
   --col-primary: #030a11; /* Blu Navy Profondo */
-  --col-primary-light: #FE654F; /* Rosso corallo */
+  --col-primary-light: #fe654f; /* Rosso corallo */
 
-  --col-accent: #FE654F; /* Rosso corallo */
-  --col-accent-hover: #D95340; /* Rosso corallo più scuro per hover */
+  --col-accent: #fe654f; /* Rosso corallo */
+  --col-accent-hover: #d95340; /* Rosso corallo più scuro per hover */
 
   --col-bg: #ffffff; /* Bianco */
-  --col-bg-alt: #F5F2EB; /* Bianco Ghiaccio (sfondo sezioni) */
+  --col-bg-alt: #f5f2eb; /* Bianco Ghiaccio (sfondo sezioni) */
 
   --col-text: #1a1a1a; /* Testo principale */
   --col-text-inv: #ffffff; /* Testo su sfondo scuro */
@@ -19,8 +19,8 @@
   --col-border: #e0e0e0; /* Bordi sottili */
 
   /* --- Spaziature & Radius --- */
-  --radius-btn: 99em; 
-  --radius-card: 1rem; 
+  --radius-btn: 99em;
+  --radius-card: 1rem;
   --radius-sm: 0.5rem;
 
   --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
@@ -33,11 +33,11 @@
 }
 
 [data-theme="dark"] {
-  --col-primary: #F5F2EB; 
-  --col-primary-light: #E2DCCF;
-  --col-accent: #FE654F; 
-  --col-bg: #030a11; 
-  --col-bg-alt: #060D16; 
+  --col-primary: #f5f2eb;
+  --col-primary-light: #e2dccf;
+  --col-accent: #fe654f;
+  --col-bg: #030a11;
+  --col-bg-alt: #060d16;
   --col-text: #f0f0f0;
   --col-text-inv: #121212;
   --col-text-muted: #a8a29e;
@@ -65,7 +65,7 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 6rem; 
+  scroll-padding-top: 6rem;
 }
 
 body {
@@ -252,25 +252,36 @@ header {
   justify-content: center;
   list-style: none;
   gap: 2rem;
+  align-items: center;
 }
-#main-menu > ul > li > a {
+#main-menu > ul > li > a,
+#main-menu > ul > li.current-page {
+  display: block;
   text-decoration: none;
   font-weight: 600;
   font-family: var(--font-head);
-  position: relative;
-  padding: 0.5em 0;
+  color: var(--col-text);
+  padding: 0.1em 0;
+  /* Applico un border trasparente */
+  border-bottom: 3px solid transparent;
+  /* Transizione sul colore del bordo */
+  transition: border-color 0.3s ease-in-out, color 0.3s ease-in-out;
 }
-#main-menu > ul > li > a:hover {
-  color: var(--col-primary);
-  text-decoration: underline;
+#main-menu > ul > li > a {
+  font-weight: 600;
 }
 
-/* Indicatore pagina corrente */
-.current-page {
-  font-family: var(--font-head);
+#main-menu > ul > li > a:hover {
+  color: var(--col-primary);
+  /* Cambio il colore attivando la transizione */
+  border-bottom-color: var(--col-accent); 
+}
+
+#main-menu > ul > li.current-page {
   font-weight: 700;
   color: var(--col-primary);
-  border-bottom: 3px solid var(--col-accent);
+  cursor: default;
+  border-bottom-color: var(--col-accent);
 }
 
 /* Azioni Header (Tema + Login) */
@@ -329,28 +340,106 @@ button:focus-visible,
    5. BREADCRUMB
    ========================================= */
 #breadcrumb {
-  background-color: var(--col-bg-alt);
-  padding: 0.8rem 0;
-  font-size: var(--fs-sm);
-  border-bottom: 1px solid var(--col-border);
+  background-color: transparent;
+  border-bottom: none;
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: center;
+  margin-top: 1%;
 }
+
 #breadcrumb ol {
   list-style: none;
   display: flex;
-  max-width: 75rem;
-  margin: 0 auto;
-  padding: 0 1.5rem;
+  flex-wrap: wrap;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+  padding: 0;
+  margin: 0;
 }
-#breadcrumb li + li::before {
-  content: "/";
-  margin: 0 0.5em;
-  color: var(--col-accent);
+
+#breadcrumb li {
+  float: left; /* evita che ciò che c'è nelle breadcrumb vada a capo riga */
 }
-#breadcrumb a {
+
+#breadcrumb li a,
+#breadcrumb li[aria-current="page"] {
+  color: var(--col-text-muted);
+  background: var(--col-bg-alt); /* Grigio chiaro/Bianco Ghiaccio */
   text-decoration: none;
+  padding: 10px 0 10px 45px; /* Padding sinistro extra per compensare la rientranza */
+  position: relative;
+  display: block;
+  float: left;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  line-height: 1.5;
+  transition: all 0.2s ease;
 }
-#breadcrumb a:hover {
-  text-decoration: underline;
+
+#breadcrumb li a::after,
+#breadcrumb li[aria-current="page"]::after {
+  content: " ";
+  display: block;
+  width: 0;
+  height: 0;
+
+  /* Crezione del triangolo */
+  border-top: 50px solid transparent;
+  border-bottom: 50px solid transparent;
+  border-left: 30px solid var(--col-bg-alt);
+
+  /* Posizionamento assoluto a destra */
+  position: absolute;
+  top: 50%;
+  margin-top: -50px;
+  left: 100%;
+  z-index: 2; /* Sta sopra all'elemento successivo */
+  transition: border-color 0.2s ease;
+}
+
+#breadcrumb li a::before,
+#breadcrumb li[aria-current="page"]::before {
+  content: " ";
+  display: block;
+  width: 0;
+  height: 0;
+  border-top: 50px solid transparent;
+  border-bottom: 50px solid transparent;
+  border-left: 30px solid white;
+  position: absolute;
+  top: 50%;
+  margin-top: -50px;
+  margin-left: 2px; /* Sposta leggermente per creare la riga bianca */
+  left: 100%;
+  z-index: 1;
+}
+
+#breadcrumb li:first-child a,
+#breadcrumb li:first-child[aria-current="page"] {
+  padding-left: 20px; /* Il primo non deve avere la rientranza a sinistra */
+}
+
+#breadcrumb li a:hover {
+  background: #e2e8f0;
+  color: var(--col-primary);
+}
+#breadcrumb li a:hover::after {
+  border-left-color: #e2e8f0; /* Anche la punta deve cambiare colore! */
+}
+
+#breadcrumb li[aria-current="page"] {
+  background: var(
+    --col-primary
+  ); /* Elemento attivo colorato di un altro colore */
+  color: var(--col-text-inv);
+  pointer-events: none; /* Non cliccabile */
+  padding-right: 20px;
+}
+
+#breadcrumb li[aria-current="page"]::after {
+  border-left-color: var(--col-primary);
 }
 
 /* =========================================
@@ -424,7 +513,7 @@ button:focus-visible,
   display: block;
 }
 .card img {
-  width: 100%;      /* sennò diventa troppo grande la card */
+  width: 100%; /* sennò diventa troppo grande la card */
   border-radius: var(--radius-sm);
   aspect-ratio: 3/2;
   object-fit: cover;
@@ -587,7 +676,7 @@ footer {
 
   /* Parte per rendere il bottone inizialmente nascosto e non cliccabile */
   opacity: 0;
-  visibility: hidden; 
+  visibility: hidden;
   pointer-events: none;
 }
 
@@ -599,6 +688,5 @@ footer {
 .scroll-to-top.show {
   opacity: 1;
   visibility: visible;
-  pointer-events: auto; 
+  pointer-events: auto;
 }
-
