@@ -4,20 +4,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SailUP - Noleggio Barche ed Esperienze a Napoli</title>
-  <meta name="description"
-    content="Noleggia barche a vela, a motore e gommoni o partecipa a tour ed esperienze uniche nel Golfo di Napoli con SailUP." />
+  <title>Login - SailUP</title>
+  <meta name="description" content="Accedi al tuo account SailUP per gestire prenotazioni e preferenze." />
   <meta name="authors" content="Alberto Reginato, Francesco Marcon" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap"
-    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="../css/style.css" media="screen" />
   <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)" />
-  <!-- ancora mancante  -->
   <link rel="stylesheet" href="../css/print.css" media="print" />
 </head>
 
@@ -30,9 +26,7 @@
         <div class="logo">
           <picture>
             <source srcset="" type="image/avif" />
-            <img alt="Logo SailUP"
-              src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=400&q=80"
-              width="30" />
+            <img alt="Logo SailUP" src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=400&q=80" width="30" />
           </picture>
           <h1 lang="en">
             <span class="logo-text">Sail<span class="text-accent">UP</span></span>
@@ -41,7 +35,7 @@
 
         <nav id="main-menu">
           <ul>
-            <li lang="en"><a href="index.html">Home</a></li>
+            <li><a href="index.html" lang="en">Home</a></li>
             <li><a href="catalogo_noleggio.html">Noleggio</a></li>
             <li><a href="catalogo_esperienze.html">Esperienze</a></li>
             <li lang="en"><a href="blog.html">Blog</a></li>
@@ -63,15 +57,15 @@
         </button>
       </div>
 
-      <nav id="mobile-menu" aria-label="Menu mobile">
+      <nav id="mobile-menu">
         <ul>
-          <li class="current-page">Home</li>
+          <li><a href="index.html">Home</a></li>
           <li><a href="catalogo_noleggio.html">Noleggio</a></li>
           <li><a href="catalogo_esperienze.html">Esperienze</a></li>
           <li><a href="blog.html">Blog</a></li>
           <li><a href="chi_siamo.html">Chi Siamo</a></li>
-          <li>
-            <a href="login.html" class="menu-login">Login / Registrati</a>
+          <li class="current-page">
+            <span class="menu-login">Login / Registrati</span>
           </li>
         </ul>
       </nav>
@@ -83,68 +77,48 @@
   </div>
   <nav aria-labelledby="breadcrumb-label" id="breadcrumb">
     <ol>
-      <li>
-        <span lang="en" class="breadcrumb-link"><a href="index.html">Home</a></span>
-      </li>
-      <li aria-current="page">Accedi</li>
+      <li><a href="index.html" lang="en">Home</a></li>
+      <li aria-current="page">Login</li>
     </ol>
   </nav>
 
   <main id="main-content">
-    <section class="section-container">
-      <main id="main-content" class="login-page">
-        <div class="login-container">
-          <div class="login-header">
-            <h2>Bentornato a Bordo</h2>
-            <p>Accedi per gestire le tue prenotazioni</p>
-          </div>
-
-          <form action="" method="POST" class="login-form">
-            <!-- inserire il nome del file PHP che riceverà i dati -->
-
+    <section class="section-container auth-container">
+      <div class="auth-wrapper">
+        <div class="auth-card">
+          <h2>Accedi al tuo account</h2>
+          <p class="auth-subtitle">Benvenuto su SailUP! Accedi per gestire le tue prenotazioni.</p>
+          
+          
+          <div id="error-message" class="error-message hidden" role="alert" aria-live="polite"></div>
+          
+          <form id="login-form" action="" method="post" novalidate>   <!-- aggiungere la action corrispondente  -->
             <div class="form-group">
-              <label for="username"><span lang="en">Email</span>:</label>
-              <input type="text" id="email" name="email" required autocomplete="email" placeholder="nome@esempio.it" />
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required aria-required="true"
+                  aria-describedby="email-hint email-error" autocomplete="email"
+                  placeholder="mariorossi@mail.com" />
+              <span id="email-error" class="field-error" role="alert"></span>
             </div>
 
             <div class="form-group">
-              <label for="password"><span lang="en">Password</span>:</label>
-              <div class="password-wrapper">
-                <input type="password" id="password" name="password" required autocomplete="current-password"
-                  placeholder="Inserisci la tua password" />
-
-                <button type="button" id="togglePassword" class="icon-btn" aria-label="Mostra password">
-                  <span id="eyeIcon" aria-hidden="true">👁️</span>
-                </button>
-              </div>
+              <label for="password">Password</label>
+              <input type="password" id="password" name="password" required aria-required="true"
+                  aria-describedby="password-hint password-error" autocomplete="new-password" />
+              <span id="password-error" class="field-error" role="alert"></span>
             </div>
-
+            
             <div class="form-actions">
-              <label class="checkbox-container">
-                <input type="checkbox" name="remember_me" />
-                <span class="checkmark"></span>
-                Ricordami
-              </label>
-              <p>
-                <a href="" class="text-accent"><span lang="en">Password</span> dimenticata?</a>
-              </p>
-              <!-- inserire il nome del file PHP per il recupero password -->
+              <button type="submit" class="btn-layout btn-full-width">Accedi</button>
             </div>
-
-            <button type="submit" class="btn-layout cta-primary">
-              Accedi
-            </button>
           </form>
-
-          <div class="login-footer">
-            <p>
-              Non hai un <span lang="en">account</span>?
-              <a href="registrazione.html" class="text-accent">Registrati ora</a>
-            </p>
-            <a href="index.html" class="text-accent">← Torna alla Home</a>
+          
+          <div class="auth-footer">
+            <p>Non hai un account? <a href="registrazione.html">Registrati ora</a></p>
           </div>
+          
         </div>
-      </main>
+      </div>
     </section>
   </main>
 
@@ -155,10 +129,7 @@
           <span class="logo-icon" aria-hidden="true">⚓</span>
           <span class="logo-text"><span lang="en">Sail</span><span class="text-accent" lang="en">UP</span></span>
         </div>
-        <p class="footer-tagline">
-          Naviga il Golfo di Napoli con stile e sicurezza. La tua avventura
-          inizia qui.
-        </p>
+        <p class="footer-tagline">Naviga il Golfo di Napoli con stile e sicurezza. La tua avventura inizia qui.</p>
       </div>
 
       <div class="footer-col nav-col">
@@ -191,23 +162,22 @@
 
     <div class="footer-bottom">
       <div class="footer-bottom-container">
-        <div class="copyright">
-          &copy; 2025 SailUP S.r.l. - All rights reserved.
-        </div>
+        <div class="copyright">&copy; 2025 SailUP S.r.l. - All rights reserved.</div>
 
         <div class="valid-logos">
           <img class="valid-code-icon" src="valid-xhtml10.png" alt="XHTML valido" />
           <img class="valid-code-icon" src="valid-CSS.png" alt="CSS valido" />
         </div>
 
-        <a href="#main-content" class="scroll-to-top" aria-label="Torna all'inizio del contenuto">
-          <span aria-hidden="true">⬆</span> Top
+        <a href="#main-content" class="scroll-to-top" id="btnTop" aria-label="Torna all'inizio del contenuto" tabindex="-1">
+          <span aria-hidden="true">⬆</span> <span lang="en">Top</span>
         </a>
       </div>
     </div>
   </footer>
 
   <script src="../js/script.js"></script>
+  <script src="../js/login_validation.js"></script>
 </body>
 
 </html>
