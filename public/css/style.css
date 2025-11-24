@@ -817,3 +817,282 @@ footer {
   color: var(--col-accent);
   font-weight: 700;
 }
+
+/* =========================================
+   10. PAGINE AUTENTICAZIONE (Login & Registrazione)
+   ========================================= */
+
+.auth-container {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3em 1.5em;
+}
+
+.auth-wrapper {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.auth-card {
+  background-color: var(--col-bg);
+  border: 1px solid var(--col-border);
+  border-radius: var(--radius-card);
+  padding: 2.5em;
+  box-shadow: var(--shadow-md);
+}
+
+.auth-card h2 {
+  text-align: center;
+  margin-bottom: 0.5em;
+  color: var(--col-primary);
+}
+
+.auth-subtitle {
+  text-align: center;
+  color: var(--col-text-muted);
+  margin-bottom: 2em;
+  font-size: var(--fs-sm);
+}
+
+/* Form Groups */
+.form-group {
+  margin-bottom: 1.5em;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5em;
+  color: var(--col-text);
+  font-family: var(--font-head);
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group input[type="tel"],
+.form-group textarea {
+  width: 100%;
+  padding: 0.9em;
+  font-size: var(--fs-base);
+  font-family: var(--font-body);
+  background-color: var(--col-bg);
+  border: 2px solid var(--col-border);
+  border-radius: var(--radius-sm);
+  transition: all 0.3s ease;
+  color: var(--col-text);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--col-accent);
+  box-shadow: 0 0 0 3px rgba(254, 101, 79, 0.1);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* Field Hints e Errors */
+.field-hint {
+  display: block;
+  margin-top: 0.4em;
+  font-size: var(--fs-sm);
+  color: var(--col-text-muted);
+  font-style: italic;
+}
+
+.field-error {
+  display: block;
+  margin-top: 0.4em;
+  font-size: var(--fs-sm);
+  color: #dc2626;
+  font-weight: 600;
+}
+
+.form-group input.error,
+.form-group textarea.error {
+  border-color: #dc2626;
+}
+
+.form-group input.valid {
+  border-color: #16a34a;
+}
+
+/* Checkbox Group */
+.checkbox-group {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8em;
+}
+
+.checkbox-group input[type="checkbox"] {
+  width: 1.2em;
+  height: 1.2em;
+  margin-top: 0.2em;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.checkbox-group label {
+  margin-bottom: 0;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.checkbox-group a {
+  color: var(--col-accent);
+  text-decoration: underline;
+}
+
+.checkbox-group a:hover {
+  color: var(--col-accent-hover);
+}
+
+/* Form Actions */
+.form-actions {
+  margin-top: 2em;
+}
+
+.btn-full-width {
+  width: 100%;
+  justify-content: center;
+  padding: 1em;
+  font-size: var(--fs-base);
+}
+
+/* Messaggi di errore/successo globali */
+.error-message,
+.success-message {
+  padding: 1em;
+  border-radius: var(--radius-sm);
+  margin-bottom: 1.5em;
+  font-weight: 600;
+  text-align: center;
+}
+
+.error-message {
+  background-color: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+}
+
+[data-theme="dark"] .error-message {
+  background-color: #450a0a;
+  color: #fca5a5;
+  border-color: #991b1b;
+}
+
+.success-message {
+  background-color: #f0fdf4;
+  color: #16a34a;
+  border: 1px solid #bbf7d0;
+}
+
+[data-theme="dark"] .success-message {
+  background-color: #052e16;
+  color: #86efac;
+  border-color: #166534;
+}
+
+/* Auth Footer */
+.auth-footer {
+  margin-top: 2em;
+  padding-top: 1.5em;
+  border-top: 1px solid var(--col-border);
+  text-align: center;
+}
+
+.auth-footer p {
+  margin-bottom: 0;
+  color: var(--col-text-muted);
+}
+
+.auth-footer a {
+  color: var(--col-accent);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.auth-footer a:hover {
+  text-decoration: underline;
+}
+
+/* =========================================
+  11. STILE MODULO INDIRIZZO
+   ========================================= */
+.auth-card .form-group label {
+  font-size: 0.9em;
+  margin-bottom: 0.3em;
+}
+
+.auth-card .form-group input,
+.auth-card .form-group textarea {
+  font-size: 0.9em;
+  padding: 0.6em 0.9em;
+  min-height: auto;
+}
+
+.auth-card .field-hint,
+.auth-card .field-error {
+  font-size: 0.8em;
+  margin-top: 0.2em;
+}
+
+.auth-card fieldset {
+  border: none;
+  padding: 0;
+  margin: 2em 0 0 0;
+  width: 100%;
+}
+
+.auth-card legend {
+  width: 100%;
+  font-family: var(--font-head);
+  font-weight: 700;
+  color: var(--col-primary);
+  font-size: 1em;
+  padding-bottom: 0.5em;
+  margin-bottom: 1em;
+  border-bottom: 1px solid var(--col-border);
+  display: block;
+}
+
+.address-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1em;
+  align-items: start;
+}
+
+.field-via {
+  grid-column: span 3;
+}
+
+.field-civico {
+  grid-column: span 1;
+}
+
+.field-cap {
+  grid-column: span 1;
+}
+
+.field-citta {
+  grid-column: span 2;
+}
+
+.field-provincia {
+  grid-column: span 1;
+}
+
+
+input[maxlength="2"],
+input[maxlength="5"] {
+  text-align: center;
+  text-transform: uppercase;
+}

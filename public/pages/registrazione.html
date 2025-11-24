@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="it" data-theme="light">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registrazione - SailUP</title>
+    <meta name="description"
+        content="Crea il tuo account SailUP per prenotare barche ed esperienze nel Golfo di Napoli." />
+    <meta name="authors" content="Alberto Reginato, Francesco Marcon" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap"
+        rel="stylesheet" />
+
+    <link rel="stylesheet" href="../css/style.css" media="screen" />
+    <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)" />
+    <link rel="stylesheet" href="../css/print.css" media="print" />
+</head>
+
+<body>
+    <a href="#main-content" class="skip-to-content">Salta al contenuto</a>
+
+    <header>
+        <div class="header-container">
+            <div class="header">
+                <div class="logo">
+                    <picture>
+                        <source srcset="" type="image/avif" />
+                        <img alt="Logo SailUP"
+                            src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=400&q=80"
+                            width="30" />
+                    </picture>
+                    <h1 lang="en">
+                        <span class="logo-text">Sail<span class="text-accent">UP</span></span>
+                    </h1>
+                </div>
+
+                <nav id="main-menu">
+                    <ul>
+                        <li><a href="index.html" lang="en">Home</a></li>
+                        <li><a href="catalogo_noleggio.html">Noleggio</a></li>
+                        <li><a href="catalogo_esperienze.html">Esperienze</a></li>
+                        <li lang="en"><a href="blog.html">Blog</a></li>
+                        <li><a href="chi_siamo.html">Chi Siamo</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-buttons">
+                    <button class="theme-toggle" aria-pressed="false" aria-label="Attiva modalità scura">
+                        <span class="active-icon sun">☀️</span>
+                        <span class="inactive-icon moon">🌙</span>
+                    </button>
+                    <a href="login.html" class="btn-layout">Login</a>
+                </div>
+
+                <button id="hamburger-btn" aria-expanded="false" aria-controls="mobile-menu" aria-label="Menu Mobile">
+                    <span class="hamburger-icon">☰</span>
+                    <span class="close-icon hidden">✕</span>
+                </button>
+            </div>
+
+            <nav id="mobile-menu">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="catalogo_noleggio.html">Noleggio</a></li>
+                    <li><a href="catalogo_esperienze.html">Esperienze</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="chi_siamo.html">Chi Siamo</a></li>
+                    <li class="current-page">
+                        <span class="menu-login">Login / Registrati</span>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="sr-only" id="breadcrumb-label">
+        <span lang="en">breadcrumb</span>
+    </div>
+    <nav aria-labelledby="breadcrumb-label" id="breadcrumb">
+        <ol>
+            <li><a href="index.html" lang="en">Home</a></li>
+            <li aria-current="page">Registrazione</li>
+        </ol>
+    </nav>
+
+    <main id="main-content">
+        <section class="section-container auth-container">
+            <div class="auth-wrapper">
+                <div class="auth-card">
+                    <h2>Crea il tuo account</h2>
+                    <p class="auth-subtitle">Unisciti a SailUP per vivere esperienze indimenticabili nel Golfo di
+                        Napoli.</p>
+
+                    <div id="error-message" class="error-message hidden" role="alert" aria-live="polite"></div>
+                    <div id="success-message" class="success-message hidden" role="alert" aria-live="polite"></div>
+
+                    <form id="register-form" action="" method="post" novalidate>        <!-- Aggiungere una azione-->
+                        <div class="form-group">
+                            <label for="nome">Nome</label>
+                            <input type="text" id="nome" name="nome" required aria-required="true"
+                                aria-describedby="nome-hint nome-error" autocomplete="given-name"
+                                placeholder="Es. Mario" pattern="^[A-Za-z\sÀ-ÿ'’]{2,50}$" />
+                            <span id="nome-hint" class="field-hint">Almeno 2 caratteri, non numeri o caratteri speciali.
+                            </span>
+                            <span id="nome-error" class="field-error" role="alert"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cognome">Cognome</label>
+                            <input type="text" id="cognome" name="cognome" required aria-required="true"
+                                aria-describedby="cognome-hint cognome-error" autocomplete="family-name"
+                                placeholder="Es. Rossi" pattern="^[A-Za-z\sÀ-ÿ'’]{2,50}$" />
+                            <span id="cognome-hint" class="field-hint">Almeno 2 caratteri, non numeri o caratteri
+                                speciali. </span>
+                            <span id="cognome-error" class="field-error" role="alert"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cf">Codice Fiscale</label>
+                            <input type="text" id="cf" name="cf" required aria-required="true"
+                                aria-describedby="cf-hint cf-error" autocomplete="off" maxlength="16"
+                                placeholder="ES. RSSMRC90C15H501T" pattern="^[A-Z0-9]{16}$" />
+                            <span id="cf-hint" class="field-hint">Deve essere composto da 16 caratteri
+                                alfanumerici.</span>
+                            <span id="cf-error" class="field-error" role="alert"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required aria-required="true"
+                                aria-describedby="email-hint email-error" autocomplete="email"
+                                placeholder="mariorossi@mail.com" />
+                            <span id="email-hint" class="field-hint">Indirizzo personale di posta elettronica per
+                                ricevere informazioni sulle prenotazioni effettuate. </span>
+                            <span id="email-error" class="field-error" role="alert"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" name="password" required aria-required="true"
+                                aria-describedby="password-hint password-error" autocomplete="new-password" />
+                            <span id="password-hint" class="field-hint">DA DEFINIRE CHE POLITICA UTILIZZIAMO </span>    <!-- deve essere definito -->
+                            <span id="password-error" class="field-error" role="alert"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="confirm-password">Conferma Password</label>
+                            <input type="password" id="confirm-password" name="confirm-password" required
+                                aria-required="true" aria-describedby="confirm-password-hint confirm-password-error"
+                                autocomplete="new-password" />
+                            <span id="confirm-password-hint" class="field-hint">Ripetere la password scelta in
+                                precedenza </span>
+                            <span id="confirm-password-error" class="field-error" role="alert"></span>
+                        </div>
+
+                        <fieldset class="address-grid">
+                            <legend>Indirizzo di Residenza</legend>
+
+                            <div class="form-group field-via">
+                                <label for="indirizzo_via">Via / Piazza</label>
+                                <input type="text" id="indirizzo_via" name="indirizzo_via" required aria-required="true"
+                                    aria-describedby="via-hint via-error" autocomplete="address-line1"
+                                    placeholder="Es. Via Caracciolo" />
+                                <span id="via-hint" class="field-hint">Inserire il nome della via o della piazza.</span>
+                                <span id="via-error" class="field-error" role="alert"></span>
+                            </div>
+
+                            <div class="form-group field-civico">
+                                <label for="indirizzo_civico">N. Civico</label>
+                                <input type="text" id="indirizzo_civico" name="indirizzo_civico" required
+                                    aria-required="true" aria-describedby="civico-hint civico-error"
+                                    autocomplete="address-line2" placeholder="10" />
+                                <span id="civico-error" class="field-error" role="alert"></span>
+                            </div>
+
+                            <div class="form-group field-cap">
+                                <label for="indirizzo_cap">CAP</label>
+                                <input type="text" id="indirizzo_cap" name="indirizzo_cap" required aria-required="true"
+                                    aria-describedby="cap-hint cap-error" autocomplete="postal-code" pattern="^\d{5}$"
+                                    placeholder="80122" maxlength="5" />
+                                <span id="cap-error" class="field-error" role="alert"></span>
+                            </div>
+
+                            <div class="form-group field-citta">
+                                <label for="indirizzo_citta">Città</label>
+                                <input type="text" id="indirizzo_citta" name="indirizzo_citta" required
+                                    aria-required="true" aria-describedby="citta-hint citta-error"
+                                    autocomplete="address-level2" placeholder="Es. Napoli" />
+                                <span id="citta-error" class="field-error" role="alert"></span>
+                            </div>
+
+                            <div class="form-group field-provincia">
+                                <label for="indirizzo_provincia">Prov.</label>
+                                <input type="text" id="indirizzo_provincia" name="indirizzo_provincia" required
+                                    aria-required="true" aria-describedby="provincia-hint provincia-error"
+                                    autocomplete="address-level1" pattern="^[A-Z]{2}$" placeholder="NA"
+                                    maxlength="2"/>
+                                <span id="provincia-error" class="field-error" role="alert"></span>
+                            </div>
+
+                        </fieldset>
+
+                        <div class="form-group checkbox-group">
+                            <input type="checkbox" id="privacy" name="privacy" required aria-required="true"
+                                aria-describedby="privacy-error" />
+                            <label for="privacy">
+                                Accetto la <a href="privacy.html" target="_blank" rel="noopener noreferrer">Privacy
+                                    Policy</a> e i termini di servizio
+                            </label>
+                            <span id="privacy-error" class="field-error" role="alert"></span>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn-layout btn-full-width">Registrati</button>
+                        </div>
+                    </form>
+
+                    <div class="auth-footer">
+                        <p>Hai già un account? <a href="login.html">Accedi</a></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="section-container footer-content">
+            <div class="footer-col brand-col">
+                <div class="logo footer-logo">
+                    <span class="logo-icon" aria-hidden="true">⚓</span>
+                    <span class="logo-text"><span lang="en">Sail</span><span class="text-accent"
+                            lang="en">UP</span></span>
+                </div>
+                <p class="footer-tagline">Naviga il Golfo di Napoli con stile e sicurezza. La tua avventura inizia qui.
+                </p>
+            </div>
+
+            <div class="footer-col nav-col">
+                <h3 class="footer-heading">Esplora</h3>
+                <nav aria-label="Menu footer">
+                    <ul class="footer-links">
+                        <li lang="en"><a href="index.html">Home</a></li>
+                        <li><a href="catalogo_noleggio.html">Noleggio</a></li>
+                        <li><a href="catalogo_esperienze.html">Esperienze</a></li>
+                        <li lang="en"><a href="blog.html">Blog</a></li>
+                        <li><a href="chi_siamo.html">Chi Siamo</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="footer-col info-col">
+                <h3 class="footer-heading">Info & Contatti</h3>
+                <ul class="footer-links">
+                    <li><a href="FAQ.html">Domande Frequenti (FAQ)</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="cookie.html">Cookie Policy</a></li>
+                </ul>
+                <address class="footer-address">
+                    <p><strong>SailUP S.r.l.</strong></p>
+                    <p>Via Caracciolo, 80122 Napoli (NA)</p>
+                    <p>P.IVA: 12345678901</p>
+                </address>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="footer-bottom-container">
+                <div class="copyright">&copy; 2025 SailUP S.r.l. - All rights reserved.</div>
+
+                <div class="valid-logos">
+                    <img class="valid-code-icon" src="valid-xhtml10.png" alt="XHTML valido" />
+                    <img class="valid-code-icon" src="valid-CSS.png" alt="CSS valido" />
+                </div>
+
+                <a href="#main-content" class="scroll-to-top" id="btnTop" aria-label="Torna all'inizio del contenuto"
+                    tabindex="-1">
+                    <span aria-hidden="true">⬆</span> <span lang="en">Top</span>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+    <script src="../js/register_validation.js"></script>
+</body>
+
+</html>
