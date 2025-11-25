@@ -143,6 +143,7 @@ img {
   font-style: italic;
 }
 
+/* Da vedere come ultimarlo */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -1090,9 +1091,537 @@ footer {
   grid-column: span 1;
 }
 
-
 input[maxlength="2"],
 input[maxlength="5"] {
   text-align: center;
   text-transform: uppercase;
+}
+/* =========================================
+   PROFILO UTENTE - SailUP
+   Stili specifici per profilo, sicurezza e prenotazioni
+   Riutilizza variabili e classi da style.css
+   ========================================= */
+
+/* =========================================
+   1. HEADER PROFILO
+   ========================================= */
+.profile-container {
+  max-width: 75em;
+  margin: 0 auto;
+  padding: 2em 1.5em;
+}
+
+.profile-header {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 2em;
+  padding: 2em;
+  background-color: var(--col-bg-alt);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 2em;
+}
+
+.profile-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid var(--col-accent);
+}
+
+.profile-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-info h1 {
+  font-size: var(--fs-lg);
+  margin-bottom: 0.3em;
+}
+
+.profile-email {
+  color: var(--col-text-muted);
+  font-size: var(--fs-sm);
+  margin-bottom: 0.2em;
+}
+
+.profile-member-since {
+  color: var(--col-text-muted);
+  font-size: var(--fs-sm);
+  font-style: italic;
+}
+
+.profile-actions {
+  display: flex;
+  gap: 1em;
+  flex-wrap: wrap;
+}
+
+/* =========================================
+   2. LAYOUT SIDEBAR + CONTENUTO
+   ========================================= */
+.profile-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 2em;
+  align-items: start;
+}
+
+/* Sidebar Navigazione */
+.profile-sidebar {
+  position: sticky;
+  top: 6em;
+  background-color: var(--col-bg-alt);
+  border-radius: var(--radius-card);
+  padding: 1.5em;
+  box-shadow: var(--shadow-sm);
+}
+
+.profile-sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.profile-sidebar li {
+  margin-bottom: 0.5em;
+}
+
+.profile-sidebar li:last-child {
+  margin-bottom: 0;
+}
+
+.profile-sidebar a {
+  display: flex;
+  align-items: center;
+  gap: 0.8em;
+  padding: 0.9em 1em;
+  text-decoration: none;
+  color: var(--col-text);
+  border-radius: var(--radius-sm);
+  transition: all 0.3s ease;
+  font-weight: 600;
+  font-family: var(--font-head);
+}
+
+.profile-sidebar a:hover {
+  background-color: var(--col-bg);
+  color: var(--col-primary);
+}
+
+.profile-sidebar .current-tab a {
+  background-color: var(--col-primary);
+  color: var(--col-text-inv);
+}
+
+.profile-sidebar .nav-icon {
+  font-size: 1.3em;
+  width: 1.5em;
+  text-align: center;
+}
+
+/* =========================================
+   3. INFO CARDS (Profilo Principale)
+   ========================================= */
+.profile-content {
+  min-height: 60vh;
+}
+
+.profile-content h2 {
+  font-size: var(--fs-xl);
+  margin-bottom: 1.5em;
+  color: var(--col-primary);
+}
+
+.info-card {
+  background-color: var(--col-bg);
+  border: 1px solid var(--col-border);
+  border-radius: var(--radius-card);
+  padding: 2em;
+  margin-bottom: 2em;
+  box-shadow: var(--shadow-sm);
+}
+
+.info-card h3 {
+  font-size: var(--fs-md);
+  color: var(--col-primary);
+  margin-bottom: 1.5em;
+  padding-bottom: 0.5em;
+  border-bottom: 2px solid var(--col-border);
+}
+
+.info-content {
+  line-height: 1.8;
+}
+
+.info-content p {
+  margin-bottom: 0.8em;
+  color: var(--col-text);
+}
+
+.info-content p:last-child {
+  margin-bottom: 0;
+}
+
+.info-content strong {
+  font-weight: 600;
+  color: var(--col-text-muted);
+  display: inline-block;
+  min-width: 150px;
+}
+
+.info-content a {
+  color: var(--col-accent);
+  text-decoration: none;
+}
+
+.info-content a:hover {
+  color: var(--col-accent-hover);
+  text-decoration: underline;
+}
+
+.profile-stats {
+  margin-top: 3em;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.5em;
+  margin-top: 1.5em;
+}
+
+.stat-card {
+  background: linear-gradient(135deg, var(--col-primary) 0%, var(--col-accent) 100%);
+  color: var(--col-text-inv);
+  padding: 2em;
+  border-radius: var(--radius-card);
+  text-align: center;
+  box-shadow: var(--shadow-md);
+  transition: transform 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+}
+
+.stat-number {
+  font-size: var(--fs-xxl);
+  font-weight: 700;
+  font-family: var(--font-head);
+  margin-bottom: 0.3em;
+}
+
+.stat-label {
+  font-size: var(--fs-sm);
+  opacity: 0.9;
+  margin: 0;
+}
+
+.security-section {
+  margin-top: 3em;
+}
+
+.security-section .auth-card {
+  margin-bottom: 2em;
+}
+
+.danger-zone {
+  background-color: #fef2f2;
+  border-color: #fecaca;
+}
+
+[data-theme="dark"] .danger-zone {
+  background-color: #450a0a;
+  border-color: #991b1b;
+}
+
+.danger-zone h3 {
+  color: #dc2626;
+}
+
+[data-theme="dark"] .danger-zone h3 {
+  color: #fca5a5;
+}
+
+.danger-zone p {
+  color: var(--col-text-muted);
+  margin-bottom: 1.5em;
+}
+
+.btn-danger {
+  background-color: #dc2626;
+  color: white;
+  border: 2px solid #dc2626;
+  padding: 0.8em 1.5em;
+  border-radius: var(--radius-btn);
+  font-weight: 600;
+  font-family: var(--font-head);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-danger:hover {
+  background-color: #b91c1c;
+  border-color: #b91c1c;
+  transform: translateY(-2px);
+}
+
+.bookings-filters {
+  margin-bottom: 2em;
+}
+
+.filter-tabs {
+  display: flex;
+  gap: 1em;
+  flex-wrap: wrap;
+  background-color: var(--col-bg-alt);
+  padding: 0.5em;
+  border-radius: var(--radius-card);
+}
+
+.filter-tab {
+  flex: 1;
+  min-width: 120px;
+  padding: 0.9em 1.5em;
+  background-color: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-family: var(--font-head);
+  color: var(--col-text);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+}
+
+.filter-tab:hover {
+  background-color: var(--col-bg);
+}
+
+.filter-tab.active {
+  background-color: var(--col-primary);
+  color: var(--col-text-inv);
+}
+
+.bookings-filters fieldset {
+  border: none;
+  padding: 0;
+  margin: 0 0 2em 0;
+  min-width: 0;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.8em;
+  padding: 0.2em 0.6em;
+  font-size: 0.85em;
+  font-weight: 700;
+  background-color: var(--col-border);
+  color: var(--col-text);
+  border-radius: 999px;
+}
+
+.filter-tab.active .badge {
+  background-color: rgba(255, 255, 255, 0.3);
+  color: var(--col-text-inv);
+}
+
+.badge-accent {
+  background-color: var(--col-accent);
+  color: white;
+}
+
+/* Lista Prenotazioni */
+.bookings-list {
+  display: grid;
+  gap: 1.5em;
+}
+
+.booking-card {
+  background-color: var(--col-bg);
+  border: 2px solid var(--col-border);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+}
+
+.booking-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.booking-card.status-active {
+  border-left: 5px solid var(--col-accent);
+}
+
+.booking-card.status-completed {
+  border-left: 5px solid #16a34a;
+}
+
+.booking-header {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 1.5em;
+  padding: 1.5em;
+  background-color: var(--col-bg-alt);
+}
+
+.booking-image {
+  width: 150px;
+  height: 100px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.booking-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.booking-info h3 {
+  font-size: var(--fs-md);
+  margin-bottom: 0.3em;
+  color: var(--col-primary);
+}
+
+.booking-type {
+  font-size: var(--fs-sm);
+  color: var(--col-text-muted);
+  margin-bottom: 0.5em;
+}
+
+.booking-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.4em 0.9em;
+  border-radius: var(--radius-btn);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  margin-top: 0.5em;
+}
+
+.booking-status-active {
+  background-color: rgba(254, 101, 79, 0.1);
+  color: var(--col-accent);
+}
+
+.booking-status-completed {
+  background-color: rgba(22, 163, 74, 0.1);
+  color: #16a34a;
+}
+
+.status-indicator {
+  font-size: 0.8em;
+}
+
+.booking-details {
+  padding: 1.5em;
+}
+
+.booking-details-content {
+  margin-bottom: 1.5em;
+  line-height: 1.8;
+}
+
+.booking-details-content p {
+  margin-bottom: 0.8em;
+  color: var(--col-text);
+}
+
+.booking-details-content p:last-child {
+  margin-bottom: 0;
+}
+
+.booking-details-content strong {
+  font-weight: 600;
+  color: var(--col-text-muted);
+  display: inline-block;
+  min-width: 180px;
+  font-size: var(--fs-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.booking-actions {
+  display: flex;
+  gap: 1em;
+  flex-wrap: wrap;
+  padding-top: 1em;
+  border-top: 1px solid var(--col-border);
+}
+
+.btn-danger-outline {
+  background-color: transparent;
+  color: #dc2626;
+  border: 2px solid #dc2626;
+  padding: 0.8em 1.5em;
+  border-radius: var(--radius-btn);
+  font-weight: 600;
+  font-family: var(--font-head);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: var(--fs-sm);
+}
+
+.btn-danger-outline:hover {
+  background-color: #dc2626;
+  color: white;
+}
+
+.bookings-empty {
+  text-align: center;
+  padding: 4em 2em;
+  background-color: var(--col-bg-alt);
+  border-radius: var(--radius-card);
+}
+
+.bookings-empty p {
+  font-size: var(--fs-md);
+  color: var(--col-text-muted);
+  margin-bottom: 2em;
+}
+
+/*Da valutare se mantenere*/
+@media (max-width: 900px) {
+  .profile-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-sidebar {
+    position: static;
+  }
+
+  .profile-sidebar ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.5em;
+  }
+
+  .booking-header {
+    grid-template-columns: 1fr;
+  }
+
+  .booking-image {
+    width: 100%;
+    height: 200px;
+  }
+}
+
+.filter-tab:focus-visible,
+.btn-danger:focus-visible,
+.btn-danger-outline:focus-visible {
+  outline: 3px solid var(--col-accent);
+  outline-offset: 3px;
 }

@@ -98,7 +98,7 @@
                     <div id="error-message" class="error-message hidden" role="alert" aria-live="polite"></div>
                     <div id="success-message" class="success-message hidden" role="alert" aria-live="polite"></div>
 
-                    <form id="register-form" action="" method="post" novalidate>        <!-- Aggiungere una azione-->
+                    <form id="register-form" action="" method="post" novalidate> <!-- Aggiungere una azione-->
                         <div class="form-group">
                             <label for="nome">Nome</label>
                             <input type="text" id="nome" name="nome" required aria-required="true"
@@ -143,7 +143,8 @@
                             <label for="password">Password</label>
                             <input type="password" id="password" name="password" required aria-required="true"
                                 aria-describedby="password-hint password-error" autocomplete="new-password" />
-                            <span id="password-hint" class="field-hint">DA DEFINIRE CHE POLITICA UTILIZZIAMO </span>    <!-- deve essere definito -->
+                            <span id="password-hint" class="field-hint">DA DEFINIRE CHE POLITICA UTILIZZIAMO </span>
+                            <!-- deve essere definito -->
                             <span id="password-error" class="field-error" role="alert"></span>
                         </div>
 
@@ -162,47 +163,49 @@
 
                             <div class="form-group field-via">
                                 <label for="indirizzo_via">Via / Piazza</label>
-                                <input type="text" id="indirizzo_via" name="indirizzo_via" required aria-required="true"
-                                    aria-describedby="via-hint via-error" autocomplete="address-line1"
-                                    placeholder="Es. Via Caracciolo" />
+                                <input type="text" id="indirizzo_via" name="indirizzo_via" value="Via Roma" required aria-required="true"
+                                aria-describedby="via-hint indirizzo_via-error" autocomplete="address-line1"
+                                placeholder="Es. Via Caracciolo" />
                                 <span id="via-hint" class="field-hint">Inserire il nome della via o della piazza.</span>
-                                <span id="via-error" class="field-error" role="alert"></span>
+                                <span id="indirizzo_via-error" class="field-error" role="alert"></span>
                             </div>
 
                             <div class="form-group field-civico">
                                 <label for="indirizzo_civico">N. Civico</label>
-                                <input type="text" id="indirizzo_civico" name="indirizzo_civico" required
-                                    aria-required="true" aria-describedby="civico-hint civico-error"
-                                    autocomplete="address-line2" placeholder="10" />
-                                <span id="civico-error" class="field-error" role="alert"></span>
+                                <input type="text" id="indirizzo_civico" name="indirizzo_civico" value="123" required aria-required="true"
+                                aria-describedby="civico-hint indirizzo_civico-error" autocomplete="address-line2"
+                                placeholder="10" />
+                                <span id="civico-hint" class="field-hint">Inserire il numero civico.</span>
+                                <span id="indirizzo_civico-error" class="field-error" role="alert"></span>
                             </div>
 
                             <div class="form-group field-cap">
                                 <label for="indirizzo_cap">CAP</label>
-                                <input type="text" id="indirizzo_cap" name="indirizzo_cap" required aria-required="true"
-                                    aria-describedby="cap-hint cap-error" autocomplete="postal-code" pattern="^\d{5}$"
-                                    placeholder="80122" maxlength="5" />
-                                <span id="cap-error" class="field-error" role="alert"></span>
+                                <input type="text" id="indirizzo_cap" name="indirizzo_cap" value="80100" required aria-required="true"
+                                aria-describedby="cap-hint indirizzo_cap-error" autocomplete="postal-code" pattern="^\d{5}$"
+                                placeholder="80122" maxlength="5" />
+                                <span id="cap-hint" class="field-hint">Inserire le 5 cifre del CAP (es. 00100).</span>
+                                <span id="indirizzo_cap-error" class="field-error" role="alert"></span>
                             </div>
 
                             <div class="form-group field-citta">
                                 <label for="indirizzo_citta">Città</label>
-                                <input type="text" id="indirizzo_citta" name="indirizzo_citta" required
-                                    aria-required="true" aria-describedby="citta-hint citta-error"
-                                    autocomplete="address-level2" placeholder="Es. Napoli" />
-                                <span id="citta-error" class="field-error" role="alert"></span>
+                                <input type="text" id="indirizzo_citta" name="indirizzo_citta" value="Napoli" required aria-required="true"
+                                aria-describedby="citta-hint indirizzo_citta-error" autocomplete="address-level2"
+                                placeholder="Es. Napoli" />
+                                <span id="citta-hint" class="field-hint">Inserire il comune di residenza.</span>
+                                <span id="indirizzo_citta-error" class="field-error" role="alert"></span>
                             </div>
 
                             <div class="form-group field-provincia">
                                 <label for="indirizzo_provincia">Prov.</label>
-                                <input type="text" id="indirizzo_provincia" name="indirizzo_provincia" required
-                                    aria-required="true" aria-describedby="provincia-hint provincia-error"
-                                    autocomplete="address-level1" pattern="^[A-Z]{2}$" placeholder="NA"
-                                    maxlength="2"/>
-                                <span id="provincia-error" class="field-error" role="alert"></span>
+                                <input type="text" id="indirizzo_provincia" name="indirizzo_provincia" value="NA" required
+                                aria-required="true" aria-describedby="provincia-hint indirizzo_provincia-error"
+                                autocomplete="address-level1" pattern="^[A-Z]{2}$" placeholder="NA" maxlength="2" />
+                                <span id="provincia-hint" class="field-hint">Sigla di 2 lettere maiuscole (es. NA).</span>
+                                <span id="indirizzo_provincia-error" class="field-error" role="alert"></span>
                             </div>
-
-                        </fieldset>
+                            </fieldset>
 
                         <div class="form-group checkbox-group">
                             <input type="checkbox" id="privacy" name="privacy" required aria-required="true"
