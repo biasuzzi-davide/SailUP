@@ -99,7 +99,7 @@
         if (validateForm()) {
             form.submit();
         } else {
-            showGlobalError('Errore di compilazione nel form! Correggere prima di poter continuare');
+            showGlobalError('Il form non è stato compilato correttamente!\n Correggere prima di continuare');
         }
     });
 })();

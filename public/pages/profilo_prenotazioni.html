@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="it" data-theme="light">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Le Mie Prenotazioni - SailUP</title>
+  <meta name="description" content="Visualizza e gestisci le tue prenotazioni con SailUP" />
+  <meta name="authors" content="Alberto Reginato, Francesco Marcon" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap"
+    rel="stylesheet" />
+
+  <link rel="stylesheet" href="../css/style.css" media="screen" />
+  <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)" />
+  <link rel="stylesheet" href="../css/profilo.css" media="screen" />
+  <link rel="stylesheet" href="../css/print.css" media="print" />
+</head>
+
+<body>
+  <a href="#main-content" class="skip-to-content">Salta al contenuto</a>
+
+  <header>
+    <div class="header-container">
+      <div class="header">
+        <div class="logo">
+          <picture>
+            <source srcset="" type="image/avif" />
+            <img alt="Logo SailUP"
+              src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=400&q=80"
+              width="30" />
+          </picture>
+          <h1 lang="en">
+            <span class="logo-text">Sail<span class="text-accent">UP</span></span>
+          </h1>
+        </div>
+
+        <nav id="main-menu" aria-label="Navigazione principale">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="catalogo_noleggio.html">Noleggio</a></li>
+            <li><a href="catalogo_esperienze.html">Esperienze</a></li>
+            <li lang="en"><a href="blog.html">Blog</a></li>
+            <li><a href="chi_siamo.html">Chi Siamo</a></li>
+          </ul>
+        </nav>
+
+        <div class="header-buttons">
+          <button class="theme-toggle" aria-pressed="false" aria-label="Attiva modalità scura">
+            <span class="active-icon sun">☀️</span>
+            <span class="inactive-icon moon">🌙</span>
+          </button>
+          <a href="profilo.html" class="btn-layout" aria-current="page">Profilo</a>
+        </div>
+
+        <button id="hamburger-btn" aria-expanded="false" aria-controls="mobile-menu" aria-label="Menu Mobile">
+          <span class="hamburger-icon">☰</span>
+          <span class="close-icon hidden">✕</span>
+        </button>
+      </div>
+
+      <nav id="mobile-menu">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="catalogo_noleggio.html">Noleggio</a></li>
+          <li><a href="catalogo_esperienze.html">Esperienze</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="chi_siamo.html">Chi Siamo</a></li>
+          <li class="current-page">Profilo</li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div class="sr-only" id="breadcrumb-label">
+    <span lang="en">breadcrumb</span>
+  </div>
+  <nav aria-labelledby="breadcrumb-label" id="breadcrumb">
+    <ol>
+      <li><a href="index.html"><span lang="en">Home</span></a></li>
+      <li><a href="profilo.html">Il Mio Profilo</a></li>
+      <li aria-current="page">Prenotazioni</li>
+    </ol>
+  </nav>
+
+  <main id="main-content">
+    <div class="profile-container section-container">
+      <div class="profile-header">
+        <div class="profile-avatar">
+          <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=200&q=80"
+            alt="Avatar di Mario Rossi" />
+        </div>
+        <div class="profile-info">
+          <h1>Mario Rossi</h1>
+          <p class="profile-email">mario.rossi@example.com</p>
+          <p class="profile-member-since">Membro dal Gennaio 2024</p>
+        </div>
+        <div class="profile-actions">
+          <a href="profilo.html" class="btn-layout-light">Visualizza Profilo</a>
+          <button class="btn-layout-light" type="button">Esci</button>
+        </div>
+      </div>
+
+      <div class="profile-layout">
+        <nav class="profile-sidebar" aria-label="Menu profilo">
+          <ul>
+            <li>
+              <a href="profilo.html">
+                <span class="nav-icon" aria-hidden="true">👤</span>
+                <span>Informazioni Personali</span>
+              </a>
+            </li>
+            <li>
+              <a href="profilo_sicurezza.html">
+                <span class="nav-icon" aria-hidden="true">🔒</span>
+                <span>Sicurezza</span>
+              </a>
+            </li>
+            <li class="current-tab">
+              <a href="profilo_prenotazioni.html" aria-current="page">
+                <span class="nav-icon" aria-hidden="true">📋</span>
+                <span>Prenotazioni</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <div class="profile-content">
+          <section aria-labelledby="bookings-title">
+            <h2 id="bookings-title">Le Mie Prenotazioni</h2>
+
+            <div class="bookings-filters">
+              <fieldset>
+                <legend class="sr-only">Filtra prenotazioni</legend>
+                <div class="filter-tabs" role="tablist" aria-label="Filtri prenotazioni">
+                  <button type="button" role="tab" aria-selected="true" aria-controls="all-bookings" 
+                    id="tab-all" class="filter-tab active">
+                    Tutte <span class="badge">12</span>
+                  </button>
+                  <button type="button" role="tab" aria-selected="false" aria-controls="active-bookings" 
+                    id="tab-active" class="filter-tab">
+                    Attive <span class="badge badge-accent">3</span>
+                  </button>
+                  <button type="button" role="tab" aria-selected="false" aria-controls="past-bookings" 
+                    id="tab-past" class="filter-tab">
+                    Completate <span class="badge">9</span>
+                  </button>
+                </div>
+              </fieldset>
+            </div>
+
+            <div id="all-bookings" role="tabpanel" aria-labelledby="tab-all" class="bookings-list">
+              <article class="booking-card status-active">
+                <div class="booking-header">
+                  <div class="booking-image">
+                    <img src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=300&q=80"
+                      alt="Barca a vela Bavaria 46" />
+                  </div>
+                  <div class="booking-info">
+                    <h3>Bavaria 46</h3>
+                    <p class="booking-type">Barca a Vela • 14<abbr title="Metri">m</abbr></p>
+                    <p class="booking-status booking-status-active">
+                      <span class="status-indicator" aria-hidden="true">●</span>
+                      Prenotazione Attiva
+                    </p>
+                  </div>
+                </div>
+                <div class="booking-details">
+                  <div class="booking-details-content">
+                    <p><strong>Data:</strong> <time datetime="2025-12-15">15 Dicembre 2025</time></p>
+                    <p><strong>Orario:</strong> <time datetime="09:00">09:00</time> - <time datetime="17:00">17:00</time></p>
+                    <p><strong>Codice Prenotazione:</strong> SU-2025-001234</p>
+                    <p><strong>Importo:</strong> 450,00 €</p>
+                  </div>
+                  <div class="booking-actions">
+                    <a href="dettaglio_prenotazione.html" class="btn-layout-light">Vedi Dettagli</a>
+                    <button type="button" class="btn-danger-outline">Annulla</button>
+                  </div>
+                </div>
+              </article>
+
+              <article class="booking-card status-active">
+                <div class="booking-header">
+                  <div class="booking-image">
+                    <img src="https://images.unsplash.com/photo-1534669740902-e09e38a6a29f?auto=format&fit=crop&w=300&q=80"
+                      alt="Tour Capri" />
+                  </div>
+                  <div class="booking-info">
+                    <h3>Tour Capri e Faraglioni</h3>
+                    <p class="booking-type">Esperienza Guidata</p>
+                    <p class="booking-status booking-status-active">
+                      <span class="status-indicator" aria-hidden="true">●</span>
+                      Prenotazione Attiva
+                    </p>
+                  </div>
+                </div>
+                <div class="booking-details">
+                  <div class="booking-details-content">
+                    <p><strong>Data:</strong> <time datetime="2025-12-20">20 Dicembre 2025</time></p>
+                    <p><strong>Orario:</strong> <time datetime="10:00">10:00</time> - <time datetime="18:00">18:00</time></p>
+                    <p><strong>Codice Prenotazione:</strong> SU-2025-001567</p>
+                    <p><strong>Importo:</strong> 120,00 €</p>
+                  </div>
+                  <div class="booking-actions">
+                    <a href="dettaglio_prenotazione.html" class="btn-layout-light">Vedi Dettagli</a>
+                    <button type="button" class="btn-danger-outline">Annulla</button>
+                  </div>
+                </div>
+              </article>
+
+              <article class="booking-card status-active">
+                <div class="booking-header">
+                  <div class="booking-image">
+                    <img src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=300&q=80"
+                      alt="Gommone Sacs Strider" />
+                  </div>
+                  <div class="booking-info">
+                    <h3>Sacs Strider</h3>
+                    <p class="booking-type">Gommone • 8<abbr title="Metri">m</abbr></p>
+                    <p class="booking-status booking-status-active">
+                      <span class="status-indicator" aria-hidden="true">●</span>
+                      Prenotazione Attiva
+                    </p>
+                  </div>
+                </div>
+                <div class="booking-details">
+                  <div class="booking-details-content">
+                    <p><strong>Data:</strong> <time datetime="2025-12-28">28 Dicembre 2025</time></p>
+                    <p><strong>Orario:</strong> <time datetime="14:00">14:00</time> - <time datetime="19:00">19:00</time></p>
+                    <p><strong>Codice Prenotazione:</strong> SU-2025-001789</p>
+                    <p><strong>Importo:</strong> 280,00 €</p>
+                  </div>
+                  <div class="booking-actions">
+                    <a href="dettaglio_prenotazione.html" class="btn-layout-light">Vedi Dettagli</a>
+                    <button type="button" class="btn-danger-outline">Annulla</button>
+                  </div>
+                </div>
+              </article>
+
+              <article class="booking-card status-completed">
+                <div class="booking-header">
+                  <div class="booking-image">
+                    <img src="https://images.unsplash.com/photo-1534669740902-e09e38a6a29f?auto=format&fit=crop&w=300&q=80"
+                      alt="Yacht Sunseeker Predator" />
+                  </div>
+                  <div class="booking-info">
+                    <h3>Sunseeker Predator</h3>
+                    <p class="booking-type">Yacht a Motore • 12<abbr title="Metri">m</abbr></p>
+                    <p class="booking-status booking-status-completed">
+                      <span class="status-indicator" aria-hidden="true">✓</span>
+                      Completata
+                    </p>
+                  </div>
+                </div>
+                <div class="booking-details">
+                  <div class="booking-details-content">
+                    <p><strong>Data:</strong> <time datetime="2025-11-10">10 Novembre 2025</time></p>
+                    <p><strong>Orario:</strong> <time datetime="09:00">09:00</time> - <time datetime="17:00">17:00</time></p>
+                    <p><strong>Codice Prenotazione:</strong> SU-2025-000987</p>
+                    <p><strong>Importo:</strong> 850,00 €</p>
+                  </div>
+                  <div class="booking-actions">
+                    <a href="dettaglio_prenotazione.html" class="btn-layout-light">Vedi Dettagli</a>
+                    <button type="button" class="btn-layout">Prenota di Nuovo</button>
+                  </div>
+                </div>
+              </article>
+
+              <article class="booking-card status-completed">
+                <div class="booking-header">
+                  <div class="booking-image">
+                    <img src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=300&q=80"
+                      alt="Tramonto a Ischia" />
+                  </div>
+                  <div class="booking-info">
+                    <h3>Tramonto a Ischia</h3>
+                    <p class="booking-type">Esperienza Guidata</p>
+                    <p class="booking-status booking-status-completed">
+                      <span class="status-indicator" aria-hidden="true">✓</span>
+                      Completata
+                    </p>
+                  </div>
+                </div>
+                <div class="booking-details">
+                  <div class="booking-details-content">
+                    <p><strong>Data:</strong> <time datetime="2025-10-22">22 Ottobre 2025</time></p>
+                    <p><strong>Orario:</strong> <time datetime="16:00">16:00</time> - <time datetime="20:00">20:00</time></p>
+                    <p><strong>Codice Prenotazione:</strong> SU-2025-000765</p>
+                    <p><strong>Importo:</strong> 95,00 €</p>
+                  </div>
+                  <div class="booking-actions">
+                    <a href="dettaglio_prenotazione.html" class="btn-layout-light">Vedi Dettagli</a>
+                    <button type="button" class="btn-layout">Prenota di Nuovo</button>
+                  </div>
+                </div>
+              </article>
+            </div>
+
+            <div id="active-bookings" role="tabpanel" aria-labelledby="tab-active" class="bookings-list hidden">
+            </div>
+
+            <div id="past-bookings" role="tabpanel" aria-labelledby="tab-past" class="bookings-list hidden">
+            </div>
+
+            <div class="bookings-empty hidden">
+              <p>Non hai ancora effettuato prenotazioni.</p>
+              <a href="catalogo_noleggio.html" class="btn-layout">Esplora la Flotta</a>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="section-container footer-content">
+      <div class="footer-col brand-col">
+        <div class="logo footer-logo">
+          <span class="logo-icon" aria-hidden="true">⚓</span>
+          <span class="logo-text"><span lang="en">Sail</span><span class="text-accent" lang="en">UP</span></span>
+        </div>
+        <p class="footer-tagline">
+          Naviga il Golfo di Napoli con stile e sicurezza. La tua avventura
+          inizia qui.
+        </p>
+      </div>
+
+      <div class="footer-col nav-col">
+        <h3 class="footer-heading">Esplora</h3>
+        <nav aria-label="Menu footer">
+          <ul class="footer-links">
+            <li lang="en"><a href="index.html">Home</a></li>
+            <li><a href="catalogo_noleggio.html">Noleggio</a></li>
+            <li><a href="catalogo_esperienze.html">Esperienze</a></li>
+            <li lang="en"><a href="blog.html">Blog</a></li>
+            <li><a href="chi_siamo.html">Chi Siamo</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="footer-col info-col">
+        <h3 class="footer-heading">Info &amp; Contatti</h3>
+        <ul class="footer-links">
+          <li><a href="FAQ.html">Domande Frequenti (FAQ)</a></li>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="cookie.html">Cookie Policy</a></li>
+        </ul>
+        <address class="footer-address">
+          <p><strong>SailUP S.r.l.</strong></p>
+          <p>Via Caracciolo, 80122 Napoli (NA)</p>
+          <p>P.IVA: 12345678901</p>
+        </address>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-bottom-container">
+        <div class="copyright">
+          &copy; 2025 SailUP S.r.l. - All rights reserved.
+        </div>
+
+        <div class="valid-logos">
+          <img class="valid-code-icon" src="valid-xhtml10.png" alt="XHTML valido" />
+          <img class="valid-code-icon" src="valid-CSS.png" alt="CSS valido" />
+        </div>
+
+        <a href="#main-content" class="scroll-to-top" id="btnTop" aria-label="Torna all'inizio del contenuto"
+          tabindex="-1">
+          <span aria-hidden="true">⬆</span> <span lang="en">Top</span>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/script.js"></script>
+</body>
+
+</html>
