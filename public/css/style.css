@@ -27,6 +27,7 @@
 
   --col-border: #e0e0e0;
   /* Bordi sottili */
+  --col-card: #ffffff;
 
   /* --- Spaziature & Radius --- */
   --radius-btn: 99em;
@@ -52,6 +53,7 @@
   --col-text-inv: #121212;
   --col-text-muted: #a8a29e;
   --col-border: #2c3e50;
+  --col-card: #0a141f
 }
 
 /* Tipografia Fluida (Clamp) */
@@ -531,7 +533,7 @@ button:focus-visible,
 }
 
 .card {
-  background-color: var(--col-bg);
+  background-color: var(--col-card);
   border-radius: var(--radius-card);
   padding: 1em;
   box-shadow: var(--shadow-sm);
