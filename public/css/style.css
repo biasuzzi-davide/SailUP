@@ -47,7 +47,7 @@
   --col-primary-light: #e2dccf;
   --col-accent: #fe654f;
   --col-bg: #030a11;
-  --col-bg-alt: #060d16;
+  --col-bg-alt: #152336;
   --col-text: #f0f0f0;
   --col-text-inv: #121212;
   --col-text-muted: #a8a29e;
@@ -620,6 +620,7 @@ button:focus-visible,
   border: 1px solid var(--col-border);
   text-decoration: none;
   transition: border-color 0.3s ease;
+  margin-bottom: 1em;
 }
 
 .horizontal-card:hover {
@@ -679,7 +680,6 @@ footer {
 
 .footer-links a {
   color: var(--col-text-inv);
-  text-decoration: none;
   transition: color 0.3s;
 }
 
@@ -746,7 +746,7 @@ footer {
 }
 
 /* =========================================
-   9. Catalogo noleggi e catalogo esperienze
+   9. Catalogo noleggi, catalogo esperienze, FAQ
    ========================================= */
 
   
@@ -817,6 +817,10 @@ footer {
   border-top: 1px solid var(--col-border);
   color: var(--col-accent);
   font-weight: 700;
+}
+
+.FAQ-header{
+  font-weight:normal !important;
 }
 
 /* =========================================
