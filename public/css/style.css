@@ -1148,12 +1148,6 @@ input[maxlength="5"] {
   margin-bottom: 0.2em;
 }
 
-.profile-member-since {
-  color: var(--col-text-muted);
-  font-size: var(--fs-sm);
-  font-style: italic;
-}
-
 .profile-actions {
   display: flex;
   gap: 1em;
