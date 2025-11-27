@@ -225,53 +225,57 @@ footer .logo p {
 }
 
 @media (max-width: 600px) {
-  .address-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
-  
-  .field-via, .field-civico, .field-cap, .field-citta, .field-provincia {
-    grid-column: auto;
-    width: 100%;
-  }
+    .address-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .field-via,
+    .field-civico,
+    .field-cap,
+    .field-citta,
+    .field-provincia {
+        grid-column: auto;
+        width: 100%;
+    }
 }
 
 .profile-header {
     grid-template-columns: 1fr;
     text-align: center;
     gap: 1.5em;
-  }
+}
 
-  .profile-avatar {
+.profile-avatar {
     margin: 0 auto;
-  }
+}
 
-  .profile-actions {
+.profile-actions {
     justify-content: center;
-  }
+}
 
-  .stats-grid {
+.stats-grid {
     grid-template-columns: 1fr;
-  }
+}
 
-  .filter-tabs {
+.filter-tabs {
     flex-direction: column;
-  }
+}
 
-  .filter-tab {
+.filter-tab {
     width: 100%;
-  }
+}
 
-  .booking-actions {
+.booking-actions {
     flex-direction: column;
-  }
+}
 
-  .booking-actions .btn-layout,
-  .booking-actions .btn-layout-light,
-  .booking-actions .btn-danger-outline {
+.booking-actions .btn-layout,
+.booking-actions .btn-layout-light,
+.booking-actions .btn-danger-outline {
     width: 100%;
-  }
+}
 
 /* =========================================
    6. PAGINA DETTAGLIO PRODOTTO (Mobile) -- da controllare --
@@ -285,18 +289,22 @@ footer .logo p {
 
 /* Gestione Immagine Hero su Mobile */
 .product-hero {
-    height: 300px;         /* Riduce l'altezza per non occupare tutto lo schermo */
+    height: 300px;
+    /* Riduce l'altezza per non occupare tutto lo schermo */
     min-height: auto;
     margin-bottom: 1.5rem;
-    border-radius: var(--radius-sm); /* Raggio meno pronunciato su mobile */
+    border-radius: var(--radius-sm);
+    /* Raggio meno pronunciato su mobile */
 }
 
 /* Sidebar Prenotazione */
 .filters-sidebar.sticky-top {
-    position: static;      /* Rimuove l'effetto sticky che su mobile non serve/dà fastidio */
+    position: static;
+    /* Rimuove l'effetto sticky che su mobile non serve/dà fastidio */
     z-index: 1;
     margin-top: 1rem;
-    order: -1;             /* OPZIONALE: Se vuoi il form SOPRA la descrizione */
+    order: -1;
+    /* OPZIONALE: Se vuoi il form SOPRA la descrizione */
 }
 
 /* Se decidi di usare order: -1 sopra, potresti voler nascondere alcuni dettagli 
@@ -304,14 +312,89 @@ footer .logo p {
 
 /* Adattamento Specifiche Tecniche (Cards Wrapper interno) */
 .product-layout .cards-wrapper {
-    grid-template-columns: repeat(2, 1fr); /* 2 colonne su mobile invece di 4 o 1 */
+    grid-template-columns: repeat(2, 1fr);
+    /* 2 colonne su mobile invece di 4 o 1 */
     gap: 0.8rem;
 }
 
 .product-layout .card {
-    padding: 0.8em; /* Meno padding nelle card specifiche */
+    padding: 0.8em;
+    /* Meno padding nelle card specifiche */
 }
 
 .product-layout .card p {
-    font-size: var(--fs-base); /* Assicura leggibilità */
+    font-size: var(--fs-base);
+    /* Assicura leggibilità */
+}
+
+.faq-question {
+    padding: 1em;
+    gap: 0.75em;
+}
+
+.faq-text {
+    font-size: var(--fs-sm);
+}
+
+.faq-answer {
+    padding: 1em;
+    padding-top: 0.5em;
+    font-size: var(--fs-sm);
+}
+
+.page-intro {
+    font-size: var(--fs-base);
+    text-align: left;
+}
+
+.catalog-hero {
+    padding: 2em 0;
+}
+
+.catalog-hero h1 {
+    font-size: var(--fs-xl);
+}
+
+.catalog-hero p {
+    font-size: var(--fs-base);
+}
+
+.catalog-layout {
+    grid-template-columns: 1fr;
+}
+
+.filters-sidebar {
+    position: static;
+    max-height: none;
+    margin-bottom: 2em;
+}
+
+.results-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1em;
+}
+
+.results-sort {
+    width: 100%;
+    justify-content: space-between;
+}
+
+.results-sort select {
+    flex: 1;
+}
+
+.catalog-grid {
+    grid-template-columns: 1fr;
+}
+
+.product-specs {
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+.product-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1em;
 }
