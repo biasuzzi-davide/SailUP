@@ -4,9 +4,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SailUP - Catalogo Esperienze</title>
+  <title>Catalogo Esperienze - SailUP</title>
   <meta name="description"
-    content="Scopri le esperienze organizzate dalle guide SailUp nel golfo di Napoli. Aperitivi al tramonto, esplorazione della costiera amalfitana o <span lang="en">tour</span> in mare. Prenota la tua avventura oggi!" />
+    content="Scopri le esperienze organizzate dalle guide SailUp nel golfo di Napoli. Aperitivi al tramonto, esplorazione della costiera amalfitana o tour in mare. Prenota la tua avventura oggi!" />
   <meta name="authors" content="SailUp team" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -17,7 +17,6 @@
 
   <link rel="stylesheet" href="../css/style.css" media="screen" />
   <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)" />
-  <!-- ancora mancante  -->
   <link rel="stylesheet" href="../css/print.css" media="print" />
 </head>
 
@@ -41,7 +40,7 @@
 
         <nav id="main-menu" aria-label="Menu principale">
           <ul>
-            <li><a href="index.html" lang="en">Home</a></li>
+            <li lang="en"><a href="index.html">Home</a></li>
             <li><a href="catalogo_noleggio.html">Noleggio</a></li>
             <li class="current-page">Esperienze</li>
             <li><a href="blog.html" lang="en">Blog</a></li>
@@ -65,7 +64,7 @@
 
       <nav id="mobile-menu" aria-label="Menu mobile">
         <ul>
-          <li><a href="index.html" lang="en">Home</a></li>
+          <li lang="en"><a href="index.html">Home</a></li>
           <li><a href="catalogo_noleggio.html">Noleggio</a></li>
           <li class="current-page">Esperienze</li>
           <li><a href="blog.html" lang="en">Blog</a></li>
@@ -91,128 +90,199 @@
   </nav>
 
   <main id="main-content">
-    <section id="esperienze-hero" class="section-container">
-      <div class="hero-content">
-        <h1>Vivi il Mare, Crea Ricordi Indelebili</h1>
-        <p>Lasciati guidare dai nostri skipper esperti alla scoperta delle meraviglie del Golfo di Napoli. <span lang="en">Tour</span>
-          esclusivi, aperitivi al tramonto e giornate da sogno ti aspettano.</p>
+    <!-- Hero -->
+    <section class="catalog-hero">
+      <div class="section-container">
+        <h1>Vivi il Mare con Noi</h1>
+        <p>Tour esclusivi, aperitivi al tramonto e giornate da sogno nel Golfo di Napoli. Lasciati guidare dai nostri skipper esperti.</p>
       </div>
     </section>
 
     <section id="catalogo" class="section-container">
-
       <div class="catalog-layout">
+        
         <aside class="filters-sidebar">
-          <h2>Filtra le esperienze</h2>
-          <form action="catalogo_esperienze.php" method="GET"> <!-- INSERIRE PHP-->
-
-            <fieldset>
-              <legend>Dettagli del <span lang="en">tour</span></legend>
-              <div class="filters-sidebar">
-                <label for="posti_disponibili">Posti (minimo richiesto)</label>
+          <div class="filters-header">
+            <h2>Filtra</h2>
+            <button type="reset" class="btn-text">Reset</button>
+          </div>
+          
+          <form action="" method="GET">     <!-- Azione da definire -->
+            <fieldset class="filter-group">
+              <legend>Dettagli</legend>
+              
+              <div class="filter-input">
+                <label for="posti_disponibili">Posti minimi</label>
                 <input type="number" id="posti_disponibili" name="posti_disponibili" min="1" placeholder="Es. 2" />
               </div>
 
-              <div class="filters-sidebar">
+              <div class="filter-input">
                 <label for="data_esperienza">Data</label>
                 <input type="date" id="data_esperienza" name="data_esperienza" />
               </div>
 
-              <div class="filters-sidebar">
-                <label for="lingua_guida">Lingua della Guida</label>
+              <div class="filter-input">
+                <label for="lingua_guida">Lingua Guida</label>
                 <select name="lingua_guida" id="lingua_guida">
                   <option value="indifferente">Indifferente</option>
                   <option value="italiano">Italiano</option>
-                  <option value="Inglese">Inglese</option>
+                  <option value="inglese">Inglese</option>
                   <option value="francese">Francese</option>
                 </select>
               </div>
-            </fieldset>
 
-            <fieldset>
-              <legend>Budget</legend>
-              <div class="filters-sidebar">
-                <label for="maxPriceExperience">Prezzo massimo (€/<span lang="en">tour</span>):</label>
-                <input type="number" id="maxPriceExperience" name="maxPriceExperience" placeholder="Costo massimo"
-                  min="50" step="50" aria-label="Filtra per prezzo massimo del <span lang="en">tour</span> in Euro">
+              <div class="filter-input">
+                <label for="maxPriceExperience">Prezzo max (€/tour)</label>
+                <input type="number" id="maxPriceExperience" name="maxPriceExperience" placeholder="Es. 500" min="50" step="50" />
               </div>
             </fieldset>
 
-            <fieldset>
+            <fieldset class="filter-group">
               <legend>Accessibilità</legend>
-              <div class="filters-sidebar">
+              <label class="filter-checkbox">
                 <input type="checkbox" id="accessibile" name="accessibile" value="true">
-                <label for="accessibile">Adatta a persone con disabilità (Accessibile)</label>
-              </div>
+                <span>Adatta a persone con disabilità</span>
+              </label>
             </fieldset>
 
-            <button type="submit" class="btn-layout full-width">Applica Filtri</button>
+            <button type="submit" class="btn-layout filter-submit">Applica Filtri</button>
           </form>
         </aside>
 
-        <div class="results-grid">
-          <div class="section-header-mobile">
-            <h2>Le Nostre Esperienze Uniche</h2>
+        <!-- Risultati -->
+        <div class="catalog-results">
+          <div class="results-header">
+            <h2>3 esperienze disponibili</h2>
+            <div class="results-sort">
+              <label for="sort">Ordina per:</label>
+              <select id="sort" name="sort">
+                <option value="price-asc">Prezzo crescente</option>
+                <option value="price-desc">Prezzo decrescente</option>
+                <option value="duration">Durata</option>
+              </select>
+            </div>
           </div>
 
-          <div class="cards-wrapper">
-            <article class="card">
-              <a href="dettaglio_esperienza.html?id=tour-capri" class="card-link-wrapper"
-                aria-label="Dettagli per Tour di Capri & Grotta Azzurra">
-                <img src="https://images.unsplash.com/photo-1594209195285-5dcbcb34df24?q=80&w=1335&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                alt="Vista mozzafiato dei Faraglioni di Capri da una barca in legno">
-                <div class="card-content">
-                  <h3 class="card-title"><span lang="en">Tour</span> di Capri & Grotta Azzurra</h3>
-                  <p class="card-description">Un'intera giornata dedicata alla scoperta dell'isola più iconica del
-                    mondo.
-                    Nuota in acque cristalline e ammira i Faraglioni.</p>
-                  <ul>
-                    <li>Posti: 8</li>
-                    <li>Durata: 8 ore</li>
-                    <li>Guida: Italiano</li>
-                    <li>Da 850€</li>
-                  </ul>
+          <div class="catalog-grid">
+            
+            <!-- Card Esperienza -->
+            <article class="product-card">
+              <a href="dettaglio_esperienza.html?id=tour-capri" class="product-card-link">
+                <div class="product-card-image">
+                  <img src="https://images.unsplash.com/photo-1594209195285-5dcbcb34df24?q=80&w=1335&auto=format&fit=crop"
+                    alt="Vista mozzafiato dei Faraglioni di Capri da una barca" />
+                  <span class="product-badge badge-tour">Tour</span>
+                </div>
+                <div class="product-card-content">
+                  <h3 class="product-title">Tour di Capri & Grotta Azzurra</h3>
+                  <p class="product-description">Un'intera giornata dedicata alla scoperta dell'isola più iconica. Nuota in acque cristalline e ammira i Faraglioni.</p>
+                  
+                  <div class="product-specs">
+                    <span class="spec-item">
+                      <span class="spec-icon" aria-hidden="true">👥</span>
+                      <span>8 posti</span>
+                    </span>
+                    <span class="spec-item">
+                      <span class="spec-icon" aria-hidden="true">⏱️</span>
+                      <span>8 ore</span>
+                    </span>
+                    <span class="spec-item">
+                      <span class="spec-icon" aria-hidden="true">🗣️</span>
+                      <span>Italiano</span>
+                    </span>
+                  </div>
+
+                  <div class="product-footer">
+                    <div class="product-price">
+                      <span class="price-label">da</span>
+                      <span class="price-value">850€</span>
+                      <span class="price-period">/tour</span>
+                    </div>
+                    <span class="product-cta">Vedi dettagli →</span>
+                  </div>
                 </div>
               </a>
             </article>
-            <article class="card">
-              <a href="dettaglio_esperienza.html?id=aperitivo-ischia" class="card-link-wrapper"
-                aria-label="Dettagli per Aperitivo al Tramonto a Ischia">
-                <img src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=400&q=80"
-                  alt="Aperitivo in barca con vista sul Castello Aragonese di Ischia">
-                <div class="card-content">
-                  <h3 class="card-title">Aperitivo al Tramonto a Ischia</h3>
-                  <p class="card-description">Goditi un aperitivo con prodotti tipici locali mentre il sole tramonta
-                    dietro
-                    il Castello Aragonese. Un'esperienza magica e rilassante.</p>
-                  <ul>
-                    <li>Posti: 6</li>
-                    <li>Durata: 4 ore</li>
-                    <li>Guida: Italiano/Inglese</li>
-                    <li>Da 450€</li>
-                  </ul>
+
+            <article class="product-card">
+              <a href="dettaglio_esperienza.html?id=aperitivo-ischia" class="product-card-link">
+                <div class="product-card-image">
+                  <img src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=400&q=80"
+                    alt="Aperitivo in barca con vista sul Castello Aragonese di Ischia" />
+                  <span class="product-badge badge-aperitivo">Aperitivo</span>
+                </div>
+                <div class="product-card-content">
+                  <h3 class="product-title">Aperitivo al Tramonto a Ischia</h3>
+                  <p class="product-description">Goditi un aperitivo con prodotti tipici mentre il sole tramonta dietro il Castello Aragonese. Un'esperienza magica.</p>
+                  
+                  <div class="product-specs">
+                    <span class="spec-item">
+                      <span class="spec-icon" aria-hidden="true">👥</span>
+                      <span>6 posti</span>
+                    </span>
+                    <span class="spec-item">
+                      <span class="spec-icon" aria-hidden="true">⏱️</span>
+                      <span>4 ore</span>
+                    </span>
+                    <span class="spec-item">
+                      <span class="spec-icon" aria-hidden="true">🗣️</span>
+                      <span>ITA/ENG</span>
+                    </span>
+                  </div>
+
+                  <div class="product-footer">
+                    <div class="product-price">
+                      <span class="price-label">da</span>
+                      <span class="price-value">450€</span>
+                      <span class="price-period">/tour</span>
+                    </div>
+                    <span class="product-cta">Vedi dettagli →</span>
+                  </div>
                 </div>
               </a>
             </article>
-            <article class="card">
-              <a href="dettaglio_esperienza.html?id=costiera-positano" class="card-link-wrapper"
-                aria-label="Dettagli per Esplorazione della Costiera Amalfitana">
-                <img src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=400&q=80"
-                  alt="Le case colorate di Positano viste dal mare durante un <span lang="en">tour</span> in barca">
-                <div class="card-content">
-                  <h3 class="card-title">Esplorazione della Costiera Amalfitana</h3>
-                  <p class="card-description">Naviga lungo la divina costiera, con soste a Positano e Amalfi per esplorare i borghi e gustare le prelibatezze locali.</p>
-                  <ul>
-                    <li>Posti: 10</li>
-                    <li>Durata: 8 ore</li>
-                    <li>Guida: Italiano/Inglese</li>
-                    <li>Da 1200€</li>
-                  </ul>
+
+            <article class="product-card">
+              <a href="dettaglio_esperienza.html?id=costiera-positano" class="product-card-link">
+                <div class="product-card-image">
+                  <img src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=400&q=80"
+                    alt="Le case colorate di Positano viste dal mare" />
+                  <span class="product-badge badge-escursione">Escursione</span>
+                </div>
+                <div class="product-card-content">
+                  <h3 class="product-title">Esplorazione Costiera Amalfitana</h3>
+                  <p class="product-description">Naviga lungo la divina costiera, con soste a Positano e Amalfi per esplorare i borghi e gustare le prelibatezze locali.</p>
+                  
+                  <div class="product-specs">
+                    <span class="spec-item">
+                      <span class="spec-icon" aria-hidden="true">👥</span>
+                      <span>10 posti</span>
+                    </span>
+                    <span class="spec-item">
+                      <span class="spec-icon" aria-hidden="true">⏱️</span>
+                      <span>8 ore</span>
+                    </span>
+                    <span class="spec-item">
+                      <span class="spec-icon" aria-hidden="true">🗣️</span>
+                      <span>ITA/ENG</span>
+                    </span>
+                  </div>
+
+                  <div class="product-footer">
+                    <div class="product-price">
+                      <span class="price-label">da</span>
+                      <span class="price-value">1200€</span>
+                      <span class="price-period">/tour</span>
+                    </div>
+                    <span class="product-cta">Vedi dettagli →</span>
+                  </div>
                 </div>
               </a>
             </article>
+
           </div>
         </div>
+      </div>
     </section>
   </main>
 
@@ -232,7 +302,7 @@
         <h3 class="footer-heading">Esplora</h3>
         <nav aria-label="Menu footer">
           <ul class="footer-links">
-            <li><a href="index.html" lang="en">Home</a></li>
+            <li lang="en"><a href="index.html">Home</a></li>
             <li><a href="catalogo_noleggio.html">Noleggio</a></li>
             <li>Esperienze</li>
             <li><a href="blog.html" lang="en">Blog</a></li>
@@ -267,7 +337,6 @@
           <img class="valid-code-icon" src="valid-CSS.png" alt="CSS valido" />
         </div>
 
-        <!-- Area bottone torna su, inizialmente non selezionabile con tab perchè invisibile -->
         <a href="#main-content" class="scroll-to-top" id="btnTop" aria-label="Torna all'inizio del contenuto"
           tabindex="-1">
           <span aria-hidden="true">⬆</span> <span lang="en">Top</span>

@@ -760,12 +760,7 @@ footer {
     gap: 0.5em;
   }
   
-  .catalog-layout {
-    display: grid;
-    grid-template-columns: minmax(250px, 300px) 1fr;
-    gap: 2.5em; 
-    align-items: start;
-  }
+  /* duplicate catalog-layout removed (kept unified definition later in file) */
 
 .filters-sidebar {
   background-color: var(--col-bg-alt);
@@ -799,10 +794,10 @@ footer {
   transition: all 0.3s ease;
 }
 
-.filter-sidebar input[type="number"]:focus,
-.filters-sidebar input[type="date"]:focus {
-  border-color: var(--col-accent);
-}
+  .filters-sidebar input[type="number"]:focus,
+  .filters-sidebar input[type="date"]:focus {
+    border-color: var(--col-accent);
+  }
 
 .card-content {
   padding: 1.5em; 
@@ -822,9 +817,7 @@ footer {
   font-weight: 700;
 }
 
-.FAQ-header{
-  font-weight:normal !important;
-}
+/* .FAQ-header removed — not used in HTML files */
 
 .horizontal-card summary {
   list-style: none; 
@@ -1671,4 +1664,478 @@ input[maxlength="5"] {
 
 .form-group input{
   color: var(--col-text);
+}
+/* =========================================
+   FAQ - SEZIONE DOMANDE FREQUENTI
+   Aggiungere alla fine di style.css
+   ========================================= */
+
+/* Introduzione pagina */
+.page-intro {
+  font-size: var(--fs-md);
+  color: var(--col-text-muted);
+  margin-bottom: 3em;
+  text-align: center;
+}
+
+/* Sezioni FAQ */
+.faq-section {
+  margin-bottom: 3em;
+}
+
+.faq-section h2 {
+  color: var(--col-primary);
+  border-bottom: 3px solid var(--col-accent);
+  padding-bottom: 0.5em;
+  margin-bottom: 1.5em;
+}
+
+/* Item FAQ singolo */
+/* Item FAQ singolo */
+.faq-item {
+  background-color: var(--col-bg);
+  border: 2px solid var(--col-border);
+  border-radius: var(--radius-card);
+  margin-bottom: 1em;
+  transition: all 0.3s ease;
+  
+  /* FIX IMPORTANTE: */
+  /* Taglia gli angoli dello sfondo interno per rispettare il border-radius */
+  overflow: hidden; 
+}
+
+/* 1. Stato APERTO (Definito PRIMA dell'hover) */
+.faq-item[open] {
+  border-color: var(--col-primary);
+  box-shadow: var(--shadow-md);
+}
+
+/* 2. Stato HOVER (Definito DOPO, così vince sempre) */
+.faq-item:hover {
+  border-color: var(--col-accent);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Domanda (summary) */
+.faq-question {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  padding: 1.25em 1.5em;
+  cursor: pointer;
+  user-select: none;
+  font-weight: 600;
+  font-family: var(--font-head);
+  color: var(--col-text);
+  list-style: none;
+  transition: background-color 0.2s ease;
+}
+
+.faq-question::-webkit-details-marker {
+  display: none;
+}
+
+.faq-question:hover {
+  background-color: var(--col-bg-alt);
+}
+
+.faq-item[open] .faq-question {
+  background-color: var(--col-bg-alt);
+  border-bottom: 1px solid var(--col-border);
+}
+
+/* Icona ancora */
+.faq-icon {
+  flex-shrink: 0;
+  width: 1.5em;
+  height: 1.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2em;
+  transition: transform 0.3s ease;
+}
+
+.faq-icon::before {
+  content: "⚓";
+  transform: rotate(-90deg);
+  display: block;
+  color: var(--col-accent);
+}
+
+.faq-item[open] .faq-icon::before {
+  transform: rotate(0deg);
+}
+
+/* Testo domanda */
+.faq-text {
+  flex: 1;
+  font-size: var(--fs-base);
+}
+
+/* Risposta */
+.faq-answer {
+  padding: 1.5em;
+  padding-top: 0.5em;
+  color: var(--col-text);
+  line-height: 1.8;
+  animation: slideDown 0.3s ease-out;
+}
+
+.faq-answer p {
+  margin-bottom: 0;
+  max-width: 100%;
+}
+
+/* Animazione apertura */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Focus per accessibilità */
+.faq-question:focus-visible {
+  outline: 3px solid var(--col-accent);
+  outline-offset: 3px;
+}
+
+
+/* =========================================
+   CATALOGHI UNIFICATO - NOLEGGIO & ESPERIENZE
+   ~150 righe | Aggiungere a style.css dopo sezione 9
+   ========================================= */
+
+/* HERO CATALOGO */
+.catalog-hero {
+  text-align: center;
+}
+.catalog-hero h1 { margin-bottom: 0.5em; }
+.catalog-hero p { font-size: var(--fs-md); max-width: 70ch; margin: 0 auto; opacity: 0.95; }
+
+/* LAYOUT CATALOGO */
+.catalog-layout {
+  display: grid;
+  grid-template-columns: minmax(250px, 300px) 1fr;
+  gap: 2.5em;
+  align-items: start;
+}
+
+/* SIDEBAR FILTRI */
+.filters-sidebar {
+  position: sticky;
+  top: 6em;
+  max-height: calc(100vh - 8em);
+  overflow-y: auto;
+}
+
+.filters-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5em;
+  padding-bottom: 0.75em;
+  border-bottom: 2px solid var(--col-border);
+}
+.filters-header h2 { margin: 0; font-size: var(--fs-lg); }
+
+.btn-text {
+  background: none;
+  border: none;
+  color: var(--col-accent);
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0.5em;
+  transition: opacity 0.2s;
+}
+.btn-text:hover { opacity: 0.7; }
+
+/* Gruppi filtri */
+.filter-group {
+  border: none;
+  padding: 0;
+  margin-bottom: 2em;
+}
+.filter-group legend {
+  font-weight: 700;
+  font-size: var(--fs-base);
+  margin-bottom: 1em;
+  color: var(--col-primary);
+}
+
+/* Checkbox e Radio */
+.filter-checkbox,
+.filter-radio {
+  display: flex;
+  align-items: center;
+  gap: 0.75em;
+  padding: 0.6em 0;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.filter-checkbox:hover,
+.filter-radio:hover {
+  background-color: var(--col-bg-alt);
+  padding-left: 0.5em;
+  margin-left: -0.5em;
+  border-radius: var(--radius-sm);
+}
+.filter-checkbox input,
+.filter-radio input {
+  cursor: pointer;
+  width: 1.1em;
+  height: 1.1em;
+  accent-color: var(--col-accent);
+}
+.filter-checkbox span,
+.filter-radio span { user-select: none; }
+
+/* Input filtri */
+.filter-input {
+  margin-bottom: 1.25em;
+}
+.filter-input label {
+  display: block;
+  font-weight: 600;
+  font-size: var(--fs-sm);
+  margin-bottom: 0.5em;
+  color: var(--col-text-muted);
+}
+.filter-input input,
+.filter-input select {
+  width: 100%;
+  padding: 0.7em;
+  border: 2px solid var(--col-border);
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-base);
+  font-family: var(--font-body);
+  background-color: var(--col-bg);
+  color: var(--col-text);
+  transition: border-color 0.2s;
+}
+.filter-input input:focus,
+.filter-input select:focus {
+  outline: none;
+  border-color: var(--col-accent);
+}
+
+.filter-submit { 
+  width: 80%; 
+  margin-top: 1.5em; 
+}
+
+/* AREA RISULTATI */
+.catalog-results {
+  flex: 1;
+}
+
+.results-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1em;
+  margin-bottom: 2em;
+  padding-bottom: 1em;
+  border-bottom: 2px solid var(--col-border);
+}
+.results-header h2 { 
+  margin: 0; 
+  font-size: var(--fs-lg); 
+  color: var(--col-primary); 
+}
+
+.results-sort {
+  display: flex;
+  align-items: center;
+  gap: 0.75em;
+}
+.results-sort label {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--col-text-muted);
+}
+.results-sort select {
+  padding: 0.5em 1em;
+  border: 2px solid var(--col-border);
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-sm);
+  font-family: var(--font-body);
+  cursor: pointer;
+  background-color: var(--col-bg);
+  color: var(--col-text);
+  transition: border-color 0.2s;
+}
+.results-sort select:focus {
+  outline: none;
+  border-color: var(--col-accent);
+}
+
+/* GRID PRODOTTI */
+.catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2em;
+}
+
+/* PRODUCT CARD (funziona per noleggio e esperienze) */
+.product-card {
+  background-color: var(--col-card);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.product-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Immagine con badge */
+.product-card-image {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+}
+.product-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+.product-card:hover .product-card-image img {
+  transform: scale(1.05);
+}
+
+/* Badge tipo (noleggio: vela/motore/gommone, esperienze: tour/aperitivo/ecc) */
+.product-badge {
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  padding: 0.4em 0.9em;
+  border-radius: var(--radius-btn);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  box-shadow: var(--shadow-md);
+}
+
+/* Badge colori - NOLEGGIO */
+.badge-motore { background-color: #3b82f6; color: white; }
+.badge-vela { background-color: #10b981; color: white; }
+.badge-gommone { background-color: #f59e0b; color: white; }
+
+/* Badge colori - ESPERIENZE */
+.badge-tour { background-color: #8b5cf6; color: white; }
+.badge-aperitivo { background-color: #ec4899; color: white; }
+.badge-escursione { background-color: #06b6d4; color: white; }
+
+/* Contenuto card */
+.product-card-content {
+  padding: 1.5em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  flex: 1;
+}
+
+.product-title {
+  font-size: var(--fs-md);
+  font-weight: 700;
+  color: var(--col-primary);
+  margin: 0;
+}
+
+.product-description {
+  font-size: var(--fs-sm);
+  color: var(--col-text-muted);
+  line-height: 1.6;
+  margin: 0;
+  flex: 1;
+}
+
+/* Specifiche tecniche con icone */
+.product-specs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
+  padding: 1em 0;
+  border-top: 1px solid var(--col-border);
+  border-bottom: 1px solid var(--col-border);
+}
+.spec-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+  font-size: var(--fs-sm);
+  color: var(--col-text);
+}
+.spec-icon { 
+  font-size: 1.1em; 
+}
+
+/* Footer card con prezzo */
+.product-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+}
+
+.product-price {
+  display: flex;
+  align-items: baseline;
+  gap: 0.3em;
+}
+.price-label { 
+  font-size: var(--fs-sm); 
+  color: var(--col-text-muted); 
+}
+.price-value {
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  font-family: var(--font-head);
+  color: var(--col-accent);
+}
+.price-period { 
+  font-size: var(--fs-sm); 
+  color: var(--col-text-muted); 
+}
+
+.product-cta {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--col-primary);
+  transition: color 0.2s;
+}
+.product-card:hover .product-cta { 
+  color: var(--col-accent); 
+}
+
+@media (max-width: 1024px) {
+  .catalog-layout { 
+    grid-template-columns: 250px 1fr; 
+    gap: 2em; 
+  }
+  .catalog-grid { 
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+    gap: 1.5em; 
+  }
 }
