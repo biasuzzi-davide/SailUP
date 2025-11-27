@@ -17,7 +17,6 @@
   /* Bianco */
   --col-bg-alt: #f5f2eb;
   /* Bianco Ghiaccio (sfondo sezioni) */
-
   --col-text: #1a1a1a;
   /* Testo principale */
   --col-text-inv: #ffffff;
@@ -394,8 +393,8 @@ button:focus-visible,
 
 #breadcrumb li a,
 #breadcrumb li[aria-current="page"] {
-  color: var(--col-text-muted);
-  background: var(--col-bg-alt);
+  color: var(--col-text-inv);
+  background: var(--col-primary);
   /* Grigio chiaro/Bianco Ghiaccio */
   text-decoration: none;
   padding: 10px 0 10px 45px;
@@ -419,7 +418,7 @@ button:focus-visible,
   /* Crezione del triangolo */
   border-top: 50px solid transparent;
   border-bottom: 50px solid transparent;
-  border-left: 30px solid var(--col-bg-alt);
+  border-left: 30px solid var(--col-primary);
 
   /* Posizionamento assoluto a destra */
   position: absolute;
@@ -466,9 +465,9 @@ button:focus-visible,
 }
 
 #breadcrumb li[aria-current="page"] {
-  background: var(--col-primary);
+  background: var(--col-bg-alt);
   /* Elemento attivo colorato di un altro colore */
-  color: var(--col-text-inv);
+  color: var(--col-text-muted);
   pointer-events: none;
   /* Non cliccabile */
   padding-right: 20px;
@@ -841,7 +840,7 @@ footer {
 .horizontal-card[open] summary::before {
   content: "⚓";
   transform: rotate(360deg);
-  transition: 0.2s;
+  transition: 0.5s;
 }
 
 /* =========================================
