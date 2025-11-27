@@ -27,7 +27,7 @@
   <header>
     <div class="header-container">
       <div class="header">
-        <div class="logo">
+        <a href="index.html" class="logo">
           <picture>
             <source srcset="" type="image/avif" />
             <img alt="Logo SailUP"
@@ -37,14 +37,14 @@
           <h1 lang="en">
             <span class="logo-text">Sail<span class="text-accent">UP</span></span>
           </h1>
-        </div>
+        </a>
 
         <nav id="main-menu" aria-label="Menu principale">
           <ul>
-            <li lang="en"><a href="index.html">Home</a></li>
+            <li><a href="index.html" lang="en">Home</a></li>
             <li><a href="catalogo_noleggio.html">Noleggio</a></li>
             <li class="current-page">Esperienze</li>
-            <li lang="en"><a href="blog.html">Blog</a></li>
+            <li><a href="blog.html" lang="en">Blog</a></li>
             <li><a href="chi_siamo.html">Chi Siamo</a></li>
           </ul>
         </nav>
@@ -65,10 +65,10 @@
 
       <nav id="mobile-menu" aria-label="Menu mobile">
         <ul>
-          <li lang="en"><a href="index.html">Home</a></li>
+          <li><a href="index.html" lang="en">Home</a></li>
           <li><a href="catalogo_noleggio.html">Noleggio</a></li>
           <li class="current-page">Esperienze</li>
-          <li lang="en"><a href="blog.html">Blog</a></li>
+          <li><a href="blog.html" lang="en">Blog</a></li>
           <li><a href="chi_siamo.html">Chi Siamo</a></li>
           <li>
             <a href="login.html" class="menu-login"><span lang="en">Login</span> / Registrati</a>
@@ -94,7 +94,7 @@
     <section id="esperienze-hero" class="section-container">
       <div class="hero-content">
         <h1>Vivi il Mare, Crea Ricordi Indelebili</h1>
-        <p>Lasciati guidare dai nostri skipper esperti alla scoperta delle meraviglie del Golfo di Napoli. Tour
+        <p>Lasciati guidare dai nostri skipper esperti alla scoperta delle meraviglie del Golfo di Napoli. <span lang="en">Tour</span>
           esclusivi, aperitivi al tramonto e giornate da sogno ti aspettano.</p>
       </div>
     </section>
@@ -107,7 +107,7 @@
           <form action="catalogo_esperienze.php" method="GET"> <!-- INSERIRE PHP-->
 
             <fieldset>
-              <legend>Dettagli del Tour</legend>
+              <legend>Dettagli del <span lang="en">tour</span></legend>
               <div class="filters-sidebar">
                 <label for="posti_disponibili">Posti (minimo richiesto)</label>
                 <input type="number" id="posti_disponibili" name="posti_disponibili" min="1" placeholder="Es. 2" />
@@ -132,9 +132,9 @@
             <fieldset>
               <legend>Budget</legend>
               <div class="filters-sidebar">
-                <label for="maxPriceExperience">Prezzo massimo (€/tour):</label>
+                <label for="maxPriceExperience">Prezzo massimo (€/<span lang="en">tour</span>):</label>
                 <input type="number" id="maxPriceExperience" name="maxPriceExperience" placeholder="Costo massimo"
-                  min="50" step="50" aria-label="Filtra per prezzo massimo del tour in Euro">
+                  min="50" step="50" aria-label="Filtra per prezzo massimo del <span lang="en">tour</span> in Euro">
               </div>
             </fieldset>
 
@@ -159,10 +159,10 @@
             <article class="card">
               <a href="dettaglio_esperienza.html?id=tour-capri" class="card-link-wrapper"
                 aria-label="Dettagli per Tour di Capri & Grotta Azzurra">
-                <img src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=400&q=80"
-                  alt="Vista dei Faraglioni di Capri da una barca al tramonto">
+                <img src="https://images.unsplash.com/photo-1594209195285-5dcbcb34df24?q=80&w=1335&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                alt="Vista mozzafiato dei Faraglioni di Capri da una barca in legno">
                 <div class="card-content">
-                  <h3 class="card-title">Tour di Capri & Grotta Azzurra</h3>
+                  <h3 class="card-title"><span lang="en">Tour</span> di Capri & Grotta Azzurra</h3>
                   <p class="card-description">Un'intera giornata dedicata alla scoperta dell'isola più iconica del
                     mondo.
                     Nuota in acque cristalline e ammira i Faraglioni.</p>
@@ -198,12 +198,10 @@
               <a href="dettaglio_esperienza.html?id=costiera-positano" class="card-link-wrapper"
                 aria-label="Dettagli per Esplorazione della Costiera Amalfitana">
                 <img src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=400&q=80"
-                  alt="Le case colorate di Positano viste dal mare durante un tour in barca">
+                  alt="Le case colorate di Positano viste dal mare durante un <span lang="en">tour</span> in barca">
                 <div class="card-content">
                   <h3 class="card-title">Esplorazione della Costiera Amalfitana</h3>
-                  <p class="card-description">Naviga lungo la divina costiera, con soste a Positano e Amalfi per
-                    esplorare i
-                    borghi e gustare le prelibatezze locali.</p>
+                  <p class="card-description">Naviga lungo la divina costiera, con soste a Positano e Amalfi per esplorare i borghi e gustare le prelibatezze locali.</p>
                   <ul>
                     <li>Posti: 10</li>
                     <li>Durata: 8 ore</li>
@@ -226,8 +224,7 @@
           <span class="logo-text"><span lang="en">Sail</span><span class="text-accent" lang="en">UP</span></span>
         </div>
         <p class="footer-tagline">
-          Naviga il Golfo di Napoli con stile e sicurezza. La tua avventura
-          inizia qui.
+          Naviga il Golfo di Napoli con stile e sicurezza. La tua avventura inizia qui.
         </p>
       </div>
 
@@ -235,10 +232,10 @@
         <h3 class="footer-heading">Esplora</h3>
         <nav aria-label="Menu footer">
           <ul class="footer-links">
-            <li lang="en"><a href="index.html">Home</a></li>
+            <li><a href="index.html" lang="en">Home</a></li>
             <li><a href="catalogo_noleggio.html">Noleggio</a></li>
             <li>Esperienze</li>
-            <li lang="en"><a href="blog.html">Blog</a></li>
+            <li><a href="blog.html" lang="en">Blog</a></li>
             <li><a href="chi_siamo.html">Chi Siamo</a></li>
           </ul>
         </nav>
@@ -247,8 +244,8 @@
       <div class="footer-col info-col">
         <h3 class="footer-heading">Info & Contatti</h3>
         <ul class="footer-links">
-          <li><a href="FAQ.html">Domande Frequenti (FAQ)</a></li>
-          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="FAQ.html">Domande Frequenti (<abbr title="Frequently Asked Questions" lang="en">FAQ</abbr>)</a></li>
+          <li><a href="privacy.html" lang="en">Privacy Policy</a></li>
           <li><a href="cookie.html">Cookie Policy</a></li>
         </ul>
         <address class="footer-address">

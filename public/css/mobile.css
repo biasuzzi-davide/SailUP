@@ -272,3 +272,46 @@ footer .logo p {
   .booking-actions .btn-danger-outline {
     width: 100%;
   }
+
+/* =========================================
+   6. PAGINA DETTAGLIO PRODOTTO (Mobile) -- da controllare --
+   ========================================= */
+
+/* Trasforma la griglia asimmetrica in colonna singola */
+.product-layout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+/* Gestione Immagine Hero su Mobile */
+.product-hero {
+    height: 300px;         /* Riduce l'altezza per non occupare tutto lo schermo */
+    min-height: auto;
+    margin-bottom: 1.5rem;
+    border-radius: var(--radius-sm); /* Raggio meno pronunciato su mobile */
+}
+
+/* Sidebar Prenotazione */
+.filters-sidebar.sticky-top {
+    position: static;      /* Rimuove l'effetto sticky che su mobile non serve/dà fastidio */
+    z-index: 1;
+    margin-top: 1rem;
+    order: -1;             /* OPZIONALE: Se vuoi il form SOPRA la descrizione */
+}
+
+/* Se decidi di usare order: -1 sopra, potresti voler nascondere alcuni dettagli 
+   del form per non ingombrare, ma di base lascialo visibile. */
+
+/* Adattamento Specifiche Tecniche (Cards Wrapper interno) */
+.product-layout .cards-wrapper {
+    grid-template-columns: repeat(2, 1fr); /* 2 colonne su mobile invece di 4 o 1 */
+    gap: 0.8rem;
+}
+
+.product-layout .card {
+    padding: 0.8em; /* Meno padding nelle card specifiche */
+}
+
+.product-layout .card p {
+    font-size: var(--fs-base); /* Assicura leggibilità */
+}
