@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="it" data-theme="light">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard Amministrazione - SailUP</title>
+    <meta name="description"
+        content="Pannello di controllo per la gestione del sito SailUP. Gestione utenti, prodotti, prenotazioni e contenuti del blog." />
+    <meta name="authors" content="SailUP team" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap"
+        rel="stylesheet" />
+
+    <link rel="stylesheet" href="../css/style.css" media="screen" />
+    <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)" />
+    <!-- ancora mancante  -->
+    <link rel="stylesheet" href="../css/print.css" media="print" />
+</head>
+
+<body>
+    <a href="#main-content" class="skip-to-content">Salta al contenuto</a>
+
+    <header>
+        <div class="header-container">
+            <div class="header">
+                <a href="index.html" class="logo">
+                    <h1>SailUP</h1>
+                </a>
+                <nav id="main-menu" aria-label="Menu Principale">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="catalogo_noleggio.html">Noleggio</a></li>
+                        <li><a href="catalogo_esperienze.html">Esperienze</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="chi_siamo.html">Chi Siamo</a></li>
+                    </ul>
+                </nav>
+                <div class="header-buttons">
+                    <button class="theme-toggle" aria-label="Cambia tema chiaro/scuro">
+                        <span class="sun">☀️</span>
+                        <span class="moon">🌙</span>
+                    </button>
+                    <a href="admin.html" class="btn-layout-light">Admin</a>
+                </div>
+                <button id="hamburger-btn" aria-label="Apri menu di navigazione" aria-expanded="false">☰</button>
+            </div>
+            <div id="mobile-menu">
+                <nav aria-label="Menu mobile">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="catalogo_noleggio.html">Noleggio</a></li>
+                        <li><a href="catalogo_esperienze.html">Esperienze</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="chi_siamo.html">Chi Siamo</a></li>
+                        <li class="current-page">Admin</li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <nav id="breadcrumb" aria-label="Percorso di navigazione">
+        <ol>
+            <li><a href="index.html">Home</a></li>
+            <li aria-current="page">Dashboard Amministrazione</li>
+        </ol>
+    </nav>
+
+    <main id="main-content">
+        <div class="profile-layout profile-container">
+            <aside class="profile-sidebar">
+                <ul>
+                    <li class="current-tab"><a href="#">📊 Dashboard</a></li>
+                    <li><a href="#">👥 Gestione Utenti</a></li>
+                    <li><a href="#">⛵ Gestione Prodotti</a></li>
+                    <li><a href="#">📋 Gestione Prenotazioni</a></li>
+                    <li><a href="#">✍️ Gestione Blog</a></li>
+                    <li><a href="#">➕ Aggiungi Nuovo Prodotto</a></li>
+                    <li><a href="#">➕ Aggiungi Nuovo Articolo Blog</a></li>
+                </ul>
+            </aside>
+
+            <div class="profile-content">
+                <section aria-labelledby="overview-heading">
+                    <h2 id="overview-heading">Panoramica Generale</h2>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <p class="stat-number">3</p>
+                            <p class="stat-label">Prenotazioni Attive</p>
+                        </div>
+                        <div class="stat-card">
+                            <p class="stat-number">152</p>
+                            <p class="stat-label">Utenti Registrati</p>
+                        </div>
+                        <div class="stat-card">
+                            <p class="stat-number">18</p>
+                            <p class="stat-label">Prodotti a Catalogo</p>
+                        </div>
+                        <div class="stat-card">
+                            <p class="stat-number">€ 4,750</p>
+                            <p class="stat-label">Incassi del Mese</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section aria-labelledby="users-heading" class="section-spacing">
+                    <h2 id="users-heading">Gestione Utenti</h2>
+                    <div class="table-responsive-wrapper">
+                        <table class="data-table">
+                            <caption>Elenco degli utenti registrati</caption>
+                            <thead>
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Nome</th>
+                                    <th scope="col">Cognome</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Ruolo</th>
+                                    <th scope="col">Azioni</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Mario</td>
+                                    <td>Rossi</td>
+                                    <td>mario.rossi@example.com</td>
+                                    <td>User</td>
+                                    <td class="table-actions"><button
+                                            class="btn-layout-light btn-sm">Modifica</button><button
+                                            class="btn-danger-outline btn-sm">Elimina</button></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Laura</td>
+                                    <td>Bianchi</td>
+                                    <td>laura.b@example.com</td>
+                                    <td>User</td>
+                                    <td class="table-actions"><button
+                                            class="btn-layout-light btn-sm">Modifica</button><button
+                                            class="btn-danger-outline btn-sm">Elimina</button></td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Admin</td>
+                                    <td>SailUP</td>
+                                    <td>admin@sailup.com</td>
+                                    <td>Admin</td>
+                                    <td class="table-actions"><button
+                                            class="btn-layout-light btn-sm">Modifica</button><button
+                                            class="btn-danger-outline btn-sm">Elimina</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section aria-labelledby="products-heading" class="section-spacing">
+                    <h2 id="products-heading">Gestione Prodotti (Noleggi & Esperienze)</h2>
+                    <div class="table-responsive-wrapper">
+                        <table class="data-table">
+                            <caption>Catalogo dei prodotti disponibili</caption>
+                            <thead>
+                                <tr>
+                                    <th scope="col">ID Prodotto</th>
+                                    <th scope="col">Nome Prodotto</th>
+                                    <th scope="col">Tipo</th>
+                                    <th scope="col">Prezzo Base</th>
+                                    <th scope="col">Posti</th>
+                                    <th scope="col">Azioni</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>sunseeker</td>
+                                    <td>Sunseeker Predator</td>
+                                    <td>Noleggio</td>
+                                    <td>€ 850</td>
+                                    <td>8</td>
+                                    <td class="table-actions"><button
+                                            class="btn-layout-light btn-sm">Modifica</button><button
+                                            class="btn-danger-outline btn-sm">Elimina</button></td>
+                                </tr>
+                                <tr>
+                                    <td>tour-capri</td>
+                                    <td>Tour di Capri & Grotta Azzurra</td>
+                                    <td>Experience</td>
+                                    <td>€ 850</td>
+                                    <td>8</td>
+                                    <td class="table-actions"><button
+                                            class="btn-layout-light btn-sm">Modifica</button><button
+                                            class="btn-danger-outline btn-sm">Elimina</button></td>
+                                </tr>
+                                <tr>
+                                    <td>bavaria46</td>
+                                    <td>Bavaria 46</td>
+                                    <td>Noleggio</td>
+                                    <td>€ 600</td>
+                                    <td>10</td>
+                                    <td class="table-actions"><button
+                                            class="btn-layout-light btn-sm">Modifica</button><button
+                                            class="btn-danger-outline btn-sm">Elimina</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section aria-labelledby="form-heading" class="section-spacing">
+                    <h2 id="form-heading">Aggiungi/Modifica Prodotto</h2>
+                    <div class="auth-card">
+                        <form action="#" method="POST">
+                            <fieldset>
+                                <legend>Dettagli del Prodotto</legend>
+
+                                <div class="form-group">
+                                    <label for="product-name">Nome Prodotto</label>
+                                    <input type="text" id="product-name" name="product-name" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="product-type">Tipo Prodotto</label>
+                                    <select id="product-type" name="product-type" required>
+                                        <option value="noleggio">Noleggio</option>
+                                        <option value="experience">Experience</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="product-description">Descrizione</label>
+                                    <textarea id="product-description" name="product-description" rows="4"></textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="product-price">Prezzo Base (€)</label>
+                                    <input type="number" id="product-price" name="product-price" min="0" step="10"
+                                        required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="product-capacity">Posti Totali</label>
+                                    <input type="number" id="product-capacity" name="product-capacity" min="1" required>
+                                </div>
+
+                                <fieldset class="checkbox-options">
+                                    <legend>Opzioni Aggiuntive</legend>
+                                    <div class="checkbox-group">
+                                        <input type="checkbox" id="requires-license" name="requires-license">
+                                        <label for="requires-license">Richiede Patente Nautica</label>
+                                    </div>
+                                    <div class="checkbox-group">
+                                        <input type="checkbox" id="is-accessible" name="is-accessible">
+                                        <label for="is-accessible">Accessibile a persone con disabilità</label>
+                                    </div>
+                                </fieldset>
+
+                                <div class="form-actions">
+                                    <button type="submit" class="btn-layout btn-full-width">Salva Prodotto</button>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="section-container footer-content">
+            <div class="footer-col brand-col">
+                <div class="logo footer-logo">
+                    <span class="logo-icon" aria-hidden="true">⚓</span>
+                    <span class="logo-text"><span lang="en">Sail</span><span class="text-accent"
+                            lang="en">UP</span></span>
+                </div>
+                <p class="footer-tagline">
+                    Naviga il Golfo di Napoli con stile e sicurezza. La tua avventura
+                    inizia qui.
+                </p>
+            </div>
+
+            <div class="footer-col nav-col">
+                <h3 class="footer-heading">Esplora</h3>
+                <nav aria-label="Menu footer">
+                    <ul class="footer-links">
+                        <li lang="en">Home</li>
+                        <li><a href="catalogo_noleggio.html">Noleggio</a></li>
+                        <li><a href="catalogo_esperienze.html">Esperienze</a></li>
+                        <li><a href="blog.html" lang="en">Blog</a></li>
+                        <li><a href="chi_siamo.html">Chi Siamo</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="footer-col info-col">
+                <h3 class="footer-heading">Info & Contatti</h3>
+                <ul class="footer-links">
+                    <li><a href="FAQ.html">Domande Frequenti (<abbr title="Frequently Asked Questions"
+                                lang="en">FAQ</abbr>)</a></li>
+                    <li><a href="privacy.html" lang="en">Privacy Policy</a></li>
+                    <li><a href="cookie.html">Cookie Policy</a></li>
+                </ul>
+                <address class="footer-address">
+                    <p><strong>SailUP S.r.l.</strong></p>
+                    <p>Via Caracciolo, 80122 Napoli (NA)</p>
+                    <p>P.IVA: 12345678901</p>
+                </address>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="footer-bottom-container">
+                <div class="copyright">
+                    &copy; 2025 SailUP S.r.l. - All rights reserved.
+                </div>
+
+                <div class="valid-logos">
+                    <img class="valid-code-icon" src="valid-xhtml10.png" alt="XHTML valido" />
+                    <img class="valid-code-icon" src="valid-CSS.png" alt="CSS valido" />
+                </div>
+
+                <!-- Area bottone torna su, inizialmente non selezionabile con tab perchè invisibile -->
+                <a href="#main-content" class="scroll-to-top" id="btnTop" aria-label="Torna all'inizio del contenuto"
+                    tabindex="-1">
+                    <span aria-hidden="true">⬆</span> <span lang="en">Top</span>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>
