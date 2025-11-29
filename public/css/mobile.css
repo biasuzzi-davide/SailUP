@@ -409,3 +409,27 @@ footer .logo p {
         width: 45%; /* Card specifiche più larghe su mobile */
     }
 }
+
+
+@media (max-width: 600px) {
+  .activity-item {
+    flex-direction: column; /* Diventa colonna */
+    align-items: flex-start; /* Allinea tutto a sinistra */
+    gap: 1em;
+  }
+
+  .activity-icon {
+    width: 2.5em;
+    height: 2.5em; /* Icona un po' più piccola */
+  }
+
+  .activity-meta {
+    text-align: left; /* Allinea testo a sinistra */
+    width: 100%;
+    border-top: 1px solid var(--col-border); /* Separatore */
+    padding-top: 0.5em;
+    display: flex;
+    justify-content: space-between; /* Mette User e Data ai lati opposti */
+    align-items: center;
+  }
+}

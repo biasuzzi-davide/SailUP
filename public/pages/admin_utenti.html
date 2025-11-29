@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard Amministrazione - SailUP</title>
-    <meta name="description" content="Pannello di controllo per la gestione del sito SailUP" />
+    <title>Gestione Utenti - Dashboard Admin - SailUP</title>
+    <meta name="description" content="Gestione utenti registrati su SailUP" />
     <meta name="authors" content="Alberto Reginato, Francesco Marcon" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -67,7 +67,7 @@
                     <li><a href="blog.html" lang="en">Blog</a></li>
                     <li><a href="chi_siamo.html">Chi Siamo</a></li>
                     <li><a href="profilo.html">Profilo</a></li>
-                    <li class="current-page">Dashboard Admin</li>
+                    <li><a href="admin.html">Dashboard Admin</a></li>
                 </ul>
             </nav>
         </div>
@@ -79,7 +79,8 @@
     <nav aria-labelledby="breadcrumb-label" id="breadcrumb">
         <ol>
             <li><a href="index.html"><span lang="en">Home</span></a></li>
-            <li aria-current="page">Dashboard Amministrazione</li>
+            <li><a href="admin.html">Dashboard</a></li>
+            <li aria-current="page">Gestione Utenti</li>
         </ol>
     </nav>
 
@@ -87,26 +88,25 @@
         <div class="profile-container section-container">
             <div class="profile-header">
                 <div class="profile-info">
-                    <h1>Dashboard Amministrazione</h1>
-                    <p class="profile-email">Benvenuto, <strong>Admin</strong>. Ecco una panoramica del sistema.</p>
+                    <h1>Gestione Utenti</h1>
+                    <p class="profile-email">Visualizza e gestisci gli utenti registrati su SailUP</p>
                 </div>
             </div>
 
             <div class="profile-layout">
                 <nav class="profile-sidebar" aria-label="Menu amministrazione">
                     <ul>
-                        <li class="current-tab">
-                            <div class="nav-item-active" aria-current="page">
+                        <li>
+                            <a href="admin.html">
                                 <span class="nav-icon" aria-hidden="true">📊</span>
                                 <span>Dashboard</span>
-                            </div>
+                            </a>
                         </li>
-
-                        <li>
-                            <a href="admin_utenti.html">
+                        <li class="current-tab">
+                            <div class="nav-item-active" aria-current="page">
                                 <span class="nav-icon" aria-hidden="true">👥</span>
                                 <span>Gestione Utenti</span>
-                            </a>
+                            </div>
                         </li>
                         <li>
                             <a href="admin_prodotti.html">
@@ -131,84 +131,132 @@
 
                 <div class="profile-content">
                     <section aria-labelledby="stats-title" class="profile-stats">
-                        <h2 id="stats-title">Panoramica Generale</h2>
+                        <h2 id="stats-title" class="sr-only">Statistiche Utenti</h2>
                         <div class="stats-grid">
                             <div class="stat-card">
                                 <p class="stat-number">152</p>
-                                <p class="stat-label">Utenti Registrati</p>
+                                <p class="stat-label">Utenti Totali</p>
                             </div>
                             <div class="stat-card">
-                                <p class="stat-number">18</p>
-                                <p class="stat-label">Prodotti a Catalogo</p>
+                                <p class="stat-number">12</p>
+                                <p class="stat-label">Nuovi (Mese)</p>
                             </div>
                             <div class="stat-card">
                                 <p class="stat-number">3</p>
-                                <p class="stat-label">Prenotazioni Attive</p>
+                                <p class="stat-label">Admin</p>
                             </div>
                             <div class="stat-card">
-                                <p class="stat-number">€4,750</p>
-                                <p class="stat-label">Incassi del Mese</p>
+                                <p class="stat-number">149</p>
+                                <p class="stat-label">Standard</p>
                             </div>
                         </div>
                     </section>
 
-                    <section aria-labelledby="recent-activity-title" class="profile-stats">
-                        <h2 id="recent-activity-title">Attività Recenti</h2>
+                    <section aria-labelledby="users-list-title" class="security-section">
+                        <h2 id="users-list-title">Elenco Utenti</h2>
 
                         <div class="activity-list">
 
                             <div class="activity-item">
-                                <div class="activity-icon icon-accent">⚓</div>
+                                <div class="activity-icon icon-success">👤</div>
                                 <div class="activity-content">
-                                    <span class="activity-type">Prenotazione</span>
-                                    <p>Nuova prenotazione per <strong>Tour di Capri</strong></p>
+                                    <span class="activity-type">User ID: 1</span>
+                                    <p><strong>Mario Rossi</strong></p>
+                                    <p class="user-subtext">mario.rossi@example.com</p>
                                 </div>
                                 <div class="activity-meta">
-                                    <span class="meta-user">Mario Rossi</span>
-                                    <time datetime="2025-01-28">Oggi, 14:32</time>
+                                    <time datetime="2024-03-15">Iscritto: 15/03/24</time>
+                                    <div class="item-actions">
+                                        <button class="btn-layout-light btn-sm"
+                                            aria-label="Modifica Mario Rossi">✏️</button>
+                                        <button class="btn-danger-outline btn-sm"
+                                            aria-label="Elimina Mario Rossi">🗑️</button>
+                                    </div>
                                 </div>
                             </div>
 
                             <div class="activity-item">
                                 <div class="activity-icon icon-success">👤</div>
                                 <div class="activity-content">
-                                    <span class="activity-type">Registrazione</span>
-                                    <p>Nuovo utente registrato al portale</p>
+                                    <span class="activity-type">User ID: 2</span>
+                                    <p><strong>Laura Bianchi</strong></p>
+                                    <p class="user-subtext">laura.bianchi@example.com</p>
                                 </div>
                                 <div class="activity-meta">
-                                    <span class="meta-user">Laura Bianchi</span>
-                                    <time datetime="2025-01-28">Oggi, 11:15</time>
+                                    <time datetime="2024-05-22">Iscritto: 22/05/24</time>
+                                    <div class="item-actions">
+                                        <button class="btn-layout-light btn-sm">✏️</button>
+                                        <button class="btn-danger-outline btn-sm">🗑️</button>
+                                    </div>
                                 </div>
                             </div>
 
                             <div class="activity-item">
-                                <div class="activity-icon icon-warning">⛵</div>
+                                <div class="activity-icon icon-accent">🛡️</div>
                                 <div class="activity-content">
-                                    <span class="activity-type">Prodotto</span>
-                                    <p>Aggiornamento dettagli <strong>Bavaria 46</strong></p>
+                                    <span class="activity-type text-accent">Admin ID: 3</span>
+                                    <p><strong>Admin SailUP</strong></p>
+                                    <p class="user-subtext">admin@sailup.com</p>
                                 </div>
                                 <div class="activity-meta">
-                                    <span class="meta-user">Admin</span>
-                                    <time datetime="2025-01-27">Ieri, 16:45</time>
+                                    <time datetime="2023-01-10">Iscritto: 10/01/23</time>
+                                    <div class="item-actions">
+                                        <button class="btn-layout-light btn-sm">✏️</button>
+                                        <button class="btn-layout-light btn-sm btn-disabled" disabled>🔒</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="activity-item">
+                                <div class="activity-icon icon-success">👤</div>
+                                <div class="activity-content">
+                                    <span class="activity-type">User ID: 4</span>
+                                    <p><strong>Giuseppe Verdi</strong></p>
+                                    <p class="user-subtext">giuseppe.verdi@example.com</p>
+                                </div>
+                                <div class="activity-meta">
+                                    <time datetime="2024-07-08">Iscritto: 08/07/24</time>
+                                    <div class="item-actions">
+                                        <button class="btn-layout-light btn-sm">✏️</button>
+                                        <button class="btn-danger-outline btn-sm">🗑️</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="activity-item">
+                                <div class="activity-icon icon-success">👤</div>
+                                <div class="activity-content">
+                                    <span class="activity-type">User ID: 5</span>
+                                    <p><strong>Anna Romano</strong></p>
+                                    <p class="user-subtext">anna.romano@example.com</p>
+                                </div>
+                                <div class="activity-meta">
+                                    <time datetime="2024-09-12">Iscritto: 12/09/24</time>
+                                    <div class="item-actions">
+                                        <button class="btn-layout-light btn-sm">✏️</button>
+                                        <button class="btn-danger-outline btn-sm">🗑️</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="activity-item">
+                                <div class="activity-icon icon-success">👤</div>
+                                <div class="activity-content">
+                                    <span class="activity-type">User ID: 6</span>
+                                    <p><strong>Francesco Esposito</strong></p>
+                                    <p class="user-subtext">francesco.esposito@example.com</p>
+                                </div>
+                                <div class="activity-meta">
+                                    <time datetime="2024-11-20">Iscritto: 20/11/24</time>
+                                    <div class="item-actions">
+                                        <button class="btn-layout-light btn-sm">✏️</button>
+                                        <button class="btn-danger-outline btn-sm">🗑️</button>
+                                    </div>
                                 </div>
                             </div>
 
                         </div>
-                    </section>
 
-                    <section aria-labelledby="quick-actions-title" class="profile-stats">
-                        <h2 id="quick-actions-title">Azioni Rapide</h2>
-                        <div class="cta-group">
-                            <a href="admin_prodotti_nuovo.html" class="btn-layout">
-                                <span aria-hidden="true">⛵</span> Aggiungi Prodotto
-                            </a>
-                            <a href="admin_blog_nuovo.html" class="btn-layout">
-                                <span aria-hidden="true">✍️</span> Nuovo Articolo Blog
-                            </a>
-                            <a href="admin_prenotazioni.html" class="btn-layout-light">
-                                <span aria-hidden="true">📋</span> Vedi Prenotazioni
-                            </a>
-                        </div>
                     </section>
                 </div>
             </div>

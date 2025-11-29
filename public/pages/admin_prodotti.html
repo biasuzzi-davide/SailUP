@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard Amministrazione - SailUP</title>
-    <meta name="description" content="Pannello di controllo per la gestione del sito SailUP" />
+    <title>Gestione Prodotti - Dashboard Admin - SailUP</title>
+    <meta name="description" content="Gestione della flotta e delle esperienze SailUP" />
     <meta name="authors" content="Alberto Reginato, Francesco Marcon" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -67,7 +67,7 @@
                     <li><a href="blog.html" lang="en">Blog</a></li>
                     <li><a href="chi_siamo.html">Chi Siamo</a></li>
                     <li><a href="profilo.html">Profilo</a></li>
-                    <li class="current-page">Dashboard Admin</li>
+                    <li><a href="admin.html">Dashboard Admin</a></li>
                 </ul>
             </nav>
         </div>
@@ -79,7 +79,8 @@
     <nav aria-labelledby="breadcrumb-label" id="breadcrumb">
         <ol>
             <li><a href="index.html"><span lang="en">Home</span></a></li>
-            <li aria-current="page">Dashboard Amministrazione</li>
+            <li><a href="admin.html">Dashboard</a></li>
+            <li aria-current="page">Gestione Prodotti</li>
         </ol>
     </nav>
 
@@ -87,32 +88,31 @@
         <div class="profile-container section-container">
             <div class="profile-header">
                 <div class="profile-info">
-                    <h1>Dashboard Amministrazione</h1>
-                    <p class="profile-email">Benvenuto, <strong>Admin</strong>. Ecco una panoramica del sistema.</p>
+                    <h1>Gestione Prodotti</h1>
+                    <p class="profile-email">Gestisci la flotta, aggiorna i prezzi e la disponibilità.</p>
                 </div>
             </div>
 
             <div class="profile-layout">
                 <nav class="profile-sidebar" aria-label="Menu amministrazione">
                     <ul>
-                        <li class="current-tab">
-                            <div class="nav-item-active" aria-current="page">
+                        <li>
+                            <a href="admin.html">
                                 <span class="nav-icon" aria-hidden="true">📊</span>
                                 <span>Dashboard</span>
-                            </div>
+                            </a>
                         </li>
-
                         <li>
                             <a href="admin_utenti.html">
                                 <span class="nav-icon" aria-hidden="true">👥</span>
                                 <span>Gestione Utenti</span>
                             </a>
                         </li>
-                        <li>
-                            <a href="admin_prodotti.html">
+                        <li class="current-tab">
+                            <div class="nav-item-active" aria-current="page">
                                 <span class="nav-icon" aria-hidden="true">⛵</span>
                                 <span>Gestione Prodotti</span>
-                            </a>
+                            </div>
                         </li>
                         <li>
                             <a href="admin_prenotazioni.html">
@@ -130,85 +130,105 @@
                 </nav>
 
                 <div class="profile-content">
-                    <section aria-labelledby="stats-title" class="profile-stats">
-                        <h2 id="stats-title">Panoramica Generale</h2>
-                        <div class="stats-grid">
-                            <div class="stat-card">
-                                <p class="stat-number">152</p>
-                                <p class="stat-label">Utenti Registrati</p>
-                            </div>
-                            <div class="stat-card">
-                                <p class="stat-number">18</p>
-                                <p class="stat-label">Prodotti a Catalogo</p>
-                            </div>
-                            <div class="stat-card">
-                                <p class="stat-number">3</p>
-                                <p class="stat-label">Prenotazioni Attive</p>
-                            </div>
-                            <div class="stat-card">
-                                <p class="stat-number">€4,750</p>
-                                <p class="stat-label">Incassi del Mese</p>
-                            </div>
-                        </div>
-                    </section>
 
-                    <section aria-labelledby="recent-activity-title" class="profile-stats">
-                        <h2 id="recent-activity-title">Attività Recenti</h2>
+                    <section aria-labelledby="products-list-title" class="security-section">
+                        <h2 id="products-list-title">Flotta & Esperienze</h2>
+
+                        <div class="item-actions">
+                            <a href="admin_prodotti_nuovo.html" class="btn-layout btn-sm">+ Aggiungi Nuovo</a>
+                        </div>
 
                         <div class="activity-list">
 
                             <div class="activity-item">
+                                <div class="activity-icon icon-accent">⛵</div>
+                                <div class="activity-content">
+                                    <span class="activity-type">Noleggio • Vela</span>
+                                    <p><strong>Bavaria 46 Cruiser</strong></p>
+                                    <p class="user-subtext">8 Posti • 4 Cabine</p>
+                                </div>
+                                <div class="activity-meta">
+                                    <p class="meta-user">€ 350 /gg</p>
+                                    <p class="user-subtext text-success">Disponibile</p>
+                                    <div class="item-actions">
+                                        <button class="btn-layout-light btn-sm"
+                                            aria-label="Modifica Bavaria 46">✏️</button>
+                                        <button class="btn-danger-outline btn-sm"
+                                            aria-label="Archivia Bavaria 46">📦</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="activity-item">
                                 <div class="activity-icon icon-accent">⚓</div>
                                 <div class="activity-content">
-                                    <span class="activity-type">Prenotazione</span>
-                                    <p>Nuova prenotazione per <strong>Tour di Capri</strong></p>
+                                    <span class="activity-type">Noleggio • Catamarano</span>
+                                    <p><strong>Lagoon 42</strong></p>
+                                    <p class="user-subtext">10 Posti • Full Optional</p>
                                 </div>
                                 <div class="activity-meta">
-                                    <span class="meta-user">Mario Rossi</span>
-                                    <time datetime="2025-01-28">Oggi, 14:32</time>
+                                    <p class="meta-user">€ 600 /gg</p>
+                                    <p class="user-subtext text-success">Disponibile</p>
+                                    <div class="item-actions">
+                                        <button class="btn-layout-light btn-sm">✏️</button>
+                                        <button class="btn-danger-outline btn-sm">📦</button>
+                                    </div>
                                 </div>
                             </div>
 
                             <div class="activity-item">
-                                <div class="activity-icon icon-success">👤</div>
+                                <div class="activity-icon icon-warning">🚤</div>
                                 <div class="activity-content">
-                                    <span class="activity-type">Registrazione</span>
-                                    <p>Nuovo utente registrato al portale</p>
+                                    <span class="activity-type">Noleggio • Gommone</span>
+                                    <p><strong>Gommonautica G48</strong></p>
+                                    <p class="user-subtext">6 Posti • Senza patente</p>
                                 </div>
                                 <div class="activity-meta">
-                                    <span class="meta-user">Laura Bianchi</span>
-                                    <time datetime="2025-01-28">Oggi, 11:15</time>
+                                    <p class="meta-user">€ 120 /gg</p>
+                                    <p class="user-subtext text-warning">Manutenzione</p>
+                                    <div class="item-actions">
+                                        <button class="btn-layout-light btn-sm">✏️</button>
+                                        <button class="btn-danger-outline btn-sm">📦</button>
+                                    </div>
                                 </div>
                             </div>
 
                             <div class="activity-item">
-                                <div class="activity-icon icon-warning">⛵</div>
+                                <div class="activity-icon icon-success">🍹</div>
                                 <div class="activity-content">
-                                    <span class="activity-type">Prodotto</span>
-                                    <p>Aggiornamento dettagli <strong>Bavaria 46</strong></p>
+                                    <span class="activity-type">Esperienza • Aperitivo</span>
+                                    <p><strong>Tramonto a Posillipo</strong></p>
+                                    <p class="user-subtext">Durata: 3h • Skipper incluso</p>
                                 </div>
                                 <div class="activity-meta">
-                                    <span class="meta-user">Admin</span>
-                                    <time datetime="2025-01-27">Ieri, 16:45</time>
+                                    <p class="meta-user">€ 45 /pax</p>
+                                    <p class="user-subtext text-success">Attivo</p>
+                                    <div class="item-actions">
+                                        <button class="btn-layout-light btn-sm">✏️</button>
+                                        <button class="btn-danger-outline btn-sm">📦</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="activity-item">
+                                <div class="activity-icon icon-accent">⛵</div>
+                                <div class="activity-content">
+                                    <span class="activity-type">Noleggio • Vela</span>
+                                    <p><strong>Oceanis 38.1</strong></p>
+                                    <p class="user-subtext">6 Posti • 3 Cabine</p>
+                                </div>
+                                <div class="activity-meta">
+                                    <p class="meta-user">€ 280 /gg</p>
+                                    <p class="user-subtext text-success">Disponibile</p>
+                                    <div class="item-actions">
+                                        <button class="btn-layout-light btn-sm">✏️</button>
+                                        <button class="btn-danger-outline btn-sm">📦</button>
+                                    </div>
                                 </div>
                             </div>
 
                         </div>
-                    </section>
 
-                    <section aria-labelledby="quick-actions-title" class="profile-stats">
-                        <h2 id="quick-actions-title">Azioni Rapide</h2>
-                        <div class="cta-group">
-                            <a href="admin_prodotti_nuovo.html" class="btn-layout">
-                                <span aria-hidden="true">⛵</span> Aggiungi Prodotto
-                            </a>
-                            <a href="admin_blog_nuovo.html" class="btn-layout">
-                                <span aria-hidden="true">✍️</span> Nuovo Articolo Blog
-                            </a>
-                            <a href="admin_prenotazioni.html" class="btn-layout-light">
-                                <span aria-hidden="true">📋</span> Vedi Prenotazioni
-                            </a>
-                        </div>
                     </section>
                 </div>
             </div>
