@@ -2654,3 +2654,26 @@ input[maxlength="5"] {
   background: #1e40af;
   color: #dbeafe;
 }
+
+/* =========================================
+  Page not found 404
+   ========================================= */
+
+.error-card {
+  background-color: var(--col-bg);
+  border: 1px solid var(--col-border);
+  border-radius: var(--radius-card);
+  padding: 2.5em;
+  box-shadow: var(--shadow-md);
+}
+
+.error-card h1,
+.error-card h2 {
+  text-align: center; /* Assicura che i titoli siano centrati */
+}
+
+.error-card p {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
