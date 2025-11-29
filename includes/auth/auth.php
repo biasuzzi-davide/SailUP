@@ -39,11 +39,11 @@ function registerUser($nome,$cognome,$cf,$email,$password,$idIndirizzo,$patente=
  * login utente
  * @return bool
  */
-function login($email, $password){
+function loginUser($email, $password){
     //rendo visbile la variabile conn presente nel file db_connect (config)
     global $conn;
 
-    // 1. Recupero utente tramite email
+    //recupero utente tramite email
     $sql = "SELECT * FROM Utente WHERE Email = :email LIMIT 1";
     $stmt = $conn->prepare($sql);
     $stmt->execute([":email" => $email]);
@@ -53,12 +53,12 @@ function login($email, $password){
         return false; // email non trovata
     }
 
-    // 2. Verifica password hashata
+    //verifica password hashata
     if (!password_verify($password, $user["passwordhash"])) {
         return false; // password sbagliata
     }
 
-    // 3. LOGIN OK → salvo nella sessione
+    //login okappa → salvo nella sessione
     $_SESSION["user_id"] = $user["idutente"];
     $_SESSION["email"]   = $user["email"];
     $_SESSION["role"]    = ($user["is_admin"] == true) ? "admin" : "user";
