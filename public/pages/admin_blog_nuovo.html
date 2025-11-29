@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="it" data-theme="light">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nuovo Articolo Blog - Dashboard Admin - SailUP</title>
+  <meta name="description" content="Form per creare un nuovo articolo del blog SailUP" />
+  <meta name="authors" content="Alberto Reginato, Francesco Marcon" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap"
+    rel="stylesheet" />
+
+  <link rel="stylesheet" href="../css/style.css" media="screen" />
+  <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)" />
+  <link rel="stylesheet" href="../css/profilo.css" media="screen" />
+  <link rel="stylesheet" href="../css/admin.css" media="screen" />
+  <link rel="stylesheet" href="../css/print.css" media="print" />
+</head>
+
+<body>
+  <a href="#main-content" class="skip-to-content">Salta al contenuto</a>
+
+  <header>
+    <div class="header-container">
+      <div class="header">
+        <a href="index.html" class="logo">
+          <picture>
+            <source srcset="" type="image/avif" />
+            <img alt="Logo SailUP"
+              src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=400&q=80"
+              width="30" />
+          </picture>
+          <h1 lang="en">
+            <span class="logo-text">Sail<span class="text-accent">UP</span></span>
+          </h1>
+        </a>
+
+        <nav id="main-menu" aria-label="Navigazione principale">
+          <ul>
+            <li><a href="index.html" lang="en">Home</a></li>
+            <li><a href="catalogo_noleggio.html">Noleggio</a></li>
+            <li><a href="catalogo_esperienze.html">Esperienze</a></li>
+            <li><a href="blog.html" lang="en">Blog</a></li>
+            <li><a href="chi_siamo.html">Chi Siamo</a></li>
+          </ul>
+        </nav>
+
+        <div class="header-buttons">
+          <button class="theme-toggle" aria-pressed="false" aria-label="Attiva modalità scura">
+            <span class="active-icon sun">☀️</span>
+            <span class="inactive-icon moon">🌙</span>
+          </button>
+          <a href="profilo.html" class="btn-layout-light">Profilo</a>
+        </div>
+
+        <button id="hamburger-btn" aria-expanded="false" aria-controls="mobile-menu" aria-label="Menu Mobile">
+          <span class="hamburger-icon">☰</span>
+          <span class="close-icon hidden">✕</span>
+        </button>
+      </div>
+
+      <nav id="mobile-menu">
+        <ul>
+          <li><a href="index.html" lang="en">Home</a></li>
+          <li><a href="catalogo_noleggio.html">Noleggio</a></li>
+          <li><a href="catalogo_esperienze.html">Esperienze</a></li>
+          <li><a href="blog.html" lang="en">Blog</a></li>
+          <li><a href="chi_siamo.html">Chi Siamo</a></li>
+          <li><a href="profilo.html">Profilo</a></li>
+          <li><a href="admin.html">Dashboard Admin</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div class="sr-only" id="breadcrumb-label">
+    <span lang="en">breadcrumb</span>
+  </div>
+  <nav aria-labelledby="breadcrumb-label" id="breadcrumb">
+    <ol>
+      <li><a href="index.html"><span lang="en">Home</span></a></li>
+      <li><a href="admin.html">Dashboard</a></li>
+      <li><a href="admin_blog.html">Gestione Blog</a></li>
+      <li aria-current="page">Nuovo Articolo</li>
+    </ol>
+  </nav>
+
+  <main id="main-content">
+    <div class="profile-container section-container">
+      <div class="admin-header">
+        <h1>Nuovo Articolo Blog</h1>
+        <p class="admin-header-subtitle">Crea un nuovo articolo per il blog SailUP</p>
+      </div>
+
+      <div class="profile-layout">
+        <nav class="profile-sidebar admin-sidebar" aria-label="Menu amministrazione">
+          <ul>
+            <li>
+              <a href="admin.html">
+                <span class="nav-icon" aria-hidden="true">📊</span>
+                <span>Dashboard</span>
+              </a>
+            </li>
+            <li>
+              <a href="admin_utenti.html">
+                <span class="nav-icon" aria-hidden="true">👥</span>
+                <span>Gestione Utenti</span>
+              </a>
+            </li>
+            <li>
+              <a href="admin_prodotti.html">
+                <span class="nav-icon" aria-hidden="true">⛵</span>
+                <span>Gestione Prodotti</span>
+              </a>
+            </li>
+            <li>
+              <a href="admin_prenotazioni.html">
+                <span class="nav-icon" aria-hidden="true">📋</span>
+                <span>Gestione Prenotazioni</span>
+              </a>
+            </li>
+            <li class="current-tab">
+              <a href="admin_blog.html" aria-current="page">
+                <span class="nav-icon" aria-hidden="true">✍️</span>
+                <span>Gestione Blog</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <div class="profile-content">
+          <section aria-labelledby="form-title" class="admin-form-card">
+            <h2 id="form-title">Dettagli Articolo</h2>
+            
+            <form action="#" method="POST">
+              <fieldset>
+                <legend>Informazioni Base</legend>
+
+                <div class="form-group">
+                  <label for="post-title">Titolo Articolo <abbr title="Obbligatorio">*</abbr></label>
+                  <input type="text" id="post-title" name="post-title" 
+                    placeholder="es. Come scegliere la barca perfetta per te" required />
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="post-id">ID Articolo <abbr title="Obbligatorio">*</abbr></label>
+                    <input type="text" id="post-id" name="post-id" 
+                      placeholder="es. come-scegliere-barca" required />
+                    <small>Usa solo lettere minuscole e trattini, senza spazi</small>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="post-author">Autore <abbr title="Obbligatorio">*</abbr></label>
+                    <input type="text" id="post-author" name="post-author" 
+                      value="Admin SailUP" required />
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="post-category">Categoria <abbr title="Obbligatorio">*</abbr></label>
+                    <select id="post-category" name="post-category" required>
+                      <option value="">Seleziona categoria...</option>
+                      <option value="guide">Guide</option>
+                      <option value="destinazioni">Destinazioni</option>
+                      <option value="consigli">Consigli</option>
+                      <option value="eventi">Eventi</option>
+                      <option value="sicurezza">Sicurezza</option>
+                      <option value="manutenzione">Manutenzione</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="post-date">Data Pubblicazione <abbr title="Obbligatorio">*</abbr></label>
+                    <input type="date" id="post-date" name="post-date" required />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="post-excerpt">Estratto / Anteprima <abbr title="Obbligatorio">*</abbr></label>
+                  <textarea id="post-excerpt" name="post-excerpt" rows="3" 
+                    placeholder="Breve descrizione dell'articolo che apparirà nelle card..." required></textarea>
+                  <small>Massimo 200 caratteri</small>
+                </div>
+              </fieldset>
+
+              <fieldset>
+                <legend>Contenuto</legend>
+
+                <div class="form-group">
+                  <label for="post-content">Contenuto Articolo <abbr title="Obbligatorio">*</abbr></label>
+                  <textarea id="post-content" name="post-content" rows="15" 
+                    placeholder="Scrivi qui il contenuto completo dell'articolo..." required></textarea>
+                  <small>Usa HTML per formattare il testo (es. &lt;p&gt;, &lt;h2&gt;, &lt;strong&gt;, &lt;em&gt;, ecc.)</small>
+                </div>
+
+                <div class="form-group">
+                  <label for="post-tags">Tag (opzionale)</label>
+                  <input type="text" id="post-tags" name="post-tags" 
+                    placeholder="es. noleggio, consigli, estate, sicurezza" />
+                  <small>Separa i tag con virgole</small>
+                </div>
+              </fieldset>
+
+              <fieldset>
+                <legend>Immagini</legend>
+
+                <div class="form-group">
+                  <label for="post-image">Immagine di Copertina <abbr title="Obbligatorio">*</abbr></label>
+                  <input type="url" id="post-image" name="post-image" 
+                    placeholder="https://example.com/image.jpg" required />
+                  <small>Inserisci l'URL dell'immagine principale dell'articolo</small>
+                </div>
+
+                <div class="form-group">
+                  <label for="post-image-alt">Testo Alternativo Immagine <abbr title="Obbligatorio">*</abbr></label>
+                  <input type="text" id="post-image-alt" name="post-image-alt" 
+                    placeholder="Descrizione dell'immagine per accessibilità" required />
+                </div>
+              </fieldset>
+
+              <fieldset>
+                <legend><abbr title="Search Engine Optimization" lang="en">SEO</abbr> e Metadata</legend>
+
+                <div class="form-group">
+                  <label for="post-meta-title">Meta Titolo (opzionale)</label>
+                  <input type="text" id="post-meta-title" name="post-meta-title" 
+                    placeholder="Titolo ottimizzato per i motori di ricerca" />
+                  <small>Se lasciato vuoto, verrà usato il titolo dell'articolo</small>
+                </div>
+
+                <div class="form-group">
+                  <label for="post-meta-description">Meta Descrizione (opzionale)</label>
+                  <textarea id="post-meta-description" name="post-meta-description" rows="2"
+                    placeholder="Descrizione ottimizzata per i motori di ricerca"></textarea>
+                  <small>Idealmente tra 120-160 caratteri</small>
+                </div>
+              </fieldset>
+
+              <fieldset>
+                <legend>Opzioni Pubblicazione</legend>
+
+                <div class="form-group">
+                  <label for="post-status">Stato Articolo <abbr title="Obbligatorio">*</abbr></label>
+                  <select id="post-status" name="post-status" required>
+                    <option value="draft">Bozza</option>
+                    <option value="published">Pubblicato</option>
+                  </select>
+                </div>
+
+                <fieldset class="checkbox-options">
+                  <legend>Opzioni Aggiuntive</legend>
+                  
+                  <div class="checkbox-group">
+                    <input type="checkbox" id="post-featured" name="post-featured" />
+                    <label for="post-featured">Articolo In Evidenza</label>
+                  </div>
+
+                  <div class="checkbox-group">
+                    <input type="checkbox" id="post-comments" name="post-comments" checked />
+                    <label for="post-comments">Abilita Commenti</label>
+                  </div>
+
+                  <div class="checkbox-group">
+                    <input type="checkbox" id="post-newsletter" name="post-newsletter" />
+                    <label for="post-newsletter">Invia Notifica Newsletter</label>
+                  </div>
+                </fieldset>
+              </fieldset>
+
+              <div class="alert alert-info">
+                <strong>Nota:</strong> Gli articoli salvati come "Bozza" non saranno visibili agli utenti fino alla pubblicazione.
+              </div>
+
+              <div class="form-actions">
+                <button type="button" class="btn-layout-light" onclick="history.back()">Annulla</button>
+                <button type="submit" name="action" value="draft" class="btn-layout-light">Salva come Bozza</button>
+                <button type="submit" name="action" value="publish" class="btn-layout">Pubblica Articolo</button>
+              </div>
+            </form>
+          </section>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="section-container footer-content">
+      <div class="footer-col brand-col">
+        <div class="logo footer-logo">
+          <span class="logo-icon" aria-hidden="true">⚓</span>
+          <span class="logo-text"><span lang="en">Sail</span><span class="text-accent" lang="en">UP</span></span>
+        </div>
+        <p class="footer-tagline">
+          Naviga il Golfo di Napoli con stile e sicurezza. La tua avventura inizia qui.
+        </p>
+      </div>
+
+      <div class="footer-col nav-col">
+        <h3 class="footer-heading">Esplora</h3>
+        <nav aria-label="Menu footer">
+          <ul class="footer-links">
+            <li><a href="index.html" lang="en">Home</a></li>
+            <li><a href="catalogo_noleggio.html">Noleggio</a></li>
+            <li><a href="catalogo_esperienze.html">Esperienze</a></li>
+            <li><a href="blog.html" lang="en">Blog</a></li>
+            <li><a href="chi_siamo.html">Chi Siamo</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="footer-col info-col">
+        <h3 class="footer-heading">Info &amp; Contatti</h3>
+        <ul class="footer-links">
+          <li><a href="FAQ.html">Domande Frequenti (<abbr title="Frequently Asked Questions" lang="en">FAQ</abbr>)</a>
+          </li>
+          <li><a href="privacy.html" lang="en">Privacy Policy</a></li>
+          <li><a href="cookie.html">Cookie Policy</a></li>
+        </ul>
+        <address class="footer-address">
+          <p><strong>SailUP S.r.l.</strong></p>
+          <p>Via Caracciolo, 80122 Napoli (NA)</p>
+          <p>P.IVA: 12345678901</p>
+        </address>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-bottom-container">
+        <div class="copyright">
+          &copy; 2025 SailUP S.r.l. - All rights reserved.
+        </div>
+
+        <div class="valid-logos">
+          <img class="valid-code-icon" src="valid-xhtml10.png" alt="XHTML valido" />
+          <img class="valid-code-icon" src="valid-CSS.png" alt="CSS valido" />
+        </div>
+
+        <a href="#main-content" class="scroll-to-top" id="btnTop" aria-label="Torna all'inizio del contenuto"
+          tabindex="-1">
+          <span aria-hidden="true">⬆</span> <span lang="en">Top</span>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/script.js"></script>
+</body>
+
+</html>

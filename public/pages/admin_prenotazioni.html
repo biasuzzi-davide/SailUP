@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="it" data-theme="light">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gestione Prenotazioni - Dashboard Admin - SailUP</title>
+  <meta name="description" content="Gestione prenotazioni attive e archiviate su SailUP" />
+  <meta name="authors" content="Alberto Reginato, Francesco Marcon" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap"
+    rel="stylesheet" />
+
+  <link rel="stylesheet" href="../css/style.css" media="screen" />
+  <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)" />
+</head>
+
+<body>
+  <a href="#main-content" class="skip-to-content">Salta al contenuto</a>
+
+  <header>
+    <div class="header-container">
+      <div class="header">
+        <a href="index.html" class="logo">
+          <picture>
+            <img alt="Logo SailUP"
+              src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=400&q=80"
+              width="30" />
+          </picture>
+          <h1 lang="en">
+            <span class="logo-text">Sail<span class="text-accent">UP</span></span>
+          </h1>
+        </a>
+
+        <nav id="main-menu" aria-label="Navigazione principale">
+          <ul>
+            <li><a href="index.html" lang="en">Home</a></li>
+            <li><a href="catalogo_noleggio.html">Noleggio</a></li>
+            <li><a href="catalogo_esperienze.html">Esperienze</a></li>
+            <li><a href="blog.html" lang="en">Blog</a></li>
+            <li><a href="chi_siamo.html">Chi Siamo</a></li>
+          </ul>
+        </nav>
+
+        <div class="header-buttons">
+          <button class="theme-toggle" aria-pressed="false" aria-label="Attiva modalità scura">
+            <span class="active-icon sun">☀️</span>
+            <span class="inactive-icon moon">🌙</span>
+          </button>
+          <a href="profilo.html" class="btn-layout-light">Profilo</a>
+        </div>
+
+        <button id="hamburger-btn" aria-expanded="false" aria-controls="mobile-menu" aria-label="Menu Mobile">
+          <span class="hamburger-icon">☰</span>
+          <span class="close-icon hidden">✕</span>
+        </button>
+      </div>
+
+      <nav id="mobile-menu">
+        <ul>
+          <li><a href="index.html" lang="en">Home</a></li>
+          <li><a href="catalogo_noleggio.html">Noleggio</a></li>
+          <li><a href="catalogo_esperienze.html">Esperienze</a></li>
+          <li><a href="blog.html" lang="en">Blog</a></li>
+          <li><a href="chi_siamo.html">Chi Siamo</a></li>
+          <li><a href="profilo.html">Profilo</a></li>
+          <li><a href="admin.html">Dashboard Admin</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div class="sr-only" id="breadcrumb-label">
+    <span lang="en">breadcrumb</span>
+  </div>
+  <nav aria-labelledby="breadcrumb-label" id="breadcrumb">
+    <ol>
+      <li><a href="index.html"><span lang="en">Home</span></a></li>
+      <li><a href="admin.html">Dashboard</a></li>
+      <li aria-current="page">Gestione Prenotazioni</li>
+    </ol>
+  </nav>
+
+  <main id="main-content">
+    <div class="profile-container section-container">
+      <div class="profile-header">
+        <div class="profile-info">
+          <h1>Gestione Prenotazioni</h1>
+          <p class="profile-email">Visualizza e gestisci le prenotazioni effettuate dagli utenti.</p>
+        </div>
+      </div>
+
+      <div class="profile-layout">
+        <nav class="profile-sidebar" aria-label="Menu amministrazione">
+          <ul>
+            <li>
+              <a href="admin.html">
+                <span class="nav-icon" aria-hidden="true">📊</span>
+                <span>Dashboard</span>
+              </a>
+            </li>
+            <li>
+              <a href="admin_utenti.html">
+                <span class="nav-icon" aria-hidden="true">👥</span>
+                <span>Gestione Utenti</span>
+              </a>
+            </li>
+            <li>
+              <a href="admin_prodotti.html">
+                <span class="nav-icon" aria-hidden="true">⛵</span>
+                <span>Gestione Prodotti</span>
+              </a>
+            </li>
+            <li class="current-tab">
+              <div class="nav-item-active" aria-current="page">
+                <span class="nav-icon" aria-hidden="true">📋</span>
+                <span>Gestione Prenotazioni</span>
+              </div>
+            </li>
+            <li>
+              <a href="admin_blog.html">
+                <span class="nav-icon" aria-hidden="true">✍️</span>
+                <span>Gestione Blog</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <div class="profile-content">
+          <section aria-labelledby="stats-title" class="profile-stats">
+            <h2 id="stats-title" class="sr-only">Statistiche Prenotazioni</h2>
+            <div class="stats-grid">
+              <div class="stat-card">
+                <p class="stat-number">3</p>
+                <p class="stat-label">Attive</p>
+              </div>
+              <div class="stat-card">
+                <p class="stat-number">5</p>
+                <p class="stat-label">In Attesa</p>
+              </div>
+              <div class="stat-card">
+                <p class="stat-number">24</p>
+                <p class="stat-label">Completate</p>
+              </div>
+              <div class="stat-card">
+                <p class="stat-number">2</p>
+                <p class="stat-label">Cancellate</p>
+              </div>
+            </div>
+          </section>
+
+          <section aria-labelledby="bookings-list-title" class="security-section">
+            <h2 id="bookings-list-title">Elenco Prenotazioni</h2>
+
+            <div class="activity-list">
+
+              <div class="activity-item">
+                <div class="activity-icon icon-success">📋</div>
+                <div class="activity-content">
+                  <span class="activity-type">#001 • Tour di Capri</span>
+                  <p><strong>Mario Rossi</strong></p>
+                  <p class="user-subtext">Utilizzo: 15/02/2025</p>
+                </div>
+                <div class="activity-meta">
+                  <p class="meta-user">€ 850</p>
+                  <p class="user-subtext text-success">Attiva</p>
+                  <div class="item-actions">
+                    <button class="btn-layout-light btn-sm" aria-label="Dettagli prenotazione">👁️</button>
+                    <button class="btn-danger-outline btn-sm" aria-label="Cancella prenotazione">❌</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="activity-item">
+                <div class="activity-icon icon-warning">⏳</div>
+                <div class="activity-content">
+                  <span class="activity-type">#002 • Bavaria 46</span>
+                  <p><strong>Laura Bianchi</strong></p>
+                  <p class="user-subtext">Utilizzo: 10/02/2025</p>
+                </div>
+                <div class="activity-meta">
+                  <p class="meta-user">€ 600</p>
+                  <p class="user-subtext text-warning">In Attesa</p>
+                  <div class="item-actions">
+                    <button class="btn-layout-light btn-sm">👁️</button>
+                    <button class="btn-layout btn-sm">✓</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="activity-item">
+                <div class="activity-icon icon-success">📋</div>
+                <div class="activity-content">
+                  <span class="activity-type">#003 • Sunseeker Predator</span>
+                  <p><strong>Giuseppe Verdi</strong></p>
+                  <p class="user-subtext">Utilizzo: 20/02/2025</p>
+                </div>
+                <div class="activity-meta">
+                  <p class="meta-user">€ 850</p>
+                  <p class="user-subtext text-success">Attiva</p>
+                  <div class="item-actions">
+                    <button class="btn-layout-light btn-sm">👁️</button>
+                    <button class="btn-danger-outline btn-sm">❌</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="activity-item">
+                <div class="activity-icon icon-warning">⏳</div>
+                <div class="activity-content">
+                  <span class="activity-type">#004 • Costiera Amalfitana</span>
+                  <p><strong>Anna Romano</strong></p>
+                  <p class="user-subtext">Utilizzo: 05/02/2025</p>
+                </div>
+                <div class="activity-meta">
+                  <p class="meta-user">€ 950</p>
+                  <p class="user-subtext text-warning">In Attesa</p>
+                  <div class="item-actions">
+                    <button class="btn-layout-light btn-sm">👁️</button>
+                    <button class="btn-layout btn-sm">✓</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="activity-item">
+                <div class="activity-icon icon-accent">✔️</div>
+                <div class="activity-content">
+                  <span class="activity-type">#005 • Jeanneau 54</span>
+                  <p><strong>Francesco Esposito</strong></p>
+                  <p class="user-subtext">Utilizzo: 25/01/2025</p>
+                </div>
+                <div class="activity-meta">
+                  <p class="meta-user">€ 750</p>
+                  <p class="user-subtext">Completata</p>
+                  <div class="item-actions">
+                    <button class="btn-layout-light btn-sm">👁️</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="activity-item">
+                <div class="activity-icon icon-accent" style="opacity: 0.5;">❌</div>
+                <div class="activity-content">
+                  <span class="activity-type">#006 • Tour di Capri</span>
+                  <p><strong>Chiara Lombardi</strong></p>
+                  <p class="user-subtext">Utilizzo: 22/01/2025</p>
+                </div>
+                <div class="activity-meta">
+                  <p class="meta-user">€ 850</p>
+                  <p class="user-subtext text-accent">Cancellata</p>
+                  <div class="item-actions">
+                    <button class="btn-layout-light btn-sm">👁️</button>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </section>
+
+          <section aria-labelledby="revenue-title" class="profile-stats" style="margin-top: 2em;">
+            <h2 id="revenue-title">Riepilogo Finanziario</h2>
+            <div class="stats-grid">
+              <div class="stat-card">
+                <p class="stat-number">€ 4,750</p>
+                <p class="stat-label">Incassi Mese</p>
+              </div>
+              <div class="stat-card">
+                <p class="stat-number">€ 3,400</p>
+                <p class="stat-label">In Attesa</p>
+              </div>
+              <div class="stat-card">
+                <p class="stat-number">€ 18,200</p>
+                <p class="stat-label">Totale 2025</p>
+              </div>
+            </div>
+          </section>
+
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="section-container footer-content">
+      <div class="footer-col brand-col">
+        <div class="logo footer-logo">
+          <span class="logo-icon" aria-hidden="true">⚓</span>
+          <span class="logo-text"><span lang="en">Sail</span><span class="text-accent" lang="en">UP</span></span>
+        </div>
+        <p class="footer-tagline">
+          Naviga il Golfo di Napoli con stile e sicurezza. La tua avventura inizia qui.
+        </p>
+      </div>
+
+      <div class="footer-col nav-col">
+        <h3 class="footer-heading">Esplora</h3>
+        <nav aria-label="Menu footer">
+          <ul class="footer-links">
+            <li><a href="index.html" lang="en">Home</a></li>
+            <li><a href="catalogo_noleggio.html">Noleggio</a></li>
+            <li><a href="catalogo_esperienze.html">Esperienze</a></li>
+            <li><a href="blog.html" lang="en">Blog</a></li>
+            <li><a href="chi_siamo.html">Chi Siamo</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="footer-col info-col">
+        <h3 class="footer-heading">Info &amp; Contatti</h3>
+        <ul class="footer-links">
+          <li><a href="FAQ.html">Domande Frequenti (<abbr title="Frequently Asked Questions" lang="en">FAQ</abbr>)</a>
+          </li>
+          <li><a href="privacy.html" lang="en">Privacy Policy</a></li>
+          <li><a href="cookie.html">Cookie Policy</a></li>
+        </ul>
+        <address class="footer-address">
+          <p><strong>SailUP S.r.l.</strong></p>
+          <p>Via Caracciolo, 80122 Napoli (NA)</p>
+          <p>P.IVA: 12345678901</p>
+        </address>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-bottom-container">
+        <div class="copyright">
+          &copy; 2025 SailUP S.r.l. - All rights reserved.
+        </div>
+
+        <div class="valid-logos">
+          <img class="valid-code-icon" src="valid-xhtml10.png" alt="XHTML valido" />
+          <img class="valid-code-icon" src="valid-CSS.png" alt="CSS valido" />
+        </div>
+
+        <a href="#main-content" class="scroll-to-top" id="btnTop" aria-label="Torna all'inizio del contenuto"
+          tabindex="-1">
+          <span aria-hidden="true">⬆</span> <span lang="en">Top</span>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/script.js"></script>
+</body>
+
+</html>
