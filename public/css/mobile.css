@@ -159,9 +159,15 @@
     width: 100%;
 }
 
+/* Mobile: ensure buttons are full-width and use centralized button variables */
 .cta-group .btn-layout,
-.cta-group .btn-layout-light {
+.cta-group .btn-layout-light,
+.cta-group .btn-full-width {
     width: 100%;
+    padding: var(--btn-padding-vertical) var(--btn-padding-horizontal);
+    font-size: var(--btn-font-size);
+    border-radius: var(--btn-radius);
+    box-sizing: border-box;
 }
 
 #quote-section {
@@ -271,10 +277,15 @@ footer .logo p {
     flex-direction: column;
 }
 
+/* Booking actions: use centralized button sizing on small screens */
 .booking-actions .btn-layout,
 .booking-actions .btn-layout-light,
 .booking-actions .btn-danger-outline {
     width: 100%;
+    padding: var(--btn-padding-vertical) var(--btn-padding-horizontal);
+    font-size: var(--btn-font-size);
+    border-radius: var(--btn-radius);
+    box-sizing: border-box;
 }
 
 /* =========================================

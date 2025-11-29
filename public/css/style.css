@@ -42,6 +42,35 @@
   --font-body: "Open Sans", sans-serif;
 }
 
+/* Button system variables */
+:root {
+  /* defaults for button sizing and behaviour */
+  --btn-padding-vertical: 0.8em;
+  --btn-padding-horizontal: 1.5em;
+  --btn-font-family: var(--font-head);
+  --btn-font-weight: 600;
+  --btn-radius: var(--radius-btn);
+  --btn-transition: 0.25s ease;
+  --btn-font-size: var(--fs-sm);
+
+  /* semantic button colors (can be overridden by theme) */
+  --btn-bg-primary: var(--col-primary);
+  --btn-color-primary: var(--col-text-inv);
+  --btn-border-primary: var(--col-primary);
+  --btn-bg-accent: var(--col-accent);
+  --btn-hover-translate: -2px;
+}
+
+/* Badge colors as variables (centralize palette) */
+:root {
+  --badge-motore: #3b82f6;
+  --badge-vela: #10b981;
+  --badge-gommone: #f59e0b;
+  --badge-tour: #8b5cf6;
+  --badge-aperitivo: #ec4899;
+  --badge-escursione: #06b6d4;
+}
+
 [data-theme="dark"] {
   --col-primary: #f5f2eb;
   --col-primary-light: #e2dccf;
@@ -183,46 +212,54 @@ img {
    3. COMPONENTI UI (Bottoni)
    ========================================= */
 .btn-layout,
-.btn-layout-light {
+.btn-layout-light,
+.btn-full-width,
+.btn-sm,
+.btn-danger,
+.btn-danger-outline,
+.btn-text,
+.btn-page {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.8em 1.5em;
-  font-family: var(--font-head);
-  font-weight: 600;
+  padding: var(--btn-padding-vertical) var(--btn-padding-horizontal);
+  font-family: var(--btn-font-family);
+  font-weight: var(--btn-font-weight);
   text-decoration: none;
-  border-radius: var(--radius-btn);
-  transition: all 0.3s ease;
+  border-radius: var(--btn-radius);
+  transition: background-color var(--btn-transition), border-color var(--btn-transition), box-shadow var(--btn-transition), transform var(--btn-transition);
   cursor: pointer;
-  font-size: var(--fs-sm);
+  font-size: var(--btn-font-size);
   margin: 1em;
+  line-height: 1;
+  border: 2px solid transparent;
 }
 
 /* Bottone Primario (Pieno) */
 .btn-layout {
-  background-color: var(--col-primary);
-  color: var(--col-text-inv) !important;
-  border: 2px solid var(--col-primary);
+  background-color: var(--btn-bg-primary);
+  color: var(--btn-color-primary) !important;
+  border-color: var(--btn-border-primary);
   box-shadow: var(--shadow-sm);
 }
 
 .btn-layout:hover {
-  background-color: var(--col-accent);
-  border-color: var(--col-accent);
-  transform: translateY(-2px);
+  background-color: var(--btn-bg-accent);
+  border-color: var(--btn-bg-accent);
+  transform: translateY(var(--btn-hover-translate));
   box-shadow: var(--shadow-md);
 }
 
 /* Bottone Secondario (Outline) */
 .btn-layout-light {
   background-color: transparent;
-  color: var(--col-primary);
-  border: 2px solid var(--col-primary);
+  color: var(--btn-bg-primary);
+  border-color: var(--btn-border-primary);
 }
 
 .btn-layout-light:hover {
-  background-color: var(--col-primary);
-  color: var(--col-text-inv) !important;
+  background-color: var(--btn-bg-primary);
+  color: var(--btn-color-primary) !important;
 }
 
 /* =========================================
@@ -2041,14 +2078,14 @@ input[maxlength="5"] {
 }
 
 /* Badge colori - NOLEGGIO */
-.badge-motore { background-color: #3b82f6; color: white; }
-.badge-vela { background-color: #10b981; color: white; }
-.badge-gommone { background-color: #f59e0b; color: white; }
+.badge-motore { background-color: var(--badge-motore); color: white; }
+.badge-vela { background-color: var(--badge-vela); color: white; }
+.badge-gommone { background-color: var(--badge-gommone); color: white; }
 
 /* Badge colori - ESPERIENZE */
-.badge-tour { background-color: #8b5cf6; color: white; }
-.badge-aperitivo { background-color: #ec4899; color: white; }
-.badge-escursione { background-color: #06b6d4; color: white; }
+.badge-tour { background-color: var(--badge-tour); color: white; }
+.badge-aperitivo { background-color: var(--badge-aperitivo); color: white; }
+.badge-escursione { background-color: var(--badge-escursione); color: white; }
 
 /* Contenuto card */
 .product-card-content {
