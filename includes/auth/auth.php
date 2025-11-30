@@ -7,15 +7,23 @@ require_once __DIR__ . '/../../config/db_connect.php';
  * registrazione nuovo utente
  * @return bool
  */
-function registerUser($nome,$cognome,$cf,$email,$password,$idIndirizzo,$patente=null){
+function registerUser($nome, $cognome, $cf, $email, $password, $indirizzo, $patente = null) {
     global $conn;
-    $hashedPassword=password_hash($password,PASSWORD_DEFAULT);
-    //insert nel database
-    $sql= "INSERT INTO Utente
-            (Nome, Cognome, CF, Email, PasswordHash, Numero_Patente_Nautica, IDIndirizzo)
-            VALUES (:nome, :cognome, :cf, :email, :hashedPassword,)";
 
-    $stmt= $conn->prepare($sql);
+    //inserisc l’indirizzo
+    $sqlInd = "INSERT INTO Indirizzo (Indirizzo) VALUES (:indirizzo) RETURNING IDIndirizzo";
+    $stmtInd = $conn->prepare($sqlInd);
+    $stmtInd->execute([":indirizzo" => $indirizzo]);
+    $idIndirizzo = $stmtInd->fetchColumn();
+
+    //inserisco l’utente
+    $sql = "INSERT INTO Utente
+            (Nome, Cognome, CF, Email, PasswordHash, Numero_Patente_Nautica, IDIndirizzo)
+            VALUES (:nome, :cognome, :cf, :email, :password, :patente, :idIndirizzo)";
+
+    $stmt = $conn->prepare($sql);
+
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
     try {
         return $stmt->execute([
@@ -23,16 +31,13 @@ function registerUser($nome,$cognome,$cf,$email,$password,$idIndirizzo,$patente=
             ":cognome"     => $cognome,
             ":cf"          => $cf,
             ":email"       => $email,
-            ":pass"        => $hashedPassword,
+            ":password"    => $hashedPassword,
             ":patente"     => $patente,
             ":idIndirizzo" => $idIndirizzo
         ]);
     } catch (PDOException $e) {
-         
         return false;
     }
-
-
 }
 
 /**
@@ -58,7 +63,7 @@ function loginUser($email, $password){
         return false; // password sbagliata
     }
 
-    //login okappa → salvo nella sessione
+    //login okappa , salvo nella sessione
     $_SESSION["user_id"] = $user["idutente"];
     $_SESSION["email"]   = $user["email"];
     $_SESSION["role"]    = ($user["is_admin"] == true) ? "admin" : "user";
