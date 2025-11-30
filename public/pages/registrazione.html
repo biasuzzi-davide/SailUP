@@ -14,7 +14,6 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap"
         rel="stylesheet" />
-
     <link rel="stylesheet" href="../css/style.css" media="screen" />
     <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)" />
     <link rel="stylesheet" href="../css/print.css" media="print" />
@@ -27,16 +26,16 @@
         <div class="header-container">
             <div class="header">
                 <a href="index.html" class="logo">
-          <picture>
-            <source srcset="" type="image/avif" />
-            <img alt="Logo SailUP"
-              src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=400&q=80"
-              width="30" />
-          </picture>
-          <h1 lang="en">
-            <span class="logo-text">Sail<span class="text-accent">UP</span></span>
-          </h1>
-        </a>
+                    <picture>
+                        <source srcset="" type="image/avif" />
+                        <img alt="Logo SailUP"
+                            src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=400&q=80"
+                            width="30" />
+                    </picture>
+                    <h1 lang="en">
+                        <span class="logo-text">Sail<span class="text-accent">UP</span></span>
+                    </h1>
+                </a>
 
                 <nav id="main-menu">
                     <ul>
@@ -148,7 +147,7 @@
                             <span id="password-error" class="field-error" role="alert"></span>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group print-none">
                             <label for="confirm-password">Conferma Password</label>
                             <input type="password" id="confirm-password" name="confirm-password" required
                                 aria-required="true" aria-describedby="confirm-password-hint confirm-password-error"
@@ -163,51 +162,53 @@
 
                             <div class="form-group field-via">
                                 <label for="indirizzo_via">Via / Piazza</label>
-                                <input type="text" id="indirizzo_via" name="indirizzo_via" value="Via Roma" required aria-required="true"
-                                aria-describedby="via-hint indirizzo_via-error" autocomplete="address-line1"
-                                placeholder="Es. Via Caracciolo" />
+                                <input type="text" id="indirizzo_via" name="indirizzo_via" value="Via Roma" required
+                                    aria-required="true" aria-describedby="via-hint indirizzo_via-error"
+                                    autocomplete="address-line1" placeholder="Es. Via Caracciolo" />
                                 <span id="via-hint" class="field-hint">Inserire il nome della via o della piazza.</span>
                                 <span id="indirizzo_via-error" class="field-error" role="alert"></span>
                             </div>
 
                             <div class="form-group field-civico">
                                 <label for="indirizzo_civico">N. Civico</label>
-                                <input type="text" id="indirizzo_civico" name="indirizzo_civico" value="123" required aria-required="true"
-                                aria-describedby="civico-hint indirizzo_civico-error" autocomplete="address-line2"
-                                placeholder="10" />
+                                <input type="text" id="indirizzo_civico" name="indirizzo_civico" value="123" required
+                                    aria-required="true" aria-describedby="civico-hint indirizzo_civico-error"
+                                    autocomplete="address-line2" placeholder="10" />
                                 <span id="civico-hint" class="field-hint">Inserire il numero civico.</span>
                                 <span id="indirizzo_civico-error" class="field-error" role="alert"></span>
                             </div>
 
                             <div class="form-group field-cap">
                                 <label for="indirizzo_cap">CAP</label>
-                                <input type="text" id="indirizzo_cap" name="indirizzo_cap" value="80100" required aria-required="true"
-                                aria-describedby="cap-hint indirizzo_cap-error" autocomplete="postal-code" pattern="^\d{5}$"
-                                placeholder="80122" maxlength="5" />
+                                <input type="text" id="indirizzo_cap" name="indirizzo_cap" value="80100" required
+                                    aria-required="true" aria-describedby="cap-hint indirizzo_cap-error"
+                                    autocomplete="postal-code" pattern="^\d{5}$" placeholder="80122" maxlength="5" />
                                 <span id="cap-hint" class="field-hint">Inserire le 5 cifre del CAP (es. 00100).</span>
                                 <span id="indirizzo_cap-error" class="field-error" role="alert"></span>
                             </div>
 
                             <div class="form-group field-citta">
                                 <label for="indirizzo_citta">Città</label>
-                                <input type="text" id="indirizzo_citta" name="indirizzo_citta" value="Napoli" required aria-required="true"
-                                aria-describedby="citta-hint indirizzo_citta-error" autocomplete="address-level2"
-                                placeholder="Es. Napoli" />
+                                <input type="text" id="indirizzo_citta" name="indirizzo_citta" value="Napoli" required
+                                    aria-required="true" aria-describedby="citta-hint indirizzo_citta-error"
+                                    autocomplete="address-level2" placeholder="Es. Napoli" />
                                 <span id="citta-hint" class="field-hint">Inserire il comune di residenza.</span>
                                 <span id="indirizzo_citta-error" class="field-error" role="alert"></span>
                             </div>
 
                             <div class="form-group field-provincia">
                                 <label for="indirizzo_provincia">Prov.</label>
-                                <input type="text" id="indirizzo_provincia" name="indirizzo_provincia" value="NA" required
-                                aria-required="true" aria-describedby="provincia-hint indirizzo_provincia-error"
-                                autocomplete="address-level1" pattern="^[A-Z]{2}$" placeholder="NA" maxlength="2" />
-                                <span id="provincia-hint" class="field-hint">Sigla di 2 lettere maiuscole (es. NA).</span>
+                                <input type="text" id="indirizzo_provincia" name="indirizzo_provincia" value="NA"
+                                    required aria-required="true"
+                                    aria-describedby="provincia-hint indirizzo_provincia-error"
+                                    autocomplete="address-level1" pattern="^[A-Z]{2}$" placeholder="NA" maxlength="2" />
+                                <span id="provincia-hint" class="field-hint">Sigla di 2 lettere maiuscole (es.
+                                    NA).</span>
                                 <span id="indirizzo_provincia-error" class="field-error" role="alert"></span>
                             </div>
-                            </fieldset>
+                        </fieldset>
 
-                        <div class="form-group checkbox-group">
+                        <div class="form-group checkbox-group print-none">
                             <input type="checkbox" id="privacy" name="privacy" required aria-required="true"
                                 aria-describedby="privacy-error" />
                             <label for="privacy">
@@ -222,7 +223,7 @@
                         </div>
                     </form>
 
-                    <div class="auth-footer">
+                    <div class="auth-footer print-none">
                         <p>Hai già un account? <a href="login.html">Accedi</a></p>
                     </div>
                 </div>
@@ -258,7 +259,8 @@
             <div class="footer-col info-col">
                 <h3 class="footer-heading">Info & Contatti</h3>
                 <ul class="footer-links">
-                    <li><a href="FAQ.html">Domande Frequenti (<abbr title="Frequently Asked Questions" lang="en">FAQ</abbr>)</a></li>
+                    <li><a href="FAQ.html">Domande Frequenti (<abbr title="Frequently Asked Questions"
+                                lang="en">FAQ</abbr>)</a></li>
                     <li><a href="privacy.html" lang="en">Privacy Policy</a></li>
                     <li><a href="cookie.html">Cookie Policy</a></li>
                 </ul>

@@ -786,7 +786,7 @@ footer {
 }
 
 /* =========================================
-   9. Catalogo noleggi, catalogo esperienze, FAQ
+   9. Catalogo noleggi, catalogo esperienze, FAQ, blog
    ========================================= */
 
   
@@ -871,6 +871,11 @@ footer {
   content: "⚓";
   transform: rotate(360deg);
   transition: 0.5s;
+}
+
+.read-more{
+  color: var(--col-accent);
+  font-style: italic;
 }
 
 /* =========================================
