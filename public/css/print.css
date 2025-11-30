@@ -1,0 +1,493 @@
+@media print {
+
+    /* generali */
+    *,
+    *::before,
+    *::after {
+        background: transparent;
+        box-shadow: none;
+        text-shadow: none;
+    }
+
+    html {
+        background-color: #fff;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        margin-top: 15px;
+        background-color: #fff;
+        color: #000;
+        font-family: "Times New Roman", Times, Georgia, serif;
+        font-size: 12pt;
+        line-height: 1.4;
+
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    a {
+        color: #000;
+        text-decoration: none;
+        /* nessuna sottolineatura link */
+    }
+
+    /* mostra l'indirizzo solo per link esterni, al momento non ce ne sono nel sito
+    main a[href^="http"]::after {
+        content: " (" attr(href) ")";
+    }
+    */
+
+    /* elementi non utili alla stampa nascosti */
+    header,
+    #breadcrumb,
+    .hero,
+    .filters-sidebar,
+    .cta-group,
+    .theme-toggle,
+    .scroll-to-top,
+    .skip-to-content,
+    .section-header a,
+    #mobile-menu,
+    #hamburger-btn,
+    .footer-col.nav-col,
+    .valid-logos,
+    .sr-only,
+    .footer-links,
+    button {
+        display: none;
+    }
+
+    main,
+    .section-container {
+        width: 99%;
+        margin: 0;
+        padding: 0;
+        display: block;
+    }
+
+    h1,
+    h2,
+    h3 {
+        color: #000;
+        page-break-after: avoid;
+        /* Evita che il titolo rimanga solo a fine pagina */
+        text-align: left;
+    }
+
+    h1 {
+        font-size: 22pt;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: #000;
+    }
+
+    h2 {
+        font-size: 18pt;
+        margin-top: 30px;
+
+    }
+
+    /* ----------------------------------------
+     Specifio per index, formatta card e quote
+    -----------------------------------------*/
+
+    .cards-wrapper,
+    .grid-2-col {
+        display: block;
+    }
+
+    .card p,
+    .horizontal-card p {
+        margin: 0;
+    }
+
+    /* griglia per allineare img a sx e descrizione a dx */
+    .card a {
+        display: grid;
+        grid-template-columns: 160px 1fr;
+        grid-template-rows: auto auto;
+        /* foto occupa due righe, titolo sopra e dettagli sotto */
+        grid-template-areas:
+            "photo name"
+            "photo details";
+        column-gap: 25px;
+        row-gap: 5px;
+        align-items: center;
+
+        border: 1px solid #000;
+        page-break-inside: avoid;
+        margin-bottom: 15px;
+        padding: 15px;
+        text-decoration: none;
+    }
+
+    /* immagine all'area photo */
+    .card img {
+        grid-area: photo;
+        width: 100%;
+        height: 100px;
+        /* imposta altezza standard all'immagine */
+    }
+
+    /* titolo all'area name */
+    .card-title {
+        grid-area: name;
+        font-size: 16pt;
+        font-weight: bold;
+    }
+
+    /* descrizione all'area details */
+    .card-subtitle {
+        grid-area: details;
+        font-size: 12pt;
+    }
+
+    .quote {
+        page-break-inside: avoid;
+    }
+
+    blockquote {
+        font-style: italic;
+        border-left: 3px solid #000;
+        margin: 20px;
+        padding-left: 15px;
+    }
+
+    /* ----------------------------------------
+     Sezione per noleggio, esperienze e blog
+    -----------------------------------------*/
+
+    .catalog-hero {
+        display: block;
+        border-bottom: 2px solid #000;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+    }
+
+    .catalog-hero h1 {
+        font-size: 20pt;
+        margin: 0;
+    }
+
+    .catalog-hero p {
+        font-size: 12pt;
+        font-style: italic;
+        margin-top: 5px;
+    }
+
+    /* nasconde filtri */
+    .results-sort {
+        display: none;
+    }
+
+    .results-header h2 {
+        font-size: 14pt;
+        padding-bottom: 5px;
+        margin-bottom: 15px;
+    }
+
+    /* trasforma la griglia in una lista verticale */
+    .catalog-layout,
+    .catalog-results,
+    .catalog-grid {
+        display: block;
+        width: 100%;
+    }
+
+    .product-card {
+        border: 1px solid #000;
+        border-radius: 0;
+        box-shadow: none;
+        margin-bottom: 15px;
+        margin-right: 10px;
+        page-break-inside: avoid;
+        background: transparent;
+    }
+
+    /* grid per allineare immagine e dati */
+    .product-card-link {
+        display: grid;
+        grid-template-columns: 180px 1fr;
+        gap: 20px;
+        text-decoration: none;
+        align-items: start;
+    }
+
+    /* immagine */
+    .product-card-image {
+        grid-column: 1;
+        width: 90%;
+        height: 120px;
+        position: relative;
+        margin: auto;
+    }
+
+    .product-card-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    /* Badge vela, motore o gommone */
+    .product-badge {
+        border: 1.5px solid #000;
+        background: #fff;
+        font-size: 9pt;
+        font-weight: bold;
+        position: absolute;
+        bottom: 5px;
+        right: 5px;
+        padding: 2px 6px;
+    }
+
+    .product-card-content {
+        grid-column: 2;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .product-title {
+        font-size: 16pt;
+        font-weight: bold;
+        margin: 0 0 5px 0;
+    }
+
+    .product-description {
+        font-size: 11pt;
+        margin-bottom: 10px;
+        line-height: 1.5;
+    }
+
+    /* specifiche barca */
+    .product-specs {
+        display: flex;
+        gap: 15px;
+        border-top: 1px dotted #000;
+        border-bottom: 1px dotted #000;
+        padding: 5px 0;
+        margin-bottom: 8px;
+        font-size: 10pt;
+    }
+
+    .spec-item {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    /* prezzo */
+    .product-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .product-price {
+        font-size: 14pt;
+        font-weight: bold;
+        color: #000;
+    }
+
+    .price-label,
+    .price-period {
+        font-size: 10pt;
+        font-weight: normal;
+    }
+
+    /* Nascondi la scritta Dettagli ->, inutile nella stampa*/
+    .product-cta {
+        display: none;
+    }
+
+    /* Nascondi la scritta Leggi tutto, inutile nella stampa*/
+    .read-more {
+        display: none;
+    }
+
+    /* ----------------------------------------
+        area account
+    -----------------------------------------*/
+
+    .print-none {
+        display: none;
+    }
+
+    .profile-stats {
+        display: block;
+        margin-bottom: 30px;
+    }
+
+    .stats-grid {
+        display: block;
+        text-align: center;
+        margin-top: 15px;
+    }
+
+    .stat-card {
+        display: inline-block;
+        width: 45%;
+        margin: 0 5px 15px 5px;
+        padding: 10px 0;
+        border: 1px solid #000;
+        background-color: #fff;
+        page-break-inside: avoid;
+    }
+
+    .stat-card .stat-number {
+        font-size: 2em;
+        font-weight: 700;
+        margin: 0;
+    }
+
+
+    /* ----------------------------------------
+        FAQ, stampa solo le domande espanse (chiedere alla prof se va bene)
+    -----------------------------------------*/
+
+    .faq-section {
+        display: none;
+    }
+
+    .faq-item {
+        display: none;
+    }
+
+    /* Mostra solo le sezioni che contengono un elemento aperto */
+    .faq-section:has(.faq-item[open]) {
+        display: block;
+    }
+
+    /* solo per gli elementi aperti */
+    .faq-item[open] {
+        display: block;
+        margin-bottom: 15px;
+        page-break-inside: avoid;
+    }
+
+    .faq-answer {
+        padding-left: 20px;
+        border-left: 2px solid #000;
+        font-size: 10pt;
+        line-height: 1.4;
+        margin-top: 5px;
+    }
+
+    /* ----------------------------------------
+       Dettaglio prodotto ed esperienze
+    -----------------------------------------*/
+
+    /* sidebar laterale rimossa */
+    .detail-layout {
+        display: block;
+    }
+
+    .detail-hero-container {
+        height: 250px;
+        overflow: hidden;
+        margin-bottom: 20px;
+    }
+
+    .detail-hero-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .detail-header .subtitle {
+        font-size: 14pt;
+        font-style: italic;
+        margin-bottom: 20px;
+    }
+
+    /* specifiche convertite in barra orizzontale */
+    .specs-grid {
+        display: flex;
+        justify-content: space-between;
+        border-top: 2px solid #000;
+        border-bottom: 2px solid #000;
+        padding: 10px 0;
+        margin-bottom: 25px;
+    }
+
+    .spec-card {
+        text-align: center;
+        flex: 1; 
+        border-right: 1px dotted #000; 
+    }
+
+    .spec-card:last-child {
+        border-right: none;
+    }
+
+    /* due colonne di dimensione uguale per incluso ed extra */
+    .amenities-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr; 
+        gap: 20px;
+        page-break-inside: avoid;
+    }
+
+    .amenity-box {
+        border: 1px solid #000;
+        padding: 15px;
+    }
+
+    .amenity-box h3 {
+        margin-top: 0;
+        font-size: 12pt;
+        border-bottom: 1px solid #000;
+        padding-bottom: 5px;
+    }
+
+    .amenity-box ul {
+        padding-left: 20px;
+    }
+
+    .amenity-box li {
+        margin-bottom: 5px;
+    }
+
+    /* box di riepilogo a fondo pagina per il prezzo */
+    .detail-sidebar {
+        margin-top: 30px;
+        border: 1px solid #000;
+        padding: 15px;
+        page-break-inside: avoid;
+    }
+
+    .price-header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .price-amount {
+        font-size: 20pt;
+        font-weight: bold;
+    }
+
+    /* form prenotazione nascosto */
+    .booking-form {
+        display: none;
+    }
+
+    /* ----------------------------------------
+        area footer
+    -----------------------------------------*/
+    footer {
+        margin-top: 50px;
+        margin-right: 10px;
+        border: 1px solid #000;
+        padding: 15px;
+        page-break-inside: avoid;
+    }
+
+    .footer-heading {
+        display: none;
+    }
+}
