@@ -1,27 +1,38 @@
-/* 1. TIPOGRAFIA FLUIDA 
-*/
+/* 1. TIPOGRAFIA FLUIDA - Ridotta su mobile */
 @supports (font-size: clamp(1rem, 1vi, 1rem)) {
     :root {
-        --fs-sm: clamp(0.8rem, 0.17vi + 0.76rem, 0.89rem);
-        --fs-base: clamp(1rem, 0.34vi + 0.91rem, 1.19rem);
-        --fs-md: clamp(1.25rem, 0.61vi + 1.1rem, 1.58rem);
-        --fs-lg: clamp(1.56rem, 1vi + 1.31rem, 2.11rem);
-        --fs-xl: clamp(1.95rem, 1.56vi + 1.56rem, 2.81rem);
-        --fs-xxl: clamp(2.44rem, 2.38vi + 1.85rem, 3.75rem);
+        /* Mobile: 0.75rem (12px) -> Desktop: 0.89rem */
+        --fs-sm: clamp(0.75rem, 0.15vi + 0.7rem, 0.89rem);
+
+        /* Mobile: 0.95rem (15.2px) -> Desktop: 1.19rem. 
+           NOTA: Non scendere sotto 0.95rem per il testo base per accessibilità */
+        --fs-base: clamp(0.95rem, 0.38vi + 0.85rem, 1.19rem);
+
+        /* Mobile: 1.15rem -> Desktop: 1.58rem */
+        --fs-md: clamp(1.15rem, 0.65vi + 1rem, 1.58rem);
+
+        /* Mobile: 1.4rem -> Desktop: 2.11rem */
+        --fs-lg: clamp(1.4rem, 1.1vi + 1.15rem, 2.11rem);
+
+        /* Mobile: 1.75rem -> Desktop: 2.81rem (Riduzione significativa per H2) */
+        --fs-xl: clamp(1.75rem, 1.6vi + 1.35rem, 2.81rem);
+
+        /* Mobile: 2.15rem -> Desktop: 3.75rem (Riduzione significativa per H1) */
+        --fs-xxl: clamp(2.15rem, 2.5vi + 1.55rem, 3.75rem);
     }
 }
 
+/* Fallback per browser vecchissimi: usiamo le dimensioni minime (mobile) */
 @supports not (font-size: clamp(1rem, 1vi, 1rem)) {
     :root {
-        --fs-sm: 0.8rem;
-        --fs-base: 1rem;
-        --fs-md: 1.25rem;
-        --fs-lg: 1.56rem;
-        --fs-xl: 1.95rem;
-        --fs-xxl: 2.44rem;
+        --fs-sm: 0.75rem;
+        --fs-base: 0.95rem;
+        --fs-md: 1.15rem;
+        --fs-lg: 1.4rem;
+        --fs-xl: 1.75rem;
+        --fs-xxl: 2.15rem;
     }
 }
-
 /* 2. HEADER & NAVIGAZIONE 
    Layout: [Logo] ...spazio... [Theme Toggle] [Hamburger]
 */
@@ -198,6 +209,10 @@ footer .footer-content {
     grid-template-columns: 1fr;
     text-align: center;
     gap: 2rem;
+}
+
+footer .logo {
+    justify-content: center;
 }
 
 footer .logo p {

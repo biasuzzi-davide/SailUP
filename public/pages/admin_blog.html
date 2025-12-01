@@ -5,14 +5,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gestione Blog - Dashboard Admin - SailUP</title>
-  <meta name="description" content="Gestione articoli del blog SailUP" />
-  <meta name="authors" content="Alberto Reginato, Francesco Marcon" />
+  <meta name="description" content="Pannello amministrativo per la gestione degli articoli del blog SailUP. Visualizza statistiche, pubblica e modifica contenuti editoriali." />
+  <meta name="robots" content="noindex, nofollow" />  <!-- nofollow è buona pratica, da vedere se risponde alle nostre necessità -->
+  <meta name="authors" content="SailUP Team" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap"
-    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="../css/style.css" media="screen" />
   <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)" />
@@ -20,20 +19,18 @@
 </head>
 
 <body>
-  <a href="#main-content" class="skip-to-content">Salta al contenuto</a>
+  <a href="#main-content" class="skip-to-content">Salta al contenuto principale</a>
 
   <header>
     <div class="header-container">
       <div class="header">
-        <a href="index.html" class="logo">
+        <a href="index.html" class="logo" aria-label="Torna alla homepage">
           <picture>
             <img alt="Logo SailUP"
               src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=400&q=80"
               width="30" />
           </picture>
-          <h1 lang="en">
-            <span class="logo-text">Sail<span class="text-accent">UP</span></span>
-          </h1>
+          <span class="logo-text" lang="en">Sail<span class="text-accent">UP</span></span>
         </a>
 
         <nav id="main-menu" aria-label="Navigazione principale">
@@ -47,20 +44,25 @@
         </nav>
 
         <div class="header-buttons">
-          <button class="theme-toggle" aria-pressed="false" aria-label="Attiva modalità scura">
-            <span class="active-icon sun">☀️</span>
-            <span class="inactive-icon moon">🌙</span>
+          <button class="theme-toggle" 
+                  aria-pressed="false" 
+                  aria-label="Attiva modalità scura">
+            <span class="active-icon sun" aria-hidden="true">☀️</span>
+            <span class="inactive-icon moon hidden" aria-hidden="true">🌙</span>
           </button>
           <a href="profilo.html" class="btn-layout-light">Profilo</a>
         </div>
 
-        <button id="hamburger-btn" aria-expanded="false" aria-controls="mobile-menu" aria-label="Menu Mobile">
-          <span class="hamburger-icon">☰</span>
-          <span class="close-icon hidden">✕</span>
+        <button id="hamburger-btn" 
+                aria-expanded="false" 
+                aria-controls="mobile-menu" 
+                aria-label="Apri menu di navigazione">
+          <span class="hamburger-icon" aria-hidden="true">☰</span>
+          <span class="close-icon hidden" aria-hidden="true">✕</span>
         </button>
       </div>
 
-      <nav id="mobile-menu">
+      <nav id="mobile-menu" aria-label="Navigazione mobile">
         <ul>
           <li><a href="index.html" lang="en">Home</a></li>
           <li><a href="catalogo_noleggio.html">Noleggio</a></li>
@@ -75,7 +77,7 @@
   </header>
 
   <div class="sr-only" id="breadcrumb-label">
-    <span lang="en">breadcrumb</span>
+    <span lang="en">Breadcrumb</span>
   </div>
   <nav aria-labelledby="breadcrumb-label" id="breadcrumb">
     <ol>
@@ -86,15 +88,17 @@
   </nav>
 
   <main id="main-content">
-    <div class="profile-container section-container">
-      <div class="profile-header">
+    <div class="section-container">
+      
+      <header class="profile-header">
         <div class="profile-info">
           <h1>Gestione Blog</h1>
-          <p class="profile-email">Gestisci gli articoli e i contenuti editoriali.</p>
+          <p class="profile-email">Gestisci gli articoli e i contenuti editoriali del blog SailUP.</p>
         </div>
-      </div>
+      </header>
 
       <div class="profile-layout">
+        
         <nav class="profile-sidebar" aria-label="Menu amministrazione">
           <ul>
             <li>
@@ -123,7 +127,7 @@
             </li>
             <li class="current-tab">
               <div class="nav-item-active" aria-current="page">
-                <span class="nav-icon" aria-hidden="true">✍️</span>
+                <span class="nav-icon" aria-hidden="true">✏️</span>
                 <span>Gestione Blog</span>
               </div>
             </li>
@@ -131,6 +135,7 @@
         </nav>
 
         <div class="profile-content">
+          
           <section aria-labelledby="stats-title" class="profile-stats">
             <h2 id="stats-title" class="sr-only">Statistiche Blog</h2>
             <div class="stats-grid">
@@ -162,11 +167,11 @@
 
             <div class="activity-list">
 
-              <div class="activity-item">
-                <div class="activity-icon icon-success">✍️</div>
+              <article class="activity-item">
+                <div class="activity-icon icon-success" aria-hidden="true">✏️</div>
                 <div class="activity-content">
                   <span class="activity-type">Guida</span>
-                  <p><strong>Come scegliere la barca perfetta</strong></p>
+                  <h3>Come scegliere la barca perfetta</h3>
                   <p class="user-subtext">342 letture • Admin SailUP</p>
                 </div>
                 <div class="activity-meta">
@@ -177,57 +182,65 @@
                     <button class="btn-danger-outline btn-sm" aria-label="Elimina articolo">🗑️</button>
                   </div>
                 </div>
-              </div>
+              </article>
 
-              <div class="activity-item">
-                <div class="activity-icon icon-success">🌍</div>
+              <article class="activity-item">
+                <div class="activity-icon icon-success" aria-hidden="true">🌍</div>
                 <div class="activity-content">
                   <span class="activity-type">Destinazioni</span>
-                  <p><strong>Le migliori destinazioni del Golfo</strong></p>
+                  <h3>Le migliori destinazioni del Golfo</h3>
                   <p class="user-subtext">285 letture • Admin SailUP</p>
                 </div>
                 <div class="activity-meta">
                   <time datetime="2025-01-10">10/01/25</time>
                   <p class="user-subtext text-success">Pubblicato</p>
                   <div class="item-actions">
-                    <button class="btn-layout-light btn-sm">✏️</button>
-                    <button class="btn-danger-outline btn-sm">🗑️</button>
+                    <button class="btn-layout-light btn-sm" 
+                            aria-label="Modifica articolo: Le migliori destinazioni del Golfo"
+                            type="button">✏️</button>
+                    <button class="btn-danger-outline btn-sm" 
+                            aria-label="Elimina articolo: Le migliori destinazioni del Golfo"
+                            type="button">🗑️</button>
                   </div>
                 </div>
-              </div>
+              </article>
 
-              <div class="activity-item">
-                <div class="activity-icon icon-warning">📝</div>
+              <article class="activity-item">
+                <div class="activity-icon icon-warning" aria-hidden="true">📝</div>
                 <div class="activity-content">
                   <span class="activity-type">Eventi</span>
-                  <p><strong>Eventi nautici 2025</strong></p>
+                  <h3>Eventi nautici 2025</h3>
                   <p class="user-subtext">Admin SailUP</p>
                 </div>
                 <div class="activity-meta">
                   <p class="user-subtext text-warning">Bozza</p>
                   <div class="item-actions">
-                    <button class="btn-layout-light btn-sm">✏️</button>
-                    <button class="btn-layout btn-sm">Pubblica</button>
+                    <button class="btn-layout-light btn-sm" 
+                            aria-label="Modifica bozza">✏️</button>
+                    <button class="btn-layout btn-sm" 
+                            aria-label="Pubblica articolo">Pubblica</button>
                   </div>
                 </div>
-              </div>
+              </article>
 
-              <div class="activity-item">
-                <div class="activity-icon icon-success">💡</div>
+              <article class="activity-item">
+                <div class="activity-icon icon-success" aria-hidden="true">💡</div>
                 <div class="activity-content">
                   <span class="activity-type">Consigli</span>
-                  <p><strong>Sicurezza in mare: la guida</strong></p>
+                  <h3>Sicurezza in mare: la guida</h3>
                   <p class="user-subtext">198 letture • Admin SailUP</p>
                 </div>
                 <div class="activity-meta">
                   <time datetime="2025-01-05">05/01/25</time>
                   <p class="user-subtext text-success">Pubblicato</p>
                   <div class="item-actions">
-                    <button class="btn-layout-light btn-sm">✏️</button>
-                    <button class="btn-danger-outline btn-sm">🗑️</button>
+                    <button class="btn-layout-light btn-sm" 
+                            aria-label="Modifica articolo">✏️</button>
+                    <button class="btn-danger-outline btn-sm" 
+                            aria-label="Elimina articolo">🗑️</button>
                   </div>
                 </div>
-              </div>
+              </article>
 
             </div>
 
@@ -238,11 +251,13 @@
   </main>
 
   <footer>
-    <div class="section-container footer-content">
+    <div class="footer-content">
       <div class="footer-col brand-col">
         <div class="logo footer-logo">
           <span class="logo-icon" aria-hidden="true">⚓</span>
-          <span class="logo-text"><span lang="en">Sail</span><span class="text-accent" lang="en">UP</span></span>
+          <span class="logo-text">
+            <span lang="en">Sail</span><span class="text-accent" lang="en">UP</span>
+          </span>
         </div>
         <p class="footer-tagline">
           Naviga il Golfo di Napoli con stile e sicurezza. La tua avventura inizia qui.
@@ -264,34 +279,42 @@
 
       <div class="footer-col info-col">
         <h3 class="footer-heading">Info &amp; Contatti</h3>
-        <ul class="footer-links">
-          <li><a href="FAQ.html">Domande Frequenti (<abbr title="Frequently Asked Questions" lang="en">FAQ</abbr>)</a>
-          </li>
-          <li><a href="privacy.html" lang="en">Privacy Policy</a></li>
-          <li><a href="cookie.html">Cookie Policy</a></li>
-        </ul>
+        <nav aria-label="Link informativi">
+          <ul class="footer-links">
+            <li>
+              <a href="FAQ.html">
+                Domande Frequenti (<abbr title="Frequently Asked Questions" lang="en">FAQ</abbr>)
+              </a>
+            </li>
+            <li><a href="privacy.html" lang="en">Privacy Policy</a></li>
+            <li><a href="cookie.html">Cookie Policy</a></li>
+          </ul>
+        </nav>
         <address class="footer-address">
           <p><strong>SailUP S.r.l.</strong></p>
-          <p>Via Caracciolo, 80122 Napoli (NA)</p>
-          <p>P.IVA: 12345678901</p>
+          <p>Via Caracciolo, 80122 Napoli (<abbr title="Napoli">NA</abbr>)</p>
+          <p><abbr title="Partita IVA">P.IVA</abbr>: 12345678901</p>
         </address>
       </div>
     </div>
 
     <div class="footer-bottom">
       <div class="footer-bottom-container">
-        <div class="copyright">
-          &copy; 2025 SailUP S.r.l. - All rights reserved.
-        </div>
+        <p class="copyright">
+          &copy; 2025 SailUP S.r.l. - <span lang="en">All rights reserved</span>.
+        </p>
 
         <div class="valid-logos">
           <img class="valid-code-icon" src="valid-xhtml10.png" alt="XHTML valido" />
           <img class="valid-code-icon" src="valid-CSS.png" alt="CSS valido" />
         </div>
 
-        <a href="#main-content" class="scroll-to-top" id="btnTop" aria-label="Torna all'inizio del contenuto"
-          tabindex="-1">
-          <span aria-hidden="true">⬆</span> <span lang="en">Top</span>
+        <a href="#main-content" 
+           class="scroll-to-top" 
+           id="btnTop" 
+           aria-label="Torna all'inizio della pagina">
+          <span aria-hidden="true">⬆</span>
+          <span lang="en">Top</span>
         </a>
       </div>
     </div>
