@@ -265,7 +265,7 @@ img {
 /* =========================================
    4. HEADER & NAVIGAZIONE
    ========================================= */
-header {
+body > header {
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -300,10 +300,18 @@ header {
   text-decoration: none;
 }
 
-.logo h1 {
-  margin: 0;
-  font-size: 1.5em;
+.logo-text {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+header .logo-text {
   color: var(--col-primary);
+}
+
+footer .logo-text {
+  color: var(--col-text-inv)
 }
 
 /* Menu Desktop (#main-menu) */
@@ -1164,11 +1172,7 @@ input[maxlength="5"] {
 /* =========================================
    1. HEADER PROFILO
    ========================================= */
-.profile-container {
-  max-width: 75em;
-  margin: 0 auto;
-  padding: 2em 1.5em;
-}
+
 
 .profile-header {
   display: grid;
@@ -2446,7 +2450,7 @@ input[maxlength="5"] {
 
 .activity-content p {
   margin: 0;
-  font-size: var(--fs-base);
+  font-size: var(--fs-sm);
   line-height: 1.3;
 }
 
