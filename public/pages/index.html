@@ -15,9 +15,9 @@
     href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap"
     rel="stylesheet" />
 
-    <link rel="stylesheet" href="../css/style.css" media="screen" />
-    <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)" />
-    <link rel="stylesheet" href="../css/print.css" media="print" />
+  <link rel="stylesheet" href="../css/style.css" media="screen" />
+  <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)" />
+  <link rel="stylesheet" href="../css/print.css" media="print" />
 </head>
 
 <body>
@@ -70,7 +70,7 @@
           <li><a href="blog.html" lang="en">Blog</a></li>
           <li><a href="chi_siamo.html">Chi Siamo</a></li>
           <li>
-            <a href="login.html" class="menu-login"><span >Login</span> / Registrati</a>
+            <a href="login.html" class="menu-login"><span>Login</span> / Registrati</a>
           </li>
         </ul>
       </nav>
@@ -87,23 +87,23 @@
   </nav>
 
   <main id="main-content">
-    <section id="hero" class="section-container">
-      <div>
-        <h1>La tua avventura nel Golfo di Napoli inizia qui</h1>
-        <p>
-          Noleggia barche a vela, a motore e gommoni o lasciati guidare dai
-          nostri skipper in <span lang="en">tour</span> indimenticabili.
-        </p>
-        <div class="cta-group">
-          <a href="catalogo_noleggio.html" class="btn-layout cta-primary">Scopri la Flotta</a>
-          <a href="catalogo_esperienze.html" class="btn-layout cta-primary">I nostri <span lang="en">Tour</span></a>
+    <div class="layout-full-width">
+      <section id="hero" class="section-container">
+        <div id="hero-content">
+          <h1>La tua avventura nel Golfo di Napoli inizia qui</h1>
+          <p>
+            Noleggia barche a vela, a motore e gommoni o lasciati guidare dai
+            nostri skipper in <span lang="en">tour</span> indimenticabili.
+          </p>
+          <div class="cta-group">
+            <a href="catalogo_noleggio.html" class="btn-hero">Scopri la Flotta</a>
+            <a href="catalogo_esperienze.html" class="btn-hero">I nostri <span lang="en">Tour</span></a>
+          </div>
         </div>
-      </div>
-      <img src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=400&q=80"
-        alt="Barca a vela nel golfo di Napoli al tramonto" class="hero-image" />
-    </section>
+      </section>
+    </div>
 
-    <section id="featured-fleet" aria-labelledby="rental-title">
+    <section>
       <div class="section-container">
         <div class="section-header">
           <h2 id="rental-title">La nostra Flotta</h2>
@@ -123,7 +123,7 @@
           </article>
           <article class="card">
             <a href="dettaglio_barca.html">
-              <img src="https://images.unsplash.com/photo-1534669740902-e09e38a6a29f?auto=format&fit=crop&w=400&q=80"
+              <img src="../img/Bavaria 46.webp"
                 alt="Barca a vela Bavaria 46" />
               <p class="card-title">Bavaria 46</p>
               <p class="card-subtitle">
@@ -133,7 +133,7 @@
           </article>
           <article class="card">
             <a href="dettaglio_barca.html">
-              <img src="https://images.unsplash.com/photo-1534669740902-e09e38a6a29f?auto=format&fit=crop&w=400&q=80"
+              <img src="../img/Sacs strider.webp"
                 alt="Gommone Sacs per escursioni giornaliere" />
               <p class="card-title">Sacs Strider</p>
               <p class="card-subtitle">
@@ -165,7 +165,8 @@
           </article>
           <article class="card">
             <a href="dettaglio_esperienza.html?id=aperitivo-ischia">
-              <img src="https://images.unsplash.com/photo-1728327510164-04538fb967ee?q=80&w=1364&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              <img
+                src="https://images.unsplash.com/photo-1728327510164-04538fb967ee?q=80&w=1364&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 alt="Barca a vela Bavaria 46" />
               <p class="card-title">Aperitivo al Tramonto a Ischia</p>
               <p class="card-subtitle">
@@ -207,7 +208,7 @@
     </div>
   </main>
 
-  
+
   <footer>
     <div class="section-container footer-content">
       <div class="footer-col brand-col">
@@ -237,7 +238,8 @@
       <div class="footer-col info-col">
         <h3 class="footer-heading">Info & Contatti</h3>
         <ul class="footer-links">
-          <li><a href="FAQ.html">Domande Frequenti (<abbr title="Frequently Asked Questions" lang="en">FAQ</abbr>)</a></li>
+          <li><a href="FAQ.html">Domande Frequenti (<abbr title="Frequently Asked Questions" lang="en">FAQ</abbr>)</a>
+          </li>
           <li><a href="privacy.html" lang="en">Privacy Policy</a></li>
           <li><a href="cookie.html">Cookie Policy</a></li>
         </ul>
