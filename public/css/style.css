@@ -5,12 +5,12 @@
   /* --- Palette Colori Nautica --- */
   --col-primary: #030a11;
   /* Blu Navy Profondo */
-  --col-primary-light: #fe654f;
+  --col-primary-light: #e13737;
   /* Rosso corallo */
 
-  --col-accent: #fe654f;
+  --col-accent: #e13737;
   /* Rosso corallo */
-  --col-accent-hover: #d95340;
+  --col-accent-hover: #e13737;
   /* Rosso corallo più scuro per hover */
 
   --col-bg: #ffffff;
@@ -74,7 +74,7 @@
 [data-theme="dark"] {
   --col-primary: #f5f2eb;
   --col-primary-light: #e2dccf;
-  --col-accent: #fe654f;
+  --col-accent: #e13737;
   --col-bg: #030a11;
   --col-bg-alt: #152336;
   --col-text: #f0f0f0;
@@ -2130,14 +2130,14 @@ input[maxlength="5"] {
 }
 
 /* Badge colori - NOLEGGIO */
-.badge-motore { background-color: var(--badge-motore); color: white; }
-.badge-vela { background-color: var(--badge-vela); color: white; }
-.badge-gommone { background-color: var(--badge-gommone); color: white; }
+.badge-motore { background-color: var(--badge-motore); color: #030a11; }
+.badge-vela { background-color: var(--badge-vela); color: #030a11; }
+.badge-gommone { background-color: var(--badge-gommone); color: #030a11; }
 
 /* Badge colori - ESPERIENZE */
-.badge-tour { background-color: var(--badge-tour); color: white; }
-.badge-aperitivo { background-color: var(--badge-aperitivo); color: white; }
-.badge-escursione { background-color: var(--badge-escursione); color: white; }
+.badge-tour { background-color: var(--badge-tour); color: #030a11; }
+.badge-aperitivo { background-color: var(--badge-aperitivo); color: #030a11; }
+.badge-escursione { background-color: var(--badge-escursione); color: #030a11; }
 
 /* Contenuto card */
 .product-card-content {
