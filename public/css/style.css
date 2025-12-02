@@ -218,6 +218,7 @@ img {
 .btn-danger,
 .btn-danger-outline,
 .btn-text,
+.btn-hero,
 .btn-page {
   display: inline-flex;
   align-items: center;
@@ -243,7 +244,14 @@ img {
   box-shadow: var(--shadow-sm);
 }
 
-.btn-layout:hover {
+.btn-hero {
+  background-color: #ffffff;
+  color: #030a11;
+  border-color: #ffffff;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-layout:hover, .btn-hero:hover{
   background-color: var(--btn-bg-accent);
   border-color: var(--btn-bg-accent);
   transform: translateY(var(--btn-hover-translate));
@@ -260,6 +268,14 @@ img {
 .btn-layout-light:hover {
   background-color: var(--btn-bg-primary);
   color: var(--btn-color-primary) !important;
+}
+
+#hero-content{
+  position: relative;
+  z-index: 2;
+}
+#hero-content h1, #hero-content{
+  color: #ffffff; 
 }
 
 /* =========================================
@@ -525,6 +541,33 @@ button:focus-visible,
 /* =========================================
    6. SEZIONI PRINCIPALI (MAIN)
    ========================================= */
+
+   body.layout-full-width {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .layout-full-width{
+    background-image: url('../img/Immagine\ Hero.png');
+    background-color: #030a11;
+    background-size: cover;
+    background-position: center;
+    max-height: 90%;
+    position: relative;
+  }
+
+  .layout-full-width::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); 
+    z-index: 1; 
+}
 .section-container {
   max-width: 75em;
   margin: 0 auto;
