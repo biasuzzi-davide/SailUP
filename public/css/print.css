@@ -51,10 +51,18 @@
     .section-header a,
     #mobile-menu,
     #hamburger-btn,
-    .footer-col.nav-col,
+    .nav-col,
     .valid-logos,
     .sr-only,
     .footer-links,
+    .results-sort,
+    .product-cta,
+    .read-more,
+    .print-none,
+    .faq-section,
+    .faq-item,
+    .booking-form,
+    .footer-heading,
     button {
         display: none;
     }
@@ -177,11 +185,6 @@
         margin-top: 5px;
     }
 
-    /* nasconde filtri */
-    .results-sort {
-        display: none;
-    }
-
     .results-header h2 {
         font-size: 14pt;
         padding-bottom: 5px;
@@ -298,23 +301,9 @@
         font-weight: normal;
     }
 
-    /* Nascondi la scritta Dettagli ->, inutile nella stampa*/
-    .product-cta {
-        display: none;
-    }
-
-    /* Nascondi la scritta Leggi tutto, inutile nella stampa*/
-    .read-more {
-        display: none;
-    }
-
     /* ----------------------------------------
         area account
     -----------------------------------------*/
-
-    .print-none {
-        display: none;
-    }
 
     .profile-stats {
         display: block;
@@ -347,14 +336,6 @@
     /* ----------------------------------------
         FAQ, stampa solo le domande espanse (chiedere alla prof se va bene)
     -----------------------------------------*/
-
-    .faq-section {
-        display: none;
-    }
-
-    .faq-item {
-        display: none;
-    }
 
     /* Mostra solo le sezioni che contengono un elemento aperto */
     .faq-section:has(.faq-item[open]) {
@@ -471,11 +452,6 @@
         font-weight: bold;
     }
 
-    /* form prenotazione nascosto */
-    .booking-form {
-        display: none;
-    }
-
     /* ----------------------------------------
         area footer
     -----------------------------------------*/
@@ -485,9 +461,5 @@
         border: 1px solid #000;
         padding: 15px;
         page-break-inside: avoid;
-    }
-
-    .footer-heading {
-        display: none;
     }
 }
