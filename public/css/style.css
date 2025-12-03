@@ -550,7 +550,7 @@ button:focus-visible,
   }
 
   .layout-full-width{
-    background-image: url('../img/Immagine\ Hero.png');
+    background-image: url('../img/Immagine\ Hero.jpg');
     background-color: #030a11;
     background-size: cover;
     background-position: center;
@@ -811,7 +811,7 @@ footer {
   bottom: 30px;
   right: 30px;
   background-color: var(--col-accent);
-  color: var(--col-primary);
+  color: var(--col-bg);
   padding: 0.5em 1em;
   border-radius: var(--radius-btn);
   font-weight: 700;
