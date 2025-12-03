@@ -33,6 +33,7 @@
         --fs-xxl: 2.15rem;
     }
 }
+
 /* 2. HEADER & NAVIGAZIONE 
    Layout: [Logo] ...spazio... [Theme Toggle] [Hamburger]
 */
@@ -276,8 +277,10 @@ footer .logo p {
     justify-content: center;
 }
 
-.stats-grid {
-    grid-template-columns: 1fr;
+@media (max-width: 600px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 .filter-tabs {
@@ -311,6 +314,10 @@ footer .logo p {
 .product-layout {
     grid-template-columns: 1fr;
     gap: 2rem;
+}
+
+.profile-layout-centered {
+    padding: 0 1em;
 }
 
 /* Gestione Immagine Hero su Mobile */
@@ -428,34 +435,66 @@ footer .logo p {
 
 @media (max-width: 600px) {
     .amenities-grid {
-        grid-template-columns: 1fr; /* Dotazioni una sotto l'altra su mobile */
+        grid-template-columns: 1fr;
+        /* Dotazioni una sotto l'altra su mobile */
+    }
+
+    .spec-card {
+        width: 45%;
+        /* Card specifiche più larghe su mobile */
+    }
+    .activity-item {
+        flex-direction: column;
+        /* Diventa colonna */
+        align-items: flex-start;
+        /* Allinea tutto a sinistra */
+        gap: 1em;
     }
     
-    .spec-card {
-        width: 45%; /* Card specifiche più larghe su mobile */
+    .activity-icon {
+        width: 2.5em;
+        height: 2.5em;
+        /* Icona un po' più piccola */
+    }
+    
+    .activity-meta {
+        text-align: left;
+        /* Allinea testo a sinistra */
+        width: 100%;
+        border-top: 1px solid var(--col-border);
+        /* Separatore */
+        padding-top: 0.5em;
+        display: flex;
+        justify-content: space-between;
+        /* Mette User e Data ai lati opposti */
+        align-items: center;
     }
 }
 
+/* =========================================
+   BREADCRUMB 
+   ========================================= */
+#breadcrumb {
+    /* Rimpicciolisce le variabili geometriche */
+    --b-arrow-h: 28px;
+    --b-arrow-w: 18px;
+    --b-pad-l: 25px;
+    --b-pad-y: 5px;
+    padding: 0.4em 0.5em;
+    justify-content: center; 
+    margin-top: 5%;
+}
 
-@media (max-width: 600px) {
-  .activity-item {
-    flex-direction: column; /* Diventa colonna */
-    align-items: flex-start; /* Allinea tutto a sinistra */
-    gap: 1em;
-  }
+#breadcrumb li a {
+    min-height: 44px; /* Touch target */
+}
 
-  .activity-icon {
-    width: 2.5em;
-    height: 2.5em; /* Icona un po' più piccola */
-  }
 
-  .activity-meta {
-    text-align: left; /* Allinea testo a sinistra */
-    width: 100%;
-    border-top: 1px solid var(--col-border); /* Separatore */
-    padding-top: 0.5em;
-    display: flex;
-    justify-content: space-between; /* Mette User e Data ai lati opposti */
-    align-items: center;
-  }
+/* Extra Small (< 360px) */
+@media (max-width: 360px) {
+    #breadcrumb {
+        --b-arrow-h: 24px;
+        --b-arrow-w: 15px;
+        --b-pad-l: 20px;
+    }
 }
