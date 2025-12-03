@@ -5,14 +5,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gestione Prodotti - Dashboard Admin - SailUP</title>
-    <meta name="description" content="Gestione della flotta e delle esperienze SailUP" />
-    <meta name="authors" content="Alberto Reginato, Francesco Marcon" />
+    <meta name="description" content="Gestione della flotta e delle esperienze SailUP">
+    <meta name="authors" content="SailUP Team">
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap"
-        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
 
         <link rel="stylesheet" href="../css/style.css" media="screen" />
         <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)" />
@@ -20,20 +18,16 @@
 </head>
 
 <body>
-    <a href="#main-content" class="skip-to-content">Salta al contenuto</a>
+    <a href="#main-content" class="skip-to-content">Salta al contenuto principale</a>
 
     <header>
         <div class="header-container">
             <div class="header">
                 <a href="index.html" class="logo">
                     <picture>
-                        <img alt="Logo SailUP"
-                            src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=400&q=80"
-                            width="30" />
+                        <img alt="Logo SailUP" src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=400&q=80" width="30" height="30">
                     </picture>
-                    <h1 lang="en">
-                        <span class="logo-text">Sail<span class="text-accent">UP</span></span>
-                    </h1>
+                    <span lang="en" class="logo-text">Sail<span class="text-accent">UP</span></span>
                 </a>
 
                 <nav id="main-menu">
@@ -48,19 +42,19 @@
 
                 <div class="header-buttons">
                     <button class="theme-toggle" aria-pressed="false" aria-label="Attiva modalità scura">
-                        <span class="active-icon sun">☀️</span>
-                        <span class="inactive-icon moon">🌙</span>
+                        <span class="active-icon sun" aria-hidden="true">☀️</span>
+                        <span class="inactive-icon moon hidden" aria-hidden="true">🌙</span>
                     </button>
                     <a href="profilo.html" class="btn-layout-light">Profilo</a>
                 </div>
 
-                <button id="hamburger-btn" aria-expanded="false" aria-controls="mobile-menu" aria-label="Menu Mobile">
-                    <span class="hamburger-icon">☰</span>
-                    <span class="close-icon hidden">✕</span>
+                <button id="hamburger-btn" aria-expanded="false" aria-controls="mobile-menu" aria-label="Apri menu di navigazione">
+                    <span class="hamburger-icon" aria-hidden="true">☰</span>
+                    <span class="close-icon hidden" aria-hidden="true">✕</span>
                 </button>
             </div>
 
-            <nav id="mobile-menu">
+            <nav id="mobile-menu" aria-label="Menu mobile">
                 <ul>
                     <li><a href="index.html" lang="en">Home</a></li>
                     <li><a href="catalogo_noleggio.html">Noleggio</a></li>
@@ -75,163 +69,171 @@
     </header>
 
     <div class="sr-only" id="breadcrumb-label">
-        <span lang="en">breadcrumb</span>
+        <span lang="en">Breadcrumb</span>
     </div>
     <nav aria-labelledby="breadcrumb-label" id="breadcrumb">
         <ol>
-            <li><a href="index.html"><span lang="en">Home</span></a></li>
+            <li><a href="index.html" lang="en">Home</a></li>
             <li><a href="admin.html">Dashboard</a></li>
             <li aria-current="page">Gestione Prodotti</li>
         </ol>
     </nav>
 
-    <main id="main-content">
-        <div class="profile-container section-container">
-            <div class="profile-header">
-                <div class="profile-info">
-                    <h1>Gestione Prodotti</h1>
-                    <p class="profile-email">Gestisci la flotta, aggiorna i prezzi e la disponibilità.</p>
-                </div>
+    <main id="main-content" class="section-container">
+        <header class="profile-header">
+            <div class="profile-info">
+                <h1>Gestione Prodotti</h1>
+                <p class="profile-text">Gestisci la flotta, aggiorna i prezzi e la disponibilità.</p>
             </div>
+        </header>
 
-            <div class="profile-layout">
-                <nav class="profile-sidebar" aria-label="Menu amministrazione">
-                    <ul>
-                        <li>
-                            <a href="admin.html">
-                                <span class="nav-icon" aria-hidden="true">📊</span>
-                                <span>Dashboard</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="admin_utenti.html">
-                                <span class="nav-icon" aria-hidden="true">👥</span>
-                                <span>Gestione Utenti</span>
-                            </a>
-                        </li>
-                        <li class="current-tab">
-                            <div class="nav-item-active" aria-current="page">
-                                <span class="nav-icon" aria-hidden="true">⛵</span>
-                                <span>Gestione Prodotti</span>
+        <div class="profile-layout">
+            <nav class="profile-sidebar" aria-label="Menu amministrazione">
+                <ul>
+                    <li>
+                        <a href="admin_utenti.html">
+                            <span class="nav-icon" aria-hidden="true">👥</span>
+                            <span>Gestione Utenti</span>
+                        </a>
+                    </li>
+                    <li class="current-tab">
+                        <span class="nav-item-active" aria-current="page">
+                            <span class="nav-icon" aria-hidden="true">⛵</span>
+                            <span>Gestione Prodotti</span>
+                        </span>
+                    </li>
+                    <li>
+                        <a href="admin_prenotazioni.html">
+                            <span class="nav-icon" aria-hidden="true">📋</span>
+                            <span>Gestione Prenotazioni</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="admin_blog.html">
+                            <span class="nav-icon" aria-hidden="true">✏️</span>
+                            <span>Gestione Blog</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="profile-content">
+                <section aria-labelledby="products-list-title">
+                    <h2 id="products-list-title">Flotta &amp; Esperienze</h2>
+
+                    <div class="item-actions">
+                        <a href="admin_prodotti_nuovo.html" class="btn-layout btn-sm">
+                            <span aria-hidden="true">+</span> Aggiungi Nuovo
+                        </a>
+                    </div>
+
+                    <ul class="activity-list">
+                        <li class="activity-item">
+                            <div class="activity-icon icon-accent" aria-hidden="true">⛵</div>
+                            <div class="activity-content">
+                                <span class="activity-type">Noleggio • Vela</span>
+                                <p>Bavaria 46 Cruiser</p>
+                                <p class="user-subtext">8 Posti • 4 Cabine</p>
+                            </div>
+                            <div class="activity-meta">
+                                <p class="meta-user">€ 350 /gg</p>
+                                <p class="user-subtext">Disponibile</p>
+                                <div class="item-actions">
+                                    <button class="btn-layout-light btn-sm" aria-label="Modifica">
+                                        <span aria-hidden="true">✏️</span>
+                                    </button>
+                                    <button class="btn-danger-outline btn-sm" aria-label="Archivia">
+                                        <span aria-hidden="true">📦</span>
+                                    </button>
+                                </div>
                             </div>
                         </li>
-                        <li>
-                            <a href="admin_prenotazioni.html">
-                                <span class="nav-icon" aria-hidden="true">📋</span>
-                                <span>Gestione Prenotazioni</span>
-                            </a>
+
+                        <li class="activity-item">
+                            <div class="activity-icon icon-accent" aria-hidden="true">⚓</div>
+                            <div class="activity-content">
+                                <span class="activity-type">Noleggio • Catamarano</span>
+                                <p>Lagoon 42</p>
+                                <p class="user-subtext">10 Posti • Full Optional</p>
+                            </div>
+                            <div class="activity-meta">
+                                <p class="meta-user">€ 600 /gg</p>
+                                <p class="user-subtext">Disponibile</p>
+                                <div class="item-actions">
+                                    <button class="btn-layout-light btn-sm" aria-label="Modifica">
+                                        <span aria-hidden="true">✏️</span>
+                                    </button>
+                                    <button class="btn-danger-outline btn-sm" aria-label="Archivia">
+                                        <span aria-hidden="true">📦</span>
+                                    </button>
+                                </div>
+                            </div>
                         </li>
-                        <li>
-                            <a href="admin_blog.html">
-                                <span class="nav-icon" aria-hidden="true">✍️</span>
-                                <span>Gestione Blog</span>
-                            </a>
+
+                        <li class="activity-item">
+                            <div class="activity-icon icon-warning" aria-hidden="true">🚤</div>
+                            <div class="activity-content">
+                                <span class="activity-type">Noleggio • Gommone</span>
+                                <p>Gommonautica G48</p>
+                                <p class="user-subtext">6 Posti • Senza patente</p>
+                            </div>
+                            <div class="activity-meta">
+                                <p class="meta-user">€ 120 /gg</p>
+                                <p class="user-subtext text-warning">Manutenzione</p>
+                                <div class="item-actions">
+                                    <button class="btn-layout-light btn-sm" aria-label="Modifica">
+                                        <span aria-hidden="true">✏️</span>
+                                    </button>
+                                    <button class="btn-danger-outline btn-sm" aria-label="Archivia">
+                                        <span aria-hidden="true">📦</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="activity-item">
+                            <div class="activity-icon icon-success" aria-hidden="true">🍹</div>
+                            <div class="activity-content">
+                                <span class="activity-type">Esperienza • Aperitivo</span>
+                                <p>Tramonto a Posillipo</p>
+                                <p class="user-subtext">Durata: 3h • Skipper incluso</p>
+                            </div>
+                            <div class="activity-meta">
+                                <p class="meta-user">€ 45 /pax</p>
+                                <p class="user-subtext">Attivo</p>
+                                <div class="item-actions">
+                                    <button class="btn-layout-light btn-sm" aria-label="Modifica">
+                                        <span aria-hidden="true">✏️</span>
+                                    </button>
+                                    <button class="btn-danger-outline btn-sm" aria-label="Archivia">
+                                        <span aria-hidden="true">📦</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="activity-item">
+                            <div class="activity-icon icon-accent" aria-hidden="true">⛵</div>
+                            <div class="activity-content">
+                                <span class="activity-type">Noleggio • Vela</span>
+                                <p>Oceanis 38.1</p>
+                                <p class="user-subtext">6 Posti • 3 Cabine</p>
+                            </div>
+                            <div class="activity-meta">
+                                <p class="meta-user">€ 280 /gg</p>
+                                <p class="user-subtext">Disponibile</p>
+                                <div class="item-actions">
+                                    <button class="btn-layout-light btn-sm" aria-label="Modifica">
+                                        <span aria-hidden="true">✏️</span>
+                                    </button>
+                                    <button class="btn-danger-outline btn-sm" aria-label="Archivia">
+                                        <span aria-hidden="true">📦</span>
+                                    </button>
+                                </div>
+                            </div>
                         </li>
                     </ul>
-                </nav>
-
-                <div class="profile-content">
-
-                    <section aria-labelledby="products-list-title" class="security-section">
-                        <h2 id="products-list-title">Flotta & Esperienze</h2>
-
-                        <div class="item-actions">
-                            <a href="admin_prodotti_nuovo.html" class="btn-layout btn-sm">+ Aggiungi Nuovo</a>
-                        </div>
-
-                        <div class="activity-list">
-
-                            <div class="activity-item">
-                                <div class="activity-icon icon-accent">⛵</div>
-                                <div class="activity-content">
-                                    <span class="activity-type">Noleggio • Vela</span>
-                                    <p><strong>Bavaria 46 Cruiser</strong></p>
-                                    <p class="user-subtext">8 Posti • 4 Cabine</p>
-                                </div>
-                                <div class="activity-meta">
-                                    <p class="meta-user">€ 350 /gg</p>
-                                    <p class="user-subtext text-success">Disponibile</p>
-                                    <div class="item-actions">
-                                        <button class="btn-layout-light btn-sm"
-                                            aria-label="Modifica Bavaria 46">✏️</button>
-                                        <button class="btn-danger-outline btn-sm"
-                                            aria-label="Archivia Bavaria 46">📦</button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="activity-item">
-                                <div class="activity-icon icon-accent">⚓</div>
-                                <div class="activity-content">
-                                    <span class="activity-type">Noleggio • Catamarano</span>
-                                    <p><strong>Lagoon 42</strong></p>
-                                    <p class="user-subtext">10 Posti • Full Optional</p>
-                                </div>
-                                <div class="activity-meta">
-                                    <p class="meta-user">€ 600 /gg</p>
-                                    <p class="user-subtext text-success">Disponibile</p>
-                                    <div class="item-actions">
-                                        <button class="btn-layout-light btn-sm">✏️</button>
-                                        <button class="btn-danger-outline btn-sm">📦</button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="activity-item">
-                                <div class="activity-icon icon-warning">🚤</div>
-                                <div class="activity-content">
-                                    <span class="activity-type">Noleggio • Gommone</span>
-                                    <p><strong>Gommonautica G48</strong></p>
-                                    <p class="user-subtext">6 Posti • Senza patente</p>
-                                </div>
-                                <div class="activity-meta">
-                                    <p class="meta-user">€ 120 /gg</p>
-                                    <p class="user-subtext text-warning">Manutenzione</p>
-                                    <div class="item-actions">
-                                        <button class="btn-layout-light btn-sm">✏️</button>
-                                        <button class="btn-danger-outline btn-sm">📦</button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="activity-item">
-                                <div class="activity-icon icon-success">🍹</div>
-                                <div class="activity-content">
-                                    <span class="activity-type">Esperienza • Aperitivo</span>
-                                    <p><strong>Tramonto a Posillipo</strong></p>
-                                    <p class="user-subtext">Durata: 3h • Skipper incluso</p>
-                                </div>
-                                <div class="activity-meta">
-                                    <p class="meta-user">€ 45 /pax</p>
-                                    <p class="user-subtext text-success">Attivo</p>
-                                    <div class="item-actions">
-                                        <button class="btn-layout-light btn-sm">✏️</button>
-                                        <button class="btn-danger-outline btn-sm">📦</button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="activity-item">
-                                <div class="activity-icon icon-accent">⛵</div>
-                                <div class="activity-content">
-                                    <span class="activity-type">Noleggio • Vela</span>
-                                    <p><strong>Oceanis 38.1</strong></p>
-                                    <p class="user-subtext">6 Posti • 3 Cabine</p>
-                                </div>
-                                <div class="activity-meta">
-                                    <p class="meta-user">€ 280 /gg</p>
-                                    <p class="user-subtext text-success">Disponibile</p>
-                                    <div class="item-actions">
-                                        <button class="btn-layout-light btn-sm">✏️</button>
-                                        <button class="btn-danger-outline btn-sm">📦</button>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-
-                    </section>
-                </div>
+                </section>
             </div>
         </div>
     </main>
@@ -241,8 +243,7 @@
             <div class="footer-col brand-col">
                 <div class="logo footer-logo">
                     <span class="logo-icon" aria-hidden="true">⚓</span>
-                    <span class="logo-text"><span lang="en">Sail</span><span class="text-accent"
-                            lang="en">UP</span></span>
+                    <span class="logo-text"><span lang="en">Sail</span><span class="text-accent" lang="en">UP</span></span>
                 </div>
                 <p class="footer-tagline">
                     Naviga il Golfo di Napoli con stile e sicurezza. La tua avventura inizia qui.
@@ -265,9 +266,7 @@
             <div class="footer-col info-col">
                 <h3 class="footer-heading">Info &amp; Contatti</h3>
                 <ul class="footer-links">
-                    <li><a href="FAQ.html">Domande Frequenti (<abbr title="Frequently Asked Questions"
-                                lang="en">FAQ</abbr>)</a>
-                    </li>
+                    <li><a href="FAQ.html">Domande Frequenti (<abbr title="Frequently Asked Questions" lang="en">FAQ</abbr>)</a></li>
                     <li><a href="privacy.html" lang="en">Privacy Policy</a></li>
                     <li><a href="cookie.html">Cookie Policy</a></li>
                 </ul>
@@ -281,17 +280,16 @@
 
         <div class="footer-bottom">
             <div class="footer-bottom-container">
-                <div class="copyright">
+                <p class="copyright">
                     &copy; 2025 SailUP S.r.l. - All rights reserved.
-                </div>
+                </p>
 
                 <div class="valid-logos">
-                    <img class="valid-code-icon" src="valid-xhtml10.png" alt="XHTML valido" />
-                    <img class="valid-code-icon" src="valid-CSS.png" alt="CSS valido" />
+                    <img class="valid-code-icon" src="valid-xhtml10.png" alt="XHTML valido" width="88" height="31">
+                    <img class="valid-code-icon" src="valid-CSS.png" alt="CSS valido" width="88" height="31">
                 </div>
 
-                <a href="#main-content" class="scroll-to-top" id="btnTop" aria-label="Torna all'inizio del contenuto"
-                    tabindex="-1">
+                <a href="#main-content" class="scroll-to-top" id="btnTop" aria-label="Torna all'inizio del contenuto">
                     <span aria-hidden="true">⬆</span> <span lang="en">Top</span>
                 </a>
             </div>

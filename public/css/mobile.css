@@ -276,6 +276,37 @@ footer .logo p {
 .profile-actions {
     justify-content: center;
 }
+.profile-sidebar {
+    position: static;
+    padding: 0; /* Rimuovi padding extra se non serve */
+    width: 100%;
+}
+
+.profile-sidebar ul {
+    display: grid;
+    /* Crea esattamente 2 colonne uguali */
+    grid-template-columns: 1fr 1fr; 
+    gap: 0.5em; 
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.profile-sidebar li {
+    margin: 0; 
+}
+
+.profile-sidebar a,
+.profile-sidebar .nav-item-active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0.8em 0.5em;
+    font-size: var(--fs-sm);
+    height: 100%;
+    border-radius: var(--radius-sm);
+}
 
 @media (max-width: 600px) {
     .stats-grid {
@@ -476,9 +507,9 @@ footer .logo p {
    ========================================= */
 #breadcrumb {
     /* Rimpicciolisce le variabili geometriche */
-    --b-arrow-h: 28px;
+    --b-arrow-h: 22px;
     --b-arrow-w: 18px;
-    --b-pad-l: 25px;
+    --b-pad-l: 28px;
     --b-pad-y: 5px;
     padding: 0.4em 0.5em;
     justify-content: center; 
@@ -487,14 +518,4 @@ footer .logo p {
 
 #breadcrumb li a {
     min-height: 44px; /* Touch target */
-}
-
-
-/* Extra Small (< 360px) */
-@media (max-width: 360px) {
-    #breadcrumb {
-        --b-arrow-h: 24px;
-        --b-arrow-w: 15px;
-        --b-pad-l: 20px;
-    }
 }
