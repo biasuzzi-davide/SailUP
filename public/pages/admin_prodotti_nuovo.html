@@ -5,8 +5,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Aggiungi Nuovo Prodotto - Dashboard Admin - SailUP</title>
-  <meta name="description" content="Form per aggiungere una nuova barca o esperienza su SailUP" />
-  <meta name="authors" content="Alberto Reginato, Francesco Marcon" />
+  <meta name="description"
+    content="Form amministrativo per aggiungere una nuova barca a noleggio o esperienza al catalogo SailUP." />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="authors" content="SailUP Team" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -14,27 +16,25 @@
     href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap"
     rel="stylesheet" />
 
-    <link rel="stylesheet" href="../css/style.css" media="screen" />
-    <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)" />
-    <link rel="stylesheet" href="../css/print.css" media="print" />
+  <link rel="stylesheet" href="../css/style.css" media="screen" />
+  <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)" />
+  <link rel="stylesheet" href="../css/print.css" media="print" />
 </head>
 
 <body>
-  <a href="#main-content" class="skip-to-content">Salta al contenuto</a>
+  <a href="#main-content" class="skip-to-content">Salta al contenuto principale</a>
 
   <header>
     <div class="header-container">
       <div class="header">
-        <a href="index.html" class="logo">
+        <a href="index.html" class="logo" aria-label="SailUP - Torna alla homepage">
           <picture>
             <source srcset="" type="image/avif" />
             <img alt="Logo SailUP"
               src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=400&q=80"
               width="30" />
           </picture>
-          <h1 lang="en">
-            <span class="logo-text">Sail<span class="text-accent">UP</span></span>
-          </h1>
+          <span class="logo-text" lang="en">Sail<span class="text-accent">UP</span></span>
         </a>
 
         <nav id="main-menu" aria-label="Navigazione principale">
@@ -49,19 +49,19 @@
 
         <div class="header-buttons">
           <button class="theme-toggle" aria-pressed="false" aria-label="Attiva modalità scura">
-            <span class="active-icon sun">☀️</span>
-            <span class="inactive-icon moon">🌙</span>
+            <span class="active-icon sun" aria-hidden="true">☀️</span>
+            <span class="inactive-icon moon hidden" aria-hidden="true">🌙</span>
           </button>
           <a href="profilo.html" class="btn-layout-light">Profilo</a>
         </div>
 
-        <button id="hamburger-btn" aria-expanded="false" aria-controls="mobile-menu" aria-label="Menu Mobile">
-          <span class="hamburger-icon">☰</span>
-          <span class="close-icon hidden">✕</span>
+        <button id="hamburger-btn" aria-expanded="false" aria-controls="mobile-menu">
+          <span class="hamburger-icon" aria-hidden="true">☰</span>
+          <span class="close-icon hidden" aria-hidden="true">✕</span>
         </button>
       </div>
 
-      <nav id="mobile-menu">
+      <nav id="mobile-menu" aria-label="Navigazione mobile">
         <ul>
           <li><a href="index.html" lang="en">Home</a></li>
           <li><a href="catalogo_noleggio.html">Noleggio</a></li>
@@ -76,232 +76,194 @@
   </header>
 
   <div class="sr-only" id="breadcrumb-label">
-    <span lang="en">breadcrumb</span>
+    <span lang="en">Breadcrumb</span>
   </div>
   <nav aria-labelledby="breadcrumb-label" id="breadcrumb">
     <ol>
       <li><a href="index.html"><span lang="en">Home</span></a></li>
       <li><a href="admin.html">Dashboard</a></li>
       <li><a href="admin_prodotti.html">Gestione Prodotti</a></li>
-      <li aria-current="page">Aggiungi Nuovo Prodotto</li>
+      <li aria-current="page">Nuovo Prodotto</li>
     </ol>
   </nav>
 
   <main id="main-content">
-    <div class="profile-container section-container">
-      <div class="admin-header">
+    <div class="section-container">
+      <header>
         <h1>Aggiungi Nuovo Prodotto</h1>
-        <p class="admin-header-subtitle">Inserisci i dettagli della nuova barca o esperienza</p>
-      </div>
+        <p>Inserisci i dettagli della nuova barca o esperienza</p>
+      </header>
 
-      <div class="profile-layout">
-        <nav class="profile-sidebar admin-sidebar" aria-label="Menu amministrazione">
-          <ul>
-            <li>
-              <a href="admin.html">
-                <span class="nav-icon" aria-hidden="true">📊</span>
-                <span>Dashboard</span>
-              </a>
-            </li>
-            <li>
-              <a href="admin_utenti.html">
-                <span class="nav-icon" aria-hidden="true">👥</span>
-                <span>Gestione Utenti</span>
-              </a>
-            </li>
-            <li class="current-tab">
-              <a href="admin_prodotti.html" aria-current="page">
-                <span class="nav-icon" aria-hidden="true">⛵</span>
-                <span>Gestione Prodotti</span>
-              </a>
-            </li>
-            <li>
-              <a href="admin_prenotazioni.html">
-                <span class="nav-icon" aria-hidden="true">📋</span>
-                <span>Gestione Prenotazioni</span>
-              </a>
-            </li>
-            <li>
-              <a href="admin_blog.html">
-                <span class="nav-icon" aria-hidden="true">✍️</span>
-                <span>Gestione Blog</span>
-              </a>
-            </li>
-          </ul>
-        </nav>
+      <div class="profile-layout-centered">
 
-        <div class="profile-content">
-          <section aria-labelledby="form-title" class="admin-form-card">
-            <h2 id="form-title">Dettagli Prodotto</h2>
-            
-            <form action="#" method="POST">
-              <fieldset>
-                <legend>Informazioni Base</legend>
+        <section aria-labelledby="form-title" class="admin-form-card">
+          <h2 id="form-title">Dettagli Prodotto</h2>
 
-                <div class="form-row">
-                  <div class="form-group">
-                    <label for="product-id">ID Prodotto <abbr title="Obbligatorio">*</abbr></label>
-                    <input type="text" id="product-id" name="product-id" 
-                      placeholder="es. sunseeker-predator" required />
-                    <small>Usa solo lettere minuscole e trattini, senza spazi</small>
-                  </div>
+          <form action="#" method="POST">
 
-                  <div class="form-group">
-                    <label for="product-type">Tipo Prodotto <abbr title="Obbligatorio">*</abbr></label>
-                    <select id="product-type" name="product-type" required>
-                      <option value="">Seleziona tipo...</option>
-                      <option value="noleggio">Barca a Noleggio</option>
-                      <option value="experience">Esperienza</option>
-                    </select>
-                  </div>
+            <fieldset>
+              <legend>Informazioni Base</legend>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="product-id"><abbr title="Identificativo">ID</abbr> Prodotto <abbr
+                      title="Campo obbligatorio">*</abbr></label>
+                  <input type="text" id="product-id" name="product-id" placeholder="es. sunseeker-predator"
+                    pattern="[a-z0-9\-]+" required aria-describedby="product-id-hint">
+                  <small id="product-id-hint">Usa solo lettere minuscole e trattini, senza spazi</small>
                 </div>
 
                 <div class="form-group">
-                  <label for="product-name">Nome Prodotto <abbr title="Obbligatorio">*</abbr></label>
-                  <input type="text" id="product-name" name="product-name" 
-                    placeholder="es. Sunseeker Predator 62" required />
-                </div>
-
-                <div class="form-group">
-                  <label for="product-description">Descrizione Breve <abbr title="Obbligatorio">*</abbr></label>
-                  <textarea id="product-description" name="product-description" rows="3" 
-                    placeholder="Descrizione che apparirà nelle card del catalogo..." required></textarea>
-                </div>
-
-                <div class="form-group">
-                  <label for="product-long-description">Descrizione Dettagliata</label>
-                  <textarea id="product-long-description" name="product-long-description" rows="6"
-                    placeholder="Descrizione completa che apparirà nella pagina del prodotto..."></textarea>
-                </div>
-              </fieldset>
-
-              <fieldset>
-                <legend>Prezzi e Capacità</legend>
-
-                <div class="form-row">
-                  <div class="form-group">
-                    <label for="product-price">Prezzo Base (€) <abbr title="Obbligatorio">*</abbr></label>
-                    <input type="number" id="product-price" name="product-price" 
-                      min="0" step="10" placeholder="850" required />
-                    <small>Prezzo al giorno per noleggi, prezzo totale per esperienze</small>
-                  </div>
-
-                  <div class="form-group">
-                    <label for="product-capacity">Capacità Massima (persone) <abbr title="Obbligatorio">*</abbr></label>
-                    <input type="number" id="product-capacity" name="product-capacity" 
-                      min="1" max="50" placeholder="8" required />
-                  </div>
-                </div>
-
-                <div class="form-row">
-                  <div class="form-group">
-                    <label for="product-length">Lunghezza (metri)</label>
-                    <input type="number" id="product-length" name="product-length" 
-                      min="0" step="0.1" placeholder="19.2" />
-                  </div>
-
-                  <div class="form-group">
-                    <label for="product-year">Anno di Costruzione</label>
-                    <input type="number" id="product-year" name="product-year" 
-                      min="1950" max="2025" placeholder="2020" />
-                  </div>
-                </div>
-              </fieldset>
-
-              <fieldset>
-                <legend>Caratteristiche e Servizi</legend>
-
-                <div class="form-group">
-                  <label for="product-features">Caratteristiche Principali</label>
-                  <textarea id="product-features" name="product-features" rows="4"
-                    placeholder="Una caratteristica per riga, ad esempio:
-3 cabine doppie
-2 bagni completi
-Cucina attrezzata
-Aria condizionata"></textarea>
-                  <small>Inserisci una caratteristica per riga</small>
-                </div>
-
-                <fieldset class="checkbox-options">
-                  <legend>Opzioni Aggiuntive</legend>
-                  
-                  <div class="checkbox-group">
-                    <input type="checkbox" id="requires-license" name="requires-license" />
-                    <label for="requires-license">Richiede Patente Nautica</label>
-                  </div>
-
-                  <div class="checkbox-group">
-                    <input type="checkbox" id="skipper-included" name="skipper-included" />
-                    <label for="skipper-included">Skipper Incluso</label>
-                  </div>
-
-                  <div class="checkbox-group">
-                    <input type="checkbox" id="fuel-included" name="fuel-included" />
-                    <label for="fuel-included">Carburante Incluso</label>
-                  </div>
-
-                  <div class="checkbox-group">
-                    <input type="checkbox" id="is-accessible" name="is-accessible" />
-                    <label for="is-accessible">Accessibile a Persone con Disabilità</label>
-                  </div>
-
-                  <div class="checkbox-group">
-                    <input type="checkbox" id="is-featured" name="is-featured" />
-                    <label for="is-featured">Prodotto In Evidenza</label>
-                  </div>
-                </fieldset>
-              </fieldset>
-
-              <fieldset>
-                <legend>Immagini</legend>
-
-                <div class="form-group">
-                  <label for="product-image-main">Immagine Principale <abbr title="Obbligatorio">*</abbr></label>
-                  <input type="url" id="product-image-main" name="product-image-main" 
-                    placeholder="https://example.com/image.jpg" required />
-                  <small>Inserisci l'URL dell'immagine principale del prodotto</small>
-                </div>
-
-                <div class="form-group">
-                  <label for="product-gallery">Galleria Immagini (opzionale)</label>
-                  <textarea id="product-gallery" name="product-gallery" rows="4"
-                    placeholder="Un URL per riga:
-https://example.com/image1.jpg
-https://example.com/image2.jpg
-https://example.com/image3.jpg"></textarea>
-                  <small>Inserisci un URL per riga</small>
-                </div>
-              </fieldset>
-
-              <fieldset>
-                <legend>Disponibilità</legend>
-
-                <div class="form-group">
-                  <label for="product-status">Stato Prodotto <abbr title="Obbligatorio">*</abbr></label>
-                  <select id="product-status" name="product-status" required>
-                    <option value="available">Disponibile</option>
-                    <option value="maintenance">In Manutenzione</option>
-                    <option value="unavailable">Non Disponibile</option>
+                  <label for="product-type">Tipo Prodotto <abbr title="Campo obbligatorio">*</abbr></label>
+                  <select id="product-type" name="product-type" required>
+                    <option value="">Seleziona tipo...</option>
+                    <option value="noleggio">Barca a Noleggio</option>
+                    <option value="experience">Esperienza</option>
                   </select>
                 </div>
-
-                <div class="form-group">
-                  <label for="product-season">Stagionalità</label>
-                  <select id="product-season" name="product-season">
-                    <option value="all">Tutto l'Anno</option>
-                    <option value="summer">Solo Estate</option>
-                    <option value="winter">Solo Inverno</option>
-                  </select>
-                </div>
-              </fieldset>
-
-              <div class="form-actions">
-                <button type="button" class="btn-layout-light" onclick="history.back()">Annulla</button>
-                <button type="submit" class="btn-layout">Salva Prodotto</button>
               </div>
-            </form>
-          </section>
-        </div>
+
+              <div class="form-group">
+                <label for="product-name">Nome Prodotto <abbr title="Campo obbligatorio">*</abbr></label>
+                <input type="text" id="product-name" name="product-name" placeholder="es. Sunseeker Predator 62"
+                  required>
+              </div>
+
+              <div class="form-group">
+                <label for="product-description">Descrizione Breve <abbr title="Campo obbligatorio">*</abbr></label>
+                <textarea id="product-description" name="product-description" rows="3"
+                  placeholder="Descrizione che apparirà nelle card del catalogo..." required></textarea>
+              </div>
+
+              <div class="form-group">
+                <label for="product-long-description">Descrizione Dettagliata</label>
+                <textarea id="product-long-description" name="product-long-description" rows="6"
+                  placeholder="Descrizione completa che apparirà nella pagina del prodotto..."></textarea>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend>Prezzi e Capacità</legend>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="product-price">Prezzo Base (€) <abbr title="Campo obbligatorio">*</abbr></label>
+                  <input type="number" id="product-price" name="product-price" min="0" step="10" placeholder="850"
+                    required aria-describedby="product-price-hint">
+                  <small id="product-price-hint">Prezzo al giorno per noleggi, prezzo totale per esperienze</small>
+                </div>
+
+                <div class="form-group">
+                  <label for="product-capacity">Capacità Massima (persone) <abbr
+                      title="Campo obbligatorio">*</abbr></label>
+                  <input type="number" id="product-capacity" name="product-capacity" min="1" max="50" placeholder="8"
+                    required>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="product-length">Lunghezza (metri)</label>
+                  <input type="number" id="product-length" name="product-length" min="0" step="0.1" placeholder="19.2">
+                </div>
+
+                <div class="form-group">
+                  <label for="product-year">Anno di Costruzione</label>
+                  <input type="number" id="product-year" name="product-year" min="1950" max="2025" placeholder="2020">
+                </div>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend>Caratteristiche e Servizi</legend>
+
+              <div class="form-group">
+                <label for="product-features">Caratteristiche Principali</label>
+                <textarea id="product-features" name="product-features" rows="4"
+                  placeholder="Una caratteristica per riga, ad esempio:&#10;3 cabine doppie&#10;2 bagni completi&#10;Cucina attrezzata&#10;Aria condizionata"
+                  aria-describedby="product-features-hint"></textarea>
+                <small id="product-features-hint">Inserisci una caratteristica per riga</small>
+              </div>
+
+              <div class="checkbox-options">
+                <p class="checkbox-options-title">Opzioni Aggiuntive</p>
+
+                <div class="checkbox-group">
+                  <input type="checkbox" id="requires-license" name="requires-license">
+                  <label for="requires-license">Richiede Patente Nautica</label>
+                </div>
+
+                <div class="checkbox-group">
+                  <input type="checkbox" id="skipper-included" name="skipper-included">
+                  <label for="skipper-included"><span lang="en">Skipper</span> Incluso</label>
+                </div>
+
+                <div class="checkbox-group">
+                  <input type="checkbox" id="fuel-included" name="fuel-included">
+                  <label for="fuel-included">Carburante Incluso</label>
+                </div>
+
+                <div class="checkbox-group">
+                  <input type="checkbox" id="is-accessible" name="is-accessible">
+                  <label for="is-accessible">Accessibile a Persone con Disabilità</label>
+                </div>
+
+                <div class="checkbox-group">
+                  <input type="checkbox" id="is-featured" name="is-featured">
+                  <label for="is-featured">Prodotto In Evidenza</label>
+                </div>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend>Immagini</legend>
+
+              <div class="form-group">
+                <label for="product-image-main">Immagine Principale <abbr title="Campo obbligatorio">*</abbr></label>
+                <input type="url" id="product-image-main" name="product-image-main"
+                  placeholder="https://example.com/image.jpg" required aria-describedby="product-image-hint">
+                <small id="product-image-hint">Inserisci l'<abbr title="Uniform Resource Locator" lang="en">URL</abbr>
+                  dell'immagine principale del prodotto</small>
+              </div>
+
+              <div class="form-group">
+                <label for="product-gallery">Galleria Immagini (opzionale)</label>
+                <textarea id="product-gallery" name="product-gallery" rows="4"
+                  placeholder="Un URL per riga:&#10;https://example.com/image1.jpg&#10;https://example.com/image2.jpg&#10;https://example.com/image3.jpg"
+                  aria-describedby="product-gallery-hint"></textarea>
+                <small id="product-gallery-hint">Inserisci un <abbr title="Uniform Resource Locator"
+                    lang="en">URL</abbr> per riga</small>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend>Disponibilità</legend>
+
+              <div class="form-group">
+                <label for="product-status">Stato Prodotto <abbr title="Campo obbligatorio">*</abbr></label>
+                <select id="product-status" name="product-status" required>
+                  <option value="available">Disponibile</option>
+                  <option value="maintenance">In Manutenzione</option>
+                  <option value="unavailable">Non Disponibile</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="product-season">Stagionalità</label>
+                <select id="product-season" name="product-season">
+                  <option value="all">Tutto l'Anno</option>
+                  <option value="summer">Solo Estate</option>
+                  <option value="winter">Solo Inverno</option>
+                </select>
+              </div>
+            </fieldset>
+
+            <div class="form-actions">
+              <button class="btn-layout-light" onclick="history.back()">Annulla</button>
+              <button type="submit" class="btn-layout">Salva Prodotto</button>
+            </div>
+          </form>
+        </section>
       </div>
     </div>
   </main>
@@ -333,34 +295,33 @@ https://example.com/image3.jpg"></textarea>
 
       <div class="footer-col info-col">
         <h3 class="footer-heading">Info &amp; Contatti</h3>
-        <ul class="footer-links">
-          <li><a href="FAQ.html">Domande Frequenti (<abbr title="Frequently Asked Questions" lang="en">FAQ</abbr>)</a>
-          </li>
-          <li><a href="privacy.html" lang="en">Privacy Policy</a></li>
-          <li><a href="cookie.html">Cookie Policy</a></li>
-        </ul>
+        <nav aria-label="Link informativi">
+          <ul class="footer-links">
+            <li><a href="FAQ.html">Domande Frequenti (<abbr title="Frequently Asked Questions" lang="en">FAQ</abbr>)</a>
+            </li>
+            <li><a href="privacy.html" lang="en">Privacy Policy</a></li>
+            <li><a href="cookie.html">Cookie Policy</a></li>
+          </ul>
+        </nav>
         <address class="footer-address">
           <p><strong>SailUP S.r.l.</strong></p>
-          <p>Via Caracciolo, 80122 Napoli (NA)</p>
-          <p>P.IVA: 12345678901</p>
+          <p>Via Caracciolo, 80122 Napoli (<abbr title="Napoli">NA</abbr>)</p>
+          <p><abbr title="Partita IVA">P.IVA</abbr>: 12345678901</p>
         </address>
       </div>
     </div>
 
     <div class="footer-bottom">
       <div class="footer-bottom-container">
-        <div class="copyright">
-          &copy; 2025 SailUP S.r.l. - All rights reserved.
-        </div>
+        <p class="copyright">&copy; 2025 SailUP S.r.l. - <span lang="en">All rights reserved</span>.</p>
 
         <div class="valid-logos">
           <img class="valid-code-icon" src="valid-xhtml10.png" alt="XHTML valido" />
           <img class="valid-code-icon" src="valid-CSS.png" alt="CSS valido" />
         </div>
 
-        <a href="#main-content" class="scroll-to-top" id="btnTop" aria-label="Torna all'inizio del contenuto"
-          tabindex="-1">
-          <span aria-hidden="true">⬆</span> <span lang="en">Top</span>
+        <a href="#main-content" class="scroll-to-top" id="btnTop" aria-label="Torna all'inizio della pagina">
+          <span aria-hidden="true">⬆</span><span lang="en">Top</span>
         </a>
       </div>
     </div>

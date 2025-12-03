@@ -5,38 +5,35 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gestione Prenotazioni - Dashboard Admin - SailUP</title>
-  <meta name="description" content="Gestione prenotazioni attive e archiviate su SailUP" />
-  <meta name="authors" content="Alberto Reginato, Francesco Marcon" />
+  <meta name="description" content="Pannello amministrativo per la gestione delle prenotazioni SailUP. Visualizza statistiche, conferma e gestisci le prenotazioni attive e archiviate.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="authors" content="SailUP Team">
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap"
-    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
 
-    <link rel="stylesheet" href="../css/style.css" media="screen" />
-    <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)" />
-    <link rel="stylesheet" href="../css/print.css" media="print" />
+  <link rel="stylesheet" href="../css/style.css" media="screen" />
+  <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)" />
+  <link rel="stylesheet" href="../css/print.css" media="print" />
 </head>
 
 <body>
-  <a href="#main-content" class="skip-to-content">Salta al contenuto</a>
+  <a href="#main-content" class="skip-to-content">Salta al contenuto principale</a>
 
   <header>
     <div class="header-container">
       <div class="header">
-        <a href="index.html" class="logo">
+        <a href="index.html" class="logo" aria-label="SailUP - Torna alla homepage">
           <picture>
             <img alt="Logo SailUP"
               src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=400&q=80"
               width="30" />
           </picture>
-          <h1 lang="en">
-            <span class="logo-text">Sail<span class="text-accent">UP</span></span>
-          </h1>
+          <span class="logo-text" lang="en">Sail<span class="text-accent">UP</span></span>
         </a>
 
-        <nav id="main-menu" aria-label="Navigazione principale">
+        <nav id="main-menu">
           <ul>
             <li><a href="index.html" lang="en">Home</a></li>
             <li><a href="catalogo_noleggio.html">Noleggio</a></li>
@@ -48,19 +45,19 @@
 
         <div class="header-buttons">
           <button class="theme-toggle" aria-pressed="false" aria-label="Attiva modalità scura">
-            <span class="active-icon sun">☀️</span>
-            <span class="inactive-icon moon">🌙</span>
+            <span class="active-icon sun" aria-hidden="true">☀️</span>
+            <span class="inactive-icon moon hidden" aria-hidden="true">🌙</span>
           </button>
           <a href="profilo.html" class="btn-layout-light">Profilo</a>
         </div>
 
-        <button id="hamburger-btn" aria-expanded="false" aria-controls="mobile-menu" aria-label="Menu Mobile">
-          <span class="hamburger-icon">☰</span>
-          <span class="close-icon hidden">✕</span>
+        <button id="hamburger-btn" aria-expanded="false" aria-controls="mobile-menu">
+          <span class="hamburger-icon" aria-hidden="true">☰</span>
+          <span class="close-icon hidden" aria-hidden="true">✕</span>
         </button>
       </div>
 
-      <nav id="mobile-menu">
+      <nav id="mobile-menu" aria-label="Navigazione mobile">
         <ul>
           <li><a href="index.html" lang="en">Home</a></li>
           <li><a href="catalogo_noleggio.html">Noleggio</a></li>
@@ -86,13 +83,13 @@
   </nav>
 
   <main id="main-content">
-    <div class="profile-container section-container">
-      <div class="profile-header">
+    <div class="section-container">
+      <header class="profile-header">
         <div class="profile-info">
           <h1>Gestione Prenotazioni</h1>
           <p class="profile-email">Visualizza e gestisci le prenotazioni effettuate dagli utenti.</p>
         </div>
-      </div>
+      </header>
 
       <div class="profile-layout">
         <nav class="profile-sidebar" aria-label="Menu amministrazione">
@@ -123,7 +120,7 @@
             </li>
             <li>
               <a href="admin_blog.html">
-                <span class="nav-icon" aria-hidden="true">✍️</span>
+                <span class="nav-icon" aria-hidden="true">✏️</span>
                 <span>Gestione Blog</span>
               </a>
             </li>
@@ -131,6 +128,7 @@
         </nav>
 
         <div class="profile-content">
+          
           <section aria-labelledby="stats-title" class="profile-stats">
             <h2 id="stats-title" class="sr-only">Statistiche Prenotazioni</h2>
             <div class="stats-grid">
@@ -158,111 +156,121 @@
 
             <div class="activity-list">
 
-              <div class="activity-item">
-                <div class="activity-icon icon-success">📋</div>
+              <article class="activity-item">
+                <div class="activity-icon icon-success" aria-hidden="true">📋</div>
                 <div class="activity-content">
                   <span class="activity-type">#001 • Tour di Capri</span>
-                  <p><strong>Mario Rossi</strong></p>
+                  <h3>Mario Rossi</h3>
                   <p class="user-subtext">Utilizzo: 15/02/2025</p>
                 </div>
                 <div class="activity-meta">
                   <p class="meta-user">€ 850</p>
                   <p class="user-subtext text-success">Attiva</p>
                   <div class="item-actions">
-                    <button class="btn-layout-light btn-sm" aria-label="Dettagli prenotazione">👁️</button>
-                    <button class="btn-danger-outline btn-sm" aria-label="Cancella prenotazione">❌</button>
+                    <button class="btn-layout-light btn-sm" 
+                            aria-label="Dettagli prenotazione">👁️</button>
+                    <button class="btn-danger-outline btn-sm" 
+                            aria-label="Cancella prenotazione">✖</button>
                   </div>
                 </div>
-              </div>
+              </article>
 
-              <div class="activity-item">
-                <div class="activity-icon icon-warning">⏳</div>
+              <article class="activity-item">
+                <div class="activity-icon icon-warning" aria-hidden="true">⏳</div>
                 <div class="activity-content">
                   <span class="activity-type">#002 • Bavaria 46</span>
-                  <p><strong>Laura Bianchi</strong></p>
+                  <h3>Laura Bianchi</h3>
                   <p class="user-subtext">Utilizzo: 10/02/2025</p>
                 </div>
                 <div class="activity-meta">
                   <p class="meta-user">€ 600</p>
                   <p class="user-subtext text-warning">In Attesa</p>
                   <div class="item-actions">
-                    <button class="btn-layout-light btn-sm">👁️</button>
-                    <button class="btn-layout btn-sm">✓</button>
+                    <button class="btn-layout-light btn-sm" 
+                            aria-label="Dettagli prenotazione">👁️</button>
+                    <button class="btn-layout btn-sm" 
+                            aria-label="Conferma prenotazione">✓</button>
                   </div>
                 </div>
-              </div>
+              </article>
 
-              <div class="activity-item">
-                <div class="activity-icon icon-success">📋</div>
+              <article class="activity-item">
+                <div class="activity-icon icon-success" aria-hidden="true">📋</div>
                 <div class="activity-content">
                   <span class="activity-type">#003 • Sunseeker Predator</span>
-                  <p><strong>Giuseppe Verdi</strong></p>
+                  <h3>Giuseppe Verdi</h3>
                   <p class="user-subtext">Utilizzo: 20/02/2025</p>
                 </div>
                 <div class="activity-meta">
                   <p class="meta-user">€ 850</p>
                   <p class="user-subtext text-success">Attiva</p>
                   <div class="item-actions">
-                    <button class="btn-layout-light btn-sm">👁️</button>
-                    <button class="btn-danger-outline btn-sm">❌</button>
+                    <button class="btn-layout-light btn-sm" 
+                            aria-label="Dettagli prenotazione">👁️</button>
+                    <button class="btn-danger-outline btn-sm" 
+                            aria-label="Cancella prenotazione">✖</button>
                   </div>
                 </div>
-              </div>
+              </article>
 
-              <div class="activity-item">
-                <div class="activity-icon icon-warning">⏳</div>
+              <article class="activity-item">
+                <div class="activity-icon icon-warning" aria-hidden="true">⏳</div>
                 <div class="activity-content">
                   <span class="activity-type">#004 • Costiera Amalfitana</span>
-                  <p><strong>Anna Romano</strong></p>
+                  <h3>Anna Romano</h3>
                   <p class="user-subtext">Utilizzo: 05/02/2025</p>
                 </div>
                 <div class="activity-meta">
                   <p class="meta-user">€ 950</p>
                   <p class="user-subtext text-warning">In Attesa</p>
                   <div class="item-actions">
-                    <button class="btn-layout-light btn-sm">👁️</button>
-                    <button class="btn-layout btn-sm">✓</button>
+                    <button class="btn-layout-light btn-sm" 
+                            aria-label="Dettagli prenotazione">👁️</button>
+                    <button class="btn-layout btn-sm" 
+                            aria-label="Conferma prenotazione">✓</button>
                   </div>
                 </div>
-              </div>
+              </article>
 
-              <div class="activity-item">
-                <div class="activity-icon icon-accent">✔️</div>
+              <article class="activity-item">
+                <div class="activity-icon icon-accent" aria-hidden="true">✔️</div>
                 <div class="activity-content">
                   <span class="activity-type">#005 • Jeanneau 54</span>
-                  <p><strong>Francesco Esposito</strong></p>
+                  <h3>Francesco Esposito</h3>
                   <p class="user-subtext">Utilizzo: 25/01/2025</p>
                 </div>
                 <div class="activity-meta">
                   <p class="meta-user">€ 750</p>
                   <p class="user-subtext">Completata</p>
                   <div class="item-actions">
-                    <button class="btn-layout-light btn-sm">👁️</button>
+                    <button class="btn-layout-light btn-sm" 
+                            aria-label="Dettagli prenotazione">👁️</button>
                   </div>
                 </div>
-              </div>
+              </article>
 
-              <div class="activity-item">
-                <div class="activity-icon icon-accent" style="opacity: 0.5;">❌</div>
+              <article class="activity-item cancelled-booking">
+                <div class="activity-icon icon-accent" aria-hidden="true">✖</div>
                 <div class="activity-content">
                   <span class="activity-type">#006 • Tour di Capri</span>
-                  <p><strong>Chiara Lombardi</strong></p>
+                  <h3>Chiara Lombardi</h3>
                   <p class="user-subtext">Utilizzo: 22/01/2025</p>
                 </div>
                 <div class="activity-meta">
                   <p class="meta-user">€ 850</p>
                   <p class="user-subtext text-accent">Cancellata</p>
                   <div class="item-actions">
-                    <button class="btn-layout-light btn-sm">👁️</button>
+                    <button class="btn-layout-light btn-sm" 
+                            aria-label="Dettagli prenotazione">👁️</button>
                   </div>
                 </div>
-              </div>
+              </article>
 
             </div>
 
           </section>
 
-          <section aria-labelledby="revenue-title" class="profile-stats" style="margin-top: 2em;">
+          <section aria-labelledby="revenue-title" class="profile-stats">
             <h2 id="revenue-title">Riepilogo Finanziario</h2>
             <div class="stats-grid">
               <div class="stat-card">
@@ -312,34 +320,32 @@
 
       <div class="footer-col info-col">
         <h3 class="footer-heading">Info &amp; Contatti</h3>
-        <ul class="footer-links">
-          <li><a href="FAQ.html">Domande Frequenti (<abbr title="Frequently Asked Questions" lang="en">FAQ</abbr>)</a>
-          </li>
-          <li><a href="privacy.html" lang="en">Privacy Policy</a></li>
-          <li><a href="cookie.html">Cookie Policy</a></li>
-        </ul>
+        <nav aria-label="Link informativi">
+          <ul class="footer-links">
+            <li><a href="FAQ.html">Domande Frequenti (<abbr title="Frequently Asked Questions" lang="en">FAQ</abbr>)</a></li>
+            <li><a href="privacy.html" lang="en">Privacy Policy</a></li>
+            <li><a href="cookie.html">Cookie Policy</a></li>
+          </ul>
+        </nav>
         <address class="footer-address">
           <p><strong>SailUP S.r.l.</strong></p>
-          <p>Via Caracciolo, 80122 Napoli (NA)</p>
-          <p>P.IVA: 12345678901</p>
+          <p>Via Caracciolo, 80122 Napoli (<abbr title="Napoli">NA</abbr>)</p>
+          <p><abbr title="Partita IVA">P.IVA</abbr>: 12345678901</p>
         </address>
       </div>
     </div>
 
     <div class="footer-bottom">
       <div class="footer-bottom-container">
-        <div class="copyright">
-          &copy; 2025 SailUP S.r.l. - All rights reserved.
-        </div>
+        <p class="copyright">&copy; 2025 SailUP S.r.l. - <span lang="en">All rights reserved</span>.</p>
 
         <div class="valid-logos">
           <img class="valid-code-icon" src="valid-xhtml10.png" alt="XHTML valido" />
           <img class="valid-code-icon" src="valid-CSS.png" alt="CSS valido" />
         </div>
 
-        <a href="#main-content" class="scroll-to-top" id="btnTop" aria-label="Torna all'inizio del contenuto"
-          tabindex="-1">
-          <span aria-hidden="true">⬆</span> <span lang="en">Top</span>
+        <a href="#main-content" class="scroll-to-top" id="btnTop" aria-label="Torna all'inizio della pagina">
+          <span aria-hidden="true">⬆</span><span lang="en">Top</span>
         </a>
       </div>
     </div>
