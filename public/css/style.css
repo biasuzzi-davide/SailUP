@@ -1308,13 +1308,6 @@ input[maxlength="5"] {
   align-items: start;
 }
 
-.profile-layout-centered {
-  display: block;
-  max-width: 1200px;
-  margin: 0 auto;
-  width: 100%;
-}
-
 /* Sidebar Navigazione */
 .profile-sidebar {
   position: sticky;
@@ -2972,4 +2965,55 @@ tr>*:last-child {
 [data-theme="dark"] .btn-icon.danger:hover {
   background-color: #450a0a;
   border-color: #ef4444;
+}
+/* =========================================
+   STILE FORM ADMIN (Semplificato)
+   ========================================= */
+
+.admin-form {
+  background-color: var(--col-bg);
+  /* Un bordo sottile e un'ombra leggera bastano per staccarlo dallo sfondo */
+  border: 1px solid var(--col-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-sm);
+  
+  max-width: 800px;
+  margin: 0 auto 3em auto;
+  padding: 2.5em;
+}
+
+/* Semplifichiamo i fieldset: niente bordi, solo spaziatura verticale */
+.admin-form fieldset {
+  border: none;
+  padding: 0;
+  margin: 0 0 2.5em 0;
+}
+
+/* Il titolo della sezione (legend) diventa un titoletto pulito */
+.admin-form legend {
+  font-family: var(--font-head);
+  font-weight: 700;
+  color: var(--col-primary);
+  font-size: 1.2em;
+  margin-bottom: 1em;
+  padding: 0;
+  display: block;
+  width: 100%;
+  border-bottom: 1px solid var(--col-border); /* Linea divisoria sottile */
+  padding-bottom: 0.5em;
+}
+
+/* Layout a griglia semplice per input affiancati */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5em;
+}
+
+/* Bottoni allineati a destra */
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1em;
+  margin-top: 1em;
 }
