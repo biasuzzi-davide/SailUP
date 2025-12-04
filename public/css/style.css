@@ -824,6 +824,10 @@ a:visited, .visited{
   color: var(--col-visited-link); 
 }
 
+.btn-hero:visited {
+    color: var(--col-text);
+}
+
 /* =========================================
    8. Bottone torna su
    ========================================= */
