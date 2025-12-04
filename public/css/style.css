@@ -438,45 +438,51 @@ button:focus-visible,
    5. BREADCRUMB
    ========================================= */
 #breadcrumb {
-    /* Configurazione Variabili */
-    --b-arrow-h: 19px;  /* Mezza altezza freccia */
-    --b-arrow-w: 25px;  /* Larghezza punta */
-    --b-pad-l: 40px;    /* Padding sinistro testo */
-    --b-pad-y: 8px;     /* Padding verticale */
-    
-    padding: 0.75em 1em;
-    margin-top: 1%; /* Allineato al tuo layout originale */
-    display: flex;
-    justify-content: center;
+  /* Configurazione Variabili */
+  --b-arrow-h: 19px;
+  /* Mezza altezza freccia */
+  --b-arrow-w: 25px;
+  /* Larghezza punta */
+  --b-pad-l: 40px;
+  /* Padding sinistro testo */
+  --b-pad-y: 8px;
+  /* Padding verticale */
+
+  padding: 0.75em 1em;
+  margin-top: 1%;
+  /* Allineato al tuo layout originale */
+  display: flex;
+  justify-content: center;
 }
 
 #breadcrumb ol {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap; /* Impedisce a capo */
-    border-radius: var(--radius-sm);
-    box-shadow: var(--shadow-sm);
-    padding: 0;
-    margin: 0;
-    scrollbar-width: none;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  /* Impedisce a capo */
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+  padding: 0;
+  margin: 0;
+  scrollbar-width: none;
 }
 
 /* Stile Link e Pagina Corrente */
 #breadcrumb li a,
 #breadcrumb li[aria-current="page"] {
-    color: var(--col-text-inv);
-    background: var(--col-primary);
-    text-decoration: none;
-    position: relative;
-    display: flex;
-    align-items: center;
-    font-weight: 600;
-    
-    /* Utilizzo Variabili */
-    padding: var(--b-pad-y) 0 var(--b-pad-y) var(--b-pad-l);
-    font-size: clamp(0.7em, 2.5vw, 0.85em);
-    min-height: calc(var(--b-arrow-h) * 1.1);
-    transition: background-color 0.2s;
+  color: var(--col-text-inv);
+  background: var(--col-primary);
+  text-decoration: none;
+  position: relative;
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+
+  /* Utilizzo Variabili */
+  padding: var(--b-pad-y) 0 var(--b-pad-y) var(--b-pad-l);
+  font-size: clamp(0.7em, 2.5vw, 0.85em);
+  min-height: calc(var(--b-arrow-h) * 1.1);
+  transition: background-color 0.2s;
 }
 
 /* Logica Frecce Unificata */
@@ -484,74 +490,77 @@ button:focus-visible,
 #breadcrumb li[aria-current="page"]::after,
 #breadcrumb li a::before,
 #breadcrumb li[aria-current="page"]::before {
-    content: " ";
-    display: block;
-    position: absolute;
-    top: 50%;
-    left: 100%;
-    width: 0;
-    height: 0;
-    pointer-events: none;
-    z-index: 2;
-    
-    /* Geometria Variabile */
-    border-top: var(--b-arrow-h) solid transparent;
-    border-bottom: var(--b-arrow-h) solid transparent;
-    border-left: var(--b-arrow-w) solid var(--col-primary);
-    margin-top: calc(var(--b-arrow-h) * -1);
-    transition: border-color 0.2s;
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  z-index: 2;
+
+  /* Geometria Variabile */
+  border-top: var(--b-arrow-h) solid transparent;
+  border-bottom: var(--b-arrow-h) solid transparent;
+  border-left: var(--b-arrow-w) solid var(--col-primary);
+  margin-top: calc(var(--b-arrow-h) * -1);
+  transition: border-color 0.2s;
 }
 
 /* Triangolo interno (separatore) */
 #breadcrumb li a::before,
 #breadcrumb li[aria-current="page"]::before {
-    border-left-color: var(--col-bg); 
-    margin-left: 1px;
-    z-index: 1;
+  border-left-color: var(--col-bg);
+  margin-left: 1px;
+  z-index: 1;
 }
 
 /* Eccezioni Primo e Ultimo elemento */
 #breadcrumb li:first-child a,
 #breadcrumb li:first-child[aria-current="page"] {
-    padding-left: 15px;
+  padding-left: 15px;
 }
+
 #breadcrumb li[aria-current="page"] {
-    background: var(--col-bg-alt);
-    color: var(--col-text-muted);
-    pointer-events: none;
-    padding-right: 15px;
+  background: var(--col-bg-alt);
+  color: var(--col-text-muted);
+  pointer-events: none;
+  padding-right: 15px;
 }
+
 #breadcrumb li[aria-current="page"]::after {
-    border-left-color: var(--col-bg-alt);
+  border-left-color: var(--col-bg-alt);
 }
 
 /* Hover */
 #breadcrumb li a:hover {
-    background: #e2e8f0;
-    color: var(--col-primary);
+  background: #e2e8f0;
+  color: var(--col-primary);
 }
+
 #breadcrumb li a:hover::after {
-    border-left-color: #e2e8f0;
+  border-left-color: #e2e8f0;
 }
 
 /* Parte per la modifica del tab sulle breadcrumb */
 #breadcrumb li a:focus-visible {
-    outline: none;
-    border: none;
-    border-radius: 0;
-    
-    background-color: var(--col-accent);
-    color: var(--col-text-inv);
+  outline: none;
+  border: none;
+  border-radius: 0;
+
+  background-color: var(--col-accent);
+  color: var(--col-text-inv);
 
 }
 
 #breadcrumb li a:focus-visible {
-    border-top-left-radius: var(--radius-sm);
-    border-bottom-left-radius: var(--radius-sm);
+  border-top-left-radius: var(--radius-sm);
+  border-bottom-left-radius: var(--radius-sm);
 }
 
 #breadcrumb li a:focus-visible::after {
-    border-left-color: var(--col-accent);
+  border-left-color: var(--col-accent);
 }
 
 /* =========================================
@@ -820,12 +829,13 @@ footer {
 }
 
 /* link visitati, non solo del footer */
-a:visited, .visited{
-  color: var(--col-visited-link); 
+a:visited,
+.visited {
+  color: var(--col-visited-link);
 }
 
 .btn-hero:visited {
-    color: var(--col-text);
+  color: var(--col-text);
 }
 
 /* =========================================
@@ -1292,7 +1302,8 @@ input[maxlength="5"] {
    ========================================= */
 .profile-layout {
   display: grid;
-  grid-template-columns: 280px 1fr;
+  grid-template-columns: 260px 1fr;
+  /* Sidebar fissa, contenuto fluido */
   gap: 2em;
   align-items: start;
 }
@@ -1312,6 +1323,7 @@ input[maxlength="5"] {
   border-radius: var(--radius-card);
   padding: 1.5em;
   box-shadow: var(--shadow-sm);
+  z-index: 90;
 }
 
 .profile-sidebar ul {
@@ -1359,6 +1371,37 @@ input[maxlength="5"] {
   font-size: 1.3em;
   width: 1.5em;
   text-align: center;
+}
+
+/* Contenitore Contenuto Principale */
+.profile-content {
+  /* FONDAMENTALE PER GRID: */
+  /* min-width: 0 permette al contenitore di restringersi anche se la tabella
+     vorrebbe essere più larga. Questo forza lo scroll o il ridimensionamento
+     della tabella invece di rompere la pagina. */
+  min-width: 0;
+  min-height: 60vh;
+}
+
+/* Gestione Mobile della Grid Layout */
+@media (max-width: 900px) {
+  .profile-layout {
+    grid-template-columns: 1fr;
+    /* Una colonna unica */
+  }
+
+  .profile-sidebar {
+    position: static;
+    /* Non più sticky su mobile */
+    margin-bottom: 2em;
+  }
+
+  /* Layout a griglia per i link della sidebar su mobile */
+  .profile-sidebar ul {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8em;
+  }
 }
 
 /* =========================================
@@ -1427,7 +1470,7 @@ input[maxlength="5"] {
 
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 1.5em;
   margin-top: 1.5em;
 }
@@ -2675,44 +2718,6 @@ input[maxlength="5"] {
   color: #dbeafe;
 }
 
-.pagination {
-  display: flex;
-  justify-content: center;
-  gap: 0.5em;
-  margin-top: 2em;
-  flex-wrap: wrap;
-}
-
-.pagination button,
-.pagination a {
-  padding: 0.5em 1em;
-  border: 1px solid var(--col-border);
-  background: var(--col-card);
-  color: var(--col-text);
-  text-decoration: none;
-  border-radius: var(--radius-sm);
-  transition: all 0.2s ease;
-  cursor: pointer;
-}
-
-.pagination button:hover:not(:disabled),
-.pagination a:hover {
-  background: var(--col-accent);
-  color: var(--col-text-inv);
-  border-color: var(--col-accent);
-}
-
-.pagination .active {
-  background: var(--col-accent);
-  color: var(--col-text-inv);
-  border-color: var(--col-accent);
-}
-
-.pagination button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
 .alert {
   padding: 1em 1.5em;
   border-radius: var(--radius-sm);
@@ -2785,13 +2790,6 @@ input[maxlength="5"] {
   margin-bottom: 1.5em;
 }
 
-.pagination-wrapper {
-  margin-top: 2em;
-  display: flex;
-  justify-content: center;
-  gap: 0.5em;
-}
-
 .btn-page {
   padding: 0.5em 1em;
 }
@@ -2841,113 +2839,105 @@ input[maxlength="5"] {
 }
 
 /* =========================================
-   12. TABELLE ADMIN & DASHBOARD
+   12. TABELLE ADMIN & DASHBOARD (Base & Desktop)
    ========================================= */
 
-/* Contenitore per lo scroll orizzontale su mobile */
 .table-container {
-  width: 100%;
-  overflow-x: auto;
-  background-color: var(--col-bg);
+  margin-top: 1.5em;
+  border: 1px solid var(--col-border);
   border-radius: var(--radius-card);
   box-shadow: var(--shadow-sm);
-  border: 1px solid var(--col-border);
-  margin-top: 1.5em;
+  background-color: var(--col-bg);
+  /* Sicurezza per schermi che non rientrano nei breakpoint standard */
+  overflow-x: auto;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 600px; /* Forza una larghezza minima per evitare schiacciamenti */
+  table-layout: fixed;
+  /* Il segreto per layout stabili */
   font-family: var(--font-body);
 }
 
-/* Titolo della tabella (Accessibilità) */
 caption {
-  caption-side: top;
   text-align: left;
   padding: 1em 1.5em;
   font-weight: 700;
   font-family: var(--font-head);
   color: var(--col-primary);
-  border-bottom: 2px solid var(--col-border);
   background-color: var(--col-bg-alt);
-  border-radius: var(--radius-card) var(--radius-card) 0 0;
+  border-bottom: 2px solid var(--col-border);
 }
 
-/* Intestazione Tabella */
+/* --- STILE BASE (Comune a tutti) --- */
+th,
+td {
+  padding: 0.8em 0.5em;
+  border-bottom: 1px solid var(--col-border);
+  vertical-align: middle;
+  /* DEFAULT: Tutto su una riga e troncato se troppo lungo */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 thead th {
   background-color: var(--col-bg-alt);
   color: var(--col-text-muted);
-  font-weight: 600;
-  font-size: var(--fs-sm);
+  font-size: 0.8em;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  padding: 1em 1.5em;
   text-align: left;
-  border-bottom: 2px solid var(--col-border);
-  white-space: nowrap; /* Evita che i titoli vadano a capo */
+  white-space: normal;
+  /* I titoli possono andare a capo se serve */
 }
 
-/* Corpo Tabella */
-tbody td {
-  padding: 1em 1.5em;
-  border-bottom: 1px solid var(--col-border);
-  color: var(--col-text);
-  vertical-align: middle;
+/* 1. ID (1ª colonna): Fissa e piccola */
+tr>*:first-child {
+  width: 60px;
+  text-align: center;
 }
 
-/* Effetto Hover sulle righe per leggibilità */
-tbody tr:hover {
-  background-color: rgba(0, 0, 0, 0.02);
+/* 2. EMAIL (3ª colonna): L'UNICA che si allarga e va a capo */
+tr>*:nth-child(3) {
+  width: 35%;
+  white-space: normal;
+  word-break: break-all;
+  overflow: visible;
 }
 
-tbody tr:last-child td {
-  border-bottom: none;
-}
-
-/* Cella Azioni (Pulsanti) */
-.actions-cell {
-  white-space: nowrap;
+/* 3. AZIONI (Ultima colonna): Fissa a destra */
+tr>*:last-child {
+  width: 110px;
   text-align: right;
+  overflow: visible;
 }
 
-.text-right {
-  text-align: right;
-}
-
-/* Pulsanti Icona (Modifica/Elimina) */
+/* Pulsanti Azione (Comuni) */
 .btn-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 2.5em;
-  height: 2.5em;
-  border-radius: var(--radius-sm);
+  width: 2.2em;
+  height: 2.2em;
   border: 1px solid var(--col-border);
-  background-color: var(--col-bg);
+  border-radius: var(--radius-sm);
+  background: var(--col-bg);
+  color: var(--col-text);
+  margin-left: 0.3em;
   cursor: pointer;
-  transition: all 0.2s ease;
-  margin-left: 0.5em;
-  font-size: 1em;
+  transition: 0.2s;
 }
 
 .btn-icon:hover {
   border-color: var(--col-accent);
-  background-color: var(--col-bg-alt);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-sm);
+  color: var(--col-accent);
 }
 
 .btn-icon.danger:hover {
   border-color: #dc2626;
-  background-color: #fef2f2;
-}
-
-/* Accessibilità: Focus visibile */
-.btn-icon:focus-visible {
-  outline: 3px solid var(--col-accent);
-  outline-offset: 2px;
+  color: #dc2626;
+  background: #fef2f2;
 }
 
 /* --- Supporto Dark Mode --- */

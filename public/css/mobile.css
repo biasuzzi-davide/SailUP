@@ -308,7 +308,11 @@ footer .logo p {
     border-radius: var(--radius-sm);
 }
 
-@media (max-width: 600px) {
+.stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+@media (max-width: 400px) {
     .stats-grid {
         grid-template-columns: 1fr;
     }
@@ -615,4 +619,46 @@ footer .logo p {
 
 .table-container td.actions-cell::before {
     display: none;
+}
+
+
+/* =========================================
+   TABELLE ADMIN 
+   ========================================= */
+
+/* Trasformiamo la tabella in blocchi */
+table, tbody, th, td, tr { 
+  display: block; 
+  width: 100%; 
+}
+
+/* La riga diventa una Card */
+tbody tr {
+  margin-bottom: 1.5em;
+  border: 1px solid var(--col-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-sm);
+  background: var(--col-bg);
+}
+
+/* La cella diventa una riga flessibile */
+tbody td {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: right;
+  white-space: normal; /* Su mobile il testo va a capo */
+  min-height: 3em;
+  border-bottom: 1px solid var(--col-border);
+}
+
+/* Etichetta generata dall'attributo data-label */
+tbody td::before {
+  content: attr(data-label);
+  font-weight: 700;
+  font-size: 0.85em;
+  text-transform: uppercase;
+  color: var(--col-text-muted);
+  text-align: left;
+  margin-right: 1em;
 }
