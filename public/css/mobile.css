@@ -662,3 +662,10 @@ tbody td::before {
   text-align: left;
   margin-right: 1em;
 }
+
+/* =========================================
+   FORM DI CREAZIONE ARTICOLI 
+   ========================================= */
+
+.admin-form { padding: 1.5em; }
+.form-row { grid-template-columns: 1fr; gap: 0; }
