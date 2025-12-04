@@ -1970,6 +1970,7 @@ input[maxlength="5"] {
 /* HERO CATALOGO */
 .catalog-hero {
   text-align: center;
+  margin: 2em;
 }
 
 .catalog-hero h1 {
@@ -2158,7 +2159,7 @@ input[maxlength="5"] {
 /* GRID PRODOTTI */
 .catalog-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 2em;
 }
 
@@ -2175,7 +2176,15 @@ input[maxlength="5"] {
 
 .product-card:hover {
   transform: translateY(-5px);
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.product-header {
+  display: flex;
+  justify-content: space-between; /* Titolo a sinistra, Badge a destra */
+  align-items: flex-start;        /* Allinea in alto (utile se il titolo va su 2 righe) */
+  gap: 1em;                       /* Spazio minimo tra i due elementi */
+  margin-bottom: 0.5em;           /* Spazio sotto, verso la descrizione */
 }
 
 .product-card-link {
@@ -2188,28 +2197,14 @@ input[maxlength="5"] {
 
 /* Immagine con badge */
 .product-card-image {
-  position: relative;
   width: 100%;
   aspect-ratio: 4/3;
-  overflow: hidden;
-}
-
-.product-card-image img {
-  width: 100%;
-  height: 100%;
+  display: block;
   object-fit: cover;
   transition: transform 0.3s ease;
 }
 
-.product-card:hover .product-card-image img {
-  transform: scale(1.05);
-}
-
-/* Badge tipo (noleggio: vela/motore/gommone, esperienze: tour/aperitivo/ecc) */
 .product-badge {
-  position: absolute;
-  top: 1em;
-  right: 1em;
   padding: 0.4em 0.9em;
   border-radius: var(--radius-btn);
   font-size: var(--fs-sm);
@@ -2217,6 +2212,9 @@ input[maxlength="5"] {
   text-transform: uppercase;
   letter-spacing: 0.05em;
   box-shadow: var(--shadow-md);
+  flex-shrink: 0;
+  white-space: nowrap; 
+  margin-top: 2px;
 }
 
 /* Badge colori - NOLEGGIO */
@@ -2265,6 +2263,7 @@ input[maxlength="5"] {
   font-weight: 700;
   color: var(--col-primary);
   margin: 0;
+  line-height: 1.5;
 }
 
 .product-description {
@@ -2333,7 +2332,7 @@ input[maxlength="5"] {
   color: var(--col-accent);
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 900px) {
   .catalog-layout {
     grid-template-columns: 250px 1fr;
     gap: 2em;
