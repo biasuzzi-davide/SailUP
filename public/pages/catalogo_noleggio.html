@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Noleggio Barche - SailUP</title>
+  <title>Catalogo Noleggio Barche - SailUP</title>
   <meta name="description"
     content="Scopri la nostra flotta di barche a noleggio a Napoli. Scegli tra barche a vela, a motore e gommoni, con o senza patente. Prenota la tua avventura oggi!" />
   <meta name="authors" content="SailUp team" />
@@ -15,9 +15,9 @@
     href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap"
     rel="stylesheet" />
 
-    <link rel="stylesheet" href="../css/style.css" media="screen" />
-    <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)" />
-    <link rel="stylesheet" href="../css/print.css" media="print" />
+  <link rel="stylesheet" href="../css/style.css" media="screen" />
+  <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)" />
+  <link rel="stylesheet" href="../css/print.css" media="print" />
 </head>
 
 <body>
@@ -28,19 +28,16 @@
       <div class="header">
         <a href="index.html" class="logo">
           <picture>
-            <source srcset="" type="image/avif" />
             <img alt="Logo SailUP"
               src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=400&q=80"
-              width="30" />
+              width="30" height="30" />
           </picture>
-          <h1 lang="en">
-            <span class="logo-text">Sail<span class="text-accent">UP</span></span>
-          </h1>
+          <span class="logo-text" lang="en">Sail<span class="text-accent">UP</span></span>
         </a>
 
-        <nav id="main-menu" aria-label="Menu principale">
+        <nav id="main-menu">
           <ul>
-            <li lang="en"><a href="index.html">Home</a></li>
+            <li><a href="index.html" lang="en">Home</a></li>
             <li class="current-page">Noleggio</li>
             <li><a href="catalogo_esperienze.html">Esperienze</a></li>
             <li><a href="blog.html" lang="en">Blog</a></li>
@@ -50,27 +47,27 @@
 
         <div class="header-buttons">
           <button class="theme-toggle" aria-pressed="false" aria-label="Attiva modalità scura">
-            <span class="active-icon sun">☀️</span>
-            <span class="inactive-icon moon">🌙</span>
+            <span class="active-icon sun" aria-hidden="true">☀️</span>
+            <span class="inactive-icon moon hidden" aria-hidden="true">🌙</span>
           </button>
           <a href="login.html" class="btn-layout" lang="en">Login</a>
         </div>
 
         <button id="hamburger-btn" aria-expanded="false" aria-controls="mobile-menu" aria-label="Menu Mobile">
-          <span class="hamburger-icon">☰</span>
-          <span class="close-icon hidden">✕</span>
+          <span class="hamburger-icon" aria-hidden="true">☰</span>
+          <span class="close-icon hidden" aria-hidden="true">✕</span>
         </button>
       </div>
 
-      <nav id="mobile-menu" aria-label="Menu mobile">
+      <nav id="mobile-menu">
         <ul>
-          <li lang="en"><a href="index.html">Home</a></li>
+          <li><a href="index.html" lang="en">Home</a></li>
           <li class="current-page">Noleggio</li>
           <li><a href="catalogo_esperienze.html">Esperienze</a></li>
           <li><a href="blog.html" lang="en">Blog</a></li>
           <li><a href="chi_siamo.html">Chi Siamo</a></li>
           <li>
-            <a href="login.html" class="menu-login">Login / Registrati</a>
+            <a href="login.html" class="menu-login" lang="en">Login / Registrati</a>
           </li>
         </ul>
       </nav>
@@ -83,339 +80,423 @@
   <nav aria-labelledby="breadcrumb-label" id="breadcrumb">
     <ol>
       <li>
-        <span lang="en" class="breadcrumb-link"><a href="index.html">Home</a></span>
+        <a href="index.html" lang="en">Home</a>
       </li>
-      <li aria-current="page">
-        Noleggio
-      </li>
+      <li aria-current="page">Noleggio</li>
     </ol>
   </nav>
 
   <main id="main-content">
     <section class="catalog-hero">
-      <div class="section-container">
-        <h1>La Nostra Flotta a Noleggio</h1>
-        <p>Dalle agili barche a vela ai potenti motoscafi, trova il mezzo perfetto per la tua prossima avventura nel
-          Golfo di Napoli.</p>
-      </div>
+      <h1>La Nostra Flotta a Noleggio</h1>
+      <p>Dalle agili barche a vela ai potenti motoscafi, trova il mezzo perfetto per la tua prossima avventura nel
+        Golfo di Napoli.</p>
     </section>
 
-    <section id="catalogo" class="section-container">
-      <div class="catalog-layout">
-        
-        <!-- Sidebar Filtri -->
-        <aside class="filters-sidebar">
-          <div class="filters-header">
-            <h2>Filtra</h2>
-            <button class="btn-text">Reset</button>
-          </div>
-          
-          <form action="" method="GET">
-            <fieldset class="filter-group">
-              <legend>Tipo di Barca</legend>
-              <label class="filter-checkbox">
-                <input type="checkbox" id="vela" name="tipo[]" value="vela" />
-                <span>Vela</span>
-              </label>
-              <label class="filter-checkbox">
-                <input type="checkbox" id="motore" name="tipo[]" value="motore" />
-                <span>Motore</span>
-              </label>
-              <label class="filter-checkbox">
-                <input type="checkbox" id="gommone" name="tipo[]" value="gommone" />
-                <span>Gommone</span>
-              </label>
-            </fieldset>
+    <section class="section-container catalog-layout" aria-labelledby="catalog-title">
+      <aside class="filters-sidebar" aria-labelledby="filters-heading">
+        <header class="filters-header">
+          <h2 id="filters-heading">Filtra</h2>
+          <button type="reset" class="btn-text" aria-label="Reimposta filtri">Reset</button>
+        </header>
 
-            <fieldset class="filter-group">
-              <legend>Patente Nautica</legend>
-              <label class="filter-radio">
-                <input type="radio" id="patente_si" name="patente" value="richiesta" />
-                <span>Richiesta</span>
-              </label>
-              <label class="filter-radio">
-                <input type="radio" id="patente_no" name="patente" value="non_richiesta" />
-                <span>Non richiesta</span>
-              </label>
-              <label class="filter-radio">
-                <input type="radio" id="patente_ind" name="patente" value="indifferente" checked />
-                <span>Indifferente</span>
-              </label>
-            </fieldset>
+        <form action="" method="GET">
+          <fieldset class="filter-group">
+            <legend>Tipo di Barca</legend>
+            <label class="filter-checkbox">
+              <input type="checkbox" id="vela" name="tipo[]" value="vela" />
+              <span>Vela</span>
+            </label>
+            <label class="filter-checkbox">
+              <input type="checkbox" id="motore" name="tipo[]" value="motore" />
+              <span>Motore</span>
+            </label>
+            <label class="filter-checkbox">
+              <input type="checkbox" id="gommone" name="tipo[]" value="gommone" />
+              <span>Gommone</span>
+            </label>
+          </fieldset>
 
-            <fieldset class="filter-group">
-              <legend>Dettagli</legend>
-              
-              <div class="filter-input">
-                <label for="posti">Posti minimi</label>
-                <input type="number" id="posti" name="posti" min="1" placeholder="Es. 4" />
-              </div>
+          <fieldset class="filter-group">
+            <legend>Patente Nautica</legend>
+            <label class="filter-radio">
+              <input type="radio" id="patente_si" name="patente" value="richiesta" />
+              <span>Richiesta</span>
+            </label>
+            <label class="filter-radio">
+              <input type="radio" id="patente_no" name="patente" value="non_richiesta" />
+              <span>Non richiesta</span>
+            </label>
+            <label class="filter-radio">
+              <input type="radio" id="patente_ind" name="patente" value="indifferente" checked />
+              <span>Indifferente</span>
+            </label>
+          </fieldset>
 
-              <div class="filter-input">
-                <label for="data_inizio">Data inizio</label>
-                <input type="date" id="data_inizio" name="data_inizio" />
-              </div>
+          <fieldset class="filter-group">
+            <legend>Dettagli</legend>
 
-              <div class="filter-input">
-                <label for="data_fine">Data fine</label>
-                <input type="date" id="data_fine" name="data_fine" />
-              </div>
-
-              <div class="filter-input">
-                <label for="maxPrice">Prezzo max (€/giorno)</label>
-                <input type="number" id="maxPrice" name="maxPrice" placeholder="Es. 500" min="100" step="50" />
-              </div>
-            </fieldset>
-
-            <button type="submit" class="btn-layout filter-submit">Applica Filtri</button>
-          </form>
-        </aside>
-
-        <!-- Risultati -->
-        <div class="catalog-results">
-          <div class="results-header">
-            <h2>6 imbarcazioni disponibili</h2>
-            <div class="results-sort">
-              <label for="sort">Ordina:</label>
-              <select id="sort" name="sort">
-                <option value="price-asc">Prezzo crescente</option>
-                <option value="price-desc">Prezzo decrescente</option>
-                <option value="size">Dimensione</option>
-              </select>
+            <div class="filter-input">
+              <label for="posti">Posti minimi</label>
+              <input type="number" id="posti" name="posti" min="1" placeholder="Es. 4" />
             </div>
-          </div>
 
-          <div class="catalog-grid">
-            
-            <article class="product-card">
-              <a href="dettaglio_barca.html?id=sunseeker" class="product-card-link">
-                <div class="product-card-image">
-                  <img src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=400&q=80"
-                    alt="Yacht a motore Sunseeker Predator ormeggiato" />
+            <div class="filter-input">
+              <label for="data_inizio">Data inizio</label>
+              <input type="date" id="data_inizio" name="data_inizio" />
+            </div>
+
+            <div class="filter-input">
+              <label for="data_fine">Data fine</label>
+              <input type="date" id="data_fine" name="data_fine" />
+            </div>
+
+            <div class="filter-input">
+              <label for="maxPrice">Prezzo max (€/giorno)</label>
+              <input type="number" id="maxPrice" name="maxPrice" placeholder="Es. 500" min="100" step="50" />
+            </div>
+          </fieldset>
+
+          <button type="submit" class="btn-layout filter-submit">Applica Filtri</button>
+        </form>
+      </aside>
+
+      <div class="catalog-results">
+        <header class="results-header">
+          <h2 id="catalog-title">Imbarcazioni disponibili</h2>
+          <div class="results-sort">
+            <label for="sort">Ordina:</label>
+            <select id="sort" name="sort">
+              <option value="price-asc">Prezzo crescente</option>
+              <option value="price-desc">Prezzo decrescente</option>
+              <option value="size">Dimensione</option>
+            </select>
+          </div>
+        </header>
+
+        <div class="catalog-grid">
+
+          <article class="product-card">
+            <a href="dettaglio_barca.html?id=sunseeker" class="product-card-link"
+              aria-label="Vedi dettagli Sunseeker Predator">
+
+              <img class="product-card-image"
+                src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=400&q=80"
+                alt="Yacht a motore Sunseeker Predator ormeggiato" width="400" height="267" />
+
+              <div class="product-card-content">
+                <div class="product-header">
+                  <h3 class="product-title">
+                    Sunseeker Predator
+                  </h3>
                   <span class="product-badge badge-motore">Motore</span>
                 </div>
-                <div class="product-card-content">
-                  <h3 class="product-title">Sunseeker Predator</h3>
-                  <p class="product-description">Yacht sportivo e lussuoso, perfetto per chi cerca velocità e comfort senza compromessi.</p>
-                  
-                  <div class="product-specs">
-                    <span class="spec-item">
-                      <span class="spec-icon" aria-hidden="true">📏</span>
-                      <span>12m</span>
-                    </span>
-                    <span class="spec-item">
-                      <span class="spec-icon" aria-hidden="true">👥</span>
-                      <span>8 posti</span>
-                    </span>
-                    <span class="spec-item">
-                      <span class="spec-icon" aria-hidden="true">🎫</span>
-                      <span>Patente</span>
-                    </span>
-                  </div>
 
-                  <div class="product-footer">
-                    <div class="product-price">
-                      <span class="price-label">da</span>
-                      <span class="price-value">850€</span>
-                      <span class="price-period">/giorno</span>
-                    </div>
-                    <span class="product-cta">Dettagli →</span>
-                  </div>
+                <p class="product-description">
+                  Potente yacht a motore con linee sportive e finiture di alta gamma per crociere veloci.
+                </p>
+
+                <div class="product-specs">
+                  <span class="spec-item">
+                    <span class="spec-icon" aria-hidden="true">📏</span>
+                    15m
+                  </span>
+                  <span class="spec-item">
+                    <span class="spec-icon" aria-hidden="true">👥</span>
+                    10 posti
+                  </span>
+                  <span class="spec-item">
+                    <span class="spec-icon" aria-hidden="true">🎫</span>
+                    Patente
+                  </span>
                 </div>
-              </a>
-            </article>
 
-            <article class="product-card">
-              <a href="dettaglio_barca.html?id=bavaria46" class="product-card-link">
-                <div class="product-card-image">
-                  <img src="../img/Bavaria 46.webp"
-                    alt="" />
+                <div class="product-footer">
+                  <div class="product-price">
+                    <span class="price-label">da</span>
+                    <span class="price-value">800€</span>
+                    <span class="price-period">/giorno</span>
+                  </div>
+                  <span class="product-cta">Dettagli →</span>
+                </div>
+              </div>
+            </a>
+          </article>
+
+          <article class="product-card">
+            <a href="dettaglio_barca.html?id=bavaria46" class="product-card-link"
+              aria-label="Vedi dettagli Bavaria 46 Cruiser">
+
+              <img class="product-card-image" src="../img/Bavaria_46.webp" alt="Barca a vela Bavaria 46 Cruiser"
+                width="400" height="267" />
+
+              <div class="product-card-content">
+                <div class="product-header">
+                  <h3 class="product-title">
+                    Bavaria 46 Cruiser
+                  </h3>
                   <span class="product-badge badge-vela">Vela</span>
                 </div>
-                <div class="product-card-content">
-                  <h3 class="product-title">Bavaria 46</h3>
-                  <p class="product-description">Eleganza della vela unita a spazi ampi. Ideale per crociere rilassanti in famiglia.</p>
-                  
-                  <div class="product-specs">
-                    <span class="spec-item">
-                      <span class="spec-icon" aria-hidden="true">📏</span>
-                      <span>14m</span>
-                    </span>
-                    <span class="spec-item">
-                      <span class="spec-icon" aria-hidden="true">👥</span>
-                      <span>10 posti</span>
-                    </span>
-                    <span class="spec-item">
-                      <span class="spec-icon" aria-hidden="true">🎫</span>
-                      <span>Patente</span>
-                    </span>
-                  </div>
 
-                  <div class="product-footer">
-                    <div class="product-price">
-                      <span class="price-label">da</span>
-                      <span class="price-value">600€</span>
-                      <span class="price-period">/giorno</span>
-                    </div>
-                    <span class="product-cta">Dettagli →</span>
-                  </div>
+                <p class="product-description">
+                  Comoda barca a vela con cabine spaziose, perfetta per crociere con famiglia o amici.
+                </p>
+
+                <div class="product-specs">
+                  <span class="spec-item">
+                    <span class="spec-icon" aria-hidden="true">📏</span>
+                    12m
+                  </span>
+                  <span class="spec-item">
+                    <span class="spec-icon" aria-hidden="true">👥</span>
+                    8 posti
+                  </span>
+                  <span class="spec-item">
+                    <span class="spec-icon" aria-hidden="true">🎫</span>
+                    Patente
+                  </span>
                 </div>
-              </a>
-            </article>
 
-            <article class="product-card">
-              <a href="dettaglio_barca.html?id=sacs" class="product-card-link">
-                <div class="product-card-image">
-                  <img src="../img/Sacs strider.webp"
-                    alt="Gommone Sacs Strider veloce sull'acqua" />
-                  <span class="product-badge badge-gommone">Gommone</span>
-                </div>
-                <div class="product-card-content">
-                  <h3 class="product-title">Sacs Strider</h3>
-                  <p class="product-description">Agile, veloce e divertente. La scelta migliore per calette nascoste.</p>
-                  
-                  <div class="product-specs">
-                    <span class="spec-item">
-                      <span class="spec-icon" aria-hidden="true">📏</span>
-                      <span>8m</span>
-                    </span>
-                    <span class="spec-item">
-                      <span class="spec-icon" aria-hidden="true">👥</span>
-                      <span>6 posti</span>
-                    </span>
-                    <span class="spec-item">
-                      <span class="spec-icon" aria-hidden="true">✅</span>
-                      <span>No patente</span>
-                    </span>
+                <div class="product-footer">
+                  <div class="product-price">
+                    <span class="price-label">da</span>
+                    <span class="price-value">700€</span>
+                    <span class="price-period">/giorno</span>
                   </div>
-
-                  <div class="product-footer">
-                    <div class="product-price">
-                      <span class="price-label">da</span>
-                      <span class="price-value">350€</span>
-                      <span class="price-period">/giorno</span>
-                    </div>
-                    <span class="product-cta">Dettagli →</span>
-                  </div>
+                  <span class="product-cta">Dettagli →</span>
                 </div>
-              </a>
-            </article>
+              </div>
+            </a>
+          </article>
 
-            <article class="product-card">
-              <a href="dettaglio_barca.html?id=odyssey" class="product-card-link">
-                <div class="product-card-image">
-                  <img src="../img/jeanneau sun odyssey 350 2.jpg"
-                    alt="" />
-                  <span class="product-badge badge-vela">Vela</span>
-                </div>
-                <div class="product-card-content">
-                  <h3 class="product-title">Jeanneau Sun Odyssey 350</h3>
-                  <p class="product-description">Prestazioni veliche eccellenti e interni moderni per navigazione superiore.</p>
-                  
-                  <div class="product-specs">
-                    <span class="spec-item">
-                      <span class="spec-icon" aria-hidden="true">📏</span>
-                      <span>12m</span>
-                    </span>
-                    <span class="spec-item">
-                      <span class="spec-icon" aria-hidden="true">👥</span>
-                      <span>8 posti</span>
-                    </span>
-                    <span class="spec-item">
-                      <span class="spec-icon" aria-hidden="true">🎫</span>
-                      <span>Patente</span>
-                    </span>
-                  </div>
+          <article class="product-card">
+            <a href="dettaglio_barca.html?id=cranchi" class="product-card-link"
+              aria-label="Vedi dettagli Cranchi Endurance 39">
 
-                  <div class="product-footer">
-                    <div class="product-price">
-                      <span class="price-label">da</span>
-                      <span class="price-value">550€</span>
-                      <span class="price-period">/giorno</span>
-                    </div>
-                    <span class="product-cta">Dettagli →</span>
-                  </div>
-                </div>
-              </a>
-            </article>
+              <img class="product-card-image" src="../img/Bavaria_46.webp"
+                alt="Motoscafo Cranchi Endurance 39 in navigazione" width="400" height="267" />
 
-            <article class="product-card">
-              <a href="dettaglio_barca.html?id=azimut" class="product-card-link">
-                <div class="product-card-image">
-                  <img src="../img/Azimut 55 fly 2.webp"
-                    alt="Yacht a motore Azimut 55 Fly" />
+              <div class="product-card-content">
+                <div class="product-header">
+                  <h3 class="product-title">
+                    Cranchi Endurance 39
+                  </h3>
                   <span class="product-badge badge-motore">Motore</span>
                 </div>
-                <div class="product-card-content">
-                  <h3 class="product-title">Azimut 55 Fly</h3>
-                  <p class="product-description">Il massimo del lusso. Flybridge spazioso e interni raffinati.</p>
-                  
-                  <div class="product-specs">
-                    <span class="spec-item">
-                      <span class="spec-icon" aria-hidden="true">📏</span>
-                      <span>17m</span>
-                    </span>
-                    <span class="spec-item">
-                      <span class="spec-icon" aria-hidden="true">👥</span>
-                      <span>12 posti</span>
-                    </span>
-                    <span class="spec-item">
-                      <span class="spec-icon" aria-hidden="true">🎫</span>
-                      <span>Patente</span>
-                    </span>
-                  </div>
 
-                  <div class="product-footer">
-                    <div class="product-price">
-                      <span class="price-label">da</span>
-                      <span class="price-value">1200€</span>
-                      <span class="price-period">/giorno</span>
-                    </div>
-                    <span class="product-cta">Dettagli →</span>
-                  </div>
+                <p class="product-description">
+                  Design elegante e versatile, ideale per gite giornaliere lungo la costa.
+                </p>
+
+                <div class="product-specs">
+                  <span class="spec-item">
+                    <span class="spec-icon" aria-hidden="true">📏</span>
+                    12m
+                  </span>
+                  <span class="spec-item">
+                    <span class="spec-icon" aria-hidden="true">👥</span>
+                    8 posti
+                  </span>
+                  <span class="spec-item">
+                    <span class="spec-icon" aria-hidden="true">🎫</span>
+                    Patente
+                  </span>
                 </div>
-              </a>
-            </article>
 
-            <article class="product-card">
-              <a href="dettaglio_barca.html?id=joker" class="product-card-link">
-                <div class="product-card-image">
-                  <img src="../img/Joker clubman 24 1.webp"
-                    alt="Gommone Joker Boat Clubman 24" />
+                <div class="product-footer">
+                  <div class="product-price">
+                    <span class="price-label">da</span>
+                    <span class="price-value">700€</span>
+                    <span class="price-period">/giorno</span>
+                  </div>
+                  <span class="product-cta">Dettagli →</span>
+                </div>
+              </div>
+            </a>
+          </article>
+
+          <article class="product-card">
+            <a href="dettaglio_barca.html?id=zodiac" class="product-card-link"
+              aria-label="Vedi dettagli Zodiac Medline 660">
+
+              <img class="product-card-image" src="../img/Bavaria_46.webp"
+                alt="Gommone Zodiac Medline 660 con motore fuoribordo" width="400" height="267" />
+
+              <div class="product-card-content">
+                <div class="product-header">
+                  <h3 class="product-title">
+                    Zodiac Medline 660
+                  </h3>
                   <span class="product-badge badge-gommone">Gommone</span>
                 </div>
-                <div class="product-card-content">
-                  <h3 class="product-title">Joker Clubman 24</h3>
-                  <p class="product-description">Pratico e spazioso, ideale per famiglie che vogliono esplorare la costa.</p>
-                  
-                  <div class="product-specs">
-                    <span class="spec-item">
-                      <span class="spec-icon" aria-hidden="true">📏</span>
-                      <span>7m</span>
-                    </span>
-                    <span class="spec-item">
-                      <span class="spec-icon" aria-hidden="true">👥</span>
-                      <span>8 posti</span>
-                    </span>
-                    <span class="spec-item">
-                      <span class="spec-icon" aria-hidden="true">✅</span>
-                      <span>No patente</span>
-                    </span>
-                  </div>
 
-                  <div class="product-footer">
-                    <div class="product-price">
-                      <span class="price-label">da</span>
-                      <span class="price-value">300€</span>
-                      <span class="price-period">/giorno</span>
-                    </div>
-                    <span class="product-cta">Dettagli →</span>
-                  </div>
+                <p class="product-description">
+                  Gommone robusto e agile, perfetto per esplorazioni marine senza patente.
+                </p>
+
+                <div class="product-specs">
+                  <span class="spec-item">
+                    <span class="spec-icon" aria-hidden="true">📏</span>
+                    6m
+                  </span>
+                  <span class="spec-item">
+                    <span class="spec-icon" aria-hidden="true">👥</span>
+                    6 posti
+                  </span>
+                  <span class="spec-item">
+                    <span class="spec-icon" aria-hidden="true">✅</span>
+                    No patente
+                  </span>
                 </div>
-              </a>
-            </article>
 
-          </div>
+                <div class="product-footer">
+                  <div class="product-price">
+                    <span class="price-label">da</span>
+                    <span class="price-value">350€</span>
+                    <span class="price-period">/giorno</span>
+                  </div>
+                  <span class="product-cta">Dettagli →</span>
+                </div>
+              </div>
+            </a>
+          </article>
+
+          <article class="product-card">
+            <a href="dettaglio_barca.html?id=odyssey" class="product-card-link"
+              aria-label="Vedi dettagli Jeanneau Sun Odyssey 350">
+
+              <img class="product-card-image" src="../img/jeanneau_sun_odyssey 350_2.jpg"
+                alt="Barca a vela Jeanneau Sun Odyssey 350 con vele spiegate" width="400" height="267" />
+
+              <div class="product-card-content">
+                <div class="product-header">
+                  <h3 class="product-title">
+                    Jeanneau Sun Odyssey 350
+                  </h3>
+                  <span class="product-badge badge-vela">Vela</span>
+                </div>
+
+                <p class="product-description">
+                  Prestazioni veliche eccellenti e interni moderni per navigazione superiore.
+                </p>
+
+                <div class="product-specs">
+                  <span class="spec-item">
+                    <span class="spec-icon" aria-hidden="true">📏</span>
+                    12m
+                  </span>
+                  <span class="spec-item">
+                    <span class="spec-icon" aria-hidden="true">👥</span>
+                    8 posti
+                  </span>
+                  <span class="spec-item">
+                    <span class="spec-icon" aria-hidden="true">🎫</span>
+                    Patente
+                  </span>
+                </div>
+
+                <div class="product-footer">
+                  <div class="product-price">
+                    <span class="price-label">da</span>
+                    <span class="price-value">550€</span>
+                    <span class="price-period">/giorno</span>
+                  </div>
+                  <span class="product-cta">Dettagli →</span>
+                </div>
+              </div>
+            </a>
+          </article>
+
+          <article class="product-card">
+            <a href="dettaglio_barca.html?id=azimut" class="product-card-link" aria-label="Vedi dettagli Azimut 55 Fly">
+
+              <img class="product-card-image" src="../img/Azimut_55_fly_2.webp"
+                alt="Yacht a motore Azimut 55 Fly con flybridge" width="400" height="267" />
+
+              <div class="product-card-content">
+                <div class="product-header">
+                  <h3 class="product-title">
+                    Azimut 55 Fly
+                  </h3>
+                  <span class="product-badge badge-motore">Motore</span>
+                </div>
+
+                <p class="product-description">
+                  Il massimo del lusso. Flybridge spazioso e interni raffinati.
+                </p>
+
+                <div class="product-specs">
+                  <span class="spec-item">
+                    <span class="spec-icon" aria-hidden="true">📏</span>
+                    17m
+                  </span>
+                  <span class="spec-item">
+                    <span class="spec-icon" aria-hidden="true">👥</span>
+                    12 posti
+                  </span>
+                  <span class="spec-item">
+                    <span class="spec-icon" aria-hidden="true">🎫</span>
+                    Patente
+                  </span>
+                </div>
+
+                <div class="product-footer">
+                  <div class="product-price">
+                    <span class="price-label">da</span>
+                    <span class="price-value">1200€</span>
+                    <span class="price-period">/giorno</span>
+                  </div>
+                  <span class="product-cta">Dettagli →</span>
+                </div>
+              </div>
+            </a>
+          </article>
+
+          <article class="product-card">
+            <a href="dettaglio_barca.html?id=joker" class="product-card-link"
+              aria-label="Vedi dettagli Joker Clubman 24">
+
+              <img class="product-card-image" src="../img/Joker_clubman_24_1.webp"
+                alt="Gommone Joker Boat Clubman 24 in navigazione" width="400" height="267" />
+
+              <div class="product-card-content">
+                <div class="product-header">
+                  <h3 class="product-title">
+                    Joker Clubman 24
+                  </h3>
+                  <span class="product-badge badge-gommone">Gommone</span>
+                </div>
+
+                <p class="product-description">
+                  Pratico e spazioso, ideale per famiglie che vogliono esplorare la costa.
+                </p>
+
+                <div class="product-specs">
+                  <span class="spec-item">
+                    <span class="spec-icon" aria-hidden="true">📏</span>
+                    7m
+                  </span>
+                  <span class="spec-item">
+                    <span class="spec-icon" aria-hidden="true">👥</span>
+                    8 posti
+                  </span>
+                  <span class="spec-item">
+                    <span class="spec-icon" aria-hidden="true">✅</span>
+                    No patente
+                  </span>
+                </div>
+
+                <div class="product-footer">
+                  <div class="product-price">
+                    <span class="price-label">da</span>
+                    <span class="price-value">300€</span>
+                    <span class="price-period">/giorno</span>
+                  </div>
+                  <span class="product-cta">Dettagli →</span>
+                </div>
+              </div>
+            </a>
+          </article>
         </div>
       </div>
     </section>
@@ -429,8 +510,7 @@
           <span class="logo-text"><span lang="en">Sail</span><span class="text-accent" lang="en">UP</span></span>
         </div>
         <p class="footer-tagline">
-          Naviga il Golfo di Napoli con stile e sicurezza. La tua avventura
-          inizia qui.
+          Naviga il Golfo di Napoli con stile e sicurezza. La tua avventura inizia qui.
         </p>
       </div>
 
@@ -438,8 +518,8 @@
         <h3 class="footer-heading">Esplora</h3>
         <nav aria-label="Menu footer">
           <ul class="footer-links">
-            <li lang="en"><a href="index.html">Home</a></li>
-            <li class="visited">Noleggio</li>
+            <li><a href="index.html" lang="en">Home</a></li>
+            <li><a href="catalogo_noleggio.html" aria-current="page">Noleggio</a></li>
             <li><a href="catalogo_esperienze.html">Esperienze</a></li>
             <li><a href="blog.html" lang="en">Blog</a></li>
             <li><a href="chi_siamo.html">Chi Siamo</a></li>
@@ -448,32 +528,32 @@
       </div>
 
       <div class="footer-col info-col">
-        <h3 class="footer-heading">Info & Contatti</h3>
+        <h3 class="footer-heading">Info &amp; Contatti</h3>
         <ul class="footer-links">
-          <li><a href="FAQ.html">Domande Frequenti (FAQ)</a></li>
-          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="FAQ.html">Domande Frequenti (<abbr title="Frequently Asked Questions" lang="en">FAQ</abbr>)</a>
+          </li>
+          <li><a href="privacy.html" lang="en">Privacy Policy</a></li>
           <li><a href="cookie.html">Cookie Policy</a></li>
         </ul>
         <address class="footer-address">
           <p><strong>SailUP S.r.l.</strong></p>
           <p>Via Caracciolo, 80122 Napoli (NA)</p>
-          <p>P.IVA: 12345678901</p>
+          <p><abbr title="Partita IVA">P.IVA</abbr>: 12345678901</p>
         </address>
       </div>
     </div>
 
     <div class="footer-bottom">
       <div class="footer-bottom-container">
-        <div class="copyright">
-          &copy; 2025 SailUP S.r.l. - All rights reserved.
-        </div>
+        <p class="copyright">
+          &copy; 2025 SailUP S.r.l. - <span lang="en">All rights reserved</span>.
+        </p>
 
         <div class="valid-logos">
-          <img class="valid-code-icon" src="valid-xhtml10.png" alt="XHTML valido" />
-          <img class="valid-code-icon" src="valid-CSS.png" alt="CSS valido" />
+          <img class="valid-code-icon" src="valid-xhtml10.png" alt="XHTML valido" width="88" height="31" />
+          <img class="valid-code-icon" src="valid-CSS.png" alt="CSS valido" width="88" height="31" />
         </div>
 
-        <!-- Area bottone torna su, inizialmente non selezionabile con tab perchè invisibile -->
         <a href="#main-content" class="scroll-to-top" id="btnTop" aria-label="Torna all'inizio del contenuto"
           tabindex="-1">
           <span aria-hidden="true">⬆</span> <span lang="en">Top</span>
