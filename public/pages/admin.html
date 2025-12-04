@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Amministrazione - SailUP</title>
+    <title>Dashboard Amministrazione - SailUP</title>
     <meta name="description" content="Pannello di controllo per la gestione del sito SailUP" />
     <meta name="authors" content="Alberto Reginato, Francesco Marcon" />
 
@@ -14,9 +14,9 @@
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap"
         rel="stylesheet" />
 
-        <link rel="stylesheet" href="../css/style.css" media="screen" />
-        <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)" />
-        <link rel="stylesheet" href="../css/print.css" media="print" />
+    <link rel="stylesheet" href="../css/style.css" media="screen" />
+    <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)" />
+    <link rel="stylesheet" href="../css/print.css" media="print" />
 </head>
 
 <body>
@@ -31,9 +31,7 @@
                             src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=400&q=80"
                             width="30" />
                     </picture>
-                    <h1 lang="en">
-                        <span class="logo-text">Sail<span class="text-accent">UP</span></span>
-                    </h1>
+                    <span class="logo-text" lang="en">Sail<span class="text-accent">UP</span></span>
                 </a>
 
                 <nav id="main-menu">
@@ -48,15 +46,15 @@
 
                 <div class="header-buttons">
                     <button class="theme-toggle" aria-pressed="false" aria-label="Attiva modalità scura">
-                        <span class="active-icon sun">☀️</span>
-                        <span class="inactive-icon moon">🌙</span>
+                        <span class="active-icon sun" aria-hidden="true">☀️</span>
+                        <span class="inactive-icon moon hidden" aria-hidden="true">🌙</span>
                     </button>
                     <a href="profilo.html" class="btn-layout-light">Profilo</a>
                 </div>
 
                 <button id="hamburger-btn" aria-expanded="false" aria-controls="mobile-menu" aria-label="Menu Mobile">
-                    <span class="hamburger-icon">☰</span>
-                    <span class="close-icon hidden">✕</span>
+                    <span class="hamburger-icon" aria-hidden="true">☰</span>
+                    <span class="close-icon hidden" aria-hidden="true">✕</span>
                 </button>
             </div>
 
@@ -85,18 +83,17 @@
     </nav>
 
     <main id="main-content">
-        <div class="profile-container section-container">
-            <div class="profile-header">
+        <div class="section-container">
+            <header class="profile-header">
                 <div class="profile-info">
-                    <h1>Amministrazione</h1>
-                    <p class="profile-email">Benvenuto, <strong>Admin</strong>. Ecco una panoramica del sistema.</p>
+                    <h1>Dashboard Amministrazione</h1>
+                    <p class="profile-text">Benvenuto, <strong>Admin</strong>. Ecco una panoramica del sistema.</p>
                 </div>
-            </div>
+            </header>
 
             <div class="profile-layout">
                 <nav class="profile-sidebar" aria-label="Menu amministrazione">
                     <ul>
-
                         <li>
                             <a href="admin_utenti.html">
                                 <span class="nav-icon" aria-hidden="true">👥</span>
@@ -117,7 +114,7 @@
                         </li>
                         <li>
                             <a href="admin_blog.html">
-                                <span class="nav-icon" aria-hidden="true">✍️</span>
+                                <span class="nav-icon" aria-hidden="true">✏️</span>
                                 <span>Gestione Blog</span>
                             </a>
                         </li>
@@ -147,49 +144,7 @@
                         </div>
                     </section>
 
-                    <section aria-labelledby="recent-activity-title" class="profile-stats">
-                        <h2 id="recent-activity-title">Attività Recenti</h2>
-
-                        <div class="activity-list">
-
-                            <div class="activity-item">
-                                <div class="activity-icon icon-accent">⚓</div>
-                                <div class="activity-content">
-                                    <span class="activity-type">Prenotazione</span>
-                                    <p>Nuova prenotazione per <strong>Tour di Capri</strong></p>
-                                </div>
-                                <div class="activity-meta">
-                                    <span class="meta-user">Mario Rossi</span>
-                                    <time datetime="2025-01-28">Oggi, 14:32</time>
-                                </div>
-                            </div>
-
-                            <div class="activity-item">
-                                <div class="activity-icon icon-success">👤</div>
-                                <div class="activity-content">
-                                    <span class="activity-type">Registrazione</span>
-                                    <p>Nuovo utente registrato al portale</p>
-                                </div>
-                                <div class="activity-meta">
-                                    <span class="meta-user">Laura Bianchi</span>
-                                    <time datetime="2025-01-28">Oggi, 11:15</time>
-                                </div>
-                            </div>
-
-                            <div class="activity-item">
-                                <div class="activity-icon icon-warning">⛵</div>
-                                <div class="activity-content">
-                                    <span class="activity-type">Prodotto</span>
-                                    <p>Aggiornamento dettagli <strong>Bavaria 46</strong></p>
-                                </div>
-                                <div class="activity-meta">
-                                    <span class="meta-user">Admin</span>
-                                    <time datetime="2025-01-27">Ieri, 16:45</time>
-                                </div>
-                            </div>
-
-                        </div>
-                    </section>
+                    <!-- Vedere che informazione utile inserire in base a che query facciamo al db e con php -->
 
                     <section aria-labelledby="quick-actions-title" class="profile-stats">
                         <h2 id="quick-actions-title">Azioni Rapide</h2>
@@ -198,7 +153,7 @@
                                 <span aria-hidden="true">⛵</span> Aggiungi Prodotto
                             </a>
                             <a href="admin_blog_nuovo.html" class="btn-layout">
-                                <span aria-hidden="true">✍️</span> Nuovo Articolo Blog
+                                <span aria-hidden="true">✏️</span> Nuovo Articolo Blog
                             </a>
                             <a href="admin_prenotazioni.html" class="btn-layout-light">
                                 <span aria-hidden="true">📋</span> Vedi Prenotazioni
@@ -215,8 +170,7 @@
             <div class="footer-col brand-col">
                 <div class="logo footer-logo">
                     <span class="logo-icon" aria-hidden="true">⚓</span>
-                    <span class="logo-text"><span lang="en">Sail</span><span class="text-accent"
-                            lang="en">UP</span></span>
+                    <span class="logo-text"><span lang="en">Sail</span><span class="text-accent" lang="en">UP</span></span>
                 </div>
                 <p class="footer-tagline">
                     Naviga il Golfo di Napoli con stile e sicurezza. La tua avventura inizia qui.
@@ -239,33 +193,30 @@
             <div class="footer-col info-col">
                 <h3 class="footer-heading">Info &amp; Contatti</h3>
                 <ul class="footer-links">
-                    <li><a href="FAQ.html">Domande Frequenti (<abbr title="Frequently Asked Questions"
-                                lang="en">FAQ</abbr>)</a>
-                    </li>
+                    <li><a href="FAQ.html">Domande Frequenti (<abbr title="Frequently Asked Questions" lang="en">FAQ</abbr>)</a></li>
                     <li><a href="privacy.html" lang="en">Privacy Policy</a></li>
                     <li><a href="cookie.html">Cookie Policy</a></li>
                 </ul>
                 <address class="footer-address">
                     <p><strong>SailUP S.r.l.</strong></p>
                     <p>Via Caracciolo, 80122 Napoli (NA)</p>
-                    <p>P.IVA: 12345678901</p>
+                    <p><abbr title="Partita IVA">P.IVA</abbr>: 12345678901</p>
                 </address>
             </div>
         </div>
 
         <div class="footer-bottom">
             <div class="footer-bottom-container">
-                <div class="copyright">
-                    &copy; 2025 SailUP S.r.l. - All rights reserved.
-                </div>
+                <p class="copyright">
+                    &copy; 2025 SailUP S.r.l. - <span lang="en">All rights reserved</span>.
+                </p>
 
                 <div class="valid-logos">
                     <img class="valid-code-icon" src="valid-xhtml10.png" alt="XHTML valido" />
                     <img class="valid-code-icon" src="valid-CSS.png" alt="CSS valido" />
                 </div>
 
-                <a href="#main-content" class="scroll-to-top" id="btnTop" aria-label="Torna all'inizio del contenuto"
-                    tabindex="-1">
+                <a href="#main-content" class="scroll-to-top" id="btnTop" aria-label="Torna all'inizio del contenuto" tabindex="-1">
                     <span aria-hidden="true">⬆</span> <span lang="en">Top</span>
                 </a>
             </div>
