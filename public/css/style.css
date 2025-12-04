@@ -28,6 +28,8 @@
   /* Bordi sottili */
   --col-card: #ffffff;
 
+  --col-visited-link: #57534e;
+
   /* --- Spaziature & Radius --- */
   --radius-btn: 99em;
   --radius-card: 1em;
@@ -815,6 +817,11 @@ footer {
   display: inline-block;
   filter: grayscale(1) invert(1);
   opacity: 0.6;
+}
+
+/* link visitati, non solo del footer */
+a:visited, .visited{
+  color: var(--col-visited-link); 
 }
 
 /* =========================================
