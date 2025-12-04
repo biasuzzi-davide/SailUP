@@ -28,7 +28,7 @@
   /* Bordi sottili */
   --col-card: #ffffff;
 
-  --col-visited-link: #57534e;
+  --col-visited-link: #8c794c;
 
   /* --- Spaziature & Radius --- */
   --radius-btn: 99em;
@@ -1961,13 +1961,7 @@ input[maxlength="5"] {
   align-items: start;
 }
 
-/* SIDEBAR FILTRI */
-.filters-sidebar {
-  position: sticky;
-  top: 6em;
-  max-height: calc(100vh - 8em);
-  overflow-y: auto;
-}
+
 
 .filters-header {
   display: flex;
