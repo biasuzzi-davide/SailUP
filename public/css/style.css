@@ -996,10 +996,8 @@ footer {
   font-family: var(--font-head);
 }
 
-.form-group input[type="text"],
-.form-group input[type="email"],
-.form-group input[type="password"],
-.form-group input[type="tel"],
+.form-group input,
+.form-group select,
 .form-group textarea {
   width: 100%;
   padding: 0.9em;
@@ -1013,9 +1011,11 @@ footer {
 }
 
 .form-group input:focus,
-.form-group textarea:focus {
+.form-group textarea:focus,
+.form-group select:focus {
   outline: none;
   border-color: var(--col-accent);
+  color: var(--col-primary);
   box-shadow: 0 0 0 3px rgba(254, 101, 79, 0.1);
 }
 
@@ -2272,12 +2272,6 @@ input[maxlength="5"] {
   justify-content: space-between;
   align-items: center;
   margin-top: auto;
-}
-
-.product-price {
-  display: flex;
-  align-items: baseline;
-  gap: 0.3em;
 }
 
 .price-label {
