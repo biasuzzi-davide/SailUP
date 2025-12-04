@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Blog - SailUP</title>
+  <title>Blog - Diario di Bordo - SailUP</title>
   <meta name="description"
     content="Consulta le guide e consigli scritte dalla redazione di SailUp per pianificare la tua prossima gita nel Golfo di Napoli." />
   <meta name="authors" content="SailUp team" />
@@ -15,13 +15,13 @@
     href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap"
     rel="stylesheet" />
 
-    <link rel="stylesheet" href="../css/style.css" media="screen" />
-    <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)" />
-    <link rel="stylesheet" href="../css/print.css" media="print" />
+  <link rel="stylesheet" href="../css/style.css" media="screen" />
+  <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)" />
+  <link rel="stylesheet" href="../css/print.css" media="print" />
 </head>
 
 <body>
-  <a href="#main-content" class="skip-to-content">Salta al contenuto</a>
+  <a href="#main-content" class="skip-to-content">Salta al contenuto principale</a>
 
   <header>
     <div class="header-container">
@@ -33,12 +33,10 @@
               src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=400&q=80"
               width="30" />
           </picture>
-          <h1 lang="en">
-            <span class="logo-text">Sail<span class="text-accent">UP</span></span>
-          </h1>
+          <span class="logo-text" lang="en">Sail<span class="text-accent">UP</span></span>
         </a>
 
-        <nav id="main-menu" aria-label="Menu principale">
+        <nav id="main-menu">
           <ul>
             <li><a href="index.html" lang="en">Home</a></li>
             <li><a href="catalogo_noleggio.html">Noleggio</a></li>
@@ -50,19 +48,19 @@
 
         <div class="header-buttons">
           <button class="theme-toggle" aria-pressed="false" aria-label="Attiva modalità scura">
-            <span class="active-icon sun">☀️</span>
-            <span class="inactive-icon moon">🌙</span>
+            <span class="active-icon sun" aria-hidden="true">☀️</span>
+            <span class="inactive-icon moon hidden" aria-hidden="true">🌙</span>
           </button>
           <a href="login.html" class="btn-layout"><span lang="en">Login</span></a>
         </div>
 
         <button id="hamburger-btn" aria-expanded="false" aria-controls="mobile-menu" aria-label="Menu Mobile">
-          <span class="hamburger-icon">☰</span>
-          <span class="close-icon hidden">✕</span>
+          <span class="hamburger-icon" aria-hidden="true">☰</span>
+          <span class="close-icon hidden" aria-hidden="true">✕</span>
         </button>
       </div>
 
-      <nav id="mobile-menu" aria-label="Menu mobile">
+      <nav id="mobile-menu">
         <ul>
           <li><a href="index.html" lang="en">Home</a></li>
           <li><a href="catalogo_noleggio.html">Noleggio</a></li>
@@ -70,7 +68,7 @@
           <li class="current-page" lang="en">Blog</li>
           <li><a href="chi_siamo.html">Chi Siamo</a></li>
           <li>
-            <a href="login.html" class="menu-login">Login / Registrati</a>
+            <a href="login.html" class="menu-login"><span lang="en">Login</span> / Registrati</a>
           </li>
         </ul>
       </nav>
@@ -83,86 +81,87 @@
   <nav aria-labelledby="breadcrumb-label" id="breadcrumb">
     <ol>
       <li>
-        <span lang="en" class="breadcrumb-link"><a href="index.html">Home</a></span>
+        <a href="index.html" lang="en">Home</a>
       </li>
       <li aria-current="page">Blog</li>
     </ol>
   </nav>
 
   <main id="main-content">
-    
-    <section id="hero" class="section-container">
-      <div>
-        <h1>Diario di Bordo</h1>
-        <p>
-            Itinerari segreti, consigli tecnici e storie di chi vive il mare ogni giorno. Lasciati ispirare per la tua prossima rotta.
-        </p>
-      </div>
-      <img src="../img/HeroDiarioDiBordo.jpg"
-        alt="Diario di bordo aperto su tavolo da carteggio" class="hero-image" />
-    </section>
+    <div class="section-container">
+      <section id="hero">
+        <!-- Necessario l'utilizzo del div per la gestione del hero content afianco a hero image -->
+        <div>
+          <h1>Diario di Bordo</h1>
+          <p>
+            Itinerari segreti, consigli tecnici e storie di chi vive il mare ogni giorno. Lasciati ispirare per la tua
+            prossima rotta.
+          </p>
+        </div>
+        <img src="../img/HeroDiarioDiBordo.jpg" alt="Diario di bordo aperto su tavolo da carteggio" class="hero-image"
+          width="600" height="450" />
+      </section>
 
-    <section class="section-container">
-      <div class="section-header">
+      <section aria-labelledby="latest-articles-title">
         <h2>Ultimi Articoli</h2>
-      </div>
 
-      <div class="cards-wrapper">
-        
-        <article class="card">
-          <a href="#" class="card-link-wrapper" aria-label="Leggi: Le 5 baie segrete di Procida">
-            <img src="../img/BaiaProcida.avif"
-              alt="Baia di Procida vista dall'alto" />
-            <div class="card-content">
-              <h3 class="card-title">Le 5 baie segrete di Procida</h3>
-              <p class="card-subtitle">Itinerari • 15 Maggio 2025</p>
-              <p class="card-description">Lontano dalla folla, scopri gli angoli di paradiso raggiungibili solo via mare nella capitale della cultura.</p>
-              <p class="read-more">Leggi tutto</p>
-            </div>
-          </a>
-        </article>
-
-        <article class="card">
-          <a href="#" class="card-link-wrapper" aria-label="Leggi: Cosa portare in barca">
-            <img src="../img/UtensiliBarca.jpg"
-              alt="Attrezzatura nautica su un pontile" />
-            <div class="card-content">
-              <h3 class="card-title">Cosa portare in barca</h3>
-              <p class="card-subtitle">Guide Pratiche • 22 Aprile 2025</p>
-              <p class="card-description">La checklist definitiva per il marinaio perfetto: cosa mettere nella sacca morbida e cosa lasciare a terra.</p>
-              <p class="read-more">Leggi tutto</p>
-            </div>
-          </a>
-        </article>
-
-        <article class="card">
-          <a href="#" class="card-link-wrapper" aria-label="Leggi: Sicurezza e Meteo">
-            <img src="../img/Meteo.jpg"
-              alt="Temporale in mare aperto" />
-            <div class="card-content">
-              <h3 class="card-title">Interpretare il Meteo</h3>
-              <p class="card-subtitle">Sicurezza • 10 Marzo 2025</p>
-              <p class="card-description">Come leggere i segnali del vento e del cielo per navigare sempre in sicurezza nel Golfo.</p>
-              <p class="read-more">Leggi tutto</p>
-            </div>
-          </a>
-        </article>
-
-        <article class="card">
-            <a href="#" class="card-link-wrapper" aria-label="Leggi: Ricette a bordo">
-              <img src="../img/CucinaBarca.jpg"
-                alt="Cuoco ai fornelli in barca" />
+        <div class="cards-wrapper">
+          <article class="card">
+            <a href="#" aria-label="Leggi l'articolo: Le 5 baie segrete di Procida">
+              <img src="../img/BaiaProcida.avif" alt="Baia di Procida vista dall'alto" width="400" height="267" />
               <div class="card-content">
-                <h3 class="card-title">Cucina di Bordo</h3>
-                <p class="card-subtitle">Lifestyle • 05 Febbraio 2025</p>
-                <p class="card-description">Tre ricette fresche e veloci che non richiedono l'uso del forno, perfette per l'estate.</p>
-                <p class="read-more">Leggi tutto</p>
+                <h3 class="card-title">Le 5 baie segrete di Procida</h3>
+                <p class="card-subtitle">Itinerari • <time datetime="2025-05-15">15 Maggio 2025</time></p>
+                <p class="card-description">Lontano dalla folla, scopri gli angoli di paradiso raggiungibili solo via
+                  mare nella capitale della cultura.</p>
+                <span class="read-more">Leggi tutto</span>
               </div>
             </a>
           </article>
-      </div>
-      
-    </section>
+
+          <article class="card">
+            <a href="#" class="card-link-wrapper" aria-label="Leggi l'articolo: Cosa portare in barca">
+              <img src="../img/UtensiliBarca.jpg" alt="Attrezzatura nautica su un pontile" width="400" height="267" />
+              <div class="card-content">
+                <h3 class="card-title">Cosa portare in barca</h3>
+                <p class="card-subtitle">Guide Pratiche • <time datetime="2025-04-22">22 Aprile 2025</time></p>
+                <p class="card-description">La checklist definitiva per il marinaio perfetto: cosa mettere nella sacca
+                  morbida e cosa lasciare a terra.</p>
+                <span class="read-more">Leggi tutto</span>
+              </div>
+            </a>
+          </article>
+
+          <article class="card">
+            <a href="#" aria-label="Leggi l'articolo: Interpretare il Meteo">
+              <img src="../img/Meteo.jpg" alt="Temporale in mare aperto" width="400" height="267" />
+              <div class="card-content">
+                <h3 class="card-title">Interpretare il Meteo</h3>
+                <p class="card-subtitle">Sicurezza • <time datetime="2025-03-10">10 Marzo 2025</time></p>
+                <p class="card-description">Come leggere i segnali del vento e del cielo per navigare sempre in
+                  sicurezza
+                  nel Golfo.</p>
+                <span class="read-more">Leggi tutto</span>
+              </div>
+            </a>
+          </article>
+
+          <article class="card">
+            <a href="#" aria-label="Leggi l'articolo: Cucina di Bordo">
+              <img src="../img/CucinaBarca.jpg" alt="Cuoco ai fornelli in barca" width="400" height="267" />
+              <div class="card-content">
+                <h3 class="card-title">Cucina di Bordo</h3>
+                <p class="card-subtitle">Lifestyle • <time datetime="2025-02-05">05 Febbraio 2025</time></p>
+                <p class="card-description">Tre ricette fresche e veloci che non richiedono l'uso del forno, perfette
+                  per
+                  l'estate.</p>
+                <span class="read-more">Leggi tutto</span>
+              </div>
+            </a>
+          </article>
+        </div>
+      </section>
+    </div>
   </main>
 
   <footer>
@@ -173,51 +172,50 @@
           <span class="logo-text"><span lang="en">Sail</span><span class="text-accent" lang="en">UP</span></span>
         </div>
         <p class="footer-tagline">
-          Naviga il Golfo di Napoli con stile e sicurezza. La tua avventura
-          inizia qui.
+          Naviga il Golfo di Napoli con stile e sicurezza. La tua avventura inizia qui.
         </p>
       </div>
 
       <div class="footer-col nav-col">
-        <h3 class="footer-heading">Esplora</h3>
+        <h2 class="footer-heading">Esplora</h2>
         <nav aria-label="Menu footer">
           <ul class="footer-links">
             <li><a href="index.html" lang="en">Home</a></li>
             <li><a href="catalogo_noleggio.html">Noleggio</a></li>
             <li><a href="catalogo_esperienze.html">Esperienze</a></li>
-            <li lang="en" class="visited">Blog</li>
+            <li><a href="blog.html" lang="en" aria-current="page">Blog</a></li>
             <li><a href="chi_siamo.html">Chi Siamo</a></li>
           </ul>
         </nav>
       </div>
 
       <div class="footer-col info-col">
-        <h3 class="footer-heading">Info & Contatti</h3>
+        <h2 class="footer-heading">Info &amp; Contatti</h2>
         <ul class="footer-links">
-          <li><a href="FAQ.html">Domande Frequenti (<abbr title="Frequently Asked Questions" lang="en">FAQ</abbr>)</a></li>
+          <li><a href="FAQ.html">Domande Frequenti (<abbr title="Frequently Asked Questions" lang="en">FAQ</abbr>)</a>
+          </li>
           <li><a href="privacy.html" lang="en">Privacy Policy</a></li>
-          <li><a href="cookie.html">Cookie Policy</a></li>
+          <li><a href="cookie.html" lang="en">Cookie Policy</a></li>
         </ul>
         <address class="footer-address">
           <p><strong>SailUP S.r.l.</strong></p>
           <p>Via Caracciolo, 80122 Napoli (NA)</p>
-          <p>P.IVA: 12345678901</p>
+          <p><abbr title="Partita IVA">P.IVA</abbr>: 12345678901</p>
         </address>
       </div>
     </div>
 
     <div class="footer-bottom">
       <div class="footer-bottom-container">
-        <div class="copyright">
-          &copy; 2025 SailUP S.r.l. - All rights reserved.
-        </div>
+        <p class="copyright">
+          &copy; 2025 SailUP S.r.l. - <span lang="en">All rights reserved</span>.
+        </p>
 
         <div class="valid-logos">
           <img class="valid-code-icon" src="valid-xhtml10.png" alt="XHTML valido" />
           <img class="valid-code-icon" src="valid-CSS.png" alt="CSS valido" />
         </div>
 
-        <!-- Area bottone torna su, inizialmente non selezionabile con tab perchè invisibile -->
         <a href="#main-content" class="scroll-to-top" id="btnTop" aria-label="Torna all'inizio del contenuto"
           tabindex="-1">
           <span aria-hidden="true">⬆</span> <span lang="en">Top</span>
