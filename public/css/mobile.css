@@ -519,3 +519,100 @@ footer .logo p {
 #breadcrumb li a {
     min-height: 44px; /* Touch target */
 }
+
+/* =========================================
+   TABELLA RESPONSIVE (Card View) - FIX HEADER
+   ========================================= */
+
+/* 1. Reset del contenitore principale */
+.table-container {
+    /* Rimuoviamo lo stile "scatola" del contenitore su mobile 
+       perché ora avremo delle card separate */
+    background-color: transparent; 
+    border: none;
+    box-shadow: none;
+    overflow: visible; /* Importante per vedere le ombre delle card */
+}
+
+/* 2. Trasformiamo gli elementi in blocchi */
+.table-container table, 
+.table-container thead, 
+.table-container tbody, 
+.table-container th, 
+.table-container td, 
+.table-container tr,
+.table-container caption { /* <--- Aggiunto caption qui */
+    display: block; 
+    width: 100%;
+}
+
+/* 3. FIX SPECIFICO PER L'INTESTAZIONE (Caption) */
+.table-container caption {
+    text-align: left;
+    margin-bottom: 1em;
+    padding: 1em;
+    background-color: var(--col-bg-alt);
+    border-radius: var(--radius-card); /* Arrotondiamo tutto */
+    border: 1px solid var(--col-border);
+    box-shadow: var(--shadow-sm);
+    
+    /* Impediamo che erediti bordi strani dalla versione desktop */
+    border-bottom: 1px solid var(--col-border); 
+}
+
+/* 4. Nascondiamo l'intestazione della tabella (thead) */
+.table-container thead { 
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+}
+
+/* 5. Stile delle CARD (Righe) */
+.table-container tr { 
+    margin-bottom: 1.5em;
+    background-color: var(--col-card);
+    border: 1px solid var(--col-border);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-sm);
+    padding: 0;
+    overflow: hidden;
+}
+
+/* 6. Stile delle Celle (Righe interne alla card) */
+.table-container td { 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: none;
+    border-bottom: 1px solid var(--col-border); 
+    padding: 1em;
+    text-align: right;
+}
+
+.table-container td:last-child { 
+    border-bottom: none; 
+}
+
+/* 7. Etichette (Data-Label) */
+.table-container td::before { 
+    content: attr(data-label);
+    font-weight: 700;
+    color: var(--col-primary);
+    text-transform: uppercase;
+    font-size: 0.75em; /* Leggermente più piccolo per eleganza */
+    letter-spacing: 0.5px;
+    text-align: left;
+    margin-right: 1em;
+    flex: 0 0 40%; /* Assicura che l'etichetta abbia spazio fisso */
+}
+
+/* 8. Cella Azioni */
+.table-container td.actions-cell {
+    justify-content: flex-end;
+    background-color: var(--col-bg-alt);
+    padding: 0.8em 1em;
+}
+
+.table-container td.actions-cell::before {
+    display: none;
+}
