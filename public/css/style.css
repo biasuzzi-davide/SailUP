@@ -192,7 +192,7 @@ img {
 }
 
 .hidden {
-  display: none !important;
+  display: none;
 }
 
 /* Accessibilità: Salta al contenuto */
@@ -244,7 +244,7 @@ img {
 /* Bottone Primario (Pieno) */
 .btn-layout {
   background-color: var(--btn-bg-primary);
-  color: var(--btn-color-primary) !important;
+  color: var(--btn-color-primary);
   border-color: var(--btn-border-primary);
   box-shadow: var(--shadow-sm);
 }
@@ -273,7 +273,7 @@ img {
 
 .btn-layout-light:hover {
   background-color: var(--btn-bg-primary);
-  color: var(--btn-color-primary) !important;
+  color: var(--btn-color-primary);
 }
 
 #hero-content {
@@ -530,6 +530,26 @@ button:focus-visible,
 }
 #breadcrumb li a:hover::after {
     border-left-color: #e2e8f0;
+}
+
+/* Parte per la modifica del tab sulle breadcrumb */
+#breadcrumb li a:focus-visible {
+    outline: none;
+    border: none;
+    border-radius: 0;
+    
+    background-color: var(--col-accent);
+    color: var(--col-text-inv);
+
+}
+
+#breadcrumb li a:focus-visible {
+    border-top-left-radius: var(--radius-sm);
+    border-bottom-left-radius: var(--radius-sm);
+}
+
+#breadcrumb li a:focus-visible::after {
+    border-left-color: var(--col-accent);
 }
 
 /* =========================================
