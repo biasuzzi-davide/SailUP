@@ -278,16 +278,6 @@ img {
   color: var(--btn-color-primary);
 }
 
-#hero-content {
-  position: relative;
-  z-index: 2;
-}
-
-#hero-content h1,
-#hero-content {
-  color: #ffffff;
-}
-
 /* =========================================
    4. HEADER & NAVIGAZIONE
    ========================================= */
