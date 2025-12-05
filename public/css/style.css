@@ -278,6 +278,16 @@ img {
   color: var(--btn-color-primary);
 }
 
+#hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+#hero-content h1,
+#hero-content {
+  color: #ffffff;
+}
+
 /* =========================================
    4. HEADER & NAVIGAZIONE
    ========================================= */
@@ -565,7 +575,7 @@ body.layout-full-width {
 }
 
 .layout-full-width {
-  background-image: url('../img/Immagine\ Hero.jpg');
+  background-image: url('../img/Immagine_Hero.jpg');
   background-color: #030a11;
   background-size: cover;
   background-position: center;
