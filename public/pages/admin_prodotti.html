@@ -119,120 +119,112 @@
 
             <div class="profile-content">
                 <section aria-labelledby="products-list-title">
-                    <h2 id="products-list-title">Flotta &amp; Esperienze</h2>
-
-                    <div class="item-actions">
+                    <h2 id="products-list-title" class="sr-only">Lista Prodotti</h2>
+                
+                    <div class="item-actions" style="margin-bottom: 1rem;">
                         <a href="admin_prodotti_nuovo.html" class="btn-layout btn-sm">
                             <span aria-hidden="true">+</span> Aggiungi Nuovo
                         </a>
                     </div>
-
-                    <ul class="activity-list">
-                        <li class="activity-item">
-                            <div class="activity-icon icon-accent" aria-hidden="true">⛵</div>
-                            <div class="activity-content">
-                                <span class="activity-type">Noleggio • Vela</span>
-                                <p>Bavaria 46 Cruiser</p>
-                                <p class="user-subtext">8 Posti • 4 Cabine</p>
-                            </div>
-                            <div class="activity-meta">
-                                <p class="meta-user">€ 350 /gg</p>
-                                <p class="user-subtext">Disponibile</p>
-                                <div class="item-actions">
-                                    <button class="btn-layout-light btn-sm" aria-label="Modifica">
-                                        <span aria-hidden="true">✏️</span>
-                                    </button>
-                                    <button class="btn-danger-outline btn-sm" aria-label="Archivia">
-                                        <span aria-hidden="true">📦</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </li>
-
-                        <li class="activity-item">
-                            <div class="activity-icon icon-accent" aria-hidden="true">⚓</div>
-                            <div class="activity-content">
-                                <span class="activity-type">Noleggio • Catamarano</span>
-                                <p>Lagoon 42</p>
-                                <p class="user-subtext">10 Posti • Full Optional</p>
-                            </div>
-                            <div class="activity-meta">
-                                <p class="meta-user">€ 600 /gg</p>
-                                <p class="user-subtext">Disponibile</p>
-                                <div class="item-actions">
-                                    <button class="btn-layout-light btn-sm" aria-label="Modifica">
-                                        <span aria-hidden="true">✏️</span>
-                                    </button>
-                                    <button class="btn-danger-outline btn-sm" aria-label="Archivia">
-                                        <span aria-hidden="true">📦</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </li>
-
-                        <li class="activity-item">
-                            <div class="activity-icon icon-warning" aria-hidden="true">🚤</div>
-                            <div class="activity-content">
-                                <span class="activity-type">Noleggio • Gommone</span>
-                                <p>Gommonautica G48</p>
-                                <p class="user-subtext">6 Posti • Senza patente</p>
-                            </div>
-                            <div class="activity-meta">
-                                <p class="meta-user">€ 120 /gg</p>
-                                <p class="user-subtext text-warning">Manutenzione</p>
-                                <div class="item-actions">
-                                    <button class="btn-layout-light btn-sm" aria-label="Modifica">
-                                        <span aria-hidden="true">✏️</span>
-                                    </button>
-                                    <button class="btn-danger-outline btn-sm" aria-label="Archivia">
-                                        <span aria-hidden="true">📦</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </li>
-
-                        <li class="activity-item">
-                            <div class="activity-icon icon-success" aria-hidden="true">🍹</div>
-                            <div class="activity-content">
-                                <span class="activity-type">Esperienza • Aperitivo</span>
-                                <p>Tramonto a Posillipo</p>
-                                <p class="user-subtext">Durata: 3h • Skipper incluso</p>
-                            </div>
-                            <div class="activity-meta">
-                                <p class="meta-user">€ 45 /pax</p>
-                                <p class="user-subtext">Attivo</p>
-                                <div class="item-actions">
-                                    <button class="btn-layout-light btn-sm" aria-label="Modifica">
-                                        <span aria-hidden="true">✏️</span>
-                                    </button>
-                                    <button class="btn-danger-outline btn-sm" aria-label="Archivia">
-                                        <span aria-hidden="true">📦</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </li>
-
-                        <li class="activity-item">
-                            <div class="activity-icon icon-accent" aria-hidden="true">⛵</div>
-                            <div class="activity-content">
-                                <span class="activity-type">Noleggio • Vela</span>
-                                <p>Oceanis 38.1</p>
-                                <p class="user-subtext">6 Posti • 3 Cabine</p>
-                            </div>
-                            <div class="activity-meta">
-                                <p class="meta-user">€ 280 /gg</p>
-                                <p class="user-subtext">Disponibile</p>
-                                <div class="item-actions">
-                                    <button class="btn-layout-light btn-sm" aria-label="Modifica">
-                                        <span aria-hidden="true">✏️</span>
-                                    </button>
-                                    <button class="btn-danger-outline btn-sm" aria-label="Archivia">
-                                        <span aria-hidden="true">📦</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
+                
+                    <div class="table-container">
+                        <table>
+                            <caption>Flotta &amp; Esperienze</caption>
+                            <thead>
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Nome Prodotto</th>
+                                    <th scope="col">Tipo</th>
+                                    <th scope="col">Dettagli</th>
+                                    <th scope="col">Prezzo</th>
+                                    <th scope="col">Stato</th>
+                                    <th scope="col">Azioni</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td data-label="ID">101</td>
+                                    <td data-label="Nome Prodotto">Bavaria 46 Cruiser</td>
+                                    <td data-label="Tipo">Noleggio • Vela</td>
+                                    <td data-label="Dettagli">8 Posti • 4 Cabine</td>
+                                    <td data-label="Prezzo">€ 350 /gg</td>
+                                    <td data-label="Stato"><span class="status-badge completed">Disponibile</span></td>
+                                    <td data-label="Azioni" class="actions-cell">
+                                        <button class="btn-icon" aria-label="Modifica Bavaria 46">
+                                            <span aria-hidden="true">✏️</span>
+                                        </button>
+                                        <button class="btn-icon danger" aria-label="Archivia Bavaria 46">
+                                            <span aria-hidden="true">📦</span>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td data-label="ID">102</td>
+                                    <td data-label="Nome Prodotto">Lagoon 42</td>
+                                    <td data-label="Tipo">Noleggio • Catamarano</td>
+                                    <td data-label="Dettagli">10 Posti • Full Optional</td>
+                                    <td data-label="Prezzo">€ 600 /gg</td>
+                                    <td data-label="Stato"><span class="status-badge completed">Disponibile</span></td>
+                                    <td data-label="Azioni" class="actions-cell">
+                                        <button class="btn-icon" aria-label="Modifica Lagoon 42">
+                                            <span aria-hidden="true">✏️</span>
+                                        </button>
+                                        <button class="btn-icon danger" aria-label="Archivia Lagoon 42">
+                                            <span aria-hidden="true">📦</span>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td data-label="ID">103</td>
+                                    <td data-label="Nome Prodotto">Gommonautica G48</td>
+                                    <td data-label="Tipo">Noleggio • Gommone</td>
+                                    <td data-label="Dettagli">6 Posti • Senza patente</td>
+                                    <td data-label="Prezzo">€ 120 /gg</td>
+                                    <td data-label="Stato"><span class="status-badge pending">Manutenzione</span></td>
+                                    <td data-label="Azioni" class="actions-cell">
+                                        <button class="btn-icon" aria-label="Modifica G48">
+                                            <span aria-hidden="true">✏️</span>
+                                        </button>
+                                        <button class="btn-icon danger" aria-label="Archivia G48">
+                                            <span aria-hidden="true">📦</span>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td data-label="ID">201</td>
+                                    <td data-label="Nome Prodotto">Tramonto a Posillipo</td>
+                                    <td data-label="Tipo">Esperienza • Aperitivo</td>
+                                    <td data-label="Dettagli">Durata: 3h • Skipper incl.</td>
+                                    <td data-label="Prezzo">€ 45 /pax</td>
+                                    <td data-label="Stato"><span class="status-badge active">Attivo</span></td>
+                                    <td data-label="Azioni" class="actions-cell">
+                                        <button class="btn-icon" aria-label="Modifica Esperienza">
+                                            <span aria-hidden="true">✏️</span>
+                                        </button>
+                                        <button class="btn-icon danger" aria-label="Archivia Esperienza">
+                                            <span aria-hidden="true">📦</span>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td data-label="ID">104</td>
+                                    <td data-label="Nome Prodotto">Oceanis 38.1</td>
+                                    <td data-label="Tipo">Noleggio • Vela</td>
+                                    <td data-label="Dettagli">6 Posti • 3 Cabine</td>
+                                    <td data-label="Prezzo">€ 280 /gg</td>
+                                    <td data-label="Stato"><span class="status-badge completed">Disponibile</span></td>
+                                    <td data-label="Azioni" class="actions-cell">
+                                        <button class="btn-icon" aria-label="Modifica Oceanis">
+                                            <span aria-hidden="true">✏️</span>
+                                        </button>
+                                        <button class="btn-icon danger" aria-label="Archivia Oceanis">
+                                            <span aria-hidden="true">📦</span>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </section>
             </div>
         </div>

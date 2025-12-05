@@ -2191,10 +2191,14 @@ input[maxlength="5"] {
 
 .product-header {
   display: flex;
-  justify-content: space-between; /* Titolo a sinistra, Badge a destra */
-  align-items: flex-start;        /* Allinea in alto (utile se il titolo va su 2 righe) */
-  gap: 1em;                       /* Spazio minimo tra i due elementi */
-  margin-bottom: 0.5em;           /* Spazio sotto, verso la descrizione */
+  justify-content: space-between;
+  /* Titolo a sinistra, Badge a destra */
+  align-items: flex-start;
+  /* Allinea in alto (utile se il titolo va su 2 righe) */
+  gap: 1em;
+  /* Spazio minimo tra i due elementi */
+  margin-bottom: 0.5em;
+  /* Spazio sotto, verso la descrizione */
 }
 
 .product-card-link {
@@ -2223,7 +2227,7 @@ input[maxlength="5"] {
   letter-spacing: 0.05em;
   box-shadow: var(--shadow-md);
   flex-shrink: 0;
-  white-space: nowrap; 
+  white-space: nowrap;
   margin-top: 2px;
 }
 
@@ -2853,7 +2857,7 @@ table {
 }
 
 caption {
-  text-align: left;
+  text-align: center;
   padding: 1em 1.5em;
   font-weight: 700;
   font-family: var(--font-head);
@@ -2869,9 +2873,7 @@ td {
   border-bottom: 1px solid var(--col-border);
   vertical-align: middle;
   /* DEFAULT: Tutto su una riga e troncato se troppo lungo */
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+
 }
 
 thead th {
@@ -2879,24 +2881,23 @@ thead th {
   color: var(--col-text-muted);
   font-size: 0.8em;
   text-transform: uppercase;
-  text-align: left;
+  text-align: center;
   white-space: normal;
-  /* I titoli possono andare a capo se serve */
 }
 
-/* 1. ID (1ª colonna): Fissa e piccola */
+tr{
+  text-align: center;
+  margin: 1em;
+}
+
+.table-users tr > *:nth-child(3){
+  width:30%
+}
+
 tr>*:first-child {
   width: 60px;
-  text-align: center;
 }
 
-/* 2. EMAIL (3ª colonna): L'UNICA che si allarga e va a capo */
-tr>*:nth-child(3) {
-  width: 35%;
-  white-space: normal;
-  word-break: break-all;
-  overflow: visible;
-}
 
 /* 3. AZIONI (Ultima colonna): Fissa a destra */
 tr>*:last-child {
@@ -2934,7 +2935,8 @@ tr>*:last-child {
 
 /* --- Supporto Dark Mode --- */
 [data-theme="dark"] .table-container {
-  background-color: var(--col-bg); /* Scuro */
+  background-color: var(--col-bg);
+  /* Scuro */
 }
 
 [data-theme="dark"] caption {
@@ -2965,6 +2967,10 @@ tr>*:last-child {
   background-color: #450a0a;
   border-color: #ef4444;
 }
+
+
+
+
 /* =========================================
    STILE FORM ADMIN (Semplificato)
    ========================================= */
@@ -2975,7 +2981,7 @@ tr>*:last-child {
   border: 1px solid var(--col-border);
   border-radius: var(--radius-card);
   box-shadow: var(--shadow-sm);
-  
+
   max-width: 800px;
   margin: 0 auto 3em auto;
   padding: 2.5em;
@@ -2998,7 +3004,8 @@ tr>*:last-child {
   padding: 0;
   display: block;
   width: 100%;
-  border-bottom: 1px solid var(--col-border); /* Linea divisoria sottile */
+  border-bottom: 1px solid var(--col-border);
+  /* Linea divisoria sottile */
   padding-bottom: 0.5em;
 }
 
