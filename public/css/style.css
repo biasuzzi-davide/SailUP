@@ -574,8 +574,22 @@ body.layout-full-width {
   overflow-x: hidden;
 }
 
-.layout-full-width {
-  background-image: url('../img/Immagine_Hero.jpg');
+#hero.hero-center {
+  grid-template-columns: 1fr;
+  text-align: center;
+  justify-items: center;
+}
+
+#hero.hero-center #hero-content {
+  max-width: 800px; 
+  margin: 0 auto;
+}
+
+#hero.hero-center .cta-group {
+  justify-content: center;
+}
+
+.layout-full-width-index, .layout-full-width-blog, .layout-full-width-chiSiamo {
   background-color: #030a11;
   background-size: cover;
   background-position: center;
@@ -583,7 +597,19 @@ body.layout-full-width {
   position: relative;
 }
 
-.layout-full-width::before {
+.layout-full-width-index{
+  background-image: url('../img/Immagine_Hero.jpg');
+}
+
+.layout-full-width-blog{
+  background-image: url('../img/HeroDiarioDiBordo.jpg');
+}
+
+.layout-full-width-chiSiamo{
+  background-image: url('../img/ChiSiamo.jpg');
+}
+
+.layout-full-width-index, .layout-full-width-blog::before, .layout-full-width-chiSiamo::before {
   content: '';
   position: absolute;
   top: 0;
