@@ -150,92 +150,96 @@
               </div>
             </div>
           </section>
-
           <section aria-labelledby="posts-list-title" class="security-section">
-            <h2 id="posts-list-title">Elenco Articoli</h2>
-
-            <div class="item-actions">
-              <a href="admin_blog_nuovo.html" class="btn-layout btn-sm">+ Nuovo Articolo</a>
+            <h2 id="posts-list-title" class="sr-only">Lista Articoli Blog</h2>
+        
+            <div class="item-actions" style="margin-bottom: 1rem;">
+                <a href="admin_blog_nuovo.html" class="btn-layout btn-sm">+ Nuovo Articolo</a>
             </div>
-
-            <div class="activity-list">
-
-              <article class="activity-item">
-                <div class="activity-icon icon-success" aria-hidden="true">✏️</div>
-                <div class="activity-content">
-                  <span class="activity-type">Guida</span>
-                  <h3>Come scegliere la barca perfetta</h3>
-                  <p class="user-subtext">342 letture • Admin SailUP</p>
-                </div>
-                <div class="activity-meta">
-                  <time datetime="2025-01-15">15/01/25</time>
-                  <p class="user-subtext text-success">Pubblicato</p>
-                  <div class="item-actions">
-                    <button class="btn-layout-light btn-sm" aria-label="Modifica articolo">✏️</button>
-                    <button class="btn-danger-outline btn-sm" aria-label="Elimina articolo">🗑️</button>
-                  </div>
-                </div>
-              </article>
-
-              <article class="activity-item">
-                <div class="activity-icon icon-success" aria-hidden="true">🌍</div>
-                <div class="activity-content">
-                  <span class="activity-type">Destinazioni</span>
-                  <h3>Le migliori destinazioni del Golfo</h3>
-                  <p class="user-subtext">285 letture • Admin SailUP</p>
-                </div>
-                <div class="activity-meta">
-                  <time datetime="2025-01-10">10/01/25</time>
-                  <p class="user-subtext text-success">Pubblicato</p>
-                  <div class="item-actions">
-                    <button class="btn-layout-light btn-sm" 
-                            aria-label="Modifica articolo">✏️</button>
-                    <button class="btn-danger-outline btn-sm" 
-                            aria-label="Elimina articolo"">🗑️</button>
-                  </div>
-                </div>
-              </article>
-
-              <article class="activity-item">
-                <div class="activity-icon icon-warning" aria-hidden="true">📝</div>
-                <div class="activity-content">
-                  <span class="activity-type">Eventi</span>
-                  <h3>Eventi nautici 2025</h3>
-                  <p class="user-subtext">Admin SailUP</p>
-                </div>
-                <div class="activity-meta">
-                  <p class="user-subtext text-warning">Bozza</p>
-                  <div class="item-actions">
-                    <button class="btn-layout-light btn-sm" 
-                            aria-label="Modifica bozza">✏️</button>
-                    <button class="btn-layout btn-sm" 
-                            aria-label="Pubblica articolo">Pubblica</button>
-                  </div>
-                </div>
-              </article>
-
-              <article class="activity-item">
-                <div class="activity-icon icon-success" aria-hidden="true">💡</div>
-                <div class="activity-content">
-                  <span class="activity-type">Consigli</span>
-                  <h3>Sicurezza in mare: la guida</h3>
-                  <p class="user-subtext">198 letture • Admin SailUP</p>
-                </div>
-                <div class="activity-meta">
-                  <time datetime="2025-01-05">05/01/25</time>
-                  <p class="user-subtext text-success">Pubblicato</p>
-                  <div class="item-actions">
-                    <button class="btn-layout-light btn-sm" 
-                            aria-label="Modifica articolo">✏️</button>
-                    <button class="btn-danger-outline btn-sm" 
-                            aria-label="Elimina articolo">🗑️</button>
-                  </div>
-                </div>
-              </article>
-
+        
+            <div class="table-container">
+                <table>
+                    <caption>Articoli Pubblicati e Bozze</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Titolo</th>
+                            <th scope="col">Categoria</th>
+                            <th scope="col">Autore / Letture</th>
+                            <th scope="col">Data</th>
+                            <th scope="col">Stato</th>
+                            <th scope="col">Azioni</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-label="ID">12</td>
+                            <td data-label="Titolo">Come scegliere la barca perfetta</td>
+                            <td data-label="Categoria">Guida</td>
+                            <td data-label="Info">Admin (342 letture)</td>
+                            <td data-label="Data"><time datetime="2025-01-15">15/01/25</time></td>
+                            <td data-label="Stato"><span class="status-badge active">Pubblicato</span></td>
+                            <td data-label="Azioni" class="actions-cell">
+                                <button class="btn-icon" aria-label="Modifica articolo">
+                                    <span aria-hidden="true">✏️</span>
+                                </button>
+                                <button class="btn-icon danger" aria-label="Elimina articolo">
+                                    <span aria-hidden="true">🗑️</span>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-label="ID">11</td>
+                            <td data-label="Titolo">Le migliori destinazioni del Golfo</td>
+                            <td data-label="Categoria">Destinazioni</td>
+                            <td data-label="Info">Admin (285 letture)</td>
+                            <td data-label="Data"><time datetime="2025-01-10">10/01/25</time></td>
+                            <td data-label="Stato"><span class="status-badge active">Pubblicato</span></td>
+                            <td data-label="Azioni" class="actions-cell">
+                                <button class="btn-icon" aria-label="Modifica articolo">
+                                    <span aria-hidden="true">✏️</span>
+                                </button>
+                                <button class="btn-icon danger" aria-label="Elimina articolo">
+                                    <span aria-hidden="true">🗑️</span>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-label="ID">10</td>
+                            <td data-label="Titolo">Eventi nautici 2025</td>
+                            <td data-label="Categoria">Eventi</td>
+                            <td data-label="Info">Admin (0 letture)</td>
+                            <td data-label="Data">-</td>
+                            <td data-label="Stato"><span class="status-badge pending">Bozza</span></td>
+                            <td data-label="Azioni" class="actions-cell">
+                                <button class="btn-icon" aria-label="Modifica bozza">
+                                    <span aria-hidden="true">✏️</span>
+                                </button>
+                                <button class="btn-icon" aria-label="Pubblica ora">
+                                    <span aria-hidden="true">🚀</span>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-label="ID">09</td>
+                            <td data-label="Titolo">Sicurezza in mare: la guida</td>
+                            <td data-label="Categoria">Consigli</td>
+                            <td data-label="Info">Admin (198 letture)</td>
+                            <td data-label="Data"><time datetime="2025-01-05">05/01/25</time></td>
+                            <td data-label="Stato"><span class="status-badge active">Pubblicato</span></td>
+                            <td data-label="Azioni" class="actions-cell">
+                                <button class="btn-icon" aria-label="Modifica articolo">
+                                    <span aria-hidden="true">✏️</span>
+                                </button>
+                                <button class="btn-icon danger" aria-label="Elimina articolo">
+                                    <span aria-hidden="true">🗑️</span>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-
-          </section>
+        </section>
         </div>
       </div>
   </main>

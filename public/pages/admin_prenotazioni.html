@@ -145,123 +145,117 @@
           </section>
 
           <section aria-labelledby="bookings-list-title" class="security-section">
-            <h2 id="bookings-list-title">Elenco Prenotazioni</h2>
-
-            <div class="activity-list">
-
-              <article class="activity-item">
-                <div class="activity-icon icon-success" aria-hidden="true">📋</div>
-                <div class="activity-content">
-                  <span class="activity-type">#001 • Tour di Capri</span>
-                  <h3>Mario Rossi</h3>
-                  <p class="user-subtext">Utilizzo: 15/02/2025</p>
-                </div>
-                <div class="activity-meta">
-                  <p class="meta-user">€ 850</p>
-                  <p class="user-subtext text-success">Attiva</p>
-                  <div class="item-actions">
-                    <button class="btn-layout-light btn-sm" 
-                            aria-label="Dettagli prenotazione">👁️</button>
-                    <button class="btn-danger-outline btn-sm" 
-                            aria-label="Cancella prenotazione">✖</button>
-                  </div>
-                </div>
-              </article>
-
-              <article class="activity-item">
-                <div class="activity-icon icon-warning" aria-hidden="true">⏳</div>
-                <div class="activity-content">
-                  <span class="activity-type">#002 • Bavaria 46</span>
-                  <h3>Laura Bianchi</h3>
-                  <p class="user-subtext">Utilizzo: 10/02/2025</p>
-                </div>
-                <div class="activity-meta">
-                  <p class="meta-user">€ 600</p>
-                  <p class="user-subtext text-warning">In Attesa</p>
-                  <div class="item-actions">
-                    <button class="btn-layout-light btn-sm" 
-                            aria-label="Dettagli prenotazione">👁️</button>
-                    <button class="btn-layout btn-sm" 
-                            aria-label="Conferma prenotazione">✓</button>
-                  </div>
-                </div>
-              </article>
-
-              <article class="activity-item">
-                <div class="activity-icon icon-success" aria-hidden="true">📋</div>
-                <div class="activity-content">
-                  <span class="activity-type">#003 • Sunseeker Predator</span>
-                  <h3>Giuseppe Verdi</h3>
-                  <p class="user-subtext">Utilizzo: 20/02/2025</p>
-                </div>
-                <div class="activity-meta">
-                  <p class="meta-user">€ 850</p>
-                  <p class="user-subtext text-success">Attiva</p>
-                  <div class="item-actions">
-                    <button class="btn-layout-light btn-sm" 
-                            aria-label="Dettagli prenotazione">👁️</button>
-                    <button class="btn-danger-outline btn-sm" 
-                            aria-label="Cancella prenotazione">✖</button>
-                  </div>
-                </div>
-              </article>
-
-              <article class="activity-item">
-                <div class="activity-icon icon-warning" aria-hidden="true">⏳</div>
-                <div class="activity-content">
-                  <span class="activity-type">#004 • Costiera Amalfitana</span>
-                  <h3>Anna Romano</h3>
-                  <p class="user-subtext">Utilizzo: 05/02/2025</p>
-                </div>
-                <div class="activity-meta">
-                  <p class="meta-user">€ 950</p>
-                  <p class="user-subtext text-warning">In Attesa</p>
-                  <div class="item-actions">
-                    <button class="btn-layout-light btn-sm" 
-                            aria-label="Dettagli prenotazione">👁️</button>
-                    <button class="btn-layout btn-sm" 
-                            aria-label="Conferma prenotazione">✓</button>
-                  </div>
-                </div>
-              </article>
-
-              <article class="activity-item">
-                <div class="activity-icon icon-accent" aria-hidden="true">✔️</div>
-                <div class="activity-content">
-                  <span class="activity-type">#005 • Jeanneau 54</span>
-                  <h3>Francesco Esposito</h3>
-                  <p class="user-subtext">Utilizzo: 25/01/2025</p>
-                </div>
-                <div class="activity-meta">
-                  <p class="meta-user">€ 750</p>
-                  <p class="user-subtext">Completata</p>
-                  <div class="item-actions">
-                    <button class="btn-layout-light btn-sm" 
-                            aria-label="Dettagli prenotazione">👁️</button>
-                  </div>
-                </div>
-              </article>
-
-              <article class="activity-item cancelled-booking">
-                <div class="activity-icon icon-accent" aria-hidden="true">✖</div>
-                <div class="activity-content">
-                  <span class="activity-type">#006 • Tour di Capri</span>
-                  <h3>Chiara Lombardi</h3>
-                  <p class="user-subtext">Utilizzo: 22/01/2025</p>
-                </div>
-                <div class="activity-meta">
-                  <p class="meta-user">€ 850</p>
-                  <p class="user-subtext text-accent">Cancellata</p>
-                  <div class="item-actions">
-                    <button class="btn-layout-light btn-sm" 
-                            aria-label="Dettagli prenotazione">👁️</button>
-                  </div>
-                </div>
-              </article>
-
+            <h2 id="bookings-list-title" class="sr-only">Lista Prenotazioni</h2>
+        
+            <div class="table-container">
+                <table>
+                    <caption>Elenco Prenotazioni Recenti</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Prodotto / Esperienza</th>
+                            <th scope="col">Cliente</th>
+                            <th scope="col">Data Utilizzo</th>
+                            <th scope="col">Totale</th>
+                            <th scope="col">Stato</th>
+                            <th scope="col">Azioni</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-label="ID">001</td>
+                            <td data-label="Prodotto">Tour di Capri</td>
+                            <td data-label="Cliente">Mario Rossi</td>
+                            <td data-label="Data"><time datetime="2025-02-15">15/02/2025</time></td>
+                            <td data-label="Totale">€ 850</td>
+                            <td data-label="Stato"><span class="status-badge active">Attiva</span></td>
+                            <td data-label="Azioni" class="actions-cell">
+                                <button class="btn-icon" aria-label="Dettagli 001">
+                                    <span aria-hidden="true">👁️</span>
+                                </button>
+                                <button class="btn-icon danger" aria-label="Cancella 001">
+                                    <span aria-hidden="true">✖</span>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-label="ID">002</td>
+                            <td data-label="Prodotto">Bavaria 46</td>
+                            <td data-label="Cliente">Laura Bianchi</td>
+                            <td data-label="Data"><time datetime="2025-02-10">10/02/2025</time></td>
+                            <td data-label="Totale">€ 600</td>
+                            <td data-label="Stato"><span class="status-badge pending">In Attesa</span></td>
+                            <td data-label="Azioni" class="actions-cell">
+                                <button class="btn-icon" aria-label="Dettagli 002">
+                                    <span aria-hidden="true">👁️</span>
+                                </button>
+                                <button class="btn-icon" aria-label="Conferma 002">
+                                    <span aria-hidden="true">✓</span>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-label="ID">003</td>
+                            <td data-label="Prodotto">Sunseeker Predator</td>
+                            <td data-label="Cliente">Giuseppe Verdi</td>
+                            <td data-label="Data"><time datetime="2025-02-20">20/02/2025</time></td>
+                            <td data-label="Totale">€ 850</td>
+                            <td data-label="Stato"><span class="status-badge active">Attiva</span></td>
+                            <td data-label="Azioni" class="actions-cell">
+                                <button class="btn-icon" aria-label="Dettagli 003">
+                                    <span aria-hidden="true">👁️</span>
+                                </button>
+                                <button class="btn-icon danger" aria-label="Cancella 003">
+                                    <span aria-hidden="true">✖</span>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-label="ID">004</td>
+                            <td data-label="Prodotto">Costiera Amalfitana</td>
+                            <td data-label="Cliente">Anna Romano</td>
+                            <td data-label="Data"><time datetime="2025-02-05">05/02/2025</time></td>
+                            <td data-label="Totale">€ 950</td>
+                            <td data-label="Stato"><span class="status-badge pending">In Attesa</span></td>
+                            <td data-label="Azioni" class="actions-cell">
+                                <button class="btn-icon" aria-label="Dettagli 004">
+                                    <span aria-hidden="true">👁️</span>
+                                </button>
+                                <button class="btn-icon" aria-label="Conferma 004">
+                                    <span aria-hidden="true">✓</span>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-label="ID">005</td>
+                            <td data-label="Prodotto">Jeanneau 54</td>
+                            <td data-label="Cliente">Francesco Esposito</td>
+                            <td data-label="Data"><time datetime="2025-01-25">25/01/2025</time></td>
+                            <td data-label="Totale">€ 750</td>
+                            <td data-label="Stato"><span class="status-badge completed">Completata</span></td>
+                            <td data-label="Azioni" class="actions-cell">
+                                <button class="btn-icon" aria-label="Dettagli 005">
+                                    <span aria-hidden="true">👁️</span>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-label="ID">006</td>
+                            <td data-label="Prodotto">Tour di Capri</td>
+                            <td data-label="Cliente">Chiara Lombardi</td>
+                            <td data-label="Data"><time datetime="2025-01-22">22/01/2025</time></td>
+                            <td data-label="Totale">€ 850</td>
+                            <td data-label="Stato"><span class="status-badge cancelled">Cancellata</span></td>
+                            <td data-label="Azioni" class="actions-cell">
+                                <button class="btn-icon" aria-label="Dettagli 006">
+                                    <span aria-hidden="true">👁️</span>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-
-          </section>
+        </section>
 
           <section aria-labelledby="revenue-title" class="profile-stats">
             <h2 id="revenue-title">Riepilogo Finanziario</h2>
