@@ -88,23 +88,22 @@
   </nav>
 
   <main id="main-content">
-    <div class="layout-full-width-blog">
-      <section id="hero" class="section-container hero-center">
-        <div id="hero-content">
+    <div class="section-container">
+      <section id="hero">
+        <!-- Necessario l'utilizzo del div per la gestione del hero content afianco a hero image -->
+        <div>
           <h1>Diario di Bordo</h1>
           <p>
             Itinerari segreti, consigli tecnici e storie di chi vive il mare ogni giorno. Lasciati ispirare per la tua
             prossima rotta.
           </p>
         </div>
+        <img src="../img/HeroDiarioDiBordo.jpg" alt="Diario di bordo aperto su tavolo da carteggio" class="hero-image"
+          width="600" height="450" />
       </section>
-    </div>
 
-    <section aria-labelledby="latest-articles-title">
-      <div class="section-container">
-        <div class="section-header">
-          <h2 id="latest-articles-title">Ultimi Articoli</h2>
-        </div>
+      <section aria-labelledby="latest-articles-title">
+        <h2>Ultimi Articoli</h2>
 
         <div class="cards-wrapper">
           <article class="card">
@@ -140,7 +139,8 @@
                 <h3 class="card-title">Interpretare il Meteo</h3>
                 <p class="card-subtitle">Sicurezza • <time datetime="2025-03-10">10 Marzo 2025</time></p>
                 <p class="card-description">Come leggere i segnali del vento e del cielo per navigare sempre in
-                  sicurezza nel Golfo.</p>
+                  sicurezza
+                  nel Golfo.</p>
                 <span class="read-more">Leggi tutto</span>
               </div>
             </a>
@@ -153,14 +153,15 @@
                 <h3 class="card-title">Cucina di Bordo</h3>
                 <p class="card-subtitle">Lifestyle • <time datetime="2025-02-05">05 Febbraio 2025</time></p>
                 <p class="card-description">Tre ricette fresche e veloci che non richiedono l'uso del forno, perfette
-                  per l'estate.</p>
+                  per
+                  l'estate.</p>
                 <span class="read-more">Leggi tutto</span>
               </div>
             </a>
           </article>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   </main>
 
   <footer>
