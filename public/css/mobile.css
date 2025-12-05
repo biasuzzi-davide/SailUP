@@ -552,9 +552,8 @@ footer .logo p {
 
 /* 3. FIX SPECIFICO PER L'INTESTAZIONE (Caption) */
 .table-container caption {
-    text-align: left;
+    text-align: center;
     margin-bottom: 1em;
-    padding: 1em;
     background-color: var(--col-bg-alt);
     border-radius: var(--radius-card); /* Arrotondiamo tutto */
     border: 1px solid var(--col-border);
