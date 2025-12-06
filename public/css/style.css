@@ -350,7 +350,7 @@ footer .logo-text {
 }
 
 #main-menu>ul>li>a,
-#main-menu>ul>li.current-page {
+#main-menu>ul>li[aria-current="page"] {
   display: block;
   text-decoration: none;
   font-weight: 600;
@@ -373,7 +373,7 @@ footer .logo-text {
   border-bottom-color: var(--col-accent);
 }
 
-#main-menu>ul>li.current-page {
+#main-menu>ul>li[aria-current="page"] {
   font-weight: 700;
   color: var(--col-primary);
   cursor: default;
@@ -690,36 +690,38 @@ body.layout-full-width {
 
 /* QUOTE (Citazione) */
 #quote-section {
-  text-align: center;
-  padding: 4em 1.5em;
-  max-width: 50em;
+  display: block;
+  max-width: 65%;
   margin: 0 auto;
-}
-
-#quote-section blockquote {
+  padding: 2em 0;
+  text-align: center;
   font-family: "Times New Roman", serif;
   font-size: var(--fs-lg);
   font-style: italic;
   color: var(--col-primary);
+  border: none;
 }
 
-#quote-section blockquote::before {
+#quote-section::before {
   content: "“";
   color: var(--col-accent);
   margin-right: 0.2em;
 }
 
-#quote-section blockquote::after {
+#quote-section::after {
   content: "”";
   color: var(--col-accent);
   margin-left: 0.2em;
 }
 
-#quote-section cite {
+#quote-section + cite {
   display: block;
-  margin-top: 1em;
+  text-align: center;
   font-weight: 600;
   font-style: normal;
+  max-width: 50em;
+  margin: 1em auto 0 auto; 
+  padding-bottom: 4em;
 }
 
 /* ESPERIENZE */
@@ -736,12 +738,7 @@ body.layout-full-width {
   border-radius: var(--radius-card);
   border: 1px solid var(--col-border);
   text-decoration: none;
-  transition: border-color 0.3s ease;
   margin-bottom: 1em;
-}
-
-.horizontal-card:hover {
-  border-color: var(--col-accent);
 }
 
 .horizontal-card h3 {
@@ -829,9 +826,11 @@ footer {
 }
 
 /* link visitati, non solo del footer */
-a:visited,
-.visited {
+a:visited {
   color: var(--col-visited-link);
+}
+li[aria-current="page"] {
+  color: var(--col-visited-link); 
 }
 
 .btn-hero:visited {

@@ -5,8 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Chi siamo - SailUP</title>
-  <meta name="description"
-    content="Presentazione del personale SailUP." />
+  <meta name="description" content="Presentazione del personale SailUP." />
   <meta name="authors" content="SailUP team" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -15,9 +14,9 @@
     href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap"
     rel="stylesheet" />
 
-  <link rel="stylesheet" href="../css/style.css" media="screen" />
-  <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)" />
-  <link rel="stylesheet" href="../css/print.css" media="print" />
+  <link rel="stylesheet" href="../css/style.css" media="screen">
+  <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)">
+  <link rel="stylesheet" href="../css/print.css" media="print">
 </head>
 
 <body>
@@ -31,34 +30,32 @@
             <source srcset="" type="image/avif" />
             <img alt="Logo SailUP"
               src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=400&q=80"
-              width="30" />
+              width="30">
           </picture>
-          <h1 lang="en">
-            <span class="logo-text">Sail<span class="text-accent">UP</span></span>
-          </h1>
+          <span class="logo-text" lang="en">Sail<span class="text-accent">UP</span></span>
         </a>
 
-        <nav id="main-menu" aria-label="Menu principale">
+        <nav id="main-menu">
           <ul>
             <li><a href="index.html" lang="en">Home</a></li>
             <li><a href="catalogo_noleggio.html">Noleggio</a></li>
             <li><a href="catalogo_esperienze.html">Esperienze</a></li>
             <li><a href="blog.html" lang="en">Blog</a></li>
-            <li class="current-page">Chi Siamo</li>
+            <li aria-current="page">Chi Siamo</li>
           </ul>
         </nav>
 
         <div class="header-buttons">
           <button class="theme-toggle" aria-pressed="false" aria-label="Attiva modalità scura">
-            <span class="active-icon sun">☀️</span>
-            <span class="inactive-icon moon">🌙</span>
+            <span class="active-icon sun" aria-hidden="true">☀️</span>
+            <span class="inactive-icon moon" aria-hidden="true">🌙</span>
           </button>
           <a href="login.html" class="btn-layout" lang="en">Login</a>
         </div>
 
         <button id="hamburger-btn" aria-expanded="false" aria-controls="mobile-menu" aria-label="Menu Mobile">
-          <span class="hamburger-icon">☰</span>
-          <span class="close-icon hidden">✕</span>
+          <span class="hamburger-icon" aria-hidden="true">☰</span>
+          <span class="close-icon hidden" aria-hidden="true">✕</span>
         </button>
       </div>
 
@@ -68,104 +65,89 @@
           <li><a href="catalogo_noleggio.html">Noleggio</a></li>
           <li><a href="catalogo_esperienze.html">Esperienze</a></li>
           <li><a href="blog.html" lang="en">Blog</a></li>
-          <li class="current-page">Chi Siamo</li>
-          <li>
-            <a href="login.html" class="menu-login"><span lang="en">Login</span> / Registrati</a>
-          </li>
+          <li aria-current="page">Chi Siamo</li>
+          <li><a href="login.html" class="menu-login"><span lang="en">Login</span> / Registrati</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
   <div class="sr-only" id="breadcrumb-label">
-    <span lang="en">breadcrumb</span>
+    <span lang="en">Breadcrumb</span>
   </div>
   <nav aria-labelledby="breadcrumb-label" id="breadcrumb">
     <ol>
-      <li>
-        <a href="index.html" lang="en">Home</a>
-      </li>
+      <li><a href="index.html" lang="en">Home</a></li>
       <li aria-current="page">Chi siamo</li>
     </ol>
   </nav>
 
   <main id="main-content">
-    <section id="hero" class="section-container">
-      <div>
-        <h1>La nostra storia, la tua rotta.</h1>
-        <p>
-          Siamo nati con il sale sulla pelle e il vento tra i capelli. SailUP è molto più di un noleggio barche: è il
-          desiderio di condividere la bellezza autentica del Golfo di Napoli.
-        </p>
-        <div class="cta-group">
-          <a href="#team" class="btn-layout cta-primary">Conosci il Team</a>
+    <section id="hero" class="section-container" aria-labelledby="hero-title">
+        <div>
+          <h1 id="hero-title">La nostra storia, la tua rotta.</h1>
+          <p>Siamo nati con il sale sulla pelle e il vento tra i capelli. SailUP è molto più di un noleggio barche: è il
+            desiderio di condividere la bellezza autentica del Golfo di Napoli.</p>
+          <div class="cta-group">
+            <a href="#team" class="btn-layout">Conosci il Team</a>
+          </div>
         </div>
-      </div>
-      <img src="../img/ChiSiamo.jpg"
-        alt="Equipaggio SailUP al lavoro" class="hero-image" />
+        <img src="../img/ChiSiamo.jpg" alt="Equipaggio SailUP al lavoro" class="hero-image">
     </section>
 
-    <section class="section-container">
-      <div class="section-header">
-        <h2>I Nostri Valori</h2>
-      </div>
+    <section class="section-container" aria-labelledby="valori-title">
+      <h2 id="valori-title">I Nostri Valori</h2>
       <div class="grid-2-col">
-        <div class="horizontal-card">
+        <article class="horizontal-card">
           <h3>Sicurezza Prima di Tutto ⚓</h3>
           <p>Ogni nostra imbarcazione è controllata scrupolosamente. La sicurezza in mare è la base per un divertimento
             senza pensieri.</p>
-        </div>
-        <div class="horizontal-card">
+        </article>
+        <article class="horizontal-card">
           <h3>Sostenibilità 🌿</h3>
           <p>Amiamo il mare e lo proteggiamo. Promuoviamo comportamenti responsabili e utilizziamo prodotti
             eco-compatibili a bordo.</p>
-        </div>
+        </article>
       </div>
     </section>
 
-    <div id="quote-section">
-      <blockquote>
-        Il mare non è mai stato amico dell'uomo. Al massimo è stato complice della sua irrequietezza.
-      </blockquote>
-      <cite>Joseph Conrad</cite>
-    </div>
+    <blockquote id="quote-section">
+      Il mare non è mai stato amico dell'uomo. Al massimo è stato complice della sua irrequietezza.
+    </blockquote>
+    <cite>Joseph Conrad</cite>
 
-    <section id="team" class="section-container">
-      <div class="section-header">
-        <h2>Il Nostro Team</h2>
-      </div>
+    <section id="team" class="section-container" aria-labelledby="team-title">
+      <h2 id="team-title">Il Nostro Team</h2>
       <p>Professionisti del mare pronti a guidarti.</p>
 
       <div class="cards-wrapper">
         <article class="card">
-          <a href="#">
-            <img src="../img/Skipper.jpg"
-              alt="Foto di A" />
+          <a href="#" aria-label="Profilo di A - Skipper">
+            <img src="../img/Skipper.jpg" alt="Foto di A">
             <div class="card-content">
               <h3 class="card-title">A</h3>
               <p class="card-subtitle">Skipper</p>
-              <p class="card-description">Con oltre 20 anni di esperienza in regata, A conosce ogni vento e
-                corrente del Golfo.</p>
+              <p class="card-description">Con oltre 20 anni di esperienza in regata, A conosce ogni vento e corrente del
+                Golfo.</p>
             </div>
           </a>
         </article>
 
         <article class="card">
-          <a href="#">
-            <img src="../img/SMM.jpg"
-              alt="Foto di H" />
+          <a href="#" aria-label="Profilo di H - Social Media Manager">
+            <img src="../img/SMM.jpg" alt="Foto di H">
             <div class="card-content">
               <h3 class="card-title">H</h3>
               <p class="card-subtitle">Social Media Manager</p>
-              <p class="card-description">Il cacciatore di tramonti. Cattura i momenti migliori delle vostre esperienze per trasformarli in ricordi indelebili (e storie perfette).</p>
+              <p class="card-description">Il cacciatore di tramonti. Cattura i momenti migliori delle vostre esperienze
+                per trasformarli in ricordi indelebili (e storie perfette).</p>
             </div>
           </a>
         </article>
 
         <article class="card">
-          <a href="#">
-            <img src="../img/IngNavale.jpg"
-              alt="Foto di F" />
+          <a href="#" aria-label="Profilo di F - Fleet Manager">
+            <img src="../img/IngNavale.jpg" alt="Foto di F">
             <div class="card-content">
               <h3 class="card-title">F</h3>
               <p class="card-subtitle">Fleet Manager</p>
@@ -176,9 +158,8 @@
         </article>
 
         <article class="card">
-          <a href="#">
-            <img src="../img/GuestExperience.jpg"
-              alt="Foto di D" />
+          <a href="#" aria-label="Profilo di D - Guest Experience">
+            <img src="../img/GuestExperience.jpg" alt="Foto di D">
             <div class="card-content">
               <h3 class="card-title">D</h3>
               <p class="card-subtitle">Guest Experience</p>
@@ -189,7 +170,6 @@
         </article>
       </div>
     </section>
-
   </main>
 
   <footer>
@@ -199,10 +179,7 @@
           <span class="logo-icon" aria-hidden="true">⚓</span>
           <span class="logo-text"><span lang="en">Sail</span><span class="text-accent" lang="en">UP</span></span>
         </div>
-        <p class="footer-tagline">
-          Naviga il Golfo di Napoli con stile e sicurezza. La tua avventura
-          inizia qui.
-        </p>
+        <p class="footer-tagline">Naviga il Golfo di Napoli con stile e sicurezza. La tua avventura inizia qui.</p>
       </div>
 
       <div class="footer-col nav-col">
@@ -213,15 +190,16 @@
             <li><a href="catalogo_noleggio.html">Noleggio</a></li>
             <li><a href="catalogo_esperienze.html">Esperienze</a></li>
             <li><a href="blog.html" lang="en">Blog</a></li>
-            <li class="visited">Chi Siamo</li>
+            <li aria-current="page">Chi Siamo</li>
           </ul>
         </nav>
       </div>
 
       <div class="footer-col info-col">
-        <h3 class="footer-heading">Info & Contatti</h3>
+        <h3 class="footer-heading">Info &amp; Contatti</h3>
         <ul class="footer-links">
-          <li><a href="FAQ.html">Domande Frequenti (<abbr title="Frequently Asked Questions" lang="en">FAQ</abbr>)</a></li>
+          <li><a href="FAQ.html">Domande Frequenti (<abbr title="Frequently Asked Questions" lang="en">FAQ</abbr>)</a>
+          </li>
           <li><a href="privacy.html" lang="en">Privacy Policy</a></li>
           <li><a href="cookie.html">Cookie Policy</a></li>
         </ul>
@@ -235,16 +213,13 @@
 
     <div class="footer-bottom">
       <div class="footer-bottom-container">
-        <div class="copyright">
-          &copy; 2025 SailUP S.r.l. - All rights reserved.
-        </div>
+        <p class="copyright">&copy; 2025 SailUP S.r.l. - All rights reserved.</p>
 
         <div class="valid-logos">
-          <img class="valid-code-icon" src="valid-xhtml10.png" alt="XHTML valido" />
-          <img class="valid-code-icon" src="valid-CSS.png" alt="CSS valido" />
+          <img class="valid-code-icon" src="valid-xhtml10.png" alt="XHTML valido">
+          <img class="valid-code-icon" src="valid-CSS.png" alt="CSS valido">
         </div>
 
-        <!-- Area bottone torna su, inizialmente non selezionabile con tab perchè invisibile -->
         <a href="#main-content" class="scroll-to-top" id="btnTop" aria-label="Torna all'inizio del contenuto"
           tabindex="-1">
           <span aria-hidden="true">⬆</span> <span lang="en">Top</span>
