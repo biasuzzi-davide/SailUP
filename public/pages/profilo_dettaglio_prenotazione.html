@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="it" data-theme="light">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dettaglio Prenotazione #1234 - SailUP</title>
+    <meta name="description" content="Dettagli completi della tua prenotazione SailUP." />
+    <meta name="authors" content="SailUP Team" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap"
+        rel="stylesheet" />
+
+    <link rel="stylesheet" href="../css/style.css" media="screen" />
+    <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)" />
+    <link rel="stylesheet" href="../css/print.css" media="print" />
+</head>
+
+<body>
+    <a href="#main-content" class="skip-to-content">Salta al contenuto principale</a>
+
+    <header>
+        <div class="header-container">
+            <div class="header">
+                <a href="index.html" class="logo" aria-label="SailUP - Torna alla homepage">
+                    <picture>
+                        <source srcset="" type="image/avif" />
+                        <img alt="Logo SailUP"
+                            src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=400&q=80"
+                            width="30" />
+                    </picture>
+                    <span class="logo-text" lang="en">Sail<span class="text-accent">UP</span></span>
+                </a>
+
+                <nav id="main-menu">
+                    <ul>
+                        <li><a href="index.html" lang="en">Home</a></li>
+                        <li><a href="catalogo_noleggio.html">Noleggio</a></li>
+                        <li><a href="catalogo_esperienze.html">Esperienze</a></li>
+                        <li><a href="blog.html" lang="en">Blog</a></li>
+                        <li><a href="chi_siamo.html">Chi Siamo</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-buttons">
+                    <button class="theme-toggle" aria-pressed="false" aria-label="Attiva modalità scura">
+                        <span class="active-icon sun" aria-hidden="true">☀️</span>
+                        <span class="inactive-icon moon hidden" aria-hidden="true">🌙</span>
+                    </button>
+                    <a href="login.html" lang="en" class="btn-layout">Login</a>
+                </div>
+
+                <button id="hamburger-btn" aria-expanded="false" aria-controls="mobile-menu"
+                    aria-label="Menu di navigazione mobile">
+                    <span class="hamburger-icon" aria-hidden="true">☰</span>
+                    <span class="close-icon hidden" aria-hidden="true">✕</span>
+                </button>
+            </div>
+
+            <nav id="mobile-menu" aria-label="Navigazione mobile">
+                <ul>
+                    <li><a href="index.html" lang="en">Home</a></li>
+                    <li><a href="catalogo_noleggio.html">Noleggio</a></li>
+                    <li><a href="catalogo_esperienze.html">Esperienze</a></li>
+                    <li><a href="blog.html" lang="en">Blog</a></li>
+                    <li><a href="chi_siamo.html">Chi Siamo</a></li>
+                    <li><a href="profilo.html">Profilo</a></li>
+                    <li><a href="admin.html">Dashboard Admin</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <div class="section-container profile-container">
+
+            <div class="profile-header">
+                <div class="profile-avatar">
+                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=200&q=80"
+                        alt="Avatar Mario Rossi" />
+                </div>
+                <div class="profile-info">
+                    <h1>Mario Rossi</h1>
+                    <p class="profile-email">mario.rossi@example.com</p>
+                    <p class="profile-member-since">Membro dal Gennaio 2024</p>
+                </div>
+                <div class="profile-actions">
+                    <a href="profilo.html" class="btn-layout-light">Visualizza Profilo</a>
+                    <button class="btn-layout-light" type="button">Esci</button>
+                </div>
+            </div>
+
+            <div class="profile-layout">
+                <nav class="profile-sidebar" aria-label="Menu profilo">
+                    <ul>
+                        <li>
+                            <a href="profilo.html">
+                                <span class="nav-icon" aria-hidden="true">👤</span>
+                                <span>Informazioni Personali</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="profilo_sicurezza.html">
+                                <span class="nav-icon" aria-hidden="true">🔒</span>
+                                <span>Sicurezza</span>
+                            </a>
+                        </li>
+                        <li class="current-tab">
+                            <a href="profilo_prenotazioni.html" class="nav-item-active">
+                                <span class="nav-icon" aria-hidden="true">📋</span>
+                                <span>Prenotazioni</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <div class="profile-content">
+
+                    <div class="form-group">
+                        <a href="profilo_prenotazioni.html" class="btn-layout-light btn-sm">
+                            <span aria-hidden="true">←</span> Torna alle prenotazioni
+                        </a>
+                    </div>
+
+                    <div class="section-header">
+                        <div>
+                            <h2>Prenotazione #SU-2025-1234</h2>
+                            <p class="text-accent">Effettuata il 15 Ottobre 2025</p>
+                        </div>
+                        <div>
+                            <span class="status-badge active">Confermata</span>
+                        </div>
+                    </div>
+
+                    <div class="booking-card">
+
+                        <div class="booking-header">
+                            <div class="booking-image">
+                                <img src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=300&q=80"
+                                    alt="Bavaria 46" />
+                            </div>
+                            <div class="booking-info">
+                                <h3>Bavaria 46 Cruiser</h3>
+                                <p class="booking-type">Napoli, Molo Beverello</p>
+                                <p class="text-accent">Noleggio Occasionale</p>
+                            </div>
+                        </div>
+
+                        <div class="booking-details">
+                            <h3 class="sr-only">Dettagli Tecnici</h3>
+
+                            <div class="specs-grid">
+                                <div class="spec-card">
+                                    <span class="spec-label">📅 Data/ora Inizio</span>
+                                    <p class="spec-value">15 Dic 2025</p>
+                                </div>
+                                <div class="spec-card">
+                                    <span class="spec-label">🏁 Data/ora Fine</span>
+                                    <p class="spec-value">15 Dic 2025</p>
+                                </div>
+                                <div class="spec-card">
+                                    <span class="spec-label">👥 Ospiti</span>
+                                    <p class="spec-value">4</p>
+                                </div>
+                                <div class="spec-card">
+                                    <span class="spec-label">Guida/Skipper</span>
+                                    <p class="spec-value">Inclusa</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-content">
+                        <h3>💳 Riepilogo Costi</h3>
+                        <ul>
+                            <li>
+                                <span>Noleggio (1 giorno)</span> <strong>€ 450,00</strong>
+                            </li>
+                            <li>
+                                <span>Skipper</span> <strong>€ 45,00</strong>
+                            </li>
+                            <li>
+                                <span>Totale</span> <strong>€ 495,00</strong>
+                            </li>
+                        </ul>
+
+                        <p class="field-hint">Metodo: Carta di Credito •••• 1234</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="section-container footer-content">
+            <div class="footer-col brand-col">
+                <div class="logo footer-logo">
+                    <span class="logo-icon" aria-hidden="true">⚓</span>
+                    <span class="logo-text">
+                        <span lang="en">Sail</span><span class="text-accent" lang="en">UP</span>
+                    </span>
+                </div>
+                <p class="footer-tagline">
+                    Naviga il Golfo di Napoli con stile e sicurezza. La tua avventura inizia qui.
+                </p>
+            </div>
+
+            <div class="footer-col nav-col">
+                <h3 class="footer-heading">Esplora</h3>
+                <nav aria-label="Menu footer">
+                    <ul class="footer-links">
+                        <li><a href="index.html" lang="en">Home</a></li>
+                        <li><a href="catalogo_noleggio.html">Noleggio</a></li>
+                        <li><a href="catalogo_esperienze.html">Esperienze</a></li>
+                        <li><a href="blog.html" lang="en">Blog</a></li>
+                        <li><a href="chi_siamo.html">Chi Siamo</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="footer-col info-col">
+                <h2 class="footer-heading">Info &amp; Contatti</h2>
+                <nav aria-label="Link informativi">
+                    <ul class="footer-links">
+                        <li>
+                            <a href="FAQ.html">
+                                Domande Frequenti (<abbr title="Frequently Asked Questions" lang="en">FAQ</abbr>)
+                            </a>
+                        </li>
+                        <li><a href="privacy.html" lang="en">Privacy Policy</a></li>
+                        <li><a href="cookie.html" lang="en">Cookie Policy</a></li>
+                    </ul>
+                </nav>
+                <address class="footer-address">
+                    <p><strong>SailUP S.r.l.</strong></p>
+                    <p>Via Caracciolo, 80122 Napoli (<abbr title="Napoli">NA</abbr>)</p>
+                    <p><abbr title="Partita IVA">P.IVA</abbr>: 12345678901</p>
+                </address>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="footer-bottom-container">
+                <p class="copyright">
+                    &copy; 2025 SailUP S.r.l. - <span lang="en">All rights reserved</span>.
+                </p>
+
+                <div class="valid-logos">
+                    <img class="valid-code-icon" src="valid-xhtml10.png" alt="XHTML valido" />
+                    <img class="valid-code-icon" src="valid-CSS.png" alt="CSS valido" />
+                </div>
+
+                <a href="#main-content" class="scroll-to-top" id="btnTop" aria-label="Torna all'inizio della pagina">
+                    <span aria-hidden="true">⬆</span>
+                    <span lang="en">Top</span>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>
