@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dettaglio Barca - Noleggio Barche - SailUP</title>  <!-- Modificare via PHP -->
+    <title>Dettaglio Barca - Noleggio Barche - SailUP</title> <!-- Modificare via PHP -->
     <meta name="description"
         content="Noleggia lo yacht a motore Sunseeker Predator per una giornata di lusso e velocità nel Golfo di Napoli. Scopri le specifiche e prenota ora.">
     <meta name="authors" content="SailUp team" />
@@ -15,13 +15,13 @@
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap"
         rel="stylesheet" />
 
-        <link rel="stylesheet" href="../css/style.css" media="screen" />
-        <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)" />
-        <link rel="stylesheet" href="../css/print.css" media="print" />
+    <link rel="stylesheet" href="../css/style.css" media="screen">
+    <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)">
+    <link rel="stylesheet" href="../css/print.css" media="print">
 </head>
 
 <body>
-    <a href="#main-content" class="skip-to-content">Salta al contenuto</a>
+    <a href="#main-content" class="skip-to-content">Salta al contenuto principale</a>
 
     <header>
         <div class="header-container">
@@ -31,20 +31,15 @@
                         <source srcset="" type="image/avif" />
                         <img alt="Logo SailUP"
                             src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=400&q=80"
-                            width="30" />
+                            width="30">
                     </picture>
-                    <h1 lang="en">
-                        <span class="logo-text">Sail<span class="text-accent">UP</span></span>
-                    </h1>
+                    <span class="logo-text" lang="en">Sail<span class="text-accent">UP</span></span>
                 </a>
 
-
-
-                <nav id="main-menu" aria-label="Menu principale" role="navigation">
+                <nav id="main-menu">
                     <ul>
                         <li><a href="index.html" lang="en">Home</a></li>
-                        <li><a href="catalogo_noleggio.html" aria-current="location">Noleggio</a>
-                        </li>
+                        <li><a href="catalogo_noleggio.html">Noleggio</a></li>
                         <li><a href="catalogo_esperienze.html">Esperienze</a></li>
                         <li><a href="blog.html" lang="en">Blog</a></li>
                         <li><a href="chi_siamo.html">Chi Siamo</a></li>
@@ -53,34 +48,34 @@
 
                 <div class="header-buttons">
                     <button class="theme-toggle" aria-pressed="false" aria-label="Attiva modalità scura">
-                        <span class="active-icon sun">☀️</span>
-                        <span class="inactive-icon moon">🌙</span>
+                        <span class="active-icon sun" aria-hidden="true">☀️</span>
+                        <span class="inactive-icon moon" aria-hidden="true">🌙</span>
                     </button>
                     <a href="login.html" class="btn-layout" lang="en">Login</a>
                 </div>
 
                 <button id="hamburger-btn" aria-expanded="false" aria-controls="mobile-menu" aria-label="Menu Mobile">
-                    <span class="hamburger-icon">☰</span>
-                    <span class="close-icon hidden">✕</span>
+                    <span class="hamburger-icon" aria-hidden="true">☰</span>
+                    <span class="close-icon hidden" aria-hidden="true">✕</span>
                 </button>
             </div>
 
             <nav id="mobile-menu" aria-label="Menu mobile">
                 <ul>
                     <li><a href="index.html" lang="en">Home</a></li>
-                    <li><a href="catalogo_noleggio.html" aria-current="location">Noleggio</a></li>
+                    <li><a href="catalogo_noleggio.html">Noleggio</a></li>
                     <li><a href="catalogo_esperienze.html">Esperienze</a></li>
                     <li><a href="blog.html" lang="en">Blog</a></li>
                     <li><a href="chi_siamo.html">Chi Siamo</a></li>
-                    <li>
-                        <a href="login.html" class="menu-login">Login / Registrati</a>
-                    </li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <nav id="breadcrumb" aria-label="Percorso di navigazione">
+    <div class="sr-only" id="breadcrumb-label">
+        <span lang="en">Breadcrumb</span>
+    </div>
+    <nav aria-labelledby="breadcrumb-label" id="breadcrumb">
         <ol>
             <li><a href="index.html" lang="en">Home</a></li>
             <li><a href="catalogo_noleggio.html">Noleggio</a></li>
@@ -88,128 +83,125 @@
         </ol>
     </nav>
 
-    <main id="main-content">
-        <div class="section-container">
-            
-            <div class="detail-hero-container">
-                <img class="detail-hero-img"
-                    src="https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?auto=format&fit=crop&w=1200&q=80"
-                    alt="Yacht Sunseeker Predator">
-            </div>
+    <main id="main-content" class="section-container">
+        <img class="detail-hero-img"
+            src="https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?auto=format&fit=crop&w=1200&q=80"
+            alt="Yacht Sunseeker Predator">
 
-            <div class="detail-layout">
-                
-                <article class="detail-content">
-                    <div class="detail-header">
-                        <h1>Sunseeker Predator</h1>
-                        <p class="subtitle">Yacht a motore di lusso • 12 metri • Patente richiesta</p>
+        <div class="detail-layout">
+            <article>
+                <header class="detail-header">
+                    <h1>Sunseeker Predator</h1>
+                    <p class="subtitle">Yacht a motore di lusso • 12 metri • Patente richiesta</p>
+                </header>
+
+                <section aria-labelledby="specs-title">
+                    <h2 id="specs-title" class="sr-only">Specifiche Tecniche</h2>
+                    <div class="specs-grid">
+                        <div class="spec-card">
+                            <span class="spec-label">⚓ Tipo</span>
+                            <p class="spec-value">Motore</p>
+                        </div>
+                        <div class="spec-card">
+                            <span class="spec-label">📏 Lunghezza</span>
+                            <p class="spec-value">12 m</p>
+                        </div>
+                        <div class="spec-card">
+                            <span class="spec-label">👥 Posti</span>
+                            <p class="spec-value">8</p>
+                        </div>
+                        <div class="spec-card">
+                            <span class="spec-label">🎫 Patente</span>
+                            <p class="spec-value">Sì</p>
+                        </div>
                     </div>
+                </section>
 
-                    <section class="specs-section">
-                        <h2 class="sr-only">Specifiche Tecniche</h2>
-                        <div class="specs-grid">
-                            <div class="spec-card">
-                                <span class="spec-label">⚓ Tipo</span>
-                                <p class="spec-value">Motore</p>
-                            </div>
-                            <div class="spec-card">
-                                <span class="spec-label">📏 Lunghezza</span>
-                                <p class="spec-value">12 m</p>
-                            </div>
-                            <div class="spec-card">
-                                <span class="spec-label">👥 Posti</span>
-                                <p class="spec-value">8</p>
-                            </div>
-                            <div class="spec-card">
-                                <span class="spec-label">🎫 Patente</span>
-                                <p class="spec-value">Sì</p>
-                            </div>
+                <section aria-labelledby="description-title">
+                    <h2 id="description-title">Descrizione</h2>
+                    <p>Il Sunseeker Predator è un capolavoro di <span lang="en">design</span> e ingegneria navale.
+                        Con le sue linee aggressive e gli interni raffinati, offre un'esperienza di navigazione
+                        ineguagliabile.</p>
+                    <p>L'ampio prendisole a prua e il pozzetto accogliente sono ideali per rilassarsi, mentre la
+                        cabina sottocoperta offre tutto il comfort necessario per una giornata in mare.</p>
+                </section>
+
+                <section aria-labelledby="amenities-title">
+                    <h2 id="amenities-title">Dotazioni e Servizi</h2>
+                    <div class="amenities-grid">
+                        <div class="amenity-box included">
+                            <h3>✅ Incluso</h3>
+                            <ul>
+                                <li>Attrezzatura sicurezza</li>
+                                <li><abbr title="Global Positioning System" lang="en">GPS</abbr> e strumentazione
+                                </li>
+                                <li><span lang="en">Tender</span> con motore</li>
+                                <li>Piattaforma bagno</li>
+                                <li>Impianto audio <abbr title="Bluetooth" lang="en">BT</abbr></li>
+                            </ul>
                         </div>
-                    </section>
 
-                    <section class="description-section">
-                        <h2>Descrizione</h2>
-                        <p>Il Sunseeker Predator è un capolavoro di design e ingegneria navale. Con le sue linee
-                            aggressive e gli interni raffinati, offre un'esperienza di navigazione ineguagliabile.</p>
-                        <p>L'ampio prendisole a prua e il pozzetto accogliente sono ideali per rilassarsi,
-                            mentre la cabina sottocoperta offre tutto il comfort necessario per una giornata in mare.</p>
-                    </section>
-
-                    <section class="amenities-section">
-                        <h2>Dotazioni e Servizi</h2>
-                        <div class="amenities-grid">
-                            <div class="amenity-box included">
-                                <h3>✅ Incluso</h3>
-                                <ul>
-                                    <li>Attrezzatura sicurezza</li>
-                                    <li>GPS e strumentazione</li>
-                                    <li>Tender con motore</li>
-                                    <li>Piattaforma bagno</li>
-                                    <li>Impianto audio BT</li>
-                                </ul>
-                            </div>
-
-                            <div class="amenity-box extra">
-                                <h3>💎 Extra</h3>
-                                <ul>
-                                    <li>Skipper (+10%)</li>
-                                    <li>Attrezzatura snorkeling</li>
-                                    <li>Catering a bordo</li>
-                                    <li>Seadoo (moto d'acqua)</li>
-                                </ul>
-                            </div>
+                        <div class="amenity-box extra">
+                            <h3>💎 <span lang="en">Extra</span></h3>
+                            <ul>
+                                <li><span lang="en">Skipper</span> (+10%)</li>
+                                <li>Attrezzatura <span lang="en">snorkeling</span></li>
+                                <li><span lang="en">Catering</span> a bordo</li>
+                                <li>Seadoo (moto d'acqua)</li>
+                            </ul>
                         </div>
-                    </section>
-                </article>
+                    </div>
+                </section>
+            </article>
 
-                <aside class="detail-sidebar sticky-sidebar">
-    
-    <div class="price-header">
-        <span class="price-label">A partire da</span>
-        <div class="price-wrapper">
-            <span class="price-currency">€</span>
-            <span class="price-amount">850</span>
-        </div>
-        <span class="price-period">/ giorno</span>
-    </div>
+            <aside class="detail-sidebar sticky-sidebar" aria-labelledby="booking-title">
+                <h2 id="booking-title" class="sr-only">Modulo di prenotazione</h2>
 
-    <form method="post" action="" class="booking-form">     <!--- Definire il PHP -->
-        <fieldset>
-            <legend class="sr-only">Prenotazione</legend>
-            
-            <div class="form-group">
-                <label for="start-date">Check-in</label>
-                <input type="date" id="start-date" name="start_date" required>
-            </div>
+                <div class="price-header">
+                    <p class="price-label">
+                        A partire da
+                        <span class="price-currency" aria-hidden="true">€</span>
+                        <span class="price-amount">850</span>
+                        / giorno
+                    </p>
+                </div>
 
-            <div class="form-group">
-                <label for="end-date">Check-out</label>
-                <input type="date" id="end-date" name="end_date" required>
-            </div>
+                <form method="post" action="" class="booking-form">
+                    <fieldset>
+                        <legend class="sr-only">Prenotazione</legend>
 
-            <div class="form-group">
-                <label for="guests">Ospiti</label>
-                <input type="number" id="guests" name="guests" min="1" max="8" value="2" required>
-            </div>
+                        <div class="form-group">
+                            <label for="start-date"><span lang="en">Check-in</span></label>
+                            <input type="date" id="start-date" name="start_date" required>
+                        </div>
 
-            <hr class="divider">
+                        <div class="form-group">
+                            <label for="end-date"><span lang="en">Check-out</span></label>
+                            <input type="date" id="end-date" name="end_date" required>
+                        </div>
 
-            <div class="form-check checkbox-highlight">
-                <input type="checkbox" id="skipper" name="skipper">
-                <label for="skipper">
-                    <span>Aggiungi Skipper</span>
-                    <span class="extra-cost text-accent">+10%</span>
-                </label>
-            </div>
+                        <div class="form-group">
+                            <label for="guests">Ospiti</label>
+                            <input type="number" id="guests" name="guests" min="1" max="8" value="2" required>
+                        </div>
 
-            <button type="submit" class="btn-layout btn-full-width cta-button">Richiedi Disponibilità</button>
-            
-            <p class="security-note">Nessun addebito immediato</p>
+                        <hr class="divider">
 
-        </fieldset>
-    </form>
-</aside>
-            </div>
+                        <div class="form-check checkbox-highlight">
+                            <input type="checkbox" id="skipper" name="skipper">
+                            <label for="skipper">
+                                <span>Aggiungi <span lang="en">Skipper</span></span>
+                                <span class=" text-accent">+10%</span>
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn-layout btn-full-width cta-button">Richiedi
+                            Disponibilità</button>
+
+                        <p class="security-note">Nessun addebito immediato</p>
+                    </fieldset>
+                </form>
+            </aside>
         </div>
     </main>
 
@@ -221,9 +213,7 @@
                     <span class="logo-text"><span lang="en">Sail</span><span class="text-accent"
                             lang="en">UP</span></span>
                 </div>
-                <p class="footer-tagline">
-                    Naviga il Golfo di Napoli con stile e sicurezza. La tua avventura
-                    inizia qui.
+                <p class="footer-tagline">Naviga il Golfo di Napoli con stile e sicurezza. La tua avventura inizia qui.
                 </p>
             </div>
 
@@ -241,12 +231,12 @@
             </div>
 
             <div class="footer-col info-col">
-                <h3 class="footer-heading">Info & Contatti</h3>
+                <h3 class="footer-heading">Info &amp; Contatti</h3>
                 <ul class="footer-links">
                     <li><a href="FAQ.html">Domande Frequenti (<abbr title="Frequently Asked Questions"
                                 lang="en">FAQ</abbr>)</a></li>
                     <li><a href="privacy.html" lang="en">Privacy Policy</a></li>
-                    <li><a href="cookie.html">Cookie Policy</a></li>
+                    <li><a href="cookie.html"><span lang="en">Cookie</span> Policy</a></li>
                 </ul>
                 <address class="footer-address">
                     <p><strong>SailUP S.r.l.</strong></p>
@@ -258,16 +248,13 @@
 
         <div class="footer-bottom">
             <div class="footer-bottom-container">
-                <div class="copyright">
-                    &copy; 2025 SailUP S.r.l. - All rights reserved.
-                </div>
+                <p class="copyright">&copy; 2025 SailUP S.r.l. - All rights reserved.</p>
 
                 <div class="valid-logos">
-                    <img class="valid-code-icon" src="valid-xhtml10.png" alt="XHTML valido" />
-                    <img class="valid-code-icon" src="valid-CSS.png" alt="CSS valido" />
+                    <img class="valid-code-icon" src="valid-xhtml10.png" alt="XHTML valido">
+                    <img class="valid-code-icon" src="valid-CSS.png" alt="CSS valido">
                 </div>
 
-                <!-- Area bottone torna su, inizialmente non selezionabile con tab perchè invisibile -->
                 <a href="#main-content" class="scroll-to-top" id="btnTop" aria-label="Torna all'inizio del contenuto"
                     tabindex="-1">
                     <span aria-hidden="true">⬆</span> <span lang="en">Top</span>
