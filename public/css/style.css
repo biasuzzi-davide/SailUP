@@ -1243,12 +1243,6 @@ input[maxlength="5"] {
 }
 
 /* =========================================
-   PROFILO UTENTE - SailUP
-   Stili specifici per profilo, sicurezza e prenotazioni
-   Riutilizza variabili e classi da style.css
-   ========================================= */
-
-/* =========================================
    1. HEADER PROFILO
    ========================================= */
 
@@ -2000,8 +1994,6 @@ input[maxlength="5"] {
   gap: 2.5em;
   align-items: start;
 }
-
-
 
 .filters-header {
   display: flex;
@@ -2865,14 +2857,11 @@ caption {
   border-bottom: 2px solid var(--col-border);
 }
 
-/* --- STILE BASE (Comune a tutti) --- */
 th,
 td {
   padding: 0.8em 0.5em;
   border-bottom: 1px solid var(--col-border);
   vertical-align: middle;
-  /* DEFAULT: Tutto su una riga e troncato se troppo lungo */
-
 }
 
 thead th {
@@ -2897,15 +2886,12 @@ tr>*:first-child {
   width: 60px;
 }
 
-
-/* 3. AZIONI (Ultima colonna): Fissa a destra */
 tr>*:last-child {
   width: 110px;
   text-align: right;
   overflow: visible;
 }
 
-/* Pulsanti Azione (Comuni) */
 .btn-icon {
   display: inline-flex;
   align-items: center;
@@ -2967,16 +2953,12 @@ tr>*:last-child {
   border-color: #ef4444;
 }
 
-
-
-
 /* =========================================
    STILE FORM ADMIN (Semplificato)
    ========================================= */
 
 .admin-form {
   background-color: var(--col-bg);
-  /* Un bordo sottile e un'ombra leggera bastano per staccarlo dallo sfondo */
   border: 1px solid var(--col-border);
   border-radius: var(--radius-card);
   box-shadow: var(--shadow-sm);
@@ -2986,14 +2968,12 @@ tr>*:last-child {
   padding: 2.5em;
 }
 
-/* Semplifichiamo i fieldset: niente bordi, solo spaziatura verticale */
 .admin-form fieldset {
   border: none;
   padding: 0;
   margin: 0 0 2.5em 0;
 }
 
-/* Il titolo della sezione (legend) diventa un titoletto pulito */
 .admin-form legend {
   font-family: var(--font-head);
   font-weight: 700;
@@ -3004,21 +2984,37 @@ tr>*:last-child {
   display: block;
   width: 100%;
   border-bottom: 1px solid var(--col-border);
-  /* Linea divisoria sottile */
   padding-bottom: 0.5em;
 }
 
-/* Layout a griglia semplice per input affiancati */
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1.5em;
 }
 
-/* Bottoni allineati a destra */
 .form-actions {
   display: flex;
   justify-content: flex-end;
   gap: 1em;
   margin-top: 1em;
+}
+
+/* =========================================
+   STILE DOCUMENTI LEGALI (Cookie/Privacy)
+   ========================================= */
+.legal-document p {
+    max-width: 100%;
+}
+
+.legal-document > h1,
+.legal-document > p:nth-of-type(-n+2) {
+    text-align: center;
+    max-width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.legal-document section {
+    margin-top: 3em;
 }
