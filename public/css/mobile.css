@@ -111,7 +111,7 @@
 }
 
 #mobile-menu.active ul li a,
-#mobile-menu.active ul li.current-page {
+#mobile-menu.active ul li[aria-current="page"] {
     display: block;
     font-family: var(--font-head);
     font-size: var(--fs-md);
@@ -131,7 +131,7 @@
     border-bottom-color: var(--col-accent);
 }
 
-#mobile-menu.active ul li.current-page {
+#mobile-menu.active ul li[aria-current="page"] {
     font-weight: 700;
     color: var(--col-primary);
     /* Bordo visibile fisso */
@@ -183,7 +183,7 @@
 }
 
 #quote-section {
-    padding: 3em 1.5rem;
+    padding: 1.7em 0.5rem;
 }
 
 #quote-section blockquote {

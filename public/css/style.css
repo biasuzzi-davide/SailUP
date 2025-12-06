@@ -350,7 +350,7 @@ footer .logo-text {
 }
 
 #main-menu>ul>li>a,
-#main-menu>ul>li.current-page {
+#main-menu>ul>li[aria-current="page"] {
   display: block;
   text-decoration: none;
   font-weight: 600;
@@ -373,7 +373,7 @@ footer .logo-text {
   border-bottom-color: var(--col-accent);
 }
 
-#main-menu>ul>li.current-page {
+#main-menu>ul>li[aria-current="page"] {
   font-weight: 700;
   color: var(--col-primary);
   cursor: default;
@@ -690,36 +690,38 @@ body.layout-full-width {
 
 /* QUOTE (Citazione) */
 #quote-section {
-  text-align: center;
-  padding: 4em 1.5em;
-  max-width: 50em;
+  display: block;
+  max-width: 65%;
   margin: 0 auto;
-}
-
-#quote-section blockquote {
+  padding: 2em 0;
+  text-align: center;
   font-family: "Times New Roman", serif;
   font-size: var(--fs-lg);
   font-style: italic;
   color: var(--col-primary);
+  border: none;
 }
 
-#quote-section blockquote::before {
+#quote-section::before {
   content: "“";
   color: var(--col-accent);
   margin-right: 0.2em;
 }
 
-#quote-section blockquote::after {
+#quote-section::after {
   content: "”";
   color: var(--col-accent);
   margin-left: 0.2em;
 }
 
-#quote-section cite {
+#quote-section + cite {
   display: block;
-  margin-top: 1em;
+  text-align: center;
   font-weight: 600;
   font-style: normal;
+  max-width: 50em;
+  margin: 1em auto 0 auto; 
+  padding-bottom: 4em;
 }
 
 /* ESPERIENZE */
@@ -736,12 +738,7 @@ body.layout-full-width {
   border-radius: var(--radius-card);
   border: 1px solid var(--col-border);
   text-decoration: none;
-  transition: border-color 0.3s ease;
   margin-bottom: 1em;
-}
-
-.horizontal-card:hover {
-  border-color: var(--col-accent);
 }
 
 .horizontal-card h3 {
@@ -829,9 +826,11 @@ footer {
 }
 
 /* link visitati, non solo del footer */
-a:visited,
-.visited {
+a:visited {
   color: var(--col-visited-link);
+}
+li[aria-current="page"] {
+  color: var(--col-visited-link); 
 }
 
 .btn-hero:visited {
@@ -1021,11 +1020,11 @@ a:visited,
 .form-group select,
 .form-group textarea {
   width: 100%;
-  padding: 0.9em;
-  font-size: var(--fs-base);
+  padding: 0.4em;
+  font-size: var(--fs-sm);
   font-family: var(--font-body);
   background-color: var(--col-bg);
-  border: 2px solid var(--col-border);
+  border: 1.5px solid var(--col-border);
   border-radius: var(--radius-sm);
   transition: all 0.3s ease;
   color: var(--col-text);
@@ -1242,12 +1241,6 @@ input[maxlength="5"] {
   text-align: center;
   text-transform: uppercase;
 }
-
-/* =========================================
-   PROFILO UTENTE - SailUP
-   Stili specifici per profilo, sicurezza e prenotazioni
-   Riutilizza variabili e classi da style.css
-   ========================================= */
 
 /* =========================================
    1. HEADER PROFILO
@@ -2002,8 +1995,6 @@ input[maxlength="5"] {
   align-items: start;
 }
 
-
-
 .filters-header {
   display: flex;
   justify-content: space-between;
@@ -2310,7 +2301,6 @@ input[maxlength="5"] {
   font-size: 1.1em;
 }
 
-/* Footer card con prezzo */
 .product-footer {
   display: flex;
   justify-content: space-between;
@@ -2358,17 +2348,11 @@ input[maxlength="5"] {
   }
 }
 
-.detail-hero-container {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 3rem;
-  width: 100%;
-}
-
 .detail-hero-img {
+  display: block;
+  margin: 0 auto 3rem;
   width: 100%;
   max-width: 900px;
-  /* Larghezza massima controllata */
   height: auto;
   max-height: 500px;
   object-fit: cover;
@@ -2384,7 +2368,6 @@ input[maxlength="5"] {
 }
 
 .detail-header {
-  text-align: center;
   margin-bottom: 2rem;
   padding-bottom: 1rem;
   border-bottom: 1px solid var(--col-border);
@@ -2459,7 +2442,6 @@ input[maxlength="5"] {
   font-size: 0.95em;
 }
 
-/* Bullet points personalizzati */
 .amenity-box.included li::before {
   content: "✓";
   position: absolute;
@@ -2484,12 +2466,10 @@ input[maxlength="5"] {
   border: 1px solid var(--col-border);
   border-radius: var(--radius-card);
   box-shadow: var(--shadow-lg);
-  /* Usa la variabile esistente, molto più pulito */
   overflow: hidden;
   z-index: 10;
 }
 
-/* Header Prezzo */
 .price-header {
   background-color: var(--col-bg-alt);
   padding: 1.5rem;
@@ -2498,28 +2478,18 @@ input[maxlength="5"] {
 }
 
 .price-label {
-  display: block;
-  font-size: 0.8em;
-  text-transform: uppercase;
   color: var(--col-text-muted);
-  letter-spacing: 1px;
 }
 
 .price-amount {
   display: block;
-  font-size: 2.8rem;
+  font-size: 1.8rem;
   font-weight: 800;
   font-family: var(--font-head);
   color: var(--col-accent);
   line-height: 1.1;
 }
 
-.price-period {
-  font-size: 0.9em;
-  color: var(--col-text-muted);
-}
-
-/* Form Container */
 .booking-form {
   padding: 1.5rem;
 }
@@ -2530,7 +2500,6 @@ input[maxlength="5"] {
   margin: 0;
 }
 
-/* Divisore semplificato */
 .divider {
   border: 0;
   border-top: 1px solid var(--col-border);
@@ -2553,14 +2522,6 @@ input[maxlength="5"] {
   cursor: pointer;
   font-weight: 600;
   padding-left: 0.5rem;
-}
-
-.extra-cost {
-  font-size: 0.85em;
-  background: var(--col-bg-alt);
-  color: var(--col-accent);
-  padding: 0.2em 0.5em;
-  border-radius: 4px;
 }
 
 .cta-button {
@@ -2592,7 +2553,6 @@ input[maxlength="5"] {
   background-color: var(--col-bg);
   border: 1px solid var(--col-border);
   border-radius: var(--radius-card);
-  /* Usa raggio esistente */
   padding: 1.2em;
 }
 
@@ -2605,7 +2565,6 @@ input[maxlength="5"] {
   justify-content: center;
   font-size: 1.2em;
   flex-shrink: 0;
-  /* Impedisce all'icona di schiacciarsi */
   font-weight: bold;
 }
 
@@ -2626,7 +2585,6 @@ input[maxlength="5"] {
 
 .activity-content {
   flex: 1;
-  /* Prende tutto lo spazio disponibile */
 }
 
 .activity-type {
@@ -2844,7 +2802,6 @@ input[maxlength="5"] {
   border-radius: var(--radius-card);
   box-shadow: var(--shadow-sm);
   background-color: var(--col-bg);
-  /* Sicurezza per schermi che non rientrano nei breakpoint standard */
   overflow-x: auto;
 }
 
@@ -2852,7 +2809,6 @@ table {
   width: 100%;
   border-collapse: collapse;
   table-layout: fixed;
-  /* Il segreto per layout stabili */
   font-family: var(--font-body);
 }
 
@@ -2866,14 +2822,11 @@ caption {
   border-bottom: 2px solid var(--col-border);
 }
 
-/* --- STILE BASE (Comune a tutti) --- */
 th,
 td {
   padding: 0.8em 0.5em;
   border-bottom: 1px solid var(--col-border);
   vertical-align: middle;
-  /* DEFAULT: Tutto su una riga e troncato se troppo lungo */
-
 }
 
 thead th {
@@ -2898,15 +2851,12 @@ tr>*:first-child {
   width: 60px;
 }
 
-
-/* 3. AZIONI (Ultima colonna): Fissa a destra */
 tr>*:last-child {
   width: 110px;
   text-align: right;
   overflow: visible;
 }
 
-/* Pulsanti Azione (Comuni) */
 .btn-icon {
   display: inline-flex;
   align-items: center;
@@ -2933,10 +2883,8 @@ tr>*:last-child {
   background: #fef2f2;
 }
 
-/* --- Supporto Dark Mode --- */
 [data-theme="dark"] .table-container {
   background-color: var(--col-bg);
-  /* Scuro */
 }
 
 [data-theme="dark"] caption {
@@ -2968,16 +2916,12 @@ tr>*:last-child {
   border-color: #ef4444;
 }
 
-
-
-
 /* =========================================
    STILE FORM ADMIN (Semplificato)
    ========================================= */
 
 .admin-form {
   background-color: var(--col-bg);
-  /* Un bordo sottile e un'ombra leggera bastano per staccarlo dallo sfondo */
   border: 1px solid var(--col-border);
   border-radius: var(--radius-card);
   box-shadow: var(--shadow-sm);
@@ -2987,14 +2931,12 @@ tr>*:last-child {
   padding: 2.5em;
 }
 
-/* Semplifichiamo i fieldset: niente bordi, solo spaziatura verticale */
 .admin-form fieldset {
   border: none;
   padding: 0;
   margin: 0 0 2.5em 0;
 }
 
-/* Il titolo della sezione (legend) diventa un titoletto pulito */
 .admin-form legend {
   font-family: var(--font-head);
   font-weight: 700;
@@ -3005,21 +2947,37 @@ tr>*:last-child {
   display: block;
   width: 100%;
   border-bottom: 1px solid var(--col-border);
-  /* Linea divisoria sottile */
   padding-bottom: 0.5em;
 }
 
-/* Layout a griglia semplice per input affiancati */
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1.5em;
 }
 
-/* Bottoni allineati a destra */
 .form-actions {
   display: flex;
   justify-content: flex-end;
   gap: 1em;
   margin-top: 1em;
+}
+
+/* =========================================
+   STILE DOCUMENTI LEGALI (Cookie/Privacy)
+   ========================================= */
+.legal-document p {
+    max-width: 100%;
+}
+
+.legal-document > h1,
+.legal-document > p:nth-of-type(-n+2) {
+    text-align: center;
+    max-width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.legal-document section {
+    margin-top: 3em;
 }

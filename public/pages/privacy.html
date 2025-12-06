@@ -13,11 +13,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap"
-        rel="stylesheet" />
+        rel="stylesheet">
 
-        <link rel="stylesheet" href="../css/style.css" media="screen" />
-        <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)" />
-        <link rel="stylesheet" href="../css/print.css" media="print" />
+    <link rel="stylesheet" href="../css/style.css" media="screen">
+    <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)">
+    <link rel="stylesheet" href="../css/print.css" media="print">
 </head>
 
 <body>
@@ -27,16 +27,14 @@
         <div class="header-container">
             <div class="header">
                 <a href="index.html" class="logo">
-          <picture>
-            <source srcset="" type="image/avif" />
-            <img alt="Logo SailUP"
-              src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=400&q=80"
-              width="30" />
-          </picture>
-          <h1 lang="en">
-            <span class="logo-text">Sail<span class="text-accent">UP</span></span>
-          </h1>
-        </a>
+                    <picture>
+                        <source srcset="" type="image/avif" />
+                        <img alt="Logo SailUP"
+                            src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=400&q=80"
+                            width="30" />
+                    </picture>
+                    <span class="logo-text" lang="en">Sail<span class="text-accent">UP</span></span>
+                </a>
 
                 <nav id="main-menu">
                     <ul>
@@ -50,111 +48,109 @@
 
                 <div class="header-buttons">
                     <button class="theme-toggle" aria-pressed="false" aria-label="Attiva modalità scura">
-                        <span class="active-icon sun">☀️</span>
-                        <span class="inactive-icon moon">🌙</span>
+                        <span class="active-icon sun" aria-hidden="true">☀️</span>
+                        <span class="inactive-icon moon" aria-hidden="true">🌙</span>
                     </button>
                     <a href="login.html" class="btn-layout" lang="en">Login</a>
                 </div>
 
                 <button id="hamburger-btn" aria-expanded="false" aria-controls="mobile-menu" aria-label="Menu Mobile">
-                    <span class="hamburger-icon">☰</span>
-                    <span class="close-icon hidden">✕</span>
+                    <span class="hamburger-icon" aria-hidden="true">☰</span>
+                    <span class="close-icon hidden" aria-hidden="true">✕</span>
                 </button>
             </div>
 
-            <nav id="mobile-menu">
+            <nav id="mobile-menu" aria-label="Menu mobile">
                 <ul>
                     <li><a href="index.html" lang="en">Home</a></li>
                     <li><a href="catalogo_noleggio.html">Noleggio</a></li>
                     <li><a href="catalogo_esperienze.html">Esperienze</a></li>
                     <li><a href="blog.html" lang="en">Blog</a></li>
                     <li><a href="chi_siamo.html">Chi Siamo</a></li>
-                    <li class="current-page">
-                        <span class="menu-login">Privacy Policy</span>
-                    </li>
                 </ul>
             </nav>
         </div>
     </header>
 
     <div class="sr-only" id="breadcrumb-label">
-        <span lang="en">breadcrumb</span>
+        <span lang="en">Breadcrumb</span>
     </div>
     <nav aria-labelledby="breadcrumb-label" id="breadcrumb">
         <ol>
-            <li>
-                <span lang="en" class="breadcrumb-link"><a href="index.html">Home</a></span>
-            </li>
-            <li aria-current="page">
-                Privacy Policy
-            </li>
+            <li><a href="index.html" lang="en">Home</a></li>
+            <li aria-current="page" lang="en">Privacy Policy</li>
         </ol>
     </nav>
 
     <main id="main-content">
-        <div class="section-container">
-            <h1>Privacy Policy</h1>
+        <article class="section-container legal-document">
+            <h1 lang="en">Privacy Policy</h1>
             <p>Ultimo aggiornamento: 23 Novembre 2025</p>
-            <p>La presente Privacy Policy descrive come SailUP S.r.l. raccoglie, utilizza e protegge le informazioni
-                personali fornite dagli utenti durante l'utilizzo del sito web.</p>
+            <p>La presente <span lang="en">Privacy Policy</span> descrive come SailUP S.r.l. raccoglie, utilizza e
+                protegge le informazioni personali fornite dagli utenti durante l'utilizzo del sito <span
+                    lang="en">web</span>.</p>
 
-            <section>
-                <h2>Titolare del Trattamento</h2>
+            <section aria-labelledby="titolare-title">
+                <h2 id="titolare-title">Titolare del Trattamento</h2>
                 <p>Il titolare del trattamento dei dati personali è:</p>
-                <address> 
-                    SailUP S.r.l.<br>           <!-- br possono andare bene? -->
-                    Via Caracciolo, 80122 Napoli (NA)<br>
-                    P.IVA: 12345678901<br>
-                    Email per questioni di privacy: privacy@sailup.it
+                <address class="footer-address">
+                    <p><strong>SailUP S.r.l.</strong></p>
+                    <p>Via Caracciolo, 80122 Napoli (NA)</p>
+                    <p>P.IVA: 12345678901</p>
+                    <p><span lang="en">Email</span> per questioni di <span lang="en">privacy</span>: <a
+                            href="mailto:privacy@sailup.it">privacy@sailup.it</a></p>
                 </address>
             </section>
 
-            <section>
-                <h2>Tipi di Dati Raccolti</h2>
+            <section aria-labelledby="dati-raccolti-title">
+                <h2 id="dati-raccolti-title">Tipi di Dati Raccolti</h2>
+
                 <h3>Dati forniti volontariamente dall'utente</h3>
                 <p>Raccogliamo i dati personali che fornisci direttamente durante la registrazione al sito, la
                     compilazione del modulo di prenotazione o la comunicazione con noi. Tali dati includono:</p>
                 <ul>
                     <li>Dati anagrafici: Nome, Cognome, Codice Fiscale.</li>
-                    <li>Dati di contatto: Indirizzo email, Domicilio.</li>
-                    <li>Credenziali di accesso: La tua password viene memorizzata in formato hash e non è mai visibile in chiaro.</li>
+                    <li>Dati di contatto: Indirizzo <span lang="en">email</span>, Domicilio.</li>
+                    <li>Credenziali di accesso: La tua <span lang="en">password</span> viene memorizzata in formato
+                        <span lang="en">hash</span> e non è mai visibile in chiaro.</li>
                     <li>Dati facoltativi: Numero di Patente Nautica (se applicabile).</li>
                 </ul>
+
                 <h3>Dati di navigazione</h3>
-                <p>I sistemi informatici e le procedure software preposte al funzionamento di questo sito web
-                    acquisiscono, nel corso del loro normale esercizio, alcuni dati personali la cui trasmissione è
-                    implicita nell'uso dei protocolli di comunicazione di Internet. Si tratta di informazioni che non
-                    sono raccolte per essere associate a interessati identificati, ma che per loro stessa natura
-                    potrebbero, attraverso elaborazioni ed associazioni con dati detenuti da terzi, permettere di
-                    identificare gli utenti.</p>
+                <p>I sistemi informatici e le procedure <span lang="en">software</span> preposte al funzionamento di
+                    questo sito <span lang="en">web</span> acquisiscono, nel corso del loro normale esercizio, alcuni
+                    dati personali la cui trasmissione è implicita nell'uso dei protocolli di comunicazione di Internet.
+                    Si tratta di informazioni che non sono raccolte per essere associate a interessati identificati, ma
+                    che per loro stessa natura potrebbero, attraverso elaborazioni ed associazioni con dati detenuti da
+                    terzi, permettere di identificare gli utenti.</p>
             </section>
 
-            <section>
-                <h2>Finalità e Base Giuridica del Trattamento</h2>
+            <section aria-labelledby="finalita-title">
+                <h2 id="finalita-title">Finalità e Base Giuridica del Trattamento</h2>
                 <p>I dati personali sono trattati per le seguenti finalità:</p>
                 <ul>
-                    <li>Gestione delle prenotazioni e fornitura dei servizi: Per adempiere ai nostri
+                    <li><strong>Gestione delle prenotazioni e fornitura dei servizi:</strong> Per adempiere ai nostri
                         obblighi contrattuali, come la gestione del noleggio o dell'esperienza da te richiesta.</li>
-                    <li>Gestione dell'account utente: Per consentirti di accedere alla tua area
-                        personale e gestire i tuoi dati e le tue prenotazioni.</li>
-                    <li>Comunicazioni di servizio: Per inviarti email relative alla tua prenotazione
-                        (conferma, promemoria, eventuali modifiche).</li>
-                    <li>Obblighi di legge: Per adempiere a obblighi fiscali, contabili e legali.</li>
+                    <li><strong>Gestione dell'<span lang="en">account</span> utente:</strong> Per consentirti di
+                        accedere alla tua area personale e gestire i tuoi dati e le tue prenotazioni.</li>
+                    <li><strong>Comunicazioni di servizio:</strong> Per inviarti <span lang="en">email</span> relative
+                        alla tua prenotazione (conferma, promemoria, eventuali modifiche).</li>
+                    <li><strong>Obblighi di legge:</strong> Per adempiere a obblighi fiscali, contabili e legali.</li>
                 </ul>
                 <p>La base giuridica del trattamento è l'esecuzione di un contratto di cui sei parte (la prenotazione) e
                     l'adempimento di obblighi legali a cui siamo soggetti.</p>
             </section>
 
-            <section>
-                <h2>Modalità di Trattamento e Periodo di Conservazione</h2>
+            <section aria-labelledby="modalita-title">
+                <h2 id="modalita-title">Modalità di Trattamento e Periodo di Conservazione</h2>
                 <p>Il trattamento dei dati avviene mediante strumenti informatici e telematici con logiche strettamente
                     correlate alle finalità stesse e, comunque, in modo da garantire la sicurezza e la riservatezza dei
                     dati. I dati personali saranno conservati per il tempo strettamente necessario a conseguire gli
                     scopi per cui sono stati raccolti e per adempiere agli obblighi di legge.</p>
             </section>
 
-            <section>
-                <h2>Diritti dell'Interessato</h2>
+            <section aria-labelledby="diritti-title">
+                <h2 id="diritti-title">Diritti dell'Interessato</h2>
                 <p>In qualità di utente, hai il diritto di:</p>
                 <ul>
                     <li>Ottenere la conferma dell'esistenza o meno di dati personali che ti riguardano.</li>
@@ -162,12 +158,13 @@
                     <li>Opporti al trattamento o richiederne la limitazione.</li>
                     <li>Richiedere la portabilità dei dati.</li>
                 </ul>
-                <p>Puoi esercitare questi diritti in qualsiasi momento accedendo alla tua area personale sul nostro sito.</p>
+                <p>Puoi esercitare questi diritti in qualsiasi momento accedendo alla tua area personale sul nostro
+                    sito.</p>
             </section>
 
-            <p>Per maggiori dettagli sull'uso dei cookie, ti invitiamo a consultare la nostra <a
-                    href="cookie.html">Cookie Policy</a>.</p>
-        </div>
+            <p>Per maggiori dettagli sull'uso dei <span lang="en">cookie</span>, ti invitiamo a consultare la nostra <a
+                    href="cookie.html"><span lang="en">Cookie Policy</span></a>.</p>
+        </article>
     </main>
 
     <footer>
@@ -178,9 +175,7 @@
                     <span class="logo-text"><span lang="en">Sail</span><span class="text-accent"
                             lang="en">UP</span></span>
                 </div>
-                <p class="footer-tagline">
-                    Naviga il Golfo di Napoli con stile e sicurezza. La tua avventura
-                    inizia qui.
+                <p class="footer-tagline">Naviga il Golfo di Napoli con stile e sicurezza. La tua avventura inizia qui.
                 </p>
             </div>
 
@@ -198,14 +193,15 @@
             </div>
 
             <div class="footer-col info-col">
-                <h3 class="footer-heading">Info & Contatti</h3>
+                <h3 class="footer-heading">Info &amp; Contatti</h3>
                 <ul class="footer-links">
-                    <li><a href="FAQ.html">Domande Frequenti (<abbr title="Frequently Asked Questions" lang="en">FAQ</abbr>)</a></li>
-                    <li class="visited">Privacy Policy</li>
-                    <li><a href="cookie.html">Cookie Policy</a></li>
+                    <li><a href="FAQ.html">Domande Frequenti (<abbr title="Frequently Asked Questions"
+                                lang="en">FAQ</abbr>)</a></li>
+                    <li aria-current="page"><span lang="en">Privacy Policy</span></li>
+                    <li><a href="cookie.html"><span lang="en">Cookie</span> Policy</a></li>
                 </ul>
                 <address class="footer-address">
-                    <p>SailUP S.r.l.</p>
+                    <p><strong>SailUP S.r.l.</strong></p>
                     <p>Via Caracciolo, 80122 Napoli (NA)</p>
                     <p>P.IVA: 12345678901</p>
                 </address>
@@ -214,16 +210,13 @@
 
         <div class="footer-bottom">
             <div class="footer-bottom-container">
-                <div class="copyright">
-                    &copy; 2025 SailUP S.r.l. - All rights reserved.
-                </div>
+                <p class="copyright">&copy; 2025 SailUP S.r.l. - All rights reserved.</p>
 
                 <div class="valid-logos">
                     <img class="valid-code-icon" src="valid-xhtml10.png" alt="XHTML valido" />
                     <img class="valid-code-icon" src="valid-CSS.png" alt="CSS valido" />
                 </div>
 
-                <!-- Area bottone torna su, inizialmente non selezionabile con tab perchè invisibile -->
                 <a href="#main-content" class="scroll-to-top" id="btnTop" aria-label="Torna all'inizio del contenuto"
                     tabindex="-1">
                     <span aria-hidden="true">⬆</span> <span lang="en">Top</span>

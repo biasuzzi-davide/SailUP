@@ -7,18 +7,20 @@
     <title>Tour di Capri & Grotta Azzurra - Esperienze - SailUP</title>
     <meta name="description"
         content="Scopri i dettagli del nostro tour esclusivo di Capri e della Grotta Azzurra. Un'intera giornata per esplorare le meraviglie dell'isola.">
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap"
+        rel="stylesheet" />
 
-    <link rel="stylesheet" href="../css/style.css" media="screen" />
-    <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)" />
-    <link rel="stylesheet" href="../css/print.css" media="print" />
+    <link rel="stylesheet" href="../css/style.css" media="screen">
+    <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)">
+    <link rel="stylesheet" href="../css/print.css" media="print">
 </head>
 
 <body>
-    <a href="#main-content" class="skip-to-content">Salta al contenuto</a>
+    <a href="#main-content" class="skip-to-content">Salta al contenuto principale</a>
 
     <header>
         <div class="header-container">
@@ -28,18 +30,16 @@
                         <source srcset="" type="image/avif" />
                         <img alt="Logo SailUP"
                             src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=400&q=80"
-                            width="30" />
+                            width="30">
                     </picture>
-                    <h1 lang="en">
-                        <span class="logo-text">Sail<span class="text-accent">UP</span></span>
-                    </h1>
+                    <span class="logo-text" lang="en">Sail<span class="text-accent">UP</span></span>
                 </a>
 
-                <nav id="main-menu" aria-label="Menu principale" role="navigation">
+                <nav id="main-menu">
                     <ul>
                         <li><a href="index.html" lang="en">Home</a></li>
                         <li><a href="catalogo_noleggio.html">Noleggio</a></li>
-                        <li>Esperienze</li>
+                        <li><a href="catalogo_esperienze.html">Esperienze</a></li>
                         <li><a href="blog.html" lang="en">Blog</a></li>
                         <li><a href="chi_siamo.html">Chi Siamo</a></li>
                     </ul>
@@ -47,15 +47,15 @@
 
                 <div class="header-buttons">
                     <button class="theme-toggle" aria-pressed="false" aria-label="Attiva modalità scura">
-                        <span class="active-icon sun">☀️</span>
-                        <span class="inactive-icon moon">🌙</span>
+                        <span class="active-icon sun" aria-hidden="true">☀️</span>
+                        <span class="inactive-icon moon" aria-hidden="true">🌙</span>
                     </button>
                     <a href="login.html" class="btn-layout" lang="en">Login</a>
                 </div>
 
                 <button id="hamburger-btn" aria-expanded="false" aria-controls="mobile-menu" aria-label="Menu Mobile">
-                    <span class="hamburger-icon">☰</span>
-                    <span class="close-icon hidden">✕</span>
+                    <span class="hamburger-icon" aria-hidden="true">☰</span>
+                    <span class="close-icon hidden" aria-hidden="true">✕</span>
                 </button>
             </div>
 
@@ -63,146 +63,151 @@
                 <ul>
                     <li><a href="index.html" lang="en">Home</a></li>
                     <li><a href="catalogo_noleggio.html">Noleggio</a></li>
-                    <li><a href="catalogo_esperienze.html" aria-current="location">Esperienze</a></li>
+                    <li><a href="catalogo_esperienze.html">Esperienze</a></li>
                     <li><a href="blog.html" lang="en">Blog</a></li>
                     <li><a href="chi_siamo.html">Chi Siamo</a></li>
-                    <li><a href="login.html" class="menu-login">Login / Registrati</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <nav id="breadcrumb" aria-label="Percorso di navigazione">
+    <div class="sr-only" id="breadcrumb-label">
+        <span lang="en">Breadcrumb</span>
+    </div>
+    <nav aria-labelledby="breadcrumb-label" id="breadcrumb">
         <ol>
             <li><a href="index.html" lang="en">Home</a></li>
             <li><a href="catalogo_esperienze.html">Esperienze</a></li>
-            <li aria-current="page"><span lang="en">Tour</span> di Capri & Grotta Azzurra</li>
+            <li aria-current="page"><span lang="en">Tour</span> Capri & Grotta Azzurra</li>
         </ol>
     </nav>
 
-    <main id="main-content">
-        <div class="section-container">
+    <main id="main-content" class="section-container">
+        <img class="detail-hero-img"
+            src="https://images.unsplash.com/photo-1594209195285-5dcbcb34df24?q=80&w=1335&auto=format&fit=crop"
+            alt="Vista dei Faraglioni di Capri">
 
-            <div class="detail-hero-container">
-                <img class="detail-hero-img"
-                    src="https://images.unsplash.com/photo-1594209195285-5dcbcb34df24?q=80&w=1335&auto=format&fit=crop"
-                    alt="Vista dei Faraglioni di Capri">
-            </div>
+        <div class="detail-layout">
+            <article>
+                <header class="detail-header">
+                    <h1><span lang="en">Tour</span> Capri & Grotta Azzurra</h1>
+                    <p class="subtitle">Giornata intera • <span lang="en">Skipper</span> incluso • Partenza da Napoli
+                    </p>
+                </header>
 
-            <div class="detail-layout">
-
-                <article class="detail-content">
-                    <div class="detail-header">
-                        <h1><span lang="en">Tour</span> Capri & Grotta Azzurra</h1>
-                        <p class="subtitle">Giornata intera • Skipper incluso • Partenza da Napoli</p>
-                    </div>
-
-                    <section class="specs-section">
-                        <h2 class="sr-only">Dettagli Tour</h2>
-                        <div class="specs-grid">
-                            <div class="spec-card">
-                                <span class="spec-label">⏳ Durata</span>
-                                <p class="spec-value">8 h</p>
-                            </div>
-                            <div class="spec-card">
-                                <span class="spec-label">👥 Ospiti</span>
-                                <p class="spec-value">Max 8</p>
-                            </div>
-                            <div class="spec-card">
-                                <span class="spec-label">👨‍✈️ Guida</span>
-                                <p class="spec-value">Sì</p>
-                            </div>
-                            <div class="spec-card">
-                                <span class="spec-label">♿ Accesso</span>
-                                <p class="spec-value">Limitato</p>
-                            </div>
+                <section aria-labelledby="specs-title">
+                    <h2 id="specs-title" class="sr-only">Dettagli Tour</h2>
+                    <div class="specs-grid">
+                        <div class="spec-card">
+                            <span class="spec-label">⏳ Durata</span>
+                            <p class="spec-value">8 h</p>
                         </div>
-                    </section>
-
-                    <section class="description-section">
-                        <h2>Descrizione dell'Esperienza</h2>
-                        <p>Parti con noi dal porto di Napoli per un'avventura indimenticabile intorno all'isola di
-                            Capri. Il nostro tour esclusivo ti porterà a scoprire grotte nascoste, insenature segrete e
-                            le famose attrazioni dell'isola.</p>
-                        <p>Visiteremo la celebre Grotta Azzurra (condizioni meteo permettendo), passeremo sotto l'arco dei Faraglioni e faremo diverse soste per nuotare nelle acque più limpide del Golfo.</p>
-                    </section>
-
-                    <section class="amenities-section">
-                        <h2>Cosa è incluso</h2>
-                        <div class="amenities-grid">
-                            <div class="amenity-box included">
-                                <h3>✅ Nel prezzo</h3>
-                                <ul>
-                                    <li>Skipper professionista</li>
-                                    <li>Carburante incluso</li>
-                                    <li>Soft drinks e snack</li>
-                                    <li>Teli mare</li>
-                                    <li>Attrezzatura snorkeling</li>
-                                </ul>
-                            </div>
-
-                            <div class="amenity-box extra">
-                                <h3>ℹ️ Info & Extra</h3>
-                                <ul>
-                                    <li>Ticket Grotta Azzurra (extra)</li>
-                                    <li>Tassa sbarco Capri (extra)</li>
-                                    <li>Pranzo al ristorante (opzionale)</li>
-                                    <li>Lingue: IT, EN, FR</li>
-                                </ul>
-                            </div>
+                        <div class="spec-card">
+                            <span class="spec-label">👥 Ospiti</span>
+                            <p class="spec-value">Max 8</p>
                         </div>
-                    </section>
-                </article>
-
-                <aside class="detail-sidebar sticky-sidebar">
-                    
-                    <div class="price-header">
-                        <span class="price-label">Prezzo totale</span>
-                        <span class="price-amount">850€</span>
-                        <span class="price-period">/ tour privato</span>
+                        <div class="spec-card">
+                            <span class="spec-label">👨‍✈️ Guida</span>
+                            <p class="spec-value">Sì</p>
+                        </div>
+                        <div class="spec-card">
+                            <span class="spec-label">♿ Accesso</span>
+                            <p class="spec-value">Limitato</p>
+                        </div>
                     </div>
+                </section>
 
-                    <form method="post" action="prenotazione.php" class="booking-form">
-                        <fieldset>
-                            <legend class="sr-only">Prenota esperienza</legend>
+                <section aria-labelledby="description-title">
+                    <h2 id="description-title">Descrizione</h2>
+                    <p>Parti con noi dal porto di Napoli per un'avventura indimenticabile intorno all'isola di
+                        Capri. Il nostro <span lang="en">tour</span> esclusivo ti porterà a scoprire grotte nascoste,
+                        insenature segrete e
+                        le famose attrazioni dell'isola.</p>
+                    <p>Visiteremo la celebre Grotta Azzurra (condizioni meteo permettendo), passeremo sotto l'arco dei
+                        Faraglioni e faremo diverse soste per nuotare nelle acque più limpide del Golfo.</p>
+                </section>
 
-                            <div class="form-group">
-                                <label for="booking-date">Data Tour</label>
-                                <input type="date" id="booking-date" name="booking_date" required>
-                            </div>
+                <section aria-labelledby="amenities-title">
+                    <h2 id="amenities-title">Cosa è incluso</h2>
+                    <div class="amenities-grid">
+                        <div class="amenity-box included">
+                            <h3>✅ Nel prezzo</h3>
+                            <ul>
+                                <li><span lang="en">Skipper</span> professionista</li>
+                                <li>Carburante incluso</li>
+                                <li><span lang="en">Soft drinks</span> e <span lang="en">snack</span></li>
+                                <li>Teli mare</li>
+                                <li>Attrezzatura <span lang="en">snorkeling</span></li>
+                            </ul>
+                        </div>
 
-                            <div class="form-group">
-                                <label for="guests">Numero Partecipanti</label>
-                                <input type="number" id="guests" name="guests" min="1" max="8" value="2" required>
-                            </div>
+                        <div class="amenity-box extra">
+                            <h3>ℹ️ Info & <span lang="en">Extra</span></h3>
+                            <ul>
+                                <li><span lang="en">Ticket</span> Grotta Azzurra (<span lang="en">extra</span>)</li>
+                                <li>Tassa sbarco Capri (<span lang="en">extra</span>)</li>
+                                <li>Pranzo al ristorante (opzionale)</li>
+                                <li>Lingue: <abbr title="Italiano">IT</abbr>, <abbr title="Inglese">EN</abbr>, <abbr
+                                        title="Francese">FR</abbr></li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </article>
 
-                            <div class="form-group">
-                                <label for="guide-language">Lingua Preferita</label>
-                                <select id="guide-language" name="guide_language">
-                                    <option value="italiano">Italiano</option>
-                                    <option value="inglese">Inglese</option>
-                                    <option value="francese">Francese</option>
-                                </select>
-                            </div>
-                            
-                            <div class="checkbox-highlight">
-                                <label for="pickup">
-                                    <span>Prelievo Hotel</span>
-                                    <span class="extra-cost">+50€</span>
-                                </label>
-                                <input type="checkbox" id="pickup" name="pickup">
-                            </div>
+            <aside class="detail-sidebar sticky-sidebar" aria-labelledby="booking-title">
+                <h2 id="booking-title" class="sr-only">Modulo di prenotazione</h2>
 
-                            <button type="submit" class="btn-layout btn-full-width cta-button">Prenota Ora</button>
+                <div class="price-header">
+                    <p class="price-label">
+                        Prezzo totale
+                        <span class="price-currency" aria-hidden="true">€</span>
+                        <span class="price-amount">850</span>
+                        / <span lang="en">tour</span>
+                    </p>
+                </div>
 
-                            <div class="security-note">
-                                <span aria-hidden="true">🔒</span> Pagamento sicuro al check-out
-                            </div>
-                        </fieldset>
-                    </form>
-                </aside>
+                <form method="post" action="prenotazione.php" class="booking-form">
+                    <fieldset>
+                        <legend class="sr-only">Prenota esperienza</legend>
 
-            </div>
+                        <div class="form-group">
+                            <label for="booking-date">Data <span lang="en">Tour</span></label>
+                            <input type="date" id="booking-date" name="booking_date" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="guests">Numero Partecipanti</label>
+                            <input type="number" id="guests" name="guests" min="1" max="8" value="2" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="guide-language">Lingua Preferita</label>
+                            <select id="guide-language" name="guide_language">
+                                <option value="italiano">Italiano</option>
+                                <option value="inglese">Inglese</option>
+                                <option value="francese">Francese</option>
+                            </select>
+                        </div>
+
+                        <hr class="divider">
+
+                        <div class="form-check checkbox-highlight">
+                            <input type="checkbox" id="pickup" name="pickup">
+                            <label for="pickup">
+                                <span>Prelievo <span lang="en">Hotel</span></span>
+                                <span class="text-accent">+50€</span>
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn-layout btn-full-width cta-button">Prenota Ora</button>
+
+                        <p class="security-note">
+                            <span aria-hidden="true">🔒</span> Pagamento sicuro al <span lang="en">check-out</span>
+                        </p>
+                    </fieldset>
+                </form>
+            </aside>
         </div>
     </main>
 
@@ -211,10 +216,10 @@
             <div class="footer-col brand-col">
                 <div class="logo footer-logo">
                     <span class="logo-icon" aria-hidden="true">⚓</span>
-                    <span class="logo-text"><span lang="en">Sail</span><span class="text-accent" lang="en">UP</span></span>
+                    <span class="logo-text"><span lang="en">Sail</span><span class="text-accent"
+                            lang="en">UP</span></span>
                 </div>
-                <p class="footer-tagline">
-                    Naviga il Golfo di Napoli con stile e sicurezza. La tua avventura inizia qui.
+                <p class="footer-tagline">Naviga il Golfo di Napoli con stile e sicurezza. La tua avventura inizia qui.
                 </p>
             </div>
 
@@ -232,11 +237,12 @@
             </div>
 
             <div class="footer-col info-col">
-                <h3 class="footer-heading">Info & Contatti</h3>
+                <h3 class="footer-heading">Info &amp; Contatti</h3>
                 <ul class="footer-links">
-                    <li><a href="FAQ.html">Domande Frequenti (<abbr title="Frequently Asked Questions" lang="en">FAQ</abbr>)</a></li>
+                    <li><a href="FAQ.html">Domande Frequenti (<abbr title="Frequently Asked Questions"
+                                lang="en">FAQ</abbr>)</a></li>
                     <li><a href="privacy.html" lang="en">Privacy Policy</a></li>
-                    <li><a href="cookie.html">Cookie Policy</a></li>
+                    <li><a href="cookie.html"><span lang="en">Cookie</span> Policy</a></li>
                 </ul>
                 <address class="footer-address">
                     <p><strong>SailUP S.r.l.</strong></p>
@@ -248,14 +254,15 @@
 
         <div class="footer-bottom">
             <div class="footer-bottom-container">
-                <div class="copyright">
-                    &copy; 2025 SailUP S.r.l. - All rights reserved.
-                </div>
+                <p class="copyright">&copy; 2025 SailUP S.r.l. - All rights reserved.</p>
+
                 <div class="valid-logos">
-                    <img class="valid-code-icon" src="valid-xhtml10.png" alt="XHTML valido" />
-                    <img class="valid-code-icon" src="valid-CSS.png" alt="CSS valido" />
+                    <img class="valid-code-icon" src="valid-xhtml10.png" alt="XHTML valido">
+                    <img class="valid-code-icon" src="valid-CSS.png" alt="CSS valido">
                 </div>
-                <a href="#main-content" class="scroll-to-top" id="btnTop" aria-label="Torna all'inizio del contenuto" tabindex="-1">
+
+                <a href="#main-content" class="scroll-to-top" id="btnTop" aria-label="Torna all'inizio del contenuto"
+                    tabindex="-1">
                     <span aria-hidden="true">⬆</span> <span lang="en">Top</span>
                 </a>
             </div>
@@ -264,4 +271,5 @@
 
     <script src="../js/script.js"></script>
 </body>
+
 </html>
