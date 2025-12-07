@@ -276,24 +276,26 @@ footer .logo p {
 .profile-actions {
     justify-content: center;
 }
+
 .profile-sidebar {
     position: static;
-    padding: 0; /* Rimuovi padding extra se non serve */
+    padding: 0;
+    /* Rimuovi padding extra se non serve */
     width: 100%;
 }
 
 .profile-sidebar ul {
     display: grid;
     /* Crea esattamente 2 colonne uguali */
-    grid-template-columns: 1fr 1fr; 
-    gap: 0.5em; 
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5em;
     margin: 0;
     padding: 0;
     list-style: none;
 }
 
 .profile-sidebar li {
-    margin: 0; 
+    margin: 0;
 }
 
 .profile-sidebar a,
@@ -310,7 +312,7 @@ footer .logo p {
 
 .stats-grid {
     grid-template-columns: repeat(2, 1fr);
-  }
+}
 
 @media (max-width: 400px) {
     .stats-grid {
@@ -342,57 +344,83 @@ footer .logo p {
 }
 
 /* =========================================
-   6. PAGINA DETTAGLIO PRODOTTO (Mobile) -- da controllare --
+   6. PAGINA DETTAGLIO PRODOTTO (Mobile)
    ========================================= */
-
-/* Trasforma la griglia asimmetrica in colonna singola */
-.product-layout {
+.detail-layout {
     grid-template-columns: 1fr;
     gap: 2rem;
 }
 
-.profile-layout-centered {
-    padding: 0 1em;
-}
-
-/* Gestione Immagine Hero su Mobile */
-.product-hero {
-    height: 300px;
-    /* Riduce l'altezza per non occupare tutto lo schermo */
-    min-height: auto;
+.detail-hero-img {
+    max-height: 300px;
     margin-bottom: 1.5rem;
     border-radius: var(--radius-sm);
-    /* Raggio meno pronunciato su mobile */
 }
 
-/* Sidebar Prenotazione */
-.filters-sidebar.sticky-top {
+.detail-sidebar {
     position: static;
-    /* Rimuove l'effetto sticky che su mobile non serve/dà fastidio */
-    z-index: 1;
+    order: 1;
+    margin-top: 2rem;
+}
+
+.price-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 1.5rem;
+    text-align: center;
+}
+
+.price-header .price-label {
+    font-size: var(--fs-sm);
+    margin: 0;
+    width: 100%;
+}
+
+.price-header .price-amount {
+    font-size: var(--fs-xl);
+    margin: 0;
+}
+
+.booking-form {
+    padding: 1rem 1.5rem 1.5rem;
+}
+
+.booking-form .form-group {
+    margin-bottom: 1rem;
+}
+
+.booking-form .divider {
+    margin: 1rem 0;
+}
+
+.booking-form .cta-button {
+    width: 100%;
+    padding: var(--btn-padding-vertical) var(--btn-padding-horizontal);
+    font-size: var(--btn-font-size);
+}
+
+.booking-form .security-note {
+    text-align: center;
+    width: 100%;
     margin-top: 1rem;
-    order: -1;
-    /* OPZIONALE: Se vuoi il form SOPRA la descrizione */
+    display: block;
 }
 
-/* Se decidi di usare order: -1 sopra, potresti voler nascondere alcuni dettagli 
-   del form per non ingombrare, ma di base lascialo visibile. */
-
-/* Adattamento Specifiche Tecniche (Cards Wrapper interno) */
-.product-layout .cards-wrapper {
+.specs-grid {
     grid-template-columns: repeat(2, 1fr);
-    /* 2 colonne su mobile invece di 4 o 1 */
-    gap: 0.8rem;
+    gap: 1rem;
+    margin-bottom: 2rem;
 }
 
-.product-layout .card {
-    padding: 0.8em;
-    /* Meno padding nelle card specifiche */
+.spec-card {
+    width: 100%;
+    padding: 0.8rem;
 }
 
-.product-layout .card p {
-    font-size: var(--fs-base);
-    /* Assicura leggibilità */
+.amenities-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
 }
 
 .faq-question {
@@ -478,6 +506,7 @@ footer .logo p {
         width: 45%;
         /* Card specifiche più larghe su mobile */
     }
+
     .activity-item {
         flex-direction: column;
         /* Diventa colonna */
@@ -485,13 +514,13 @@ footer .logo p {
         /* Allinea tutto a sinistra */
         gap: 1em;
     }
-    
+
     .activity-icon {
         width: 2.5em;
         height: 2.5em;
         /* Icona un po' più piccola */
     }
-    
+
     .activity-meta {
         text-align: left;
         /* Allinea testo a sinistra */
@@ -510,68 +539,58 @@ footer .logo p {
    BREADCRUMB 
    ========================================= */
 #breadcrumb {
-    /* Rimpicciolisce le variabili geometriche */
     --b-arrow-h: 22px;
     --b-arrow-w: 18px;
     --b-pad-l: 28px;
     --b-pad-y: 5px;
     padding: 0.4em 0.5em;
-    justify-content: center; 
+    justify-content: center;
     margin-top: 5%;
 }
 
 #breadcrumb li a {
-    min-height: 44px; /* Touch target */
+    min-height: 44px;
+    /* Touch target */
 }
 
 /* =========================================
    TABELLA RESPONSIVE (Card View) - FIX HEADER
    ========================================= */
-
-/* 1. Reset del contenitore principale */
 .table-container {
-    /* Rimuoviamo lo stile "scatola" del contenitore su mobile 
-       perché ora avremo delle card separate */
-    background-color: transparent; 
+    background-color: transparent;
     border: none;
     box-shadow: none;
-    overflow: visible; /* Importante per vedere le ombre delle card */
+    overflow: visible;
 }
 
-/* 2. Trasformiamo gli elementi in blocchi */
-.table-container table, 
-.table-container thead, 
-.table-container tbody, 
-.table-container th, 
-.table-container td, 
+.table-container table,
+.table-container thead,
+.table-container tbody,
+.table-container th,
+.table-container td,
 .table-container tr,
-.table-container caption { /* <--- Aggiunto caption qui */
-    display: block; 
+.table-container caption {
+    display: block;
     width: 100%;
 }
 
-/* 3. FIX SPECIFICO PER L'INTESTAZIONE (Caption) */
 .table-container caption {
     text-align: center;
     margin-bottom: 1em;
     background-color: var(--col-bg-alt);
-    border-radius: var(--radius-card); /* Arrotondiamo tutto */
+    border-radius: var(--radius-card);
     border: 1px solid var(--col-border);
     box-shadow: var(--shadow-sm);
-    
-    /* Impediamo che erediti bordi strani dalla versione desktop */
-    border-bottom: 1px solid var(--col-border); 
+    border-bottom: 1px solid var(--col-border);
 }
 
-/* 4. Nascondiamo l'intestazione della tabella (thead) */
-.table-container thead { 
+.table-container thead {
     position: absolute;
     top: -9999px;
     left: -9999px;
 }
 
-/* 5. Stile delle CARD (Righe) */
-.table-container tr { 
+.table-container tr {
     margin-bottom: 1.5em;
     background-color: var(--col-card);
     border: 1px solid var(--col-border);
@@ -581,35 +600,32 @@ footer .logo p {
     overflow: hidden;
 }
 
-/* 6. Stile delle Celle (Righe interne alla card) */
-.table-container td { 
+.table-container td {
     display: flex;
     justify-content: space-between;
     align-items: center;
     border: none;
-    border-bottom: 1px solid var(--col-border); 
+    border-bottom: 1px solid var(--col-border);
     padding: 1em;
     text-align: right;
 }
 
-.table-container td:last-child { 
-    border-bottom: none; 
+.table-container td:last-child {
+    border-bottom: none;
 }
 
-/* 7. Etichette (Data-Label) */
-.table-container td::before { 
+.table-container td::before {
     content: attr(data-label);
     font-weight: 700;
     color: var(--col-primary);
     text-transform: uppercase;
-    font-size: 0.75em; /* Leggermente più piccolo per eleganza */
+    font-size: 0.75em;
     letter-spacing: 0.5px;
     text-align: left;
     margin-right: 1em;
-    flex: 0 0 40%; /* Assicura che l'etichetta abbia spazio fisso */
+    flex: 0 0 40%;
 }
 
-/* 8. Cella Azioni */
 .table-container td.actions-cell {
     justify-content: flex-end;
     background-color: var(--col-bg-alt);
@@ -624,47 +640,52 @@ footer .logo p {
 /* =========================================
    TABELLE ADMIN 
    ========================================= */
-
-/* Trasformiamo la tabella in blocchi */
-table, tbody, th, td, tr { 
-  display: block; 
-  width: 100%; 
+table,
+tbody,
+th,
+td,
+tr {
+    display: block;
+    width: 100%;
 }
 
-/* La riga diventa una Card */
 tbody tr {
-  margin-bottom: 1.5em;
-  border: 1px solid var(--col-border);
-  border-radius: var(--radius-card);
-  box-shadow: var(--shadow-sm);
-  background: var(--col-bg);
+    margin-bottom: 1.5em;
+    border: 1px solid var(--col-border);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-sm);
+    background: var(--col-bg);
 }
 
-/* La cella diventa una riga flessibile */
 tbody td {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  text-align: right;
-  white-space: normal; /* Su mobile il testo va a capo */
-  min-height: 3em;
-  border-bottom: 1px solid var(--col-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: right;
+    white-space: normal;
+    min-height: 3em;
+    border-bottom: 1px solid var(--col-border);
 }
 
-/* Etichetta generata dall'attributo data-label */
 tbody td::before {
-  content: attr(data-label);
-  font-weight: 700;
-  font-size: 0.85em;
-  text-transform: uppercase;
-  color: var(--col-text-muted);
-  text-align: left;
-  margin-right: 1em;
+    content: attr(data-label);
+    font-weight: 700;
+    font-size: 0.85em;
+    text-transform: uppercase;
+    color: var(--col-text-muted);
+    text-align: left;
+    margin-right: 1em;
 }
 
 /* =========================================
    FORM DI CREAZIONE ARTICOLI 
    ========================================= */
 
-.admin-form { padding: 1.5em; }
-.form-row { grid-template-columns: 1fr; gap: 0; }
+.admin-form {
+    padding: 1.5em;
+}
+
+.form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+}
