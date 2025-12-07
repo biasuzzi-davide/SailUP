@@ -1309,7 +1309,6 @@ input[maxlength="5"] {
   border-radius: var(--radius-card);
   padding: 1.5em;
   box-shadow: var(--shadow-sm);
-  z-index: 90;
 }
 
 .profile-sidebar ul {
@@ -2467,7 +2466,6 @@ input[maxlength="5"] {
   border-radius: var(--radius-card);
   box-shadow: var(--shadow-lg);
   overflow: hidden;
-  z-index: 10;
 }
 
 .price-header {
