@@ -21,21 +21,17 @@
 </head>
 
 <body>
-  <a href="#main-content" class="skip-to-content">Salta al contenuto</a>
+  <a href="#main-content" class="skip-to-content">Salta al contenuto principale</a>
 
   <header>
     <div class="header-container">
       <div class="header">
         <div class="logo">
           <picture>
-            <source srcset="" type="image/avif" />
-            <img alt="Logo SailUP"
-              src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=400&q=80"
-              width="30" />
+            <source srcset="" type="image/avif">
+            <img alt="Logo SailUP" src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=400&q=80" width="30">
           </picture>
-          <h1 lang="en">
-            <span class="logo-text">Sail<span class="text-accent">UP</span></span>
-          </h1>
+          <span class="logo-text" lang="en">Sail<span class="text-accent">UP</span></span>
         </div>
 
         <nav id="main-menu">
@@ -50,35 +46,33 @@
 
         <div class="header-buttons">
           <button class="theme-toggle" aria-pressed="false" aria-label="Attiva modalità scura">
-            <span class="active-icon sun">☀️</span>
-            <span class="inactive-icon moon">🌙</span>
+            <span class="active-icon sun" aria-hidden="true">☀️</span>
+            <span class="inactive-icon moon" aria-hidden="true">🌙</span>
           </button>
           <a href="login.html" lang="en" class="btn-layout">Login</a>
         </div>
 
         <button id="hamburger-btn" aria-expanded="false" aria-controls="mobile-menu" aria-label="Menu Mobile">
-          <span class="hamburger-icon">☰</span>
-          <span class="close-icon hidden">✕</span>
+          <span class="hamburger-icon" aria-hidden="true">☰</span>
+          <span class="close-icon hidden" aria-hidden="true">✕</span>
         </button>
       </div>
 
-      <nav id="mobile-menu">
+      <nav id="mobile-menu" aria-label="Menu mobile">
         <ul>
-          <li aria-current="page">Home</li>
+          <li aria-current="page" lang="en">Home</li>
           <li><a href="catalogo_noleggio.html">Noleggio</a></li>
           <li><a href="catalogo_esperienze.html">Esperienze</a></li>
           <li><a href="blog.html" lang="en">Blog</a></li>
           <li><a href="chi_siamo.html">Chi Siamo</a></li>
-          <li>
-            <a href="login.html" class="menu-login"><span>Login</span> / Registrati</a>
-          </li>
+          <li><a href="login.html" class="menu-login"><span lang="en">Login</span> / Registrati</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
   <div class="sr-only" id="breadcrumb-label">
-    <span lang="en">breadcrumb</span>
+    <span lang="en">Breadcrumb</span>
   </div>
   <nav aria-labelledby="breadcrumb-label" id="breadcrumb">
     <ol>
@@ -88,13 +82,10 @@
 
   <main id="main-content">
     <div class="layout-full-width">
-      <section id="hero" class="section-container">
+      <section id="hero" class="section-container" aria-labelledby="hero-title">
         <div id="hero-content">
-          <h1>La tua avventura nel Golfo di Napoli inizia qui</h1>
-          <p>
-            Noleggia barche a vela, a motore e gommoni o lasciati guidare dai
-            nostri skipper in <span lang="en">tour</span> indimenticabili.
-          </p>
+          <h1 id="hero-title">La tua avventura nel Golfo di Napoli inizia qui</h1>
+          <p>Noleggia barche a vela, a motore e gommoni o lasciati guidare dai nostri <span lang="en">skipper</span> in <span lang="en">tour</span> indimenticabili.</p>
           <div class="cta-group">
             <a href="catalogo_noleggio.html" class="btn-hero">Scopri la Flotta</a>
             <a href="catalogo_esperienze.html" class="btn-hero">I nostri <span lang="en">Tour</span></a>
@@ -103,90 +94,84 @@
       </section>
     </div>
 
-    <section>
-      <div class="section-container">
-        <div class="section-header">
-          <h2 id="rental-title">La nostra Flotta</h2>
-          <a href="catalogo_noleggio.html" aria-label="Vedi tutta la flotta">Mostra tutte</a>
-        </div>
+    <section class="section-container" aria-labelledby="rental-title">
+      <div class="section-header">
+        <h2 id="rental-title">La nostra Flotta</h2>
+        <a href="catalogo_noleggio.html" aria-label="Vedi tutta la flotta">Mostra tutte</a>
+      </div>
 
-        <div class="cards-wrapper">
-          <article class="card">
-            <a href="dettaglio_barca.html">
-              <img src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=400&q=80"
-                alt="Yacht a motore modello Sunseeker" />
-              <p class="card-title">Sunseeker Predator</p>
-              <p class="card-subtitle">
-                Motore • 12<abbr title="Metri">m</abbr>
-              </p>
-            </a>
-          </article>
-          <article class="card">
-            <a href="dettaglio_barca.html">
-              <img src="../img/Bavaria_46.webp"
-                alt="Barca a vela Bavaria 46" />
-              <p class="card-title">Bavaria 46</p>
-              <p class="card-subtitle">
-                Vela • 14<abbr title="Metri">m</abbr>
-              </p>
-            </a>
-          </article>
-          <article class="card">
-            <a href="dettaglio_barca.html">
-              <img src="../img/Sacs_strider.webp"
-                alt="Gommone Sacs per escursioni giornaliere" />
-              <p class="card-title">Sacs Strider</p>
-              <p class="card-subtitle">
-                Gommone • 8<abbr title="Metri">m</abbr>
-              </p>
-            </a>
-          </article>
-        </div>
+      <div class="cards-wrapper">
+        <article class="card">
+          <a href="dettaglio_barca.html" aria-label="Dettagli Sunseeker Predator">
+            <img src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=400&q=80" alt="Yacht a motore modello Sunseeker" />
+            <div class="card-content">
+              <h3 class="card-title">Sunseeker Predator</h3>
+              <p class="card-subtitle">Motore • 12<abbr title="Metri">m</abbr></p>
+            </div>
+          </a>
+        </article>
+        <article class="card">
+          <a href="dettaglio_barca.html" aria-label="Dettagli Bavaria 46">
+            <img src="../img/Bavaria_46.webp" alt="Barca a vela Bavaria 46" />
+            <div class="card-content">
+              <h3 class="card-title">Bavaria 46</h3>
+              <p class="card-subtitle">Vela • 14<abbr title="Metri">m</abbr></p>
+            </div>
+          </a>
+        </article>
+        <article class="card">
+          <a href="dettaglio_barca.html" aria-label="Dettagli Sacs Strider">
+            <img src="../img/Sacs_strider.webp" alt="Gommone Sacs per escursioni giornaliere" />
+            <div class="card-content">
+              <h3 class="card-title">Sacs Strider</h3>
+              <p class="card-subtitle">Gommone • 8<abbr title="Metri">m</abbr></p>
+            </div>
+          </a>
+        </article>
       </div>
     </section>
 
-    <section>
-      <div class="section-container">
-        <div class="section-header">
-          <h2 id="experiences-title">Esperienze Uniche</h2>
-          <a href="catalogo_esperienze.html" aria-label="Vedi tutte le nostre esperienze disponibili">Mostra tutte</a>
-        </div>
+    <section class="section-container" aria-labelledby="experiences-title">
+      <div class="section-header">
+        <h2 id="experiences-title">Esperienze Uniche</h2>
+        <a href="catalogo_esperienze.html" aria-label="Vedi tutte le nostre esperienze disponibili">Mostra tutte</a>
+      </div>
 
-        <div class="cards-wrapper">
-          <article class="card">
-            <a href="dettaglio_esperienza.html">
-              <img src="https://images.unsplash.com/photo-1594209195285-5dcbcb34df24?q=80&w=1335&auto=format&fit=crop"
-                alt="Vista mozzafiato dei Faraglioni di Capri da una barca" />
-              <p class="card-title">Tour di Capri & Grotta Azzurra</p>
+      <div class="cards-wrapper">
+        <article class="card">
+          <a href="dettaglio_esperienza.html" aria-label="Dettagli Tour di Capri e Grotta Azzurra">
+            <img src="https://images.unsplash.com/photo-1594209195285-5dcbcb34df24?q=80&w=1335&auto=format&fit=crop" alt="Vista mozzafiato dei Faraglioni di Capri da una barca" />
+            <div class="card-content">
+              <h3 class="card-title"><span lang="en">Tour</span> di Capri &amp; Grotta Azzurra</h3>
               <p class="card-subtitle">
-                ⏱️ 8 ore • 👥 8 posti • 🗣️ <abbr title="Italiano">ITA</abbr>
+                <span aria-hidden="true">⏱️</span> 8 ore • 
+                <span aria-hidden="true">👥</span> 8 posti • 
+                <span aria-hidden="true">🗣️</span> <abbr title="Italiano">ITA</abbr>
               </p>
-            </a>
-          </article>
-          <article class="card">
-            <a href="dettaglio_esperienza.html?id=aperitivo-ischia">
-              <img
-                src="https://images.unsplash.com/photo-1728327510164-04538fb967ee?q=80&w=1364&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                alt="Barca a vela Bavaria 46" />
-              <p class="card-title">Aperitivo al Tramonto a Ischia</p>
+            </div>
+          </a>
+        </article>
+        <article class="card">
+          <a href="dettaglio_esperienza.html?id=aperitivo-ischia" aria-label="Dettagli Aperitivo al Tramonto a Ischia">
+            <img src="https://images.unsplash.com/photo-1728327510164-04538fb967ee?q=80&w=1364&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Tramonto a Ischia visto dalla barca" />
+            <div class="card-content">
+              <h3 class="card-title">Aperitivo al Tramonto a Ischia</h3>
               <p class="card-subtitle">
-                ⏱️ 4 ore • 👥 6 posti • 🗣️ <abbr title="Italiano/Inglese">ITA/ENG</abbr>
+                <span aria-hidden="true">⏱️</span> 4 ore • 
+                <span aria-hidden="true">👥</span> 6 posti • 
+                <span aria-hidden="true">🗣️</span> <abbr title="Italiano/Inglese">ITA/ENG</abbr>
               </p>
-            </a>
-          </article>
-        </div>
+            </div>
+          </a>
+        </article>
       </div>
     </section>
 
-    <div id="quote-section" class="quote">
-      <blockquote
-        cite="https://mareeletterarie.com/blogs/gazzetta-del-gabbiano/seneca-e-la-rotta-del-vento-navigare-con-consapevolezza">
-        Non esiste vento favorevole per il marinaio che non sa dove andare.
-      </blockquote>
-      <cite>Seneca</cite>
-    </div>
+    <blockquote id="quote-section" cite="https://mareeletterarie.com/blogs/gazzetta-del-gabbiano/seneca-e-la-rotta-del-vento-navigare-con-consapevolezza">
+      Non esiste vento favorevole per il marinaio che non sa dove andare.
+    </blockquote>
+    <cite>Seneca</cite>
   </main>
-
 
   <footer>
     <div class="section-container footer-content">
@@ -195,17 +180,14 @@
           <span class="logo-icon" aria-hidden="true">⚓</span>
           <span class="logo-text"><span lang="en">Sail</span><span class="text-accent" lang="en">UP</span></span>
         </div>
-        <p class="footer-tagline">
-          Naviga il Golfo di Napoli con stile e sicurezza. La tua avventura
-          inizia qui.
-        </p>
+        <p class="footer-tagline">Naviga il Golfo di Napoli con stile e sicurezza. La tua avventura inizia qui.</p>
       </div>
 
       <div class="footer-col nav-col">
         <h3 class="footer-heading">Esplora</h3>
         <nav aria-label="Menu footer">
           <ul class="footer-links">
-            <li lang="en" aria-current="page">Home</li>
+            <li aria-current="page" lang="en">Home</li>
             <li><a href="catalogo_noleggio.html">Noleggio</a></li>
             <li><a href="catalogo_esperienze.html">Esperienze</a></li>
             <li><a href="blog.html" lang="en">Blog</a></li>
@@ -215,12 +197,11 @@
       </div>
 
       <div class="footer-col info-col">
-        <h3 class="footer-heading">Info & Contatti</h3>
+        <h3 class="footer-heading">Info &amp; Contatti</h3>
         <ul class="footer-links">
-          <li><a href="FAQ.html">Domande Frequenti (<abbr title="Frequently Asked Questions" lang="en">FAQ</abbr>)</a>
-          </li>
+          <li><a href="FAQ.html">Domande Frequenti (<abbr title="Frequently Asked Questions" lang="en">FAQ</abbr>)</a></li>
           <li><a href="privacy.html" lang="en">Privacy Policy</a></li>
-          <li><a href="cookie.html">Cookie Policy</a></li>
+          <li><a href="cookie.html"><span lang="en">Cookie</span> Policy</a></li>
         </ul>
         <address class="footer-address">
           <p><strong>SailUP S.r.l.</strong></p>
@@ -232,18 +213,14 @@
 
     <div class="footer-bottom">
       <div class="footer-bottom-container">
-        <div class="copyright">
-          &copy; 2025 SailUP S.r.l. - All rights reserved.
-        </div>
+        <p class="copyright">&copy; 2025 SailUP S.r.l. - All rights reserved.</p>
 
         <div class="valid-logos">
-          <img class="valid-code-icon" src="valid-xhtml10.png" alt="XHTML valido" />
-          <img class="valid-code-icon" src="valid-CSS.png" alt="CSS valido" />
+          <img class="valid-code-icon" src="valid-xhtml10.png" alt="XHTML valido">
+          <img class="valid-code-icon" src="valid-CSS.png" alt="CSS valido">
         </div>
 
-        <!-- Area bottone torna su, inizialmente non selezionabile con tab perchè invisibile -->
-        <a href="#main-content" class="scroll-to-top" id="btnTop" aria-label="Torna all'inizio del contenuto"
-          tabindex="-1">
+        <a href="#main-content" class="scroll-to-top" id="btnTop" aria-label="Torna all'inizio del contenuto" tabindex="-1">
           <span aria-hidden="true">⬆</span> <span lang="en">Top</span>
         </a>
       </div>
