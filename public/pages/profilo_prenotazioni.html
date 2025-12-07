@@ -14,9 +14,9 @@
     href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap"
     rel="stylesheet" />
 
-    <link rel="stylesheet" href="../css/style.css" media="screen" />
-    <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)" />
-    <link rel="stylesheet" href="../css/print.css" media="print" />
+  <link rel="stylesheet" href="../css/style.css" media="screen" />
+  <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)" />
+  <link rel="stylesheet" href="../css/print.css" media="print" />
 </head>
 
 <body>
@@ -68,7 +68,7 @@
           <li><a href="catalogo_esperienze.html">Esperienze</a></li>
           <li><a href="blog.html" lang="en">Blog</a></li>
           <li><a href="chi_siamo.html">Chi Siamo</a></li>
-          <li aria-current="page">Profilo</li>
+          <li class="current-page">Profilo</li>
         </ul>
       </nav>
     </div>
@@ -135,39 +135,39 @@
               <fieldset>
                 <legend class="sr-only">Filtra prenotazioni</legend>
                 <div class="filter-tabs" role="tablist" aria-label="Filtri prenotazioni">
-                  <button type="button" role="tab" aria-selected="true" aria-controls="all-bookings" 
-                    id="tab-all" class="filter-tab active">
-                    Tutte <span class="badge">12</span>
+                  <button type="button" role="tab" aria-selected="true" id="tab-all" class="filter-tab active"
+                    onclick="filterBookings('all')">
+                    Tutte <span id="badge-all" class="badge">0</span>
                   </button>
-                  <button type="button" role="tab" aria-selected="false" aria-controls="active-bookings" 
-                    id="tab-active" class="filter-tab">
-                    Attive <span class="badge badge-accent">3</span>
+                  <button type="button" role="tab" aria-selected="false" id="tab-active" class="filter-tab"
+                    onclick="filterBookings('active')">
+                    Attive <span id="badge-active" class="badge badge-accent">0</span>
                   </button>
-                  <button type="button" role="tab" aria-selected="false" aria-controls="past-bookings" 
-                    id="tab-past" class="filter-tab">
-                    Completate <span class="badge">9</span>
+                  <button type="button" role="tab" aria-selected="false" id="tab-completed" class="filter-tab"
+                    onclick="filterBookings('completed')">
+                    Completate <span id="badge-completed" class="badge">0</span>
                   </button>
                 </div>
               </fieldset>
             </div>
 
-            <div id="all-bookings" role="tabpanel" aria-labelledby="tab-all">
+            <div id="bookings-container">
               <div class="table-container">
-                <table>
-                  <caption>Elenco completo delle tue prenotazioni</caption>
+                <table id="bookings-table">
+                  <caption>Elenco delle prenotazioni</caption>
                   <thead>
                     <tr>
                       <th scope="col">Codice</th>
                       <th scope="col">Prodotto / Esperienza</th>
-                      <th scope="col">Data & Orario</th>
+                      <th scope="col">Data / Orario</th>
                       <th scope="col">Importo</th>
                       <th scope="col">Stato</th>
                       <th scope="col">Azioni</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td data-label="Codice"><strong>#1234</strong></td>
+                    <tr class="booking-row" data-status="active">
+                      <td data-label="Codice prenotazione"><strong>#1234</strong></td>
                       <td data-label="Prodotto">
                         Bavaria 46
                         <br><small class="text-accent">Barca a Vela</small>
@@ -179,61 +179,47 @@
                       <td data-label="Importo">€ 450,00</td>
                       <td data-label="Stato"><span class="status-badge active">Attiva</span></td>
                       <td data-label="Azioni" class="actions-cell">
-                        <a href="dettaglio_prenotazione.html" class="btn-icon" aria-label="Vedi dettagli prenotazione #1234">
-                          <span aria-hidden="true">👁️</span>
-                        </a>
-                        <button class="btn-icon danger" aria-label="Annulla prenotazione #1234">
-                          <span aria-hidden="true">✖</span>
-                        </button>
+                        <a href="dettaglio_prenotazione.html" class="btn-icon">👁️</a>
+                        <button class="btn-icon danger">✖</button>
                       </td>
                     </tr>
 
-                    <tr>
-                      <td data-label="Codice"><strong>#1567</strong></td>
+                    <tr class="booking-row" data-status="active">
+                      <td data-label="Codice prenotazione"><strong>#1567</strong></td>
                       <td data-label="Prodotto">
                         Tour Capri e Faraglioni
                         <br><small class="text-accent">Esperienza</small>
                       </td>
                       <td data-label="Data">
                         <time datetime="2025-12-20">20/12/2025</time>
-                        <br><small>10:00 - 18:00</small>
                       </td>
                       <td data-label="Importo">€ 120,00</td>
                       <td data-label="Stato"><span class="status-badge active">Attiva</span></td>
                       <td data-label="Azioni" class="actions-cell">
-                        <a href="dettaglio_prenotazione.html" class="btn-icon" aria-label="Vedi dettagli prenotazione #1567">
-                          <span aria-hidden="true">👁️</span>
-                        </a>
-                        <button class="btn-icon danger" aria-label="Annulla prenotazione #1567">
-                          <span aria-hidden="true">✖</span>
-                        </button>
+                        <a href="dettaglio_prenotazione.html" class="btn-icon">👁️</a>
+                        <button class="btn-icon danger">✖</button>
                       </td>
                     </tr>
 
-                    <tr>
-                      <td data-label="Codice"><strong>#1789</strong></td>
+                    <tr class="booking-row" data-status="active">
+                      <td data-label="Codice prenotazione"><strong>#1789</strong></td>
                       <td data-label="Prodotto">
                         Sacs Strider
                         <br><small class="text-accent">Gommone</small>
                       </td>
                       <td data-label="Data">
                         <time datetime="2025-12-28">28/12/2025</time>
-                        <br><small>14:00 - 19:00</small>
                       </td>
                       <td data-label="Importo">€ 280,00</td>
                       <td data-label="Stato"><span class="status-badge active">Attiva</span></td>
                       <td data-label="Azioni" class="actions-cell">
-                        <a href="dettaglio_prenotazione.html" class="btn-icon" aria-label="Vedi dettagli prenotazione #1789">
-                          <span aria-hidden="true">👁️</span>
-                        </a>
-                        <button class="btn-icon danger" aria-label="Annulla prenotazione #1789">
-                          <span aria-hidden="true">✖</span>
-                        </button>
+                        <a href="dettaglio_prenotazione.html" class="btn-icon">👁️</a>
+                        <button class="btn-icon danger">✖</button>
                       </td>
                     </tr>
 
-                    <tr>
-                      <td data-label="Codice"><strong>#0987</strong></td>
+                    <tr class="booking-row" data-status="completed">
+                      <td data-label="Codice prenotazione"><strong>#0987</strong></td>
                       <td data-label="Prodotto">
                         Sunseeker Predator
                         <br><small class="text-muted">Yacht</small>
@@ -244,14 +230,12 @@
                       <td data-label="Importo">€ 850,00</td>
                       <td data-label="Stato"><span class="status-badge completed">Completata</span></td>
                       <td data-label="Azioni" class="actions-cell">
-                        <a href="dettaglio_prenotazione.html" class="btn-icon" aria-label="Vedi dettagli prenotazione #0987">
-                          <span aria-hidden="true">👁️</span>
-                        </a>
+                        <a href="dettaglio_prenotazione.html" class="btn-icon">👁️</a>
                       </td>
                     </tr>
 
-                    <tr>
-                      <td data-label="Codice"><strong>#0765</strong></td>
+                    <tr class="booking-row" data-status="completed">
+                      <td data-label="Codice prenotazione"><strong>#0765</strong></td>
                       <td data-label="Prodotto">
                         Tramonto a Ischia
                         <br><small class="text-muted">Esperienza</small>
@@ -262,54 +246,20 @@
                       <td data-label="Importo">€ 95,00</td>
                       <td data-label="Stato"><span class="status-badge completed">Completata</span></td>
                       <td data-label="Azioni" class="actions-cell">
-                        <a href="dettaglio_prenotazione.html" class="btn-icon" aria-label="Vedi dettagli prenotazione #0765">
-                          <span aria-hidden="true">👁️</span>
-                        </a>
+                        <a href="dettaglio_prenotazione.html" class="btn-icon">👁️</a>
                       </td>
                     </tr>
                   </tbody>
                 </table>
               </div>
-              
-              <div class="bookings-empty hidden">
-                <p>Non hai ancora effettuato prenotazioni.</p>
-                <a href="catalogo_noleggio.html" class="btn-layout">Esplora la Flotta</a>
+
+              <div id="no-bookings-message" class="bookings-empty hidden">
+                <p>Non ci sono prenotazioni in questa categoria.</p>
               </div>
             </div>
-
-            <div id="active-bookings" role="tabpanel" aria-labelledby="tab-active" class="hidden">
-               <div class="table-container">
-                <table>
-                  <caption>Le tue prenotazioni attive</caption>
-                  <thead>
-                    <tr>
-                      <th scope="col">Codice</th>
-                      <th scope="col">Prodotto</th>
-                      <th scope="col">Data</th>
-                      <th scope="col">Importo</th>
-                      <th scope="col">Stato</th>
-                      <th scope="col">Azioni</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td data-label="Codice"><strong>#1234</strong></td>
-                      <td data-label="Prodotto">Bavaria 46</td>
-                      <td data-label="Data"><time datetime="2025-12-15">15/12/2025</time></td>
-                      <td data-label="Importo">€ 450,00</td>
-                      <td data-label="Stato"><span class="status-badge active">Attiva</span></td>
-                      <td data-label="Azioni" class="actions-cell">
-                        <a href="#" class="btn-icon">👁️</a>
-                      </td>
-                    </tr>
-                     </tbody>
-                </table>
-              </div>
-            </div>
-
           </section>
         </div>
-        
+
       </div>
     </div>
   </main>
@@ -343,7 +293,8 @@
       <div class="footer-col info-col">
         <h3 class="footer-heading">Info &amp; Contatti</h3>
         <ul class="footer-links">
-          <li><a href="FAQ.html">Domande Frequenti (<abbr title="Frequently Asked Questions" lang="en">FAQ</abbr>)</a></li>
+          <li><a href="FAQ.html">Domande Frequenti (<abbr title="Frequently Asked Questions" lang="en">FAQ</abbr>)</a>
+          </li>
           <li><a href="privacy.html" lang="en">Privacy Policy</a></li>
           <li><a href="cookie.html">Cookie Policy</a></li>
         </ul>

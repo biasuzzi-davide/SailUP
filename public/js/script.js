@@ -100,3 +100,67 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 });
+
+/* ---------------------------------------
+   4. GESTIONE FILTRI PRENOTAZIONI
+   --------------------------------------- */
+   document.addEventListener('DOMContentLoaded', () => {
+    // Eseguiamo solo se siamo nella pagina prenotazioni
+    const bookingsTable = document.getElementById('bookings-table');
+    if (!bookingsTable) return;
+
+    const rows = document.querySelectorAll('.booking-row');
+    const badgeAll = document.getElementById('badge-all');
+    const badgeActive = document.getElementById('badge-active');
+    const badgeCompleted = document.getElementById('badge-completed');
+    const noBookingsMsg = document.getElementById('no-bookings-message');
+
+    // Funzione per ggiornare contatori
+    function updateCounters() {
+        const total = rows.length;
+        const activeCount = Array.from(rows).filter(r => r.getAttribute('data-status') === 'active').length;
+        const completedCount = Array.from(rows).filter(r => r.getAttribute('data-status') === 'completed').length;
+
+        if(badgeAll) badgeAll.textContent = total;
+        if(badgeActive) badgeActive.textContent = activeCount;
+        if(badgeCompleted) badgeCompleted.textContent = completedCount;
+    }
+
+    // Inizializza i contatori
+    updateCounters();
+
+    window.filterBookings = function(status) {
+        let visibleCount = 0;
+
+        rows.forEach(row => {
+            const rowStatus = row.getAttribute('data-status');
+            
+            if (status === 'all' || rowStatus === status) {
+                row.style.display = '';
+                visibleCount++;
+            } else {
+                row.style.display = 'none';
+            }
+        });
+
+        // Se non ci sono risultati
+        if (visibleCount === 0) {
+            bookingsTable.parentElement.classList.add('hidden'); // Nasconde il contenitore tabella e mostra messaggio vuoto
+            noBookingsMsg.classList.remove('hidden');
+        } else {
+            bookingsTable.parentElement.classList.remove('hidden');
+            noBookingsMsg.classList.add('hidden');
+        }
+
+        // Gestione stato bottoni
+        document.querySelectorAll('.filter-tab').forEach(btn => {
+            btn.classList.remove('active');
+            btn.setAttribute('aria-selected', 'false');
+            
+            if (btn.id === `tab-${status}`) {
+                btn.classList.add('active');
+                btn.setAttribute('aria-selected', 'true');
+            }
+        });
+    };
+});
