@@ -2,35 +2,16 @@
    1. VARIABILI & TEMA (SailUP Identity)
    ========================================= */
 :root {
-  /* --- Palette Colori Nautica --- */
-  --col-primary: #030a11;
-  /* Blu Navy Profondo */
-  --col-primary-light: #e13737;
-  /* Rosso corallo */
+  --font-head: "Montserrat", sans-serif;
+  --font-body: "Open Sans", sans-serif;
 
-  --col-accent: #e13737;
-  /* Rosso corallo */
-  --col-accent-hover: #e13737;
-  /* Rosso corallo più scuro per hover */
-
-  --col-bg: #ffffff;
-  /* Bianco */
-  --col-bg-alt: #f5f2eb;
-  /* Bianco Ghiaccio (sfondo sezioni) */
-  --col-text: #1a1a1a;
-  /* Testo principale */
-  --col-text-inv: #ffffff;
-  /* Testo su sfondo scuro */
-  --col-text-muted: #57534e;
-  /* Testo secondario */
-
-  --col-border: #e0e0e0;
-  /* Bordi sottili */
-  --col-card: #ffffff;
-
-  --col-visited-link: #8c794c;
-
-  /* --- Spaziature & Radius --- */
+  --fs-sm: clamp(0.8em, 0.17vi + 0.76em, 0.89em);
+  --fs-base: clamp(1em, 0.34vi + 0.91em, 1.1em);
+  --fs-md: clamp(1.25em, 0.61vi + 1.1em, 1.4em);
+  --fs-lg: clamp(1.56em, 1vi + 1.31em, 2em);
+  --fs-xl: clamp(1.95em, 1.56vi + 1.56em, 2.5em);
+  --fs-xxl: clamp(2.44em, 2.38vi + 1.85em, 3.5em);
+  
   --radius-btn: 99em;
   --radius-card: 1em;
   --radius-sm: 0.5em;
@@ -39,32 +20,33 @@
   --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.15);
 
-  /* --- Tipografia --- */
-  --font-head: "Montserrat", sans-serif;
-  --font-body: "Open Sans", sans-serif;
-}
+  --col-primary: #030a11;
+  --col-accent: #e13737;
+  --col-accent-hover: #c92a2a;
 
-/* Button system variables */
-:root {
-  /* defaults for button sizing and behaviour */
+  --col-bg: #ffffff;
+  --col-bg-alt: #f5f2eb;
+
+  --col-text: #1a1a1a;
+  --col-text-inv: #ffffff;
+  --col-text-muted: #57534e;
+
+  --col-border: #e0e0e0;
+  --col-card: #ffffff;
+  --col-visited-link: #8c794c;
+
   --btn-padding-vertical: 0.8em;
   --btn-padding-horizontal: 1.5em;
   --btn-font-family: var(--font-head);
   --btn-font-weight: 600;
-  --btn-radius: var(--radius-btn);
   --btn-transition: 0.25s ease;
-  --btn-font-size: var(--fs-sm);
+  --btn-hover-translate: -2px;
 
-  /* semantic button colors (can be overridden by theme) */
   --btn-bg-primary: var(--col-primary);
   --btn-color-primary: var(--col-text-inv);
   --btn-border-primary: var(--col-primary);
   --btn-bg-accent: var(--col-accent);
-  --btn-hover-translate: -2px;
-}
 
-/* Badge colors as variables (centralize palette) */
-:root {
   --badge-motore: #3b82f6;
   --badge-vela: #10b981;
   --badge-gommone: #f59e0b;
@@ -84,16 +66,6 @@
   --col-text-muted: #a8a29e;
   --col-border: #2c3e50;
   --col-card: #0a141f;
-}
-
-/* Tipografia Fluida (Clamp) */
-:root {
-  --fs-sm: clamp(0.8em, 0.17vi + 0.76em, 0.89em);
-  --fs-base: clamp(1em, 0.34vi + 0.91em, 1.1em);
-  --fs-md: clamp(1.25em, 0.61vi + 1.1em, 1.4em);
-  --fs-lg: clamp(1.56em, 1vi + 1.31em, 2em);
-  --fs-xl: clamp(1.95em, 1.56vi + 1.56em, 2.5em);
-  --fs-xxl: clamp(2.44em, 2.38vi + 1.85em, 3.5em);
 }
 
 /* =========================================
@@ -237,10 +209,10 @@ ul {
   font-family: var(--btn-font-family);
   font-weight: var(--btn-font-weight);
   text-decoration: none;
-  border-radius: var(--btn-radius);
+  border-radius: var(--radius-btn);
   transition: background-color var(--btn-transition), border-color var(--btn-transition), box-shadow var(--btn-transition), transform var(--btn-transition);
   cursor: pointer;
-  font-size: var(--btn-font-size);
+  font-size: var(--fs-sm);
   margin: 1em;
   line-height: 1;
   border: 2px solid transparent;
