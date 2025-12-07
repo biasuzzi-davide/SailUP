@@ -244,14 +244,14 @@ img {
 }
 
 /* Bottone Primario (Pieno) */
-.btn-layout {
+.btn-layout, .btn-layout:visited {
   background-color: var(--btn-bg-primary);
   color: var(--btn-color-primary);
   border-color: var(--btn-border-primary);
   box-shadow: var(--shadow-sm);
 }
 
-.btn-hero {
+.btn-hero, .btn-hero:visited {
   background-color: #ffffff;
   color: #030a11;
   border-color: #ffffff;
@@ -832,15 +832,11 @@ li[aria-current="page"] {
   color: var(--col-visited-link); 
 }
 
-.btn-hero:visited {
-  color: var(--col-text);
-}
-
 /* =========================================
    8. Bottone torna su
    ========================================= */
 
-.scroll-to-top {
+.scroll-to-top, .scroll-to-top:visited {
   position: fixed;
   bottom: 30px;
   right: 30px;
