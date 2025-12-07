@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dettaglio Prenotazione #1234 - SailUP</title>
-    <meta name="description" content="Dettagli completi della tua prenotazione SailUP." />
+    <meta name="description" content="Riepilogo dettagli prenotazione SailUP." />
     <meta name="authors" content="SailUP Team" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -68,7 +68,6 @@
                     <li><a href="blog.html" lang="en">Blog</a></li>
                     <li><a href="chi_siamo.html">Chi Siamo</a></li>
                     <li><a href="profilo.html">Profilo</a></li>
-                    <li><a href="admin.html">Dashboard Admin</a></li>
                 </ul>
             </nav>
         </div>
@@ -80,130 +79,88 @@
     <nav aria-labelledby="breadcrumb-label" id="breadcrumb">
         <ol>
             <li><a href="index.html" lang="en">Home</a></li>
-            <li><a href="profilo.html">Il mio profilo</a></li>
             <li><a href="profilo_prenotazioni.html">Prenotazioni</a></li>
-            <li aria-current="page">Dettaglio prenotazione</li>
+            <li aria-current="page">Riepilogo #1234</li>
         </ol>
     </nav>
 
-    <main id="main-content">
-        <div class="section-container profile-container">
+    <main id="main-content" class="section-container">
 
-            <div class="profile-header">
-                <div class="profile-avatar">
-                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=200&q=80"
-                        alt="Avatar Mario Rossi" />
+        <div class="product-layout">
+
+            <header class="section-header">
+                <div>
+                    <h1>Prenotazione #SU-2025-1234</h1>
+                    <p class="text-accent">Effettuata il 15 Ottobre 2025</p>
                 </div>
-                <div class="profile-info">
-                    <h1>Mario Rossi</h1>
-                    <p class="profile-email">mario.rossi@example.com</p>
-                    <p class="profile-member-since">Membro dal Gennaio 2024</p>
+                <div>
+                    <span class="status-badge active">Confermata</span>
                 </div>
-                <div class="profile-actions">
-                    <a href="profilo.html" class="btn-layout-light">Visualizza Profilo</a>
-                    <button class="btn-layout-light" type="button">Esci</button>
-                </div>
-            </div>
+            </header>
 
-            <div class="profile-layout">
-                <nav class="profile-sidebar" aria-label="Menu profilo">
-                    <ul>
-                        <li>
-                            <a href="profilo.html">
-                                <span class="nav-icon" aria-hidden="true">👤</span>
-                                <span>Informazioni Personali</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="profilo_sicurezza.html">
-                                <span class="nav-icon" aria-hidden="true">🔒</span>
-                                <span>Sicurezza</span>
-                            </a>
-                        </li>
-                        <li class="current-tab">
-                            <a href="profilo_prenotazioni.html" class="nav-item-active">
-                                <span class="nav-icon" aria-hidden="true">📋</span>
-                                <span>Prenotazioni</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
+            <article class="booking-card">
 
-                <div class="profile-content">
-
-                    <div class="form-group">
-                        <a href="profilo_prenotazioni.html" class="btn-layout-light btn-sm">
-                            <span aria-hidden="true">←</span> Torna alle prenotazioni
-                        </a>
+                <header class="booking-header">
+                    <div class="booking-image">
+                        <img src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=300&q=80"
+                            alt="Bavaria 46" />
                     </div>
-
-                    <div class="section-header">
-                        <div>
-                            <h2>Prenotazione #SU-2025-1234</h2>
-                            <p class="text-accent">Effettuata il 15 Ottobre 2025</p>
-                        </div>
-                        <div>
-                            <span class="status-badge active">Confermata</span>
-                        </div>
+                    <div class="booking-info">
+                        <h2>Bavaria 46 Cruiser</h2>
+                        <p class="booking-type">Napoli, Molo Beverello</p>
+                        <p class="text-accent">Noleggio Occasionale</p>
                     </div>
+                </header>
 
-                    <div class="booking-card">
+                <section class="booking-details" aria-labelledby="specs-title">
+                    <h3 id="specs-title" class="sr-only">Specifiche della prenotazione</h3>
 
-                        <div class="booking-header">
-                            <div class="booking-image">
-                                <img src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=300&q=80"
-                                    alt="Bavaria 46" />
-                            </div>
-                            <div class="booking-info">
-                                <h3>Bavaria 46 Cruiser</h3>
-                                <p class="booking-type">Napoli, Molo Beverello</p>
-                                <p class="text-accent">Noleggio Occasionale</p>
-                            </div>
+                    <dl class="specs-grid">
+                        <div class="spec-card">
+                            <dt class="spec-label"><span aria-hidden="true">📅</span> Inizio</dt>
+                            <dd class="spec-value">15 Dic 2025</dd>
                         </div>
-
-                        <div class="booking-details">
-                            <h3 class="sr-only">Dettagli Tecnici</h3>
-
-                            <div class="specs-grid">
-                                <div class="spec-card">
-                                    <span class="spec-label">📅 Data/ora Inizio</span>
-                                    <p class="spec-value">15 Dic 2025</p>
-                                </div>
-                                <div class="spec-card">
-                                    <span class="spec-label">🏁 Data/ora Fine</span>
-                                    <p class="spec-value">15 Dic 2025</p>
-                                </div>
-                                <div class="spec-card">
-                                    <span class="spec-label">👥 Ospiti</span>
-                                    <p class="spec-value">4</p>
-                                </div>
-                                <div class="spec-card">
-                                    <span class="spec-label">Guida/Skipper</span>
-                                    <p class="spec-value">Inclusa</p>
-                                </div>
-                            </div>
+                        <div class="spec-card">
+                            <dt class="spec-label"><span aria-hidden="true">🏁</span> Fine</dt>
+                            <dd class="spec-value">15 Dic 2025</dd>
                         </div>
-                    </div>
+                        <div class="spec-card">
+                            <dt class="spec-label"><span aria-hidden="true">👥</span> Ospiti</dt>
+                            <dd class="spec-value">4</dd>
+                        </div>
+                        <div class="spec-card">
+                            <dt class="spec-label">Skipper</dt>
+                            <dd class="spec-value">Incluso</dd>
+                        </div>
+                    </dl>
+                </section>
 
-                    <div class="card-content">
-                        <h3>💳 Riepilogo Costi</h3>
-                        <ul>
-                            <li>
-                                <span>Noleggio (1 giorno)</span> <strong>€ 450,00</strong>
-                            </li>
-                            <li>
-                                <span>Skipper</span> <strong>€ 45,00</strong>
-                            </li>
-                            <li>
-                                <span>Totale</span> <strong>€ 495,00</strong>
-                            </li>
-                        </ul>
+                <section class="card-content" aria-labelledby="costs-title">
+                    <h3 id="costs-title">💳 Riepilogo Costi</h3>
 
-                        <p class="field-hint">Metodo: Carta di Credito •••• 1234</p>
-                    </div>
+                    <table>
+                        <caption class="sr-only">Dettaglio costi per la prenotazione</caption>
+                        <tbody>
+                            <tr>
+                                <th scope="row" style="font-weight: normal; text-align: left;">Noleggio (1 giorno)</th>
+                                <td><strong>€ 450,00</strong></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="font-weight: normal; text-align: left;">Skipper</th>
+                                <td><strong>€ 45,00</strong></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="text-align: left;"><strong>Totale</strong></th>
+                                <td><strong class="text-accent">€ 495,00</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
 
-                </div>
-            </div>
+                    <p class="field-hint">Metodo: Carta di Credito •••• 1234</p>
+
+                </section>
+            </article>
+
         </div>
     </main>
 
