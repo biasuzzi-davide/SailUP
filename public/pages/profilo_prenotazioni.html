@@ -32,9 +32,7 @@
               src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=400&q=80"
               width="30" />
           </picture>
-          <h1 lang="en">
-            <span class="logo-text">Sail<span class="text-accent">UP</span></span>
-          </h1>
+          <span class="logo-text" lang="en">Sail<span class="text-accent">UP</span></span>
         </a>
 
         <nav id="main-menu">
@@ -49,15 +47,15 @@
 
         <div class="header-buttons">
           <button class="theme-toggle" aria-pressed="false" aria-label="Attiva modalità scura">
-            <span class="active-icon sun">☀️</span>
-            <span class="inactive-icon moon">🌙</span>
+            <span class="active-icon sun" aria-hidden="true">☀️</span>
+            <span class="inactive-icon moon hidden" aria-hidden="true">🌙</span>
           </button>
           <a href="profilo.html" class="btn-layout" aria-current="page">Profilo</a>
         </div>
 
         <button id="hamburger-btn" aria-expanded="false" aria-controls="mobile-menu" aria-label="Menu Mobile">
-          <span class="hamburger-icon">☰</span>
-          <span class="close-icon hidden">✕</span>
+          <span class="hamburger-icon" aria-hidden="true">☰</span>
+          <span class="close-icon hidden" aria-hidden="true">✕</span>
         </button>
       </div>
 
@@ -179,8 +177,8 @@
                       <td data-label="Importo">€ 450,00</td>
                       <td data-label="Stato"><span class="status-badge active">Attiva</span></td>
                       <td data-label="Azioni" class="actions-cell">
-                        <a href="dettaglio_prenotazione.html" class="btn-icon">👁️</a>
-                        <button class="btn-icon danger">✖</button>
+                        <a href="dettaglio_prenotazione.html" class="btn-icon" aria-label="Vedi dettagli prenotazione #1234">👁️</a>
+                        <button class="btn-icon danger" aria-label="Cancella prenotazione #1234">✖</button>
                       </td>
                     </tr>
 
@@ -196,8 +194,8 @@
                       <td data-label="Importo">€ 120,00</td>
                       <td data-label="Stato"><span class="status-badge active">Attiva</span></td>
                       <td data-label="Azioni" class="actions-cell">
-                        <a href="dettaglio_prenotazione.html" class="btn-icon">👁️</a>
-                        <button class="btn-icon danger">✖</button>
+                        <a href="dettaglio_prenotazione.html" class="btn-icon" aria-label="Vedi dettagli prenotazione #1567">👁️</a>
+                        <button class="btn-icon danger" aria-label="Cancella prenotazione #1567">✖</button>
                       </td>
                     </tr>
 
@@ -213,8 +211,8 @@
                       <td data-label="Importo">€ 280,00</td>
                       <td data-label="Stato"><span class="status-badge active">Attiva</span></td>
                       <td data-label="Azioni" class="actions-cell">
-                        <a href="dettaglio_prenotazione.html" class="btn-icon">👁️</a>
-                        <button class="btn-icon danger">✖</button>
+                        <a href="dettaglio_prenotazione.html" class="btn-icon" aria-label="Vedi dettagli prenotazione #1789">👁️</a>
+                        <button class="btn-icon danger" aria-label="Cancella prenotazione #1789">✖</button>
                       </td>
                     </tr>
 
@@ -230,7 +228,7 @@
                       <td data-label="Importo">€ 850,00</td>
                       <td data-label="Stato"><span class="status-badge completed">Completata</span></td>
                       <td data-label="Azioni" class="actions-cell">
-                        <a href="dettaglio_prenotazione.html" class="btn-icon">👁️</a>
+                        <a href="dettaglio_prenotazione.html" class="btn-icon" aria-label="Vedi dettagli prenotazione #0987">👁️</a>
                       </td>
                     </tr>
 
@@ -246,7 +244,7 @@
                       <td data-label="Importo">€ 95,00</td>
                       <td data-label="Stato"><span class="status-badge completed">Completata</span></td>
                       <td data-label="Azioni" class="actions-cell">
-                        <a href="dettaglio_prenotazione.html" class="btn-icon">👁️</a>
+                        <a href="dettaglio_prenotazione.html" class="btn-icon" aria-label="Vedi dettagli prenotazione #0765">👁️</a>
                       </td>
                     </tr>
                   </tbody>
@@ -272,8 +270,7 @@
           <span class="logo-text"><span lang="en">Sail</span><span class="text-accent" lang="en">UP</span></span>
         </div>
         <p class="footer-tagline">
-          Naviga il Golfo di Napoli con stile e sicurezza. La tua avventura
-          inizia qui.
+          Naviga il Golfo di Napoli con stile e sicurezza. La tua avventura inizia qui.
         </p>
       </div>
 
@@ -296,12 +293,12 @@
           <li><a href="FAQ.html">Domande Frequenti (<abbr title="Frequently Asked Questions" lang="en">FAQ</abbr>)</a>
           </li>
           <li><a href="privacy.html" lang="en">Privacy Policy</a></li>
-          <li><a href="cookie.html">Cookie Policy</a></li>
+          <li><a href="cookie.html" lang="en">Cookie Policy</a></li>
         </ul>
         <address class="footer-address">
-          <p><strong>SailUP S.r.l.</strong></p>
-          <p>Via Caracciolo, 80122 Napoli (NA)</p>
-          <p>P.IVA: 12345678901</p>
+          <p><strong>SailUP <abbr title="Società a responsabilità limitata">S.r.l.</abbr></strong></p>
+          <p>Via Caracciolo, 80122 Napoli (<abbr title="Napoli">NA</abbr>)</p>
+          <p><abbr title="Partita IVA">P.IVA</abbr>: 12345678901</p>
         </address>
       </div>
     </div>
@@ -309,12 +306,12 @@
     <div class="footer-bottom">
       <div class="footer-bottom-container">
         <div class="copyright">
-          &copy; 2025 SailUP S.r.l. - All rights reserved.
+          &copy; 2025 SailUP <abbr title="Società a responsabilità limitata">S.r.l.</abbr> - <span lang="en">All rights reserved</span>.
         </div>
 
         <div class="valid-logos">
-          <img class="valid-code-icon" src="valid-xhtml10.png" alt="XHTML valido" />
-          <img class="valid-code-icon" src="valid-CSS.png" alt="CSS valido" />
+          <img class="valid-code-icon" src="../img/valid-xhtml10.webp" alt="XHTML valido" />
+          <img class="valid-code-icon" src="../img/valid-css.webp" alt="CSS valido" />
         </div>
 
         <a href="#main-content" class="scroll-to-top" id="btnTop" aria-label="Torna all'inizio del contenuto"

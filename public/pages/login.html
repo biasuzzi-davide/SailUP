@@ -30,9 +30,7 @@
               src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=400&q=80"
               width="30" />
           </picture>
-          <h1 lang="en">
-            <span class="logo-text">Sail<span class="text-accent">UP</span></span>
-          </h1>
+          <span class="logo-text" lang="en">Sail<span class="text-accent">UP</span></span>
         </a>
 
         <nav id="main-menu">
@@ -47,15 +45,15 @@
 
         <div class="header-buttons">
           <button class="theme-toggle" aria-pressed="false" aria-label="Attiva modalità scura">
-            <span class="active-icon sun">☀️</span>
-            <span class="inactive-icon moon">🌙</span>
+            <span class="active-icon sun" aria-hidden="true">☀️</span>
+            <span class="inactive-icon moon hidden" aria-hidden="true">🌙</span>
           </button>
           <a href="login.html" class="btn-layout" lang="en">Login</a>
         </div>
 
         <button id="hamburger-btn" aria-expanded="false" aria-controls="mobile-menu" aria-label="Menu Mobile">
-          <span class="hamburger-icon">☰</span>
-          <span class="close-icon hidden">✕</span>
+          <span class="hamburger-icon" aria-hidden="true">☰</span>
+          <span class="close-icon hidden" aria-hidden="true">✕</span>
         </button>
       </div>
 
@@ -67,7 +65,7 @@
           <li><a href="blog.html" lang="en">Blog</a></li>
           <li><a href="chi_siamo.html">Chi Siamo</a></li>
           <li aria-current="page">
-            <span class="menu-login">Login / Registrati</span>
+            <span class="menu-login"><span lang="en">Login</span> / Registrati</span>
           </li>
         </ul>
       </nav>
@@ -80,7 +78,7 @@
   <nav aria-labelledby="breadcrumb-label" id="breadcrumb">
     <ol>
       <li><a href="index.html" lang="en">Home</a></li>
-      <li aria-current="page">Login</li>
+      <li aria-current="page"><span lang="en">Login</span></li>
     </ol>
   </nav>
 
@@ -88,7 +86,7 @@
     <section class="section-container auth-container">
       <div class="auth-wrapper">
         <div class="auth-card">
-          <h2>Accedi al tuo account</h2>
+          <h2>Accedi al tuo <span lang="en">account</span></h2>
           <p class="auth-subtitle">Benvenuto su SailUP! Accedi per gestire le tue prenotazioni.</p>
           
           
@@ -96,17 +94,15 @@
           
           <form id="login-form" action="" method="post" novalidate>   <!-- aggiungere la action corrispondente  -->
             <div class="form-group">
-              <label for="email">Email</label>
-              <input type="email" id="email" name="email" required aria-required="true"
-                  aria-describedby="email-hint email-error" autocomplete="email"
+              <label for="email" lang="en">Email</label>
+              <input type="email" id="email" name="email" required aria-required="true" autocomplete="email"
                   placeholder="mariorossi@mail.com" />
               <span id="email-error" class="field-error" role="alert"></span>
             </div>
 
             <div class="form-group">
-              <label for="password">Password</label>
-              <input type="password" id="password" name="password" required aria-required="true"
-                  aria-describedby="password-hint password-error" autocomplete="new-password" />
+              <label for="password" lang="en">Password</label>
+              <input type="password" id="password" name="password" required aria-required="true" autocomplete="current-password" />
               <span id="password-error" class="field-error" role="alert"></span>
             </div>
             
@@ -116,9 +112,8 @@
           </form>
           
           <div class="auth-footer print-none">
-            <p>Non hai un account? <a href="registrazione.html">Registrati ora</a></p>
+            <p>Non hai un <span lang="en">account</span>? <a href="registrazione.html">Registrati ora</a></p>
           </div>
-          
         </div>
       </div>
     </section>
@@ -152,23 +147,23 @@
         <ul class="footer-links">
           <li><a href="FAQ.html">Domande Frequenti (<abbr title="Frequently Asked Questions" lang="en">FAQ</abbr>)</a></li>
           <li><a href="privacy.html" lang="en">Privacy Policy</a></li>
-          <li><a href="cookie.html">Cookie Policy</a></li>
+          <li><a href="cookie.html" lang="en">Cookie Policy</a></li>
         </ul>
         <address class="footer-address">
-          <p><strong>SailUP S.r.l.</strong></p>
-          <p>Via Caracciolo, 80122 Napoli (NA)</p>
-          <p>P.IVA: 12345678901</p>
+          <p><strong>SailUP <abbr title="Società a responsabilità limitata">S.r.l.</abbr></strong></p>
+          <p>Via Caracciolo, 80122 Napoli (<abbr title="Napoli">NA</abbr>)</p>
+          <p><abbr title="Partita IVA">P.IVA</abbr>: 12345678901</p>
         </address>
       </div>
     </div>
 
     <div class="footer-bottom">
       <div class="footer-bottom-container">
-        <div class="copyright">&copy; 2025 SailUP S.r.l. - All rights reserved.</div>
+        <div class="copyright">&copy; 2025 SailUP <abbr title="Società a responsabilità limitata">S.r.l.</abbr> - <span lang="en">All rights reserved</span>.</div>
 
         <div class="valid-logos">
-          <img class="valid-code-icon" src="valid-xhtml10.png" alt="XHTML valido" />
-          <img class="valid-code-icon" src="valid-CSS.png" alt="CSS valido" />
+          <img class="valid-code-icon" src="../img/valid-xhtml10.webp" alt="XHTML valido" />
+          <img class="valid-code-icon" src="../img/valid-css.webp" alt="CSS valido" />
         </div>
 
         <a href="#main-content" class="scroll-to-top" id="btnTop" aria-label="Torna all'inizio del contenuto" tabindex="-1">
