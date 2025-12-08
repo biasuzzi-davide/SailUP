@@ -2244,8 +2244,6 @@ footer {
 .valid-logos img {
   height: 30px;
   display: inline-block;
-  filter: grayscale(1) invert(1);
-  opacity: 0.6;
 }
 
 /* =========================================
