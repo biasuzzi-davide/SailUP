@@ -332,7 +332,7 @@ footer .logo p {
 /* Booking actions: use centralized button sizing on small screens */
 .booking-actions .btn-layout,
 .booking-actions .btn-layout-light,
-.booking-actions .btn-danger-outline {
+.booking-actions {
     width: 100%;
     box-sizing: border-box;
 }
