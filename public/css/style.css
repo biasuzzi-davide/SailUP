@@ -122,10 +122,6 @@ a {
 
 a:hover { color: var(--col-primary); }
 
-form {
-  
-}
-
 :focus-visible {
   outline: 3px solid var(--col-accent);
   outline-offset: 3px;
@@ -139,7 +135,8 @@ form {
   padding: 0;
   margin: -1px;
   overflow: hidden;
-  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  clip: rect(0, 0, 0, 0);   /* Fall back per browser vecchi */ 
   white-space: nowrap;
   border-width: 0;
 }
