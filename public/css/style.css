@@ -200,7 +200,6 @@ form {
 
 .btn-layout:hover {
   background-color: var(--col-accent);
-  border-color: var(--col-accent);
   transform: translateY(var(--btn-hover-translate));
   box-shadow: var(--shadow-md);
 }
@@ -231,12 +230,10 @@ form {
 .btn-danger {
   background-color: #dc2626;
   color: white;
-  border-color: #dc2626;
 }
 
 .btn-danger:hover {
   background-color: #b91c1c;
-  border-color: #b91c1c;
   transform: translateY(-2px);
 }
 
@@ -1921,8 +1918,6 @@ input[maxlength="5"] {
   list-style: none;
   transition: background-color 0.2s ease;
 }
-
-.faq-question::-webkit-details-marker { display: none; }
 
 .faq-question:hover { background-color: var(--col-bg-alt); }
 
