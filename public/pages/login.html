@@ -83,37 +83,35 @@
   </nav>
 
   <main id="main-content">
-    <section class="section-container auth-container">
-      <div class="auth-wrapper">
-        <div class="auth-card">
-          <h2>Accedi al tuo <span lang="en">account</span></h2>
-          <p class="auth-subtitle">Benvenuto su SailUP! Accedi per gestire le tue prenotazioni.</p>
-          
-          
-          <div id="error-message" class="error-message hidden" role="alert" aria-live="polite"></div>
-          
-          <form id="login-form" action="" method="post" novalidate>   <!-- aggiungere la action corrispondente  -->
-            <div class="form-group">
-              <label for="email" lang="en">Email</label>
-              <input type="email" id="email" name="email" required aria-required="true" autocomplete="email"
-                  placeholder="mariorossi@mail.com" />
-              <span id="email-error" class="field-error" role="alert"></span>
-            </div>
-
-            <div class="form-group">
-              <label for="password" lang="en">Password</label>
-              <input type="password" id="password" name="password" required aria-required="true" autocomplete="current-password" />
-              <span id="password-error" class="field-error" role="alert"></span>
-            </div>
-            
-            <div class="form-actions">
-              <button type="submit" class="btn-layout btn-full-width">Accedi</button>
-            </div>
-          </form>
-          
-          <div class="auth-footer print-none">
-            <p>Non hai un <span lang="en">account</span>? <a href="registrazione.html">Registrati ora</a></p>
+    <section class="auth-container">
+      <div class="auth-card">
+        <h2>Accedi al tuo <span lang="en">account</span></h2>
+        <p class="auth-subtitle">Benvenuto su SailUP! Accedi per gestire le tue prenotazioni.</p>
+        
+        
+        <div id="error-message" class="error-message hidden" role="alert" aria-live="polite"></div>
+        
+        <form id="login-form" action="" method="post" novalidate>   <!-- aggiungere la action corrispondente  -->
+          <div class="form-group">
+            <label for="email" lang="en">Email</label>
+            <input type="email" id="email" name="email" required aria-required="true" autocomplete="email"
+                placeholder="mariorossi@mail.com" />
+            <span id="email-error" class="field-error" role="alert"></span>
           </div>
+
+          <div class="form-group">
+            <label for="password" lang="en">Password</label>
+            <input type="password" id="password" name="password" required aria-required="true" autocomplete="current-password" />
+            <span id="password-error" class="field-error" role="alert"></span>
+          </div>
+          
+          <div class="form-actions">
+            <button type="submit" class="btn-layout btn-full-width">Accedi</button>
+          </div>
+        </form>
+        
+        <div class="auth-footer print-none">
+          <p>Non hai un <span lang="en">account</span>? <a href="registrazione.html">Registrati ora</a></p>
         </div>
       </div>
     </section>

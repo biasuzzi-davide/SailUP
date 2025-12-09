@@ -275,36 +275,22 @@ footer .logo p {
 }
 
 .profile-sidebar {
-    position: static;
     padding: 0;
-    /* Rimuovi padding extra se non serve */
-    width: 100%;
+    border: none;
+    background: transparent; 
 }
 
 .profile-sidebar ul {
-    display: grid;
-    /* Crea esattamente 2 colonne uguali */
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr); 
     gap: 0.5em;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-.profile-sidebar li {
-    margin: 0;
 }
 
 .profile-sidebar a,
 .profile-sidebar .nav-item-active {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
     padding: 0.8em 0.5em;
     font-size: var(--fs-sm);
-    height: 100%;
-    border-radius: var(--radius-sm);
+    background-color: var(--col-bg-alt); 
+    border: 1px solid var(--col-border);
 }
 
 .stats-grid {
@@ -329,7 +315,6 @@ footer .logo p {
     flex-direction: column;
 }
 
-/* Booking actions: use centralized button sizing on small screens */
 .booking-actions .btn-layout,
 .booking-actions .btn-layout-light,
 .booking-actions {
@@ -539,7 +524,7 @@ footer .logo p {
     --b-pad-y: 5px;
     padding: 0.4em 0.5em;
     justify-content: center;
-    margin-top: 5%;
+    margin-top: 2%;
 }
 
 #breadcrumb li a {

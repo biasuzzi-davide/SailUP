@@ -733,6 +733,8 @@ body.layout-full-width {
   padding: 1em 0;
   border-top: 1px solid var(--col-border);
   border-bottom: 1px solid var(--col-border);
+  list-style: none; 
+  margin: 0;
 }
 
 .spec-item {
@@ -989,13 +991,10 @@ body.layout-full-width {
   padding: 3em 1.5em;
 }
 
-.auth-wrapper {
+.auth-card {
   width: 100%;
   max-width: 500px;
   margin: 0 auto;
-}
-
-.auth-card {
   background-color: var(--col-bg);
   border: 1px solid var(--col-border);
   border-radius: var(--radius-card);
@@ -1066,8 +1065,8 @@ body.layout-full-width {
 .field-citta { grid-column: span 2; }
 .field-provincia { grid-column: span 1; }
 
-input[maxlength="2"],
-input[maxlength="5"] {
+.auth-card input[maxlength="2"],
+.auth-card input[maxlength="5"] {
   text-align: center;
   text-transform: uppercase;
 }
@@ -1638,12 +1637,35 @@ input[maxlength="5"] {
 }
 
 .info-card {
-  background-color: var(--col-bg);
   border: 1px solid var(--col-border);
   border-radius: var(--radius-card);
   padding: 2em;
   margin-bottom: 2em;
   box-shadow: var(--shadow-sm);
+  background-color: var(--col-bg); /* Assicurati che abbia uno sfondo */
+}
+
+.info-card dl div {
+  display: flex;
+  padding: 0.5em 0;
+  border-bottom: 1px solid var(--col-border);
+}
+.info-card dl div:last-child {
+  border-bottom: none;
+}
+
+.info-card dt {
+  font-weight: 600;         /* Evidenzia leggermente (grassetto) */
+  min-width: 140px;         /* Larghezza minima per allineare le colonne */
+  margin: 0;                /* Reset margini browser */
+  color: var(--col-heading); /* Usa il colore dei titoli se vuoi più contrasto */
+}
+
+/* Stile del dato (DD) */
+.info-card dd {
+  margin: 0;                /* Importante: resetta il margine sinistro default */
+  flex: 1;                  /* Prende tutto lo spazio rimanente a destra */
+  color: var(--col-text);
 }
 
 .info-card h3 {
@@ -2316,3 +2338,50 @@ a:visited { color: var(--col-visited-link); }
 li[aria-current="page"] { color: var(--col-visited-link); }
 
 .filters-wrapper { margin-bottom: 1.5em; }
+
+
+/* =========================================
+   BREAKPOINT 1024px (Tablet/Laptop)
+   Uniformazione di tutte le Sidebar
+   ========================================= */
+
+@media screen and (max-width: 1024px) {
+  
+  .profile-layout,
+  .catalog-layout,
+  .detail-layout {
+    grid-template-columns: 1fr;
+    gap: 2em; 
+  }
+
+  .profile-sidebar,
+  .sticky-sidebar {
+    position: static;
+    width: 100%;
+    margin-bottom: 1.5em; 
+  }
+
+  .profile-sidebar ul {
+    display: flex; 
+    width: 100%;
+    gap: 1em;
+  }
+
+  .profile-sidebar li {
+    flex: 1; 
+    margin-bottom: 0;
+  }
+
+  .profile-sidebar a,
+  .profile-sidebar .nav-item-active {
+    justify-content: center;
+    text-align: center;
+    flex-direction: column; 
+    height: 100%;
+    font-size: 0.85em;
+  }
+  
+  .filter-submit {
+    width: 100%;
+  }
+}

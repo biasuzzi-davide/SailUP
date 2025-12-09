@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Il Mio Profilo - SailUP</title>
   <meta name="description" content="Visualizza e gestisci il tuo profilo utente SailUP" />
-  <meta name="authors" content="Alberto Reginato, Francesco Marcon" />
+  <meta name="authors" content="SailUP Team" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -48,7 +48,7 @@
         <div class="header-buttons">
           <button class="theme-toggle" aria-pressed="false" aria-label="Attiva modalità scura">
             <span class="active-icon sun" aria-hidden="true">☀️</span>
-            <span class="inactive-icon moon" aria-hidden="true">🌙</span>
+            <span class="inactive-icon moon hidden" aria-hidden="true">🌙</span>
           </button>
           <a href="profilo.html" class="btn-layout" aria-current="page">Profilo</a>
         </div>
@@ -129,13 +129,28 @@
             
             <div class="info-card">
               <h3>Dati Anagrafici</h3>
-              <div class="info-content">
-                <p><strong>Nome:</strong> Mario</p>
-                <p><strong>Cognome:</strong> Rossi</p>
-                <p><strong>Codice Fiscale:</strong> RSSMRA90E15H501T</p>
-                <p><strong>Data di Nascita:</strong> <time datetime="1990-05-15">15 Maggio 1990</time></p>
-                <p><strong>Email:</strong> mario.rossi@example.com</p>
-              </div>
+              <dl>
+                <div>
+                    <dt>Nome:</dt>
+                    <dd>Mario</dd>
+                </div>
+                <div>
+                    <dt>Cognome:</dt>
+                    <dd>Rossi</dd>
+                </div>
+                <div>
+                    <dt>Codice Fiscale:</dt>
+                    <dd>RSSMRA90E15H501T</dd>
+                </div>
+                <div>
+                    <dt>Data di Nascita:</dt>
+                    <dd><time datetime="1990-05-15">15 Maggio 1990</time></dd>
+                </div>
+                <div>
+                    <dt>Email:</dt>
+                    <dd>mario.rossi@example.com</dd>
+                </div>
+              </dl>
             </div>
 
             <div class="info-card">
@@ -151,16 +166,16 @@
 
           <section aria-labelledby="stats-title" class="profile-stats">
             <h2 id="stats-title">Le Tue Statistiche</h2>
-            <div class="stats-grid">
+            <dl class="stats-grid">
               <div class="stat-card">
-                <p class="stat-number">12</p>
-                <p class="stat-label">Prenotazioni Totali</p>
+                <dt class="stat-label">Prenotazioni Totali</dt>
+                <dd class="stat-number">12</dd>
               </div>
               <div class="stat-card">
-                <p class="stat-number">3</p>
-                <p class="stat-label">Prenotazioni Attive</p>
+                <dt class="stat-label">Prenotazioni Attive</dt>
+                <dd class="stat-number">3</dd>
               </div>
-            </div>
+            </dl>
           </section>
         </div>
       </div>
