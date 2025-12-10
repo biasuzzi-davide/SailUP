@@ -1091,17 +1091,7 @@ a.product-cta:focus-visible {
 }
 
 /* =========================================
-   12. GRID UTILS
-   ========================================= */
-.grid-2-col {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2em;
-  margin-top: 2em;
-}
-
-/* =========================================
-   13. CATALOGO (Noleggio & Esperienze)
+   12. CATALOGO (Noleggio & Esperienze)
    ========================================= */
 .catalog-hero {
   text-align: center;
@@ -1265,7 +1255,7 @@ a.product-cta:focus-visible {
 }
 
 /* =========================================
-   14. DETTAGLIO PRODOTTO
+   13. DETTAGLIO PRODOTTO
    ========================================= */
 .detail-hero-img {
   display: block;
@@ -1436,7 +1426,7 @@ a.product-cta:focus-visible {
 }
 
 /* =========================================
-   15. PROFILO UTENTE
+   14. PROFILO UTENTE
    ========================================= */
 .profile-header {
   display: grid;
@@ -1817,7 +1807,7 @@ a.product-cta:focus-visible {
 }
 
 /* =========================================
-   16. FAQ
+   15. FAQ
    ========================================= */
 .page-intro {
   margin-bottom: 3em;
@@ -1905,7 +1895,7 @@ a.product-cta:focus-visible {
 }
 
 /* =========================================
-   17. TABELLE ADMIN & DASHBOARD
+    16. TABELLE ADMIN & DASHBOARD
    ========================================= */
 .table-container {
   border: 1px solid var(--col-border);
@@ -1993,7 +1983,7 @@ tr>*:last-child { width: 8rem; text-align: right; overflow: visible; }
 [data-theme="dark"] .btn-icon.danger:hover { background-color: #450a0a; border-color: #ef4444; }
 
 /* =========================================
-   18. ADMIN FORM
+   17. ADMIN FORM
    ========================================= */
 .admin-form {
   background-color: var(--col-bg);
@@ -2030,7 +2020,7 @@ tr>*:last-child { width: 8rem; text-align: right; overflow: visible; }
 }
 
 /* =========================================
-   19. ACTIVITY LIST
+   18. ACTIVITY LIST
    ========================================= */
 .activity-list {
   display: flex;
@@ -2102,7 +2092,7 @@ tr>*:last-child { width: 8rem; text-align: right; overflow: visible; }
 }
 
 /* =========================================
-   20. FOOTER
+   19. FOOTER
    ========================================= */
 footer {
   background-color: var(--col-primary);
@@ -2169,7 +2159,7 @@ footer {
 }
 
 /* =========================================
-   21. SCROLL TO TOP
+   20. SCROLL TO TOP
    ========================================= */
 .scroll-to-top, .scroll-to-top:visited {
   position: fixed;
@@ -2200,7 +2190,7 @@ footer {
 }
 
 /* =========================================
-   22. DOCUMENTI LEGALI & EXTRA
+   21. DOCUMENTI LEGALI & EXTRA
    ========================================= */
 .legal-document p { max-width: 100%; }
 
