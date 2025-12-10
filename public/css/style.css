@@ -570,10 +570,6 @@ body.layout-full-width {
 /* =========================================
    7. CARDS (Fleet, Product, Horizontal)
    ========================================= */
-#featured-fleet {
-  background-color: var(--col-bg-alt);
-}
-
 .section-header {
   display: flex;
   justify-content: space-between;
@@ -588,60 +584,6 @@ body.layout-full-width {
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2em;
   margin: 1em;
-}
-
-.card {
-  background-color: var(--col-card);
-  border-radius: var(--radius-card);
-  padding: 1em;
-  box-shadow: var(--shadow-sm);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-md);
-}
-
-.card a {
-  text-decoration: none;
-  color: inherit;
-  display: block;
-}
-
-.card img {
-  width: 100%;
-  border-radius: var(--radius-sm);
-  aspect-ratio: 3/2;
-  object-fit: cover;
-  margin-bottom: 1em;
-}
-
-.card-title {
-  font-weight: 700;
-  font-size: var(--fs-base);
-  margin-bottom: 0.25em;
-}
-
-.card-subtitle {
-  color: var(--col-primary);
-  font-size: var(--fs-sm);
-  font-weight: 600;
-  text-transform: uppercase;
-}
-
-.card-content ul {
-  list-style: none;
-  padding-top: 1em;
-  border-top: 1px solid var(--col-border);
-}
-
-.card-content ul li:last-child {
-  margin-top: 1em;
-  padding-top: 1em;
-  border-top: 1px solid var(--col-border);
-  color: var(--col-accent);
-  font-weight: 700;
 }
 
 .horizontal-card {
@@ -692,7 +634,6 @@ body.layout-full-width {
   justify-content: space-between;
   align-items: flex-start;
   gap: 1em;
-  margin-bottom: 0.5em;
 }
 
 .product-title {
@@ -736,7 +677,7 @@ body.layout-full-width {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: auto;
+  margin-top: 0;
 }
 
 .price-value {
@@ -755,19 +696,14 @@ body.layout-full-width {
 a.product-cta {
   font-size: var(--fs-sm);
   font-weight: 700;
-  color: var(--col-primary); /* Colore base scuro */
-  text-decoration: none; /* Nessuna sottolineatura di default */
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3em;
-  transition: color 0.2s ease, transform 0.2s ease;
-  padding: 0.5em 0; /* Aumenta l'area cliccabile senza creare un "bottone falso" */
+  color: var(--col-primary);
+  text-decoration: none;
+  transition: color 0.3s ease, transform 0.3s ease;
 }
 
 a.product-cta:hover {
-  color: var(--col-accent); /* Diventa rosso/accent al passaggio */
-  transform: translateX(4px); /* Si sposta leggermente a destra */
-  cursor: pointer;
+  color: var(--col-accent);
+  transform: translateX(2px);
 }
 
 a.product-cta:focus-visible {
@@ -1133,7 +1069,6 @@ a.product-cta:focus-visible {
   display: block;
   max-width: 65%;
   margin: 0 auto;
-  padding: 2em 0;
   text-align: center;
   font-family: "Times New Roman", serif;
   font-size: var(--fs-lg);
@@ -1967,11 +1902,6 @@ a.product-cta:focus-visible {
   content: "⚓";
   transform: rotate(360deg);
   transition: 0.5s;
-}
-
-.read-more {
-  color: var(--col-accent);
-  font-style: italic;
 }
 
 /* =========================================
