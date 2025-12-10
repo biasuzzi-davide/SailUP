@@ -138,6 +138,10 @@
     border-bottom-color: var(--col-accent);
 }
 
+#mobile-menu ul li a:visited {
+  color: var(--col-visited-link);
+}
+
 #mobile-menu .menu-login {
     font-weight: 600;
     color: var(--col-primary);
