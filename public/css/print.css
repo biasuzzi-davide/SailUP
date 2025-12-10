@@ -101,8 +101,7 @@
      Specifio per index, formatta card e quote
     -----------------------------------------*/
 
-    .cards-wrapper,
-    .grid-2-col {
+    .cards-wrapper {
         display: block;
     }
 

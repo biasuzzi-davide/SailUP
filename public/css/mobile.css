@@ -196,11 +196,6 @@
     gap: 1.5rem;
 }
 
-.grid-2-col {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-}
-
 .horizontal-card {
     text-align: center;
     padding: 1.5rem;
