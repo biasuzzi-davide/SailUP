@@ -314,10 +314,6 @@ header .logo-text {
   color: var(--col-primary);
 }
 
-footer .logo-text, .footer-tagline, .footer-col, .footer-bottom-container, .footer-links {
-  color: #fff;
-}
-
 #main-menu ul {
   display: flex;
   justify-content: center;
@@ -2098,7 +2094,7 @@ tr>*:last-child { width: 8rem; text-align: right; overflow: visible; }
    ========================================= */
 footer {
   background-color: var(--col-bg-footer);
-  color: var(--col-text-inv);
+  color: #fff;
   margin-top: auto;
   border-top: 5px solid var(--col-accent);
 }
@@ -2130,7 +2126,6 @@ footer {
 .footer-links li { margin-bottom: 0.5em; }
 
 .footer-links a {
-  color: var(--col-text-inv);
   transition: color 0.3s;
 }
 
