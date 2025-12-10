@@ -44,12 +44,12 @@
   --btn-transition: 0.25s ease;
   --btn-hover-translate: -2px;
 
-  --badge-motore: #3b82f6;
-  --badge-vela: #10b981;
-  --badge-gommone: #f59e0b;
-  --badge-tour: #8b5cf6;
-  --badge-aperitivo: #ec4899;
-  --badge-escursione: #06b6d4;
+  --badge-motore: #60a5fa;
+  --badge-vela: #34d399;
+  --badge-gommone: #fbbf24;
+  --badge-tour: #a78bfa;
+  --badge-aperitivo: #f472b6;
+  --badge-escursione: #22d3ee;
 }
 
 [data-theme="dark"] {
