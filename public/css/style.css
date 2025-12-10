@@ -25,11 +25,12 @@
   --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.15);
 
   --col-primary: #030a11;
-  --col-accent: #e13737;
+  --col-accent: hwb(2 15% 11%);
   --col-accent-hover: #c92a2a;
 
   --col-bg: #ffffff;
   --col-bg-alt: #f5f2eb;
+  --col-bg-footer: #000000;
 
   --col-text: #1a1a1a;
   --col-text-inv: #ffffff;
@@ -37,7 +38,7 @@
 
   --col-border: #e0e0e0;
   --col-card: #ffffff;
-  --col-visited-link: #8c794c;
+  --col-visited-link: #4478b8;
 
   --btn-padding-vertical: 0.8em;
   --btn-padding-horizontal: 1.5em;
@@ -237,6 +238,7 @@ a:hover { color: var(--col-primary); }
 .btn-text {
   color: var(--col-accent);
   padding: 0.5em;
+  background-color: var(--col-bg);
 }
 
 .btn-text:hover {
@@ -312,8 +314,8 @@ header .logo-text {
   color: var(--col-primary);
 }
 
-footer .logo-text {
-  color: var(--col-text-inv);
+footer .logo-text, .footer-tagline, .footer-col, .footer-bottom-container, .footer-links {
+  color: #fff;
 }
 
 #main-menu ul {
@@ -2095,7 +2097,7 @@ tr>*:last-child { width: 8rem; text-align: right; overflow: visible; }
    19. FOOTER
    ========================================= */
 footer {
-  background-color: var(--col-primary);
+  background-color: var(--col-bg-footer);
   color: var(--col-text-inv);
   margin-top: auto;
   border-top: 5px solid var(--col-accent);
