@@ -667,27 +667,9 @@ body.layout-full-width {
   background-color: var(--col-card);
   border-radius: var(--radius-card);
   overflow: hidden;
-  box-shadow: var(--shadow-sm);
-  transition: all 0.3s ease;
+  box-shadow: var(--shadow-lg);
   display: flex;
   flex-direction: column;
-}
-
-.product-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-md);
-}
-
-.product-card:has(.product-card-link:focus-visible) {
-  outline: 3px solid var(--col-accent);
-}
-
-.product-card-link {
-  text-decoration: none;
-  color: inherit;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
 }
 
 .product-card-image {
@@ -695,7 +677,6 @@ body.layout-full-width {
   aspect-ratio: 4/3;
   display: block;
   object-fit: cover;
-  transition: transform 0.3s ease;
 }
 
 .product-card-content {
@@ -771,32 +752,32 @@ body.layout-full-width {
   color: var(--col-text-muted);
 }
 
-.product-cta {
+a.product-cta {
   font-size: var(--fs-sm);
-  font-weight: 600;
-  color: var(--col-primary);
-  transition: color 0.2s;
+  font-weight: 700;
+  color: var(--col-primary); /* Colore base scuro */
+  text-decoration: none; /* Nessuna sottolineatura di default */
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  transition: color 0.2s ease, transform 0.2s ease;
+  padding: 0.5em 0; /* Aumenta l'area cliccabile senza creare un "bottone falso" */
 }
 
-.product-card:hover .product-cta {
-  color: var(--col-accent);
+a.product-cta:hover {
+  color: var(--col-accent); /* Diventa rosso/accent al passaggio */
+  transform: translateX(4px); /* Si sposta leggermente a destra */
+  cursor: pointer;
+}
+
+a.product-cta:focus-visible {
+  outline: 2px solid var(--col-accent);
+  border-radius: var(--radius-sm);
 }
 
 /* =========================================
    8. BADGE & STATUS
    ========================================= */
-.badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 1.8em;
-  padding: 0.2em 0.6em;
-  font-size: 0.85em;
-  font-weight: 700;
-  background-color: var(--col-border);
-  color: var(--col-text);
-  border-radius: 999px;
-}
 
 .product-badge {
   padding: 0.4em 0.9em;
@@ -997,7 +978,6 @@ body.layout-full-width {
 
 .auth-card {
   width: 100%;
-  max-width: 500px;
   margin: 0 auto;
   background-color: var(--col-bg);
   border: 1px solid var(--col-border);
@@ -1307,7 +1287,6 @@ body.layout-full-width {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
   gap: 1em;
   margin-bottom: 2em;
   padding-bottom: 1em;
@@ -2091,7 +2070,6 @@ tr>*:last-child { width: 8rem; text-align: right; overflow: visible; }
   border: 1px solid var(--col-border);
   border-radius: var(--radius-card);
   box-shadow: var(--shadow-sm);
-  max-width: 800px;
   margin: 0 auto 3em auto;
   padding: 2.5em;
 }
