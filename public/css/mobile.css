@@ -397,7 +397,6 @@ footer .logo p {
 }
 
 .spec-card {
-    width: 100%;
     padding: 0.8rem;
 }
 
@@ -486,10 +485,6 @@ footer .logo p {
 @media (max-width: 600px) {
     .amenities-grid {
         grid-template-columns: 1fr;
-    }
-
-    .spec-card {
-        width: 45%;
     }
 
     .activity-item {
