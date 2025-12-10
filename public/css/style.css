@@ -336,6 +336,10 @@ footer .logo-text {
   transition: border-color 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
+#main-menu > ul > li > a:visited {
+  color: var(--col-visited-link);
+}
+
 #main-menu > ul > li > a:hover {
   color: var(--col-primary);
   border-bottom-color: var(--col-accent);
