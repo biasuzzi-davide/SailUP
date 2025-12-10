@@ -478,38 +478,30 @@ footer .logo p {
 @media (max-width: 600px) {
     .amenities-grid {
         grid-template-columns: 1fr;
-        /* Dotazioni una sotto l'altra su mobile */
     }
 
     .spec-card {
         width: 45%;
-        /* Card specifiche più larghe su mobile */
     }
 
     .activity-item {
         flex-direction: column;
-        /* Diventa colonna */
         align-items: flex-start;
-        /* Allinea tutto a sinistra */
         gap: 1em;
     }
 
     .activity-icon {
         width: 2.5em;
         height: 2.5em;
-        /* Icona un po' più piccola */
     }
 
     .activity-meta {
         text-align: left;
-        /* Allinea testo a sinistra */
         width: 100%;
         border-top: 1px solid var(--col-border);
-        /* Separatore */
         padding-top: 0.5em;
         display: flex;
         justify-content: space-between;
-        /* Mette User e Data ai lati opposti */
         align-items: center;
     }
 }
@@ -533,13 +525,11 @@ footer .logo p {
 }
 
 /* =========================================
-   TABELLA RESPONSIVE (Card View) - FIX HEADER
+   TABELLA RESPONSIVE
    ========================================= */
 .table-container {
-    background-color: transparent;
     border: none;
     box-shadow: none;
-    overflow: visible;
 }
 
 .table-container table,
@@ -550,17 +540,12 @@ footer .logo p {
 .table-container tr,
 .table-container caption {
     display: block;
-    width: 100%;
 }
 
-.table-container caption {
-    text-align: center;
-    margin-bottom: 1em;
-    background-color: var(--col-bg-alt);
-    border-radius: var(--radius-card);
-    border: 1px solid var(--col-border);
-    box-shadow: var(--shadow-sm);
-    border-bottom: 1px solid var(--col-border);
+.table-container tr > *:first-child,
+.table-container tr > *:last-child,
+.table-container tr > *:nth-child(3) {
+    width: 100%;
 }
 
 .table-container thead {
@@ -569,14 +554,24 @@ footer .logo p {
     left: -9999px;
 }
 
-.table-container tr {
-    margin-bottom: 1.5em;
-    background-color: var(--col-card);
-    border: 1px solid var(--col-border);
+.table-container caption {
+    text-align: center;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background-color: var(--col-bg-alt);
+    border: 0.0625rem solid var(--col-border);
     border-radius: var(--radius-card);
     box-shadow: var(--shadow-sm);
-    padding: 0;
-    overflow: hidden;
+    color: var(--col-primary);
+    font-weight: 700;
+    font-family: var(--font-head);
+}
+
+.table-container tr {
+    margin-left: 0;
+    margin-right: 0;
+    border: 1px solid var(--col-border);
+    border-radius: var(--radius-card);
 }
 
 .table-container td {
@@ -585,8 +580,8 @@ footer .logo p {
     align-items: center;
     border: none;
     border-bottom: 1px solid var(--col-border);
-    padding: 1em;
-    text-align: right;
+    padding: 0.8rem 1rem;
+    min-height: 3.5rem;
 }
 
 .table-container td:last-child {
@@ -599,61 +594,25 @@ footer .logo p {
     color: var(--col-primary);
     text-transform: uppercase;
     font-size: 0.75em;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.03rem;
     text-align: left;
     margin-right: 1em;
     flex: 0 0 40%;
 }
 
 .table-container td.actions-cell {
-    justify-content: flex-end;
+    justify-content: flex-end; 
     background-color: var(--col-bg-alt);
-    padding: 0.8em 1em;
 }
 
 .table-container td.actions-cell::before {
-    display: none;
+    display: none; /* Nasconde label "Azioni" */
 }
 
-
-/* =========================================
-   TABELLE ADMIN 
-   ========================================= */
-table,
-tbody,
-th,
-td,
-tr {
-    display: block;
-    width: 100%;
-}
-
-tbody tr {
-    margin-bottom: 1.5em;
-    border: 1px solid var(--col-border);
-    border-radius: var(--radius-card);
-    box-shadow: var(--shadow-sm);
-    background: var(--col-bg);
-}
-
-tbody td {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    text-align: right;
-    white-space: normal;
-    min-height: 3em;
-    border-bottom: 1px solid var(--col-border);
-}
-
-tbody td::before {
-    content: attr(data-label);
-    font-weight: 700;
-    font-size: 0.85em;
-    text-transform: uppercase;
-    color: var(--col-text-muted);
-    text-align: left;
-    margin-right: 1em;
+.table-container .btn-icon {
+    min-width: 44px; 
+    min-height: 44px;
+    font-size: 1.25rem;
 }
 
 /* =========================================
