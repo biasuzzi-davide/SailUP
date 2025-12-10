@@ -467,6 +467,10 @@ footer .logo p {
     grid-template-columns: 1fr 1fr;
 }
 
+.product-header {
+    flex-wrap: wrap;
+}
+
 .product-specs {
     flex-direction: column;
     gap: 0.5em;
