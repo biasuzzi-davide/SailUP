@@ -1298,15 +1298,15 @@ a.product-cta:focus-visible {
 }
 
 .specs-grid {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); 
   gap: 1.5rem;
   margin-bottom: 3rem;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .spec-card {
-  width: 130px;
   padding: 1rem;
   background-color: var(--col-bg-alt);
   border-radius: var(--radius-sm);
