@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const hamburgerBtn = document.getElementById('hamburger-btn');
     const mobileMenu = document.getElementById('mobile-menu');
     
-    // Selettori per le icone dentro il bottone
     const openIcon = document.querySelector('.hamburger-icon'); // L'icona "☰"
     const closeIcon = document.querySelector('.close-icon');    // L'icona "✕"
 
@@ -15,22 +14,16 @@ document.addEventListener('DOMContentLoaded', () => {
         hamburgerBtn.addEventListener('click', () => {
             const isExpanded = hamburgerBtn.getAttribute('aria-expanded') === 'true';
             
-            // 1. Toggle stato ARIA per accessibilità
             hamburgerBtn.setAttribute('aria-expanded', !isExpanded);
             
-            // 2. Toggle Visibilità Menu 
-            // (Nota: Assicurati che nel CSS esista la regola: #mobile-menu.active { display: block; })
             mobileMenu.classList.toggle('active');
             
-            // 3. Toggle Icone usando la classe .hidden definita nel CSS
             if (!isExpanded) {
                 openIcon.classList.add('hidden');
                 closeIcon.classList.remove('hidden');
-                document.body.style.overflow = 'hidden'; // Blocca lo scroll della pagina
             } else {
                 openIcon.classList.remove('hidden');
                 closeIcon.classList.add('hidden');
-                document.body.style.overflow = ''; 
             }
         });
     }
@@ -90,7 +83,6 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     function scrollFunction() {
-        // Quando vengono superati 150px mostra il bottone e lo rende raggiungibile via tab
         if (document.body.scrollTop > 150 || document.documentElement.scrollTop > 150) {
             btn.classList.add("show");
             btn.setAttribute("tabindex", "0");
@@ -115,7 +107,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const badgeCompleted = document.getElementById('badge-completed');
     const noBookingsMsg = document.getElementById('no-bookings-message');
 
-    // Funzione per ggiornare contatori
     function updateCounters() {
         const total = rows.length;
         const activeCount = Array.from(rows).filter(r => r.getAttribute('data-status') === 'active').length;
@@ -152,7 +143,6 @@ document.addEventListener('DOMContentLoaded', () => {
             noBookingsMsg.classList.add('hidden');
         }
 
-        // Gestione stato bottoni
         document.querySelectorAll('.filter-tab').forEach(btn => {
             btn.classList.remove('active');
             btn.setAttribute('aria-selected', 'false');
