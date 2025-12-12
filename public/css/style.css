@@ -254,6 +254,7 @@ a:hover { color: var(--col-primary); }
 .btn-sm {
   padding: 0.25em 0.6em;
   font-size: 0.85em;
+  margin-bottom: 1rem;
 }
 
 .btn-page {
