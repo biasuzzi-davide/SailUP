@@ -1992,12 +1992,6 @@ footer {
   gap: 3em;
 }
 
-.footer-logo .logo-text {
-  font-family: var(--font-head);
-  font-size: 1.5em;
-  font-weight: 700;
-}
-
 .footer-heading {
   color: var(--col-accent);
   text-transform: uppercase;
