@@ -257,16 +257,6 @@ a:hover { color: var(--col-primary); }
   margin-bottom: 1rem;
 }
 
-.btn-page {
-  padding: 0.5em 1em;
-}
-
-.btn-disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-  pointer-events: none;
-}
-
 /* =========================================
    4. HEADER & NAVIGAZIONE
    ========================================= */
@@ -297,7 +287,6 @@ body > header {
   gap: 2em;
 }
 
-/* Logo */
 .logo {
   display: flex;
   align-items: center;
@@ -351,7 +340,6 @@ header .logo-text {
   border-bottom-color: var(--col-accent);
 }
 
-/* Azioni Header */
 .header-buttons {
   display: flex;
   align-items: center;
@@ -375,7 +363,6 @@ header .logo-text {
   background-color: var(--col-bg-alt);
 }
 
-/* Hamburger (Mobile) */
 #hamburger-btn {
   display: none;
   background: none;
@@ -444,7 +431,6 @@ header .logo-text {
   height: 0;
   pointer-events: none;
   z-index: 2;
-
   border-top: var(--b-arrow-h) solid transparent;
   border-bottom: var(--b-arrow-h) solid transparent;
   border-left: var(--b-arrow-w) solid var(--col-primary);
@@ -507,30 +493,32 @@ header .logo-text {
   padding: 2em 1.5em;
 }
 
-body.layout-full-width {
-  padding: 0;
-  width: 100%;
-  overflow-x: hidden;
-}
-
 .layout-full-width {
-  margin-top: 1em;
-  background-image: url('../img/Immagine_Hero.jpg');
-  background-color: #030a11;
-  background-size: cover;
-  background-position: center;
-  max-height: 90%;
   position: relative;
+  width: 100%;
+  max-height: 90%;
+  background-color: #030a11;
+  overflow: hidden;
+  margin-top: 1em;
 }
 
 .layout-full-width::before {
   content: '';
   position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 1;
+}
+
+.hero-bg {
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
+  object-fit: cover;
+  object-position: center;
 }
 
 #hero {
@@ -544,7 +532,7 @@ body.layout-full-width {
 #hero-content {
   position: relative;
   z-index: 2;
-  color: #ffffff;
+  color: var(--col-text-inv);
 }
 
 #hero-content h1 {
@@ -559,7 +547,7 @@ body.layout-full-width {
   box-shadow: var(--shadow-lg);
 }
 
-.cta-group {
+.action-buttons {
   margin-top: 2em;
   display: flex;
   gap: 1em;
@@ -569,7 +557,7 @@ body.layout-full-width {
 /* =========================================
    7. CARDS (Fleet, Product, Horizontal)
    ========================================= */
-.section-header {
+.flex-title {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
@@ -592,16 +580,6 @@ body.layout-full-width {
   border: 1px solid var(--col-border);
   text-decoration: none;
   margin-bottom: 1em;
-}
-
-.horizontal-card h3 {
-  color: var(--col-primary);
-  margin-top: 0;
-}
-
-.horizontal-card p {
-  color: var(--col-text-muted);
-  margin-bottom: 0;
 }
 
 .product-card {

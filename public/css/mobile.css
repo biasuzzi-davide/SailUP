@@ -170,15 +170,15 @@
     margin-inline: auto;
 }
 
-.cta-group {
+.action-buttons {
     flex-direction: column;
     width: 100%;
 }
 
 /* Mobile: ensure buttons are full-width and use centralized button variables */
-.cta-group .btn-layout,
-.cta-group .btn-layout-light,
-.cta-group .btn-full-width {
+.action-buttons .btn-layout,
+.action-buttons .btn-layout-light,
+.action-buttons .btn-full-width {
     width: 100%;
     box-sizing: border-box;
 }
