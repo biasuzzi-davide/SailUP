@@ -363,6 +363,13 @@ header .logo-text {
   background-color: var(--col-bg-alt);
 }
 
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 2em;
+}
+
 #hamburger-btn {
   display: none;
   background: none;
@@ -1091,7 +1098,6 @@ a.product-cta:focus-visible {
   align-items: start;
 }
 
-/* Filters */
 .filters-sidebar {
   background-color: var(--col-bg-alt);
   grid-column: 1;
@@ -1107,13 +1113,6 @@ a.product-cta:focus-visible {
   font-size: var(--fs-base);
   margin-bottom: 1em;
   color: var(--col-primary);
-}
-
-.filters-sidebar fieldset {
-  border: none;
-  padding: 0;
-  margin: 0;
-  margin-bottom: 2em;
 }
 
 .filters-header {
@@ -1133,7 +1132,6 @@ a.product-cta:focus-visible {
 .filter-group {
   border: none;
   padding: 0;
-  margin-bottom: 2em;
 }
 
 .filter-group legend {
@@ -1168,21 +1166,11 @@ a.product-cta:focus-visible {
   color: var(--col-text-muted);
 }
 
-.filter-input input,
-.filter-input select {
-  width: 100%;
-  padding: 0.7em;
-  border: 2px solid var(--col-border);
-  border-radius: var(--radius-sm);
-  font-size: var(--fs-base);
-}
-
 .filter-submit {
   width: 80%;
   margin-top: 1.5em;
 }
 
-/* Results */
 .catalog-results { flex: 1; }
 
 .results-header {
@@ -1449,7 +1437,6 @@ a.product-cta:focus-visible {
   flex-wrap: wrap;
 }
 
-/* Layout Profile */
 .profile-layout {
   display: grid;
   grid-template-columns: 260px 1fr;
@@ -1527,7 +1514,7 @@ a.product-cta:focus-visible {
   padding: 2em;
   margin-bottom: 2em;
   box-shadow: var(--shadow-sm);
-  background-color: var(--col-bg); /* Assicurati che abbia uno sfondo */
+  background-color: var(--col-bg);
 }
 
 .info-card dl div {
@@ -1540,16 +1527,15 @@ a.product-cta:focus-visible {
 }
 
 .info-card dt {
-  font-weight: 600;         /* Evidenzia leggermente (grassetto) */
-  min-width: 140px;         /* Larghezza minima per allineare le colonne */
-  margin: 0;                /* Reset margini browser */
-  color: var(--col-heading); /* Usa il colore dei titoli se vuoi più contrasto */
+  font-weight: 600;
+  min-width: 140px;
+  margin: 0;
+  color: var(--col-heading);
 }
 
-/* Stile del dato (DD) */
 .info-card dd {
-  margin: 0;                /* Importante: resetta il margine sinistro default */
-  flex: 1;                  /* Prende tutto lo spazio rimanente a destra */
+  margin: 0;
+  flex: 1;
   color: var(--col-text);
 }
 
@@ -1620,8 +1606,8 @@ a.product-cta:focus-visible {
   margin: 0;
 }
 
-.security-section { margin-top: 3em; }
-.security-section .auth-card { margin-bottom: 2em; }
+.admin-section { margin-top: 3em; }
+.admin-section .auth-card { margin-bottom: 2em; }
 
 .danger-zone {
   background-color: #fef2f2;
@@ -1652,7 +1638,7 @@ a.product-cta:focus-visible {
   padding: 0.9em 1.5em;
   background-color: transparent;
   border: none;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-btn);
   font-weight: 600;
   font-family: var(--font-head);
   color: var(--col-text);
@@ -1669,6 +1655,11 @@ a.product-cta:focus-visible {
 .filter-tab.active {
   background-color: var(--col-primary);
   color: var(--col-text-inv);
+}
+
+.badge {
+  border-radius: var(--radius-btn);
+  padding: 0.2em 0.6em;
 }
 
 .filter-tab.active .badge {
@@ -1694,16 +1685,19 @@ a.product-cta:focus-visible {
   border-radius: var(--radius-card);
   overflow: hidden;
   box-shadow: var(--shadow-sm);
-  transition: all 0.3s ease;
-}
-
-.booking-card:hover {
-  box-shadow: var(--shadow-md);
-  transform: translateY(-2px);
 }
 
 .booking-card.status-active { border-left: 5px solid var(--col-accent); }
 .booking-card.status-completed { border-left: 5px solid #16a34a; }
+
+.booking-presentation {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 2em;
+  border-bottom: 2px solid var(--col-border);
+  padding-bottom: 0.5em;
+}
 
 .booking-header {
   display: grid;
@@ -1726,7 +1720,7 @@ a.product-cta:focus-visible {
   object-fit: cover;
 }
 
-.booking-info h3 {
+.booking-info h2 {
   font-size: var(--fs-md);
   margin-bottom: 0.3em;
   color: var(--col-primary);
@@ -1738,28 +1732,8 @@ a.product-cta:focus-visible {
   margin-bottom: 0.5em;
 }
 
-.booking-details { padding: 1.5em; }
-
-.booking-details-content {
-  margin-bottom: 1.5em;
-  line-height: 1.8;
-}
-
-.booking-details-content p {
-  margin-bottom: 0.8em;
-  color: var(--col-text);
-}
-
-.booking-details-content p:last-child { margin-bottom: 0; }
-
-.booking-details-content strong {
-  font-weight: 600;
-  color: var(--col-text-muted);
-  display: inline-block;
-  min-width: 180px;
-  font-size: var(--fs-sm);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+.booking-details { 
+  padding: 1.5em; 
 }
 
 .booking-actions {
@@ -1781,6 +1755,14 @@ a.product-cta:focus-visible {
   font-size: var(--fs-md);
   color: var(--col-text-muted);
   margin-bottom: 2em;
+}
+
+.booking-details table th {
+  text-align: left;
+}
+
+.booking-details table td {
+  text-align: right;
 }
 
 /* =========================================
@@ -1849,11 +1831,6 @@ a.product-cta:focus-visible {
 .faq-answer p {
   margin-bottom: 0;
   max-width: 100%;
-}
-
-@keyframes slideDown {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
 }
 
 .horizontal-card summary { list-style: none; }
@@ -1997,78 +1974,6 @@ tr>*:last-child { width: 8rem; text-align: right; overflow: visible; }
 }
 
 /* =========================================
-   18. ACTIVITY LIST
-   ========================================= */
-.activity-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1em;
-}
-
-.activity-item {
-  display: flex;
-  align-items: center;
-  gap: 1.5em;
-  background-color: var(--col-bg);
-  border: 1px solid var(--col-border);
-  border-radius: var(--radius-card);
-  padding: 1.2em;
-}
-
-.activity-icon {
-  width: 3em;
-  height: 3em;
-  border-radius: var(--radius-sm);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.2em;
-  flex-shrink: 0;
-  font-weight: bold;
-}
-
-.icon-accent { background: rgba(254, 101, 79, 0.1); color: var(--col-accent); }
-.icon-success { background: #dcfce7; color: #166534; }
-.icon-warning { background: #fef3c7; color: #92400e; }
-
-.activity-content { flex: 1; }
-
-.activity-type {
-  font-size: 0.75em;
-  text-transform: uppercase;
-  font-weight: 700;
-  color: var(--col-text-muted);
-  letter-spacing: 0.5px;
-  display: block;
-  margin-bottom: 0.2em;
-}
-
-.activity-content p {
-  margin: 0;
-  font-size: var(--fs-sm);
-  line-height: 1.3;
-}
-
-.activity-meta {
-  text-align: right;
-  min-width: 100px;
-}
-
-.meta-user {
-  display: block;
-  font-weight: 600;
-  font-size: var(--fs-sm);
-  color: var(--col-primary);
-}
-
-.activity-meta time {
-  display: block;
-  font-size: 0.75em;
-  color: var(--col-text-muted);
-  margin-top: 0.2em;
-}
-
-/* =========================================
    19. FOOTER
    ========================================= */
 footer {
@@ -2117,9 +2022,6 @@ footer {
   background-color: rgba(0, 0, 0, 0.2);
   padding: 1.5em;
   font-size: 0.85em;
-}
-
-.footer-bottom-container {
   max-width: 75em;
   margin: 0 auto;
   display: flex;
@@ -2213,6 +2115,14 @@ li[aria-current="page"] { color: var(--col-visited-link); }
 
 .filters-wrapper { margin-bottom: 1.5em; }
 
+/* =========================================
+   PER TRANSIZIONI
+   ========================================= */
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
 /* =========================================
    BREAKPOINT 1024px (Tablet/Laptop)
