@@ -216,11 +216,6 @@ footer .logo p {
     font-size: var(--fs-md);
 }
 
-.footer-bottom-container {
-    flex-direction: column;
-    gap: 1rem;
-}
-
 /* Animazione */
 @keyframes slideDown {
     from {
