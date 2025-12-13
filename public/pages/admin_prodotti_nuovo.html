@@ -96,40 +96,38 @@
         <section aria-labelledby="form-title" class="admin-form">
           <h2 id="form-title">Dettagli Prodotto</h2>
 
-          <form action="#" method="POST">
+          <div id="error-message" class="error-message hidden" role="alert" aria-live="polite"></div>
+          <div id="success-message" class="success-message hidden" role="alert" aria-live="polite"></div>
+
+          <form id="product-form" action="#" method="POST" novalidate>
 
             <fieldset>
               <legend>Informazioni Base</legend>
 
               <div class="form-row">
                 <div class="form-group">
-                  <label for="product-id"><abbr title="Identificativo">ID</abbr> Prodotto <abbr
-                      title="Campo obbligatorio">*</abbr></label>
-                  <input type="text" id="product-id" name="product-id" placeholder="es. sunseeker-predator"
-                    pattern="[a-z0-9\-]+" required aria-describedby="product-id-hint">
-                  <small id="product-id-hint">Usa solo lettere minuscole e trattini, senza spazi</small>
+                  <label for="product-name">Nome Prodotto <abbr title="Campo obbligatorio">*</abbr></label>
+                  <input type="text" id="product-name" name="product-name" placeholder="es. Sunseeker Predator 62"
+                    required aria-required="true" aria-describedby="product-name-error">
+                  <span id="product-name-error" class="field-error" role="alert"></span>
                 </div>
 
                 <div class="form-group">
                   <label for="product-type">Tipo Prodotto <abbr title="Campo obbligatorio">*</abbr></label>
-                  <select id="product-type" name="product-type" required>
+                  <select id="product-type" name="product-type" required aria-required="true" aria-describedby="product-type-error">
                     <option value="">Seleziona tipo...</option>
                     <option value="noleggio">Barca a Noleggio</option>
                     <option value="experience">Esperienza</option>
                   </select>
+                  <span id="product-type-error" class="field-error" role="alert"></span>
                 </div>
-              </div>
-
-              <div class="form-group">
-                <label for="product-name">Nome Prodotto <abbr title="Campo obbligatorio">*</abbr></label>
-                <input type="text" id="product-name" name="product-name" placeholder="es. Sunseeker Predator 62"
-                  required>
               </div>
 
               <div class="form-group">
                 <label for="product-description">Descrizione Breve <abbr title="Campo obbligatorio">*</abbr></label>
                 <textarea id="product-description" name="product-description" rows="3"
-                  placeholder="Descrizione che apparirà nelle card del catalogo..." required></textarea>
+                  placeholder="Descrizione che apparirà nelle card del catalogo..." required aria-required="true" aria-describedby="product-description-error"></textarea>
+                <span id="product-description-error" class="field-error" role="alert"></span>
               </div>
 
               <div class="form-group">
@@ -146,15 +144,17 @@
                 <div class="form-group">
                   <label for="product-price">Prezzo Base (€) <abbr title="Campo obbligatorio">*</abbr></label>
                   <input type="number" id="product-price" name="product-price" min="0" step="10" placeholder="850"
-                    required aria-describedby="product-price-hint">
-                  <small id="product-price-hint">Prezzo al giorno per noleggi, prezzo totale per esperienze</small>
+                    required aria-required="true" aria-describedby="product-price-hint product-price-error">
+                  <span id="product-price-hint" class="field-hint">Prezzo al giorno per noleggi, prezzo totale per esperienze</span>
+                  <span id="product-price-error" class="field-error" role="alert"></span>
                 </div>
 
                 <div class="form-group">
                   <label for="product-capacity">Capacità Massima (persone) <abbr
                       title="Campo obbligatorio">*</abbr></label>
                   <input type="number" id="product-capacity" name="product-capacity" min="1" max="50" placeholder="8"
-                    required>
+                    required aria-required="true" aria-describedby="product-capacity-error">
+                  <span id="product-capacity-error" class="field-error" role="alert"></span>
                 </div>
               </div>
 
@@ -179,7 +179,7 @@
                 <textarea id="product-features" name="product-features" rows="4"
                   placeholder="Una caratteristica per riga, ad esempio:&#10;3 cabine doppie&#10;2 bagni completi&#10;Cucina attrezzata&#10;Aria condizionata"
                   aria-describedby="product-features-hint"></textarea>
-                <small id="product-features-hint">Inserisci una caratteristica per riga</small>
+                <span id="product-features-hint" class="field-hint">Inserisci una caratteristica per riga</span>
               </div>
 
               <div class="checkbox-options">
@@ -213,23 +213,22 @@
             </fieldset>
 
             <fieldset>
-              <legend>Immagini</legend>
+              <legend>Immagine</legend>
 
               <div class="form-group">
                 <label for="product-image-main">Immagine Principale <abbr title="Campo obbligatorio">*</abbr></label>
                 <input type="url" id="product-image-main" name="product-image-main"
-                  placeholder="https://example.com/image.jpg" required aria-describedby="product-image-hint">
-                <small id="product-image-hint">Inserisci l'<abbr title="Uniform Resource Locator" lang="en">URL</abbr>
-                  dell'immagine principale del prodotto</small>
+                  placeholder="https://example.com/image.jpg" required aria-required="true" aria-describedby="product-image-hint product-image-main-error">
+                <span id="product-image-hint" class="field-hint">Inserisci l'<abbr title="Uniform Resource Locator" lang="en">URL</abbr>
+                  dell'immagine principale del prodotto</span>
+                <span id="product-image-main-error" class="field-error" role="alert"></span>
               </div>
 
               <div class="form-group">
-                <label for="product-gallery">Galleria Immagini (opzionale)</label>
-                <textarea id="product-gallery" name="product-gallery" rows="4"
-                  placeholder="Un URL per riga:&#10;https://example.com/image1.jpg&#10;https://example.com/image2.jpg&#10;https://example.com/image3.jpg"
-                  aria-describedby="product-gallery-hint"></textarea>
-                <small id="product-gallery-hint">Inserisci un <abbr title="Uniform Resource Locator"
-                    lang="en">URL</abbr> per riga</small>
+                <label for="Testo_Alternativo">Testo Alternativo Immagine <abbr title="Campo obbligatorio">*</abbr></label>
+                <input type="text" id="Testo_Alternativo" name="Testo_Alternativo"
+                  placeholder="Descrizione dell'immagine per accessibilità" required aria-required="true" aria-describedby="Testo_Alternativo-error" />
+                <span id="Testo_Alternativo-error" class="field-error" role="alert"></span>
               </div>
             </fieldset>
 
@@ -238,11 +237,12 @@
 
               <div class="form-group">
                 <label for="product-status">Stato Prodotto <abbr title="Campo obbligatorio">*</abbr></label>
-                <select id="product-status" name="product-status" required>
+                <select id="product-status" name="product-status" required aria-required="true" aria-describedby="product-status-error">
                   <option value="available">Disponibile</option>
                   <option value="maintenance">In Manutenzione</option>
                   <option value="unavailable">Non Disponibile</option>
                 </select>
+                <span id="product-status-error" class="field-error" role="alert"></span>
               </div>
 
               <div class="form-group">
@@ -256,7 +256,7 @@
             </fieldset>
 
             <div class="form-actions">
-              <button class="btn-layout-light" onclick="history.back()">Annulla</button>
+              <button type="button" class="btn-layout-light" onclick="history.back()">Annulla</button>
               <button type="submit" class="btn-layout">Salva Prodotto</button>
             </div>
           </form>
@@ -322,6 +322,7 @@
   </footer>
 
   <script src="../js/script.js"></script>
+  <script src="../js/products_validation.js"></script>
 </body>
 
 </html>

@@ -1951,7 +1951,6 @@ tr>*:last-child { width: 8rem; text-align: right; overflow: visible; }
 .admin-form fieldset {
   border: none;
   padding: 0;
-  margin: 0 0 2.5em 0;
 }
 
 .admin-form legend {
