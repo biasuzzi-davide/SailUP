@@ -25,12 +25,13 @@
   --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.15);
 
   --col-primary: #030a11;
-  --col-accent: hwb(2 15% 11%);
+  --col-accent: #e32d26;
   --col-accent-hover: #c92a2a;
 
   --col-bg: #ffffff;
   --col-bg-alt: #f5f2eb;
   --col-bg-footer: #000000;
+  --col-hero: #fff;
 
   --col-text: #1a1a1a;
   --col-text-inv: #ffffff;
@@ -56,7 +57,6 @@
 [data-theme="dark"] {
   --col-primary: #f5f2eb;
   --col-primary-light: #e2dccf;
-  --col-accent: #e13737;
   --col-bg: #030a11;
   --col-bg-alt: #152336;
   --col-text: #f0f0f0;
@@ -204,8 +204,8 @@ a:hover { color: var(--col-primary); }
 
 .btn-hero,
 .btn-hero:visited {
-  background-color: var(--col-bg);
-  color: var(--col-text);
+  background-color: var(--col-hero);
+  color: var(--col-bg-footer);
 }
 
 .btn-hero:hover {
@@ -537,12 +537,11 @@ header .logo-text {
 }
 
 #hero-content {
-  position: relative;
   z-index: 2;
   color: var(--col-text-inv);
 }
 
-#hero-content h1 {
+#hero-content h1, #hero-content p{
   color: #ffffff;
 }
 
