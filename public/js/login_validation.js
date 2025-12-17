@@ -12,8 +12,8 @@
     }
 
     function validateEmail(email) {
-        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return re.test(email);
+        // Accetta qualsiasi email (basta che non sia vuota) per fini didattici
+        return true;
     }
 
     function showFieldError(input, message) {
@@ -54,16 +54,11 @@
             showFieldError(emailInput, 'L\'email è obbligatoria');
             return false;
         }
-        if (!validateEmail(email)) {
-            showFieldError(emailInput, 'Inserisci un\'email valida');
-            return false;
-        }
-
         clearFieldError(emailInput);
         return true;
     }
 
-    /* Da definire che limitazioni vogliamo in modo più chiaro */
+    // Accetta qualsiasi password (basta che non sia vuota) per fini didattici
     function validatePasswordField() {
         const password = passwordInput.value;
 
@@ -71,12 +66,6 @@
             showFieldError(passwordInput, 'La password è obbligatoria');
             return false;
         }
-
-        if (password.length < 8) {
-            showFieldError(passwordInput, 'La password deve essere di almeno 8 caratteri');
-            return false;
-        }
-
         clearFieldError(passwordInput);
         return true;
     }

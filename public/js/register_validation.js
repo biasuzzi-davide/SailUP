@@ -30,16 +30,13 @@
     }
 
     function validateEmailRegex(email) {
-        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return re.test(email);
+        // Accetta qualsiasi email (basta che non sia vuota) per fini didattici
+        return true;
     }
 
     function validatePasswordStrength(password) {
-        const minLength = 8;
-        const hasUpperCase = /[A-Z]/.test(password);
-        const hasLowerCase = /[a-z]/.test(password);
-        const hasNumber = /[0-9]/.test(password);
-        return password.length >= minLength && hasUpperCase && hasLowerCase && hasNumber;
+        // Accetta qualsiasi password (basta che non sia vuota) per fini didattici
+        return true;
     }
 
     function showFieldError(input, message) {
@@ -116,17 +113,12 @@
     function validateEmailField() {
         const val = emailInput.value.trim();
         if (val === '') { showFieldError(emailInput, 'L\'email è obbligatoria'); return false; }
-        if (!validateEmailRegex(val)) { showFieldError(emailInput, 'Inserisci un\'email valida'); return false; }
         clearFieldError(emailInput); return true;
     }
 
     function validatePasswordField() {
         const val = passwordInput.value;
         if (val === '') { showFieldError(passwordInput, 'La password è obbligatoria'); return false; }
-        if (!validatePasswordStrength(val)) {
-            showFieldError(passwordInput, 'Minimo 8 caratteri, una maiuscola, una minuscola e un numero');
-            return false;
-        }
         clearFieldError(passwordInput); return true;
     }
 
