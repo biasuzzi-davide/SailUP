@@ -42,7 +42,7 @@
   /* Borders & UI */
   --col-border: #cbd2d9;
   --col-card: #ffffff;
-  --col-visited-link: #475569;
+  --col-visited-link: #4593ff;
 
   /* Buttons */
   --btn-padding-vertical: 0.8em;
@@ -1628,7 +1628,6 @@ a.product-cta:focus-visible {
 
 .profile-content h2 {
   font-size: var(--fs-xl);
-  margin-bottom: 1.5em;
   color: var(--col-primary);
 }
 
@@ -1714,7 +1713,7 @@ a.product-cta:focus-visible {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1.5em;
-  margin-top: 1.5em;
+  margin-bottom: 1.5em;
 }
 
 .stat-card {
@@ -2170,11 +2169,11 @@ footer {
   background-color: var(--col-bg-footer);
   color: #f1f5f9;
   margin-top: auto;
-  border-top: 5px solid #38bdf8; 
+  border-top: 5px solid #81b6ff; 
 }
 
 footer .text-accent {
-  color: #38bdf8; 
+  color: #81b6ff; 
 }
 
 .footer-content {
@@ -2215,32 +2214,16 @@ footer .text-accent {
   transition: all 0.3s ease;
   display: inline-block;
 }
-.footer-links a::after {
-  content: "✓";
-  font-weight: bold;
-  margin-left: 5px;
-  color: var(--col-bg-footer); 
-  text-decoration: none; 
-  display: inline-block;
-}
-.footer-links a:visited {
-  color: var(--col-text-inv)
-}
-
-.footer-links a:visited::after {
-  color: #38bdf8; 
-}
-
 .footer-links a:hover,
 .footer-links a:focus-visible {
-  color: #38bdf8; 
+  color: #81b6ff; 
   transform: translateX(5px);
   text-decoration: underline;
   text-underline-offset: 4px;
 }
 
 .footer-links a:focus-visible {
-  outline: 2px solid #38bdf8;
+  outline: 2px solid #81b6ff;
   outline-offset: 4px;
   border-radius: 2px;
 }
