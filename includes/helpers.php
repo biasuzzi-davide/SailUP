@@ -5,9 +5,9 @@ function buildHeader($phpSelf) {
     $headerTemplatePath = __DIR__ . '/../public/pages/elementi_semantici/header.html';
     $headerTemplate = file_get_contents($headerTemplatePath);
 
-    // Calcola il percorso relativo dalla directory dello script a public/pages/
-    // ATTUALMENTE assumo che gli script PHP sono in public/php/, e pages/ è ../pages/, la situa potrebbe cambiare
-    $relativePath = '../pages/';
+    // Calcola il percorso relativo dalla directory dello script a public/php/
+    // Gli script PHP sono in public/php/, quindi i link puntano a ../php/
+    $relativePath = '../php/';
 
     // Determina la pagina corrente basata su basename di phpSelf
     $current = basename($phpSelf, '.php');
@@ -54,6 +54,14 @@ function buildHeader($phpSelf) {
     $header = str_replace('[MOBILE CHI_SIAMO LI]', $mobileChiSiamoLi, $header);
     $header = str_replace('[MOBILE LOGIN LI]', $mobileLoginLi, $header);
 
+    // Login link for header buttons
+    if ($current == 'login') {
+        $loginLink = '<span lang="en" class="btn-layout">Login</span>';
+    } else {
+        $loginLink = '<a href="' . $relativePath . $pages['login'] . '" lang="en" class="btn-layout">Login</a>';
+    }
+    $header = str_replace('[LOGIN LINK]', $loginLink, $header);
+
     return $header;
 }
 
@@ -62,7 +70,7 @@ function buildFooter($phpSelf) {
     $footerTemplate = file_get_contents($footerTemplatePath);
 
     // Calcola il percorso relativo
-    $relativePath = '../pages/';
+    $relativePath = '../php/';
 
     // Pagina corrente
     $current = basename($phpSelf, '.php');
