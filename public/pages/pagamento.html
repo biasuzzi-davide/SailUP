@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="it" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagamento - SailUP</title>
+    <meta name="description" content="Completa il pagamento per confermare la tua prenotazione su SailUP.">
+    <meta name="authors" content="SailUp team">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/style.css" media="screen">
+    <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)">
+    <link rel="stylesheet" href="../css/print.css" media="print">
+</head>
+
+<body>
+    <a href="#main-content" class="skip-to-content">Salta al contenuto principale</a>
+
+    <header>
+        <div class="header-container">
+            <div class="header">
+                <a href="index.html" class="logo">
+                    <picture>
+                        <source srcset="" type="image/avif">
+                        <img alt="" 
+                             src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=400&q=80"
+                             width="30" aria-hidden="true">
+                    </picture>
+                    <span class="logo-text" lang="en">Sail<span class="text-accent">UP</span></span>
+                </a>
+
+                <nav id="main-menu" aria-label="Menu principale">
+                    <ul>
+                        <li><a href="index.html" lang="en">Home</a></li>
+                        <li><a href="catalogo_noleggio.html">Noleggio</a></li>
+                        <li><a href="catalogo_esperienze.html">Esperienze</a></li>
+                        <li><a href="blog.html" lang="en">Blog</a></li>
+                        <li><a href="chi_siamo.html">Chi Siamo</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-buttons">
+                    <button class="theme-toggle" aria-pressed="false" aria-label="Attiva modalità scura">
+                        <span class="sun" aria-hidden="true">☀️</span>
+                        <span class="moon hidden" aria-hidden="true">🌙</span>
+                    </button>
+                    <a href="profilo.html" class="btn-layout">Profilo</a>
+                </div>
+
+                <button id="hamburger-btn" aria-expanded="false" aria-controls="mobile-menu" aria-label="Menu Mobile">
+                    <span class="hamburger-icon" aria-hidden="true">☰</span>
+                    <span class="close-icon hidden" aria-hidden="true">✕</span>
+                </button>
+            </div>
+            
+            </div>
+    </header>
+
+    <div class="sr-only" id="breadcrumb-label">
+        <span lang="en">Breadcrumb</span>
+    </div>
+    <nav aria-labelledby="breadcrumb-label" id="breadcrumb">
+        <ol>
+            <li><a href="index.html" lang="en">Home</a></li>
+            <li><a href="catalogo_noleggio.html">Noleggio</a></li>
+            <li><a href="dettaglio_barca.html">Sunseeker Predator</a></li>
+            <li aria-current="page">Pagamento</li>
+        </ol>
+    </nav>
+
+    <main id="main-content">
+        <section class="section-container">
+            <div class="auth-card">
+                <h1>Completa la Prenotazione</h1>
+                <p class="auth-subtitle">Inserisci i dati della carta per procedere</p>
+
+                <div id="error-message" class="error-message hidden" role="alert" aria-live="assertive"></div>
+                <div id="success-message" class="success-message hidden" role="alert" aria-live="polite"></div>
+
+                <form id="payment-form" action="#" method="post" novalidate>
+                    <fieldset>
+                        <legend>Dati Carta di Credito</legend>
+
+                        <div class="form-group">
+                            <label for="card-holder">Intestatario Carta</label>
+                            <input type="text" id="card-holder" name="card_holder" required autocomplete="cc-name" placeholder="Mario Rossi">
+                            <span id="card-holder-error" class="field-error" aria-live="polite"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="card-number">Numero Carta</label>
+                            <input type="text" id="card-number" name="card_number" required autocomplete="cc-number" maxlength="19" inputmode="numeric" placeholder="1234 5678 9012 3456">
+                            <span id="card-number-error" class="field-error" aria-live="polite"></span>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="expiry-date">Scadenza</label>
+                                <input type="text" id="expiry-date" name="expiry_date" required autocomplete="cc-exp" placeholder="MM/AA" maxlength="5" inputmode="numeric">
+                                <span id="expiry-date-error" class="field-error" aria-live="polite"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="cvv"><abbr title="Card Verification Value" lang="en">CVV</abbr></label>
+                                <input type="text" id="cvv" name="cvv" required autocomplete="cc-csc" maxlength="4" inputmode="numeric" placeholder="123">
+                                <span id="cvv-error" class="field-error" aria-live="polite"></span>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="terms" name="terms" required>
+                        <label for="terms">Accetto i <a href="privacy.html">termini e condizioni</a></label>
+                    </div>
+                    <span id="terms-error" class="field-error" role="alert"></span>
+
+                    <div class="form-actions">
+                        <a href="dettaglio_barca.html" class="btn-layout-light">Indietro</a>
+                        <button type="submit" class="btn-layout">Paga Ora</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="section-container footer-content">
+            <div>
+                <div class="logo">
+                    <span aria-hidden="true">⚓</span>
+                    <span class="logo-text"><span lang="en">Sail</span><span class="text-accent" lang="en">UP</span></span>
+                </div>
+                <p>Naviga il Golfo di Napoli con stile e sicurezza. La tua avventura inizia qui.</p>
+            </div>
+
+            <div class="footer-col">
+                <h3 class="footer-heading">Esplora</h3>
+                <nav aria-label="Menu footer">
+                    <ul class="footer-links">
+                        <li><a href="index.html" lang="en">Home</a></li>
+                        <li><a href="catalogo_noleggio.html">Noleggio</a></li>
+                        <li><a href="catalogo_esperienze.html">Esperienze</a></li>
+                        <li><a href="blog.html" lang="en">Blog</a></li>
+                        <li><a href="chi_siamo.html">Chi Siamo</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div>
+                <h3 class="footer-heading">Info &amp; Contatti</h3>
+                <ul class="footer-links">
+                    <li><a href="FAQ.html">Domande Frequenti (<abbr title="Frequently Asked Questions" lang="en">FAQ</abbr>)</a></li>
+                    <li><a href="privacy.html" lang="en">Privacy Policy</a></li>
+                    <li><a href="cookie.html"><span lang="en">Cookie</span> Policy</a></li>
+                </ul>
+                <address>
+                    <p><strong>SailUP <abbr title="Società a responsabilità limitata">S.r.l.</abbr></strong></p>
+                    <p>Via Caracciolo, 80122 Napoli (<abbr title="Napoli">NA</abbr>)</p>
+                    <p><abbr title="Partita IVA">P.IVA</abbr>: 12345678901</p>
+                </address>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 SailUP <abbr title="Società a responsabilità limitata">S.r.l.</abbr> - <span lang="en">All rights reserved</span>.</p>
+
+            <div class="valid-logos">
+                <img src="../img/valid-xhtml10.webp" alt="XHTML valido" loading="lazy">
+                <img src="../img/valid-css.webp" alt="CSS valido" loading="lazy">
+            </div>
+
+            <a href="#main-content" class="scroll-to-top" id="btnTop" aria-label="Torna all'inizio del contenuto" tabindex="-1">
+                <span aria-hidden="true">⬆</span> <span lang="en">Torna su</span>
+            </a>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+    <script src="../js/payment_validation.js"></script>
+</body>
+</html>
