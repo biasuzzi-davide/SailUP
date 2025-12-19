@@ -1,5 +1,5 @@
 <?php
-// Mappa unica delle pagine (usata sia per header che per footer)
+//mappa unica delle pagine (usata sia per header che per footer)
 $pages = [
     'index' => 'index.php',
     'catalogo_noleggio' => 'catalogo_noleggio.php',
