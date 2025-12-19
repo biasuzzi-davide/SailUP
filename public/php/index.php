@@ -18,7 +18,7 @@ if ($fleetProdotti && is_array($fleetProdotti)) {
         $altText = $prodotto['Testo_Alternativo'] ?? 'Immagine non disponibile';
         $fleetCards .= '
         <article class="product-card">
-          <img class="product-card-image" src="' . htmlspecialchars($imageUrl) . '" alt="' . htmlspecialchars($altText) . '" />
+          <img class="product-card-image" src="' . htmlspecialchars($imageUrl) . '" alt="' . htmlspecialchars($altText) . '">
           <div class="product-card-content">
             <div class="product-header">
               <h3 class="product-title">' . htmlspecialchars($prodotto['Nome_Prodotto']) . '</h3>
@@ -41,7 +41,7 @@ if ($experienceProdotti && is_array($experienceProdotti)) {
         $altText = $prodotto['Testo_Alternativo'] ?? 'Immagine non disponibile';
         $experienceCards .= '
         <article class="product-card">
-          <img class="product-card-image" src="' . htmlspecialchars($imageUrl) . '" alt="' . htmlspecialchars($altText) . '" loading="lazy" />
+          <img class="product-card-image" src="' . htmlspecialchars($imageUrl) . '" alt="' . htmlspecialchars($altText) . '" loading="lazy">
           <div class="product-card-content">
             <div class="product-header">
               <h3 class="product-title">' . htmlspecialchars($prodotto['Nome_Prodotto']) . '</h3>
