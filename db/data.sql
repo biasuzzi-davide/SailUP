@@ -1,5 +1,5 @@
 -- ============================================================================
--- POPOLAMENTO DATI DI PROVA (SailUP)
+-- POPOLAMENTO DATI DI PROVA (SailUP) - POI VERRANNO SOSTITUITI CON DATI REALI
 -- ============================================================================
 
 USE dbiasuzz;
