@@ -488,7 +488,7 @@ class DBConnection {
     /**
      * Recupera prodotti con media associata, limitati per tipo e numero.
      */
-    public function getProdottiWithMedia(?string $tipoProdotto = null, int $limit = 10): array|bool {
+    public function getProdottiWithMedia(?string $tipoProdotto = null, int $limit = 100): array|bool {
         $this->openConnection();
         try {
             $query = "
