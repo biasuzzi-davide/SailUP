@@ -9,7 +9,7 @@ if(session_status()==PHP_SESSION_NONE){
  * @return bool
 */
 function isLogged(){
-    return isset($_SESSION['user_id']);
+    return isset($_SESSION['user']);
 
 }
 
@@ -17,10 +17,10 @@ function isLogged(){
  * reindirizza l'utente alla schermata di login se non è loggato
  * @return void
  */
-function requireLogin(){
-    if(!isLogged()){
-        header("Location: "); //PERCORSO ALLA SCHERMATA DI LOGIN, AGGIUNGERE LATER
-        exit(); //fermo l esecuzione dello script
+function requireLogin(string $redirect = '../php/login.php'): void {
+    if (!isLogged()) {
+        header('Location: ' . $redirect);
+        exit;
     }
 }
 
@@ -28,11 +28,8 @@ function requireLogin(){
  * controllo se l'utente è admin
  * @return bool
  */
-function isAdmin(){
-    /*faccio prima isset per evitare errori nel caso cercassi 'admin'
-    in $_SESSION e quest'ultima fosse null
-    */
-    return isset($_SESSION['role']) && $_SESSION['role']=== 'admin';
+function isAdmin(): bool {
+    return isset($_SESSION['user']['Is_Admin']) && (int)$_SESSION['user']['Is_Admin'] === 1;
 }
 
 /**
@@ -41,27 +38,24 @@ function isAdmin(){
  *  potrebbe accederci modificando l'url)
  *  @return void
  */
-function requireAdmin(){
-    requireLogin();
-
-    if(!isAdmin()){
-        //indirizzo ad una schermata "non sei autorizzato"
-        header("Location: "); // DA COMPLETARE
-        exit(); //fermo l esecuzione dello script
+function requireAdmin(string $redirect = '../php/login.php', string $forbidden = '../pages/403.html'): void {
+    requireLogin($redirect);
+    if (!isAdmin()) {
+        header('Location: ' . $forbidden);
+        exit;
     }
 }
-
 /**
  * per effettuare il logout dell'utente
  * @return void
  */
-function logout(){
-    //pulisco tutte le variabili di sessione
+function logout(string $redirect = '../php/login.php'): void {
+    //pulisce variabili di sessione
     session_unset();
-    //elimino la sessione per liberare lo spazio associato sul server
+    //elimina la sessione per liberare lo spazio associato
     session_destroy();
-    //indirizzo l'utente verso la schermata di login e blocco l esecuzione dello script (per sicurezza)
-    header("Location: "); //DA COMPLETARE IL PERCORSO
-    exit();
+    //indirizzo l'utente verso la schermata di login e blocco l esecuzione dello script
+    header('Location: ' . $redirect);
+    exit;
 }
 

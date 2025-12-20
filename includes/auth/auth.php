@@ -1,73 +1,68 @@
 <?php
-require_once __DIR__ . '/../session/session.php';
-require_once __DIR__ . '/../../config/db_connect.php';
+//funzioni di autenticazione e registrazione
+declare(strict_types=1);
 
+require_once __DIR__ . '/../session/session.php';
+require_once __DIR__ . '/../db_connection.php';
 
 /**
- * registrazione nuovo utente
- * @return bool
+ *rèegistra un utente completo di indirizzo
  */
-function registerUser($nome, $cognome, $cf, $email, $password, $indirizzo, $patente = null) {
-    global $conn;
+function registerUserFull(array $data): array {
+    $db = new DBConnection();
 
-    //inserisc l’indirizzo
-    $sqlInd = "INSERT INTO Indirizzo (Indirizzo) VALUES (:indirizzo) RETURNING IDIndirizzo";
-    $stmtInd = $conn->prepare($sqlInd);
-    $stmtInd->execute([":indirizzo" => $indirizzo]);
-    $idIndirizzo = $stmtInd->fetchColumn();
-
-    //inserisco l’utente
-    $sql = "INSERT INTO Utente
-            (Nome, Cognome, CF, Email, PasswordHash, Numero_Patente_Nautica, IDIndirizzo)
-            VALUES (:nome, :cognome, :cf, :email, :password, :patente, :idIndirizzo)";
-
-    $stmt = $conn->prepare($sql);
-
-    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-
-    try {
-        return $stmt->execute([
-            ":nome"        => $nome,
-            ":cognome"     => $cognome,
-            ":cf"          => $cf,
-            ":email"       => $email,
-            ":password"    => $hashedPassword,
-            ":patente"     => $patente,
-            ":idIndirizzo" => $idIndirizzo
-        ]);
-    } catch (PDOException $e) {
-        return false;
+    //innserisco prima l indirizzo
+    $idIndirizzo = $db->insertIndirizzo(
+        $data['via'],
+        $data['civico'],
+        $data['cap'],
+        $data['citta'],
+        $data['provincia'],
+        $data['paese'] ?? 'IT'
+    );
+    if (!$idIndirizzo) {
+        return ['ok' => false, 'error' => 'indirizzo'];
     }
+
+    //registro utente
+    $result = $db->registerUser(
+        $data['nome'],
+        $data['cognome'],
+        $data['cf'],
+        $data['email'],
+        $data['password_hash'],
+        $data['patente'] ?? null,
+        $idIndirizzo,
+        $data['is_admin'] ?? false
+    );
+
+    if ($result === -1) return ['ok' => false, 'error' => 'email_duplicata'];
+    if ($result === -2) return ['ok' => false, 'error' => 'cf_duplicato'];
+    if (!$result)       return ['ok' => false, 'error' => 'generic'];
+
+    return ['ok' => true, 'user_id' => $result];
 }
 
 /**
- * login utente
- * @return bool
+ *effettua login e popola la sessione
+ *ritorna array utente se ok, -1 se utente non trovato,0 se password errata, false se errore
  */
-function loginUser($email, $password){
-    //rendo visbile la variabile conn presente nel file db_connect (config)
-    global $conn;
+function loginUserAuth(string $email, string $password) {
+    $db = new DBConnection();
+    $user = $db->loginUser($email, $password); // già usa password_verify e attivo=1
 
-    //recupero utente tramite email
-    $sql = "SELECT * FROM Utente WHERE Email = :email LIMIT 1";
-    $stmt = $conn->prepare($sql);
-    $stmt->execute([":email" => $email]);
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if (!$user) {
-        return false; // email non trovata
+    if (is_array($user)) {
+        $_SESSION['user'] = $user;
+        //aggiorno ultimo accesso
+        $db->aggiornaUltimoAccesso(idUtente: (int)$user['IDUtente']);
     }
 
-    //verifica password hashata
-    if (!password_verify($password, $user["passwordhash"])) {
-        return false; // password sbagliata
-    }
+    return $user;
+}
 
-    //login okappa , salvo nella sessione
-    $_SESSION["user_id"] = $user["idutente"];
-    $_SESSION["email"]   = $user["email"];
-    $_SESSION["role"]    = ($user["is_admin"] == true) ? "admin" : "user";
-
-    return true;
-
+/**
+ *esegue il logout usando l'helper di sessione
+ */
+function logoutUser(string $redirect = '../php/login.php'): void {
+    logout($redirect);
 }
