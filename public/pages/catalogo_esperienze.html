@@ -2,22 +2,22 @@
 <html lang="it" data-theme="light">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8" >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Catalogo Esperienze - SailUP</title>
   <meta name="description"
-    content="Scopri le esperienze organizzate dalle guide SailUp nel golfo di Napoli. Aperitivi al tramonto, esplorazione della costiera amalfitana o tour in mare. Prenota la tua avventura oggi!" />
-  <meta name="authors" content="SailUp team" />
+    content="Scopri le esperienze organizzate dalle guide SailUp nel golfo di Napoli. Aperitivi al tramonto, esplorazione della costiera amalfitana o tour in mare. Prenota la tua avventura oggi!">
+  <meta name="authors" content="SailUp team">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap"
-    rel="stylesheet" />
+    rel="stylesheet"  >
 
-  <link rel="stylesheet" href="../css/style.css" media="screen" />
-  <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)" />
-  <link rel="stylesheet" href="../css/print.css" media="print" />
+  <link rel="stylesheet" href="../css/style.css" media="screen">
+  <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)">
+  <link rel="stylesheet" href="../css/print.css" media="print">
 </head>
 
 <body>
@@ -57,12 +57,12 @@
 
             <div class="filter-input">
               <label for="posti_disponibili">Posti minimi</label>
-              <input type="number" id="posti_disponibili" name="posti_disponibili" min="1" placeholder="Es. 2" />
+              <input type="number" id="posti_disponibili" name="posti_disponibili" min="1" placeholder="Es. 2">
             </div>
 
             <div class="filter-input">
               <label for="data_esperienza">Data</label>
-              <input type="date" id="data_esperienza" name="data_esperienza" />
+              <input type="date" id="data_esperienza" name="data_esperienza">
             </div>
 
             <div class="filter-input">
@@ -78,7 +78,7 @@
             <div class="filter-input">
               <label for="maxPriceExperience">Prezzo max (€/tour)</label>
               <input type="number" id="maxPriceExperience" name="maxPriceExperience" placeholder="Es. 500" min="50"
-                step="50" />
+                step="50">
             </div>
           </fieldset>
 
@@ -94,9 +94,9 @@
         </form>
       </aside>
 
-      <div class="catalog-results">
-        <header class="results-header">
-          <h2 id="catalog-title">3 esperienze disponibili</h2>
+        <div class="catalog-results">
+          <header class="results-header">
+            <h2 id="catalog-title">Esperienze disponibili</h2>
           <div class="results-sort">
             <label for="sort">Ordina per:</label>
             <select id="sort" name="sort">
@@ -108,143 +108,7 @@
         </header>
 
         <div class="catalog-grid">
-          <article class="product-card">
-            <img class="product-card-image" src="../img/Capri&GrottaAzzurra.avif"
-              alt="Vista mozzafiato dei Faraglioni di Capri da una barca" width="400" height="267" />
-
-            <div class="product-card-content">
-              <div class="product-header">
-                <h3 class="product-title">
-                  Tour di Capri &amp; Grotta Azzurra
-                </h3>
-                <span class="product-badge badge-tour">Tour</span>
-              </div>
-
-              <p class="product-description">
-                Un'intera giornata dedicata alla scoperta dell'isola più iconica. Nuota in acque cristalline e ammira
-                i Faraglioni.
-              </p>
-
-              <ul class="product-specs">
-                <li class="spec-item">
-                  <span class="spec-icon" aria-hidden="true">👥</span>
-                  8 posti
-                </li>
-                <li class="spec-item">
-                  <span class="spec-icon" aria-hidden="true">⏱️</span>
-                  8 ore
-                </li>
-                <li class="spec-item">
-                  <span class="spec-icon" aria-hidden="true">🗣️</span>
-                  Italiano
-                </li>
-              </ul>
-
-              <div class="product-footer">
-                <div class="product-price">
-                  <span class="price-label">da</span>
-                  <span class="price-value">850€</span>
-                  <span class="price-period">/tour</span>
-                </div>
-                <a href="dettaglio_esperienza.html?id=tour-capri" class="product-cta"
-                  aria-label="Vedi dettagli Tour di Capri e Grotta Azzurra">
-                  Vedi dettagli →
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <article class="product-card">
-            <img class="product-card-image" src="../img/Aperitivo_tramonto.avif"
-              alt="Tramonto sul mare con aperitivo su barca" width="400" height="267" />
-
-            <div class="product-card-content">
-              <div class="product-header">
-                <h3 class="product-title">
-                  Aperitivo al Tramonto a Ischia
-                </h3>
-                <span class="product-badge badge-aperitivo">Aperitivo</span>
-              </div>
-
-              <p class="product-description">
-                Goditi un aperitivo con prodotti tipici mentre il sole tramonta. Un'esperienza magica.
-              </p>
-
-              <ul class="product-specs">
-                <li class="spec-item">
-                  <span class="spec-icon" aria-hidden="true">👥</span>
-                  6 posti
-                </li>
-                <li class="spec-item">
-                  <span class="spec-icon" aria-hidden="true">⏱️</span>
-                  4 ore
-                </li>
-                <li class="spec-item">
-                  <span class="spec-icon" aria-hidden="true">🗣️</span>
-                  <abbr title="Italiano">ITA</abbr>/<abbr title="Inglese" lang="en">ENG</abbr>
-                </li>
-              </ul>
-
-              <div class="product-footer">
-                <div class="product-price">
-                  <span class="price-label">da</span>
-                  <span class="price-value">450€</span>
-                  <span class="price-period">/tour</span>
-                </div>
-                <a href="dettaglio_esperienza.html?id=aperitivo-ischia" class="product-cta"
-                  aria-label="Vedi dettagli Aperitivo al Tramonto a Ischia">
-                  Vedi dettagli →
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <!-- Da qui in poi lazy loading -->
-          <article class="product-card">
-            <img class="product-card-image" src="../img/EsplorazioneCostiera.avif" loading="lazy"
-              alt="Vista panoramica della Costiera Amalfitana da una barca" width="400" height="267" />
-
-            <div class="product-card-content">
-              <div class="product-header">
-                <h3 class="product-title">
-                  Esplorazione Costiera Amalfitana
-                </h3>
-                <span class="product-badge badge-escursione">Escursione</span>
-              </div>
-
-              <p class="product-description">
-                Naviga lungo la divina costiera, con soste a Positano e Amalfi per esplorare i borghi e gustare le
-                prelibatezze locali.
-              </p>
-
-              <ul class="product-specs">
-                <li class="spec-item">
-                  <span class="spec-icon" aria-hidden="true">👥</span>
-                  10 posti
-                </li>
-                <li class="spec-item">
-                  <span class="spec-icon" aria-hidden="true">⏱️</span>
-                  8 ore
-                </li>
-                <li class="spec-item">
-                  <span class="spec-icon" aria-hidden="true">🗣️</span>
-                  <abbr title="Italiano">ITA</abbr>/<abbr title="Inglese" lang="en">ENG</abbr>
-                </li>
-              </ul>
-
-              <div class="product-footer">
-                <div class="product-price">
-                  <span class="price-label">da</span>
-                  <span class="price-value">1200€</span>
-                  <span class="price-period">/tour</span>
-                </div>
-                <a href="dettaglio_esperienza.html?id=costiera-positano" class="product-cta"
-                  aria-label="Vedi dettagli Esplorazione Costiera Amalfitana">
-                  Vedi dettagli →
-                </a>
-              </div>
-            </div>
-          </article>
+          [ESPERIENZE_CARDS]
         </div>
       </div>
     </section>
