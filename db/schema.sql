@@ -14,6 +14,8 @@
         `Articolo_Blog`, 
         `Indirizzo`, 
         `Indisponibilita`, 
+        `Lingua`, 
+        `Prodotto_Lingua`, 
         `Media`, 
         `Prenotazione`, 
         `Prodotto`, 
@@ -76,7 +78,28 @@
         INDEX idx_attivo (Attivo)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-    -- 4. PRODOTTO EXTRA
+    -- 4. LINGUA
+    CREATE TABLE IF NOT EXISTS Lingua (
+        IDLingua INT AUTO_INCREMENT PRIMARY KEY,
+        Codice VARCHAR(5) NOT NULL UNIQUE,
+        Nome VARCHAR(50) NOT NULL,
+        Attivo BOOLEAN DEFAULT 1 NOT NULL,
+        Data_Creazione TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        Data_Modifica TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        INDEX idx_codice (Codice)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+    -- 5. PRODOTTO_LINGUA
+    CREATE TABLE IF NOT EXISTS Prodotto_Lingua (
+        IDProdotto VARCHAR(50) NOT NULL,
+        IDLingua INT NOT NULL,
+        PRIMARY KEY (IDProdotto, IDLingua),
+        FOREIGN KEY (IDProdotto) REFERENCES Prodotto(IDProdotto) ON DELETE CASCADE ON UPDATE CASCADE,
+        FOREIGN KEY (IDLingua) REFERENCES Lingua(IDLingua) ON DELETE RESTRICT ON UPDATE CASCADE,
+        INDEX idx_prodottolingua_lingua (IDLingua)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+    -- 6. PRODOTTO EXTRA
     CREATE TABLE IF NOT EXISTS Prodotto_Extra (
         IDExtra INT AUTO_INCREMENT PRIMARY KEY,
         IDProdotto VARCHAR(50) NOT NULL,
@@ -87,7 +110,7 @@
         FOREIGN KEY (IDProdotto) REFERENCES Prodotto(IDProdotto) ON DELETE CASCADE
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-    -- 5. PRODOTTO INCLUSO
+    -- 7. PRODOTTO INCLUSO
     CREATE TABLE IF NOT EXISTS Prodotto_Incluso (
         IDIncluso INT AUTO_INCREMENT PRIMARY KEY,
         IDProdotto VARCHAR(50) NOT NULL,
@@ -95,7 +118,7 @@
         FOREIGN KEY (IDProdotto) REFERENCES Prodotto(IDProdotto) ON DELETE CASCADE
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-    -- 6. ARTICOLO BLOG
+    -- 8. ARTICOLO BLOG
     CREATE TABLE IF NOT EXISTS Articolo_Blog (
         IDArticolo INT AUTO_INCREMENT PRIMARY KEY,
         IDAutore INT NOT NULL,
@@ -110,7 +133,7 @@
         INDEX idx_pubblicato (Pubblicato)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-    -- 7. ARTICOLO BLOG EXTRA
+    -- 9. ARTICOLO BLOG EXTRA
     CREATE TABLE IF NOT EXISTS Articolo_Blog_Extra (
         IDExtra INT AUTO_INCREMENT PRIMARY KEY,
         IDArticolo INT NOT NULL,
@@ -122,7 +145,7 @@
         INDEX idx_articolo_extra (IDArticolo)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-    -- 8. MEDIA
+    -- 10. MEDIA
     CREATE TABLE IF NOT EXISTS Media (
         IDMedia INT AUTO_INCREMENT PRIMARY KEY,
         URL_Media VARCHAR(500) NOT NULL,
@@ -142,7 +165,7 @@
         )
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-    -- 9. PRENOTAZIONE
+    -- 11. PRENOTAZIONE
     CREATE TABLE IF NOT EXISTS Prenotazione (
         IDPrenotazione INT AUTO_INCREMENT PRIMARY KEY,
         IDUtente INT NOT NULL,
@@ -161,7 +184,7 @@
         INDEX idx_stato (Stato_Prenotazione)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-    -- 10. INDISPONIBILITA
+    -- 12. INDISPONIBILITA
     CREATE TABLE IF NOT EXISTS Indisponibilita (
         IDIndisponibilita INT AUTO_INCREMENT PRIMARY KEY,
         IDProdotto VARCHAR(50) NOT NULL,

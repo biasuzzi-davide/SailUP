@@ -389,6 +389,55 @@ class DBConnection {
         }
     }
 
+    /**
+     * Recupera le lingue attivate associate a un prodotto specifico.
+     */
+    public function getLinguePerProdotto(string $idProdotto): array|bool {
+        $this->openConnection();
+        $query = "
+            SELECT l.Codice, l.Nome
+            FROM Lingua l
+            INNER JOIN Prodotto_Lingua pl ON pl.IDLingua = l.IDLingua
+            WHERE pl.IDProdotto = ? AND l.Attivo = 1
+            ORDER BY l.Nome ASC
+        ";
+
+        try {
+            $stmt = $this->connection->prepare($query);
+            if (!$stmt) {
+                $this->closeConnection();
+                return false;
+            }
+
+            $stmt->bind_param('s', $idProdotto);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $stmt->close();
+
+            if (!$result) {
+                $this->closeConnection();
+                return false;
+            }
+
+            if ($result->num_rows === 0) {
+                $this->closeConnection();
+                return [];
+            }
+
+            $lingue = [];
+            while ($row = $result->fetch_assoc()) {
+                $lingue[] = $row;
+            }
+
+            $result->free();
+            $this->closeConnection();
+            return $lingue;
+        } catch (Throwable $t) {
+            $this->closeConnection();
+            return false;
+        }
+    }
+
     /* ============================================================
        METODI PRENOTAZIONE
        ============================================================ */
