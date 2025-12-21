@@ -404,7 +404,7 @@
     }
 
     /* due colonne di dimensione uguale per incluso ed extra */
-    .amenities-grid {
+    .servicies-grid {
         display: grid;
         grid-template-columns: 1fr 1fr; 
         gap: 20px;
