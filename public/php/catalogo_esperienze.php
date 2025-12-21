@@ -44,6 +44,17 @@ if ($prodottiExperience && is_array($prodottiExperience) && count($prodottiExper
         $price = isset($prodotto['Prezzo_Base']) ? number_format((float) $prodotto['Prezzo_Base'], 0, ',', '.') : '—';
         $detailUrl = 'dettaglio_esperienza.php?id=' . rawurlencode($idProdotto);
 
+        $lingueDisponibili = [];
+        $lingueAssoc = $db->getLinguePerProdotto($idProdotto);
+        if (is_array($lingueAssoc)) {
+            foreach ($lingueAssoc as $lingua) {
+                if (!empty($lingua['Nome'])) {
+                    $lingueDisponibili[] = htmlspecialchars($lingua['Nome'], ENT_QUOTES);
+                }
+            }
+        }
+        $lingueDescrizione = !empty($lingueDisponibili) ? implode(', ', $lingueDisponibili) : 'Lingue in definizione';
+
         $cardsHtml .= '<article class="product-card">
             <img class="product-card-image" src="' . htmlspecialchars($imageUrl, ENT_QUOTES) . '" alt="' . htmlspecialchars($altText, ENT_QUOTES) . '" width="400" height="267" loading="lazy">
             <div class="product-card-content">
@@ -68,8 +79,8 @@ if ($prodottiExperience && is_array($prodottiExperience) && count($prodottiExper
                   ' . $accessibileLabel . '
                 </li>
                 <li class="spec-item">
-                  <span class="spec-icon" aria-hidden="true">🗺️</span>
-                  ' . $badgeText . '
+                  <span class="spec-icon" aria-hidden="true">🌐</span>
+                  Lingue: ' . $lingueDescrizione . '
                 </li>
               </ul>
 

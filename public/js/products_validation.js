@@ -11,6 +11,9 @@
     const imageInput = document.getElementById('product-image-main');
     const altInput = document.getElementById('Testo_Alternativo'); 
     const statusInput = document.getElementById('product-status');
+    const languageFieldset = document.getElementById('language-fieldset');
+    const languageCheckboxes = Array.from(document.querySelectorAll('input[name="product-languages[]"]'));
+    const languageError = document.getElementById('product-languages-error');
 
     const errorMessageDiv = document.getElementById('error-message');
     const successMessageDiv = document.getElementById('success-message');
@@ -120,6 +123,57 @@
         clearFieldError(statusInput); return true;
     }
 
+    function clearLanguageSelection() {
+        languageCheckboxes.forEach(function (checkbox) {
+            checkbox.checked = false;
+        });
+    }
+
+    function clearLanguageError() {
+        if (languageError) {
+            languageError.textContent = '';
+        }
+        if (languageFieldset) {
+            languageFieldset.setAttribute('aria-invalid', 'false');
+        }
+    }
+
+    function updateLanguageFieldsetVisibility() {
+        if (!languageFieldset) {
+            return;
+        }
+
+        if (typeInput.value === 'experience') {
+            languageFieldset.classList.remove('hidden');
+        } else {
+            languageFieldset.classList.add('hidden');
+            clearLanguageSelection();
+            clearLanguageError();
+        }
+    }
+
+    function validateLanguages() {
+        if (!languageFieldset || typeInput.value !== 'experience') {
+            clearLanguageError();
+            return true;
+        }
+
+        const hasSelection = languageCheckboxes.some(function (checkbox) {
+            return checkbox.checked;
+        });
+
+        if (!hasSelection) {
+            if (languageError) {
+                languageError.textContent = 'Seleziona almeno una lingua per l\'esperienza';
+            }
+            languageFieldset.setAttribute('aria-invalid', 'true');
+            return false;
+        }
+
+        clearLanguageError();
+        return true;
+    }
+
     function validateForm() {
         hideGlobalMessages();
 
@@ -131,8 +185,9 @@
         const v6 = validateImage();
         const v7 = validateAlt();
         const v8 = validateStatus();
+        const v9 = validateLanguages();
 
-        return v1 && v2 && v3 && v4 && v5 && v6 && v7 && v8;
+        return v1 && v2 && v3 && v4 && v5 && v6 && v7 && v8 && v9;
     }
 
     nameInput.addEventListener('blur', validateName);
@@ -153,6 +208,18 @@
         input.addEventListener('input', hideGlobalMessages);
     });
 
+    typeInput.addEventListener('change', function () {
+        updateLanguageFieldsetVisibility();
+        hideGlobalMessages();
+    });
+
+    languageCheckboxes.forEach(function (checkbox) {
+        checkbox.addEventListener('change', function () {
+            hideGlobalMessages();
+            validateLanguages();
+        });
+    });
+
     form.addEventListener('submit', function (e) {
         e.preventDefault();
 
@@ -162,5 +229,7 @@
             showGlobalMessage('Il form non è stato compilato correttamente!\n Correggere prima di poter continuare', 'error');
         }
     });
+
+    updateLanguageFieldsetVisibility();
 
 })();
