@@ -1,9 +1,28 @@
     -- ============================================================================
-    -- SailUP Database Schema (Versione Strict)
+    -- SailUP Database Schema
     -- Database: dbiasuzz
     -- ============================================================================
 
     USE dbiasuzz;
+
+    -- Disabilita i controlli delle chiavi esterne per evitare errori di vincolo
+    SET FOREIGN_KEY_CHECKS = 0;
+
+    -- Elimina tutte le tabelle in un colpo solo
+    DROP TABLE IF EXISTS 
+        `Articolo_Blog_Extra`, 
+        `Articolo_Blog`, 
+        `Indirizzo`, 
+        `Indisponibilita`, 
+        `Media`, 
+        `Prenotazione`, 
+        `Prodotto`, 
+        `Prodotto_Extra`, 
+        `Prodotto_Incluso`, 
+        `Utente`;
+
+    -- Riabilita i controlli delle chiavi esterne
+    SET FOREIGN_KEY_CHECKS = 1;
 
     -- 1. INDIRIZZO
     CREATE TABLE IF NOT EXISTS Indirizzo (
@@ -84,13 +103,26 @@
         Descrizione_Breve VARCHAR(500) NOT NULL,
         Contenuto LONGTEXT NOT NULL,
         Data_Pubblicazione DATETIME NOT NULL,
+        Tempo_Lettura INT UNSIGNED DEFAULT 0 NOT NULL,
         Pubblicato BOOLEAN DEFAULT 0,
         Data_Creazione TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY (IDAutore) REFERENCES Utente(IDUtente) ON DELETE RESTRICT,
         INDEX idx_pubblicato (Pubblicato)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-    -- 7. MEDIA
+    -- 7. ARTICOLO BLOG EXTRA
+    CREATE TABLE IF NOT EXISTS Articolo_Blog_Extra (
+        IDExtra INT AUTO_INCREMENT PRIMARY KEY,
+        IDArticolo INT NOT NULL,
+        Titolo VARCHAR(255) NOT NULL,
+        Elemento TEXT NOT NULL,
+        Ordine INT NOT NULL DEFAULT 0,
+        Data_Creazione TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (IDArticolo) REFERENCES Articolo_Blog(IDArticolo) ON DELETE CASCADE,
+        INDEX idx_articolo_extra (IDArticolo)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+    -- 8. MEDIA
     CREATE TABLE IF NOT EXISTS Media (
         IDMedia INT AUTO_INCREMENT PRIMARY KEY,
         URL_Media VARCHAR(500) NOT NULL,
@@ -110,7 +142,7 @@
         )
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-    -- 8. PRENOTAZIONE
+    -- 9. PRENOTAZIONE
     CREATE TABLE IF NOT EXISTS Prenotazione (
         IDPrenotazione INT AUTO_INCREMENT PRIMARY KEY,
         IDUtente INT NOT NULL,
@@ -129,7 +161,7 @@
         INDEX idx_stato (Stato_Prenotazione)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-    -- 9. INDISPONIBILITA
+    -- 10. INDISPONIBILITA
     CREATE TABLE IF NOT EXISTS Indisponibilita (
         IDIndisponibilita INT AUTO_INCREMENT PRIMARY KEY,
         IDProdotto VARCHAR(50) NOT NULL,

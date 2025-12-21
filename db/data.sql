@@ -38,9 +38,18 @@ INSERT INTO Prodotto_Incluso (IDProdotto, Nome_Incluso) VALUES
 ('EXP-TRAMONTO-01', 'Snack e Bevande');
 
 -- 6. ARTICOLI BLOG
-INSERT INTO Articolo_Blog (IDAutore, Titolo, Descrizione_Breve, Contenuto, Data_Pubblicazione, Pubblicato) VALUES
-(1, '5 Cale nascoste da vedere', 'Scopri le spiagge segrete.', 'Contenuto lungo dell\'articolo sulle cale...', NOW(), 1),
-(1, 'Come ormeggiare in sicurezza', 'Guida pratica per principianti.', 'Contenuto tecnico sull\'ormeggio...', NOW(), 1);
+INSERT INTO Articolo_Blog (IDAutore, Titolo, Descrizione_Breve, Contenuto, Data_Pubblicazione, Tempo_Lettura, Pubblicato) VALUES
+(1, '5 Cale nascoste da vedere', 'Scopri le spiagge segrete.', 'Contenuto lungo dell\'articolo sulle cale...', NOW(), 6, 1),
+(1, 'Come ormeggiare in sicurezza', 'Guida pratica per principianti.', 'Contenuto tecnico sull\'ormeggio...', NOW(), 4, 1);
+
+-- 6.1 ARTICOLO BLOG EXTRA (Consigli pratici)
+INSERT INTO Articolo_Blog_Extra (IDArticolo, Titolo, Elemento, Ordine) VALUES
+(1, '🎒 Cosa non dimenticare', 'Maschera e boccaglio per lo snorkel del giorno.', 1),
+(1, '🎒 Cosa non dimenticare', 'Acqua in abbondanza e uno spuntino leggero.', 2),
+(1, '🎒 Cosa non dimenticare', 'Crema solare ad alta protezione resistente all\'acqua.', 3),
+(1, '🎒 Cosa non dimenticare', 'Una macchina fotografica impermeabile o una custodia stagna.', 4),
+(2, '🛟 Prima di salpare', 'Verifica sempre il livello di carburante e il piano di sicurezza.', 1),
+(2, '🛟 Prima di salpare', 'Consegna un itinerario di massima al personale di terra.', 2);
 
 -- 7. MEDIA (Foto)
 INSERT INTO Media (URL_Media, Testo_Alternativo, Tipo_Media, IDUtente, IDProdotto, IDArticolo) VALUES
