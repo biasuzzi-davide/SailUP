@@ -306,17 +306,6 @@ footer .logo p {
     width: 100%;
 }
 
-.booking-actions {
-    flex-direction: column;
-}
-
-.booking-actions .btn-layout,
-.booking-actions .btn-layout-light,
-.booking-actions {
-    width: 100%;
-    box-sizing: border-box;
-}
-
 /* =========================================
    11. CATALOGO
    ========================================= */
@@ -457,35 +446,14 @@ footer .logo p {
     padding: 0.8rem;
 }
 
-.amenities-grid {
+.servicies-grid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
 }
 
 @media (max-width: 600px) {
-    .amenities-grid {
+    .servicies-grid {
         grid-template-columns: 1fr;
-    }
-
-    .activity-item {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1em;
-    }
-
-    .activity-icon {
-        width: 2.5em;
-        height: 2.5em;
-    }
-
-    .activity-meta {
-        text-align: left;
-        width: 100%;
-        border-top: 1px solid var(--col-border);
-        padding-top: 0.5em;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
     }
 }
 
