@@ -1,6 +1,9 @@
 <?php
 
+require_once '../../includes/session/session.php';
 require_once '../../includes/helpers.php';
+
+requireAdmin();
 
 $html = buildPage('../pages/admin.html', $_SERVER['PHP_SELF']);
 
