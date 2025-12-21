@@ -545,4 +545,54 @@ class DBConnection {
             return false;
         }
     }
+
+    /**
+     * Recupera gli articoli pubblicati con media associata.
+     */
+    public function getArticoliBlogWithMedia(int $limit = 10): array|bool {
+        $this->openConnection();
+        try {
+            $query = "
+                SELECT a.*, m.URL_Media, m.Testo_Alternativo
+                FROM Articolo_Blog a
+                LEFT JOIN Media m ON a.IDArticolo = m.IDArticolo
+                WHERE a.Pubblicato = 1
+                ORDER BY a.Data_Pubblicazione DESC
+                LIMIT ?
+            ";
+
+            $stmt = $this->connection->prepare($query);
+            if (!$stmt) {
+                $this->closeConnection();
+                return false;
+            }
+
+            $stmt->bind_param('i', $limit);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $stmt->close();
+
+            if (!$result) {
+                $this->closeConnection();
+                return false;
+            }
+
+            if ($result->num_rows === 0) {
+                $this->closeConnection();
+                return [];
+            }
+
+            $articoli = [];
+            while ($row = $result->fetch_assoc()) {
+                $articoli[] = $row;
+            }
+
+            $result->free();
+            $this->closeConnection();
+            return $articoli;
+        } catch (Throwable $t) {
+            $this->closeConnection();
+            return false;
+        }
+    }
 }
