@@ -1406,7 +1406,7 @@ a.product-cta:focus-visible {
   margin: 0;
 }
 
-.amenities-grid {
+.servicies-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
@@ -1884,14 +1884,6 @@ a.product-cta:focus-visible {
 
 .booking-details {
   padding: 1.5em;
-}
-
-.booking-actions {
-  display: flex;
-  gap: 1em;
-  flex-wrap: wrap;
-  padding-top: 1em;
-  border-top: 1px solid var(--col-border);
 }
 
 .bookings-empty {

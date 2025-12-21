@@ -1,28 +1,22 @@
-/* 1. TIPOGRAFIA FLUIDA - Ridotta su mobile */
+/* =========================================
+   SAILUP - MOBILE STYLESHEET
+   ========================================= */
+
+/* =========================================
+   1. TIPOGRAFIA FLUIDA MOBILE
+   ========================================= */
+
 @supports (font-size: clamp(1rem, 1vi, 1rem)) {
     :root {
-        /* Mobile: 0.75rem (12px) -> Desktop: 0.89rem */
         --fs-sm: clamp(0.75rem, 0.15vi + 0.7rem, 0.89rem);
-
-        /* Mobile: 0.95rem (15.2px) -> Desktop: 1.19rem. 
-           NOTA: Non scendere sotto 0.95rem per il testo base per accessibilità */
         --fs-base: clamp(0.95rem, 0.38vi + 0.85rem, 1.19rem);
-
-        /* Mobile: 1.15rem -> Desktop: 1.58rem */
         --fs-md: clamp(1.15rem, 0.65vi + 1rem, 1.58rem);
-
-        /* Mobile: 1.4rem -> Desktop: 2.11rem */
         --fs-lg: clamp(1.4rem, 1.1vi + 1.15rem, 2.11rem);
-
-        /* Mobile: 1.75rem -> Desktop: 2.81rem (Riduzione significativa per H2) */
         --fs-xl: clamp(1.75rem, 1.6vi + 1.35rem, 2.81rem);
-
-        /* Mobile: 2.15rem -> Desktop: 3.75rem (Riduzione significativa per H1) */
         --fs-xxl: clamp(2.15rem, 2.5vi + 1.55rem, 3.75rem);
     }
 }
 
-/* Fallback per browser vecchissimi: usiamo le dimensioni minime (mobile) */
 @supports not (font-size: clamp(1rem, 1vi, 1rem)) {
     :root {
         --fs-sm: 0.75rem;
@@ -34,9 +28,9 @@
     }
 }
 
-/* 2. HEADER & NAVIGAZIONE 
-   Layout: [Logo] ...spazio... [Theme Toggle] [Hamburger]
-*/
+/* =========================================
+   2. HEADER & NAVIGAZIONE
+   ========================================= */
 
 #main-menu {
     display: none;
@@ -79,9 +73,9 @@
     min-height: 44px;
 }
 
-/* 3. MOBILE MENU 
-   Aggiornato per matchare la logica del Desktop (bordo trasparente)
-*/
+/* =========================================
+   3. MOBILE MENU
+   ========================================= */
 
 #mobile-menu {
     display: none;
@@ -119,10 +113,7 @@
     color: var(--col-text);
     text-decoration: none;
     padding: 0.2em 0;
-
-    /* Bordo presente ma invisibile */
     border-bottom: 3px solid transparent;
-
     transition: border-color 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
@@ -134,12 +125,11 @@
 #mobile-menu.active ul li[aria-current="page"] {
     font-weight: 700;
     color: var(--col-primary);
-    /* Bordo visibile fisso */
     border-bottom-color: var(--col-accent);
 }
 
 #mobile-menu ul li a:visited {
-  color: var(--col-visited-link);
+    color: var(--col-visited-link);
 }
 
 #mobile-menu .menu-login {
@@ -147,7 +137,9 @@
     color: var(--col-primary);
 }
 
-/* 4. LAYOUT CONTENUTI (Mapping Reference) */
+/* =========================================
+   4. HERO & LAYOUT SEZIONI
+   ========================================= */
 
 #hero {
     grid-template-columns: 1fr;
@@ -175,13 +167,16 @@
     width: 100%;
 }
 
-/* Mobile: ensure buttons are full-width and use centralized button variables */
 .action-buttons .btn-layout,
 .action-buttons .btn-layout-light,
 .action-buttons .btn-full-width {
     width: 100%;
     box-sizing: border-box;
 }
+
+/* =========================================
+   5. QUOTE SECTION
+   ========================================= */
 
 #quote-section {
     padding: 1.7em 0.5rem;
@@ -190,6 +185,10 @@
 #quote-section blockquote {
     font-size: var(--fs-md);
 }
+
+/* =========================================
+   6. CARDS
+   ========================================= */
 
 .cards-wrapper {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -201,7 +200,10 @@
     padding: 1.5rem;
 }
 
-/* 5. FOOTER */
+/* =========================================
+   7. FOOTER
+   ========================================= */
+
 footer .footer-content {
     grid-template-columns: 1fr;
     text-align: center;
@@ -216,18 +218,9 @@ footer .logo p {
     font-size: var(--fs-md);
 }
 
-/* Animazione */
-@keyframes slideDown {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
+/* =========================================
+   8. AUTH PAGES
+   ========================================= */
 
 .auth-card {
     padding: 1.5em;
@@ -254,6 +247,10 @@ footer .logo p {
     }
 }
 
+/* =========================================
+   9. PROFILO UTENTE
+   ========================================= */
+
 .profile-header {
     grid-template-columns: 1fr;
     text-align: center;
@@ -271,11 +268,11 @@ footer .logo p {
 .profile-sidebar {
     padding: 0;
     border: none;
-    background: transparent; 
+    background: transparent;
 }
 
 .profile-sidebar ul {
-    grid-template-columns: repeat(2, 1fr); 
+    grid-template-columns: repeat(2, 1fr);
     gap: 0.5em;
 }
 
@@ -283,7 +280,7 @@ footer .logo p {
 .profile-sidebar .nav-item-active {
     padding: 0.8em 0.5em;
     font-size: var(--fs-sm);
-    background-color: var(--col-bg-alt); 
+    background-color: var(--col-bg-alt);
     border: 1px solid var(--col-border);
 }
 
@@ -297,6 +294,10 @@ footer .logo p {
     }
 }
 
+/* =========================================
+   10. PRENOTAZIONI
+   ========================================= */
+
 .filter-tabs {
     flex-direction: column;
 }
@@ -305,20 +306,75 @@ footer .logo p {
     width: 100%;
 }
 
-.booking-actions {
-    flex-direction: column;
+/* =========================================
+   11. CATALOGO
+   ========================================= */
+
+.page-intro {
+    font-size: var(--fs-base);
+    text-align: left;
 }
 
-.booking-actions .btn-layout,
-.booking-actions .btn-layout-light,
-.booking-actions {
+.catalog-hero {
+    padding: 2em 0;
+}
+
+.catalog-hero h1 {
+    font-size: var(--fs-xl);
+}
+
+.catalog-hero p {
+    font-size: var(--fs-base);
+}
+
+.catalog-layout {
+    grid-template-columns: 1fr;
+}
+
+.filters-sidebar {
+    position: static;
+    max-height: none;
+    margin-bottom: 2em;
+}
+
+.results-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1em;
+}
+
+.results-sort {
     width: 100%;
-    box-sizing: border-box;
+    justify-content: space-between;
+}
+
+.results-sort select {
+    flex: 1;
+}
+
+.catalog-grid {
+    grid-template-columns: 1fr 1fr;
+}
+
+.product-header {
+    flex-wrap: wrap;
+}
+
+.product-specs {
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+.product-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1em;
 }
 
 /* =========================================
-   6. PAGINA DETTAGLIO PRODOTTO (Mobile)
+   12. DETTAGLIO PRODOTTO
    ========================================= */
+
 .detail-layout {
     grid-template-columns: 1fr;
     gap: 2rem;
@@ -390,10 +446,20 @@ footer .logo p {
     padding: 0.8rem;
 }
 
-.amenities-grid {
+.servicies-grid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
 }
+
+@media (max-width: 600px) {
+    .servicies-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* =========================================
+   13. FAQ
+   ========================================= */
 
 .faq-question {
     padding: 1em;
@@ -410,116 +476,10 @@ footer .logo p {
     font-size: var(--fs-sm);
 }
 
-.page-intro {
-    font-size: var(--fs-base);
-    text-align: left;
-}
-
-.catalog-hero {
-    padding: 2em 0;
-}
-
-.catalog-hero h1 {
-    font-size: var(--fs-xl);
-}
-
-.catalog-hero p {
-    font-size: var(--fs-base);
-}
-
-.catalog-layout {
-    grid-template-columns: 1fr;
-}
-
-.filters-sidebar {
-    position: static;
-    max-height: none;
-    margin-bottom: 2em;
-}
-
-.results-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1em;
-}
-
-.results-sort {
-    width: 100%;
-    justify-content: space-between;
-}
-
-.results-sort select {
-    flex: 1;
-}
-
-.catalog-grid {
-    grid-template-columns: 1fr 1fr;
-}
-
-.product-header {
-    flex-wrap: wrap;
-}
-
-.product-specs {
-    flex-direction: column;
-    gap: 0.5em;
-}
-
-.product-footer {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1em;
-}
-
-
-@media (max-width: 600px) {
-    .amenities-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .activity-item {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1em;
-    }
-
-    .activity-icon {
-        width: 2.5em;
-        height: 2.5em;
-    }
-
-    .activity-meta {
-        text-align: left;
-        width: 100%;
-        border-top: 1px solid var(--col-border);
-        padding-top: 0.5em;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-}
-
 /* =========================================
-   BREADCRUMB 
+   14. TABELLE RESPONSIVE
    ========================================= */
-#breadcrumb {
-    --b-arrow-h: 22px;
-    --b-arrow-w: 18px;
-    --b-pad-l: 28px;
-    --b-pad-y: 5px;
-    padding: 0.4em 0.5em;
-    justify-content: center;
-    margin-top: 2%;
-}
 
-#breadcrumb li a {
-    min-height: 44px;
-    /* Touch target */
-}
-
-/* =========================================
-   TABELLA RESPONSIVE
-   ========================================= */
 .table-container {
     border: none;
     box-shadow: none;
@@ -535,9 +495,9 @@ footer .logo p {
     display: block;
 }
 
-.table-container tr > *:first-child,
-.table-container tr > *:last-child,
-.table-container tr > *:nth-child(3) {
+.table-container tr>*:first-child,
+.table-container tr>*:last-child,
+.table-container tr>*:nth-child(3) {
     width: 100%;
 }
 
@@ -594,22 +554,22 @@ footer .logo p {
 }
 
 .table-container td.actions-cell {
-    justify-content: flex-end; 
+    justify-content: flex-end;
     background-color: var(--col-bg-alt);
 }
 
 .table-container td.actions-cell::before {
-    display: none; /* Nasconde label "Azioni" */
+    display: none;
 }
 
 .table-container .btn-icon {
-    min-width: 44px; 
+    min-width: 44px;
     min-height: 44px;
     font-size: 1.25rem;
 }
 
 /* =========================================
-   FORM DI CREAZIONE ARTICOLI 
+   15. ADMIN FORM
    ========================================= */
 
 .admin-form {
@@ -619,4 +579,20 @@ footer .logo p {
 .form-row {
     grid-template-columns: 1fr;
     gap: 0;
+}
+
+/* =========================================
+   16. ANIMAZIONI
+   ========================================= */
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
