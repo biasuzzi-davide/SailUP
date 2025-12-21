@@ -1,6 +1,6 @@
 <?php
 //funzioni di autenticazione e registrazione
-declare(strict_types=1);
+declare(strict_types=1); //per evitare conversioni automatiche, invece che fare ciò che vuole lancia errori
 
 require_once __DIR__ . '/../session/session.php';
 require_once __DIR__ . '/../db_connection.php';
