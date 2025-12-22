@@ -4,9 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Le 5 baie segrete di Procida - Blog - SailUP</title>
+  <title>[ARTICLE_TITLE] - Blog - SailUP</title>
   <meta name="description"
-    content="Un viaggio alla scoperta degli angoli più nascosti della Capitale della Cultura, accessibili solo via mare.">
+    content="[ARTICLE_DESCRIPTION]">
   <meta name="authors" content="SailUP Team">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,7 +32,7 @@
     <ol>
       <li><a href="index.html" lang="en">Home</a></li>
       <li><a href="blog.html" lang="en">Blog</a></li>
-      <li aria-current="page">Le 5 baie segrete di Procida</li>
+      <li aria-current="page">[BREADCRUMB_TITLE]</li>
     </ol>
   </nav>
 
@@ -40,12 +40,12 @@
       <article aria-labelledby="article-title">
         <section id="hero">
           <div>
-            <h1 id="article-title">Le 5 baie segrete di Procida</h1>
+            <h1 id="article-title">[ARTICLE_TITLE]</h1>
             <p>
-              <time datetime="2025-05-15">15 Maggio 2025</time> • Lettura 2 <abbr title="minuti">min</abbr>
+              <time datetime="[ARTICLE_DATE_ISO]">[ARTICLE_DATE_FORMATTED]</time> • Lettura [ARTICLE_READING_TIME] <abbr title="minuti">min</abbr>
             </p>
           </div>
-          <img src="../img/BaiaProcida.avif" alt="Vista aerea della Baia del Postino a Procida" class="hero-image"
+          <img src="[ARTICLE_IMAGE_SRC]" alt="[ARTICLE_IMAGE_ALT]" class="hero-image"
             width="600" height="450">
         </section>
 
@@ -54,13 +54,12 @@
 
           <div class="profile-header">
             <div class="profile-avatar">
-              <img src="../img/Skipper.jpg" alt="Foto Marco il Marinaio">
+              <img src="[AUTHOR_IMAGE_SRC]" alt="[AUTHOR_IMAGE_ALT]">
             </div>
             <div class="profile-info">
-              <h3>Marco il Marinaio</h3>
-              <p><span lang="en">Skipper</span> Esperto SailUP</p>
-              <p class="profile-text"><span lang="en">Skipper</span> con vent'anni di esperienza nel Golfo di Napoli.
-                Condivide le sue rotte segrete per una navigazione sicura.</p>
+              <h3>[AUTHOR_FULL_NAME]</h3>
+              <p>[AUTHOR_ROLE]</p>
+              <p class="profile-text">[AUTHOR_DESCRIPTION]</p>
             </div>
           </div>
         </section>
@@ -68,51 +67,20 @@
         <section aria-labelledby="intro-title">
           <h2 id="intro-title">Introduzione</h2>
 
-          <p>Procida, Capitale Italiana della Cultura 2022, è un gioiello del Golfo di Napoli. Ma oltre ai suoi celebri
-            borghi colorati come la Corricella, l'isola nasconde tesori accessibili solo a chi ha la fortuna di
-            esplorarla via mare.</p>
+          <p>[ARTICLE_SUMMARY]</p>
         </section>
 
         <section aria-labelledby="spiagge-title">
-          <h2 id="spiagge-title">Le Spiagge Segrete</h2>
+          <h2 id="spiagge-title">[ARTICLE_BODY_TITLE]</h2>
 
-          <h3>1. La Spiaggia del Pozzo Vecchio</h3>
-          <p>Nota anche come la "Spiaggia del Postino" per essere stata il <span lang="en">set</span> del celebre film
-            con Massimo Troisi, questa baia a forma di mezzaluna è caratterizzata da sabbia scura di origine vulcanica e
-            un'atmosfera sospesa nel tempo.</p>
-
-          <h3>2. La Baia della Chiaiolella</h3>
-          <p>Sebbene la Chiaiolella sia un porto turistico conosciuto, la sua baia nasconde calette più piccole e
-            appartate verso l'isolotto di Vivara, ideali per gettare l'ancora e godersi un pranzo al riparo dai venti.
-          </p>
-
-          <h3>3. La Spiaggia della Lingua</h3>
-          <p>Situata sul versante opposto al porto principale, è una piccola lingua di sabbia e ciottoli. È meno
-            frequentata dai turisti via terra a causa della ripida scalinata, ma via mare offre un'acqua cristallina e
-            una vista impareggiabile sul canale di Procida.</p>
-
-          <h3>4. Spiaggia di Ciraccio</h3>
-          <p>È la spiaggia più lunga dell'isola, spesso battuta dal sole tutto il giorno. La parte più a ovest, separata
-            dai Faraglioni di Procida, offre piscine naturali tra gli scogli dove è possibile fare <span
-              lang="en">snorkeling</span> in totale tranquillità.</p>
-
-          <h3>5. Punta dei Monaci</h3>
-          <p>Un luogo selvaggio e roccioso, accessibile quasi esclusivamente via mare. Qui la natura regna sovrana e i
-            fondali sono profondi e ricchi di vita, perfetti per chi ama le immersioni o semplicemente nuotare nel blu
-            profondo lontano dalla folla.</p>
+          <div class="article-body">
+            [ARTICLE_CONTENT]
+          </div>
         </section>
 
         <aside aria-labelledby="tips-title">
           <h2 id="tips-title" class="sr-only">Consigli Pratici</h2>
-          <div class="amenity-box included">
-            <h3>🎒 Cosa non dimenticare</h3>
-            <ul>
-              <li>Maschera e boccaglio per lo <span lang="en">snorkeling</span></li>
-              <li>Acqua in abbondanza e uno spuntino</li>
-              <li>Crema solare ad alta protezione</li>
-              <li>Una macchina fotografica impermeabile</li>
-            </ul>
-          </div>
+          [ARTICLE_EXTRA_LIST]
         </aside>
       </article>
       
