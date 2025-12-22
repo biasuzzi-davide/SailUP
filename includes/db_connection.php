@@ -344,6 +344,148 @@ class DBConnection {
     }
 
     /**
+     * Recupera un singolo prodotto con la prima immagine disponibile.
+     */
+    public function getProdottoWithMediaById(string $idProdotto): array|bool|null {
+        $this->openConnection();
+        $query = "
+            SELECT p.*, m.URL_Media, m.Testo_Alternativo
+            FROM Prodotto p
+            LEFT JOIN Media m ON p.IDProdotto = m.IDProdotto
+            WHERE p.IDProdotto = ? AND p.Attivo = 1
+            ORDER BY m.IDMedia ASC
+            LIMIT 1
+        ";
+
+        try {
+            $stmt = $this->connection->prepare($query);
+            if (!$stmt) {
+                $this->closeConnection();
+                return false;
+            }
+
+            $stmt->bind_param('s', $idProdotto);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $stmt->close();
+
+            if (!$result) {
+                $this->closeConnection();
+                return false;
+            }
+
+            if ($result->num_rows === 0) {
+                $this->closeConnection();
+                return null;
+            }
+
+            $row = $result->fetch_assoc();
+            $result->free();
+            $this->closeConnection();
+            return $row;
+        } catch (Throwable $t) {
+            $this->closeConnection();
+            return false;
+        }
+    }
+
+    /**
+     * Recupera i nomi degli elementi inclusi per un prodotto.
+     */
+    public function getProdottoInclusi(string $idProdotto): array|bool {
+        $this->openConnection();
+        $query = "
+            SELECT Nome_Incluso
+            FROM Prodotto_Incluso
+            WHERE IDProdotto = ?
+            ORDER BY Nome_Incluso ASC
+        ";
+
+        try {
+            $stmt = $this->connection->prepare($query);
+            if (!$stmt) {
+                $this->closeConnection();
+                return false;
+            }
+
+            $stmt->bind_param('s', $idProdotto);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $stmt->close();
+
+            if (!$result) {
+                $this->closeConnection();
+                return false;
+            }
+
+            if ($result->num_rows === 0) {
+                $this->closeConnection();
+                return [];
+            }
+
+            $inclusi = [];
+            while ($row = $result->fetch_assoc()) {
+                $inclusi[] = $row;
+            }
+
+            $result->free();
+            $this->closeConnection();
+            return $inclusi;
+        } catch (Throwable $t) {
+            $this->closeConnection();
+            return false;
+        }
+    }
+
+    /**
+     * Recupera gli extra associati a un prodotto.
+     */
+    public function getProdottoExtra(string $idProdotto): array|bool {
+        $this->openConnection();
+        $query = "
+            SELECT Nome_Extra, Prezzo_Extra, Descrizione_Extra, Opzionale
+            FROM Prodotto_Extra
+            WHERE IDProdotto = ?
+            ORDER BY Opzionale DESC, Nome_Extra ASC
+        ";
+
+        try {
+            $stmt = $this->connection->prepare($query);
+            if (!$stmt) {
+                $this->closeConnection();
+                return false;
+            }
+
+            $stmt->bind_param('s', $idProdotto);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $stmt->close();
+
+            if (!$result) {
+                $this->closeConnection();
+                return false;
+            }
+
+            if ($result->num_rows === 0) {
+                $this->closeConnection();
+                return [];
+            }
+
+            $extras = [];
+            while ($row = $result->fetch_assoc()) {
+                $extras[] = $row;
+            }
+
+            $result->free();
+            $this->closeConnection();
+            return $extras;
+        } catch (Throwable $t) {
+            $this->closeConnection();
+            return false;
+        }
+    }
+
+    /**
      * Restituisce tutti i prodotti attivi, eventualmente filtrati per tipo.
      */
     public function getProdotti(?string $tipoProdotto = null): array|bool {
