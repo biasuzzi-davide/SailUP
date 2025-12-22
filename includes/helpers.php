@@ -127,4 +127,105 @@ function buildPage($templatePath, $phpSelf) {
     $html = str_replace('[FOOTER]', $footer, $html);
     return $html;
 }
+
+/**
+ * Restituisce un messaggio HTML composto da paragrafi puliti.
+ */
+function buildParagraphsFromText(?string $text, string $emptyMessage = 'Contenuto non disponibile.'): string {
+    $cleaned = trim((string) $text);
+    if ($cleaned === '') {
+        return '<p>' . htmlspecialchars($emptyMessage, ENT_QUOTES) . '</p>';
+    }
+
+    $lines = preg_split('/\r\n|\r|\n/', $cleaned);
+    $paragraphs = array_filter(array_map('trim', (array) $lines), fn($value) => $value !== '');
+
+    if (empty($paragraphs)) {
+        return '<p>' . htmlspecialchars($emptyMessage, ENT_QUOTES) . '</p>';
+    }
+
+    $html = '';
+    foreach ($paragraphs as $paragraph) {
+        $html .= '<p>' . htmlspecialchars($paragraph, ENT_QUOTES) . '</p>';
+    }
+
+    return $html;
+}
+
+/**
+ * Formatta un numero decimale con la virgola italiana e rimuove gli zeri finali.
+ */
+function formatDecimalNumber(?string $value, int $decimals = 2): string {
+    if ($value === null || $value === '') {
+        return '—';
+    }
+
+    $formatted = number_format((float) $value, $decimals, ',', '.');
+    if (strpos($formatted, ',') !== false) {
+        $formatted = rtrim($formatted, '0');
+        $formatted = rtrim($formatted, ',');
+    }
+
+    return $formatted;
+}
+
+/**
+ * Formattta un valore monetario senza decimali (#) per i prezzi "da".
+ */
+function formatPriceValue(?string $value): string {
+    if ($value === null || $value === '') {
+        return '—';
+    }
+
+    return number_format((float) $value, 0, ',', '.');
+}
+
+/**
+ * Rende una stringa numerica con due decimali e virgole italiane.
+ */
+function formatCurrencyWithDecimals(?string $value): string {
+    if ($value === null || $value === '') {
+        return '';
+    }
+
+    return number_format((float) $value, 2, ',', '.');
+}
+
+/**
+ * Costruisce un elenco HTML da un array di righe.
+ */
+function buildItemsList(array $items, string $valueKey, string $emptyMessage, ?callable $formatter = null): string {
+    $filtered = array_filter($items, fn($row) => !empty($row[$valueKey]));
+    if (empty($filtered)) {
+        return '<li>' . htmlspecialchars($emptyMessage, ENT_QUOTES) . '</li>';
+    }
+
+    $html = '';
+    foreach ($filtered as $row) {
+        if ($formatter !== null) {
+            $content = $formatter($row);
+        } else {
+            $content = htmlspecialchars($row[$valueKey], ENT_QUOTES);
+        }
+
+        $html .= '<li>' . $content . '</li>';
+    }
+
+    return $html;
+}
+
+/**
+ * Ritorna il placeholder condiviso dagli articoli nel caso in cui manchi un media.
+ */
+function getPlaceholderImage(): string {
+    return '../img/placeholder.png';
+}
+
+/**
+ * Risolve un URL immagine, utilizzando il placeholder se necessario.
+ */
+function resolveImageUrl(?string $url): string {
+    $trimmed = trim((string) $url);
+    return $trimmed !== '' ? $trimmed : getPlaceholderImage();
+}
 ?>

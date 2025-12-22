@@ -3,16 +3,16 @@
 
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dettaglio Barca - Noleggio Barche - SailUP</title> <meta name="description"
-        content="Noleggia lo yacht a motore Sunseeker Predator per una giornata di lusso e velocità nel Golfo di Napoli. Scopri le specifiche e prenota ora.">
-    <meta name="authors" content="SailUp team" />
+        content="Noleggia [PRODUCT_NAME] per una giornata di lusso e velocità nel Golfo di Napoli. Scopri le specifiche e prenota ora.">
+    <meta name="authors" content="SailUp team">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap"
-        rel="stylesheet" />
+        rel="stylesheet">
 
     <link rel="stylesheet" href="../css/style.css" media="screen">
     <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)">
@@ -29,22 +29,22 @@
     </div>
     <nav aria-labelledby="breadcrumb-label" id="breadcrumb">
         <ol>
-            <li><a href="index.html" lang="en">Home</a></li>
-            <li><a href="catalogo_noleggio.html">Noleggio</a></li>
-            <li aria-current="page">Sunseeker Predator</li>
+            <li><a href="index.php" lang="en">Home</a></li>
+            <li><a href="catalogo_noleggio.php">Noleggio</a></li>
+            <li aria-current="page">[PRODUCT_NAME]</li>
         </ol>
     </nav>
 
     <main id="main-content" class="section-container">
         <img class="detail-hero-img"
-            src="https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?auto=format&fit=crop&w=1200&q=80"
-            alt="Yacht Sunseeker Predator">
+            src="[PRODUCT_IMAGE_SRC]"
+            alt="[PRODUCT_IMAGE_ALT]">
 
         <div class="detail-layout">
             <article>
                 <header class="detail-header">
-                    <h1>Sunseeker Predator</h1>
-                    <p>Yacht a motore di lusso</p>
+                    <h1>[PRODUCT_NAME]</h1>
+                    <p>[PRODUCT_BRIEF]</p>
                 </header>
 
                 <section aria-labelledby="specs-title">
@@ -53,30 +53,26 @@
                     <dl class="specs-grid">
                         <div class="spec-card">
                             <dt class="spec-label"><span aria-hidden="true">⚓</span> Tipo</dt>
-                            <dd class="spec-value">Motore</dd>
+                            <dd class="spec-value">[PRODUCT_TYPE]</dd>
                         </div>
                         <div class="spec-card">
                             <dt class="spec-label"><span aria-hidden="true">📏</span> Lunghezza</dt>
-                            <dd class="spec-value">12 m</dd>
+                            <dd class="spec-value">[PRODUCT_LENGTH]</dd>
                         </div>
                         <div class="spec-card">
                             <dt class="spec-label"><span aria-hidden="true">👥</span> Posti</dt>
-                            <dd class="spec-value">8</dd>
+                            <dd class="spec-value">[PRODUCT_SEATS]</dd>
                         </div>
                         <div class="spec-card">
                             <dt class="spec-label"><span aria-hidden="true">🎫</span> Patente</dt>
-                            <dd class="spec-value">Sì</dd>
+                            <dd class="spec-value">[PRODUCT_LICENSE]</dd>
                         </div>
                     </dl>
                     </section>
 
                 <section aria-labelledby="description-title">
                     <h2 id="description-title">Descrizione</h2>
-                    <p>Il Sunseeker Predator è un capolavoro di <span lang="en">design</span> e ingegneria navale.
-                        Con le sue linee aggressive e gli interni raffinati, offre un'esperienza di navigazione
-                        ineguagliabile.</p>
-                    <p>L'ampio prendisole a prua e il pozzetto accogliente sono ideali per rilassarsi, mentre la
-                        cabina sottocoperta offre tutto il comfort necessario per una giornata in mare.</p>
+                    [PRODUCT_DESCRIPTION_BLOCK]
                 </section>
 
                 <section aria-labelledby="amenities-title">
@@ -85,22 +81,14 @@
                         <div class="amenity-box included">
                             <h3>✅ Incluso</h3>
                             <ul>
-                                <li>Attrezzatura sicurezza</li>
-                                <li><abbr title="Global Positioning System" lang="en">GPS</abbr> e strumentazione
-                                </li>
-                                <li><span lang="en">Tender</span> con motore</li>
-                                <li>Piattaforma bagno</li>
-                                <li>Impianto audio <abbr title="Bluetooth" lang="en">BT</abbr></li>
+                                [INCLUDED_ITEMS]
                             </ul>
                         </div>
 
                         <div class="amenity-box extra">
                             <h3>💎 <span lang="en">Extra</span></h3>
                             <ul>
-                                <li><span lang="en">Skipper</span> (+10%)</li>
-                                <li>Attrezzatura <span lang="en">snorkeling</span></li>
-                                <li><span lang="en">Catering</span> a bordo</li>
-                                <li>Seadoo (moto d'acqua)</li>
+                                [EXTRA_ITEMS]
                             </ul>
                         </div>
                     </div>
@@ -114,7 +102,7 @@
                     <p class="price-label">
                         A partire da
                         <span aria-hidden="true">€</span>
-                        <span class="price-amount">850</span>
+                        <span class="price-amount">[PRODUCT_PRICE]</span>
                         / giorno
                     </p>
                 </div>
