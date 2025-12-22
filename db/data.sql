@@ -18,10 +18,10 @@ INSERT INTO Utente (Nome, Cognome, CF, Email, PasswordHash, Numero_Patente_Nauti
 ('Giulia', 'Bianchi', 'BNCGLI95M55H501Z', 'giulia@email.com', 'hashed_secret_giulia', NULL, 3, 0);
 
 -- 3. INSERIMENTO PRODOTTI
-INSERT INTO Prodotto (IDProdotto, Tipo_Prodotto, Tipologia_Prodotto, Nome_Prodotto, Descrizione_Breve, Prezzo_Base, Posti_Totali, Accessibile_Disabili, Lunghezza_Barca_Metri, Richiede_Patente) VALUES
-('BARCA-GOZZO-01', 'Noleggio', 'Gozzo', 'Gozzo Sorrentino Classico', 'Ideale per giornate di relax.', 250.00, 6, 0, 7.50, 0),
-('GOMMONE-SPORT-05', 'Noleggio', 'Gommone', 'Gommone Sport 200cv', 'Velocità e divertimento.', 400.00, 8, 0, 8.20, 1),
-('EXP-TRAMONTO-01', 'Experience', 'Romantico', 'Aperitivo al Tramonto', 'Tour della costa con prosecco.', 50.00, 10, 1, NULL, NULL);
+INSERT INTO Prodotto (IDProdotto, Tipo_Prodotto, Tipologia_Prodotto, Nome_Prodotto, Descrizione_Breve, Durata_Ore, Prezzo_Base, Posti_Totali, Accessibile_Disabili, Lunghezza_Barca_Metri, Richiede_Patente) VALUES
+('BARCA-GOZZO-01', 'Noleggio', 'Gozzo', 'Gozzo Sorrentino Classico', 'Ideale per giornate di relax.', NULL, 250.00, 6, 0, 7.50, 0),
+('GOMMONE-SPORT-05', 'Noleggio', 'Gommone', 'Gommone Sport 200cv', 'Velocità e divertimento.', NULL, 400.00, 8, 0, 8.20, 1),
+('EXP-TRAMONTO-01', 'Experience', 'Romantico', 'Aperitivo al Tramonto', 'Tour della costa con prosecco.', 8, 50.00, 10, 1, NULL, NULL);
 
 -- 4. LINGUE DISPONIBILI
 INSERT INTO Lingua (Codice, Nome) VALUES
