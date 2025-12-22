@@ -63,6 +63,7 @@
         IDProdotto VARCHAR(50) PRIMARY KEY,
         Tipo_Prodotto ENUM('Noleggio', 'Experience') NOT NULL,
         Tipologia_Prodotto VARCHAR(30) NULL, 
+        Durata_Ore INT UNSIGNED NULL,
         Nome_Prodotto VARCHAR(255) NOT NULL,
         Descrizione_Breve VARCHAR(500) NULL,
         Descrizione TEXT NULL,
