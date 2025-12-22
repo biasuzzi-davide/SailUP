@@ -644,4 +644,106 @@ class DBConnection {
             return false;
         }
     }
+
+    /**
+     * Recupera un articolo pubblicato con i dati dell'autore e le immagini collegate.
+     */
+    public function getArticoloBlogCompleto(int $idArticolo): array|bool|null {
+        $this->openConnection();
+        $query = "
+            SELECT a.*,
+                   u.Nome AS Autore_Nome,
+                   u.Cognome AS Autore_Cognome,
+                   u.Numero_Patente_Nautica AS Autore_Patente,
+                   u.Data_Registrazione AS Autore_Data_Registrazione,
+                   u.Is_Admin AS Autore_Is_Admin,
+                   (SELECT URL_Media FROM Media WHERE IDArticolo = a.IDArticolo ORDER BY IDMedia ASC LIMIT 1) AS Articolo_URL,
+                   (SELECT Testo_Alternativo FROM Media WHERE IDArticolo = a.IDArticolo ORDER BY IDMedia ASC LIMIT 1) AS Articolo_Alt,
+                   (SELECT URL_Media FROM Media WHERE IDUtente = u.IDUtente ORDER BY IDMedia ASC LIMIT 1) AS Autore_URL,
+                   (SELECT Testo_Alternativo FROM Media WHERE IDUtente = u.IDUtente ORDER BY IDMedia ASC LIMIT 1) AS Autore_Alt
+            FROM Articolo_Blog a
+            JOIN Utente u ON u.IDUtente = a.IDAutore
+            WHERE a.IDArticolo = ? AND a.Pubblicato = 1
+            LIMIT 1
+        ";
+
+        try {
+            $stmt = $this->connection->prepare($query);
+            if (!$stmt) {
+                $this->closeConnection();
+                return false;
+            }
+
+            $stmt->bind_param('i', $idArticolo);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $stmt->close();
+
+            if (!$result) {
+                $this->closeConnection();
+                return false;
+            }
+
+            if ($result->num_rows === 0) {
+                $this->closeConnection();
+                return null;
+            }
+
+            $row = $result->fetch_assoc();
+            $result->free();
+            $this->closeConnection();
+            return $row;
+        } catch (Throwable $t) {
+            $this->closeConnection();
+            return false;
+        }
+    }
+
+    /**
+     * Recupera i suggerimenti extra associati a un articolo.
+     */
+    public function getArticoloBlogExtra(int $idArticolo): array|bool {
+        $this->openConnection();
+        $query = "
+            SELECT Titolo, Elemento
+            FROM Articolo_Blog_Extra
+            WHERE IDArticolo = ?
+            ORDER BY Titolo ASC, Ordine ASC
+        ";
+
+        try {
+            $stmt = $this->connection->prepare($query);
+            if (!$stmt) {
+                $this->closeConnection();
+                return false;
+            }
+
+            $stmt->bind_param('i', $idArticolo);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $stmt->close();
+
+            if (!$result) {
+                $this->closeConnection();
+                return false;
+            }
+
+            if ($result->num_rows === 0) {
+                $this->closeConnection();
+                return [];
+            }
+
+            $extras = [];
+            while ($row = $result->fetch_assoc()) {
+                $extras[] = $row;
+            }
+
+            $result->free();
+            $this->closeConnection();
+            return $extras;
+        } catch (Throwable $t) {
+            $this->closeConnection();
+            return false;
+        }
+    }
 }
