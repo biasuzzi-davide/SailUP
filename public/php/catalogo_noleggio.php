@@ -48,7 +48,7 @@ if ($prodottiNoleggio && is_array($prodottiNoleggio) && count($prodottiNoleggio)
 				$richiedePatente = filter_var($prodotto['Richiede_Patente'], FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
 				$richiedePatente = $richiedePatente ?? false;
 				$patenteIcon = $richiedePatente ? '🎫' : '✅';
-				$patenteLabel = $richiedePatente ? 'Patente' : 'No patente';
+				$patenteLabel = $richiedePatente ? 'Patente Richiesta' : 'Patente non Richiesta';
 
 				$prezzoBase = isset($prodotto['Prezzo_Base']) ? number_format((float) $prodotto['Prezzo_Base'], 0, ',', '.') : '—';
 
