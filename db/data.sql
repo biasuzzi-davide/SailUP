@@ -1,6 +1,7 @@
 -- ============================================================================
 -- NOLEGGIO BARCHE NAPOLI - DATI COMPLETI E REALISTICI
 -- Database: dbiasuzz
+-- ATTENZIONE, FILE VECCHIO, NON UTILIZZARE ATTUALMENTE, UTILIZZARE IL FILE dbiasuzz.sql presente nella stessa cartella
 -- ============================================================================
 
 USE dbiasuzz;
