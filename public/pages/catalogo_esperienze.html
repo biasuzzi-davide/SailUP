@@ -48,44 +48,41 @@
       <aside class="filters-sidebar" aria-labelledby="filters-heading">
         <header class="filters-header">
           <h2 id="filters-heading">Filtra</h2>
-          <button type="reset" class="btn-text" aria-label="Reimposta filtri">Reset</button>
+          <button type="reset" id="esperienze-reset" form="esperienze-filters-form" class="btn-text" aria-label="Reimposta filtri">Reset</button>
         </header>
 
-        <form action="" method="GET">
+        <form id="esperienze-filters-form" action="[ACTION_URL]" method="GET">
           <fieldset class="filter-group">
             <legend>Dettagli</legend>
 
             <div class="filter-input">
               <label for="posti_disponibili">Posti minimi</label>
-              <input type="number" id="posti_disponibili" name="posti_disponibili" min="1" placeholder="Es. 2">
+              <input type="number" id="posti_disponibili" name="posti_disponibili" min="1" placeholder="Es. 2" value="[VAL_POSTI]">
             </div>
 
             <div class="filter-input">
               <label for="data_esperienza">Data</label>
-              <input type="date" id="data_esperienza" name="data_esperienza">
+              <input type="date" id="data_esperienza" name="data_esperienza" value="[VAL_DATA]">
             </div>
 
             <div class="filter-input">
               <label for="lingua_guida">Lingua Guida</label>
               <select name="lingua_guida" id="lingua_guida">
-                <option value="indifferente">Indifferente</option>
-                <option value="italiano">Italiano</option>
-                <option value="inglese">Inglese</option>
-                <option value="francese">Francese</option>
+                [LINGUA_OPTIONS]
               </select>
             </div>
 
             <div class="filter-input">
               <label for="maxPriceExperience">Prezzo max (€/tour)</label>
-              <input type="number" id="maxPriceExperience" name="maxPriceExperience" placeholder="Es. 500" min="50"
-                step="50">
+              <input type="number" id="maxPriceExperience" name="maxPriceExperience" placeholder="Es. 45" min="25"
+                step="10" value="[VAL_MAX_PRICE]">
             </div>
           </fieldset>
 
           <fieldset class="filter-group">
             <legend>Accessibilità</legend>
             <label class="filter-checkbox">
-              <input type="checkbox" id="accessibile" name="accessibile" value="true">
+              <input type="checkbox" id="accessibile" name="accessibile" value="true" [CHECK_ACCESSIBILE]>
               <span>Adatta a persone con disabilità</span>
             </label>
           </fieldset>
@@ -99,10 +96,10 @@
             <h2 id="catalog-title">Esperienze disponibili</h2>
           <div class="results-sort">
             <label for="sort">Ordina per:</label>
-            <select id="sort" name="sort">
-              <option value="price-asc">Prezzo crescente</option>
-              <option value="price-desc">Prezzo decrescente</option>
-              <option value="duration">Durata</option>
+            <select id="sort" name="sort" form="esperienze-filters-form">
+              <option value="price-asc" [SELECTED_PRICE_ASC]>Prezzo crescente</option>
+              <option value="price-desc" [SELECTED_PRICE_DESC]>Prezzo decrescente</option>
+              <option value="duration" [SELECTED_DURATION]>Durata</option>
             </select>
           </div>
         </header>
