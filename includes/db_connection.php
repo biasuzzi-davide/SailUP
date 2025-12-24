@@ -628,6 +628,69 @@ class DBConnection {
         }
     }
 
+    /**
+     * Restituisce le lingue attive collegate a prodotti, filtrando opzionalmente per tipo.
+     */
+    public function getLingueDisponibiliPerTipo(?string $tipoProdotto = null): array|bool {
+        $this->openConnection();
+        $query = "
+            SELECT DISTINCT l.Codice, l.Nome
+            FROM Lingua l
+            INNER JOIN Prodotto_Lingua pl ON pl.IDLingua = l.IDLingua
+            INNER JOIN Prodotto p ON p.IDProdotto = pl.IDProdotto
+            WHERE l.Attivo = 1 AND p.Attivo = 1
+        ";
+
+        $params = [];
+        $types = '';
+
+        if ($tipoProdotto !== null) {
+            $query .= " AND p.Tipo_Prodotto = ?";
+            $params[] = $tipoProdotto;
+            $types .= 's';
+        }
+
+        $query .= ' ORDER BY l.Nome ASC';
+
+        try {
+            $stmt = $this->connection->prepare($query);
+            if (!$stmt) {
+                $this->closeConnection();
+                return false;
+            }
+
+            if (!empty($params)) {
+                $stmt->bind_param($types, ...$params);
+            }
+
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $stmt->close();
+
+            if (!$result) {
+                $this->closeConnection();
+                return false;
+            }
+
+            if ($result->num_rows === 0) {
+                $this->closeConnection();
+                return [];
+            }
+
+            $lingue = [];
+            while ($row = $result->fetch_assoc()) {
+                $lingue[] = $row;
+            }
+
+            $result->free();
+            $this->closeConnection();
+            return $lingue;
+        } catch (Throwable $t) {
+            $this->closeConnection();
+            return false;
+        }
+    }
+
     /* ============================================================
        METODI PRENOTAZIONE
        ============================================================ */
@@ -789,6 +852,23 @@ class DBConnection {
                 $types .= 'd';
             }
 
+            if (array_key_exists('accessibile', $filters) && $filters['accessibile'] !== null) {
+                $conditions[] = 'p.Accessibile_Disabili = ?';
+                $params[] = $filters['accessibile'] ? 1 : 0;
+                $types .= 'i';
+            }
+
+            if (!empty($filters['lingua'])) {
+                $conditions[] = 'EXISTS (
+                    SELECT 1
+                    FROM Prodotto_Lingua pl
+                    INNER JOIN Lingua l ON l.IDLingua = pl.IDLingua AND l.Attivo = 1
+                    WHERE pl.IDProdotto = p.IDProdotto AND l.Codice = ?
+                )';
+                $params[] = $filters['lingua'];
+                $types .= 's';
+            }
+
             $orderClause = 'ORDER BY p.Data_Creazione DESC, p.IDProdotto ASC';
             switch ($sort) {
                 case 'price-asc':
@@ -796,6 +876,9 @@ class DBConnection {
                     break;
                 case 'price-desc':
                     $orderClause = 'ORDER BY p.Prezzo_Base DESC, p.IDProdotto ASC';
+                    break;
+                case 'duration':
+                    $orderClause = 'ORDER BY COALESCE(p.Durata_Ore, 0) ASC, p.IDProdotto ASC';
                     break;
                 case 'size':
                     $orderClause = 'ORDER BY COALESCE(p.Lunghezza_Barca_Metri, 0) DESC, p.IDProdotto ASC';
