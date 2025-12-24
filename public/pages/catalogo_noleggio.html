@@ -48,38 +48,27 @@
       <aside class="filters-sidebar" aria-labelledby="filters-heading">
         <header class="filters-header">
           <h2 id="filters-heading">Filtra</h2>
-          <button type="reset" class="btn-text" aria-label="Reimposta filtri">Reset</button>
+          <button type="reset" id="filters-reset" form="noleggio-filters-form" class="btn-text" aria-label="Reimposta filtri">Reset</button>
         </header>
 
-        <form action="" method="GET">
+        <form id="noleggio-filters-form" action="[ACTION_URL]" method="GET">
           <fieldset class="filter-group">
             <legend>Tipo di Barca</legend>
-            <label class="filter-checkbox">
-              <input type="checkbox" id="vela" name="tipo[]" value="vela">
-              <span>Vela</span>
-            </label>
-            <label class="filter-checkbox">
-              <input type="checkbox" id="motore" name="tipo[]" value="motore">
-              <span>Motore</span>
-            </label>
-            <label class="filter-checkbox">
-              <input type="checkbox" id="gommone" name="tipo[]" value="gommone">
-              <span>Gommone</span>
-            </label>
+            [TIPOLOGIA_OPTIONS]
           </fieldset>
 
           <fieldset class="filter-group">
             <legend>Patente Nautica</legend>
             <label class="filter-radio">
-              <input type="radio" id="patente_si" name="patente" value="richiesta">
+              <input type="radio" id="patente_si" name="patente" value="richiesta" [CHECK_PATENTE_RICHIESTA]>
               <span>Richiesta</span>
             </label>
             <label class="filter-radio">
-              <input type="radio" id="patente_no" name="patente" value="non_richiesta">
+              <input type="radio" id="patente_no" name="patente" value="non_richiesta" [CHECK_PATENTE_NON_RICHIESTA]>
               <span>Non richiesta</span>
             </label>
             <label class="filter-radio">
-              <input type="radio" id="patente_ind" name="patente" value="indifferente" checked>
+              <input type="radio" id="patente_ind" name="patente" value="indifferente" [CHECK_PATENTE_IND]>
               <span>Indifferente</span>
             </label>
           </fieldset>
@@ -89,25 +78,24 @@
 
             <div class="filter-input">
               <label for="posti">Posti minimi</label>
-              <input type="number" id="posti" name="posti" min="1" placeholder="Es. 4">
+              <input type="number" id="posti" name="posti" min="1" placeholder="Es. 4" value="[VAL_POSTI]">
             </div>
 
             <div class="filter-input">
               <label for="data_inizio">Data inizio</label>
-              <input type="date" id="data_inizio" name="data_inizio">
+              <input type="date" id="data_inizio" name="data_inizio" value="[VAL_DATA_INIZIO]">
             </div>
 
             <div class="filter-input">
               <label for="data_fine">Data fine</label>
-              <input type="date" id="data_fine" name="data_fine">
+              <input type="date" id="data_fine" name="data_fine" value="[VAL_DATA_FINE]">
             </div>
 
             <div class="filter-input">
               <label for="maxPrice">Prezzo max (€/giorno)</label>
-              <input type="number" id="maxPrice" name="maxPrice" placeholder="Es. 500" min="100" step="50">
+              <input type="number" id="maxPrice" name="maxPrice" placeholder="Es. 500" min="100" step="50" value="[VAL_MAX_PRICE]">
             </div>
           </fieldset>
-
           <button type="submit" class="btn-layout filter-submit">Applica Filtri</button>
         </form>
       </aside>
@@ -117,10 +105,10 @@
           <h2 id="catalog-title">Imbarcazioni disponibili</h2>
           <div class="results-sort">
             <label for="sort">Ordina:</label>
-            <select id="sort" name="sort">
-              <option value="price-asc">Prezzo crescente</option>
-              <option value="price-desc">Prezzo decrescente</option>
-              <option value="size">Dimensione</option>
+            <select id="sort" name="sort" form="noleggio-filters-form">
+              <option value="price-asc" [SELECTED_PRICE_ASC]>Prezzo crescente</option>
+              <option value="price-desc" [SELECTED_PRICE_DESC]>Prezzo decrescente</option>
+              <option value="size" [SELECTED_SIZE]>Dimensione</option>
             </select>
           </div>
         </header>
