@@ -154,3 +154,35 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 });
+
+/* ---------------------------------------
+   5. FILTRI CATALOGO NOLEGGIO
+   --------------------------------------- */
+document.addEventListener('DOMContentLoaded', () => {
+    const filtersForm = document.getElementById('noleggio-filters-form');
+    if (!filtersForm) return;
+
+    const sortSelect = document.getElementById('sort');
+    if (sortSelect) {
+        sortSelect.addEventListener('change', () => {
+            if (typeof filtersForm.requestSubmit === 'function') {
+                filtersForm.requestSubmit();
+            } else {
+                filtersForm.submit();
+            }
+        });
+    }
+
+    const handleReset = () => {
+        if (sortSelect) {
+            sortSelect.value = sortSelect.options[0]?.value || '';
+        }
+        setTimeout(() => {
+            window.location.href = window.location.pathname;
+        }, 0);
+    };
+
+    filtersForm.addEventListener('reset', () => {
+        handleReset();
+    });
+});

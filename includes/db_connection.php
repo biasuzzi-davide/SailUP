@@ -532,6 +532,54 @@ class DBConnection {
     }
 
     /**
+     * Restituisce le tipologie disponibili per un determinato tipo di prodotto (es. Noleggio/Experience).
+     */
+    public function getTipologieByTipo(string $tipoProdotto): array|bool {
+        $this->openConnection();
+        $query = "
+            SELECT DISTINCT Tipologia_Prodotto
+            FROM Prodotto
+            WHERE Attivo = 1 AND Tipo_Prodotto = ? AND Tipologia_Prodotto IS NOT NULL AND TRIM(Tipologia_Prodotto) <> ''
+            ORDER BY Tipologia_Prodotto ASC
+        ";
+
+        try {
+            $stmt = $this->connection->prepare($query);
+            if (!$stmt) {
+                $this->closeConnection();
+                return false;
+            }
+
+            $stmt->bind_param('s', $tipoProdotto);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $stmt->close();
+
+            if (!$result) {
+                $this->closeConnection();
+                return false;
+            }
+
+            if ($result->num_rows === 0) {
+                $this->closeConnection();
+                return [];
+            }
+
+            $tipologie = [];
+            while ($row = $result->fetch_assoc()) {
+                $tipologie[] = $row['Tipologia_Prodotto'];
+            }
+
+            $result->free();
+            $this->closeConnection();
+            return $tipologie;
+        } catch (Throwable $t) {
+            $this->closeConnection();
+            return false;
+        }
+    }
+
+    /**
      * Recupera le lingue attivate associate a un prodotto specifico.
      */
     public function getLinguePerProdotto(string $idProdotto): array|bool {
@@ -679,25 +727,86 @@ class DBConnection {
     /**
      * Recupera prodotti con media associata, limitati per tipo e numero.
      */
-    public function getProdottiWithMedia(?string $tipoProdotto = null, int $limit = 100): array|bool {
+    public function getProdottiWithMedia(
+        ?string $tipoProdotto = null,
+        int $limit = 100,
+        array $filters = [],
+        ?string $sort = null
+    ): array|bool {
         $this->openConnection();
         try {
+            if ($limit <= 0) {
+                $limit = 100;
+            }
+
             $query = "
                 SELECT p.*, m.URL_Media, m.Testo_Alternativo
                 FROM Prodotto p
                 LEFT JOIN Media m ON p.IDProdotto = m.IDProdotto
-                WHERE p.Attivo = 1
             ";
+
+            $conditions = ['p.Attivo = 1'];
             $params = [];
             $types = '';
 
             if ($tipoProdotto !== null) {
-                $query .= " AND p.Tipo_Prodotto = ?";
+                $conditions[] = 'p.Tipo_Prodotto = ?';
                 $params[] = $tipoProdotto;
                 $types .= 's';
             }
 
-            $query .= " ORDER BY p.Data_Creazione DESC LIMIT ?";
+            if (!empty($filters['tipologie']) && is_array($filters['tipologie'])) {
+                $tipologie = array_values(array_unique(array_filter(
+                    array_map('trim', $filters['tipologie']),
+                    fn($value) => $value !== ''
+                )));
+
+                if (!empty($tipologie)) {
+                    $placeholders = implode(',', array_fill(0, count($tipologie), '?'));
+                    $conditions[] = "p.Tipologia_Prodotto IN ($placeholders)";
+                    foreach ($tipologie as $tipologia) {
+                        $params[] = $tipologia;
+                        $types .= 's';
+                    }
+                }
+            }
+
+            if (array_key_exists('patente', $filters) && $filters['patente'] !== null) {
+                $conditions[] = 'p.Richiede_Patente = ?';
+                $params[] = $filters['patente'] ? 1 : 0;
+                $types .= 'i';
+            }
+
+            if (!empty($filters['postiMin'])) {
+                $conditions[] = 'p.Posti_Totali >= ?';
+                $params[] = (int) $filters['postiMin'];
+                $types .= 'i';
+            }
+
+            if (!empty($filters['prezzoMax'])) {
+                $conditions[] = 'p.Prezzo_Base <= ?';
+                $params[] = (float) $filters['prezzoMax'];
+                $types .= 'd';
+            }
+
+            $orderClause = 'ORDER BY p.Data_Creazione DESC, p.IDProdotto ASC';
+            switch ($sort) {
+                case 'price-asc':
+                    $orderClause = 'ORDER BY p.Prezzo_Base ASC, p.IDProdotto ASC';
+                    break;
+                case 'price-desc':
+                    $orderClause = 'ORDER BY p.Prezzo_Base DESC, p.IDProdotto ASC';
+                    break;
+                case 'size':
+                    $orderClause = 'ORDER BY COALESCE(p.Lunghezza_Barca_Metri, 0) DESC, p.IDProdotto ASC';
+                    break;
+            }
+
+            if (!empty($conditions)) {
+                $query .= ' WHERE ' . implode(' AND ', $conditions);
+            }
+            $query .= ' ' . $orderClause . ' LIMIT ?';
+
             $params[] = $limit;
             $types .= 'i';
 
@@ -706,9 +815,11 @@ class DBConnection {
                 $this->closeConnection();
                 return false;
             }
+
             if (!empty($params)) {
                 $stmt->bind_param($types, ...$params);
             }
+
             $stmt->execute();
             $result = $stmt->get_result();
             $stmt->close();
