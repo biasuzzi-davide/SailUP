@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Creato il: Dic 23, 2025 alle 12:39
+-- Creato il: Dic 25, 2025 alle 19:03
 -- Versione del server: 11.8.3-MariaDB-0+deb13u1 from Debian
 -- Versione PHP: 8.4.11
 
@@ -288,7 +288,7 @@ CREATE TABLE `Media` (
   `IDProdotto` varchar(50) DEFAULT NULL,
   `IDArticolo` int(11) DEFAULT NULL,
   `Data_Caricamento` timestamp NULL DEFAULT current_timestamp()
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dump dei dati per la tabella `Media`
@@ -313,11 +313,26 @@ INSERT INTO `Media` (`IDMedia`, `URL_Media`, `Testo_Alternativo`, `Tipo_Media`, 
 (16, '../img/prodotti/tramontonapoli.jpg', 'Coppia al tramonto con prosecco', 'Immagine', NULL, 'EXP-TRAMONTO-001', NULL, '2025-12-23 12:11:10'),
 (17, '../img/prodotti/snork.jpg', 'Snorkeling a Capri con pesci', 'Immagine', NULL, 'EXP-SNORKEL-001', NULL, '2025-12-23 12:11:10'),
 (18, '../img/prodotti/costieraamalfitana.jpg', 'Costiera Amalfitana vista dal mare', 'Immagine', NULL, 'EXP-ESCURSIONE-001', NULL, '2025-12-23 12:11:10'),
-(19, '../img/Azimut_55_fly_2.webp', 'Cala dell\'Infreschi bellissima', 'Immagine', NULL, NULL, 1, '2025-12-23 12:11:10'),
-(20, '../img/Azimut_55_fly_2.webp', 'Snorkel a Capri con pesce dorato', 'Immagine', NULL, NULL, 2, '2025-12-23 12:11:10'),
-(21, '../img/Azimut_55_fly_2.webp', 'Ormeggio professionale al porto', 'Immagine', NULL, NULL, 3, '2025-12-23 12:11:10'),
-(22, '../img/Azimut_55_fly_2.webp', 'Yacht di lusso nel golfo', 'Immagine', NULL, NULL, 4, '2025-12-23 12:11:10'),
-(23, '../img/Azimut_55_fly_2.webp', 'Barca a vela al tramonto', 'Immagine', NULL, NULL, 5, '2025-12-23 12:11:10');
+(64, '../img/blog/cale-costiera-sorrentina.webp', 'Spiagge e cale nascoste della costiera sorrentina', 'Immagine', NULL, NULL, 1, '2025-12-25 18:34:09'),
+(65, '../img/blog/snorkeling-capri.webp', 'Guida allo snorkeling e fauna marina a Capri', 'Immagine', NULL, NULL, 2, '2025-12-25 18:34:09'),
+(66, '../img/blog/ormeggio-sicurezza.webp', 'Tecniche di ormeggio sicuro per principianti', 'Immagine', NULL, NULL, 3, '2025-12-25 18:34:09'),
+(67, '../img/blog/lusso-yacht-charter.webp', 'Yacht di lusso e charter esclusivi nel golfo', 'Immagine', NULL, NULL, 4, '2025-12-25 18:34:09'),
+(68, '../img/blog/navigazione-vela.webp', 'Barche a vela e crociere tradizionali', 'Immagine', NULL, NULL, 5, '2025-12-25 18:34:09'),
+(69, '../img/blog/sicurezza-mare.webp', 'Protocolli di sicurezza e attrezzature obbligatorie', 'Immagine', NULL, NULL, 6, '2025-12-25 18:34:09'),
+(70, '../img/blog/positano-amalfi.webp', 'Villaggi storici di Positano e Amalfi', 'Immagine', NULL, NULL, 7, '2025-12-25 18:34:09'),
+(71, '../img/blog/bioluminescenza-golfo.webp', 'Fenomeno della bioluminescenza nel golfo di Napoli', 'Immagine', NULL, NULL, 8, '2025-12-25 18:34:09'),
+(72, '../img/blog/ricette-cucina-marinara.webp', 'Ricette di cucina marinara da preparare a bordo', 'Immagine', NULL, NULL, 9, '2025-12-25 18:34:09'),
+(73, '../img/blog/flora-fauna-marinara.webp', 'Flora e fauna marina della costiera sorrentina', 'Immagine', NULL, NULL, 10, '2025-12-25 18:34:09'),
+(74, '../img/blog/meteo-stagioni-navigazione.webp', 'Meteo e stagioni ideali per navigare', 'Immagine', NULL, NULL, 11, '2025-12-25 18:34:09'),
+(75, '../img/blog/sorrento-perla-costiera.webp', 'Sorrento, perla della costiera amalfitana', 'Immagine', NULL, NULL, 12, '2025-12-25 18:34:09'),
+(76, '../img/blog/fotografia-subacquea.webp', 'Fotografia subacquea e cattura di momenti', 'Immagine', NULL, NULL, 13, '2025-12-25 18:34:09'),
+(77, '../img/blog/sostenibilita-marina.webp', 'Navigazione sostenibile e protezione marina', 'Immagine', NULL, NULL, 14, '2025-12-25 18:34:09'),
+(78, '../img/blog/capri-leggenda-realta.webp', 'Isola di Capri: leggenda e realtà', 'Immagine', NULL, NULL, 15, '2025-12-25 18:34:09'),
+(79, '../img/blog/noleggio-barca-scelta.webp', 'Come scegliere la barca perfetta per il noleggio', 'Immagine', NULL, NULL, 16, '2025-12-25 18:34:09'),
+(80, '../img/blog/ballate-marinai-tradizioni.webp', 'Tradizioni nautiche e ballate di marinai', 'Immagine', NULL, NULL, 17, '2025-12-25 18:34:09'),
+(81, '../img/blog/wellness-mare-relax.webp', 'Wellness e relax in mare a bordo', 'Immagine', NULL, NULL, 18, '2025-12-25 18:34:09'),
+(82, '../img/blog/ischia-vulcani-terme.webp', 'Ischia: vulcani, terme e bellezze naturali', 'Immagine', NULL, NULL, 19, '2025-12-25 18:34:09'),
+(83, '../img/blog/regolamenti-marittimi.webp', 'Regolamenti marittimi e doveri del navigatore', 'Immagine', NULL, NULL, 20, '2025-12-25 18:34:09');
 
 -- --------------------------------------------------------
 
@@ -797,7 +812,7 @@ ALTER TABLE `Lingua`
 -- AUTO_INCREMENT per la tabella `Media`
 --
 ALTER TABLE `Media`
-  MODIFY `IDMedia` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `IDMedia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 
 --
 -- AUTO_INCREMENT per la tabella `Prenotazione`
