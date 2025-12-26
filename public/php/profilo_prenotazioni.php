@@ -22,7 +22,8 @@ if (is_array($prenotazioni) && !empty($prenotazioni)) {
             . '</tr>';
     }
 } else {
-    $rowsHtml = '<tr class="booking-row"><td colspan="5">Nessuna prenotazione trovata.</td></tr>';
+    // Riga segnaposto senza classi usate per i contatori JS, così resta a 0
+    $rowsHtml = '<tr><td colspan="5">Nessuna prenotazione trovata.</td></tr>';
 }
 
 $html = buildPage('../pages/profilo_prenotazioni.html', $_SERVER['PHP_SELF']);
