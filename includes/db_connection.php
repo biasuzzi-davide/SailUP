@@ -869,6 +869,46 @@ class DBConnection {
                 $types .= 's';
             }
 
+            $dataRichiestaInizio = $filters['dataRichiestaInizio'] ?? null;
+            $dataRichiestaFine = $filters['dataRichiestaFine'] ?? null;
+            $rangeValido = false;
+            if ($dataRichiestaInizio !== null && $dataRichiestaFine !== null) {
+                $timestampInizio = strtotime($dataRichiestaInizio);
+                $timestampFine = strtotime($dataRichiestaFine);
+                if ($timestampInizio !== false && $timestampFine !== false && $timestampInizio <= $timestampFine) {
+                    $rangeValido = true;
+                }
+            }
+
+            if ($rangeValido) {
+                $conditions[] = 'NOT EXISTS (
+                    SELECT 1
+                    FROM Prenotazione pr
+                    WHERE pr.IDProdotto = p.IDProdotto
+                      AND pr.Stato_Prenotazione != ?
+                      AND pr.Data_Ora_Inizio < ?
+                      AND pr.Data_Ora_Fine > ?
+                )';
+                $params[] = 'Cancellata';
+                $types .= 's';
+                $params[] = $dataRichiestaFine;
+                $types .= 's';
+                $params[] = $dataRichiestaInizio;
+                $types .= 's';
+
+                $conditions[] = 'NOT EXISTS (
+                    SELECT 1
+                    FROM Indisponibilita ind
+                    WHERE ind.IDProdotto = p.IDProdotto
+                      AND ind.Data_Inizio < ?
+                      AND ind.Data_Fine > ?
+                )';
+                $params[] = $dataRichiestaFine;
+                $types .= 's';
+                $params[] = $dataRichiestaInizio;
+                $types .= 's';
+            }
+
             $orderClause = 'ORDER BY p.Data_Creazione DESC, p.IDProdotto ASC';
             switch ($sort) {
                 case 'price-asc':

@@ -19,6 +19,16 @@ $datePattern = '/^\d{4}-\d{2}-\d{2}$/';
 $dataEsperienza = (isset($_GET['data_esperienza']) && preg_match($datePattern, (string) $_GET['data_esperienza']))
     ? $_GET['data_esperienza']
     : '';
+$dataRichiestaInizio = null;
+$dataRichiestaFine = null;
+if ($dataEsperienza !== '') {
+    $parsedDate = DateTime::createFromFormat('Y-m-d', $dataEsperienza);
+    if ($parsedDate) {
+        $formattedDate = $parsedDate->format('Y-m-d');
+        $dataRichiestaInizio = $formattedDate . ' 00:00:00';
+        $dataRichiestaFine = $formattedDate . ' 23:59:59';
+    }
+}
 
 $linguaSelezionata = '';
 if (isset($_GET['lingua_guida'])) {
@@ -54,6 +64,10 @@ $filters = [
     'accessibile' => $accessibileFiltro,
     'lingua' => $linguaSelezionata,
 ];
+if ($dataRichiestaInizio !== null && $dataRichiestaFine !== null) {
+    $filters['dataRichiestaInizio'] = $dataRichiestaInizio;
+    $filters['dataRichiestaFine'] = $dataRichiestaFine;
+}
 
 $prodottiExperience = $db->getProdottiWithMedia('Experience', 200, $filters, $sortChoice);
 
