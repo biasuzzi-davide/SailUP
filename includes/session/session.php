@@ -4,6 +4,26 @@ if(session_status()==PHP_SESSION_NONE){
     session_start();
 }
 
+/**
+ * restituisce un token csfr di sessione,generandolo se mancante
+ */
+function getCsrfToken(): string {
+    if (empty($_SESSION['csrf_token'])) {
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+    }
+    return $_SESSION['csrf_token'];
+}
+
+/**
+ * verifica la validità del token csrf
+ */
+function verifyCsrfToken(?string $token): bool {
+    if (empty($_SESSION['csrf_token']) || $token === null) {
+        return false;
+    }
+    return hash_equals($_SESSION['csrf_token'], $token);
+}
+
 /** 
  * controlla se l'utente è loggato o meno, isset dice se quella variabile è null o meno
  * @return bool
@@ -58,4 +78,3 @@ function logout(string $redirect = '../php/login.php'): void {
     header('Location: ' . $redirect);
     exit;
 }
-

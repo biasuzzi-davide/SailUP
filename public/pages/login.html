@@ -38,10 +38,13 @@
         <h2>Accedi al tuo <span lang="en">account</span></h2>
         <p class="auth-subtitle">Benvenuto su SailUP! Accedi per gestire le tue prenotazioni.</p>
         
-        
+        <div id="server-messages" class="form-messages [SERVER_STATE]" role="status" aria-live="polite">
+          <p>[SERVER_MESSAGES]</p>
+        </div>
         <div id="error-message" class="error-message hidden" role="alert" aria-live="polite"></div>
         
         <form id="login-form" action="" method="post" novalidate>   <!-- aggiungere la action corrispondente  -->
+          <input type="hidden" name="csrf_token" value="[CSRF_TOKEN]">
           <div class="form-group">
             <label for="email" lang="en">Email</label>
             <input type="email" id="email" name="email" required autocomplete="email"

@@ -40,16 +40,15 @@
       <div class="profile-header">
         <div class="profile-avatar">
           <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=200&q=80"
-            alt="Avatar di Mario Rossi" />
+            alt="Avatar di [USER_NOME] [USER_COGNOME]" />
         </div>
         <div class="profile-info">
-          <h1>Mario Rossi</h1>
-          <p>mario.rossi@example.com</p>
-          <p>Membro dal Gennaio 2024</p>
+          <h1>[USER_NOME] [USER_COGNOME]</h1>
+          <p>[USER_EMAIL]</p>
         </div>
         <div class="profile-actions">
-          <a href="profilo.html" class="btn-layout-light">Visualizza Profilo</a>
-          <button class="btn-layout-light" type="button">Esci</button>
+          <a href="profilo.php" class="btn-layout-light">Visualizza Profilo</a>
+          <a href="logout.php" class="btn-layout-light">Esci</a>
         </div>
       </div>
 
@@ -57,13 +56,13 @@
         <nav class="profile-sidebar" aria-label="Menu profilo">
           <ul>
             <li>
-              <a href="profilo.html">
+              <a href="profilo.php">
                 <span class="nav-icon" aria-hidden="true">👤</span>
                 <span>Informazioni Personali</span>
               </a>
             </li>
             <li>
-              <a href="profilo_sicurezza.html">
+              <a href="profilo_sicurezza.php">
                 <span class="nav-icon" aria-hidden="true">🔒</span>
                 <span>Sicurezza</span>
               </a>
@@ -113,89 +112,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr class="booking-row" data-status="active">
-                      <td data-label="Codice prenotazione"><strong>#1234</strong></td>
-                      <td data-label="Prodotto">
-                        Bavaria 46
-                      </td>
-                      <td data-label="Data">
-                        <time datetime="2025-12-15">15/12/2025</time>
-                      </td>
-                      <td data-label="Importo">€ 450,00</td>
-                      <td data-label="Stato"><span class="status-badge active">Attiva</span></td>
-                      <td data-label="Azioni" class="actions-cell">
-                        <a href="dettaglio_prenotazione.html" class="btn-icon"
-                          aria-label="Vedi dettagli prenotazione #1234">👁️</a>
-                        <button class="btn-icon danger" aria-label="Cancella prenotazione #1234">✖</button>
-                      </td>
-                    </tr>
-
-                    <tr class="booking-row" data-status="active">
-                      <td data-label="Codice prenotazione"><strong>#1567</strong></td>
-                      <td data-label="Prodotto">
-                        Tour Capri e Faraglioni
-                      </td>
-                      <td data-label="Data">
-                        <time datetime="2025-12-20">20/12/2025</time>
-                      </td>
-                      <td data-label="Importo">€ 120,00</td>
-                      <td data-label="Stato"><span class="status-badge active">Attiva</span></td>
-                      <td data-label="Azioni" class="actions-cell">
-                        <a href="dettaglio_prenotazione.html" class="btn-icon"
-                          aria-label="Vedi dettagli prenotazione #1567">👁️</a>
-                        <button class="btn-icon danger" aria-label="Cancella prenotazione #1567">✖</button>
-                      </td>
-                    </tr>
-
-                    <tr class="booking-row" data-status="active">
-                      <td data-label="Codice prenotazione"><strong>#1789</strong></td>
-                      <td data-label="Prodotto">
-                        Sacs Strider
-                      </td>
-                      <td data-label="Data">
-                        <time datetime="2025-12-28">28/12/2025</time>
-                      </td>
-                      <td data-label="Importo">€ 280,00</td>
-                      <td data-label="Stato"><span class="status-badge active">Attiva</span></td>
-                      <td data-label="Azioni" class="actions-cell">
-                        <a href="dettaglio_prenotazione.html" class="btn-icon"
-                          aria-label="Vedi dettagli prenotazione #1789">👁️</a>
-                        <button class="btn-icon danger" aria-label="Cancella prenotazione #1789">✖</button>
-                      </td>
-                    </tr>
-
-                    <tr class="booking-row" data-status="completed">
-                      <td data-label="Codice prenotazione"><strong>#0987</strong></td>
-                      <td data-label="Prodotto">
-                        Sunseeker Predator
-                      </td>
-                      <td data-label="Data">
-                        <time datetime="2025-11-10">10/11/2025</time>
-                      </td>
-                      <td data-label="Importo">€ 850,00</td>
-                      <td data-label="Stato"><span class="status-badge completed">Completata</span></td>
-                      <td data-label="Azioni" class="actions-cell">
-                        <a href="dettaglio_prenotazione.html" class="btn-icon"
-                          aria-label="Vedi dettagli prenotazione #0987">👁️</a>
-                      </td>
-                    </tr>
-
-                    <tr class="booking-row" data-status="completed">
-                      <td data-label="Codice prenotazione"><strong>#0765</strong></td>
-                      <td data-label="Prodotto">
-                        Tramonto a Ischia
-                        <div class="text-muted">Esperienza</div>
-                      </td>
-                      <td data-label="Data">
-                        <time datetime="2025-10-22">22/10/2025</time>
-                      </td>
-                      <td data-label="Importo">€ 95,00</td>
-                      <td data-label="Stato"><span class="status-badge completed">Completata</span></td>
-                      <td data-label="Azioni" class="actions-cell">
-                        <a href="dettaglio_prenotazione.html" class="btn-icon"
-                          aria-label="Vedi dettagli prenotazione #0765">👁️</a>
-                      </td>
-                    </tr>
+                    [BOOKING_ROWS]
                   </tbody>
                 </table>
               </div>

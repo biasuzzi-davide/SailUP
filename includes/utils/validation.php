@@ -34,7 +34,7 @@ function validatePassword(string $password):bool{
 }
 
 /**
- * checka se il codice fiscale inserito è ok
+ * checka se il codice fiscale inserito è ok,controlla se è formato da lettere e numeri e se l ultimo carattere è quello giusto
  * @param string $cf
  * @return bool
  */

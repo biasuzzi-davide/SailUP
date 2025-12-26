@@ -138,6 +138,51 @@ class DBConnection {
         }
     }
 
+    /**
+     * update di un indirizzo esistente
+     */
+    public function updateIndirizzo(
+        int $idIndirizzo,
+        string $via,
+        string $nCivico,
+        string $cap,
+        string $citta,
+        string $provincia,
+        string $paese = 'IT'
+    ): bool {
+        $this->openConnection();
+        $query = "UPDATE Indirizzo
+                  SET Via = ?, N_Civico = ?, CAP = ?, Citta = ?, Provincia = ?, Paese = ?
+                  WHERE IDIndirizzo = ?";
+
+        try {
+            $stmt = $this->connection->prepare($query);
+            if (!$stmt) {
+                $this->closeConnection();
+                return false;
+            }
+
+            $stmt->bind_param(
+                "ssssssi",
+                $via,
+                $nCivico,
+                $cap,
+                $citta,
+                $provincia,
+                $paese,
+                $idIndirizzo
+            );
+
+            $ok = $stmt->execute();
+            $stmt->close();
+            $this->closeConnection();
+            return $ok;
+        } catch (Throwable $t) {
+            $this->closeConnection();
+            return false;
+        }
+    }
+
     /* ============================================================
        METODI UTENTE
        ============================================================ */
@@ -281,6 +326,298 @@ class DBConnection {
     }
 
     /**
+     *recupera un utente per id
+     *ritorna array se trovato, null se mancante,false in caso di errore db
+     */
+    public function getUtenteById(int $idUtente): array|null|bool {
+        $this->openConnection();
+        $query = "
+            SELECT IDUtente, Nome, Cognome, Email, Is_Admin, Attivo, Data_Registrazione
+            FROM Utente
+            WHERE IDUtente = ?
+            LIMIT 1
+        ";
+
+        try {
+            $stmt = $this->connection->prepare($query);
+            if (!$stmt) {
+                $this->closeConnection();
+                return false;
+            }
+
+            $stmt->bind_param('i', $idUtente);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $row = $result->fetch_assoc();
+            $stmt->close();
+            $this->closeConnection();
+
+            if (!$row) {
+                return null;
+            }
+
+            return $row;
+        } catch (Throwable $t) {
+            $this->closeConnection();
+            return false;
+        }
+    }
+
+    /**
+     * Aggiorna i dati base utente (nome, cognome, CF, email).
+     * Ritorna true se ok, -1 se email già usata da altro utente, -2 se CF già usato, false in caso di errore.
+     */
+    public function updateUserProfile(
+        int $idUtente,
+        string $nome,
+        string $cognome,
+        string $cf,
+        string $email
+    ) {
+        $this->openConnection();
+        try {
+            // Controllo email duplicata su altri utenti
+            $qEmail = "SELECT IDUtente FROM Utente WHERE Email = ? AND IDUtente <> ?";
+            $stmt = $this->connection->prepare($qEmail);
+            if (!$stmt) {
+                $this->closeConnection();
+                return false;
+            }
+            $stmt->bind_param("si", $email, $idUtente);
+            $stmt->execute();
+            $res = $stmt->get_result();
+            if ($res->num_rows > 0) {
+                $stmt->close();
+                $this->closeConnection();
+                return -1;
+            }
+            $stmt->close();
+
+            // Controllo CF duplicato su altri utenti
+            $qCF = "SELECT IDUtente FROM Utente WHERE CF = ? AND IDUtente <> ?";
+            $stmt = $this->connection->prepare($qCF);
+            if (!$stmt) {
+                $this->closeConnection();
+                return false;
+            }
+            $stmt->bind_param("si", $cf, $idUtente);
+            $stmt->execute();
+            $res = $stmt->get_result();
+            if ($res->num_rows > 0) {
+                $stmt->close();
+                $this->closeConnection();
+                return -2;
+            }
+            $stmt->close();
+
+            // Update utente
+            $query = "UPDATE Utente
+                      SET Nome = ?, Cognome = ?, CF = ?, Email = ?
+                      WHERE IDUtente = ?";
+            $stmt = $this->connection->prepare($query);
+            if (!$stmt) {
+                $this->closeConnection();
+                return false;
+            }
+
+            $stmt->bind_param("ssssi", $nome, $cognome, $cf, $email, $idUtente);
+            $ok = $stmt->execute();
+            $stmt->close();
+            $this->closeConnection();
+            return $ok;
+        } catch (Throwable $t) {
+            $this->closeConnection();
+            return false;
+        }
+    }
+
+    /**
+     * aggiorna la password di un utente
+     */
+    public function updateUserPassword(int $idUtente, string $newPasswordHash): bool {
+        $this->openConnection();
+        $query = "UPDATE Utente SET PasswordHash = ? WHERE IDUtente = ?";
+
+        try {
+            $stmt = $this->connection->prepare($query);
+            if (!$stmt) {
+                $this->closeConnection();
+                return false;
+            }
+
+            $stmt->bind_param('si', $newPasswordHash, $idUtente);
+            $ok = $stmt->execute();
+            $stmt->close();
+            $this->closeConnection();
+            return $ok;
+        } catch (Throwable $t) {
+            $this->closeConnection();
+            return false;
+        }
+    }
+
+    /**
+     * update del ruolo di un user
+     */
+    public function setUserRole(int $idUtente, bool $isAdmin): bool {
+        $this->openConnection();
+        $query = "UPDATE Utente SET Is_Admin = ? WHERE IDUtente = ?";
+
+        try {
+            $stmt = $this->connection->prepare($query);
+            if (!$stmt) {
+                $this->closeConnection();
+                return false;
+            }
+
+            $flag = $isAdmin ? 1 : 0;
+            $stmt->bind_param('ii', $flag, $idUtente);
+            $ok = $stmt->execute();
+            $stmt->close();
+            $this->closeConnection();
+            return $ok;
+        } catch (Throwable $t) {
+            $this->closeConnection();
+            return false;
+        }
+    }
+
+    /**
+     * Attiva/disattiva un uten
+     */
+    public function setUserStatus(int $idUtente, bool $attivo): bool {
+        $this->openConnection();
+        $query = "UPDATE Utente SET Attivo = ? WHERE IDUtente = ?";
+
+        try {
+            $stmt = $this->connection->prepare($query);
+            if (!$stmt) {
+                $this->closeConnection();
+                return false;
+            }
+
+            $flag = $attivo ? 1 : 0;
+            $stmt->bind_param('ii', $flag, $idUtente);
+            $ok = $stmt->execute();
+            $stmt->close();
+            $this->closeConnection();
+            return $ok;
+        } catch (Throwable $t) {
+            $this->closeConnection();
+            return false;
+        }
+    }
+
+    /**
+     * restituisce tutti gli utenti (serve per l admin)
+     */
+    public function getUtenti(): array|bool {
+        $this->openConnection();
+        $query = "SELECT IDUtente, Nome, Cognome, Email, Data_Registrazione, Is_Admin, Attivo FROM Utente ORDER BY Data_Registrazione DESC";
+
+        try {
+            $result = $this->connection->query($query);
+            if (!$result) {
+                $this->closeConnection();
+                return false;
+            }
+            $rows = [];
+            while ($row = $result->fetch_assoc()) {
+                $rows[] = $row;
+            }
+            $result->free();
+            $this->closeConnection();
+            return $rows;
+        } catch (Throwable $t) {
+            $this->closeConnection();
+            return false;
+        }
+    }
+
+    /**
+     * ricerca utentie con filtro e paginazione
+     */
+    public function searchUtenti(
+        ?string $term = null,
+        ?string $ruolo = null,
+        ?string $stato = null,
+        int $limit = 20,
+        int $offset = 0
+    ): array|bool {
+        $this->openConnection();
+
+        $conditions = [];
+        $params = [];
+        $types = '';
+
+        if ($term !== null && trim($term) !== '') {
+            $like = '%' . trim($term) . '%';
+            $conditions[] = '(Nome LIKE ? OR Cognome LIKE ? OR Email LIKE ?)';
+            $params[] = $like;
+            $params[] = $like;
+            $params[] = $like;
+            $types .= 'sss';
+        }
+
+        if ($ruolo === 'admin') {
+            $conditions[] = 'Is_Admin = 1';
+        } elseif ($ruolo === 'standard') {
+            $conditions[] = 'Is_Admin = 0';
+        }
+
+        if ($stato === 'attivi') {
+            $conditions[] = 'Attivo = 1';
+        } elseif ($stato === 'disattivi') {
+            $conditions[] = 'Attivo = 0';
+        }
+
+        $query = "SELECT SQL_CALC_FOUND_ROWS IDUtente, Nome, Cognome, Email, Data_Registrazione, Is_Admin, Attivo
+                  FROM Utente";
+
+        if (!empty($conditions)) {
+            $query .= ' WHERE ' . implode(' AND ', $conditions);
+        }
+
+        $query .= ' ORDER BY Data_Registrazione DESC LIMIT ? OFFSET ?';
+        $params[] = $limit;
+        $params[] = $offset;
+        $types .= 'ii';
+
+        try {
+            $stmt = $this->connection->prepare($query);
+            if (!$stmt) {
+                $this->closeConnection();
+                return false;
+            }
+
+            $stmt->bind_param($types, ...$params);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            $rows = [];
+            while ($row = $result->fetch_assoc()) {
+                $rows[] = $row;
+            }
+
+            $stmt->close();
+
+            $countResult = $this->connection->query("SELECT FOUND_ROWS() AS total");
+            $total = 0;
+            if ($countResult) {
+                $totalRow = $countResult->fetch_assoc();
+                $total = (int) ($totalRow['total'] ?? 0);
+                $countResult->free();
+            }
+
+            $this->closeConnection();
+            return ['data' => $rows, 'total' => $total];
+        } catch (Throwable $t) {
+            $this->closeConnection();
+            return false;
+        }
+    }
+
+    /**
      * Aggiorna la data dell'ultimo accesso.
      */
     public function aggiornaUltimoAccesso(int $idUtente): bool {
@@ -310,7 +647,362 @@ class DBConnection {
        ============================================================ */
 
     /**
-     * Restituisce un prodotto per IDProdotto oppure null/false.
+     * crea nuovo prodotto 
+     */
+    public function creaProdotto(array $data): bool {
+        $this->openConnection();
+        $query = "
+            INSERT INTO Prodotto (
+                IDProdotto, Tipo_Prodotto, Tipologia_Prodotto, Durata_Ore,
+                Nome_Prodotto, Descrizione_Breve, Descrizione, Prezzo_Base,
+                Posti_Totali, Accessibile_Disabili, Lunghezza_Barca_Metri,
+                Richiede_Patente, Attivo
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ";
+
+        try {
+            $stmt = $this->connection->prepare($query);
+            if (!$stmt) {
+                $this->closeConnection();
+                return false;
+            }
+
+            $durata = $data['Durata_Ore'] ?? null;
+            if ($durata !== null) {
+                $durata = (int) $durata;
+            }
+
+            $stmt->bind_param(
+                'sssisssdiidii',
+                $data['IDProdotto'],
+                $data['Tipo_Prodotto'],
+                $data['Tipologia_Prodotto'],
+                $durata,
+                $data['Nome_Prodotto'],
+                $data['Descrizione_Breve'],
+                $data['Descrizione'],
+                $data['Prezzo_Base'],
+                $data['Posti_Totali'],
+                $data['Accessibile_Disabili'],
+                $data['Lunghezza_Barca_Metri'],
+                $data['Richiede_Patente'],
+                $data['Attivo']
+            );
+
+            $ok = $stmt->execute();
+            $stmt->close();
+            $this->closeConnection();
+            return $ok;
+        } catch (Throwable $t) {
+            $this->closeConnection();
+            return false;
+        }
+    }
+
+    /**
+     * aggiorna un prodotto esistente
+     */
+    public function updateProdotto(string $idProdotto, array $data): bool {
+        $this->openConnection();
+        $query = "
+            UPDATE Prodotto
+            SET Tipo_Prodotto = ?, Tipologia_Prodotto = ?, Durata_Ore = ?, Nome_Prodotto = ?,
+                Descrizione_Breve = ?, Descrizione = ?, Prezzo_Base = ?, Posti_Totali = ?,
+                Accessibile_Disabili = ?, Lunghezza_Barca_Metri = ?, Richiede_Patente = ?, Attivo = ?
+            WHERE IDProdotto = ?
+        ";
+
+        try {
+            $stmt = $this->connection->prepare($query);
+            if (!$stmt) {
+                $this->closeConnection();
+                return false;
+            }
+
+            $durata = $data['Durata_Ore'] ?? null;
+            if ($durata !== null) {
+                $durata = (int) $durata;
+            }
+
+            $stmt->bind_param(
+                'ssisssdiidiis',
+                $data['Tipo_Prodotto'],
+                $data['Tipologia_Prodotto'],
+                $durata,
+                $data['Nome_Prodotto'],
+                $data['Descrizione_Breve'],
+                $data['Descrizione'],
+                $data['Prezzo_Base'],
+                $data['Posti_Totali'],
+                $data['Accessibile_Disabili'],
+                $data['Lunghezza_Barca_Metri'],
+                $data['Richiede_Patente'],
+                $data['Attivo'],
+                $idProdotto
+            );
+
+            $ok = $stmt->execute();
+            $stmt->close();
+            $this->closeConnection();
+            return $ok;
+        } catch (Throwable $t) {
+            $this->closeConnection();
+            return false;
+        }
+    }
+
+    /**
+     * aggiorna stato prodotto
+     */
+    public function setProdottoStatus(string $idProdotto, bool $attivo): bool {
+        $this->openConnection();
+        $query = "UPDATE Prodotto SET Attivo = ? WHERE IDProdotto = ?";
+
+        try {
+            $stmt = $this->connection->prepare($query);
+            if (!$stmt) {
+                $this->closeConnection();
+                return false;
+            }
+
+            $flag = $attivo ? 1 : 0;
+            $stmt->bind_param('is', $flag, $idProdotto);
+            $ok = $stmt->execute();
+            $stmt->close();
+            $this->closeConnection();
+            return $ok;
+        } catch (Throwable $t) {
+            $this->closeConnection();
+            return false;
+        }
+    }
+
+    /**
+     * recupera prodotti anche non attivi, con filtri base e paginazione
+     */
+    public function getProdottiAdmin(
+        ?string $term = null,
+        ?string $tipo = null,
+        ?string $stato = null,
+        int $limit = 20,
+        int $offset = 0
+    ): array|bool {
+        $this->openConnection();
+
+        $conditions = [];
+        $params = [];
+        $types = '';
+
+        if ($term !== null && trim($term) !== '') {
+            $like = '%' . trim($term) . '%';
+            $conditions[] = '(Nome_Prodotto LIKE ? OR IDProdotto LIKE ?)';
+            $params[] = $like;
+            $params[] = $like;
+            $types .= 'ss';
+        }
+
+        if ($tipo !== null && $tipo !== '') {
+            $conditions[] = 'Tipo_Prodotto = ?';
+            $params[] = $tipo;
+            $types .= 's';
+        }
+
+        if ($stato === 'attivi') {
+            $conditions[] = 'Attivo = 1';
+        } elseif ($stato === 'disattivi') {
+            $conditions[] = 'Attivo = 0';
+        }
+
+        $query = "SELECT SQL_CALC_FOUND_ROWS *
+                  FROM Prodotto";
+
+        if (!empty($conditions)) {
+            $query .= ' WHERE ' . implode(' AND ', $conditions);
+        }
+
+        $query .= ' ORDER BY Data_Creazione DESC LIMIT ? OFFSET ?';
+        $params[] = $limit;
+        $params[] = $offset;
+        $types .= 'ii';
+
+        try {
+            $stmt = $this->connection->prepare($query);
+            if (!$stmt) {
+                $this->closeConnection();
+                return false;
+            }
+
+            $stmt->bind_param($types, ...$params);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            $rows = [];
+            while ($row = $result->fetch_assoc()) {
+                $rows[] = $row;
+            }
+            $stmt->close();
+
+            $countResult = $this->connection->query("SELECT FOUND_ROWS() AS total");
+            $total = 0;
+            if ($countResult) {
+                $totalRow = $countResult->fetch_assoc();
+                $total = (int) ($totalRow['total'] ?? 0);
+                $countResult->free();
+            }
+
+            $this->closeConnection();
+            return ['data' => $rows, 'total' => $total];
+        } catch (Throwable $t) {
+            $this->closeConnection();
+            return false;
+        }
+    }
+
+    /**
+     * modifica/setta lingue prodotto
+     */
+    public function setLingueProdotto(string $idProdotto, array $codici): bool {
+        $this->openConnection();
+        $this->connection->begin_transaction();
+
+        try {
+            $del = $this->connection->prepare("DELETE FROM Prodotto_Lingua WHERE IDProdotto = ?");
+            if (!$del) {
+                $this->connection->rollback();
+                $this->closeConnection();
+                return false;
+            }
+            $del->bind_param('s', $idProdotto);
+            $del->execute();
+            $del->close();
+
+            if (!empty($codici)) {
+                $stmt = $this->connection->prepare("
+                    INSERT INTO Prodotto_Lingua (IDProdotto, IDLingua)
+                    SELECT ?, IDLingua FROM Lingua WHERE Codice = ? AND Attivo = 1
+                ");
+                if (!$stmt) {
+                    $this->connection->rollback();
+                    $this->closeConnection();
+                    return false;
+                }
+
+                foreach ($codici as $codice) {
+                    $code = trim($codice);
+                    if ($code === '') continue;
+                    $stmt->bind_param('ss', $idProdotto, $code);
+                    $stmt->execute();
+                }
+                $stmt->close();
+            }
+
+            $this->connection->commit();
+            $this->closeConnection();
+            return true;
+        } catch (Throwable $t) {
+            $this->connection->rollback();
+            $this->closeConnection();
+            return false;
+        }
+    }
+
+    /**
+     * Sostituisce la media principale del prodotto
+     */
+    public function upsertMediaProdotto(string $idProdotto, string $url, string $alt): bool {
+        $this->openConnection();
+        $this->connection->begin_transaction();
+
+        try {
+            $del = $this->connection->prepare("DELETE FROM Media WHERE IDProdotto = ?");
+            if (!$del) {
+                $this->connection->rollback();
+                $this->closeConnection();
+                return false;
+            }
+            $del->bind_param('s', $idProdotto);
+            $del->execute();
+            $del->close();
+
+            $stmt = $this->connection->prepare("
+                INSERT INTO Media (URL_Media, Testo_Alternativo, Tipo_Media, IDProdotto)
+                VALUES (?, ?, 'Immagine', ?)
+            ");
+            if (!$stmt) {
+                $this->connection->rollback();
+                $this->closeConnection();
+                return false;
+            }
+
+            $stmt->bind_param('sss', $url, $alt, $idProdotto);
+            $ok = $stmt->execute();
+            $stmt->close();
+
+            if ($ok) {
+                $this->connection->commit();
+            } else {
+                $this->connection->rollback();
+            }
+
+            $this->closeConnection();
+            return $ok;
+        } catch (Throwable $t) {
+            $this->connection->rollback();
+            $this->closeConnection();
+            return false;
+        }
+    }
+
+    /**
+     * sostituisce gli inclusi del prodotto
+     */
+    public function setInclusiProdotto(string $idProdotto, array $inclusi): bool {
+        $this->openConnection();
+        $this->connection->begin_transaction();
+
+        try {
+            $del = $this->connection->prepare("DELETE FROM Prodotto_Incluso WHERE IDProdotto = ?");
+            if (!$del) {
+                $this->connection->rollback();
+                $this->closeConnection();
+                return false;
+            }
+            $del->bind_param('s', $idProdotto);
+            $del->execute();
+            $del->close();
+
+            if (!empty($inclusi)) {
+                $stmt = $this->connection->prepare("
+                    INSERT INTO Prodotto_Incluso (IDProdotto, Nome_Incluso)
+                    VALUES (?, ?)
+                ");
+                if (!$stmt) {
+                    $this->connection->rollback();
+                    $this->closeConnection();
+                    return false;
+                }
+
+                foreach ($inclusi as $inc) {
+                    $val = trim($inc);
+                    if ($val === '') continue;
+                    $stmt->bind_param('ss', $idProdotto, $val);
+                    $stmt->execute();
+                }
+                $stmt->close();
+            }
+
+            $this->connection->commit();
+            $this->closeConnection();
+            return true;
+        } catch (Throwable $t) {
+            $this->connection->rollback();
+            $this->closeConnection();
+            return false;
+        }
+    }
+
+    /**
+     * Rrestituisce un prodotto per per id
      */
     public function getProdottoById(string $idProdotto) {
         $this->openConnection();
@@ -354,6 +1046,51 @@ class DBConnection {
             LEFT JOIN Media m ON p.IDProdotto = m.IDProdotto
             WHERE p.IDProdotto = ? AND p.Attivo = 1
             ORDER BY m.IDMedia ASC
+            LIMIT 1
+        ";
+
+        try {
+            $stmt = $this->connection->prepare($query);
+            if (!$stmt) {
+                $this->closeConnection();
+                return false;
+            }
+
+            $stmt->bind_param('s', $idProdotto);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $stmt->close();
+
+            if (!$result) {
+                $this->closeConnection();
+                return false;
+            }
+
+            if ($result->num_rows === 0) {
+                $this->closeConnection();
+                return null;
+            }
+
+            $row = $result->fetch_assoc();
+            $result->free();
+            $this->closeConnection();
+            return $row;
+        } catch (Throwable $t) {
+            $this->closeConnection();
+            return false;
+        }
+    }
+
+    /**
+     * recupera prodotto per l'area admin (anche non attivo)
+     */
+    public function getProdottoAdminById(string $idProdotto): array|bool|null {
+        $this->openConnection();
+        $query = "
+            SELECT p.*, m.URL_Media, m.Testo_Alternativo
+            FROM Prodotto p
+            LEFT JOIN Media m ON p.IDProdotto = m.IDProdotto
+            WHERE p.IDProdotto = ?
             LIMIT 1
         ";
 
@@ -788,6 +1525,111 @@ class DBConnection {
     }
 
     /**
+     * recupera tutte le prenotazioni con dati utente 
+     */
+    public function getPrenotazioni(): array|bool {
+        $this->openConnection();
+        $query = "
+            SELECT pr.*, u.Nome AS Utente_Nome, u.Cognome AS Utente_Cognome, u.Email AS Utente_Email
+            FROM Prenotazione pr
+            JOIN Utente u ON u.IDUtente = pr.IDUtente
+            ORDER BY pr.Data_Ora_Inizio DESC
+        ";
+
+        try {
+            $result = $this->connection->query($query);
+            if (!$result) {
+                $this->closeConnection();
+                return false;
+            }
+
+            $rows = [];
+            while ($row = $result->fetch_assoc()) {
+                $rows[] = $row;
+            }
+
+            $result->free();
+            $this->closeConnection();
+            return $rows;
+        } catch (Throwable $t) {
+            $this->closeConnection();
+            return false;
+        }
+    }
+
+    /**
+     * aggiorna stato e note prenotazione
+     */
+    public function updatePrenotazioneStato(int $idPrenotazione, string $stato, ?string $note = null): bool {
+        $this->openConnection();
+
+        $allowed = ['In Attesa', 'Confermata', 'Cancellata'];
+        if (!in_array($stato, $allowed, true)) {
+            $this->closeConnection();
+            return false;
+        }
+
+        $query = "UPDATE Prenotazione SET Stato_Prenotazione = ?, Note_Addizionali = ? WHERE IDPrenotazione = ?";
+
+        try {
+            $stmt = $this->connection->prepare($query);
+            if (!$stmt) {
+                $this->closeConnection();
+                return false;
+            }
+
+            $stmt->bind_param('ssi', $stato, $note, $idPrenotazione);
+            $ok = $stmt->execute();
+            $stmt->close();
+            $this->closeConnection();
+            return $ok;
+        } catch (Throwable $t) {
+            $this->closeConnection();
+            return false;
+        }
+    }
+
+    /**
+     * recupera  prenotazione con dati utente e prodotto
+     */
+    public function getPrenotazioneById(int $idPrenotazione): array|bool|null {
+        $this->openConnection();
+        $query = "
+            SELECT pr.*,
+                   u.Nome AS Utente_Nome, u.Cognome AS Utente_Cognome, u.Email AS Utente_Email,
+                   p.Nome_Prodotto, p.Tipo_Prodotto, p.Tipologia_Prodotto, p.Prezzo_Base,
+                   m.URL_Media, m.Testo_Alternativo
+            FROM Prenotazione pr
+            JOIN Utente u ON u.IDUtente = pr.IDUtente
+            JOIN Prodotto p ON p.IDProdotto = pr.IDProdotto
+            LEFT JOIN Media m ON m.IDProdotto = p.IDProdotto
+            WHERE pr.IDPrenotazione = ?
+            LIMIT 1
+        ";
+
+        try {
+            $stmt = $this->connection->prepare($query);
+            if (!$stmt) {
+                $this->closeConnection();
+                return false;
+            }
+            $stmt->bind_param('i', $idPrenotazione);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $row = $result->fetch_assoc();
+            $stmt->close();
+            $this->closeConnection();
+            if (!$row) {
+                return null;
+            }
+            return $row;
+        } catch (Throwable $t) {
+            $this->closeConnection();
+            return false;
+        }
+    }
+
+    /**
      * Recupera prodotti con media associata, limitati per tipo e numero.
      */
     public function getProdottiWithMedia(
@@ -1118,6 +1960,198 @@ class DBConnection {
             $this->closeConnection();
             return $extras;
         } catch (Throwable $t) {
+            $this->closeConnection();
+            return false;
+        }
+    }
+
+    /**
+     * recupera articoli area admin
+     */
+    public function getArticoliAdmin(?string $term = null, int $limit = 20, int $offset = 0): array|bool {
+        $this->openConnection();
+
+        $conditions = [];
+        $params = [];
+        $types = '';
+
+        if ($term !== null && trim($term) !== '') {
+            $like = '%' . trim($term) . '%';
+            $conditions[] = '(Titolo LIKE ? OR Descrizione_Breve LIKE ?)';
+            $params[] = $like;
+            $params[] = $like;
+            $types .= 'ss';
+        }
+
+        $query = "
+            SELECT SQL_CALC_FOUND_ROWS a.*, u.Nome AS Autore_Nome, u.Cognome AS Autore_Cognome,
+                   (SELECT URL_Media FROM Media WHERE IDArticolo = a.IDArticolo LIMIT 1) AS URL_Media
+            FROM Articolo_Blog a
+            JOIN Utente u ON u.IDUtente = a.IDAutore
+        ";
+
+        if (!empty($conditions)) {
+            $query .= ' WHERE ' . implode(' AND ', $conditions);
+        }
+
+        $query .= ' ORDER BY a.Data_Pubblicazione DESC, a.IDArticolo DESC LIMIT ? OFFSET ?';
+        $params[] = $limit;
+        $params[] = $offset;
+        $types .= 'ii';
+
+        try {
+            $stmt = $this->connection->prepare($query);
+            if (!$stmt) {
+                $this->closeConnection();
+                return false;
+            }
+            $stmt->bind_param($types, ...$params);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            $rows = [];
+            while ($row = $result->fetch_assoc()) {
+                $rows[] = $row;
+            }
+            $stmt->close();
+
+            $countResult = $this->connection->query("SELECT FOUND_ROWS() AS total");
+            $total = 0;
+            if ($countResult) {
+                $totalRow = $countResult->fetch_assoc();
+                $total = (int) ($totalRow['total'] ?? 0);
+                $countResult->free();
+            }
+
+            $this->closeConnection();
+            return ['data' => $rows, 'total' => $total];
+        } catch (Throwable $t) {
+            $this->closeConnection();
+            return false;
+        }
+    }
+
+    /**
+     * crea nuovo articolo di blog.
+     */
+    public function creaArticoloBlog(
+        int $idAutore,
+        string $titolo,
+        string $descrizioneBreve,
+        string $contenuto,
+        string $dataPubblicazione,
+        bool $pubblicato,
+        int $tempoLettura = 0
+    ) {
+        $this->openConnection();
+        $query = "
+            INSERT INTO Articolo_Blog (IDAutore, Titolo, Descrizione_Breve, Contenuto, Data_Pubblicazione, Tempo_Lettura, Pubblicato)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+        ";
+
+        try {
+            $stmt = $this->connection->prepare($query);
+            if (!$stmt) {
+                $this->closeConnection();
+                return false;
+            }
+
+            $pub = $pubblicato ? 1 : 0;
+            $stmt->bind_param('issssii', $idAutore, $titolo, $descrizioneBreve, $contenuto, $dataPubblicazione, $tempoLettura, $pub);
+            $ok = $stmt->execute();
+            $newId = $stmt->insert_id;
+            $stmt->close();
+            $this->closeConnection();
+            return $ok ? $newId : false;
+        } catch (Throwable $t) {
+            $this->closeConnection();
+            return false;
+        }
+    }
+
+    /**
+     * aggiorna stato pubblicazione di un articolo
+     */
+    public function setArticoloStato(int $idArticolo, bool $pubblicato): bool {
+        $this->openConnection();
+        $query = "UPDATE Articolo_Blog SET Pubblicato = ? WHERE IDArticolo = ?";
+
+        try {
+            $stmt = $this->connection->prepare($query);
+            if (!$stmt) {
+                $this->closeConnection();
+                return false;
+            }
+            $flag = $pubblicato ? 1 : 0;
+            $stmt->bind_param('ii', $flag, $idArticolo);
+            $ok = $stmt->execute();
+            $stmt->close();
+            $this->closeConnection();
+            return $ok;
+        } catch (Throwable $t) {
+            $this->closeConnection();
+            return false;
+        }
+    }
+
+    /**
+     * elimina articolo 
+     */
+    public function deleteArticolo(int $idArticolo): bool {
+        $this->openConnection();
+        $query = "DELETE FROM Articolo_Blog WHERE IDArticolo = ?";
+
+        try {
+            $stmt = $this->connection->prepare($query);
+            if (!$stmt) {
+                $this->closeConnection();
+                return false;
+            }
+            $stmt->bind_param('i', $idArticolo);
+            $ok = $stmt->execute();
+            $stmt->close();
+            $this->closeConnection();
+            return $ok;
+        } catch (Throwable $t) {
+            $this->closeConnection();
+            return false;
+        }
+    }
+
+    /**
+     * sostituisce la media principale di un articolo
+     */
+    public function upsertMediaArticolo(int $idArticolo, string $url, string $alt): bool {
+        $this->openConnection();
+        $this->connection->begin_transaction();
+
+        try {
+            $this->connection->query("DELETE FROM Media WHERE IDArticolo = " . (int) $idArticolo);
+
+            $stmt = $this->connection->prepare("
+                INSERT INTO Media (URL_Media, Testo_Alternativo, Tipo_Media, IDArticolo)
+                VALUES (?, ?, 'Immagine', ?)
+            ");
+            if (!$stmt) {
+                $this->connection->rollback();
+                $this->closeConnection();
+                return false;
+            }
+
+            $stmt->bind_param('ssi', $url, $alt, $idArticolo);
+            $ok = $stmt->execute();
+            $stmt->close();
+
+            if ($ok) {
+                $this->connection->commit();
+            } else {
+                $this->connection->rollback();
+            }
+
+            $this->closeConnection();
+            return $ok;
+        } catch (Throwable $t) {
+            $this->connection->rollback();
             $this->closeConnection();
             return false;
         }

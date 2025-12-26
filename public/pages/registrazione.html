@@ -48,6 +48,7 @@
                 <div id="success-message" class="success-message hidden" role="alert" aria-live="polite"></div>
 
                 <form id="register-form" action="" method="post" novalidate> <!-- Aggiungere una azione-->
+                    <input type="hidden" name="csrf_token" value="[CSRF_TOKEN]">
                     <div class="form-group">
                         <label for="nome">Nome</label>
                         <input type="text" id="nome" name="nome" required aria-required="true"

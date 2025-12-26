@@ -29,8 +29,8 @@
     </div>
     <nav aria-labelledby="breadcrumb-label" id="breadcrumb">
         <ol>
-            <li><a href="index.html"><span lang="en">Home</span></a></li>
-            <li><a href="admin.html">Dashboard</a></li>
+            <li><a href="index.php"><span lang="en">Home</span></a></li>
+            <li><a href="admin.php">Dashboard</a></li>
             <li aria-current="page">Gestione Utenti</li>
         </ol>
     </nav>
@@ -53,19 +53,19 @@
                         </span>
                     </li>
                     <li>
-                        <a href="admin_prodotti.html">
+                        <a href="admin_prodotti.php">
                             <span class="nav-icon" aria-hidden="true">⛵</span>
                             <span>Gestione Prodotti</span>
                         </a>
                     </li>
                     <li>
-                        <a href="admin_prenotazioni.html">
+                        <a href="admin_prenotazioni.php">
                             <span class="nav-icon" aria-hidden="true">📋</span>
                             <span>Gestione Prenotazioni</span>
                         </a>
                     </li>
                     <li>
-                        <a href="admin_blog.html">
+                        <a href="admin_blog.php">
                             <span class="nav-icon" aria-hidden="true">✍️</span>
                             <span>Blog</span>
                         </a>
@@ -99,7 +99,35 @@
 
                 <section aria-labelledby="users-table-title">
                     <h2 id="users-table-title" class="sr-only">Tabella utenti</h2>
-                    
+
+                    <form class="filter-bar" method="get" action="admin_utenti.php" aria-label="Filtra utenti">
+                        <div class="form-group">
+                            <label for="filter-user-q">Cerca</label>
+                            <input type="search" id="filter-user-q" name="q" value="[ADMIN_USERS_SEARCH]" placeholder="Nome, cognome o email">
+                        </div>
+                        <div class="form-group">
+                            <label for="filter-user-role">Ruolo</label>
+                            <select id="filter-user-role" name="ruolo">
+                                <option value="">Tutti</option>
+                                <option value="admin" [IF_RUOLO_ADMIN]>Admin</option>
+                                <option value="standard" [IF_RUOLO_STANDARD]>Standard</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="filter-user-status">Stato</label>
+                            <select id="filter-user-status" name="stato">
+                                <option value="">Tutti</option>
+                                <option value="attivi" [IF_STATO_ATTIVI]>Attivi</option>
+                                <option value="disattivi" [IF_STATO_DISATTIVI]>Disattivati</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn-layout btn-sm">Filtra</button>
+                        </div>
+                    </form>
+
+                    [ADMIN_USERS_FEEDBACK]
+
                     <div class="table-container">
                         <table class="table-users">
                             <caption>Utenti Registrati su SailUP</caption>
@@ -110,54 +138,17 @@
                                     <th scope="col">Email</th>
                                     <th scope="col">Data Iscrizione</th>
                                     <th scope="col">Ruolo</th>
+                                    <th scope="col">Stato</th>
+                                    <th scope="col">Azioni</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td data-label="ID">1</td>
-                                    <td data-label="Nome">Mario Rossi</td>
-                                    <td data-label="Email">mario.rossi@example.com</td>
-                                    <td data-label="Data Iscrizione"><time datetime="2024-03-15">15/03/24</time></td>
-                                    <td data-label="Ruolo"><span class="status-badge completed">Standard</span></td>
-                                </tr>
-                                <tr>
-                                    <td data-label="ID">2</td>
-                                    <td data-label="Nome">Laura Bianchi</td>
-                                    <td data-label="Email">laura.bianchi@example.com</td>
-                                    <td data-label="Data Iscrizione"><time datetime="2024-05-22">22/05/24</time></td>
-                                    <td data-label="Ruolo"><span class="status-badge completed">Standard</span></td>
-                                </tr>
-                                <tr>
-                                    <td data-label="ID">3</td>
-                                    <td data-label="Nome">Admin SailUP</td>
-                                    <td data-label="Email">admin@sailup.com</td>
-                                    <td data-label="Data Iscrizione"><time datetime="2023-01-10">10/01/23</time></td>
-                                    <td data-label="Ruolo"><span class="status-badge active">Admin</span></td>
-                                </tr>
-                                <tr>
-                                    <td data-label="ID">4</td>
-                                    <td data-label="Nome">Giuseppe Verdi</td>
-                                    <td data-label="Email">giuseppe.verdi@example.com</td>
-                                    <td data-label="Data Iscrizione"><time datetime="2024-07-08">08/07/24</time></td>
-                                    <td data-label="Ruolo"><span class="status-badge completed">Standard</span></td>
-                                </tr>
-                                <tr>
-                                    <td data-label="ID">5</td>
-                                    <td data-label="Nome">Anna Romano</td>
-                                    <td data-label="Email">anna.romano@example.com</td>
-                                    <td data-label="Data Iscrizione"><time datetime="2024-09-12">12/09/24</time></td>
-                                    <td data-label="Ruolo"><span class="status-badge completed">Standard</span></td>
-                                </tr>
-                                <tr>
-                                    <td data-label="ID">6</td>
-                                    <td data-label="Nome">Francesco Esposito</td>
-                                    <td data-label="Email">francesco.esposito@example.com</td>
-                                    <td data-label="Data Iscrizione"><time datetime="2024-11-20">20/11/24</time></td>
-                                    <td data-label="Ruolo"><span class="status-badge completed">Standard</span></td>
-                                </tr>
+                                [ADMIN_USERS_ROWS]
                             </tbody>
                         </table>
                     </div>
+
+                    [ADMIN_USERS_PAGINATION]
                 </section>
             </div>
         </div>

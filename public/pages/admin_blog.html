@@ -28,8 +28,8 @@
   </div>
   <nav aria-labelledby="breadcrumb-label" id="breadcrumb">
     <ol>
-      <li><a href="index.html"><span lang="en">Home</span></a></li>
-      <li><a href="admin.html">Dashboard</a></li>
+      <li><a href="index.php"><span lang="en">Home</span></a></li>
+      <li><a href="admin.php">Dashboard</a></li>
       <li aria-current="page">Blog</li>
     </ol>
   </nav>
@@ -48,19 +48,19 @@
         <nav class="profile-sidebar" aria-label="Menu amministrazione">
           <ul>
             <li>
-              <a href="admin_utenti.html">
+              <a href="admin_utenti.php">
                 <span class="nav-icon" aria-hidden="true">👥</span>
                 <span>Gestione Utenti</span>
               </a>
             </li>
             <li>
-              <a href="admin_prodotti.html">
+              <a href="admin_prodotti.php">
                 <span class="nav-icon" aria-hidden="true">⛵</span>
                 <span>Gestione Prodotti</span>
               </a>
             </li>
             <li>
-              <a href="admin_prenotazioni.html">
+              <a href="admin_prenotazioni.php">
                 <span class="nav-icon" aria-hidden="true">📋</span>
                 <span>Gestione Prenotazioni</span>
               </a>
@@ -106,9 +106,21 @@
             <h2 id="posts-list-title" class="sr-only">Lista Articoli Blog</h2>
         
             <div class="item-actions">
-                <a href="admin_blog_nuovo.html" class="btn-layout btn-sm">+ Nuovo Articolo</a>
+                <a href="admin_blog_nuovo.php" class="btn-layout btn-sm">+ Nuovo Articolo</a>
             </div>
-        
+
+            <form class="filter-bar" method="get" action="admin_blog.php" aria-label="Filtra articoli">
+              <div class="form-group">
+                <label for="filter-blog-q">Cerca</label>
+                <input type="search" id="filter-blog-q" name="q" value="[ADMIN_BLOG_SEARCH]" placeholder="Titolo o descrizione">
+              </div>
+              <div class="form-group">
+                <button type="submit" class="btn-layout btn-sm">Filtra</button>
+              </div>
+            </form>
+
+            [ADMIN_BLOG_FEEDBACK]
+
             <div class="table-container">
                 <table>
                     <caption>Articoli Pubblicati e Bozze</caption>
@@ -123,69 +135,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td data-label="ID">12</td>
-                            <td data-label="Titolo">Come scegliere la barca perfetta</td>
-                            <td data-label="Categoria">Guida</td>
-                            <td data-label="Data"><time datetime="2025-01-15">15/01/25</time></td>
-                            <td data-label="Stato"><span class="status-badge active">Pubblicato</span></td>
-                            <td data-label="Azioni" class="actions-cell">
-                                <button class="btn-icon" aria-label="Modifica articolo">
-                                    <span aria-hidden="true">✏️</span>
-                                </button>
-                                <button class="btn-icon danger" aria-label="Elimina articolo">
-                                    <span aria-hidden="true">🗑️</span>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td data-label="ID">11</td>
-                            <td data-label="Titolo">Le migliori destinazioni del Golfo</td>
-                            <td data-label="Categoria">Destinazioni</td>
-                            <td data-label="Data"><time datetime="2025-01-10">10/01/25</time></td>
-                            <td data-label="Stato"><span class="status-badge active">Pubblicato</span></td>
-                            <td data-label="Azioni" class="actions-cell">
-                                <button class="btn-icon" aria-label="Modifica articolo">
-                                    <span aria-hidden="true">✏️</span>
-                                </button>
-                                <button class="btn-icon danger" aria-label="Elimina articolo">
-                                    <span aria-hidden="true">🗑️</span>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td data-label="ID">10</td>
-                            <td data-label="Titolo">Eventi nautici 2025</td>
-                            <td data-label="Categoria">Eventi</td>
-                            <td data-label="Data">-</td>
-                            <td data-label="Stato"><span class="status-badge pending">Bozza</span></td>
-                            <td data-label="Azioni" class="actions-cell">
-                                <button class="btn-icon" aria-label="Modifica bozza">
-                                    <span aria-hidden="true">✏️</span>
-                                </button>
-                                <button class="btn-icon" aria-label="Pubblica ora">
-                                    <span aria-hidden="true">🚀</span>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td data-label="ID">09</td>
-                            <td data-label="Titolo">Sicurezza in mare: la guida</td>
-                            <td data-label="Categoria">Consigli</td>
-                            <td data-label="Data"><time datetime="2025-01-05">05/01/25</time></td>
-                            <td data-label="Stato"><span class="status-badge active">Pubblicato</span></td>
-                            <td data-label="Azioni" class="actions-cell">
-                                <button class="btn-icon" aria-label="Modifica articolo">
-                                    <span aria-hidden="true">✏️</span>
-                                </button>
-                                <button class="btn-icon danger" aria-label="Elimina articolo">
-                                    <span aria-hidden="true">🗑️</span>
-                                </button>
-                            </td>
-                        </tr>
+                        [ADMIN_BLOG_ROWS]
                     </tbody>
                 </table>
             </div>
+
+            [ADMIN_BLOG_PAGINATION]
         </section>
         </div>
       </div>

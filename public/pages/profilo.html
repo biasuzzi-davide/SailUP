@@ -39,15 +39,15 @@
       <div class="profile-header">
         <div class="profile-avatar">
           <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=200&q=80"
-            alt="Avatar di Mario Rossi" />
+            alt="Avatar di [USER_NOME] [USER_COGNOME]" />
         </div>
         <div class="profile-info">
-          <h1>Mario Rossi</h1>
-          <p>mario.rossi@example.com</p>
+          <h1>[USER_NOME] [USER_COGNOME]</h1>
+          <p>[USER_EMAIL]</p>
         </div>
         <div class="profile-actions">
-          <a href="profilo_sicurezza.html" class="btn-layout">Modifica Profilo</a>
-          <button class="btn-layout-light" type="button">Esci</button>
+          <a href="profilo_sicurezza.php" class="btn-layout">Modifica Profilo</a>
+          <a href="logout.php" class="btn-layout-light">Esci</a>
         </div>
       </div>
 
@@ -61,13 +61,13 @@
               </div>
             </li>
             <li>
-              <a href="profilo_sicurezza.html">
+              <a href="profilo_sicurezza.php">
                 <span class="nav-icon" aria-hidden="true">🔒</span>
                 <span>Sicurezza</span>
               </a>
             </li>
             <li>
-              <a href="profilo_prenotazioni.html">
+              <a href="profilo_prenotazioni.php">
                 <span class="nav-icon" aria-hidden="true">📋</span>
                 <span>Prenotazioni</span>
               </a>
@@ -84,23 +84,23 @@
               <dl>
                 <div>
                     <dt>Nome:</dt>
-                    <dd>Mario</dd>
+                    <dd>[USER_NOME]</dd>
                 </div>
                 <div>
                     <dt>Cognome:</dt>
-                    <dd>Rossi</dd>
+                    <dd>[USER_COGNOME]</dd>
                 </div>
                 <div>
                     <dt>Codice Fiscale:</dt>
-                    <dd>RSSMRA90E15H501T</dd>
-                </div>
-                <div>
-                    <dt>Data di Nascita:</dt>
-                    <dd><time datetime="1990-05-15">15 Maggio 1990</time></dd>
+                    <dd>[USER_CF]</dd>
                 </div>
                 <div>
                     <dt>Email:</dt>
-                    <dd>mario.rossi@example.com</dd>
+                    <dd>[USER_EMAIL]</dd>
+                </div>
+                <div>
+                    <dt>Patente nautica:</dt>
+                    <dd>[USER_PATENTE]</dd>
                 </div>
               </dl>
             </div>
@@ -108,9 +108,9 @@
             <div class="info-card">
               <h3>Indirizzo di Residenza</h3>
               <address class="info-content">
-                <p>Via Roma, 123</p>
-                <p>80100 Napoli (<abbr title="Napoli">NA</abbr>)</p>
-                <p>Italia</p>
+                <p>[ADDR_VIA], [ADDR_CIVICO]</p>
+                <p>[ADDR_CAP] [ADDR_CITTA] (<abbr title="[ADDR_PROVINCIA_FULL]">[ADDR_PROVINCIA]</abbr>)</p>
+                <p>[ADDR_PAESE]</p>
               </address>
             </div>
             
@@ -121,11 +121,11 @@
             <dl class="stats-grid">
               <div class="stat-card">
                 <dt class="stat-label">Prenotazioni Totali</dt>
-                <dd class="stat-number">12</dd>
+                <dd class="stat-number">[STAT_TOT_PREN]</dd>
               </div>
               <div class="stat-card">
                 <dt class="stat-label">Prenotazioni Attive</dt>
-                <dd class="stat-number">3</dd>
+                <dd class="stat-number">[STAT_ATTIVE]</dd>
               </div>
             </dl>
           </section>

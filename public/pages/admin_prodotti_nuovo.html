@@ -31,26 +31,28 @@
   </div>
   <nav aria-labelledby="breadcrumb-label" id="breadcrumb">
     <ol>
-      <li><a href="index.html"><span lang="en">Home</span></a></li>
-      <li><a href="admin.html">Dashboard</a></li>
-      <li><a href="admin_prodotti.html">Gestione Prodotti</a></li>
+      <li><a href="index.php"><span lang="en">Home</span></a></li>
+      <li><a href="admin.php">Dashboard</a></li>
+      <li><a href="admin_prodotti.php">Gestione Prodotti</a></li>
       <li aria-current="page">Nuovo Prodotto</li>
     </ol>
   </nav>
 
   <main id="main-content" class="section-container">
       <header>
-        <h1>Aggiungi Nuovo Prodotto</h1>
-        <p>Inserisci i dettagli della nuova barca o esperienza</p>
+        <h1>Aggiungi/Modifica Prodotto</h1>
+        <p>Inserisci o aggiorna i dettagli della barca o esperienza</p>
       </header>
 
         <section aria-labelledby="form-title" class="admin-form">
           <h2 id="form-title">Dettagli Prodotto</h2>
 
-          <div id="error-message" class="error-message hidden" role="alert" aria-live="polite"></div>
-          <div id="success-message" class="success-message hidden" role="alert" aria-live="polite"></div>
+          [ADMIN_PRODUCT_FEEDBACK]
 
-          <form id="product-form" action="#" method="POST" novalidate>
+          <form id="product-form" action="[ADMIN_PRODUCT_ACTION]" method="POST" novalidate>
+            <input type="hidden" name="csrf_token" value="[CSRF_TOKEN]">
+            <input type="hidden" name="mode" value="[PROD_MODE]">
+            <input type="hidden" name="product-id" value="[PRODUCT_ID_VALUE]">
 
             <fieldset>
               <legend>Informazioni Base</legend>
@@ -59,7 +61,7 @@
                 <div class="form-group">
                   <label for="product-name">Nome Prodotto <abbr title="Campo obbligatorio">*</abbr></label>
                   <input type="text" id="product-name" name="product-name" placeholder="es. Sunseeker Predator 62"
-                    required aria-required="true" aria-describedby="product-name-error">
+                    value="[PROD_NAME]" required aria-required="true" aria-describedby="product-name-error">
                   <span id="product-name-error" class="field-error" role="alert"></span>
                 </div>
 
@@ -67,24 +69,38 @@
                   <label for="product-type">Tipo Prodotto <abbr title="Campo obbligatorio">*</abbr></label>
                   <select id="product-type" name="product-type" required aria-required="true" aria-describedby="product-type-error">
                     <option value="">Seleziona tipo...</option>
-                    <option value="noleggio">Barca a Noleggio</option>
-                    <option value="experience">Esperienza</option>
+                    <option value="noleggio" [PROD_TYPE_NOLEGGIO]>Barca a Noleggio</option>
+                    <option value="experience" [PROD_TYPE_EXP]>Esperienza</option>
                   </select>
                   <span id="product-type-error" class="field-error" role="alert"></span>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="product-category">Tipologia</label>
+                  <input type="text" id="product-category" name="product-category" placeholder="es. Gommone, Vela, Tour"
+                    value="[PROD_TIPOLOGIA]" aria-describedby="product-category-hint">
+                  <span id="product-category-hint" class="field-hint">Categoria o tipologia mostrata nelle card</span>
+                </div>
+                <div class="form-group">
+                  <label for="product-duration">Durata (ore)</label>
+                  <input type="number" id="product-duration" name="product-duration" min="0" step="1" placeholder="4"
+                    value="[PROD_DURATION]">
                 </div>
               </div>
 
               <div class="form-group">
                 <label for="product-description">Descrizione Breve <abbr title="Campo obbligatorio">*</abbr></label>
                 <textarea id="product-description" name="product-description" rows="3"
-                  placeholder="Descrizione che apparirà nelle card del catalogo..." required aria-required="true" aria-describedby="product-description-error"></textarea>
+                  placeholder="Descrizione che apparirà nelle card del catalogo..." required aria-required="true" aria-describedby="product-description-error">[PROD_DESC]</textarea>
                 <span id="product-description-error" class="field-error" role="alert"></span>
               </div>
 
               <div class="form-group">
                 <label for="product-long-description">Descrizione Dettagliata</label>
                 <textarea id="product-long-description" name="product-long-description" rows="6"
-                  placeholder="Descrizione completa che apparirà nella pagina del prodotto..."></textarea>
+                  placeholder="Descrizione completa che apparirà nella pagina del prodotto...">[PROD_DESC_LONG]</textarea>
               </div>
             </fieldset>
 
@@ -95,7 +111,7 @@
                 <div class="form-group">
                   <label for="product-price">Prezzo Base (€) <abbr title="Campo obbligatorio">*</abbr></label>
                   <input type="number" id="product-price" name="product-price" min="0" step="10" placeholder="850"
-                    required aria-required="true" aria-describedby="product-price-hint product-price-error">
+                    value="[PROD_PRICE]" required aria-required="true" aria-describedby="product-price-hint product-price-error">
                   <span id="product-price-hint" class="field-hint">Prezzo al giorno per noleggi, prezzo totale per esperienze</span>
                   <span id="product-price-error" class="field-error" role="alert"></span>
                 </div>
@@ -104,7 +120,7 @@
                   <label for="product-capacity">Capacità Massima (persone) <abbr
                       title="Campo obbligatorio">*</abbr></label>
                   <input type="number" id="product-capacity" name="product-capacity" min="1" max="50" placeholder="8"
-                    required aria-required="true" aria-describedby="product-capacity-error">
+                    value="[PROD_CAPACITY]" required aria-required="true" aria-describedby="product-capacity-error">
                   <span id="product-capacity-error" class="field-error" role="alert"></span>
                 </div>
               </div>
@@ -112,7 +128,7 @@
               <div class="form-row">
                 <div class="form-group">
                   <label for="product-length">Lunghezza (metri)</label>
-                  <input type="number" id="product-length" name="product-length" min="0" step="0.1" placeholder="19.2">
+                  <input type="number" id="product-length" name="product-length" min="0" step="0.1" placeholder="19.2" value="[PROD_LENGTH]">
                 </div>
 
                 <div class="form-group">
@@ -129,7 +145,7 @@
                 <label for="product-features">Caratteristiche Principali</label>
                 <textarea id="product-features" name="product-features" rows="4"
                   placeholder="Una caratteristica per riga, ad esempio:&#10;3 cabine doppie&#10;2 bagni completi&#10;Cucina attrezzata&#10;Aria condizionata"
-                  aria-describedby="product-features-hint"></textarea>
+                  aria-describedby="product-features-hint">[PROD_FEATURES]</textarea>
                 <span id="product-features-hint" class="field-hint">Inserisci una caratteristica per riga</span>
               </div>
 
@@ -137,7 +153,7 @@
                 <p class="checkbox-options-title">Opzioni Aggiuntive</p>
 
                 <div class="checkbox-group">
-                  <input type="checkbox" id="requires-license" name="requires-license">
+                  <input type="checkbox" id="requires-license" name="requires-license" [CHECK_PATENTE]>
                   <label for="requires-license">Richiede Patente Nautica</label>
                 </div>
 
@@ -152,7 +168,7 @@
                 </div>
 
                 <div class="checkbox-group">
-                  <input type="checkbox" id="is-accessible" name="is-accessible">
+                  <input type="checkbox" id="is-accessible" name="is-accessible" [CHECK_ACCESS]>
                   <label for="is-accessible">Accessibile a Persone con Disabilità</label>
                 </div>
 
@@ -167,23 +183,23 @@
               <legend>Lingue parlate nell'esperienza</legend>
               <p class="field-hint">Seleziona almeno una lingua per garantire la copertura linguistica del tour.</p>
               <div class="checkbox-group">
-                <input type="checkbox" id="language-it" name="product-languages[]" value="IT" aria-describedby="product-languages-error">
+                <input type="checkbox" id="language-it" name="product-languages[]" value="IT" aria-describedby="product-languages-error" [LANG_IT]>
                 <label for="language-it">Italiano</label>
               </div>
               <div class="checkbox-group">
-                <input type="checkbox" id="language-en" name="product-languages[]" value="EN" aria-describedby="product-languages-error">
+                <input type="checkbox" id="language-en" name="product-languages[]" value="EN" aria-describedby="product-languages-error" [LANG_EN]>
                 <label for="language-en">Inglese</label>
               </div>
               <div class="checkbox-group">
-                <input type="checkbox" id="language-fr" name="product-languages[]" value="FR" aria-describedby="product-languages-error">
+                <input type="checkbox" id="language-fr" name="product-languages[]" value="FR" aria-describedby="product-languages-error" [LANG_FR]>
                 <label for="language-fr">Francese</label>
               </div>
               <div class="checkbox-group">
-                <input type="checkbox" id="language-es" name="product-languages[]" value="ES" aria-describedby="product-languages-error">
+                <input type="checkbox" id="language-es" name="product-languages[]" value="ES" aria-describedby="product-languages-error" [LANG_ES]>
                 <label for="language-es">Spagnolo</label>
               </div>
               <div class="checkbox-group">
-                <input type="checkbox" id="language-de" name="product-languages[]" value="DE" aria-describedby="product-languages-error">
+                <input type="checkbox" id="language-de" name="product-languages[]" value="DE" aria-describedby="product-languages-error" [LANG_DE]>
                 <label for="language-de">Tedesco</label>
               </div>
               <span id="product-languages-error" class="field-error" role="alert"></span>
@@ -195,7 +211,7 @@
               <div class="form-group">
                 <label for="product-image-main">Immagine Principale <abbr title="Campo obbligatorio">*</abbr></label>
                 <input type="url" id="product-image-main" name="product-image-main"
-                  placeholder="https://example.com/image.jpg" required aria-required="true" aria-describedby="product-image-hint product-image-main-error">
+                  placeholder="https://example.com/image.jpg" value="[IMG_URL]" required aria-required="true" aria-describedby="product-image-hint product-image-main-error">
                 <span id="product-image-hint" class="field-hint">Inserisci l'<abbr title="Uniform Resource Locator" lang="en">URL</abbr>
                   dell'immagine principale del prodotto</span>
                 <span id="product-image-main-error" class="field-error" role="alert"></span>
@@ -204,7 +220,7 @@
               <div class="form-group">
                 <label for="Testo_Alternativo">Testo Alternativo Immagine <abbr title="Campo obbligatorio">*</abbr></label>
                 <input type="text" id="Testo_Alternativo" name="Testo_Alternativo"
-                  placeholder="Descrizione dell'immagine per accessibilità" required aria-required="true" aria-describedby="Testo_Alternativo-error" />
+                  placeholder="Descrizione dell'immagine per accessibilità" value="[IMG_ALT]" required aria-required="true" aria-describedby="Testo_Alternativo-error" />
                 <span id="Testo_Alternativo-error" class="field-error" role="alert"></span>
               </div>
             </fieldset>
@@ -215,9 +231,9 @@
               <div class="form-group">
                 <label for="product-status">Stato Prodotto <abbr title="Campo obbligatorio">*</abbr></label>
                 <select id="product-status" name="product-status" required aria-required="true" aria-describedby="product-status-error">
-                  <option value="available">Disponibile</option>
-                  <option value="maintenance">In Manutenzione</option>
-                  <option value="unavailable">Non Disponibile</option>
+                  <option value="available" [SEL_STATUS_AVAILABLE]>Disponibile</option>
+                  <option value="maintenance" [SEL_STATUS_MAINT]>In Manutenzione</option>
+                  <option value="unavailable" [SEL_STATUS_UNAVAIL]>Non Disponibile</option>
                 </select>
                 <span id="product-status-error" class="field-error" role="alert"></span>
               </div>

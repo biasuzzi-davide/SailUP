@@ -1,5 +1,6 @@
 <?php
 require_once '../../config/pages.php';
+require_once __DIR__ . '/session/session.php';
 
 function buildHeader($phpSelf) {
     $headerTemplatePath = __DIR__ . '/../public/pages/elementi_semantici/header.html';
@@ -54,13 +55,35 @@ function buildHeader($phpSelf) {
     $header = str_replace('[MOBILE CHI_SIAMO LI]', $mobileChiSiamoLi, $header);
     $header = str_replace('[MOBILE LOGIN LI]', $mobileLoginLi, $header);
 
-    // Login link for header buttons
-    if ($current == 'login') {
-        $loginLink = '<span lang="en" class="btn-layout">Login</span>';
+    // Link area (login / profilo / admin / logout)
+    $userLinks = '';
+    if (isLogged()) {
+        if (isAdmin()) {
+            $userLinks .= '<a href="' . $relativePath . 'admin.php" class="btn-layout">Admin</a>';
+        }
+        $userLinks .= '<a href="' . $relativePath . 'profilo.php" class="btn-layout">Profilo</a>';
+        $userLinks .= '<a href="' . $relativePath . 'logout.php" class="btn-layout">Logout</a>';
     } else {
-        $loginLink = '<a href="' . $relativePath . $pages['login'] . '" lang="en" class="btn-layout">Login</a>';
+        if ($current == 'login') {
+            $userLinks = '<span lang="en" class="btn-layout">Login</span>';
+        } else {
+            $userLinks = '<a href="' . $relativePath . $pages['login'] . '" lang="en" class="btn-layout">Login</a>';
+        }
     }
-    $header = str_replace('[LOGIN LINK]', $loginLink, $header);
+    $header = str_replace('[LOGIN LINK]', $userLinks, $header);
+
+    // Mobile login/profile/admin/logout area
+    if (isLogged()) {
+        $mobileLoginLi = '';
+        if (isAdmin()) {
+            $mobileLoginLi .= '<li><a href="' . $relativePath . 'admin.php">Admin</a></li>';
+        }
+        $mobileLoginLi .= '<li><a href="' . $relativePath . 'profilo.php">Profilo</a></li>';
+        $mobileLoginLi .= '<li><a href="' . $relativePath . 'logout.php">Logout</a></li>';
+    } else {
+        $mobileLoginLi = createHeaderItem('login', 'Login / Registrati', $current, $relativePath, $pages, 'en', 'menu-login');
+    }
+    $header = str_replace('[MOBILE LOGIN LI]', $mobileLoginLi, $header);
 
     return $header;
 }

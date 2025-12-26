@@ -30,26 +30,25 @@
   <nav aria-labelledby="breadcrumb-label" id="breadcrumb">
     <ol>
       <li><a href="index.html"><span lang="en">Home</span></a></li>
-      <li><a href="profilo.html">Il Mio Profilo</a></li>
+      <li><a href="profilo.php">Il Mio Profilo</a></li>
       <li aria-current="page">Sicurezza</li>
     </ol>
   </nav>
 
   <main id="main-content">
     <div class="profile-container section-container">
-      <div class="profile-header">
+     <div class="profile-header">
         <div class="profile-avatar">
           <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=200&q=80"
-            alt="Avatar di Mario Rossi" />
+            alt="Avatar di [USER_NOME] [USER_COGNOME]" />
         </div>
         <div class="profile-info">
-          <h1>Mario Rossi</h1>
-          <p>mario.rossi@example.com</p>
-          <p>Membro da <time datetime="2024-01">Gennaio 2024</time></p>
+          <h1>[USER_NOME] [USER_COGNOME]</h1>
+          <p>[USER_EMAIL]</p>
         </div>
         <div class="profile-actions">
-          <a href="profilo.html" class="btn-layout-light">Visualizza Profilo</a>
-          <button class="btn-layout-light" type="button">Esci</button>
+          <a href="profilo.php" class="btn-layout-light">Visualizza Profilo</a>
+          <a href="logout.php" class="btn-layout-light">Esci</a>
         </div>
       </div>
 
@@ -57,7 +56,7 @@
         <nav class="profile-sidebar" aria-label="Menu profilo">
           <ul>
             <li>
-              <a href="profilo.html">
+              <a href="profilo.php">
                 <span class="nav-icon" aria-hidden="true">👤</span>
                 <span>Informazioni Personali</span>
               </a>
@@ -69,7 +68,7 @@
               </div>
             </li>
             <li>
-              <a href="profilo_prenotazioni.html">
+              <a href="profilo_prenotazioni.php">
                 <span class="nav-icon" aria-hidden="true">📋</span>
                 <span>Prenotazioni</span>
               </a>
@@ -82,13 +81,16 @@
             <h2 id="edit-profile-title">Modifica Dati Personali</h2>
 
             <div class="auth-card">
-              <div id="error-message" class="error-message hidden" role="alert" aria-live="polite"></div>
-              <div id="success-message" class="success-message hidden" role="alert" aria-live="polite"></div>
+              <div class="form-messages [PROFILE_SERVER_STATE]" role="status" aria-live="polite">
+                <p>[PROFILE_SERVER_MESSAGES]</p>
+              </div>
 
-              <form id="edit-profile-form" action="#" method="post" novalidate>
+              <form id="edit-profile-form" action="" method="post" novalidate>
+                <input type="hidden" name="csrf_token" value="[CSRF_TOKEN]">
+                <input type="hidden" name="form_type" value="profile">
                 <div class="form-group">
                   <label for="nome">Nome</label>
-                  <input type="text" id="nome" name="nome" value="Mario" required aria-required="true"
+                  <input type="text" id="nome" name="nome" value="[USER_NOME]" required aria-required="true"
                     aria-describedby="nome-hint nome-error" autocomplete="given-name"
                     placeholder="Es. Mario" pattern="^[A-Za-z\sÀ-ÿ'']{2,50}$" />
                   <span id="nome-hint" class="field-hint">Almeno 2 caratteri, non numeri o caratteri speciali.</span>
@@ -97,7 +99,7 @@
 
                 <div class="form-group">
                   <label for="cognome">Cognome</label>
-                  <input type="text" id="cognome" name="cognome" value="Rossi" required aria-required="true"
+                  <input type="text" id="cognome" name="cognome" value="[USER_COGNOME]" required aria-required="true"
                     aria-describedby="cognome-hint cognome-error" autocomplete="family-name"
                     placeholder="Es. Rossi" pattern="^[A-Za-z\sÀ-ÿ'']{2,50}$" />
                   <span id="cognome-hint" class="field-hint">Almeno 2 caratteri, non numeri o caratteri speciali.</span>
@@ -106,7 +108,7 @@
 
                 <div class="form-group">
                   <label for="cf">Codice Fiscale</label>
-                  <input type="text" id="cf" name="cf" value="RSSMRA90E15H501T" required aria-required="true"
+                  <input type="text" id="cf" name="cf" value="[USER_CF]" required aria-required="true"
                     aria-describedby="cf-hint cf-error" autocomplete="off" maxlength="16"
                     placeholder="ES. RSSMRC90C15H501T" pattern="^[A-Z0-9]{16}$" />
                   <span id="cf-hint" class="field-hint">Deve essere composto da 16 caratteri alfanumerici.</span>
@@ -115,7 +117,7 @@
 
                 <div class="form-group">
                   <label for="email">Email</label>
-                  <input type="email" id="email" name="email" value="mario.rossi@example.com" required aria-required="true"
+                  <input type="email" id="email" name="email" value="[USER_EMAIL]" required aria-required="true"
                     aria-describedby="email-hint email-error" autocomplete="email"
                     placeholder="mariorossi@mail.com" />
                   <span id="email-hint" class="field-hint">Indirizzo personale di posta elettronica per ricevere informazioni sulle prenotazioni effettuate.</span>
@@ -127,7 +129,7 @@
 
                     <div class="form-group field-via">
                         <label for="indirizzo_via">Via / Piazza</label>
-                        <input type="text" id="indirizzo_via" name="indirizzo_via" value="Via Roma" required aria-required="true"
+                        <input type="text" id="indirizzo_via" name="indirizzo_via" value="[ADDR_VIA]" required aria-required="true"
                         aria-describedby="via-hint indirizzo_via-error" autocomplete="address-line1"
                         placeholder="Es. Via Caracciolo" />
                         <span id="via-hint" class="field-hint">Inserire il nome della via o della piazza.</span>
@@ -135,8 +137,8 @@
                     </div>
 
                     <div class="form-group field-civico">
-                        <label for="indirizzo_civico"><abbvr title="Numero">N.</abbvr> Civico</label>
-                        <input type="text" id="indirizzo_civico" name="indirizzo_civico" value="123" required aria-required="true"
+                        <label for="indirizzo_civico"><abbr title="Numero">N.</abbr> Civico</label>
+                        <input type="text" id="indirizzo_civico" name="indirizzo_civico" value="[ADDR_CIVICO]" required aria-required="true"
                         aria-describedby="civico-hint indirizzo_civico-error" autocomplete="address-line2"
                         placeholder="10" />
                         <span id="civico-hint" class="field-hint">Inserire il numero civico.</span>
@@ -145,16 +147,16 @@
 
                     <div class="form-group field-cap">
                         <label for="indirizzo_cap">CAP</label>
-                        <input type="text" id="indirizzo_cap" name="indirizzo_cap" value="80100" required aria-required="true"
+                        <input type="text" id="indirizzo_cap" name="indirizzo_cap" value="[ADDR_CAP]" required aria-required="true"
                         aria-describedby="cap-hint indirizzo_cap-error" autocomplete="postal-code" pattern="^\d{5}$"
                         placeholder="80122" maxlength="5" />
-                        <span id="cap-hint" class="field-hint">Inserire le 5 cifre del <abbvr title="Codice di avviamento postale">CAP</abbvr> <abbr title="esempio">es.</abbr> 00100).</span>
+                        <span id="cap-hint" class="field-hint">Inserire le 5 cifre del <abbr title="Codice di avviamento postale">CAP</abbr> <abbr title="esempio">es.</abbr> 00100).</span>
                         <span id="indirizzo_cap-error" class="field-error" role="alert"></span>
                     </div>
 
                     <div class="form-group field-citta">
                         <label for="indirizzo_citta">Città</label>
-                        <input type="text" id="indirizzo_citta" name="indirizzo_citta" value="Napoli" required aria-required="true"
+                        <input type="text" id="indirizzo_citta" name="indirizzo_citta" value="[ADDR_CITTA]" required aria-required="true"
                         aria-describedby="citta-hint indirizzo_citta-error" autocomplete="address-level2"
                         placeholder="Es. Napoli" />
                         <span id="citta-hint" class="field-hint">Inserire il comune di residenza.</span>
@@ -163,7 +165,7 @@
 
                     <div class="form-group field-provincia">
                         <label for="indirizzo_provincia"><abbr title="Provincia">Prov.</abbr></label>
-                        <input type="text" id="indirizzo_provincia" name="indirizzo_provincia" value="NA" required
+                        <input type="text" id="indirizzo_provincia" name="indirizzo_provincia" value="[ADDR_PROVINCIA]" required
                         aria-required="true" aria-describedby="provincia-hint indirizzo_provincia-error"
                         autocomplete="address-level1" pattern="^[A-Z]{2}$" placeholder="NA" maxlength="2" />
                         <span id="provincia-hint" class="field-hint">Sigla di 2 lettere maiuscole <abbr title="esempio">es.</abbr><abbr title="Napoli">NA</abbr>.</span>
@@ -184,10 +186,13 @@
             <div class="auth-card">
               <h3>Cambia <span lang="en">Password</span></h3>
               
-              <div id="password-error-message" class="error-message hidden" role="alert" aria-live="polite"></div>
-              <div id="password-success-message" class="success-message hidden" role="alert" aria-live="polite"></div>
+              <div class="form-messages [PW_SERVER_STATE]" role="status" aria-live="polite">
+                <p>[PW_SERVER_MESSAGES]</p>
+              </div>
 
-              <form id="change-password-form" action="#" method="post" novalidate>
+              <form id="change-password-form" action="" method="post" novalidate>
+                <input type="hidden" name="csrf_token" value="[CSRF_TOKEN]">
+                <input type="hidden" name="form_type" value="password">
                 <div class="form-group">
                   <label for="current-password">Password Attuale</label>
                   <input type="password" id="current-password" name="current-password" 
