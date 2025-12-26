@@ -3,7 +3,6 @@
 require_once '../../includes/session/session.php';
 require_once '../../includes/db_connection.php';
 require_once '../../includes/helpers.php';
-require_once '../../includes/db_connection.php';
 
 requireLogin();
 
@@ -55,6 +54,26 @@ $placeholders['[STAT_ATTIVE]'] = $statAttive;
 
 $html = buildPage('../pages/profilo.html', $_SERVER['PHP_SELF']);
 $html = str_replace(array_keys($placeholders + $addrPlaceholders), array_values($placeholders + $addrPlaceholders), $html);
+
+// Forza i valori delle statistiche dopo il load per evitare sovrascritture client-side
+$syncScript = '<script>(function(){'
+    . 'const tot=' . json_encode($statTotPren) . ';'
+    . 'const att=' . json_encode($statAttive) . ';'
+    . 'const apply=function(){'
+        . 'const t=document.querySelector(\"[data-stat=tot]\");'
+        . 'const a=document.querySelector(\"[data-stat=attive]\");'
+        . 'if(t) t.textContent=tot;'
+        . 'if(a) a.textContent=att;'
+    . '};'
+    . 'document.addEventListener(\"DOMContentLoaded\",function(){'
+        . 'apply();'
+        . 'const targets=document.querySelectorAll(\"[data-stat=tot],[data-stat=attive]\");'
+        . 'const obs=new MutationObserver(apply);'
+        . 'targets.forEach(el=>obs.observe(el,{childList:true,subtree:true,characterData:true}));'
+        . 'setTimeout(()=>obs.disconnect(),5000);'
+    . '});'
+    . '})();</script>';
+$html = str_replace('</body>', $syncScript . '</body>', $html);
 
 echo $html;
 ?>
