@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dettaglio Barca - Noleggio Barche - SailUP</title> <meta name="description"
+    <title>Dettaglio Barca - Noleggio Barche - SailUP</title>
+    <meta name="description"
         content="Noleggia [PRODUCT_NAME] per una giornata di lusso e velocità nel Golfo di Napoli. Scopri le specifiche e prenota ora.">
     <meta name="authors" content="SailUp team">
 
@@ -36,9 +37,7 @@
     </nav>
 
     <main id="main-content" class="section-container">
-        <img class="detail-hero-img"
-            src="[PRODUCT_IMAGE_SRC]"
-            alt="[PRODUCT_IMAGE_ALT]">
+        <img class="detail-hero-img" src="[PRODUCT_IMAGE_SRC]" alt="[PRODUCT_IMAGE_ALT]">
 
         <div class="detail-layout">
             <article>
@@ -49,7 +48,7 @@
 
                 <section aria-labelledby="specs-title">
                     <h2 id="specs-title" class="sr-only">Specifiche Tecniche</h2>
-                    
+
                     <dl class="specs-grid">
                         <div class="spec-card">
                             <dt class="spec-label"><span aria-hidden="true">⚓</span> Tipo</dt>
@@ -68,7 +67,7 @@
                             <dd class="spec-value">[PRODUCT_LICENSE]</dd>
                         </div>
                     </dl>
-                    </section>
+                </section>
 
                 <section aria-labelledby="description-title">
                     <h2 id="description-title">Descrizione</h2>
@@ -126,6 +125,15 @@
                             <input type="number" id="guests" name="guests" min="1" max="8" value="2" required>
                         </div>
 
+                        <div class="form-group">
+                            <label for="select-payment">Seleziona Pagamento</label>
+                            <select id="select-payment" name="select_payment">
+                                <option value="cc">Carta di Credito</option>
+                                <option value="bb">Bonifico Bancario</option>
+                                <option value="contanti">Contanti</option>
+                            </select>
+                        </div>
+
                         <hr class="divider">
 
                         <div class="form-check checkbox-highlight">
@@ -136,10 +144,14 @@
                             </label>
                         </div>
 
-                        <button type="submit" class="btn-layout btn-full-width cta-button">Richiedi
-                            Disponibilità</button>
+                        <button type="submit" class="btn-layout btn-full-width cta-button">Prenota Ora</button>
+
+                        <div class="field-error [SERVER_STATE]">
+                            [SERVER_MESSAGES]
+                        </div>
 
                         <p class="security-note">Nessun addebito immediato</p>
+
                     </fieldset>
                 </form>
             </aside>
