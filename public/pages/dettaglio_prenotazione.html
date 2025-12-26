@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dettaglio Prenotazione #1234 - SailUP</title>
+    <title>Dettaglio Prenotazione [BOOKING_ID] - SailUP</title>
     <meta name="description" content="Riepilogo dettagli prenotazione SailUP." />
     <meta name="authors" content="SailUP Team" />
 
@@ -31,8 +31,8 @@
         <ol>
             <li><a href="index.html" lang="en">Home</a></li>
             <li><a href="profilo.html">Profilo</a></li>
-            <li><a href="profilo_prenotazioni.html">Prenotazioni</a></li>
-            <li aria-current="page">Riepilogo #1234</li>
+            <li><a href="admin_prenotazioni.php">Gestione Prenotazioni</a></li>
+            <li aria-current="page">Riepilogo #[BOOKING_ID]</li>
         </ol>
     </nav>
 
@@ -42,11 +42,11 @@
 
             <header class="section-header">
                 <div>
-                    <h1>Prenotazione #SU-2025-1234</h1>
-                    <p class="text-accent">Effettuata il 15 Ottobre 2025</p>
+                    <h1>Prenotazione #[BOOKING_CODE]</h1>
+                    <p class="text-accent">Effettuata il [BOOKING_CREATED_AT]</p>
                 </div>
                 <div>
-                    <span class="status-badge active">Confermata</span>
+                    [BOOKING_STATUS_BADGE]
                 </div>
             </header>
 
@@ -54,13 +54,13 @@
 
                 <header class="booking-header">
                     <div class="booking-image">
-                        <img src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=300&q=80"
-                            alt="Bavaria 46" />
+                        <img src="[BOOKING_IMG_URL]"
+                            alt="[BOOKING_IMG_ALT]" />
                     </div>
                     <div class="booking-info">
-                        <h2>Bavaria 46 Cruiser</h2>
-                        <p class="booking-type">Napoli, Molo Beverello</p>
-                        <p class="text-accent">Noleggio Occasionale</p>
+                        <h2>[BOOKING_PRODUCT]</h2>
+                        <p class="booking-type">Cliente: [BOOKING_CLIENTE]</p>
+                        <p class="text-accent">Tipo: [BOOKING_TIPO]</p>
                     </div>
                 </header>
 
@@ -70,19 +70,19 @@
                     <dl class="specs-grid">
                         <div class="spec-card">
                             <dt class="spec-label"><span aria-hidden="true">📅</span> Inizio</dt>
-                            <dd class="spec-value">15 Dic 2025</dd>
+                            <dd class="spec-value">[BOOKING_START]</dd>
                         </div>
                         <div class="spec-card">
                             <dt class="spec-label"><span aria-hidden="true">🏁</span> Fine</dt>
-                            <dd class="spec-value">15 Dic 2025</dd>
+                            <dd class="spec-value">[BOOKING_END]</dd>
                         </div>
                         <div class="spec-card">
                             <dt class="spec-label"><span aria-hidden="true">👥</span> Ospiti</dt>
-                            <dd class="spec-value">4</dd>
+                            <dd class="spec-value">[BOOKING_GUESTS]</dd>
                         </div>
                         <div class="spec-card">
                             <dt class="spec-label">Skipper</dt>
-                            <dd class="spec-value">Incluso</dd>
+                            <dd class="spec-value">[BOOKING_SKIPPER]</dd>
                         </div>
                     </dl>
                 </section>
@@ -94,22 +94,38 @@
                         <caption class="sr-only">Dettaglio costi per la prenotazione</caption>
                         <tbody>
                             <tr>
-                                <th scope="row">Noleggio (1 giorno)</th>
-                                <td><strong>€ 450,00</strong></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Skipper</th>
-                                <td><strong>€ 45,00</strong></td>
-                            </tr>
-                            <tr>
-                                <th scope="row"><strong>Totale</strong></th>
-                                <td><strong class="text-accent">€ 495,00</strong></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                            <th scope="row"><strong>Totale</strong></th>
+                            <td><strong class="text-accent">€ [BOOKING_TOTAL]</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
 
-                    <p class="field-hint">Metodo: Carta di Credito •••• 1234</p>
+                    <p class="field-hint">Metodo: [BOOKING_PAYMENT]</p>
+                    <p class="field-hint">Email cliente: [BOOKING_EMAIL]</p>
 
+                </section>
+
+                <section class="booking-details" aria-labelledby="update-title">
+                    <h3 id="update-title">Aggiorna Stato e Note</h3>
+                    [BOOKING_FEEDBACK]
+                    <form method="post" action="dettaglio_prenotazione.php?id=[BOOKING_ID]" class="admin-form">
+                        <input type="hidden" name="csrf_token" value="[CSRF_TOKEN]">
+                        <div class="form-group">
+                            <label for="booking-status">Stato prenotazione</label>
+                            <select id="booking-status" name="status">
+                                <option value="In Attesa" [SEL_PENDING]>In Attesa</option>
+                                <option value="Confermata" [SEL_CONF]>Confermata</option>
+                                <option value="Cancellata" [SEL_CANC]>Cancellata</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="booking-note">Note</label>
+                            <textarea id="booking-note" name="note" rows="3" placeholder="Aggiungi note amministrative">[BOOKING_NOTE]</textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn-layout btn-sm">Salva</button>
+                        </div>
+                    </form>
                 </section>
             </article>
 

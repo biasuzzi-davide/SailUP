@@ -25,9 +25,9 @@
 
   <nav aria-label="Breadcrumb" id="breadcrumb">
     <ol>
-      <li><a href="index.html"><span lang="en">Home</span></a></li>
-      <li><a href="admin.html">Dashboard</a></li>
-      <li><a href="admin_blog.html">Blog</a></li>
+      <li><a href="index.php"><span lang="en">Home</span></a></li>
+      <li><a href="admin.php">Dashboard</a></li>
+      <li><a href="admin_blog.php">Blog</a></li>
       <li aria-current="page">Nuovo Articolo</li>
     </ol>
   </nav>
@@ -41,10 +41,10 @@
       <section aria-labelledby="form-title" class="admin-form">
         <h2 id="form-title">Dettagli Articolo</h2>
 
-        <div id="error-message" class="error-message hidden" role="alert"></div>
-        <div id="success-message" class="success-message hidden" role="alert"></div>
+        [ADMIN_BLOG_NEW_FEEDBACK]
 
-        <form id="blog-form" action="#" method="POST" novalidate>
+        <form id="blog-form" action="[ADMIN_BLOG_ACTION]" method="POST" novalidate>
+          <input type="hidden" name="csrf_token" value="[CSRF_TOKEN]">
           <fieldset>
             <legend>Informazioni Base</legend>
 

@@ -27,8 +27,8 @@
     </div>
     <nav aria-labelledby="breadcrumb-label" id="breadcrumb">
         <ol>
-            <li><a href="index.html" lang="en">Home</a></li>
-            <li><a href="admin.html">Dashboard</a></li>
+            <li><a href="index.php" lang="en">Home</a></li>
+            <li><a href="admin.php">Dashboard</a></li>
             <li aria-current="page">Gestione Prodotti</li>
         </ol>
     </nav>
@@ -45,7 +45,7 @@
             <nav class="profile-sidebar" aria-label="Menu amministrazione">
                 <ul>
                     <li>
-                        <a href="admin_utenti.html">
+                        <a href="admin_utenti.php">
                             <span class="nav-icon" aria-hidden="true">👥</span>
                             <span>Gestione Utenti</span>
                         </a>
@@ -57,13 +57,13 @@
                         </span>
                     </li>
                     <li>
-                        <a href="admin_prenotazioni.html">
+                        <a href="admin_prenotazioni.php">
                             <span class="nav-icon" aria-hidden="true">📋</span>
                             <span>Gestione Prenotazioni</span>
                         </a>
                     </li>
                     <li>
-                        <a href="admin_blog.html">
+                        <a href="admin_blog.php">
                             <span class="nav-icon" aria-hidden="true">✏️</span>
                             <span>Blog</span>
                         </a>
@@ -76,10 +76,38 @@
                     <h2 id="products-list-title">Lista Prodotti</h2>
                 
                     <div class="item-actions">
-                        <a href="admin_prodotti_nuovo.html" class="btn-layout btn-sm">
+                        <a href="admin_prodotti_nuovo.php" class="btn-layout btn-sm">
                             <span aria-hidden="true">+</span> Aggiungi Nuovo
                         </a>
                     </div>
+
+                    <form class="filter-bar" method="get" action="admin_prodotti.php" aria-label="Filtra prodotti">
+                        <div class="form-group">
+                            <label for="filter-q">Cerca</label>
+                            <input type="search" id="filter-q" name="q" value="[ADMIN_PRODUCTS_SEARCH]" placeholder="Cerca per nome o ID">
+                        </div>
+                        <div class="form-group">
+                            <label for="filter-tipo">Tipo</label>
+                            <select id="filter-tipo" name="tipo">
+                                <option value="">Tutti</option>
+                                <option value="Noleggio" [IF_TIPO_NOLEGGIO]>Noleggio</option>
+                                <option value="Experience" [IF_TIPO_EXPERIENCE]>Experience</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="filter-stato">Stato</label>
+                            <select id="filter-stato" name="stato">
+                                <option value="">Tutti</option>
+                                <option value="attivi" [IF_STATO_ATTIVI]>Attivi</option>
+                                <option value="disattivi" [IF_STATO_DISATTIVI]>Disattivi</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn-layout btn-sm">Filtra</button>
+                        </div>
+                    </form>
+
+                    [ADMIN_PRODUCTS_FEEDBACK]
                 
                     <div class="table-container">
                         <table>
@@ -96,89 +124,12 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td data-label="ID">101</td>
-                                    <td data-label="Nome Prodotto">Bavaria 46 Cruiser</td>
-                                    <td data-label="Tipo">Noleggio • Vela</td>
-                                    <td data-label="Dettagli">8 Posti • 4 Cabine</td>
-                                    <td data-label="Prezzo">€ 350 /gg</td>
-                                    <td data-label="Stato"><span class="status-badge completed">Disponibile</span></td>
-                                    <td data-label="Azioni" class="actions-cell">
-                                        <button class="btn-icon" aria-label="Modifica Bavaria 46">
-                                            <span aria-hidden="true">✏️</span>
-                                        </button>
-                                        <button class="btn-icon danger" aria-label="Archivia Bavaria 46">
-                                            <span aria-hidden="true">📦</span>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="ID">102</td>
-                                    <td data-label="Nome Prodotto">Lagoon 42</td>
-                                    <td data-label="Tipo">Noleggio • Catamarano</td>
-                                    <td data-label="Dettagli">10 Posti • Full Optional</td>
-                                    <td data-label="Prezzo">€ 600 /gg</td>
-                                    <td data-label="Stato"><span class="status-badge completed">Disponibile</span></td>
-                                    <td data-label="Azioni" class="actions-cell">
-                                        <button class="btn-icon" aria-label="Modifica Lagoon 42">
-                                            <span aria-hidden="true">✏️</span>
-                                        </button>
-                                        <button class="btn-icon danger" aria-label="Archivia Lagoon 42">
-                                            <span aria-hidden="true">📦</span>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="ID">103</td>
-                                    <td data-label="Nome Prodotto">Gommonautica G48</td>
-                                    <td data-label="Tipo">Noleggio • Gommone</td>
-                                    <td data-label="Dettagli">6 Posti • Senza patente</td>
-                                    <td data-label="Prezzo">€ 120 /gg</td>
-                                    <td data-label="Stato"><span class="status-badge pending">Manutenzione</span></td>
-                                    <td data-label="Azioni" class="actions-cell">
-                                        <button class="btn-icon" aria-label="Modifica G48">
-                                            <span aria-hidden="true">✏️</span>
-                                        </button>
-                                        <button class="btn-icon danger" aria-label="Archivia G48">
-                                            <span aria-hidden="true">📦</span>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="ID">201</td>
-                                    <td data-label="Nome Prodotto">Tramonto a Posillipo</td>
-                                    <td data-label="Tipo">Esperienza • Aperitivo</td>
-                                    <td data-label="Dettagli">Durata: 3h • Skipper incl.</td>
-                                    <td data-label="Prezzo">€ 45 /pax</td>
-                                    <td data-label="Stato"><span class="status-badge active">Attivo</span></td>
-                                    <td data-label="Azioni" class="actions-cell">
-                                        <button class="btn-icon" aria-label="Modifica Esperienza">
-                                            <span aria-hidden="true">✏️</span>
-                                        </button>
-                                        <button class="btn-icon danger" aria-label="Archivia Esperienza">
-                                            <span aria-hidden="true">📦</span>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="ID">104</td>
-                                    <td data-label="Nome Prodotto">Oceanis 38.1</td>
-                                    <td data-label="Tipo">Noleggio • Vela</td>
-                                    <td data-label="Dettagli">6 Posti • 3 Cabine</td>
-                                    <td data-label="Prezzo">€ 280 /gg</td>
-                                    <td data-label="Stato"><span class="status-badge completed">Disponibile</span></td>
-                                    <td data-label="Azioni" class="actions-cell">
-                                        <button class="btn-icon" aria-label="Modifica Oceanis">
-                                            <span aria-hidden="true">✏️</span>
-                                        </button>
-                                        <button class="btn-icon danger" aria-label="Archivia Oceanis">
-                                            <span aria-hidden="true">📦</span>
-                                        </button>
-                                    </td>
-                                </tr>
+                                [ADMIN_PRODUCTS_ROWS]
                             </tbody>
                         </table>
                     </div>
+
+                    [ADMIN_PRODUCTS_PAGINATION]
                 </section>
             </div>
         </div>

@@ -8,6 +8,10 @@ require_once '../../includes/helpers.php';
 $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (!verifyCsrfToken($_POST['csrf_token'] ?? null)) {
+        $errors[] = 'Sessione scaduta, ricarica la pagina.';
+    }
+
     $nome      = trim($_POST['nome'] ?? '');
     $cognome   = trim($_POST['cognome'] ?? '');
     $cf        = strtoupper(trim($_POST['cf'] ?? ''));
@@ -62,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $html = buildPage('../pages/registrazione.html', $_SERVER['PHP_SELF']);
 
-// Inserisci stato e messaggi server nel template tramite placeholder
+//inserisc stato e messaggi server nel template tramite placeholder
 $state = empty($errors) ? 'hidden' : 'error';
 $messageText = '';
 if (!empty($errors)) {
@@ -70,8 +74,8 @@ if (!empty($errors)) {
 }
 
 $html = str_replace(
-    ['[SERVER_STATE]', '[SERVER_MESSAGES]'],
-    [$state, $messageText],
+    ['[SERVER_STATE]', '[SERVER_MESSAGES]', '[CSRF_TOKEN]'],
+    [$state, $messageText, htmlspecialchars(getCsrfToken())],
     $html
 );
 

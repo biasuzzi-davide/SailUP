@@ -55,9 +55,7 @@ INSERT INTO Lingua (Codice, Nome, Attivo) VALUES
 ('ES', 'Spagnolo', 1);
 
 -- ============================================================================
--- 4. PRODOTTI (12 barche + 3 experiences = 15 prodotti)
--- ============================================================================
-
+-- 4. PRODOTTI (12 barche + 3 experiences = 15 prodotti)-----------------------
 -- BARCHE PER NOLEGGIO (12)
 INSERT INTO Prodotto (IDProdotto, Tipo_Prodotto, Tipologia_Prodotto, Nome_Prodotto, Descrizione_Breve, Durata_Ore, Prezzo_Base, Posti_Totali, Accessibile_Disabili, Lunghezza_Barca_Metri, Richiede_Patente, Attivo) VALUES
 

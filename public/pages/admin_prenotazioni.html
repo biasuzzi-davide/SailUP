@@ -28,8 +28,8 @@
   </div>
   <nav aria-labelledby="breadcrumb-label" id="breadcrumb">
     <ol>
-      <li><a href="index.html"><span lang="en">Home</span></a></li>
-      <li><a href="admin.html">Dashboard</a></li>
+      <li><a href="index.php"><span lang="en">Home</span></a></li>
+      <li><a href="admin.php">Dashboard</a></li>
       <li aria-current="page">Gestione Prenotazioni</li>
     </ol>
   </nav>
@@ -46,13 +46,13 @@
         <nav class="profile-sidebar" aria-label="Menu amministrazione">
           <ul>
             <li>
-              <a href="admin_utenti.html">
+              <a href="admin_utenti.php">
                 <span class="nav-icon" aria-hidden="true">👥</span>
                 <span>Gestione Utenti</span>
               </a>
             </li>
             <li>
-              <a href="admin_prodotti.html">
+              <a href="admin_prodotti.php">
                 <span class="nav-icon" aria-hidden="true">⛵</span>
                 <span>Gestione Prodotti</span>
               </a>
@@ -64,7 +64,7 @@
               </div>
             </li>
             <li>
-              <a href="admin_blog.html">
+              <a href="admin_blog.php">
                 <span class="nav-icon" aria-hidden="true">✏️</span>
                 <span>Blog</span>
               </a>
@@ -80,28 +80,49 @@
             <dl class="stats-grid">
               <div class="stat-card">
                 <dt class="stat-label">Attive</dt>
-                <dd class="stat-number">3</dd>
+                <dd class="stat-number">[STAT_ATTIVE]</dd>
               </div>
               
               <div class="stat-card">
                 <dt class="stat-label">In Attesa</dt>
-                <dd class="stat-number">5</dd>
+                <dd class="stat-number">[STAT_ATTESA]</dd>
               </div>
               
               <div class="stat-card">
                 <dt class="stat-label">Completate</dt>
-                <dd class="stat-number">24</dd>
+                <dd class="stat-number">[STAT_COMPLETATE]</dd>
               </div>
               
               <div class="stat-card">
                 <dt class="stat-label">Cancellate</dt>
-                <dd class="stat-number">2</dd>
+                <dd class="stat-number">[STAT_CANCELLATE]</dd>
               </div>
             </dl>
           </section>
 
           <section aria-labelledby="bookings-list-title" class="admin-section">
             <h2 id="bookings-list-title" class="sr-only">Lista Prenotazioni</h2>
+
+            <form class="filter-bar" method="get" action="admin_prenotazioni.php" aria-label="Filtra prenotazioni">
+              <div class="form-group">
+                <label for="filter-booking-q">Cerca</label>
+                <input type="search" id="filter-booking-q" name="q" value="[ADMIN_BOOKINGS_SEARCH]" placeholder="Cliente o ID">
+              </div>
+              <div class="form-group">
+                <label for="filter-booking-status">Stato</label>
+                <select id="filter-booking-status" name="stato">
+                  <option value="">Tutti</option>
+                  <option value="In Attesa" [IF_BOOKING_STATO_ATTESA]>In Attesa</option>
+                  <option value="Confermata" [IF_BOOKING_STATO_CONF]>Confermate</option>
+                  <option value="Cancellata" [IF_BOOKING_STATO_CANC]>Cancellate</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <button type="submit" class="btn-layout btn-sm">Filtra</button>
+              </div>
+            </form>
+
+            [ADMIN_BOOKINGS_FEEDBACK]
         
             <div class="table-container">
                 <table>
@@ -118,99 +139,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td data-label="ID">001</td>
-                            <td data-label="Prodotto">Tour di Capri</td>
-                            <td data-label="Cliente">Mario Rossi</td>
-                            <td data-label="Data"><time datetime="2025-02-15">15/02/2025</time></td>
-                            <td data-label="Totale">€ 850</td>
-                            <td data-label="Stato"><span class="status-badge active">Attiva</span></td>
-                            <td data-label="Azioni" class="actions-cell">
-                                <a href="dettaglio_prenotazione.html" class="btn-icon" aria-label="Vedi dettagli prenotazione #1567">
-                                  <span aria-hidden="true">👁️</span>
-                                </a>
-                                <button class="btn-icon danger" aria-label="Cancella 001">
-                                    <span aria-hidden="true">✖</span>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td data-label="ID">002</td>
-                            <td data-label="Prodotto">Bavaria 46</td>
-                            <td data-label="Cliente">Laura Bianchi</td>
-                            <td data-label="Data"><time datetime="2025-02-10">10/02/2025</time></td>
-                            <td data-label="Totale">€ 600</td>
-                            <td data-label="Stato"><span class="status-badge pending">In Attesa</span></td>
-                            <td data-label="Azioni" class="actions-cell">
-                                <a href="dettaglio_prenotazione.html" class="btn-icon" aria-label="Vedi dettagli prenotazione #1567">
-                                  <span aria-hidden="true">👁️</span>
-                                </a>
-                                <button class="btn-icon" aria-label="Conferma 002">
-                                    <span aria-hidden="true">✓</span>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td data-label="ID">003</td>
-                            <td data-label="Prodotto">Sunseeker Predator</td>
-                            <td data-label="Cliente">Giuseppe Verdi</td>
-                            <td data-label="Data"><time datetime="2025-02-20">20/02/2025</time></td>
-                            <td data-label="Totale">€ 850</td>
-                            <td data-label="Stato"><span class="status-badge active">Attiva</span></td>
-                            <td data-label="Azioni" class="actions-cell">
-                                <a href="dettaglio_prenotazione.html" class="btn-icon" aria-label="Vedi dettagli prenotazione #1567">
-                                  <span aria-hidden="true">👁️</span>
-                                </a>
-                                <button class="btn-icon danger" aria-label="Cancella 003">
-                                    <span aria-hidden="true">✖</span>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td data-label="ID">004</td>
-                            <td data-label="Prodotto">Costiera Amalfitana</td>
-                            <td data-label="Cliente">Anna Romano</td>
-                            <td data-label="Data"><time datetime="2025-02-05">05/02/2025</time></td>
-                            <td data-label="Totale">€ 950</td>
-                            <td data-label="Stato"><span class="status-badge pending">In Attesa</span></td>
-                            <td data-label="Azioni" class="actions-cell">
-                                <a href="dettaglio_prenotazione.html" class="btn-icon" aria-label="Vedi dettagli prenotazione #1567">
-                                  <span aria-hidden="true">👁️</span>
-                                </a>
-                                <button class="btn-icon" aria-label="Conferma 004">
-                                    <span aria-hidden="true">✓</span>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td data-label="ID">005</td>
-                            <td data-label="Prodotto">Jeanneau 54</td>
-                            <td data-label="Cliente">Francesco Esposito</td>
-                            <td data-label="Data"><time datetime="2025-01-25">25/01/2025</time></td>
-                            <td data-label="Totale">€ 750</td>
-                            <td data-label="Stato"><span class="status-badge completed">Completata</span></td>
-                            <td data-label="Azioni" class="actions-cell">
-                                <a href="dettaglio_prenotazione.html" class="btn-icon" aria-label="Vedi dettagli prenotazione #1567">
-                                  <span aria-hidden="true">👁️</span>
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td data-label="ID">006</td>
-                            <td data-label="Prodotto">Tour di Capri</td>
-                            <td data-label="Cliente">Chiara Lombardi</td>
-                            <td data-label="Data"><time datetime="2025-01-22">22/01/2025</time></td>
-                            <td data-label="Totale">€ 850</td>
-                            <td data-label="Stato"><span class="status-badge cancelled">Cancellata</span></td>
-                            <td data-label="Azioni" class="actions-cell">
-                                <a href="dettaglio_prenotazione.html" class="btn-icon" aria-label="Vedi dettagli prenotazione #1567">
-                                  <span aria-hidden="true">👁️</span>
-                                </a>
-                            </td>
-                        </tr>
+                        [ADMIN_BOOKINGS_ROWS]
                     </tbody>
                 </table>
             </div>
+
+            [ADMIN_BOOKINGS_PAGINATION]
         </section>
 
           <section aria-labelledby="revenue-title" class="profile-stats">

@@ -7,6 +7,9 @@ require_once '../../includes/helpers.php';
 $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (!verifyCsrfToken($_POST['csrf_token'] ?? null)) {
+        $errors[] = 'Sessione scaduta, ricarica la pagina.';
+    } else {
     $email = trim($_POST['email'] ?? '');
     $password = $_POST['password'] ?? '';
 
@@ -23,16 +26,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         $errors[] = 'Errore inatteso, riprova';
     }
+    }
 }
 
 $html = buildPage('../pages/login.html', $_SERVER['PHP_SELF']);
 
+$state = empty($errors) ? 'hidden' : 'error';
+$messageText = '';
 if (!empty($errors)) {
-    $msg = '<div role="status" aria-live="polite" class="form-messages error">'.implode('<br>', array_map('htmlspecialchars', $errors)).'</div>';
-    $html = str_replace('[ERRORS]', $msg, $html);
-} else {
-    $html = str_replace('[ERRORS]', '', $html);
+    $messageText = htmlspecialchars(implode(' | ', $errors));
 }
+
+$html = str_replace(
+    ['[SERVER_STATE]', '[SERVER_MESSAGES]', '[CSRF_TOKEN]'],
+    [$state, $messageText, htmlspecialchars(getCsrfToken())],
+    $html
+);
 
 echo $html;
 ?>
