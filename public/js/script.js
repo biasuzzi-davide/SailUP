@@ -192,3 +192,66 @@ document.addEventListener('DOMContentLoaded', () => {
     setupCatalogFilters('noleggio-filters-form');
     setupCatalogFilters('esperienze-filters-form');
 });
+
+/* ---------------------------------------
+   6. Date persistenti dai cataloghi
+   --------------------------------------- */
+
+document.addEventListener('DOMContentLoaded', () => {
+    let storage;
+    try {
+        storage = window.sessionStorage;
+    } catch {
+        storage = null;
+    }
+    if (!storage) return;
+
+    const catalogDateKeys = {
+        experience: 'catalog_experience_date',
+        rentalStart: 'catalog_rental_start_date',
+        rentalEnd: 'catalog_rental_end_date'
+    };
+
+    const persistInputValue = (selector, key) => {
+        const input = document.querySelector(selector);
+        if (!input) return;
+
+        const saveValue = () => {
+            const value = input.value.trim();
+            if (value) {
+                storage.setItem(key, value);
+            } else {
+                storage.removeItem(key);
+            }
+        };
+
+        input.addEventListener('change', saveValue);
+        saveValue();
+    };
+
+    persistInputValue('#data_esperienza', catalogDateKeys.experience);
+    persistInputValue('#data_inizio', catalogDateKeys.rentalStart);
+    persistInputValue('#data_fine', catalogDateKeys.rentalEnd);
+
+    document.addEventListener('reset', (event) => {
+        if (!event.target) return;
+        if (event.target.id === 'esperienze-filters-form') {
+            storage.removeItem(catalogDateKeys.experience);
+        } else if (event.target.id === 'noleggio-filters-form') {
+            storage.removeItem(catalogDateKeys.rentalStart);
+            storage.removeItem(catalogDateKeys.rentalEnd);
+        }
+    });
+
+    const hydrateBookingInput = (selector, key) => {
+        const input = document.querySelector(selector);
+        const value = storage.getItem(key);
+        if (input && value) {
+            input.value = value;
+        }
+    };
+
+    hydrateBookingInput('#booking-date', catalogDateKeys.experience);
+    hydrateBookingInput('#start-date', catalogDateKeys.rentalStart);
+    hydrateBookingInput('#end-date', catalogDateKeys.rentalEnd);
+});
