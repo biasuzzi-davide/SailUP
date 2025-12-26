@@ -45,6 +45,20 @@ $datePattern = '/^\d{4}-\d{2}-\d{2}$/';
 $dataInizio = (isset($_GET['data_inizio']) && preg_match($datePattern, (string) $_GET['data_inizio'])) ? $_GET['data_inizio'] : '';
 $dataFine = (isset($_GET['data_fine']) && preg_match($datePattern, (string) $_GET['data_fine'])) ? $_GET['data_fine'] : '';
 
+$dataRichiestaInizio = null;
+$dataRichiestaFine = null;
+if ($dataInizio !== '' && $dataFine !== '') {
+	$dataInizioObj = DateTime::createFromFormat('Y-m-d', $dataInizio);
+	$dataFineObj = DateTime::createFromFormat('Y-m-d', $dataFine);
+	if ($dataInizioObj && $dataFineObj) {
+		if ($dataInizioObj > $dataFineObj) {
+			[$dataInizioObj, $dataFineObj] = [$dataFineObj, $dataInizioObj];
+		}
+		$dataRichiestaInizio = $dataInizioObj->format('Y-m-d') . ' 00:00:00';
+		$dataRichiestaFine = $dataFineObj->format('Y-m-d') . ' 23:59:59';
+	}
+}
+
 $sortParam = $_GET['sort'] ?? 'price-asc';
 $allowedSort = ['price-asc', 'price-desc', 'size'];
 $sortChoice = in_array($sortParam, $allowedSort, true) ? $sortParam : 'price-asc';
@@ -55,6 +69,10 @@ $filters = [
 	'postiMin' => $postiMin,
 	'prezzoMax' => $maxPrice,
 ];
+if ($dataRichiestaInizio !== null && $dataRichiestaFine !== null) {
+	$filters['dataRichiestaInizio'] = $dataRichiestaInizio;
+	$filters['dataRichiestaFine'] = $dataRichiestaFine;
+}
 
 $prodottiNoleggio = $db->getProdottiWithMedia('Noleggio', 200, $filters, $sortChoice);
 
