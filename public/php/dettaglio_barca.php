@@ -4,6 +4,7 @@ require_once '../../includes/helpers.php';
 require_once '../../includes/db_connection.php';
 
 $db = new DBConnection();
+
 $productId = trim((string) filter_input(INPUT_GET, 'id', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
 $productDetail = null;
 
@@ -122,8 +123,9 @@ $placeholders = [
 	'[PRODUCT_PRICE]' => htmlspecialchars($priceLabel, ENT_QUOTES),
 	'[EXTRA_CHECKBOXES]' => $extraCheckboxes,
 	'[MIN_DATE]' => date('Y-m-d'),
-	'[SERVER_STATE]' => isset($serverState) ? $serverState : '',
-	'[SERVER_MESSAGES]' => isset($serverMessage) ? $serverMessage : '',
+	// messaggi server: nascosti perché il form non è gestito lato server
+	'[SERVER_STATE]' => 'hidden',
+	'[SERVER_MESSAGES]' => '',
 ];
 
 $html = str_replace(array_keys($placeholders), array_values($placeholders), $html);

@@ -6,6 +6,18 @@ require_once '../../includes/utils/validation.php';
 require_once '../../includes/helpers.php';
 
 $errors = [];
+$old = [
+    'nome' => '',
+    'cognome' => '',
+    'cf' => '',
+    'email' => '',
+    'via' => 'Via Roma',
+    'civico' => '123',
+    'cap' => '80100',
+    'citta' => 'Napoli',
+    'provincia' => 'NA',
+    'privacy' => false,
+];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!verifyCsrfToken($_POST['csrf_token'] ?? null)) {
@@ -24,6 +36,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $citta     = trim($_POST['indirizzo_citta'] ?? '');
     $provincia = strtoupper(trim($_POST['indirizzo_provincia'] ?? ''));
     $patente   = trim($_POST['patente'] ?? '');
+    $privacy   = isset($_POST['privacy']);
+
+    // conserva i valori inseriti per ripopolare il form
+    $old = [
+        'nome' => $nome,
+        'cognome' => $cognome,
+        'cf' => $cf,
+        'email' => $email,
+        'via' => $via === '' ? '' : $via,
+        'civico' => $civico === '' ? '' : $civico,
+        'cap' => $cap === '' ? '' : $cap,
+        'citta' => $citta === '' ? '' : $citta,
+        'provincia' => $provincia === '' ? '' : $provincia,
+        'privacy' => $privacy,
+    ];
 
     //validazioni
     if (!isValidName($nome)) $errors[] = 'Nome non valido';
@@ -74,8 +101,14 @@ if (!empty($errors)) {
 }
 
 $html = str_replace(
-    ['[SERVER_STATE]', '[SERVER_MESSAGES]', '[CSRF_TOKEN]'],
-    [$state, $messageText, htmlspecialchars(getCsrfToken())],
+    ['[SERVER_STATE]', '[SERVER_MESSAGES]', '[CSRF_TOKEN]',
+     '[OLD_NOME]', '[OLD_COGNOME]', '[OLD_CF]', '[OLD_EMAIL]',
+     '[OLD_VIA]', '[OLD_CIVICO]', '[OLD_CAP]', '[OLD_CITTA]', '[OLD_PROVINCIA]',
+     '[PRIVACY_CHECKED]'],
+    [$state, $messageText, htmlspecialchars(getCsrfToken()),
+     htmlspecialchars($old['nome'] ?? ''), htmlspecialchars($old['cognome'] ?? ''), htmlspecialchars($old['cf'] ?? ''), htmlspecialchars($old['email'] ?? ''),
+     htmlspecialchars($old['via'] ?? ''), htmlspecialchars($old['civico'] ?? ''), htmlspecialchars($old['cap'] ?? ''), htmlspecialchars($old['citta'] ?? ''), htmlspecialchars($old['provincia'] ?? ''),
+     !empty($old['privacy']) ? 'checked' : ''],
     $html
 );
 

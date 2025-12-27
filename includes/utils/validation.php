@@ -124,10 +124,10 @@ function isValidIndirizzo(string $indirizzo): bool {
     return preg_match("/^[A-Za-z0-9\s,.\-\/]+$/", $indirizzo) === 1;
 }
 
-//civico, lettere/numeri/trattino, 1-10 caratteri
+//civico, numeri, 1-5 caratteri
 function isValidCivico(string $civico): bool {
     $civico = trim($civico);
-    return $civico !== '' && preg_match('/^[A-Za-z0-9\-]{1,10}$/', $civico) === 1;
+    return $civico !== '' && preg_match('/^[0-9]{1,5}$/', $civico) === 1;
 }
 
 //cap, 5 cifre
@@ -145,4 +145,3 @@ function isValidCitta(string $citta): bool {
 function isValidProvincia(string $prov): bool {
     return preg_match('/^[A-Z]{2}$/', strtoupper(trim($prov))) === 1;
 }
-
