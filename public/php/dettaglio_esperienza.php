@@ -54,7 +54,7 @@ $extraHtml = buildItemsList(
 	function ($item) {
 		$label = htmlspecialchars($item['Nome_Extra'] ?? '', ENT_QUOTES);
 		if (!empty($item['Prezzo_Extra'])) {
-			$formattedPrice = formatCurrencyWithDecimals($item['Prezzo_Extra']);
+			$formattedPrice = number_format((float) $item['Prezzo_Extra'], 0, ',', '.');
 			if ($formattedPrice !== '') {
 				$label .= ' (+ ' . htmlspecialchars($formattedPrice, ENT_QUOTES) . ' €)';
 			}
@@ -63,6 +63,32 @@ $extraHtml = buildItemsList(
 		return $label;
 	}
 );
+
+// Genera le checkbox per gli extra nel form
+$extraCheckboxes = '';
+if (is_array($extra) && count($extra) > 0) {
+	foreach ($extra as $index => $extraItem) {
+		$extraName = htmlspecialchars($extraItem['Nome_Extra'] ?? '', ENT_QUOTES);
+		$extraPrice = $extraItem['Prezzo_Extra'] ?? 0;
+		$isOptional = isset($extraItem['Opzionale']) ? filter_var($extraItem['Opzionale'], FILTER_VALIDATE_BOOLEAN) : true;
+		$formattedPrice = number_format((float) $extraPrice, 0, ',', '.');
+		
+		$checkboxId = 'extra-' . $index;
+		$checkedAttr = !$isOptional ? 'checked' : '';
+		$disabledAttr = !$isOptional ? 'disabled' : '';
+		$priceText = $formattedPrice !== '' ? '+' . htmlspecialchars($formattedPrice, ENT_QUOTES) . ' €' : '';
+		
+		$extraCheckboxes .= '<div class="form-check checkbox-highlight">';
+		$extraCheckboxes .= '<input type="checkbox" id="' . $checkboxId . '" name="extras[]" value="' . $index . '" ' . $checkedAttr . ' ' . $disabledAttr . '>';
+		$extraCheckboxes .= '<label for="' . $checkboxId . '">';
+		$extraCheckboxes .= '<span>' . $extraName . '</span>';
+		if ($priceText !== '') {
+			$extraCheckboxes .= '<span class="text-accent">' . $priceText . '</span>';
+		}
+		$extraCheckboxes .= '</label>';
+		$extraCheckboxes .= '</div>' . "\n";
+	}
+}
 
 $languages = $db->getLinguePerProdotto($experience['IDProdotto']);
 $languageNames = [];
@@ -92,6 +118,7 @@ $placeholders = [
 	'[EXTRA_ITEMS]' => $extraHtml,
 	'[EXPERIENCE_LANGUAGES]' => htmlspecialchars($languageList, ENT_QUOTES),
 	'[EXPERIENCE_PRICE]' => htmlspecialchars($price, ENT_QUOTES),
+	'[EXTRA_CHECKBOXES]' => $extraCheckboxes,
 ];
 
 $html = str_replace(array_keys($placeholders), array_values($placeholders), $html);
