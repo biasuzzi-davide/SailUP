@@ -25,40 +25,35 @@
         <section class="section-container">
             <div class="auth-card">
                 <div>
-                    <!-- IL TITOLO è PAGAMENTO CONFERMATO IN CASO DI PAGAMENTO CON CARTA OPPURE PAGAMENTO DA FARE TIPO PER CONTANTI O BONIFICO-->
-                    <h1>[TITOLO]</h1>
-                    <p class="auth-subtitle">La tua prenotazione è stata registrata con successo.</p>
+                    <h1>[TITOLO_CONFERMA]</h1>
+                    <p class="auth-subtitle">[SOTTOTITOLO_CONFERMA]</p>
                 </div>
+
+                [ISTRUZIONI_PAGAMENTO]
 
                 <div class="order-summary">
                     <h2>Riepilogo Ordine</h2>
                     <dl>
                         <div>
-                            <dt>Imbarcazione:</dt>
-                            <dd><strong>Sunseeker Predator</strong></dd>
+                            <dt>[TIPO_PRODOTTO_LABEL]:</dt>
+                            <dd><strong>[NOME_PRODOTTO]</strong></dd>
                         </div>
                         <div>
-                            <dt><span lang="en">Check-in</span>:</dt>
-                            <dd><time datetime="2025-07-15">15 Luglio 2025</time></dd>
+                            <dt>[DATA_LABEL]:</dt>
+                            <dd><time datetime="[DATA_INIZIO_ISO]">[DATA_INIZIO_FORMATTATA]</time></dd>
                         </div>
+                        [DATA_FINE_ROW]
+                        [EXTRA_SERVIZIO_ROW]
                         <div>
-                            <dt><span lang="en">Check-out</span>:</dt>
-                            <dd><time datetime="2025-07-17">17 Luglio 2025</time></dd>
-                        </div>
-                        <div>
-                            <dt><span lang="en">Skipper</span>:</dt>
-                            <dd>Sì <span class="text-accent">(+10%)</span></dd>
-                        </div>
-                        <div>
-                            <dt><strong>Totale Pagato:</strong></dt>
-                            <dd><strong class="price-value">€ 1.870</strong></dd>
+                            <dt><strong>Totale [PAGATO_O_DA_PAGARE]:</strong></dt>
+                            <dd><strong class="price-value">€ [PREZZO_TOTALE]</strong></dd>
                         </div>
                     </dl>
                 </div>
 
                 <div class="form-actions">
-                    <a href="index.html" class="btn-layout">Torna alla Home</a>
-                    <a href="profilo.html" class="btn-layout-light">I miei Noleggi</a>
+                    <a href="index.php" class="btn-layout">Torna alla <span lang="en">Home</span></a>
+                    <a href="profilo_prenotazioni.php" class="btn-layout-light">Le mie Prenotazioni</a>
                 </div>
             </div>
         </section>

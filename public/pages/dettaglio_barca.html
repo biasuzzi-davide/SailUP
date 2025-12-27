@@ -106,18 +106,18 @@
                     </p>
                 </div>
 
-                <form method="post" action="" class="booking-form">
+                <form method="post" action="prenota_noleggio.php?id=[PRODUCT_ID]" class="booking-form">
                     <fieldset>
                         <legend class="sr-only">Prenotazione</legend>
 
                         <div class="form-group">
                             <label for="start-date"><span lang="en">Check-in</span></label>
-                            <input type="date" id="start-date" name="start_date" required>
+                            <input type="date" id="start-date" name="start_date" required min="[MIN_DATE]">
                         </div>
 
                         <div class="form-group">
                             <label for="end-date"><span lang="en">Check-out</span></label>
-                            <input type="date" id="end-date" name="end_date" required>
+                            <input type="date" id="end-date" name="end_date" required min="[MIN_DATE]">
                         </div>
 
                         <div class="form-group">

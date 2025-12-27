@@ -163,7 +163,6 @@
     inputs.terms?.addEventListener('change', validateTerms);
 
     form.addEventListener('submit', function(e) {
-        e.preventDefault();
         hideGlobalMessages();
 
         const validations = [
@@ -176,17 +175,9 @@
 
         const isFormValid = validations.every(result => result === true);
 
-        if (isFormValid) {
-            showGlobalMessage('Pagamento confermato! Reindirizzamento...', 'success');
-            
-            const submitBtn = form.querySelector('button[type="submit"]');
-            if(submitBtn) submitBtn.disabled = true;
-
-            setTimeout(function() {
-                window.location.href = 'conferma_prenotazione.html';
-            }, 1500);
-
-        } else {
+        if (!isFormValid) {
+            // Blocca l'invio SOLO se la validazione fallisce
+            e.preventDefault();
             showGlobalMessage('Per favore correggi gli errori evidenziati.', 'error');
             
             const firstError = form.querySelector('[aria-invalid="true"]');
@@ -194,6 +185,14 @@
                 firstError.focus();
                 firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
+        } else {
+            // Se valido, mostra feedback ma lascia che il form si invii naturalmente
+            showGlobalMessage('Elaborazione pagamento in corso...', 'success');
+            
+            const submitBtn = form.querySelector('button[type="submit"]');
+            if(submitBtn) submitBtn.disabled = true;
+            
+            // Il form si invierà naturalmente al server (nessun preventDefault né submit())
         }
     });
 

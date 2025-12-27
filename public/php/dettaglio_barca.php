@@ -79,16 +79,21 @@ if (is_array($extra) && count($extra) > 0) {
 	foreach ($extra as $index => $extraItem) {
 		$extraName = htmlspecialchars($extraItem['Nome_Extra'] ?? '', ENT_QUOTES);
 		$extraPrice = $extraItem['Prezzo_Extra'] ?? 0;
+		$extraId = $extraItem['IDExtra'] ?? $index;
 		$isOptional = isset($extraItem['Opzionale']) ? filter_var($extraItem['Opzionale'], FILTER_VALIDATE_BOOLEAN) : true;
 		$formattedPrice = number_format((float) $extraPrice, 0, ',', '.');
 		
-		$checkboxId = 'extra-' . $index;
+		$checkboxId = 'extra-' . $extraId;
 		$checkedAttr = !$isOptional ? 'checked' : '';
 		$disabledAttr = !$isOptional ? 'disabled' : '';
 		$priceText = $formattedPrice !== '' ? '+' . htmlspecialchars($formattedPrice, ENT_QUOTES) . ' €' : '';
 		
 		$extraCheckboxes .= '<div class="form-check checkbox-highlight">';
-		$extraCheckboxes .= '<input type="checkbox" id="' . $checkboxId . '" name="extras[]" value="' . $index . '" ' . $checkedAttr . ' ' . $disabledAttr . '>';
+		$extraCheckboxes .= '<input type="checkbox" id="' . $checkboxId . '" name="extras[]" value="' . $extraId . '" ' . $checkedAttr . ' ' . $disabledAttr . '>';
+		// Aggiungi hidden input per extra obbligatori (disabled non viene inviato)
+		if (!$isOptional) {
+			$extraCheckboxes .= '<input type="hidden" name="extras[]" value="' . $extraId . '">';
+		}
 		$extraCheckboxes .= '<label for="' . $checkboxId . '">';
 		$extraCheckboxes .= '<span>' . $extraName . '</span>';
 		if ($priceText !== '') {
@@ -102,6 +107,7 @@ if (is_array($extra) && count($extra) > 0) {
 $html = buildPage('../pages/dettaglio_barca.html', $_SERVER['PHP_SELF']);
 
 $placeholders = [
+	'[PRODUCT_ID]' => htmlspecialchars($productId, ENT_QUOTES),
 	'[PRODUCT_IMAGE_SRC]' => htmlspecialchars($heroImage, ENT_QUOTES),
 	'[PRODUCT_IMAGE_ALT]' => htmlspecialchars($heroAlt, ENT_QUOTES),
 	'[PRODUCT_NAME]' => htmlspecialchars($productName, ENT_QUOTES),
@@ -115,6 +121,9 @@ $placeholders = [
 	'[EXTRA_ITEMS]' => $extraHtml,
 	'[PRODUCT_PRICE]' => htmlspecialchars($priceLabel, ENT_QUOTES),
 	'[EXTRA_CHECKBOXES]' => $extraCheckboxes,
+	'[MIN_DATE]' => date('Y-m-d'),
+	'[SERVER_STATE]' => isset($serverState) ? $serverState : '',
+	'[SERVER_MESSAGES]' => isset($serverMessage) ? $serverMessage : '',
 ];
 
 $html = str_replace(array_keys($placeholders), array_values($placeholders), $html);

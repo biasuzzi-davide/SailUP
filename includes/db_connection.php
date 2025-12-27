@@ -1180,7 +1180,7 @@ class DBConnection {
     public function getProdottoExtra(string $idProdotto): array|bool {
         $this->openConnection();
         $query = "
-            SELECT Nome_Extra, Prezzo_Extra, Descrizione_Extra, Opzionale
+            SELECT IDExtra, Nome_Extra, Prezzo_Extra, Descrizione_Extra, Opzionale
             FROM Prodotto_Extra
             WHERE IDProdotto = ?
             ORDER BY Opzionale DESC, Nome_Extra ASC
@@ -2156,4 +2156,131 @@ class DBConnection {
             return false;
         }
     }
+
+    /* ============================================================
+       METODI PRENOTAZIONE
+       ============================================================ */
+
+    /**
+     * Verifica se un prodotto è disponibile in un determinato periodo
+     */
+    public function checkDateAvailability(string $idProdotto, string $dataInizio, string $dataFine): bool {
+        $this->openConnection();
+        
+        // Controlla prenotazioni esistenti (non cancellate)
+        $query = "SELECT COUNT(*) as count FROM Prenotazione 
+                  WHERE IDProdotto = ? 
+                  AND Stato_Prenotazione != 'Cancellata'
+                  AND (
+                      (Data_Ora_Inizio < ? AND Data_Ora_Fine > ?) OR
+                      (Data_Ora_Inizio < ? AND Data_Ora_Fine > ?) OR
+                      (Data_Ora_Inizio >= ? AND Data_Ora_Fine <= ?)
+                  )";
+        
+        try {
+            $stmt = $this->connection->prepare($query);
+            if (!$stmt) {
+                $this->closeConnection();
+                return false;
+            }
+            
+            $stmt->bind_param('sssssss', $idProdotto, $dataFine, $dataInizio, $dataFine, $dataInizio, $dataInizio, $dataFine);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $row = $result->fetch_assoc();
+            $count = (int) $row['count'];
+            
+            $stmt->close();
+            
+            // Controlla anche indisponibilità manuali
+            $query2 = "SELECT COUNT(*) as count FROM Indisponibilita 
+                       WHERE IDProdotto = ? 
+                       AND (
+                           (Data_Inizio < ? AND Data_Fine > ?) OR
+                           (Data_Inizio < ? AND Data_Fine > ?) OR
+                           (Data_Inizio >= ? AND Data_Fine <= ?)
+                       )";
+            
+            $stmt2 = $this->connection->prepare($query2);
+            if (!$stmt2) {
+                $this->closeConnection();
+                return false;
+            }
+            
+            $stmt2->bind_param('sssssss', $idProdotto, $dataFine, $dataInizio, $dataFine, $dataInizio, $dataInizio, $dataFine);
+            $stmt2->execute();
+            $result2 = $stmt2->get_result();
+            $row2 = $result2->fetch_assoc();
+            $count2 = (int) $row2['count'];
+            
+            $stmt2->close();
+            $this->closeConnection();
+            
+            return ($count === 0 && $count2 === 0);
+        } catch (Throwable $t) {
+            $this->closeConnection();
+            return false;
+        }
+    }
+
+    /**
+     * Inserisce una nuova prenotazione
+     * @return int|false ID della prenotazione inserita o false in caso di errore
+     */
+    public function insertPrenotazione(
+        int $idUtente,
+        string $idProdotto,
+        string $dataInizio,
+        string $dataFine,
+        bool $skipperRichiesto,
+        float $prezzoTotale,
+        string $metodoPagamento,
+        string $statoPrenotazione = 'In Attesa',
+        ?string $noteAddizionali = null
+    ) {
+        $this->openConnection();
+        
+        $query = "INSERT INTO Prenotazione 
+                  (IDUtente, IDProdotto, Data_Ora_Inizio, Data_Ora_Fine, Skipper_Richiesto, 
+                   Prezzo_Totale, Metodo_Pagamento, Stato_Prenotazione, Note_Addizionali)
+                  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        
+        try {
+            $stmt = $this->connection->prepare($query);
+            if (!$stmt) {
+                $this->closeConnection();
+                return false;
+            }
+            
+            $skipperInt = $skipperRichiesto ? 1 : 0;
+            $stmt->bind_param(
+                'isssidsss',
+                $idUtente,
+                $idProdotto,
+                $dataInizio,
+                $dataFine,
+                $skipperInt,
+                $prezzoTotale,
+                $metodoPagamento,
+                $statoPrenotazione,
+                $noteAddizionali
+            );
+            
+            if (!$stmt->execute()) {
+                $stmt->close();
+                $this->closeConnection();
+                return false;
+            }
+            
+            $id = $stmt->insert_id;
+            $stmt->close();
+            $this->closeConnection();
+            return $id;
+        } catch (Throwable $t) {
+            $this->closeConnection();
+            return false;
+        }
+    }
 }
+
+
