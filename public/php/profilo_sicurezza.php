@@ -1,5 +1,4 @@
 <?php
-
 require_once '../../includes/session/session.php';
 require_once '../../includes/db_connection.php';
 require_once '../../includes/utils/validation.php';
