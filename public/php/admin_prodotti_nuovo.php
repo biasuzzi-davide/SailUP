@@ -105,9 +105,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($descrBreve === '') $errors[] = 'Inserisci la descrizione breve';
         if ($prezzo <= 0) $errors[] = 'Prezzo non valido';
         if ($posti <= 0) $errors[] = 'Capacità non valida';
-        //url relativo all imagine del prodotto
+        //prima accettavamo solo url assoluti, ora ho aggiunto anche la possibilità che un url sia relativo
         $isAbsUrl = filter_var($urlImg, FILTER_VALIDATE_URL) !== false;
-        $isRelPath = preg_match('#^(\\/|\\.\\/|\\.\\.\\/|[A-Za-z0-9_-]+\\/)[^\\s]+$#', $urlImg) === 1;
+        // accetta percorsi relativi o semplici nomi file (es. img/foo.jpg o foo.jpg)
+        $isRelPath = preg_match('#^(\\/|\\.\\/|\\.\\.\\/)?[A-Za-z0-9._-]+(\\/[A-Za-z0-9._-]+)*$#', $urlImg) === 1;
         if ($urlImg === '' || (!$isAbsUrl && !$isRelPath)) $errors[] = 'URL immagine non valido';
         if ($altImg === '') $errors[] = 'Testo alternativo obbligatorio';
         if ($tipo === 'experience' && (empty($lingue) || !is_array($lingue))) {
@@ -181,15 +182,44 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $placeholders['[LANG_FR]'] = in_array('FR', $langsCodes, true) ? 'checked' : '';
                 $placeholders['[LANG_ES]'] = in_array('ES', $langsCodes, true) ? 'checked' : '';
                 $placeholders['[LANG_DE]'] = in_array('DE', $langsCodes, true) ? 'checked' : '';
-            } else {
-                $feedbackClass = 'alert alert-error';
-                $feedback = 'Errore durante il salvataggio del prodotto.';
-            }
         } else {
             $feedbackClass = 'alert alert-error';
-            $feedback = implode(' | ', $errors);
+            $feedback = 'Errore durante il salvataggio del prodotto.';
         }
+    } else {
+        $feedbackClass = 'alert alert-error';
+        $feedback = implode(' | ', $errors);
+
+        // Ripopola il form con i valori inseriti dall'utente
+        $editingId = $prodIdPost !== '' ? $prodIdPost : $editingId;
+        $placeholders = array_merge($placeholders, [
+            '[PROD_NAME]' => htmlspecialchars($nome),
+            '[PROD_TYPE_NOLEGGIO]' => $tipo === 'noleggio' ? 'selected' : '',
+            '[PROD_TYPE_EXP]' => $tipo === 'experience' ? 'selected' : '',
+            '[PROD_TIPOLOGIA]' => htmlspecialchars($tipologia),
+            '[PROD_DURATION]' => htmlspecialchars((string)$durata),
+            '[PROD_DESC]' => htmlspecialchars($descrBreve),
+            '[PROD_DESC_LONG]' => htmlspecialchars($descr),
+            '[PROD_PRICE]' => htmlspecialchars((string)$prezzo),
+            '[PROD_CAPACITY]' => htmlspecialchars((string)$posti),
+            '[PROD_LENGTH]' => htmlspecialchars((string)($lunghezza ?? '')),
+            '[IMG_URL]' => htmlspecialchars($urlImg),
+            '[IMG_ALT]' => htmlspecialchars($altImg),
+            '[CHECK_PATENTE]' => $richiedePatente ? 'checked' : '',
+            '[CHECK_ACCESS]' => $accessibile ? 'checked' : '',
+            '[SEL_STATUS_AVAILABLE]' => $status === 'available' ? 'selected' : '',
+            '[SEL_STATUS_MAINT]' => $status === 'maintenance' ? 'selected' : '',
+            '[SEL_STATUS_UNAVAIL]' => $status === 'unavailable' ? 'selected' : '',
+            '[PROD_FEATURES]' => htmlspecialchars($features),
+        ]);
+        $langsCodes = is_array($lingue) ? $lingue : [];
+        $placeholders['[LANG_IT]'] = in_array('IT', $langsCodes, true) ? 'checked' : '';
+        $placeholders['[LANG_EN]'] = in_array('EN', $langsCodes, true) ? 'checked' : '';
+        $placeholders['[LANG_FR]'] = in_array('FR', $langsCodes, true) ? 'checked' : '';
+        $placeholders['[LANG_ES]'] = in_array('ES', $langsCodes, true) ? 'checked' : '';
+        $placeholders['[LANG_DE]'] = in_array('DE', $langsCodes, true) ? 'checked' : '';
     }
+}
 }
 
 $html = buildPage('../pages/admin_prodotti_nuovo.html', $_SERVER['PHP_SELF']);
