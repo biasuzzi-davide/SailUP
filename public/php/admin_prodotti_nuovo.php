@@ -105,7 +105,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($descrBreve === '') $errors[] = 'Inserisci la descrizione breve';
         if ($prezzo <= 0) $errors[] = 'Prezzo non valido';
         if ($posti <= 0) $errors[] = 'Capacità non valida';
-        if ($urlImg === '' || !filter_var($urlImg, FILTER_VALIDATE_URL)) $errors[] = 'URL immagine non valido';
+        //url relativo all imagine del prodotto
+        $isAbsUrl = filter_var($urlImg, FILTER_VALIDATE_URL) !== false;
+        $isRelPath = preg_match('#^(\\/|\\.\\/|\\.\\.\\/|[A-Za-z0-9_-]+\\/)[^\\s]+$#', $urlImg) === 1;
+        if ($urlImg === '' || (!$isAbsUrl && !$isRelPath)) $errors[] = 'URL immagine non valido';
         if ($altImg === '') $errors[] = 'Testo alternativo obbligatorio';
         if ($tipo === 'experience' && (empty($lingue) || !is_array($lingue))) {
             $errors[] = 'Seleziona almeno una lingua per le esperienze';

@@ -281,6 +281,10 @@ a:hover {
   background-color: var(--col-bg);
 }
 
+.btn-text.danger {
+  color: #b91c1c;
+}
+
 .btn-text:hover {
   opacity: 0.7;
 }
