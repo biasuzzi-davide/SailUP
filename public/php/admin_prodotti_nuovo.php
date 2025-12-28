@@ -148,7 +148,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
 
             if ($ok) {
-                $db->upsertMediaProdotto($idProdotto, $urlImg, $altImg);
+                $normalizedUrl = $urlImg;
+                if (!$isAbsUrl && strpos($urlImg, '/') === false && strpos($urlImg, '\\') === false) {
+                    // se è solo un filename, punta alla cartella immagini prodotti
+                    $normalizedUrl = '../img/prodotti/' . ltrim($urlImg, '/');
+                }
+
+                $db->upsertMediaProdotto($idProdotto, $normalizedUrl, $altImg);
                 $db->setLingueProdotto($idProdotto, is_array($lingue) ? $lingue : []);
                 $featLines = $features === '' ? [] : array_filter(array_map('trim', preg_split('/\r\n|\r|\n/', $features)));
                 $db->setInclusiProdotto($idProdotto, $featLines);
@@ -167,7 +173,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     '[PROD_PRICE]' => htmlspecialchars((string)$prezzo),
                     '[PROD_CAPACITY]' => htmlspecialchars((string)$posti),
                     '[PROD_LENGTH]' => htmlspecialchars((string)($lunghezza ?? '')),
-                    '[IMG_URL]' => htmlspecialchars($urlImg),
+                    '[IMG_URL]' => htmlspecialchars($normalizedUrl),
                     '[IMG_ALT]' => htmlspecialchars($altImg),
                     '[CHECK_PATENTE]' => $richiedePatente ? 'checked' : '',
                     '[CHECK_ACCESS]' => $accessibile ? 'checked' : '',
