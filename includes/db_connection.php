@@ -1630,6 +1630,41 @@ class DBConnection {
     }
 
     /**
+     * Statistiche rapide per dashboard admin.
+     */
+    public function getAdminStats(): array|bool {
+        $this->openConnection();
+        $query = "
+            SELECT
+                (SELECT COUNT(*) FROM Utente) AS total_users,
+                (SELECT COUNT(*) FROM Prodotto WHERE Attivo = 1) AS active_products,
+                (SELECT COUNT(*) FROM Prenotazione WHERE Stato_Prenotazione IN ('In Attesa', 'Confermata')) AS active_bookings,
+                (SELECT COALESCE(SUM(Prezzo_Totale), 0)
+                 FROM Prenotazione
+                 WHERE Stato_Prenotazione = 'Confermata'
+                   AND YEAR(Data_Creazione) = YEAR(CURRENT_DATE())
+                   AND MONTH(Data_Creazione) = MONTH(CURRENT_DATE())
+                ) AS monthly_revenue
+        ";
+
+        try {
+            $result = $this->connection->query($query);
+            if (!$result) {
+                $this->closeConnection();
+                return false;
+            }
+
+            $row = $result->fetch_assoc();
+            $result->free();
+            $this->closeConnection();
+            return $row ?: [];
+        } catch (Throwable $t) {
+            $this->closeConnection();
+            return false;
+        }
+    }
+
+    /**
      * Recupera prodotti con media associata, limitati per tipo e numero.
      */
     public function getProdottiWithMedia(
@@ -2282,5 +2317,4 @@ class DBConnection {
         }
     }
 }
-
 
