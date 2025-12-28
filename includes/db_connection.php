@@ -364,6 +364,38 @@ class DBConnection {
     }
 
     /**
+     * Statistiche aggregate sugli utenti.
+     */
+    public function getUserStats(): array|bool {
+        $this->openConnection();
+        $query = "
+            SELECT
+                (SELECT COUNT(*) FROM Utente) AS total_users,
+                (SELECT COUNT(*) FROM Utente WHERE Is_Admin = 1) AS admin_users,
+                (SELECT COUNT(*) FROM Utente WHERE Is_Admin = 0) AS standard_users,
+                (SELECT COUNT(*) FROM Utente
+                 WHERE YEAR(Data_Registrazione) = YEAR(CURRENT_DATE())
+                   AND MONTH(Data_Registrazione) = MONTH(CURRENT_DATE())
+                ) AS new_this_month
+        ";
+
+        try {
+            $result = $this->connection->query($query);
+            if (!$result) {
+                $this->closeConnection();
+                return false;
+            }
+            $row = $result->fetch_assoc();
+            $result->free();
+            $this->closeConnection();
+            return $row ?: [];
+        } catch (Throwable $t) {
+            $this->closeConnection();
+            return false;
+        }
+    }
+
+    /**
      * Aggiorna i dati base utente (nome, cognome, CF, email).
      * Ritorna true se ok, -1 se email già usata da altro utente, -2 se CF già usato, false in caso di errore.
      */
@@ -1665,6 +1697,46 @@ class DBConnection {
     }
 
     /**
+     * stats finanziarie prenotazioni (incassi e pending)
+     */
+    public function getBookingFinanceStats(): array|bool {
+        $this->openConnection();
+        $query = "
+            SELECT
+                (SELECT COALESCE(SUM(Prezzo_Totale), 0)
+                 FROM Prenotazione
+                 WHERE Stato_Prenotazione = 'Confermata'
+                   AND YEAR(Data_Creazione) = YEAR(CURRENT_DATE())
+                   AND MONTH(Data_Creazione) = MONTH(CURRENT_DATE())
+                ) AS revenue_month,
+                (SELECT COALESCE(SUM(Prezzo_Totale), 0)
+                 FROM Prenotazione
+                 WHERE Stato_Prenotazione = 'In Attesa'
+                ) AS revenue_pending,
+                (SELECT COALESCE(SUM(Prezzo_Totale), 0)
+                 FROM Prenotazione
+                 WHERE Stato_Prenotazione = 'Confermata'
+                   AND YEAR(Data_Creazione) = YEAR(CURRENT_DATE())
+                ) AS revenue_year
+        ";
+
+        try {
+            $result = $this->connection->query($query);
+            if (!$result) {
+                $this->closeConnection();
+                return false;
+            }
+            $row = $result->fetch_assoc();
+            $result->free();
+            $this->closeConnection();
+            return $row ?: [];
+        } catch (Throwable $t) {
+            $this->closeConnection();
+            return false;
+        }
+    }
+
+    /**
      * Recupera prodotti con media associata, limitati per tipo e numero.
      */
     public function getProdottiWithMedia(
@@ -2317,4 +2389,3 @@ class DBConnection {
         }
     }
 }
-

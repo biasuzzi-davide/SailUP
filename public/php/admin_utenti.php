@@ -7,6 +7,7 @@ require_once '../../includes/helpers.php';
 requireAdmin();
 
 $db = new DBConnection();
+$userStats = $db->getUserStats();
 $feedbackState = 'hidden';
 $feedbackMessage = '';
 $currentUserId = $_SESSION['user']['IDUtente'] ?? null;
@@ -94,6 +95,8 @@ if (is_array($users) && !empty($users)) {
         $dataIscr = !empty($u['Data_Registrazione']) ? htmlspecialchars(date('d/m/Y', strtotime($u['Data_Registrazione']))) : '—';
         $isSelf = $currentUserId !== null && (int) $currentUserId === (int) $u['IDUtente'];
         $disableAttr = $isSelf ? ' disabled aria-disabled="true" title="Azione non disponibile sul tuo account"' : '';
+        $statusLabel = !empty($u['Attivo']) ? 'Disattiva' : 'Attiva';
+        $roleLabel = !empty($u['Is_Admin']) ? 'Rimuovi admin' : 'Rendi admin';
         $rows .= '<tr>'
             . '<td data-label="ID">' . htmlspecialchars($u['IDUtente']) . '</td>'
             . '<td data-label="Nome">' . htmlspecialchars(($u['Nome'] ?? '') . ' ' . ($u['Cognome'] ?? '')) . '</td>'
@@ -106,16 +109,16 @@ if (is_array($users) && !empty($users)) {
             . '<input type="hidden" name="csrf_token" value="' . $csrfToken . '">'
             . '<input type="hidden" name="user_id" value="' . htmlspecialchars($u['IDUtente']) . '">'
             . '<input type="hidden" name="action" value="toggle_status">'
-            . '<button type="submit" class="btn-icon" aria-label="Attiva o disattiva utente ' . htmlspecialchars($u['Email'] ?? '') . '"' . $disableAttr . '>'
-            . (!empty($u['Attivo']) ? '⏻' : '✅')
+            . '<button type="submit" class="btn-text" aria-label="Attiva o disattiva utente ' . htmlspecialchars($u['Email'] ?? '') . '"' . $disableAttr . '>'
+            . htmlspecialchars($statusLabel)
             . '</button>'
             . '</form>'
             . '<form method="post" class="inline-form">'
             . '<input type="hidden" name="csrf_token" value="' . $csrfToken . '">'
             . '<input type="hidden" name="user_id" value="' . htmlspecialchars($u['IDUtente']) . '">'
             . '<input type="hidden" name="action" value="toggle_role">'
-            . '<button type="submit" class="btn-icon" aria-label="Cambia ruolo utente ' . htmlspecialchars($u['Email'] ?? '') . '"' . $disableAttr . '>'
-            . (!empty($u['Is_Admin']) ? '👤' : '⭐')
+            . '<button type="submit" class="btn-text" aria-label="Cambia ruolo utente ' . htmlspecialchars($u['Email'] ?? '') . '"' . $disableAttr . '>'
+            . htmlspecialchars($roleLabel)
             . '</button>'
             . '</form>'
             . '</td>'
@@ -131,7 +134,15 @@ if ($feedbackState !== 'hidden' && $feedbackMessage !== '') {
     $feedbackBlock = '<div class="' . $alertClass . '" role="status" aria-live="polite">' . htmlspecialchars($feedbackMessage) . '</div>';
 }
 
+//builda la pagine ed inserisce le stats dinamche al posto dei placeholder
 $html = buildPage('../pages/admin_utenti.html', $_SERVER['PHP_SELF']);
+$statPlaceholders = [
+    '[STAT_USERS_TOTAL]' => htmlspecialchars((string)($userStats['total_users'] ?? 0)),
+    '[STAT_USERS_MONTH]' => htmlspecialchars((string)($userStats['new_this_month'] ?? 0)),
+    '[STAT_USERS_ADMIN]' => htmlspecialchars((string)($userStats['admin_users'] ?? 0)),
+    '[STAT_USERS_STANDARD]' => htmlspecialchars((string)($userStats['standard_users'] ?? 0)),
+];
+
 $pages = $total > 0 ? (int)ceil($total / $perPage) : 1;
 $pagination = '';
 if ($pages > 1) {
@@ -173,5 +184,5 @@ $html = str_replace(
     $html
 );
 
-echo $html;
+echo str_replace(array_keys($statPlaceholders), array_values($statPlaceholders), $html);
 ?>

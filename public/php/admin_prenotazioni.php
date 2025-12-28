@@ -47,6 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $prenAll = $db->getPrenotazioni();
+$finStats = $db->getBookingFinanceStats();
 $pren = [];
 $total = 0;
 $stats = [
@@ -141,7 +142,22 @@ if ($feedback !== '' && $feedbackClass !== '') {
 }
 
 $html = str_replace(
-    ['[ADMIN_BOOKINGS_ROWS]', '[ADMIN_BOOKINGS_FEEDBACK]', '[ADMIN_BOOKINGS_PAGINATION]', '[ADMIN_BOOKINGS_SEARCH]', '[IF_BOOKING_STATO_ATTESA]', '[IF_BOOKING_STATO_CONF]', '[IF_BOOKING_STATO_CANC]', '[STAT_ATTIVE]', '[STAT_ATTESA]', '[STAT_COMPLETATE]', '[STAT_CANCELLATE]'],
+    [
+        '[ADMIN_BOOKINGS_ROWS]',
+        '[ADMIN_BOOKINGS_FEEDBACK]',
+        '[ADMIN_BOOKINGS_PAGINATION]',
+        '[ADMIN_BOOKINGS_SEARCH]',
+        '[IF_BOOKING_STATO_ATTESA]',
+        '[IF_BOOKING_STATO_CONF]',
+        '[IF_BOOKING_STATO_CANC]',
+        '[STAT_ATTIVE]',
+        '[STAT_ATTESA]',
+        '[STAT_COMPLETATE]',
+        '[STAT_CANCELLATE]',
+        '[STAT_REVENUE_MONTH]',
+        '[STAT_REVENUE_PENDING]',
+        '[STAT_REVENUE_YEAR]',
+    ],
     [
         $rows,
         $feedbackBlock,
@@ -154,6 +170,9 @@ $html = str_replace(
         $stats['attesa'],
         $stats['confermate'],
         $stats['cancellate'],
+        htmlspecialchars(number_format((float)($finStats['revenue_month'] ?? 0), 2, ',', '.')),
+        htmlspecialchars(number_format((float)($finStats['revenue_pending'] ?? 0), 2, ',', '.')),
+        htmlspecialchars(number_format((float)($finStats['revenue_year'] ?? 0), 2, ',', '.')),
     ],
     $html
 );
