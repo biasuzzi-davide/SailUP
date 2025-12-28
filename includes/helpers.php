@@ -110,20 +110,16 @@ function buildFooter($phpSelf) {
             return '<li><a href="' . $relativePath . $pages[$key] . '"' . $langAttr . '>' . $label . '</a></li>';
         }
     }
-
-    // Home item
+    
+    // Footer menu items
     $homeLi = createFooterItem('index', 'Home', $current, $relativePath, $pages, 'en');
-
-    // Altri item
     $noleggioLi = createFooterItem('catalogo_noleggio', 'Noleggio', $current, $relativePath, $pages);
     $esperienzeLi = createFooterItem('catalogo_esperienze', 'Esperienze', $current, $relativePath, $pages);
     $blogLi = createFooterItem('blog', 'Blog', $current, $relativePath, $pages, 'en');
     $chiSiamoLi = createFooterItem('chi_siamo', 'Chi Siamo', $current, $relativePath, $pages);
-
-    // Altri item (sempre link)
-    $faqLi = '<li><a href="' . $relativePath . $pages['faq'] . '">Domande Frequenti (<abbr title="Frequently Asked Questions" lang="en">FAQ</abbr>)</a></li>';
-    $privacyLi = '<li><a href="' . $relativePath . $pages['privacy'] . '" lang="en">Privacy Policy</a></li>';
-    $cookieLi = '<li><a href="' . $relativePath . $pages['cookie'] . '"><span lang="en">Cookie</span> Policy</a></li>';
+    $faqLi = createFooterItem('faq', 'Domande Frequenti (<abbr title="Frequently Asked Questions" lang="en">FAQ</abbr>)', $current, $relativePath, $pages);
+    $privacyLi = createFooterItem('privacy', 'Privacy Policy', $current, $relativePath, $pages, 'en');
+    $cookieLi = createFooterItem('cookie', '<span lang="en">Cookie</span> Policy', $current, $relativePath, $pages);
 
     // Recupera l'Anno corrente
     $annoCorrente = date('Y');
