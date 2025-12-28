@@ -34,44 +34,13 @@ function validatePassword(string $password):bool{
 }
 
 /**
- * checka se il codice fiscale inserito è ok,controlla se è formato da lettere e numeri e se l ultimo carattere è quello giusto
+ * checka se il codice fiscale inserito è ok,controlla se è formato da lettere e numeri 
  * @param string $cf
  * @return bool
  */
 function isValidCF(string $cf){
-    //converto in maiuscolo per poter usare le tabelle
-    $cf = strtoupper($cf);
-
-    //controllo il formato, solo lettere e numeri e length 16
-    if (!preg_match('/^[A-Z0-9]{16}$/', $cf)) {
-        return false;
-    }
-
-    //tabella dei valori in posizione dispari secondo il codice fiscale italiano
-    $odd = [
-        '0'=>1,'1'=>0,'2'=>5,'3'=>7,'4'=>9,'5'=>13,'6'=>15,'7'=>17,'8'=>19,'9'=>21,
-        'A'=>1,'B'=>0,'C'=>5,'D'=>7,'E'=>9,'F'=>13,'G'=>15,'H'=>17,'I'=>19,'J'=>21,
-        'K'=>2,'L'=>4,'M'=>18,'N'=>20,'O'=>11,'P'=>3,'Q'=>6,'R'=>8,'S'=>12,'T'=>14,
-        'U'=>16,'V'=>10,'W'=>22,'X'=>25,'Y'=>24,'Z'=>23
-    ];
-
-    //tabella dei valori in posizione pari
-    $even = [
-        '0'=>0,'1'=>1,'2'=>2,'3'=>3,'4'=>4,'5'=>5,'6'=>6,'7'=>7,'8'=>8,'9'=>9,
-        'A'=>0,'B'=>1,'C'=>2,'D'=>3,'E'=>4,'F'=>5,'G'=>6,'H'=>7,'I'=>8,'J'=>9,
-        'K'=>10,'L'=>11,'M'=>12,'N'=>13,'O'=>14,'P'=>15,'Q'=>16,'R'=>17,'S'=>18,'T'=>19,
-        'U'=>20,'V'=>21,'W'=>22,'X'=>23,'Y'=>24,'Z'=>25
-    ];
-
-    //somma dei valori calcolati per ciascun carattere
-    $sum = 0;
-
-    for ($i = 0; $i < 15; $i++) {
-        $char = $cf[$i];
-        $sum += ($i % 2 === 0) ? $odd[$char] : $even[$char];
-    }
-
-    return $cf[15] === chr(($sum % 26) + ord('A'));
+    // semplice validazione: solo lettere/numeri e lunghezza 16
+    return preg_match('/^[A-Za-z0-9]{16}$/', $cf) === 1;
 }
 
 //validazione nome
