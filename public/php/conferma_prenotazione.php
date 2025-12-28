@@ -49,9 +49,17 @@ $dataInizioIso = '';
 $dataInizioFormattata = '';
 $dataFineRow = '';
 
-if (isset($prenotazione['data_inizio']) && $prenotazione['data_inizio'] !== null) {
-    $dataInizioIso = $prenotazione['data_inizio'];
-    $dateObj = DateTime::createFromFormat('Y-m-d', $prenotazione['data_inizio']);
+// Uso data_inizio_display se disponibile, altrimenti data_inizio
+$dataInizioStr = $prenotazione['data_inizio_display'] ?? $prenotazione['data_inizio'] ?? null;
+
+if ($dataInizioStr !== null) {
+    // Estraggo solo la data se è in formato datetime
+    if (strpos($dataInizioStr, ' ') !== false) {
+        $dataInizioStr = explode(' ', $dataInizioStr)[0];
+    }
+    
+    $dataInizioIso = $dataInizioStr;
+    $dateObj = DateTime::createFromFormat('Y-m-d', $dataInizioStr);
     if ($dateObj) {
         // Formattazione manuale per evitare problemi con locale
         $mesi = ['', 'Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre'];
@@ -60,7 +68,7 @@ if (isset($prenotazione['data_inizio']) && $prenotazione['data_inizio'] !== null
         $anno = $dateObj->format('Y');
         $dataInizioFormattata = $giorno . ' ' . $mese . ' ' . $anno;
     } else {
-        $dataInizioFormattata = $prenotazione['data_inizio'];
+        $dataInizioFormattata = $dataInizioStr;
     }
 }
 
@@ -68,23 +76,33 @@ if (isset($prenotazione['data_inizio']) && $prenotazione['data_inizio'] !== null
 $dataLabel = $tipoProdotto === 'Experience' ? 'Data <span lang="en">Tour</span>' : '<span lang="en">Check-in</span>';
 
 // Data fine (solo per noleggi)
-if ($tipoProdotto === 'Noleggio' && isset($prenotazione['data_fine']) && $prenotazione['data_fine'] !== null) {
-    $dataFineIso = $prenotazione['data_fine'];
-    $dateFineObj = DateTime::createFromFormat('Y-m-d', $prenotazione['data_fine']);
-    if ($dateFineObj) {
-        $mesi = ['', 'Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre'];
-        $giorno = $dateFineObj->format('d');
-        $mese = $mesi[(int)$dateFineObj->format('m')];
-        $anno = $dateFineObj->format('Y');
-        $dataFineFormattata = $giorno . ' ' . $mese . ' ' . $anno;
-    } else {
-        $dataFineFormattata = $prenotazione['data_fine'];
-    }
+if ($tipoProdotto === 'Noleggio') {
+    // Uso data_fine_display se disponibile, altrimenti data_fine
+    $dataFineStr = $prenotazione['data_fine_display'] ?? $prenotazione['data_fine'] ?? null;
     
-    $dataFineRow = '<div>
-            <dt><span lang="en">Check-out</span>:</dt>
-            <dd><time datetime="' . htmlspecialchars($dataFineIso, ENT_QUOTES) . '">' . htmlspecialchars($dataFineFormattata, ENT_QUOTES) . '</time></dd>
-        </div>';
+    if ($dataFineStr !== null) {
+        // Estraggo solo la data se è in formato datetime
+        if (strpos($dataFineStr, ' ') !== false) {
+            $dataFineStr = explode(' ', $dataFineStr)[0];
+        }
+        
+        $dataFineIso = $dataFineStr;
+        $dateFineObj = DateTime::createFromFormat('Y-m-d', $dataFineStr);
+        if ($dateFineObj) {
+            $mesi = ['', 'Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre'];
+            $giorno = $dateFineObj->format('d');
+            $mese = $mesi[(int)$dateFineObj->format('m')];
+            $anno = $dateFineObj->format('Y');
+            $dataFineFormattata = $giorno . ' ' . $mese . ' ' . $anno;
+        } else {
+            $dataFineFormattata = $dataFineStr;
+        }
+        
+        $dataFineRow = '<div>
+                <dt><span lang="en">Check-out</span>:</dt>
+                <dd><time datetime="' . htmlspecialchars($dataFineIso, ENT_QUOTES) . '">' . htmlspecialchars($dataFineFormattata, ENT_QUOTES) . '</time></dd>
+            </div>';
+    }
 }
 
 // Extra servizio (skipper per noleggio, pickup per esperienza)

@@ -227,7 +227,32 @@ if ($selectPayment === 'cc') {
     $metodoPagamento = 'Contanti';
 }
 
-// Inserisco la prenotazione
+// Se il pagamento è con carta, NON inserisco subito la prenotazione
+// La inserirò solo dopo la validazione della carta in pagamento.php
+if ($selectPayment === 'cc') {
+    // Salvo i dati in sessione senza creare la prenotazione
+    $_SESSION['prenotazione_temp'] = [
+        'id_prenotazione' => null, // Sarà creata dopo il pagamento
+        'id_utente' => $idUtente,
+        'id_prodotto' => $productId,
+        'nome_prodotto' => $productDetail['Nome_Prodotto'],
+        'tipo_prodotto' => 'Noleggio',
+        'data_inizio' => $dataInizio,
+        'data_fine' => $dataFine,
+        'data_inizio_display' => $startDate,
+        'data_fine_display' => $endDate,
+        'skipper' => $skipperChecked,
+        'prezzo_totale' => $prezzoTotale,
+        'metodo_pagamento' => $metodoPagamento,
+        'stato' => 'Confermata', // Sarà confermata dopo il pagamento
+    ];
+    
+    // Vai alla pagina di pagamento
+    header('Location: pagamento.php');
+    exit;
+}
+
+// Per altri metodi di pagamento, inserisco la prenotazione normalmente con stato "In Attesa"
 $idPrenotazione = $db->insertPrenotazione(
     $idUtente,
     $productId,
@@ -253,22 +278,17 @@ $_SESSION['prenotazione_temp'] = [
     'id_prodotto' => $productId,
     'nome_prodotto' => $productDetail['Nome_Prodotto'],
     'tipo_prodotto' => 'Noleggio',
-    'data_inizio' => $startDate,
-    'data_fine' => $endDate,
+    'data_inizio' => $dataInizio,
+    'data_fine' => $dataFine,
+    'data_inizio_display' => $startDate,
+    'data_fine_display' => $endDate,
     'skipper' => $skipperChecked,
     'prezzo_totale' => $prezzoTotale,
     'metodo_pagamento' => $metodoPagamento,
     'stato' => $statoPrenotazione,
 ];
 
-// Redirect in base al metodo di pagamento
-if ($selectPayment === 'cc') {
-    // Vai alla pagina di pagamento
-    header('Location: pagamento.php');
-    exit;
-} else {
-    // Vai direttamente alla conferma
-    header('Location: conferma_prenotazione.php');
-    exit;
-}
+// Vai direttamente alla conferma
+header('Location: conferma_prenotazione.php');
+exit;
 ?>
