@@ -38,21 +38,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Simulo un pagamento riuscito
     // In un sistema reale qui si chiamerebbe il gateway di pagamento
     
-    // Aggiorno lo stato della prenotazione a "Confermata"
-    $idPrenotazione = $prenotazione['id_prenotazione'];
+    // Creo la prenotazione con stato "Confermata" (solo per pagamenti con carta)
+    $idPrenotazione = $db->insertPrenotazione(
+        $prenotazione['id_utente'],
+        $prenotazione['id_prodotto'],
+        $prenotazione['data_inizio'],
+        $prenotazione['data_fine'],
+        $prenotazione['skipper'] ?? $prenotazione['pickup'] ?? false,
+        $prenotazione['prezzo_totale'],
+        $prenotazione['metodo_pagamento'],
+        'Confermata', // Stato confermato direttamente
+        null
+    );
     
-    // Query diretta per aggiornare lo stato (la firma richiede stato e note opzionali)
-    $updated = $db->updatePrenotazioneStato($idPrenotazione, 'Confermata', null);
-    
-    if ($updated) {
-        // Aggiorno anche in sessione
+    if ($idPrenotazione) {
+        // Aggiorno i dati in sessione con l'ID della prenotazione creata
+        $_SESSION['prenotazione_temp']['id_prenotazione'] = $idPrenotazione;
         $_SESSION['prenotazione_temp']['stato'] = 'Confermata';
         
         // Redirect alla conferma
         header('Location: conferma_prenotazione.php');
         exit;
     } else {
-        // Errore nell'aggiornamento
+        // Errore nella creazione della prenotazione
         $html = buildPage('../pages/pagamento.html', $_SERVER['PHP_SELF']);
         echo $html;
         exit;
