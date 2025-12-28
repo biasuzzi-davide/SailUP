@@ -1732,6 +1732,7 @@ a.product-cta:focus-visible {
   font-weight: 700;
   font-family: var(--font-head);
   margin-bottom: 0.3em;
+  white-space: nowrap;
 }
 
 .stat-label {
