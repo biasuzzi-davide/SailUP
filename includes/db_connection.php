@@ -364,7 +364,7 @@ class DBConnection {
     }
 
     /**
-     * Statistiche aggregate sugli utenti.
+     * stats da visualizzare relative agli utenti nella pagina admin_utenti
      */
     public function getUserStats(): array|bool {
         $this->openConnection();
@@ -2219,6 +2219,33 @@ class DBConnection {
             $stmt->close();
             $this->closeConnection();
             return $ok;
+        } catch (Throwable $t) {
+            $this->closeConnection();
+            return false;
+        }
+    }
+
+    /**
+     * stats da visualizzare in admin_blog
+     */
+    public function getBlogStats(): array|bool {
+        $this->openConnection();
+        $query = "
+            SELECT
+                (SELECT COUNT(*) FROM Articolo_Blog WHERE Pubblicato = 1) AS published,
+                (SELECT COUNT(*) FROM Articolo_Blog WHERE Pubblicato = 0) AS drafts
+        ";
+
+        try {
+            $result = $this->connection->query($query);
+            if (!$result) {
+                $this->closeConnection();
+                return false;
+            }
+            $row = $result->fetch_assoc();
+            $result->free();
+            $this->closeConnection();
+            return $row ?: [];
         } catch (Throwable $t) {
             $this->closeConnection();
             return false;

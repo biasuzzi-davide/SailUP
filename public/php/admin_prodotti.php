@@ -79,8 +79,9 @@ if (is_array($prodotti) && !empty($prodotti)) {
         $tipoDisplay = htmlspecialchars($tipo) . ($tipologia ? ' • ' . htmlspecialchars($tipologia) : '');
         $prezzo = isset($p['Prezzo_Base']) ? '€ ' . number_format((float)$p['Prezzo_Base'], 2, ',', '.') : '—';
         $stato = !empty($p['Attivo']) ? '<span class="status-badge active">Attivo</span>' : '<span class="status-badge cancelled">Disattivo</span>';
-        $toggleIcon = !empty($p['Attivo']) ? '⏻' : '✅';
-        $toggleTitle = !empty($p['Attivo']) ? 'Disattiva prodotto' : 'Riattiva prodotto';
+        $toggleLabel = !empty($p['Attivo']) ? 'Disattiva' : 'Attiva';
+        $toggleClass = !empty($p['Attivo']) ? 'btn-text danger' : 'btn-text';
+        $toggleConfirm = !empty($p['Attivo']) ? ' onsubmit="return confirm(\'Disattivare questo prodotto?\');"' : '';
         $rows .= '<tr>'
             . '<td data-label="ID">' . htmlspecialchars($p['IDProdotto']) . '</td>'
             . '<td data-label="Nome Prodotto">' . htmlspecialchars($p['Nome_Prodotto'] ?? '') . '</td>'
@@ -89,19 +90,13 @@ if (is_array($prodotti) && !empty($prodotti)) {
             . '<td data-label="Prezzo">' . $prezzo . '</td>'
             . '<td data-label="Stato">' . $stato . '</td>'
             . '<td data-label="Azioni" class="actions-cell">'
-            . '<a class="btn-icon" href="admin_prodotti_nuovo.php?id=' . htmlspecialchars($p['IDProdotto']) . '" aria-label="Modifica ' . htmlspecialchars($p['Nome_Prodotto'] ?? '') . '">✏️</a>'
-            . '<form method="post" class="inline-form">'
+            . '<a class="btn-text" href="admin_prodotti_nuovo.php?id=' . htmlspecialchars($p['IDProdotto']) . '" aria-label="Modifica ' . htmlspecialchars($p['Nome_Prodotto'] ?? '') . '">Modifica</a>'
+            . '<form method="post" class="inline-form"' . $toggleConfirm . '>'
             . '<input type="hidden" name="csrf_token" value="' . $csrfToken . '">'
             . '<input type="hidden" name="id_prodotto" value="' . htmlspecialchars($p['IDProdotto']) . '">'
             . '<input type="hidden" name="attivo" value="' . (!empty($p['Attivo']) ? 1 : 0) . '">'
             . '<input type="hidden" name="action" value="toggle">'
-            . '<button type="submit" class="btn-icon" aria-label="' . htmlspecialchars($toggleTitle) . ' ' . htmlspecialchars($p['Nome_Prodotto'] ?? '') . '">' . $toggleIcon . '</button>'
-            . '</form>'
-            . '<form method="post" class="inline-form" onsubmit="return confirm(\'Disattivare questo prodotto?\');">'
-            . '<input type="hidden" name="csrf_token" value="' . $csrfToken . '">'
-            . '<input type="hidden" name="id_prodotto" value="' . htmlspecialchars($p['IDProdotto']) . '">'
-            . '<input type="hidden" name="action" value="delete">'
-            . '<button type="submit" class="btn-icon danger" aria-label="Disattiva prodotto ' . htmlspecialchars($p['Nome_Prodotto'] ?? '') . '">🗑️</button>'
+            . '<button type="submit" class="' . $toggleClass . '" aria-label="' . htmlspecialchars($toggleLabel) . ' prodotto ' . htmlspecialchars($p['Nome_Prodotto'] ?? '') . '">' . htmlspecialchars($toggleLabel) . '</button>'
             . '</form>'
             . '</td>'
             . '</tr>';
