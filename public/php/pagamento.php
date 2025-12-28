@@ -83,6 +83,7 @@ if ($prenotazione['tipo_prodotto'] === 'Noleggio') {
 $placeholders = [
     '[LINK PRODOTTO]' => htmlspecialchars($linkProdotto, ENT_QUOTES),
     '[NOME-PRODOTTO]' => htmlspecialchars($nomeProdotto, ENT_QUOTES),
+    '[LINK_INDIETRO]' => htmlspecialchars($linkProdotto, ENT_QUOTES),
 ];
 
 $html = str_replace(array_keys($placeholders), array_values($placeholders), $html);
