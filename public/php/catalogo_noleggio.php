@@ -197,6 +197,7 @@ $html = str_replace('[VAL_POSTI]', $postiMin !== null ? htmlspecialchars((string
 $html = str_replace('[VAL_DATA_INIZIO]', htmlspecialchars($dataInizio, ENT_QUOTES), $html);
 $html = str_replace('[VAL_DATA_FINE]', htmlspecialchars($dataFine, ENT_QUOTES), $html);
 $html = str_replace('[VAL_MAX_PRICE]', $maxPrice !== null ? htmlspecialchars((string) $maxPrice, ENT_QUOTES) : '', $html);
+$html = str_replace('[MIN_DATE]', date('Y-m-d'), $html);
 
 $html = str_replace('[SELECTED_PRICE_ASC]', $sortChoice === 'price-asc' ? 'selected' : '', $html);
 $html = str_replace('[SELECTED_PRICE_DESC]', $sortChoice === 'price-desc' ? 'selected' : '', $html);

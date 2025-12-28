@@ -186,6 +186,7 @@ $html = str_replace('[LINGUA_OPTIONS]', $linguaOptions, $html);
 $html = str_replace('[VAL_POSTI]', $postiMin !== null ? htmlspecialchars((string) $postiMin, ENT_QUOTES) : '', $html);
 $html = str_replace('[VAL_DATA]', htmlspecialchars($dataEsperienza, ENT_QUOTES), $html);
 $html = str_replace('[VAL_MAX_PRICE]', $maxPrice !== null ? htmlspecialchars((string) $maxPrice, ENT_QUOTES) : '', $html);
+$html = str_replace('[MIN_DATE]', date('Y-m-d'), $html);
 $html = str_replace('[CHECK_ACCESSIBILE]', $accessibileFiltro ? 'checked' : '', $html);
 
 $html = str_replace('[SELECTED_PRICE_ASC]', $sortChoice === 'price-asc' ? 'selected' : '', $html);
