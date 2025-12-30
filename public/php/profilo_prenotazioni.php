@@ -83,6 +83,10 @@ if (is_array($prenotazioni) && !empty($prenotazioni)) {
 }
 
 $html = buildPage('../pages/profilo_prenotazioni.html', $_SERVER['PHP_SELF']);
+
+// Keywords per SEO
+$keywords = '<meta name="keywords" content="prenotazioni SailUP, gestione prenotazioni, storico prenotazioni, annulla prenotazione">';
+
 $placeholders = [
     '[BOOKING_ROWS]' => $rowsHtml,
     '[USER_NOME]' => htmlspecialchars($_SESSION['user']['Nome'] ?? ''),
@@ -91,6 +95,7 @@ $placeholders = [
     '[BOOKINGS_SERVER_STATE]' => $feedbackState,
     '[BOOKINGS_SERVER_MESSAGES]' => htmlspecialchars($feedbackMsg),
     '[CSRF_TOKEN]' => $csrfToken,
+    '[KEYWORDS]' => $keywords,
 ];
 $html = str_replace(array_keys($placeholders), array_values($placeholders), $html);
 

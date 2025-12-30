@@ -107,6 +107,15 @@ if (is_array($extra) && count($extra) > 0) {
 
 $html = buildPage('../pages/dettaglio_barca.html', $_SERVER['PHP_SELF']);
 
+// Genera keywords dinamiche basate sui dati della barca
+$keywordsContent = 'noleggio ' . strtolower($productName) . ', ' . strtolower($productType) . ' Napoli, barche ' . strtolower($productType) . ', noleggio barche Golfo di Napoli';
+if ($licenseRaw === false) {
+    $keywordsContent .= ', barche senza patente';
+} else if ($licenseRaw === true) {
+    $keywordsContent .= ', barche con patente';
+}
+$keywords = '<meta name="keywords" content="' . htmlspecialchars($keywordsContent, ENT_QUOTES) . '">';
+
 $placeholders = [
 	'[PRODUCT_ID]' => htmlspecialchars($productId, ENT_QUOTES),
 	'[PRODUCT_IMAGE_SRC]' => htmlspecialchars($heroImage, ENT_QUOTES),
@@ -123,6 +132,7 @@ $placeholders = [
 	'[PRODUCT_PRICE]' => htmlspecialchars($priceLabel, ENT_QUOTES),
 	'[EXTRA_CHECKBOXES]' => $extraCheckboxes,
 	'[MIN_DATE]' => date('Y-m-d'),
+	'[KEYWORDS]' => $keywords,
 	// messaggi server: nascosti perché il form non è gestito lato server
 	'[SERVER_STATE]' => 'hidden',
 	'[SERVER_MESSAGES]' => '',

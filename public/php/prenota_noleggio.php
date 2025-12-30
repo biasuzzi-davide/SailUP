@@ -126,6 +126,12 @@ if (!isLogged()) {
         '[SERVER_MESSAGES]' => $serverMessage,
     ];
     
+    // Keywords dinamiche
+    $keywordsContent = 'noleggio ' . strtolower($productName) . ', ' . strtolower($productType) . ' Napoli, prenota barca Napoli';
+    $placeholders['[KEYWORDS]'] = '<meta name="keywords" content="' . htmlspecialchars($keywordsContent, ENT_QUOTES) . '">';
+    $placeholders['[PRODUCT_ID]'] = htmlspecialchars($productId, ENT_QUOTES);
+    $placeholders['[MIN_DATE]'] = date('Y-m-d');
+    
     $html = str_replace(array_keys($placeholders), array_values($placeholders), $html);
     echo $html;
     exit;

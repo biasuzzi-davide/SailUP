@@ -71,12 +71,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $html = buildPage('../pages/admin_blog_nuovo.html', $_SERVER['PHP_SELF']);
+
+// Keywords per SEO (pagine admin sono noindex)
+$keywords = '<meta name="keywords" content="nuovo articolo blog, crea articolo, admin blog SailUP">';
+
 $html = str_replace(
-    ['[ADMIN_BLOG_NEW_FEEDBACK]', '[CSRF_TOKEN]', '[ADMIN_BLOG_ACTION]'],
+    ['[ADMIN_BLOG_NEW_FEEDBACK]', '[CSRF_TOKEN]', '[ADMIN_BLOG_ACTION]', '[KEYWORDS]'],
     [
         $feedback ? '<div class="' . $feedbackClass . '" role="status" aria-live="polite">' . htmlspecialchars($feedback) . '</div>' : '',
         htmlspecialchars(getCsrfToken()),
         htmlspecialchars($_SERVER['PHP_SELF']),
+        $keywords,
     ],
     $html
 );

@@ -109,6 +109,13 @@ $languageList = $languageNames !== [] ? implode(', ', $languageNames) : '—';
 
 $html = buildPage('../pages/dettaglio_esperienza.html', $_SERVER['PHP_SELF']);
 
+// Genera keywords dinamiche basate sui dati dell'esperienza
+$keywordsContent = strtolower($experienceName) . ', esperienza mare Napoli, tour guidato Napoli, Golfo di Napoli';
+if (!empty($languageNames)) {
+    $keywordsContent .= ', guida ' . strtolower(implode(' ', array_slice($languageNames, 0, 2)));
+}
+$keywords = '<meta name="keywords" content="' . htmlspecialchars($keywordsContent, ENT_QUOTES) . '">';
+
 $placeholders = [
 	'[EXPERIENCE_ID]' => htmlspecialchars($experienceId, ENT_QUOTES),
 	'[EXPERIENCE_NAME]' => htmlspecialchars($experienceName, ENT_QUOTES),
@@ -126,6 +133,7 @@ $placeholders = [
 	'[EXPERIENCE_PRICE]' => htmlspecialchars($price, ENT_QUOTES),
 	'[EXTRA_CHECKBOXES]' => $extraCheckboxes,
 	'[MIN_DATE]' => date('Y-m-d'),
+	'[KEYWORDS]' => $keywords,
 	'[SERVER_STATE]' => isset($serverState) ? $serverState : '',
 	'[SERVER_MESSAGES]' => isset($serverMessage) ? $serverMessage : '',
 ];

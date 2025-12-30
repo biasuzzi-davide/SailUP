@@ -37,9 +37,12 @@ if (!empty($errors)) {
     $messageText = htmlspecialchars(implode(' | ', $errors));
 }
 
+// Keywords per SEO
+$keywords = '<meta name="keywords" content="login SailUP, accedi account, area utente, prenotazioni SailUP">';
+
 $html = str_replace(
-    ['[SERVER_STATE]', '[SERVER_MESSAGES]', '[CSRF_TOKEN]'],
-    [$state, $messageText, htmlspecialchars(getCsrfToken())],
+    ['[SERVER_STATE]', '[SERVER_MESSAGES]', '[CSRF_TOKEN]', '[KEYWORDS]'],
+    [$state, $messageText, htmlspecialchars(getCsrfToken()), $keywords],
     $html
 );
 

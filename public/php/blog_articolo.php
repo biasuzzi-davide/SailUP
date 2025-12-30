@@ -126,6 +126,10 @@ $authorImageAlt = $article['Autore_Alt'] ?: 'Foto profilo di ' . $authorName;
 
 $html = buildPage('../pages/blog_articolo.html', $_SERVER['PHP_SELF']);
 
+// Genera keywords dinamiche basate sull'articolo del blog
+$keywordsContent = 'blog SailUP, ' . strtolower($articleTitle) . ', Golfo di Napoli, consigli nautici, esperienze mare';
+$keywords = '<meta name="keywords" content="' . htmlspecialchars($keywordsContent, ENT_QUOTES, 'UTF-8') . '">';
+
 $placeholders = [
     '[ARTICLE_TITLE]' => htmlspecialchars($articleTitle, ENT_QUOTES, 'UTF-8'),
     '[BREADCRUMB_TITLE]' => htmlspecialchars($articleTitle, ENT_QUOTES, 'UTF-8'),
@@ -144,6 +148,7 @@ $placeholders = [
     '[AUTHOR_ROLE]' => htmlspecialchars($authorRole, ENT_QUOTES, 'UTF-8'),
     '[AUTHOR_DESCRIPTION]' => htmlspecialchars($authorDescription, ENT_QUOTES, 'UTF-8'),
     '[ARTICLE_EXTRA_LIST]' => $contentExtras,
+    '[KEYWORDS]' => $keywords,
 ];
 
 echo str_replace(array_keys($placeholders), array_values($placeholders), $html);

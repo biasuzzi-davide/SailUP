@@ -138,6 +138,7 @@ $html = str_replace(
         '[IF_TIPO_EXPERIENCE]',
         '[IF_STATO_ATTIVI]',
         '[IF_STATO_DISATTIVI]',
+        '[KEYWORDS]',
     ],
     [
         $feedbackBlock,
@@ -147,6 +148,7 @@ $html = str_replace(
         $filterTipo === 'Experience' ? 'selected' : '',
         $filterStato === 'attivi' ? 'selected' : '',
         $filterStato === 'disattivi' ? 'selected' : '',
+        '<meta name="keywords" content="gestione prodotti, admin barche, admin esperienze, dashboard prodotti SailUP">',
     ],
     $html
 );
