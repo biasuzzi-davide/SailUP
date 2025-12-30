@@ -229,14 +229,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $html = buildPage('../pages/admin_prodotti_nuovo.html', $_SERVER['PHP_SELF']);
+
+// Keywords per SEO (pagine admin sono noindex)
+$keywords = '<meta name="keywords" content="nuovo prodotto, aggiungi barca, aggiungi esperienza, admin prodotti SailUP">';
+
 $html = str_replace(
-    ['[ADMIN_PRODUCT_FEEDBACK]', '[CSRF_TOKEN]', '[ADMIN_PRODUCT_ACTION]', '[PROD_MODE]', '[PRODUCT_ID_VALUE]'],
+    ['[ADMIN_PRODUCT_FEEDBACK]', '[CSRF_TOKEN]', '[ADMIN_PRODUCT_ACTION]', '[PROD_MODE]', '[PRODUCT_ID_VALUE]', '[KEYWORDS]'],
     [
         $feedback ? '<div class="' . $feedbackClass . '" role="status" aria-live="polite">' . htmlspecialchars($feedback) . '</div>' : '',
         htmlspecialchars(getCsrfToken()),
         htmlspecialchars($_SERVER['PHP_SELF']),
         htmlspecialchars($mode),
         htmlspecialchars($editingId),
+        $keywords,
     ],
     $html
 );

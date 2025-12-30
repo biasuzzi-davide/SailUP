@@ -4,6 +4,11 @@ require_once '../../includes/helpers.php';
 require_once '../../includes/db_connection.php';
 
 $html = buildPage('../pages/catalogo_esperienze.html', $_SERVER['PHP_SELF']);
+
+// Keywords per SEO
+$keywords = '<meta name="keywords" content="esperienze mare Napoli, tour guidati Napoli, aperitivo al tramonto, costiera amalfitana, Capri, escursioni guidate, Golfo di Napoli">';
+$html = str_replace('[KEYWORDS]', $keywords, $html);
+
 $html = str_replace('[ACTION_URL]', htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES), $html);
 
 $db = new DBConnection();

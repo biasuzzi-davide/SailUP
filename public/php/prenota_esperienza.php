@@ -136,6 +136,12 @@ if (!isLogged()) {
         '[SERVER_MESSAGES]' => $serverMessage,
     ];
     
+    // Keywords dinamiche
+    $keywordsContent = strtolower($experienceName) . ', prenota esperienza Napoli, tour guidato Napoli';
+    $placeholders['[KEYWORDS]'] = '<meta name="keywords" content="' . htmlspecialchars($keywordsContent, ENT_QUOTES) . '">';
+    $placeholders['[EXPERIENCE_ID]'] = htmlspecialchars($experienceId, ENT_QUOTES);
+    $placeholders['[MIN_DATE]'] = date('Y-m-d');
+    
     $html = str_replace(array_keys($placeholders), array_values($placeholders), $html);
     echo $html;
     exit;

@@ -143,6 +143,10 @@ $placeholders = [
     '[PAGATO_O_DA_PAGARE]' => htmlspecialchars($pagatoODaPagare, ENT_QUOTES),
 ];
 
+// Keywords per SEO
+$keywords = '<meta name="keywords" content="conferma prenotazione, riepilogo ordine, prenotazione completata, SailUP">';
+$placeholders['[KEYWORDS]'] = $keywords;
+
 $html = str_replace(array_keys($placeholders), array_values($placeholders), $html);
 
 echo $html;

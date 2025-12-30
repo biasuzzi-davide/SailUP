@@ -86,6 +86,10 @@ $placeholders = [
     '[LINK_INDIETRO]' => htmlspecialchars($linkProdotto, ENT_QUOTES),
 ];
 
+// Keywords per SEO
+$keywords = '<meta name="keywords" content="pagamento SailUP, completa prenotazione, pagamento sicuro, checkout">';
+$placeholders['[KEYWORDS]'] = $keywords;
+
 $html = str_replace(array_keys($placeholders), array_values($placeholders), $html);
 
 echo $html;
