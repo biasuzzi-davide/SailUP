@@ -96,62 +96,7 @@ Attraverso la registrazione la piattaforma consente l'accesso ad un'*area person
 SailUP è stato progettato e sviluppato con l'intenzione di essere utilizzato come un prodotto reale, ponendo come priorità la versione mobile ("mobile-first"), data la natura turistica del servizio, e cercando di ottimizzare l'usabilità, l'accessibilità e la coerenza grafica con l'identità marittima del brand.
 
 
-= Analisi
-La fase di analisi rappresenta un momento critico in cui si gettano le fondamenta del progetto. In questa sezione vengono esaminate le componenti essenziali che hanno guidato le scelte successive: l'identificazione dell'utenza target e dei dispositivi di accesso, la definizione delle funzionalità necessarie e la pianificazione di una strategia di ottimizzazione per i motori di ricerca (SEO). Un'analisi accurata assicura che il prodotto finale sia non solo tecnicamente valido, ma anche efficace e pertinente per i suoi utilizzatori.
 
-== Utenza Target
-L'utenza della piattaforma SailUP è stata segmentata in due categorie principali, ciascuna con esigenze e priorità distinte:
-
-- *Nuovi Clienti/Turisti:* Si tratta di utenti che non conoscono il servizio e sono alla ricerca di informazioni su gite in barca ed esperienze nel Golfo di Napoli. Per questo segmento, il sito deve essere visivamente accattivante, ricco di informazioni chiare e facile da navigare. L'obiettivo è catturare il loro interesse, trasmettere fiducia e guidarli fluidamente verso la prenotazione.
-- *Clienti Abituali/Utenti Registrati:* Questi utenti hanno già interagito con SailUP o prevedono di utilizzarlo con regolarità. La loro priorità è l'efficienza: desiderano accedere rapidamente al sistema di prenotazione, gestire le proprie prenotazioni attive e consultare lo storico delle esperienze passate.
-
-All'interno del sistema, sono stati definiti due ruoli operativi:
-- *Utente Semplice:* Un utente registrato che può effettuare e gestire le proprie prenotazioni.
-- *Amministratore:* Un utente con privilegi elevati che gestisce l'intero contenuto del sito, inclusi prodotti, utenti, prenotazioni e articoli del blog.
-
-== Devices
-Considerando che una porzione significativa dell'utenza target, in particolare i turisti, accede al web tramite dispositivi mobili, è stata adottata una filosofia di progettazione *"mobile-first"*, progettando quindi l'interfaccia utente partendo dalle limitazioni e dalle specificità degli schermi più piccoli. Successivamente, il layout e le funzionalità vengono arricchiti e adattati per schermi più grandi, come quelli dei computer desktop, attraverso l'uso di tecniche di design responsivo e media queries.
-
-== Funzionalità
-La piattaforma SailUP è stata dotata di un set di funzionalità specifiche per ogni ruolo utente, garantendo un'esperienza personalizzata e sicura.
-
-*Ospite (Utente non autenticato):*
-- Visualizzazione dei cataloghi di noleggio barche ed esperienze.
-- Lettura degli articoli pubblicati sul blog.
-- Accesso alle pagine informative statiche (Chi Siamo, FAQ, Privacy/Cookie Policy).
-- Possibilità di registrarsi al sito.
-
-*Utente Registrato:*
-- Tutte le funzionalità dell'Ospite.
-- Accesso al sistema tramite Login e Logout.
-- Gestione del proprio profilo utente, inclusa la modifica dei dati anagrafici e della password.
-- Visualizzazione e gestione delle proprie prenotazioni, suddivise tra attive e completate.
-
-*Amministratore:*
-- Accesso a un pannello di controllo (Dashboard) dedicato e protetto.
-- Gestione completa degli utenti registrati (visualizzazione, modifica, eliminazione).
-- Operazioni CRUD (Create, Read, Update, Delete) sui prodotti del catalogo (barche, esperienze ed articoli del blog).
-- Gestione centralizzata di tutte le prenotazioni presenti nel sistema.
-
-== Ricerche da Soddisfare e Strategia SEO
-Per garantire che SailUP sia facilmente reperibile dagli utenti, è stata definita una strategia SEO mirata a intercettare le ricerche più pertinenti.
-
-*Potenziali ricerche degli utenti:*
-- "noleggio barche Golfo di Napoli"
-- "escursioni in barca Capri"
-- "gita in barca a Positano"
-- "esperienze nautiche Napoli"
-- "blog nautica consigli"
-- "affitto gommone Ischia"
-
-*Strategie SEO implementate:*
-Per migliorare il posizionamento del sito sui motori di ricerca, sono state adottate le seguenti tecniche:
-
-- *HTML Semantico:* Utilizzo corretto e strutturato dei tag HTML5 (`<header>`, `<nav>`, `<main>`, `<h1>`, etc.) per comunicare in modo efficace la gerarchia dei contenuti agli spider dei motori di ricerca.
-- *Meta Tag:* Compilazione accurata dei meta title e meta description per ogni pagina, al fine di ottimizzare lo snippet visualizzato nei risultati di ricerca.
-- *Alternative Testuali:* Inserimento di attributi `alt` descrittivi per le immagini non decorative, migliorando l'accessibilità e fornendo contesto ai motori di ricerca.
-- *Content Marketing:* Creazione di contenuti di qualità e pertinenti tramite il blog integrato, per attrarre traffico organico e far conoscere il servizio.
-- *Controllo SEO sui Contenuti:* Il form di creazione degli articoli del blog include campi dedicati per "Meta Titolo" e "Meta Descrizione", offrendo all'amministratore un controllo diretto e granulare sull'ottimizzazione SEO di ogni singolo post.
 
 = Analisi
 
@@ -200,43 +145,48 @@ Per intercettare il target di riferimento, il sito web è strutturato per soddis
 - Blog consigli nautica
 - Tour in barca con skipper
 
+
 = Progettazione
-La fase di progettazione ha il compito di tradurre i requisiti emersi dall'analisi in un piano tecnico e strutturale concreto. In questa sezione vengono definite l'architettura logica del sito e le linee guida che hanno orientato le scelte di sviluppo, assicurando coerenza, manutenibilità e aderenza agli standard qualitativi richiesti.
 
 == Linee Guida
-Lo sviluppo di SailUP è stato guidato da un insieme di principi fondamentali, volti a garantire la qualità e la robustezza della piattaforma:
+Per la gestione del ciclo di vita del software e il coordinamento del team, si è scelto di utilizzare un repository su GitHub per il versionamento del codice.
 
-- *Repository condiviso:* È stato scelto di sviluppare il progetto *SailUP* adottando un un repository su github per la condivisione del codice tra i membri del team.
-- *Separazione dei Livelli:* È stata mantenuta una rigida separazione tra la struttura del contenuto (HTML), lo stile di presentazione (CSS) e il comportamento interattivo (JavaScript e php), come esplicitamente richiesto dalle specifiche del corso. Questo approccio migliora la manutenibilità e la modularità del codice.
-- *Design Moderno e Pulito:* La scelta è ricaduta su un layout grafico minimale ed elegante, con l'obiettivo di valorizzare i contenuti visivi (immagini di barche e paesaggi) e migliorare l'esperienza utente, rendendo la navigazione piacevole e intuitiva. Seppur l'interfaccia sia minimale ed il bianco sia predominante, è stata adottata una palette cromatica di toni di blu più o meno accesi, per richiamare il tema marino e per trasmettere...
-- *Accessibilità by Design:* La progettazione del sito è stata condotta cercando garantire l'accessibilità a tutte le categorie di utenti.
-- *Standard Web:* Il progetto si impegna a utilizzare esclusivamente standard web consolidati come HTML5 e CSS3. Per la gestione del layout responsivo, sono state impiegate le moderne tecniche di Flexbox e Grid, garantendo compatibilità cross-browser e una solida base per future evoluzioni.
+In questa sezione vengono illustrati i principi che hanno guidato la realizzazione del sito web, collegando i contenuti offerti alle funzionalità individuate in fase di analisi.
+L'eterogeneità della clientela (turisti e residenti) ci ha portato a perseguire un design minimale e pulito. Si è scelto di puntare su un *branding* coerente con l'identità marittima: seppur il bianco sia predominante per garantire leggibilità e chiarezza delle informazioni, è stata adottata una palette cromatica basata su diverse tonalità di blu per richiamare il tema nautico e, sfruttando la psicologia dei colori, trasmettere eleganza, calma, sicurezza e freschezza.
 
-== Architettura del Sito
-È stato scelto un modello di architettura gerarchica per la sua chiarezza e facilità di navigazione. La struttura del sito è organizzata come segue, garantendo un percorso logico per l'utente:
+È stata mantenuta una rigida separazione tra struttura (HTML), presentazione (CSS) e comportamento (PHP & JavaScript), per garantire modularità e rispetto degli standard web.
 
-- Home
-- Noleggio (Catalogo barche)
-- Esperienze (Catalogo esperienze)
-- Blog
-  - Articolo Singolo
-- Chi Siamo
-- FAQ
-- Login / Registrazione
-- Area Utente
-  - Profilo e Modifica Dati
-  - Le Mie Prenotazioni
-- Dashboard Admin
-  - Gestione Utenti
-  - Gestione Prodotti
-    - Aggiungi/Modifica Prodotto
-  - Gestione Prenotazioni
-  - Gestione Blog
-    - Aggiungi/Modifica Articolo
-- Privacy Policy
-- Cookie Policy
+Infine, la progettazione del sito è stata condotta cercando garantire l'accessibilità a tutte le categorie di utenti.
 
-Questa struttura chiara e ben definita ha costituito la base per la successiva fase di realizzazione tecnica.
+== Struttura
+La struttura del sito segue il modello gerarchico. In questa fase si è pianificata una suddivisione nelle seguenti pagine principali, accessibili tramite un menù di navigazione globale:
+
+- *Home:*
+  La pagina Home funge da punto di snodo principale. Deve contenere informazioni essenziali e presentative di SailUP, utilizzando immagini di impatto per catturare l'attenzione del visitatore e offrire collegamenti rapidi alle funzionalità principali, quindi le sezioni Noleggio ed Esperienze.
+  Copre il requisito //*Vetrina*.
+
+- *Cataloghi Noleggio ed Esperienze:*
+  Queste pagine permettono all'utente di visualizzare l'offerta completa. Devono prevedere sistemi di filtraggio (per data, prezzo, tipologia) per agevolare la ricerca. Selezionando un elemento, l'utente accede a una pagina di dettaglio dove può consultare le specifiche e procedere alla prenotazione. Il sistema effettuerà un controllo sulla disponibilità delle date scelte restituendo un feedback all'utente.
+  Coprono i requisiti di //*Vetrina* e *Prenotazione*.
+
+- *Blog:*
+  La pagina Blog raccoglie articoli informativi e consigli turistici. Ogni articolo è visualizzabile singolarmente. Questa sezione non offre interattività transazionale ma è fondamentale per l'attrattiva del sito.
+  Copre i requisiti di //*Vetrina* e *Strategia SEO*.
+
+- *Pagine Informative Chi Siamo, FAQ, Privacy e Cookie:*
+  Queste pagine offrono supporto all'utente, spiegando la storia dell'azienda e rispondendo alle domande frequenti per ridurre il carico di assistenza diretta.
+  Coprono in parte il requisito //*Vetrina*.
+
+- *Area Riservata:*
+  Questa sezione gestisce l'accesso alla piattaforma. La pagina di *Login/Registrazione* permette all'utente di autenticarsi o creare un nuovo profilo. Una volta loggato, il sistema indirizza l'utente alla vista corretta in base al suo ruolo:
+
+  - *Pagina Profilo Cliente:*
+    Offre al cliente la possibilità di visualizzare e modificare i propri dati anagrafici. Include una sezione per consultare lo storico delle prenotazioni (attive e passate), permettendo all'utente di avere riscontro immediato sulle proprie attività.
+    Copre il requisito di //*Gestione Profilo*.
+
+  - *Dashboard Amministratore:*
+    Questa sezione, accessibile solo agli utenti con privilegi elevati, funge da centro di controllo. Permette di visualizzare la totalità delle prenotazioni nel sistema, gestire l'anagrafica degli utenti registrati e modificare dinamicamente i contenuti del sito (aggiunta/modifica/rimozione di Barche, Esperienze e Articoli del Blog).
+    Copre il requisito di //*Amministrazione*.
 
 = Realizzazione
 In questa sezione vengono descritte le scelte tecniche e le soluzioni implementative adottate per costruire la piattaforma SailUP. Vengono analizzati gli aspetti legati sia allo sviluppo frontend, che definisce l'interfaccia utente, sia al backend, che gestisce la logica applicativa e la persistenza dei dati.
