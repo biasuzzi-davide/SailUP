@@ -86,13 +86,15 @@
 
 = Abstract
 
-Il progetto *SailUP* consiste in una piattaforma web per il noleggio di imbarcazioni e la prenotazione di esperienze nautiche nel suggestivo scenario del Golfo di Napoli. L'obiettivo primario è stato realizzare un'interfaccia moderna, intuitiva e accessibile, capace di soddisfare le esigenze sia dei turisti in cerca di avventure, sia dei residenti locali.
+SailUP è la piattaforma web dedicata al noleggio di imbarcazioni e alla prenotazione di esperienze nautiche nel suggestivo scenario del Golfo di Napoli.
+Uno dei maggiori problemi riguardanti la gestione tradizionale delle richieste di noleggio e dei tour turistici è la frammentazione dei servizi tra canali telefonici e fisici, che rischia di generare inefficienze e sovrapposizioni nelle disponibilità. Il progetto nasce proprio dalla volontà di offrire un supporto tecnologico capace di ottimizzare i processi gestionali interni e, contemporaneamente, garantire agli utenti finali un servizio immediato, intuitivo, trasparente e autonomo.
 
-Il nucleo centrale del sito risiede nelle sezioni dedicate al *Catalogo Imbarcazioni* e alle *Esperienze*. Queste funzionalità sono state progettate per guidare l'utente in modo fluido dalla consultazione delle disponibilità fino alla finalizzazione della prenotazione, garantendo un accesso rapido alle informazioni essenziali e ai servizi offerti dal team SailUP.\
-Particolare attenzione è stata anche dedicata alla sezione *Blog*, concepita con una duplice finalità: offrire contenuti informativi di valore ai clienti e supportare l'attività di content marketing per attrarre nuovi utenti. \
-Completano la struttura l'*area personale*, per la gestione del profilo e dello storico prenotazioni dell'utente, e il pannello di *controllo amministrativo* per la gestione completa dei contenuti da parte dell'amministratore.
+Il sito web desiderato è dunque focalizzato sull'implementazione delle funzionalità di *Noleggio* e *Esperienze*, guidando l'utente dalla consultazione del catalogo fino alla prenotazione. SailUP sfrutta la piattaforma anche come una vetrina virtuale attraverso una sezione *Blog* dedicata, attraverso cui mira a fornire contenuti informativi di valore ai clienti e a supportare l'attività di content marketing per attrarre nuovi utenti, siano essi turisti o residenti locali.
 
-Lo sviluppo del progetto ha posto un'enfasi particolare sull'accessibilità, sul design responsivo secondo un approccio "mobile-first" e sulla scrupolosa aderenza agli standard web moderni, in linea con le direttive del corso.
+Attraverso la registrazione la piattaforma consente l'accesso ad un'*area personale* per la gestione del profilo e il monitoraggio dello storico prenotazioni. Parallelamente, un pannello di *controllo amministrativo* permette la gestione completa dei contenuti dinamici del sito.
+
+SailUP è stato progettato e sviluppato con l'intenzione di essere utilizzato come un prodotto reale, ponendo come priorità la versione mobile ("mobile-first"), data la natura turistica del servizio, e cercando di ottimizzare l'usabilità, l'accessibilità e la coerenza grafica con l'identità marittima del brand.
+
 
 = Analisi
 La fase di analisi rappresenta un momento critico in cui si gettano le fondamenta del progetto. In questa sezione vengono esaminate le componenti essenziali che hanno guidato le scelte successive: l'identificazione dell'utenza target e dei dispositivi di accesso, la definizione delle funzionalità necessarie e la pianificazione di una strategia di ottimizzazione per i motori di ricerca (SEO). Un'analisi accurata assicura che il prodotto finale sia non solo tecnicamente valido, ma anche efficace e pertinente per i suoi utilizzatori.
@@ -150,6 +152,53 @@ Per migliorare il posizionamento del sito sui motori di ricerca, sono state adot
 - *Alternative Testuali:* Inserimento di attributi `alt` descrittivi per le immagini non decorative, migliorando l'accessibilità e fornendo contesto ai motori di ricerca.
 - *Content Marketing:* Creazione di contenuti di qualità e pertinenti tramite il blog integrato, per attrarre traffico organico e far conoscere il servizio.
 - *Controllo SEO sui Contenuti:* Il form di creazione degli articoli del blog include campi dedicati per "Meta Titolo" e "Meta Descrizione", offrendo all'amministratore un controllo diretto e granulare sull'ottimizzazione SEO di ogni singolo post.
+
+= Analisi
+
+== Utenza Target
+SailUP si pone come punto di riferimento per il turismo nautico nel Golfo di Napoli. L'utenza prevista è eterogenea, spaziando dal turista internazionale al residente locale in cerca di svago.
+Gli utenti si suddividono principalmente in due categorie:
+
+- *Clienti Abituali / Utenti Registrati:*
+  Sono coloro che hanno già usufruito dei servizi SailUP o pianificano di farlo regolarmente. La loro priorità è l'efficienza: desiderano accedere rapidamente al sistema, gestire le prenotazioni attive e consultare lo storico.
+- *Nuovi Clienti / Turisti:*
+  Non conoscono il sito o il servizio. È necessario in primo luogo ottimizzare il ranking del sito nelle ricerche, in secondo luogo è altrettanto importante garantire la loro permanenza nel sito, una volta entrati, tramite una grafica accattivante e una struttira intuitiva, che possa accompagnarli fluidamente verso la prenotazione di un'imbarcazione o di un'esperienza.
+
+== Devices
+Considerando la natura turistica del servizio e l'utilizzo in mobilità, ci si aspetta una netta prevalenza di accessi da smartphone. Per questo motivo, il design e l'interfaccia utente sono stati progettati seguendo rigorosamente l'approccio *mobile-first*.
+
+== Funzionalità
+Sono state individuate e realizzate le seguenti funzionalità principali:
+
+- *Catalogo noleggio, esperienze e Blog:*
+  - La Home e le pagine di catalogo devono presentare le imbarcazioni e le esperienze con immagini accattivanti e dettagli tecnici chiari.
+  - È prevista una sezione Blog per il content marketing, utile ad attrarre traffico organico e fornire consigli utili agli utenti (es. itinerari, guide).
+  - La grafica deve essere coerente con il tema nautico e garantire la massima leggibilità ed intuitività.
+
+- *Prenotazione:*
+  - La prenotazione è caratterizzata dalla scelta di una data, del numero di ospiti e di eventuali servizi accessori (es. skipper).
+  - Il sistema deve verificare la disponibilità della risorsa (barca o esperienza) per la data richiesta tramite controlli server-side.
+  - Le prenotazioni possono essere effettuate da utenti registrati; gli ospiti vengono invitati a registrarsi o accedere per finalizzare la prenotazione.
+  - In seguito alla richiesta, il sistema fornisce un feedback immediato sull'esito (conferma o errore per indisponibilità).
+
+- *Area Personale e Amministrazione:*
+  - Sezione *Cliente* per la gestione del profilo e visualizzazione dello storico prenotazioni.
+  - Sezione *Admin* per il controllo completo della piattaforma. L'amministratore necessita di una visione globale su utenti iscritti e prenotazioni effettuate e un sistema CRUD (Create, Read, Update, Delete) per gestire dinamicamente i prodotti, quindi barche, esperienze ed articoli del blog.
+
+- *Ospite:* 
+  - L' utente non autenticato potrà visualizzare i cataloghi di noleggio barche ed esperienze, leggere gli articoli pubblicati sul blog, accedere alle pagine informative statiche (Chi Siamo, FAQ, Privacy/Cookie Policy) e registrarsi al sito.
+
+- *Registrazione:* 
+  - Si prevede un form di compilazione dati per consentire ai nuovi utenti di creare un account, requisito necessario per effettuare una prenotazione e per gestirla.
+
+== Ricerche da soddisfare
+Per intercettare il target di riferimento, il sito web è strutturato per soddisfare le seguenti intenzioni di ricerca (SEO):
+- Noleggio barche Golfo di Napoli
+- Escursioni in barca Capri e Positano
+- Esperienze nautiche Napoli
+- Affitto gommone Ischia
+- Blog consigli nautica
+- Tour in barca con skipper
 
 = Progettazione
 La fase di progettazione ha il compito di tradurre i requisiti emersi dall'analisi in un piano tecnico e strutturale concreto. In questa sezione vengono definite l'architettura logica del sito e le linee guida che hanno orientato le scelte di sviluppo, assicurando coerenza, manutenibilità e aderenza agli standard qualitativi richiesti.
