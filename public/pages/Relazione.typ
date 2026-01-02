@@ -159,7 +159,7 @@ L'eterogeneità della clientela (turisti e residenti) ci ha portato a perseguire
 Infine, la progettazione del sito è stata condotta cercando garantire l'accessibilità a tutte le categorie di utenti.
 
 == Struttura
-La struttura del sito segue il modello gerarchico. In questa fase si è pianificata una suddivisione nelle seguenti pagine principali, accessibili tramite un menù di navigazione globale:
+La struttura del sito segue il modello gerarchico schematizzato in #link(<fig-sitemap>)[Figura 1]. In questa fase si è pianificata una suddivisione nelle seguenti pagine principali, accessibili tramite un menù di navigazione globale:
 
 - *Home:*
   La pagina Home funge da punto di snodo principale. Deve contenere informazioni essenziali e presentative di SailUP, utilizzando immagini di impatto per catturare l'attenzione del visitatore e offrire collegamenti rapidi alle funzionalità principali, quindi le sezioni Noleggio ed Esperienze.
@@ -173,7 +173,7 @@ La struttura del sito segue il modello gerarchico. In questa fase si è pianific
   La pagina Blog raccoglie articoli informativi e consigli turistici. Ogni articolo è visualizzabile singolarmente. Questa sezione non offre interattività transazionale ma è fondamentale per l'attrattiva del sito.
   Copre i requisiti di //*Vetrina* e *Strategia SEO*.
 
-- *Pagine Informative Chi Siamo, FAQ, Privacy e Cookie:*
+- *Pagine Informative 'Chi Siamo', 'FAQ', 'Privacy' e 'Cookie':*
   Queste pagine offrono supporto all'utente, spiegando la storia dell'azienda e rispondendo alle domande frequenti per ridurre il carico di assistenza diretta.
   Coprono in parte il requisito //*Vetrina*.
 
@@ -188,12 +188,19 @@ La struttura del sito segue il modello gerarchico. In questa fase si è pianific
     Questa sezione, accessibile solo agli utenti con privilegi elevati, funge da centro di controllo. Permette di visualizzare la totalità delle prenotazioni nel sistema, gestire l'anagrafica degli utenti registrati e modificare dinamicamente i contenuti del sito (aggiunta/modifica/rimozione di Barche, Esperienze e Articoli del Blog).
     Copre il requisito di //*Amministrazione*.
 
+  #figure(
+    image("../img/diagramma_albero.png", width: 100%), // Imposta la larghezza al 90% della pagina
+    gap: 2em,
+    caption: [Sitemap gerarchica della piattaforma SailUP],
+  ) <fig-sitemap>
+
 = Realizzazione
 In questa sezione vengono descritte le scelte tecniche e le soluzioni implementative adottate per costruire la piattaforma SailUP. Vengono analizzati gli aspetti legati sia allo sviluppo frontend, che definisce l'interfaccia utente, sia al backend, che gestisce la logica applicativa e la persistenza dei dati.
 
 == Implementazione del Frontend
 === Struttura (HTML)
-...
+- ...
+
 === Presentazione (CSS)
 ...
 === Comportamento (JavaScript)
