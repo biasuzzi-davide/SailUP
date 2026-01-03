@@ -134,7 +134,7 @@ if ($feedbackState !== 'hidden' && $feedbackMessage !== '') {
     $feedbackBlock = '<div class="' . $alertClass . '" role="status" aria-live="polite">' . htmlspecialchars($feedbackMessage) . '</div>';
 }
 
-//builda la pagine ed inserisce le stats dinamche al posto dei placeholder
+//builda la pagine ed inserisce le stats dinamche al posto dei placeholdersss
 $html = buildPage('../pages/admin_utenti.html', $_SERVER['PHP_SELF']);
 $statPlaceholders = [
     '[STAT_USERS_TOTAL]' => htmlspecialchars((string)($userStats['total_users'] ?? 0)),
