@@ -396,6 +396,36 @@ class DBConnection {
     }
 
     /**
+     * Statistiche di riepilogo per i prodotti (pagina admin_prodotti)
+     */
+    public function getProductStats(): array|bool {
+        $this->openConnection();
+        $query = "
+            SELECT
+                (SELECT COUNT(*) FROM Prodotto) AS total_products,
+                (SELECT COUNT(*) FROM Prodotto WHERE Attivo = 1) AS active_products,
+                (SELECT COUNT(*) FROM Prodotto WHERE Attivo = 0) AS inactive_products,
+                (SELECT COUNT(*) FROM Prodotto WHERE Tipo_Prodotto = 'Noleggio') AS rental_products,
+                (SELECT COUNT(*) FROM Prodotto WHERE Tipo_Prodotto = 'Experience') AS experience_products
+        ";
+
+        try {
+            $result = $this->connection->query($query);
+            if (!$result) {
+                $this->closeConnection();
+                return false;
+            }
+            $row = $result->fetch_assoc();
+            $result->free();
+            $this->closeConnection();
+            return $row ?: [];
+        } catch (Throwable $t) {
+            $this->closeConnection();
+            return false;
+        }
+    }
+
+    /**
      * Aggiorna i dati base utente (nome, cognome, CF, email).
      * Ritorna true se ok, -1 se email già usata da altro utente, -2 se CF già usato, false in caso di errore.
      */
@@ -1249,6 +1279,57 @@ class DBConnection {
             $this->closeConnection();
             return $extras;
         } catch (Throwable $t) {
+            $this->closeConnection();
+            return false;
+        }
+    }
+
+    /**
+     * Sostituisce gli extra di un prodotto.
+     */
+    public function setProdottoExtra(string $idProdotto, array $extras): bool {
+        $this->openConnection();
+        $this->connection->begin_transaction();
+
+        try {
+            $del = $this->connection->prepare("DELETE FROM Prodotto_Extra WHERE IDProdotto = ?");
+            if (!$del) {
+                $this->connection->rollback();
+                $this->closeConnection();
+                return false;
+            }
+            $del->bind_param('s', $idProdotto);
+            $del->execute();
+            $del->close();
+
+            if (!empty($extras)) {
+                $stmt = $this->connection->prepare("
+                    INSERT INTO Prodotto_Extra (IDProdotto, Nome_Extra, Prezzo_Extra, Descrizione_Extra, Opzionale)
+                    VALUES (?, ?, ?, ?, ?)
+                ");
+                if (!$stmt) {
+                    $this->connection->rollback();
+                    $this->closeConnection();
+                    return false;
+                }
+
+                foreach ($extras as $ex) {
+                    $nome = trim($ex['nome'] ?? '');
+                    $prezzo = isset($ex['prezzo']) ? (float)$ex['prezzo'] : 0.0;
+                    $descr = trim($ex['descrizione'] ?? '');
+                    $opzionale = !empty($ex['opzionale']) ? 1 : 0;
+                    if ($nome === '') continue;
+                    $stmt->bind_param('ssdsi', $idProdotto, $nome, $prezzo, $descr, $opzionale);
+                    $stmt->execute();
+                }
+                $stmt->close();
+            }
+
+            $this->connection->commit();
+            $this->closeConnection();
+            return true;
+        } catch (Throwable $t) {
+            $this->connection->rollback();
             $this->closeConnection();
             return false;
         }
@@ -2298,13 +2379,14 @@ class DBConnection {
     /**
      * Verifica se un prodotto è disponibile in un determinato periodo
      */
-    public function checkDateAvailability(string $idProdotto, string $dataInizio, string $dataFine): bool {
+    public function checkDateAvailability(string $idProdotto, string $dataInizio, string $dataFine, ?int $excludePrenotazioneId = null): bool {
         $this->openConnection();
         
         // Controlla prenotazioni esistenti (non cancellate)
         $query = "SELECT COUNT(*) as count FROM Prenotazione 
                   WHERE IDProdotto = ? 
-                  AND Stato_Prenotazione != 'Cancellata'
+                  AND Stato_Prenotazione != 'Cancellata' " .
+                  ($excludePrenotazioneId !== null ? "AND IDPrenotazione <> ? " : "") . "
                   AND (
                       (Data_Ora_Inizio < ? AND Data_Ora_Fine > ?) OR
                       (Data_Ora_Inizio < ? AND Data_Ora_Fine > ?) OR
@@ -2318,7 +2400,21 @@ class DBConnection {
                 return false;
             }
             
-            $stmt->bind_param('sssssss', $idProdotto, $dataFine, $dataInizio, $dataFine, $dataInizio, $dataInizio, $dataFine);
+            if ($excludePrenotazioneId !== null) {
+                $stmt->bind_param(
+                    'sissssss',
+                    $idProdotto,
+                    $excludePrenotazioneId,
+                    $dataFine,
+                    $dataInizio,
+                    $dataFine,
+                    $dataInizio,
+                    $dataInizio,
+                    $dataFine
+                );
+            } else {
+                $stmt->bind_param('sssssss', $idProdotto, $dataFine, $dataInizio, $dataFine, $dataInizio, $dataInizio, $dataFine);
+            }
             $stmt->execute();
             $result = $stmt->get_result();
             $row = $result->fetch_assoc();

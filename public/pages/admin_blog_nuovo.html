@@ -41,13 +41,16 @@
 
         [ADMIN_BLOG_NEW_FEEDBACK]
 
+        <form id="blog-form" action="[ADMIN_BLOG_ACTION]" method="post" novalidate>
+          <input type="hidden" name="csrf_token" value="[CSRF_TOKEN]">
+
           <fieldset>
             <legend>Informazioni Base</legend>
 
             <div class="form-group">
               <label for="post-title">Titolo Articolo <abbr title="Campo obbligatorio">*</abbr></label>
               <input type="text" id="post-title" name="post-title"
-                placeholder="es. Come scegliere la barca perfetta per te" required aria-required="true" aria-describedby="post-title-error" />
+                placeholder="es. Come scegliere la barca perfetta per te" value="[OLD_TITLE]" required aria-required="true" aria-describedby="post-title-error" />
               <span id="post-title-error" class="field-error" role="alert"></span>
             </div>
 
@@ -56,19 +59,19 @@
                 <label for="post-category">Categoria <abbr title="Campo obbligatorio">*</abbr></label>
                 <select id="post-category" name="post-category" required aria-required="true" aria-describedby="post-category-error">
                   <option value="">Seleziona categoria...</option>
-                  <option value="guide">Guide</option>
-                  <option value="destinazioni">Destinazioni</option>
-                  <option value="consigli">Consigli</option>
-                  <option value="eventi">Eventi</option>
-                  <option value="sicurezza">Sicurezza</option>
-                  <option value="manutenzione">Manutenzione</option>
+                  <option value="guide" [IF_CAT_GUIDE]>Guide</option>
+                  <option value="destinazioni" [IF_CAT_DEST]>Destinazioni</option>
+                  <option value="consigli" [IF_CAT_CONSIGLI]>Consigli</option>
+                  <option value="eventi" [IF_CAT_EVENTI]>Eventi</option>
+                  <option value="sicurezza" [IF_CAT_SIC]>Sicurezza</option>
+                  <option value="manutenzione" [IF_CAT_MAN]>Manutenzione</option>
                 </select>
                 <span id="post-category-error" class="field-error" role="alert"></span>
               </div>
 
               <div class="form-group">
                 <label for="post-date">Data Pubblicazione <abbr title="Campo obbligatorio">*</abbr></label>
-                <input type="date" id="post-date" name="post-date" required aria-required="true" aria-describedby="post-date-error" />
+                <input type="date" id="post-date" name="post-date" value="[OLD_DATE]" required aria-required="true" aria-describedby="post-date-error" />
                 <span id="post-date-error" class="field-error" role="alert"></span>
               </div>
             </div>
@@ -77,7 +80,7 @@
               <label for="post-excerpt">Estratto / Anteprima <abbr title="Campo obbligatorio">*</abbr></label>
               <textarea id="post-excerpt" name="post-excerpt" rows="3" maxlength="200"
                 placeholder="Breve descrizione dell'articolo che apparirà nelle card..." 
-                required aria-required="true" aria-describedby="excerpt-hint post-excerpt-error"></textarea>
+                required aria-required="true" aria-describedby="excerpt-hint post-excerpt-error">[OLD_EXCERPT]</textarea>
               <span id="excerpt-hint" class="field-hint">Massimo 200 caratteri</span>
               <span id="post-excerpt-error" class="field-error" role="alert"></span>
             </div>
@@ -90,7 +93,7 @@
               <label for="post-content">Contenuto Articolo <abbr title="Campo obbligatorio">*</abbr></label>
               <textarea id="post-content" name="post-content" rows="15"
                 placeholder="Scrivi qui il contenuto completo dell'articolo..." 
-                required aria-required="true" aria-describedby="content-hint post-content-error"></textarea>
+                required aria-required="true" aria-describedby="content-hint post-content-error">[OLD_CONTENT]</textarea>
               <span id="content-hint" class="field-hint">Usa <abbr title="HyperText Markup Language" lang="en">HTML</abbr> per formattare il testo <abbr title="esempio">es.</abbr> &lt;p&gt;, &lt;h2&gt;, &lt;strong&gt;, &lt;em&gt;, ecc.)</span>
               <span id="post-content-error" class="field-error" role="alert"></span>
             </div>
@@ -98,7 +101,7 @@
             <div class="form-group">
               <label for="post-tags"><span lang="en">Tag</span> (opzionale)</label>
               <input type="text" id="post-tags" name="post-tags"
-                placeholder="es. noleggio, consigli, estate, sicurezza" aria-describedby="tags-hint" />
+                placeholder="es. noleggio, consigli, estate, sicurezza" value="[OLD_TAGS]" aria-describedby="tags-hint" />
               <span id="tags-hint" class="field-hint">Separa i tag con virgole</span>
             </div>
           </fieldset>
@@ -108,8 +111,8 @@
 
             <div class="form-group">
               <label for="post-image">Immagine di Copertina <abbr title="Campo obbligatorio">*</abbr></label>
-              <input type="url" id="post-image" name="post-image" placeholder="https://example.com/image.jpg"
-                required aria-required="true" aria-describedby="image-hint post-image-error" />
+              <input type="text" id="post-image" name="post-image" placeholder="https://example.com/image.jpg oppure /img/copertina.jpg"
+                value="[OLD_IMAGE]" required aria-required="true" aria-describedby="image-hint post-image-error" />
               <span id="image-hint" class="field-hint">Inserisci l'<abbr title="Uniform Resource Locator" lang="en">URL</abbr> dell'immagine principale dell'articolo</span>
               <span id="post-image-error" class="field-error" role="alert"></span>
             </div>
@@ -117,7 +120,7 @@
             <div class="form-group">
               <label for="Testo_Alternativo">Testo Alternativo Immagine <abbr title="Campo obbligatorio">*</abbr></label>
               <input type="text" id="Testo_Alternativo" name="Testo_Alternativo"
-                placeholder="Descrizione dell'immagine per accessibilità" required aria-required="true" aria-describedby="Testo_Alternativo-error" />
+                placeholder="Descrizione dell'immagine per accessibilità" value="[OLD_ALT]" required aria-required="true" aria-describedby="Testo_Alternativo-error" />
               <span id="Testo_Alternativo-error" class="field-error" role="alert"></span>
             </div>
           </fieldset>
@@ -128,16 +131,25 @@
             <div class="form-group">
               <label for="post-meta-title"><span lang="en">Meta</span> Titolo (opzionale)</label>
               <input type="text" id="post-meta-title" name="post-meta-title"
-                placeholder="Titolo ottimizzato per i motori di ricerca" aria-describedby="meta-title-hint">
+                placeholder="Titolo ottimizzato per i motori di ricerca" value="[OLD_META_TITLE]" aria-describedby="meta-title-hint">
               <span id="meta-title-hint" class="field-hint">Se lasciato vuoto, verrà usato il titolo dell'articolo</span>
             </div>
 
             <div class="form-group">
               <label for="post-meta-description"><span lang="en">Meta</span> Descrizione (opzionale)</label>
               <textarea id="post-meta-description" name="post-meta-description" rows="2" maxlength="160"
-                placeholder="Descrizione ottimizzata per i motori di ricerca" aria-describedby="meta-desc-hint"></textarea>
+                placeholder="Descrizione ottimizzata per i motori di ricerca" aria-describedby="meta-desc-hint">[OLD_META_DESC]</textarea>
               <span id="meta-desc-hint" class="field-hint">Idealmente tra 120-160 caratteri</span>
             </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Extra Articolo</legend>
+            <p class="field-hint">Aggiungi riquadri extra (Titolo + contenuto) che verranno mostrati come suggerimenti.</p>
+            <div id="extras-container" class="extras-container">
+              [ADMIN_BLOG_EXTRAS]
+            </div>
+            <button type="button" class="btn-layout-light" id="add-extra">Aggiungi extra</button>
           </fieldset>
 
           <fieldset>
@@ -146,27 +158,11 @@
             <div class="form-group">
               <label for="post-status">Stato Articolo <abbr title="Campo obbligatorio">*</abbr></label>
               <select id="post-status" name="post-status" required>
-                <option value="draft">Bozza</option>
-                <option value="published">Pubblicato</option>
+                <option value="draft" [IF_STATUS_DRAFT]>Bozza</option>
+                <option value="published" [IF_STATUS_PUB]>Pubblicato</option>
               </select>
             </div>
 
-            <p>Opzioni Aggiuntive:</p>
-            
-            <div class="checkbox-group">
-              <input type="checkbox" id="post-featured" name="post-featured" />
-              <label for="post-featured">Articolo In Evidenza</label>
-            </div>
-
-            <div class="checkbox-group">
-              <input type="checkbox" id="post-comments" name="post-comments" checked />
-              <label for="post-comments">Abilita Commenti</label>
-            </div>
-
-            <div class="checkbox-group">
-              <input type="checkbox" id="post-newsletter" name="post-newsletter">
-              <label for="post-newsletter">Invia Notifica <span lang="en">Newsletter</span></label>
-            </div>
           </fieldset>
 
           <div class="alert alert-info">
@@ -187,6 +183,28 @@
 
   <script src="../js/script.js"></script>
   <script src="../js/blog_validation.js"></script>
+  <script>
+    (function() {
+      const addBtn = document.getElementById('add-extra');
+      const container = document.getElementById('extras-container');
+      if (!addBtn || !container) return;
+      addBtn.addEventListener('click', function () {
+        const row = document.createElement('div');
+        row.className = 'extra-row';
+        row.innerHTML = `
+          <div class="form-group">
+            <label>Titolo Extra</label>
+            <input type="text" name="extra_title[]" placeholder="es. Suggerimenti finali" />
+          </div>
+          <div class="form-group">
+            <label>Contenuto</label>
+            <textarea name="extra_item[]" rows="2" placeholder="Testo o elenco"></textarea>
+          </div>
+        `;
+        container.appendChild(row);
+      });
+    })();
+  </script>
 </body>
 
 </html>
