@@ -41,8 +41,8 @@
 
   <main id="main-content" class="section-container">
       <header>
-        <h1>Aggiungi/Modifica Prodotto</h1>
-        <p>Inserisci o aggiorna i dettagli della barca o esperienza</p>
+         <h1>Aggiungi Nuovo Prodotto</h1>
+        <p>Inserisci i dettagli della nuova barca o esperienza</p>
       </header>
 
         <section aria-labelledby="form-title" class="admin-form">
@@ -74,20 +74,6 @@
                     <option value="experience" [PROD_TYPE_EXP]>Esperienza</option>
                   </select>
                   <span id="product-type-error" class="field-error" role="alert"></span>
-                </div>
-              </div>
-
-              <div class="form-row">
-                <div class="form-group">
-                  <label for="product-category">Tipologia</label>
-                  <input type="text" id="product-category" name="product-category" placeholder="es. Gommone, Vela, Tour"
-                    value="[PROD_TIPOLOGIA]" aria-describedby="product-category-hint">
-                  <span id="product-category-hint" class="field-hint">Categoria o tipologia mostrata nelle card</span>
-                </div>
-                <div class="form-group">
-                  <label for="product-duration">Durata (ore)</label>
-                  <input type="number" id="product-duration" name="product-duration" min="0" step="1" placeholder="4"
-                    value="[PROD_DURATION]">
                 </div>
               </div>
 

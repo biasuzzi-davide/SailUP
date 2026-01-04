@@ -133,7 +133,7 @@ $placeholders = [
 	'[EXTRA_CHECKBOXES]' => $extraCheckboxes,
 	'[MIN_DATE]' => date('Y-m-d'),
 	'[KEYWORDS]' => $keywords,
-	// messaggi server: nascosti perché il form non è gestito lato server
+	//messaggi server nascosti 
 	'[SERVER_STATE]' => 'hidden',
 	'[SERVER_MESSAGES]' => '',
 ];
