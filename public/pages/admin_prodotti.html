@@ -82,32 +82,6 @@
                         </a>
                     </div>
 
-                    <form class="filter-bar" method="get" action="admin_prodotti.php" aria-label="Filtra prodotti">
-                        <div class="form-group">
-                            <label for="filter-q">Cerca</label>
-                            <input type="search" id="filter-q" name="q" value="[ADMIN_PRODUCTS_SEARCH]" placeholder="Cerca per nome o ID">
-                        </div>
-                        <div class="form-group">
-                            <label for="filter-tipo">Tipo</label>
-                            <select id="filter-tipo" name="tipo">
-                                <option value="">Tutti</option>
-                                <option value="Noleggio" [IF_TIPO_NOLEGGIO]>Noleggio</option>
-                                <option value="Experience" [IF_TIPO_EXPERIENCE]>Experience</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="filter-stato">Stato</label>
-                            <select id="filter-stato" name="stato">
-                                <option value="">Tutti</option>
-                                <option value="attivi" [IF_STATO_ATTIVI]>Attivi</option>
-                                <option value="disattivi" [IF_STATO_DISATTIVI]>Disattivi</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn-layout btn-sm">Filtra</button>
-                        </div>
-                    </form>
-
                     [ADMIN_PRODUCTS_FEEDBACK]
                 
                     <div class="table-container">

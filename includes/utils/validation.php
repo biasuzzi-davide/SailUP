@@ -39,7 +39,7 @@ function validatePassword(string $password):bool{
  * @return bool
  */
 function isValidCF(string $cf){
-    // semplice validazione: solo lettere/numeri e lunghezza 16
+    //solo lettere/numeri e lunghezza 16
     return preg_match('/^[A-Za-z0-9]{16}$/', $cf) === 1;
 }
 

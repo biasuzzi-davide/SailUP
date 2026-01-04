@@ -101,32 +101,6 @@
                 <section aria-labelledby="users-table-title">
                     <h2 id="users-table-title" class="sr-only">Tabella utenti</h2>
 
-                    <form class="filter-bar" method="get" action="admin_utenti.php" aria-label="Filtra utenti">
-                        <div class="form-group">
-                            <label for="filter-user-q">Cerca</label>
-                            <input type="search" id="filter-user-q" name="q" value="[ADMIN_USERS_SEARCH]" placeholder="Nome, cognome o email">
-                        </div>
-                        <div class="form-group">
-                            <label for="filter-user-role">Ruolo</label>
-                            <select id="filter-user-role" name="ruolo">
-                                <option value="">Tutti</option>
-                                <option value="admin" [IF_RUOLO_ADMIN]>Admin</option>
-                                <option value="standard" [IF_RUOLO_STANDARD]>Standard</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="filter-user-status">Stato</label>
-                            <select id="filter-user-status" name="stato">
-                                <option value="">Tutti</option>
-                                <option value="attivi" [IF_STATO_ATTIVI]>Attivi</option>
-                                <option value="disattivi" [IF_STATO_DISATTIVI]>Disattivati</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn-layout btn-sm">Filtra</button>
-                        </div>
-                    </form>
-
                     [ADMIN_USERS_FEEDBACK]
 
                     <div class="table-container">
@@ -139,8 +113,6 @@
                                     <th scope="col">Email</th>
                                     <th scope="col">Data Iscrizione</th>
                                     <th scope="col">Ruolo</th>
-                                    <th scope="col">Stato</th>
-                                    <th scope="col">Azioni</th>
                                 </tr>
                             </thead>
                             <tbody>
