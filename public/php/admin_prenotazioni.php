@@ -26,21 +26,45 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $feedbackClass = 'alert alert-error';
         $feedback = 'Prenotazione non valida.';
     } else {
-        $newState = null;
-        if ($action === 'confirm') $newState = 'Confermata';
-        if ($action === 'cancel') $newState = 'Cancellata';
-
-        if ($newState === null) {
+        $booking = $db->getPrenotazioneById($idPren);
+        if ($booking === null) {
             $feedbackClass = 'alert alert-error';
-            $feedback = 'Azione non valida.';
+            $feedback = 'Prenotazione non trovata.';
+        } elseif ($booking === false) {
+            $feedbackClass = 'alert alert-error';
+            $feedback = 'Errore durante il recupero della prenotazione.';
         } else {
-            $ok = $db->updatePrenotazioneStato($idPren, $newState);
-            if ($ok) {
-                $feedbackClass = 'alert alert-success';
-                $feedback = 'Stato prenotazione aggiornato.';
-            } else {
+            $newState = null;
+            if ($action === 'confirm') $newState = 'Confermata';
+            if ($action === 'cancel') $newState = 'Cancellata';
+
+            if ($newState === null) {
                 $feedbackClass = 'alert alert-error';
-                $feedback = 'Impossibile aggiornare la prenotazione.';
+                $feedback = 'Azione non valida.';
+            } else {
+                $canConfirm = true;
+                if ($newState === 'Confermata') {
+                    $canConfirm = $db->checkDateAvailability(
+                        (string)$booking['IDProdotto'],
+                        (string)$booking['Data_Ora_Inizio'],
+                        (string)$booking['Data_Ora_Fine'],
+                        (int)$booking['IDPrenotazione']
+                    );
+                }
+
+                if (!$canConfirm) {
+                    $feedbackClass = 'alert alert-error';
+                    $feedback = 'La barca risulta già occupata per quelle date.';
+                } else {
+                    $ok = $db->updatePrenotazioneStato($idPren, $newState);
+                    if ($ok) {
+                        $feedbackClass = 'alert alert-success';
+                        $feedback = 'Stato prenotazione aggiornato.';
+                    } else {
+                        $feedbackClass = 'alert alert-error';
+                        $feedback = 'Impossibile aggiornare la prenotazione.';
+                    }
+                }
             }
         }
     }
@@ -57,6 +81,7 @@ $stats = [
     'cancellate' => 0,
 ];
 if (is_array($prenAll)) {
+    $now = new DateTimeImmutable('now');
     $filtered = array_filter($prenAll, function ($row) use ($search, $filterStato) {
         $match = true;
         if ($search !== '') {
@@ -70,15 +95,24 @@ if (is_array($prenAll)) {
     });
     foreach ($prenAll as $row) {
         $st = $row['Stato_Prenotazione'] ?? '';
+        $startStr = $row['Data_Ora_Inizio'] ?? null;
+        $startDate = null;
+        if ($startStr) {
+            try {
+                $startDate = new DateTimeImmutable($startStr);
+            } catch (Throwable $t) {
+                $startDate = null;
+            }
+        }
+
         if ($st === 'Confermata') {
-            $stats['confermate']++;
+            $stats['confermate']++; // tutte le confermate
         } elseif ($st === 'Cancellata') {
             $stats['cancellate']++;
         } elseif ($st === 'In Attesa') {
             $stats['attesa']++;
         }
     }
-    $stats['attive'] = $stats['confermate'];
     $total = count($filtered);
     $offset = ($page - 1) * $perPage;
     $pren = array_slice(array_values($filtered), $offset, $perPage);

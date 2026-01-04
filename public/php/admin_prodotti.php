@@ -10,6 +10,7 @@ $db = new DBConnection();
 $feedback = '';
 $feedbackClass = '';
 $csrfToken = htmlspecialchars(getCsrfToken());
+$productStats = $db->getProductStats();
 
 $page = max(1, (int)($_GET['page'] ?? 1));
 $perPage = 10;
@@ -138,6 +139,11 @@ $html = str_replace(
         '[IF_TIPO_EXPERIENCE]',
         '[IF_STATO_ATTIVI]',
         '[IF_STATO_DISATTIVI]',
+        '[STAT_PRODUCTS_TOTAL]',
+        '[STAT_PRODUCTS_ACTIVE]',
+        '[STAT_PRODUCTS_INACTIVE]',
+        '[STAT_PRODUCTS_NOL]',
+        '[STAT_PRODUCTS_EXP]',
         '[KEYWORDS]',
     ],
     [
@@ -148,6 +154,11 @@ $html = str_replace(
         $filterTipo === 'Experience' ? 'selected' : '',
         $filterStato === 'attivi' ? 'selected' : '',
         $filterStato === 'disattivi' ? 'selected' : '',
+        htmlspecialchars((string)($productStats['total_products'] ?? 0)),
+        htmlspecialchars((string)($productStats['active_products'] ?? 0)),
+        htmlspecialchars((string)($productStats['inactive_products'] ?? 0)),
+        htmlspecialchars((string)($productStats['rental_products'] ?? 0)),
+        htmlspecialchars((string)($productStats['experience_products'] ?? 0)),
         '<meta name="keywords" content="gestione prodotti, admin barche, admin esperienze, dashboard prodotti SailUP">',
     ],
     $html

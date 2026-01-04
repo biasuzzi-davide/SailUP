@@ -233,6 +233,14 @@ $html = buildPage('../pages/admin_prodotti_nuovo.html', $_SERVER['PHP_SELF']);
 // Keywords per SEO (pagine admin sono noindex)
 $keywords = '<meta name="keywords" content="nuovo prodotto, aggiungi barca, aggiungi esperienza, admin prodotti SailUP">';
 
+$isEdit = $mode === 'edit';
+$pageTitle = $isEdit ? 'Modifica Prodotto' : 'Aggiungi Nuovo Prodotto';
+$pageSub = $isEdit ? 'Aggiorna i dettagli di barca o esperienza' : 'Inserisci i dettagli della nuova barca o esperienza';
+$placeholders['[PROD_TITLE]'] = $pageTitle;
+$placeholders['[PROD_HEADING]'] = $pageTitle;
+$placeholders['[PROD_SUBHEADING]'] = $pageSub;
+$placeholders['[PROD_BREADCRUMB]'] = $isEdit ? 'Modifica Prodotto' : 'Nuovo Prodotto';
+
 $html = str_replace(
     ['[ADMIN_PRODUCT_FEEDBACK]', '[CSRF_TOKEN]', '[ADMIN_PRODUCT_ACTION]', '[PROD_MODE]', '[PRODUCT_ID_VALUE]', '[KEYWORDS]'],
     [
