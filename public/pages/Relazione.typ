@@ -151,10 +151,9 @@ Per intercettare il target di riferimento, il sito web è strutturato per soddis
 == Linee Guida
 Per la gestione del ciclo di vita del software e il coordinamento del team, si è scelto di utilizzare un repository su GitHub per il versionamento del codice.
 
-In questa sezione vengono illustrati i principi che hanno guidato la realizzazione del sito web, collegando i contenuti offerti alle funzionalità individuate in fase di analisi.
-L'eterogeneità della clientela (turisti e residenti) ci ha portato a perseguire un design minimale e pulito. Si è scelto di puntare su un *branding* coerente con l'identità marittima: seppur il bianco sia predominante per garantire leggibilità e chiarezza delle informazioni, è stata adottata una palette cromatica basata su diverse tonalità di blu per richiamare il tema nautico e, sfruttando la psicologia dei colori, trasmettere eleganza, calma, sicurezza e freschezza.
+L'eterogeneità della clientela (turisti e residenti) ci ha spinti a progettare un design minimale e pulito. Si è scelto di puntare su un branding coerente con l'identità marittima: seppur il bianco sia predominante di modo da garantire leggibilità e chiarezza delle informazioni, è stata adottata una palette cromatica basata su diverse tonalità di blu per richiamare il tema nautico e, sfruttando la psicologia dei colori, trasmettere eleganza, calma, sicurezza e freschezza.
 
-È stata mantenuta una rigida separazione tra struttura (HTML), presentazione (CSS) e comportamento (PHP & JavaScript), per garantire modularità e rispetto degli standard web.
+È stata mantenuta una rigida separazione tra struttura (HTML), presentazione (CSS) e comportamento (PHP e JavaScript), per garantire modularità e rispetto degli standard web.
 
 Infine, la progettazione del sito è stata condotta cercando garantire l'accessibilità a tutte le categorie di utenti.
 
@@ -163,53 +162,93 @@ La struttura del sito segue il modello gerarchico schematizzato in #link(<fig-si
 
 - *Home:*
   La pagina Home funge da punto di snodo principale. Deve contenere informazioni essenziali e presentative di SailUP, utilizzando immagini di impatto per catturare l'attenzione del visitatore e offrire collegamenti rapidi alle funzionalità principali, quindi le sezioni Noleggio ed Esperienze.
-  Copre il requisito //*Vetrina*.
 
 - *Cataloghi Noleggio ed Esperienze:*
   Queste pagine permettono all'utente di visualizzare l'offerta completa. Devono prevedere sistemi di filtraggio (per data, prezzo, tipologia) per agevolare la ricerca. Selezionando un elemento, l'utente accede a una pagina di dettaglio dove può consultare le specifiche e procedere alla prenotazione. Il sistema effettuerà un controllo sulla disponibilità delle date scelte restituendo un feedback all'utente.
-  Coprono i requisiti di //*Vetrina* e *Prenotazione*.
 
 - *Blog:*
   La pagina Blog raccoglie articoli informativi e consigli turistici. Ogni articolo è visualizzabile singolarmente. Questa sezione non offre interattività transazionale ma è fondamentale per l'attrattiva del sito.
-  Copre i requisiti di //*Vetrina* e *Strategia SEO*.
 
 - *Pagine Informative 'Chi Siamo', 'FAQ', 'Privacy' e 'Cookie':*
-  Queste pagine offrono supporto all'utente, spiegando la storia dell'azienda e rispondendo alle domande frequenti per ridurre il carico di assistenza diretta.
-  Coprono in parte il requisito //*Vetrina*.
+  Queste pagine offrono supporto all'utente, presentando il team di SailUP, rispondendo ai dubbi più comuni per ridurre il carico di assistenza diretta e illustrando in modo trasparente le politiche di privacy e gestione dei cookie adottate dalla piattaforma.
 
 - *Area Riservata:*
   Questa sezione gestisce l'accesso alla piattaforma. La pagina di *Login/Registrazione* permette all'utente di autenticarsi o creare un nuovo profilo. Una volta loggato, il sistema indirizza l'utente alla vista corretta in base al suo ruolo:
 
   - *Pagina Profilo Cliente:*
     Offre al cliente la possibilità di visualizzare e modificare i propri dati anagrafici. Include una sezione per consultare lo storico delle prenotazioni (attive e passate), permettendo all'utente di avere riscontro immediato sulle proprie attività.
-    Copre il requisito di //*Gestione Profilo*.
 
   - *Dashboard Amministratore:*
     Questa sezione, accessibile solo agli utenti con privilegi elevati, funge da centro di controllo. Permette di visualizzare la totalità delle prenotazioni nel sistema, gestire l'anagrafica degli utenti registrati e modificare dinamicamente i contenuti del sito (aggiunta/modifica/rimozione di Barche, Esperienze e Articoli del Blog).
-    Copre il requisito di //*Amministrazione*.
 
   #figure(
-    image("../img/diagramma_albero.png", width: 100%), // Imposta la larghezza al 90% della pagina
+    image("../img/diagramma_albero.png", width: 100%), 
     gap: 2em,
-    caption: [Sitemap gerarchica della piattaforma SailUP],
+    caption: [Mappa gerarchica della piattaforma SailUP],
   ) <fig-sitemap>
 
 = Realizzazione
-In questa sezione vengono descritte le scelte tecniche e le soluzioni implementative adottate per costruire la piattaforma SailUP. Vengono analizzati gli aspetti legati sia allo sviluppo frontend, che definisce l'interfaccia utente, sia al backend, che gestisce la logica applicativa e la persistenza dei dati.
+In questa sezione vengono descritte le soluzioni implementative adottate per costruire la piattaforma SailUP. Vengono di seguito analizzati gli aspetti legati al *frontend* ed al *backend*.
 
-== Implementazione del Frontend
+== Front-End
+
 === Struttura (HTML)
-- ...
+La costruzione delle pagine web sfrutta il markup di HTML5, garantendo una chiara gerarchia delle informazioni. L'ossatura di ogni documento sfrutta i tag standard `<header>`, `<nav>`, `<main>` e `<footer>`, che permettono agli utenti di _screen reader_ di orientarsi rapidamente all'interno della pagina.
+
+- *Struttura generale:* La navigazione principale è contenuta nell'`<header>` e si adatta ai dispositivi mobili trasformandosi in un menu a scomparsa gestito tramite un pulsante ad 'hamburger', il cui stato è comunicato alle tecnologie assistive tramite l'attributo `aria-expanded`. \ Per facilitare l'esperienza d'uso via tastiera è stato inserito all'inizio del `<body>` il collegamento nascosto #underline[_Skip Link_], che consente di saltare i menù ripetitivi andando direttamente al contenuto principale della pagina. \ Il corpo centrale della pagina è racchiuso nel tag `<main>`, al cui interno i contenuti sono organizzati logicamente: le schede del singolo prodotto nei cataloghi sono marcate con il tag `<article>`, identificandole come entità indipendenti, mentre le sezioni accessorie, come i filtri di ricerca e i riepiloghi d'ordine, sono delimitate dal tag `<aside>`.
+- *Breadcrumbs:* L'orientamento all'interno delle pagine è agevolato dalle breadcrumbs, presenti in tutte le pagine ad eccezione di quella d'errore.
+- *Attributi:* Particolare attenzione è stata inoltre posta nel definire attributi adeguati per il contenuto e gli elementi funzionali: ai termini in lingua inglese è stato associato l'attributo `lang="en"` (es. _Privacy Policy_, _Login_), alle sigle ed acronimi (es. CAP, NA, S.r.l., FAQ) l'attributo `title` all'interno del tag `<abbr>` per esplicitarne il significato e alle date l'attributo datetime nel tag `<time>` per renderle _machine-readable_ (e quindi interpretabili da motori di ricerca e _screen reader_). 
+- *Ottimizzazioni:* Sono stati infine impiegati attributi specifici per migliorare l'esperienza utente, come `autocomplete` e `pattern` per facilitare la compilazione dei form e `loading="lazy"` per ottimizzare il caricamento delle immagini.
 
 === Presentazione (CSS)
-...
-=== Comportamento (JavaScript)
-...
-=== Convenzioni Interne
-...
+La parte grafica è gestita interamente tramite fogli di stile CSS, mantenendo una netta separazione tra struttura e presentazione. Il sistema è stato reso modulare attraverso l'uso di file specifici: `style.css` per il desktop, `mobile.css` per i dispositivi portatili e `print.css` per la stampa.
 
-== Logica Applicativa e Dati (Backend)
-=== JavaScript
+==== Style.css (Desktop e Base)
+Questo foglio di stile definisce l'identità visiva principale del sito. Le scelte stilistiche includono:
+- *Responsive design*: L'interfaccia adotta un approccio fluido che si adatta alle diverse risoluzioni dello schermo. Per il posizionamento degli elementi sono state impiegate le tecnologie *Flexbox* per header e footer e *CSS Grid* per le griglie dei prodotti e le specifiche tecniche.
+- *Variabili*: L'uso di variabili CSS definite in `:root` ha permesso di centralizzare la gestione del tema. Questo facilita la manutenzione e abilita il supporto alla *Dark Mode* semplicemente modificando i valori delle variabili colore per la modalità scura.
+- *Grid e flexbox*: L'impaginazione sfrutta CSS Grid per le strutture bidimensionali (come le card dei prodotti) e Flexbox per gli allineamenti monodimensionali (header e navbar).
+- *Accessibilità visiva*: I colori scelti rispettano i criteri di contrasto WCAG AA. Inoltre, è stato definito un feedback visivo chiaro per gli stati di interazione (`:hover`, `:focus`), migliorando l'usabilità per chi naviga da tastiera.
+
+==== Mobile.css (Dispositivi Portatili)
+Richiamato tramite media query per dispositivi con larghezza inferiore a 768px, questo foglio di stile ottimizza l'esperienza utente su schermi ridotti:
+- *Navigazione semplificata*: Il menu di navigazione orizzontale viene nascosto e viene introdotto un menù "Hamburger" espandibile, massimizzando lo spazio disponibile per i contenuti.
+- *Linearizzazione del layout*: Le griglie multi-colonna, come le card per i prodotti, vengono riconfigurate in un layout a colonna singola per facilitare la lettura e lo scorrimento verticale.
+- *Tabelle responsive*: Per risolvere il problema della leggibilità delle tabelle su schermi stretti, le righe vengono trasformate visivamente in "card". L'intestazione della colonna viene inserita direttamente nella cella, permettendo all'utente di leggere il dato contestualizzato senza dover scorrere orizzontalmente o zoomare.
+- *Aree interattive*: Le dimensioni dei pulsanti e delle aree interattive sono aumentate per facilitare l'interazione tramite tocco.
+
+==== Print.css (Stampa)
+Per assicurare che i contenuti siano fruibili in maniera ottimale su carta è stato predisposto un foglio di stile dedicato. Per la stampa il layout viene semplificato:
+- *Rimozione degli elementi sperflui*: Gli elementi interattivi inutili su carta (menu, breadcrumb, pulsanti "prenota", hero images) vengono nascosti tramite la classe `.print-none`, lasciando solamente il contenuto informativo essenziale come ad esempio indirizzo e P.IVA nel footer.
+- *Ottimizzazioni per la lettura*: Il font viene cambiato globalmente in _Times New Roman_ (serif), più leggibile su supporto cartaceo rispetto ai font sans-serif usati a video. I colori vengono forzati al nero su bianco e i link perdono la sottolineatura per una pulizia visiva maggiore.
+- *Layout adattivo*: La struttura a colonne viene linearizzata, permettendo al contenuto principale di occupare l'intera larghezza del foglio stampato, evitando tagli laterali.
+- *Gestione griglie*: Le sezioni a griglia vengono mantenute ma adattate con l'aggiunta di bordi per delimitare le aree, sostituendo la distinzione cromatica che viene persa in stampa.
+- *Visualizzazione link esterni:* Sebbene attualmente disabilitata in assenza di collegamenti esterni, è stata predisposta una regola per stampare in chiaro l'URL di destinazione accanto ai link. Questo accorgimento permette a chi consulta la versione cartacea di conoscere l'indirizzo delle risorse citate, altrimenti irrecuperabile su carta.
+
+=== Convenzioni interne
+Oltre agli standard web generali, il progetto adotta specifiche convenzioni stilistiche e funzionali per garantire un'esperienza utente coerente e prevedibile:
+
+- *Link*: i collegamenti ipertestuali sono distinguibili dal testo grazie alla sottolineatura presente. I link visitati, poi, assumono una colorazione azzurra, in linea con l'identità del brand.
+- *Pagina corrente e link circolari*: Nei menu di navigazione la voce corrispondente alla pagina attuale è evidenziata visivamente con una sottolineatura blu e resa non cliccabile. In generale tutti i link che normalemte riporterebbero alla pagina corrente, i link circolari, vengono resi non cliccabili evitando ricaricamenti inutili e aiutando l'orientamento dell'utente.
+- *Convenzione font*: _Montserrat_ è riservato esclusivamente alle intestazioni (h1-h6) e ai bottoni per impatto visivo, mentre _Open Sans_ è utilizzato per tutto il corpo del testo.
+- *Badge*: Nelle tabelle di riepilogo (es. prenotazioni), lo stato viene esplicitato da etichette colorate in base allo stato dell'elemento.
+- *Divisione contenuti*: I contenuti indipendenti, come i prodotti nei cataloghi, sono sempre incapsulati in card con bordi arrotondati per facilitarne la distinzione.
+- *Feedback nei Form*: I messaggi di aiuto sono sempre posizionati sotto il campo input in colore grigio, mentre i messaggi di errore appaiono in rosso.
+
+=== Comportamento (JavaScript)
+Le funzionalità interattive lato client sono gestite da script modulari che arricchiscono l'esperienza utente secondo il principio del *Progressive Enhancement*, garantendo funzionalità di base anche in assenza di JavaScript.
+
+Il file `script.js` orchestra le seguenti funzioni:
+- *Menu mobile*: Gestisce l'apertura e chiusura del menu "hamburger", alternando le icone di stato (aperto/chiuso) e sincronizzando l'attributo ARIA `aria-expanded` per garantire la corretta comunicazione dello stato alle tecnologie assistive.
+- *Modalità scura*: Controlla il cambio del tema visivo (chiaro/scuro) agendo sull'attributo `data-theme` del tag `html` e memorizzando la preferenza dell'utente nel `localStorage` per mantenere la scelta nelle visite successive.
+- *Filtri*: Viene implementato un sistema di filtraggio per lo storico delle prenotazioni. Questo permette di visualizzare istantaneamente le prenotazioni in base al loro stato ("Tutte", "Attive", "Completate") agendo sulla visibilità delle righe della tabella e aggiornando in tempo reale i contatori presenti nelle tab di filtro.
+
+I file di validazione dedicati (`register_validation.js`, `login_validation.js`, `blog_validation.js`) garantiscono l'integrità dei dati e migliorano l'usabilità dei form:
+- *Validazione in tempo reale*: Verifica la correttezza del campo alla perdita del focus, controllando formati complessi come il Codice Fiscale, la validità strutturale delle Email o delle URL.
+- *Assistenza all'input*: Include comportamenti come la conversione automatica in maiuscolo dei caratteri durante la digitazione nei campi Codice Fiscale e Provincia.
+- *Invio del modulo*: Lo script intercetta il tentativo di invio del modulo e lo valida. Se la validazione fallisce la richiesta al server viene bloccata e la pagina esegue uno scroll automatico verso il primo campo errato, portandovi il focus per facilitare la correzione immediata.
+
+== Backend
 ...
 === PHP
 ...
@@ -223,7 +262,7 @@ In questa sezione vengono descritte le scelte tecniche e le soluzioni implementa
 ...
 == Contrasti
 ...
-== Screen Reader
+== _screen reader_
 ...
 
 = Testing e Validazione
@@ -235,14 +274,14 @@ La fase di testing è essenziale per garantire che il prodotto finale sia corret
 == Accessibilità
 L'accessibilità è stata un pilastro del progetto, guidata dai principi studiati durante il corso e dalle linee guida internazionali.
 
-- *Principi WCAG e Struttura Semantica:* Il progetto aderisce ai quattro principi fondamentali delle WCAG (Web Content Accessibility Guidelines), riassunti nell'acronimo PURO: Percepibile, Utilizzabile, Comprensibile e Robusto. L'uso rigoroso di HTML semantico (`<main>`, `<nav>`, `<header>`, `<footer>`) fornisce una struttura chiara e prevedibile, che facilita l'interpretazione dei contenuti da parte delle tecnologie assistive come gli screen reader.
-- *Navigazione da Tastiera:* Il sito è stato progettato per essere completamente navigabile utilizzando esclusivamente la tastiera. È stato verificato per ogni pagina che l'ordine di focus mediante tabulazione avvenisse correttamente. \ È stata poi implementato il link "Salta al contenuto" per permettere agli utenti di screen reader di bypassare i blocchi di navigazione ripetitivi e a loro superflui.
+- *Principi WCAG e Struttura Semantica:* Il progetto aderisce ai quattro principi fondamentali delle WCAG (Web Content Accessibility Guidelines), riassunti nell'acronimo PURO: Percepibile, Utilizzabile, Comprensibile e Robusto. L'uso rigoroso di HTML semantico (`<main>`, `<nav>`, `<header>`, `<footer>`) fornisce una struttura chiara e prevedibile, che facilita l'interpretazione dei contenuti da parte delle tecnologie assistive come gli _screen reader_.
+- *Navigazione da Tastiera:* Il sito è stato progettato per essere completamente navigabile utilizzando esclusivamente la tastiera. È stato verificato per ogni pagina che l'ordine di focus mediante tabulazione avvenisse correttamente. \ È stata poi implementato il link "Salta al contenuto" per permettere agli utenti di _screen reader_ di bypassare i blocchi di navigazione ripetitivi e a loro superflui.
 
 - *Contrasto Cromatico e Colori:* È stata prestata particolare attenzione al contrasto tra testo e sfondo, verificando che i rapporti cromatici rispettassero almeno il livello AA delle WCAG. Inoltre, l'implementazione di un selettore di tema light/dark offre agli utenti la possibilità di scegliere la modalità di visualizzazione con il contrasto che preferiscono, migliorando ulteriormente la leggibilità.
 
 - *Alternative Testuali:* Ogni immagine portatrice di informazione, quindi non puramente decorativa, è stata dotata di un attributo `alt` descrittivo di modo table da veicolare informazioni grafiche attraverso strumenti di sintesi vocale. Per rafforzare ciò, i form amministrativi per l'aggiunta di prodotti e articoli del blog includono un campo obbligatorio per il "Testo Alternativo", assicurando che questa buona norma venga applicata a tutti i contenuti futuri.
 
-- *WAI-ARIA:* Dove necessario, sono stati utilizzati attributi WAI-ARIA (Accessible Rich Internet Applications) come `aria-expanded`, `aria-label` e `aria-required` per arricchire semanticamente i componenti dinamici. Questo permette di rendere il loro stato e la loro funzione pienamente comprensibili per gli screen reader, come richiesto dalle linee guida per le Rich Internet Applications.
+- *WAI-ARIA:* Dove necessario, sono stati utilizzati attributi WAI-ARIA (Accessible Rich Internet Applications) come `aria-expanded`, `aria-label` e `aria-required` per arricchire semanticamente i componenti dinamici. Questo permette di rendere il loro stato e la loro funzione pienamente comprensibili per gli _screen reader_, come richiesto dalle linee guida per le Rich Internet Applications.
 
 - *Test con Strumenti:* L'accessibilità è stata verificata attraverso ...
 
@@ -293,8 +332,8 @@ Il progetto *SailUP* ha raggiunto con successo tutti gli obiettivi prefissati, r
 == Sviluppi Futuri
 La base tecnologica solida e modulare di SailUP si presta a numerose evoluzioni future. Tra le possibili implementazioni, si possono ipotizzare:
 
-- *Sistema di Recensioni e Valutazioni:* Aggiungere una funzionalità che permetta agli utenti di lasciare recensioni e valutazioni sui prodotti, aumentando la fiducia e fornendo un feedback prezioso.
+- *Sistema di recensioni e valutazioni:* Aggiungere una funzionalità che permetta agli utenti di lasciare recensioni e valutazioni sui prodotti, aumentando la fiducia e fornendo un feedback prezioso.
 
-- *Notifiche Automatiche via Email:* Sviluppare un sistema per l'invio automatico di email di conferma, promemoria e aggiornamenti relativi alle prenotazioni effettuate dagli utenti.
+- *Notifiche automatiche via email:* Sviluppare un sistema per l'invio automatico di email di conferma, promemoria e aggiornamenti relativi alle prenotazioni effettuate dagli utenti.
 
 - *Localizzazione:* Introdurre supporto alle lingue più diffuse tra i turisti che affollano il Golfo di Napoli, come ad esempio francese, inglese e spagnolo.
