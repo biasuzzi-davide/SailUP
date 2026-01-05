@@ -34,13 +34,12 @@ function buildHeader($phpSelf) {
     $blogLi = createHeaderItem('blog', 'Blog', $current, $relativePath, $pages, 'en');
     $chiSiamoLi = createHeaderItem('chi_siamo', 'Chi Siamo', $current, $relativePath, $pages);
 
-    // Mobile menu items (same as main, plus login)
+    // Mobile menu items (same as main, plus login/logout)
     $mobileHomeLi = createHeaderItem('index', 'Home', $current, $relativePath, $pages, 'en');
     $mobileNoleggioLi = createHeaderItem('catalogo_noleggio', 'Noleggio', $current, $relativePath, $pages);
     $mobileEsperienzeLi = createHeaderItem('catalogo_esperienze', 'Esperienze', $current, $relativePath, $pages);
     $mobileBlogLi = createHeaderItem('blog', 'Blog', $current, $relativePath, $pages, 'en');
     $mobileChiSiamoLi = createHeaderItem('chi_siamo', 'Chi Siamo', $current, $relativePath, $pages);
-    $mobileLoginLi = createHeaderItem('login', 'Login / Registrati', $current, $relativePath, $pages, 'en', 'menu-login');
 
     // Sostituisci placeholder
     $header = str_replace('[HOME LI]', $homeLi, $headerTemplate);
@@ -53,36 +52,25 @@ function buildHeader($phpSelf) {
     $header = str_replace('[MOBILE ESPERIENZE LI]', $mobileEsperienzeLi, $header);
     $header = str_replace('[MOBILE BLOG LI]', $mobileBlogLi, $header);
     $header = str_replace('[MOBILE CHI_SIAMO LI]', $mobileChiSiamoLi, $header);
-    $header = str_replace('[MOBILE LOGIN LI]', $mobileLoginLi, $header);
 
-    // Link area (login / profilo / admin / logout)
-    $userLinks = '';
+    // Pulsante unico in base allo stato
     if (isLogged()) {
         if (isAdmin()) {
-            $userLinks .= '<a href="' . $relativePath . 'admin.php" class="btn-layout">Admin</a>';
+            $loginLink = '<a href="' . $relativePath . 'admin.php" class="btn-layout">Admin</a>';
+            $mobileLoginLi = '<li><a href="' . $relativePath . 'admin.php">Admin</a></li>';
+        } else {
+            $loginLink = '<a href="' . $relativePath . 'profilo.php" class="btn-layout">Profilo</a>';
+            $mobileLoginLi = '<li><a href="' . $relativePath . 'profilo.php">Profilo</a></li>';
         }
-        $userLinks .= '<a href="' . $relativePath . 'profilo.php" class="btn-layout">Profilo</a>';
-        $userLinks .= '<a href="' . $relativePath . 'logout.php" class="btn-layout">Logout</a>';
     } else {
         if ($current == 'login') {
-            $userLinks = '<span lang="en" class="btn-layout">Login</span>';
+            $loginLink = '<span lang="en" class="btn-layout">Login</span>';
         } else {
-            $userLinks = '<a href="' . $relativePath . $pages['login'] . '" lang="en" class="btn-layout">Login</a>';
+            $loginLink = '<a href="' . $relativePath . $pages['login'] . '" lang="en" class="btn-layout">Login</a>';
         }
-    }
-    $header = str_replace('[LOGIN LINK]', $userLinks, $header);
-
-    // Mobile login/profile/admin/logout area
-    if (isLogged()) {
-        $mobileLoginLi = '';
-        if (isAdmin()) {
-            $mobileLoginLi .= '<li><a href="' . $relativePath . 'admin.php">Admin</a></li>';
-        }
-        $mobileLoginLi .= '<li><a href="' . $relativePath . 'profilo.php">Profilo</a></li>';
-        $mobileLoginLi .= '<li><a href="' . $relativePath . 'logout.php">Logout</a></li>';
-    } else {
         $mobileLoginLi = createHeaderItem('login', 'Login / Registrati', $current, $relativePath, $pages, 'en', 'menu-login');
     }
+    $header = str_replace('[LOGIN LINK]', $loginLink, $header);
     $header = str_replace('[MOBILE LOGIN LI]', $mobileLoginLi, $header);
 
     return $header;
@@ -110,16 +98,20 @@ function buildFooter($phpSelf) {
             return '<li><a href="' . $relativePath . $pages[$key] . '"' . $langAttr . '>' . $label . '</a></li>';
         }
     }
-    
-    // Footer menu items
+
+    // Home item
     $homeLi = createFooterItem('index', 'Home', $current, $relativePath, $pages, 'en');
+
+    // Altri item
     $noleggioLi = createFooterItem('catalogo_noleggio', 'Noleggio', $current, $relativePath, $pages);
     $esperienzeLi = createFooterItem('catalogo_esperienze', 'Esperienze', $current, $relativePath, $pages);
     $blogLi = createFooterItem('blog', 'Blog', $current, $relativePath, $pages, 'en');
     $chiSiamoLi = createFooterItem('chi_siamo', 'Chi Siamo', $current, $relativePath, $pages);
-    $faqLi = createFooterItem('faq', 'Domande Frequenti (<abbr title="Frequently Asked Questions" lang="en">FAQ</abbr>)', $current, $relativePath, $pages);
-    $privacyLi = createFooterItem('privacy', 'Privacy Policy', $current, $relativePath, $pages, 'en');
-    $cookieLi = createFooterItem('cookie', '<span lang="en">Cookie</span> Policy', $current, $relativePath, $pages);
+
+    // Altri item (sempre link)
+    $faqLi = '<li><a href="' . $relativePath . $pages['faq'] . '">Domande Frequenti (<abbr title="Frequently Asked Questions" lang="en">FAQ</abbr>)</a></li>';
+    $privacyLi = '<li><a href="' . $relativePath . $pages['privacy'] . '" lang="en">Privacy Policy</a></li>';
+    $cookieLi = '<li><a href="' . $relativePath . $pages['cookie'] . '"><span lang="en">Cookie</span> Policy</a></li>';
 
     // Recupera l'Anno corrente
     $annoCorrente = date('Y');
