@@ -4,8 +4,17 @@
   numbering: "1",
 )
 
+#show heading.where(level: 1): set text(size: 24pt, weight: "bold")
+
+#show heading.where(level: 2): set text(size: 22pt, weight: "bold")
+
+#show heading.where(level: 3): set text(size: 18pt, weight: "bold")
+
+#show heading.where(level: 4): set text(size: 14pt, weight: "bold")
+
+
 #set text(
-  size: 11pt,
+  size: 12pt,
   lang: "it"
 )
 
@@ -137,7 +146,7 @@ Sono state individuate e realizzate le seguenti funzionalità principali:
   - Si prevede un form di compilazione dati per consentire ai nuovi utenti di creare un account, requisito necessario per effettuare una prenotazione e per gestirla.
 
 == Ricerche da soddisfare
-Per intercettare il target di riferimento, il sito web è strutturato per soddisfare le seguenti intenzioni di ricerca (SEO):
+Al fine di migliorare la SEO ed intercettare il target di riferimento, il sito web è strutturato per soddisfare le seguenti intenzioni di ricerca:
 - Noleggio barche Golfo di Napoli
 - Escursioni in barca Capri e Positano
 - Esperienze nautiche Napoli
@@ -271,6 +280,21 @@ La struttura del database si sviluppa con 12 entità:
 - *Prodotti*: La tabella `Prodotto` (polimorfica per Noleggio/Esperienze) è il centro di un serie di altre tabelle: `Prodotto_Extra` e `Prodotto_Incluso` per le specifiche, `Lingua` e `Prodotto_Lingua` per le competenze linguistiche degli skipper/guide.
 - *Operatività*: `Prenotazione` traccia lo storico degli ordini e i pagamenti, mentre `Indisponibilita` permette agli admin di bloccare date specifiche sul calendario.
 - *Content management*: `Articolo_Blog` e `Articolo_Blog_Extra` strutturano i contenuti editoriali, supportati dalla tabella `Media` che centralizza i percorsi dei file multimediali collegandoli dinamicamente alle varie entità.
+
+Le entità implementate, ed i principali attributi, sono: 
+
+- *Utente*: Contiene le informazioni di tutti gli iscritti. Ogni record ha un `IDUtente`, credenziali e dati anagrafici. Il campo `Is_Admin` serve per distinguere i privilegi di accesso.
+- *Indirizzo*: Memorizza i dati geografici (Via, Città, CAP) separandoli dall'utente per una migliore normalizzazione.
+- *Prodotto*: Contiene i dati comuni dei prototti, Noleggi ed Esperienze, del catalogo (prezzo, descrizione, posti).
+- *Prodotto_Extra*: Gestisce i servizi opzionali a pagamento (es. Skipper, Champagne).
+- *Prodotto_Incluso*: Elenca i servizi già compresi nel prezzo base (es. Carburante, Assicurazione).
+- *Lingua*: Memorizza Le lingue supportate per i servizi guidati (IT, EN, FR, ES).
+- *Prodotto_Lingua*: Relazione che collega Prodotto e Lingua, indicando quali lingue sono parlate nell'esperienza specifica.
+- *Prenotazione*: Necessaria per mantenere lo storico delle transazioni. 
+- *Indisponibilita*: Permette agli amministratori di bloccare date specifiche (es. per manutenzione).
+- *Articolo_Blog*: Necessaria per gestire gli articoli del blog.
+- *Articolo_Blog_Extra*: Struttura i contenuti complessi degli articoli (es. liste puntate, sezioni "Cosa portare").
+- *Media*: centralizza la gestione delle immagini.
 
 === Sicurezza lato server
 Per quanto riguarda la sicurezza, oltre alla validazione degli input, sono state implementate lato backend i seguenti controlli:
