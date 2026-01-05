@@ -1062,41 +1062,7 @@ class DBConnection {
             return false;
         }
     }
-
-    /**
-     * Rrestituisce un prodotto per per id
-     */
-    public function getProdottoById(string $idProdotto) {
-        $this->openConnection();
-        $query = "SELECT * FROM Prodotto WHERE IDProdotto = ? AND Attivo = 1";
-
-        try {
-            $stmt = $this->connection->prepare($query);
-            if (!$stmt) {
-                $this->closeConnection();
-                return false;
-            }
-
-            $stmt->bind_param("s", $idProdotto);
-            $stmt->execute();
-            $result = $stmt->get_result();
-
-            if ($result->num_rows === 0) {
-                $stmt->close();
-                $this->closeConnection();
-                return null;
-            }
-
-            $row = $result->fetch_assoc();
-            $stmt->close();
-            $this->closeConnection();
-            return $row;
-        } catch (Throwable $t) {
-            $this->closeConnection();
-            return false;
-        }
-    }
-
+    
     /**
      * Recupera un singolo prodotto con la prima immagine disponibile.
      */
@@ -1336,52 +1302,6 @@ class DBConnection {
     }
 
     /**
-     * Restituisce tutti i prodotti attivi, eventualmente filtrati per tipo.
-     */
-    public function getProdotti(?string $tipoProdotto = null): array|bool {
-        $this->openConnection();
-        try {
-            if ($tipoProdotto === null) {
-                $query = "SELECT * FROM Prodotto WHERE Attivo = 1";
-                $result = $this->connection->query($query);
-            } else {
-                $query = "SELECT * FROM Prodotto WHERE Attivo = 1 AND Tipo_Prodotto = ?";
-                $stmt = $this->connection->prepare($query);
-                if (!$stmt) {
-                    $this->closeConnection();
-                    return false;
-                }
-                $stmt->bind_param("s", $tipoProdotto);
-                $stmt->execute();
-                $result = $stmt->get_result();
-                $stmt->close();
-            }
-
-            if (!$result) {
-                $this->closeConnection();
-                return false;
-            }
-
-            if ($result->num_rows === 0) {
-                $this->closeConnection();
-                return [];
-            }
-
-            $prodotti = [];
-            while ($row = $result->fetch_assoc()) {
-                $prodotti[] = $row;
-            }
-
-            $result->free();
-            $this->closeConnection();
-            return $prodotti;
-        } catch (Throwable $t) {
-            $this->closeConnection();
-            return false;
-        }
-    }
-
-    /**
      * Restituisce le tipologie disponibili per un determinato tipo di prodotto (es. Noleggio/Experience).
      */
     public function getTipologieByTipo(string $tipoProdotto): array|bool {
@@ -1544,63 +1464,6 @@ class DBConnection {
     /* ============================================================
        METODI PRENOTAZIONE
        ============================================================ */
-
-    /**
-     * Crea una prenotazione (senza logica di disponibilità).
-     * Ritorna IDPrenotazione oppure false.
-     */
-    public function creaPrenotazione(
-        int $idUtente,
-        string $idProdotto,
-        string $dataOraInizio,
-        string $dataOraFine,
-        bool $skipperRichiesto,
-        float $prezzoTotale,
-        string $metodoPagamento,
-        ?string $note
-    ) {
-        $this->openConnection();
-        $query = "INSERT INTO Prenotazione 
-                    (IDUtente, IDProdotto, Data_Ora_Inizio, Data_Ora_Fine, 
-                     Skipper_Richiesto, Prezzo_Totale, Metodo_Pagamento, Note_Addizionali)
-                  VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-
-        try {
-            $stmt = $this->connection->prepare($query);
-            if (!$stmt) {
-                $this->closeConnection();
-                return false;
-            }
-
-            $skipperInt = $skipperRichiesto ? 1 : 0;
-
-            $stmt->bind_param(
-                "isssidss",
-                $idUtente,
-                $idProdotto,
-                $dataOraInizio,
-                $dataOraFine,
-                $skipperInt,
-                $prezzoTotale,
-                $metodoPagamento,
-                $note
-            );
-
-            if (!$stmt->execute()) {
-                $stmt->close();
-                $this->closeConnection();
-                return false;
-            }
-
-            $id = $stmt->insert_id;
-            $stmt->close();
-            $this->closeConnection();
-            return $id;
-        } catch (Throwable $t) {
-            $this->closeConnection();
-            return false;
-        }
-    }
 
     /**
      * Restituisce le prenotazioni di un utente ordinate per data.

@@ -2,13 +2,10 @@
 // conferma_prenotazione.php - Pagina di conferma dopo la prenotazione
 
 require_once '../../includes/helpers.php';
-require_once '../../includes/db_connection.php';
 require_once '../../includes/session/session.php';
 
 // Verifica che l'utente sia loggato
 requireLogin();
-
-$db = new DBConnection();
 
 // Verifica che ci sia una prenotazione completata
 if (!isset($_SESSION['prenotazione_temp'])) {

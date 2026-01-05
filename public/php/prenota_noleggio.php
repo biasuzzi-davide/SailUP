@@ -88,16 +88,21 @@ if (!isLogged()) {
         foreach ($extra as $index => $extraItem) {
             $extraName = htmlspecialchars($extraItem['Nome_Extra'] ?? '', ENT_QUOTES);
             $extraPrice = $extraItem['Prezzo_Extra'] ?? 0;
+            $extraId = $extraItem['IDExtra'] ?? $index;
             $isOptional = isset($extraItem['Opzionale']) ? filter_var($extraItem['Opzionale'], FILTER_VALIDATE_BOOLEAN) : true;
             $formattedPrice = number_format((float) $extraPrice, 0, ',', '.');
             
-            $checkboxId = 'extra-' . $index;
+            $checkboxId = 'extra-' . $extraId;
             $checkedAttr = !$isOptional ? 'checked' : '';
             $disabledAttr = !$isOptional ? 'disabled' : '';
             $priceText = $formattedPrice !== '' ? '+' . htmlspecialchars($formattedPrice, ENT_QUOTES) . ' €' : '';
             
             $extraCheckboxes .= '<div class="form-check checkbox-highlight">';
-            $extraCheckboxes .= '<input type="checkbox" id="' . $checkboxId . '" name="extras[]" value="' . $index . '" ' . $checkedAttr . ' ' . $disabledAttr . '>';
+            $extraCheckboxes .= '<input type="checkbox" id="' . $checkboxId . '" name="extras[]" value="' . $extraId . '" ' . $checkedAttr . ' ' . $disabledAttr . '>';
+            // Aggiungi hidden input per extra obbligatori (disabled non viene inviato)
+            if (!$isOptional) {
+                $extraCheckboxes .= '<input type="hidden" name="extras[]" value="' . $extraId . '">';
+            }
             $extraCheckboxes .= '<label for="' . $checkboxId . '">';
             $extraCheckboxes .= '<span>' . $extraName . '</span>';
             if ($priceText !== '') {
@@ -188,6 +193,8 @@ if (!$isAvailable) {
 
 // Calcolo del prezzo
 $prezzoBase = (float) ($productDetail['Prezzo_Base'] ?? 0);
+
+// Carico gli extra (necessario qui perché il flusso POST non passa attraverso la parte GET sopra)
 $extra = $db->getProdottoExtra($productDetail['IDProdotto']);
 if ($extra === false) $extra = [];
 
