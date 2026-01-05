@@ -218,7 +218,7 @@ Richiamato tramite media query per dispositivi con larghezza inferiore a 768px, 
 - *Aree interattive*: Le dimensioni dei pulsanti e delle aree interattive sono aumentate per facilitare l'interazione tramite tocco.
 
 ==== Print.css (Stampa)
-Per assicurare che i contenuti siano fruibili in maniera ottimale su carta è stato predisposto un foglio di stile dedicato. Per la stampa il layout viene semplificato:
+Per assicurare che i contenuti siano fruibili in maniera ottimale su carta è stato predisposto un foglio di stile dedicato, che modifica la struttura di una pagina come segue:
 - *Rimozione degli elementi sperflui*: Gli elementi interattivi inutili su carta (menu, breadcrumb, pulsanti "prenota", hero images) vengono nascosti tramite la classe `.print-none`, lasciando solamente il contenuto informativo essenziale come ad esempio indirizzo e P.IVA nel footer.
 - *Ottimizzazioni per la lettura*: Il font viene cambiato globalmente in _Times New Roman_ (serif), più leggibile su supporto cartaceo rispetto ai font sans-serif usati a video. I colori vengono forzati al nero su bianco e i link perdono la sottolineatura per una pulizia visiva maggiore.
 - *Layout adattivo*: La struttura a colonne viene linearizzata, permettendo al contenuto principale di occupare l'intera larghezza del foglio stampato, evitando tagli laterali.
@@ -248,12 +248,29 @@ I file di validazione dedicati (`register_validation.js`, `login_validation.js`,
 - *Assistenza all'input*: Include comportamenti come la conversione automatica in maiuscolo dei caratteri durante la digitazione nei campi Codice Fiscale e Provincia.
 - *Invio del modulo*: Lo script intercetta il tentativo di invio del modulo e lo valida. Se la validazione fallisce la richiesta al server viene bloccata e la pagina esegue uno scroll automatico verso il primo campo errato, portandovi il focus per facilitare la correzione immediata.
 
-== Backend
-...
-=== PHP
-...
-=== Database
-...
+== Back-End
+
+=== Architettura (PHP)
+Lo sviluppo lato server è stato realizzato con un approccio modulare che simula il pattern architetturale *Model-View-Controller* (MVC). Questa scelta ha permesso di mantenere il codice ordinato e manutenibile.
+
+Ogni pagina PHP funge da *Controller*: gestisce la logica, verifica i permessi dell'utente e interagisce con il database. La generazione dell'interfaccia (*View*) avviene separando la logica dall'HTML: il codice PHP carica i template HTML statici tramite la funzione helper `buildPage()` e inietta i dati dinamici sostituendo dei segnaposto predefiniti (es. `[USER_NOME]`, `[SERVER_MESSAGES]`).
+
+=== Gestione dei Dati (Database)
+L'interazione con i dati è centralizzata e astratta tramite la classe `DBConnection`, grazie ai metodi specifici per le operazioni di lettura e scrittura (es. `getIndirizzoById`, `insertPrenotazione`), separando così la logica applicativa dalla struttura fisica del database, semplificando eventuali modifiche future allo schema.
+
+Le entità principali del sistema comprendono:
+- *Utente*: Gestisce sia i clienti che gli amministratori, differenziati da un flag di ruolo.
+- *Prodotto*: Una tabella che gestisce sia le imbarcazioni (Noleggio) che le attività turistiche (Esperienze).
+- *Prenotazione*: Collega utenti e prodotti, tracciando lo stato del servizio e del pagamento.
+- *Articolo_Blog*: Contiene i dati editoriali per la sezione informativa.
+
+=== Sicurezza
+La protezione dell'applicazione e dei dati utente è stata una priorità trasversale nello sviluppo del backend, implementando diverse contromisure contro le vulnerabilità web più comuni:
+
+- *XSS*: Tutti i dati dinamici inseriti nell'HTML vengono trattati con la funzione `htmlspecialchars()` per convertire i caratteri speciali in entità HTML. Questo impedisce l'iniezione di script malevoli (*Cross-Site Scripting*) qualora un utente tentasse di inserire codice JavaScript nei campi di input.
+- *Validazione Input*: I dati in ingresso vengono filtrati e validati rigorosamente lato server. Ad esempio, durante la registrazione, si verifica l'unicità dell'email e del codice fiscale, oltre alla complessità della password, restituendo feedback precisi in caso di errore.
+- *Controllo Accessi*: L'accesso alle aree riservate è protetto, se un utente non autenticato tenta di accedere a pagine protette (es. `profilo.php`), viene reindirizzato forzatamente alla pagina di login.
+
 
 = Accessibilità
 == Validazione HTML5
