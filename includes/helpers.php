@@ -247,4 +247,477 @@ function resolveImageUrl(?string $url): string {
     $trimmed = trim((string) $url);
     return $trimmed !== '' ? $trimmed : getPlaceholderImage();
 }
+
+/**
+ * Genera l'HTML di una card prodotto semplice (usata nell'homepage).
+ * 
+ * @param array $prodotto Dati del prodotto dal database
+ * @param string $tipo Tipo di prodotto: 'noleggio' o 'experience'
+ * @return string HTML della card
+ */
+function buildSimpleProductCard(array $prodotto, string $tipo = 'noleggio'): string {
+    $idProdotto = $prodotto['IDProdotto'] ?? '';
+    if ($idProdotto === '') {
+        return '';
+    }
+
+    $imageUrl = resolveImageUrl($prodotto['URL_Media'] ?? null);
+    $altText = $prodotto['Testo_Alternativo'] ?? 'Immagine non disponibile';
+    $productName = htmlspecialchars($prodotto['Nome_Prodotto'] ?? 'Prodotto', ENT_QUOTES);
+
+    // Determina URL di dettaglio e testo CTA in base al tipo
+    if ($tipo === 'experience') {
+        $detailUrl = 'dettaglio_esperienza.php?id=' . rawurlencode($idProdotto);
+        $ctaText = 'Prenota ora &rarr;';
+        $ariaLabel = 'Prenota ' . $productName;
+    } else {
+        $detailUrl = 'dettaglio_barca.php?id=' . rawurlencode($idProdotto);
+        $ctaText = 'Scopri di più &rarr;';
+        $ariaLabel = 'Vedi dettagli ' . $productName;
+    }
+
+    // Attributo loading per esperienze
+    $loadingAttr = ($tipo === 'experience') ? ' loading="lazy"' : '';
+
+    return '<article class="product-card">
+          <img class="product-card-image" src="' . htmlspecialchars($imageUrl, ENT_QUOTES) . '" alt="' . htmlspecialchars($altText, ENT_QUOTES) . '"' . $loadingAttr . '>
+          <div class="product-card-content">
+            <div class="product-header">
+              <h3 class="product-title">' . $productName . '</h3>
+            </div>
+            <div class="product-footer">
+              <a href="' . htmlspecialchars($detailUrl, ENT_QUOTES) . '" class="product-cta" aria-label="' . htmlspecialchars($ariaLabel, ENT_QUOTES) . '">' . $ctaText . '</a>
+            </div>
+          </div>
+        </article>';
+}
+
+/**
+ * Genera l'HTML di una card per il catalogo noleggio.
+ * 
+ * @param array $prodotto Dati del prodotto dal database
+ * @return string HTML della card
+ */
+function buildNoleggioCatalogCard(array $prodotto): string {
+    $idProdotto = $prodotto['IDProdotto'] ?? '';
+    if ($idProdotto === '') {
+        return '';
+    }
+
+    $imageUrl = resolveImageUrl($prodotto['URL_Media'] ?? null);
+    $altText = $prodotto['Testo_Alternativo'] ?? 'Immagine non disponibile';
+    $productName = htmlspecialchars($prodotto['Nome_Prodotto'] ?? 'Prodotto', ENT_QUOTES);
+    $description = htmlspecialchars($prodotto['Descrizione_Breve'] ?? 'Descrizione non disponibile.', ENT_QUOTES);
+
+    // Badge tipologia
+    $badgeTextRaw = $prodotto['Tipologia_Prodotto'] ?? 'Noleggio';
+    $badgeText = htmlspecialchars($badgeTextRaw, ENT_QUOTES);
+    $badgeKey = strtolower($badgeTextRaw);
+    $badgeClass = 'badge-motore';
+    if (strpos($badgeKey, 'vela') !== false) {
+        $badgeClass = 'badge-vela';
+    } elseif (strpos($badgeKey, 'gommone') !== false) {
+        $badgeClass = 'badge-gommone';
+    } elseif (strpos($badgeKey, 'motore') !== false) {
+        $badgeClass = 'badge-motore';
+    }
+
+    // Lunghezza barca
+    $lengthValue = $prodotto['Lunghezza_Barca_Metri'];
+    $formattedLength = '—';
+    if ($lengthValue !== null && $lengthValue !== '') {
+        $formattedLength = number_format((float) $lengthValue, 2, ',', '.');
+        $formattedLength = rtrim(rtrim($formattedLength, '0'), ',');
+        $formattedLength .= 'm';
+    }
+
+    // Posti totali
+    $postiTotali = isset($prodotto['Posti_Totali']) ? (int) $prodotto['Posti_Totali'] : null;
+    $postiDescrizione = $postiTotali !== null ? $postiTotali . ' posti' : '—';
+
+    // Patente
+    $richiedePatente = filter_var($prodotto['Richiede_Patente'], FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
+    $richiedePatente = $richiedePatente ?? false;
+    $patenteIcon = $richiedePatente ? '🎫' : '✅';
+    $patenteLabel = $richiedePatente ? 'Patente Richiesta' : 'Patente non Richiesta';
+
+    // Prezzo
+    $prezzoBase = isset($prodotto['Prezzo_Base']) ? number_format((float) $prodotto['Prezzo_Base'], 0, ',', '.') : '—';
+
+    $detailUrl = 'dettaglio_barca.php?id=' . rawurlencode($idProdotto);
+
+    return '<article class="product-card">
+        <img class="product-card-image" src="' . htmlspecialchars($imageUrl, ENT_QUOTES) . '" alt="' . htmlspecialchars($altText, ENT_QUOTES) . '" width="400" height="267" loading="lazy">
+        <div class="product-card-content">
+            <div class="product-header">
+                <h3 class="product-title">
+                    ' . $productName . '
+                </h3>
+                <span class="product-badge ' . $badgeClass . '">' . $badgeText . '</span>
+            </div>
+
+            <p class="product-description">
+                ' . $description . '
+            </p>
+
+            <ul class="product-specs">
+                <li class="spec-item">
+                    <span class="spec-icon" aria-hidden="true">📏</span>
+                    ' . $formattedLength . '
+                </li>
+                <li class="spec-item">
+                    <span class="spec-icon" aria-hidden="true">👥</span>
+                    ' . $postiDescrizione . '
+                </li>
+                <li class="spec-item">
+                    <span class="spec-icon" aria-hidden="true">' . $patenteIcon . '</span>
+                    ' . $patenteLabel . '
+                </li>
+            </ul>
+
+            <div class="product-footer">
+                <div class="product-price">
+                    <span class="price-label">da</span>
+                    <span class="price-value">' . $prezzoBase . '€</span>
+                    <span class="price-period">/giorno</span>
+                </div>
+                <a href="' . $detailUrl . '" class="product-cta" aria-label="Vedi dettagli ' . $productName . '">
+                    Vedi dettagli →
+                </a>
+            </div>
+        </div>
+    </article>';
+}
+
+/**
+ * Genera l'HTML di una card per il catalogo esperienze.
+ * 
+ * @param array $prodotto Dati del prodotto dal database
+ * @param array $lingueDisponibili Array con le lingue disponibili per questo prodotto
+ * @return string HTML della card
+ */
+function buildExperienceCatalogCard(array $prodotto, array $lingueDisponibili = []): string {
+    $idProdotto = $prodotto['IDProdotto'] ?? '';
+    if ($idProdotto === '') {
+        return '';
+    }
+
+    $imageUrl = resolveImageUrl($prodotto['URL_Media'] ?? null);
+    $altText = $prodotto['Testo_Alternativo'] ?? 'Immagine non disponibile';
+    $productName = htmlspecialchars($prodotto['Nome_Prodotto'] ?? 'Esperienza', ENT_QUOTES);
+    $description = htmlspecialchars($prodotto['Descrizione_Breve'] ?? 'Descrizione non disponibile.', ENT_QUOTES);
+
+    // Badge tipologia
+    $tipologiaRaw = $prodotto['Tipologia_Prodotto'] ?? 'Tour';
+    $badgeText = htmlspecialchars($tipologiaRaw, ENT_QUOTES);
+    $badgeSlug = strtolower($tipologiaRaw);
+    if (strpos($badgeSlug, 'aperitivo') !== false) {
+        $badgeClass = 'badge-aperitivo';
+    } elseif (strpos($badgeSlug, 'escursione') !== false) {
+        $badgeClass = 'badge-escursione';
+    } elseif (strpos($badgeSlug, 'tour') !== false) {
+        $badgeClass = 'badge-tour';
+    } else {
+        $badgeClass = 'badge-tour';
+    }
+
+    // Posti totali
+    $postiTotali = isset($prodotto['Posti_Totali']) ? (int) $prodotto['Posti_Totali'] : null;
+    $postiDescrizione = $postiTotali !== null ? $postiTotali . ' posti' : '—';
+
+    // Accessibilità
+    $accessibile = filter_var($prodotto['Accessibile_Disabili'], FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
+    $accessibileLabel = $accessibile ? 'Accessibile a tutti' : 'Accessibilità limitata';
+
+    // Lingue disponibili
+    $lingueNomi = [];
+    if (is_array($lingueDisponibili)) {
+        foreach ($lingueDisponibili as $lingua) {
+            if (!empty($lingua['Nome'])) {
+                $lingueNomi[] = htmlspecialchars($lingua['Nome'], ENT_QUOTES);
+            }
+        }
+    }
+    $lingueDescrizione = !empty($lingueNomi) ? implode(', ', $lingueNomi) : 'Lingue in definizione';
+
+    // Prezzo
+    $price = isset($prodotto['Prezzo_Base']) ? number_format((float) $prodotto['Prezzo_Base'], 0, ',', '.') : '—';
+
+    $detailUrl = 'dettaglio_esperienza.php?id=' . rawurlencode($idProdotto);
+
+    return '<article class="product-card">
+        <img class="product-card-image" src="' . htmlspecialchars($imageUrl, ENT_QUOTES) . '" alt="' . htmlspecialchars($altText, ENT_QUOTES) . '" width="400" height="267" loading="lazy">
+        <div class="product-card-content">
+          <div class="product-header">
+            <h3 class="product-title">
+              ' . $productName . '
+            </h3>
+            <span class="product-badge ' . $badgeClass . '">' . $badgeText . '</span>
+          </div>
+
+          <p class="product-description">
+            ' . $description . '
+          </p>
+
+          <ul class="product-specs">
+            <li class="spec-item">
+              <span class="spec-icon" aria-hidden="true">👥</span>
+              ' . $postiDescrizione . '
+            </li>
+            <li class="spec-item">
+              <span class="spec-icon" aria-hidden="true">♿</span>
+              ' . $accessibileLabel . '
+            </li>
+            <li class="spec-item">
+              <span class="spec-icon" aria-hidden="true">🌐</span>
+              Lingue: ' . $lingueDescrizione . '
+            </li>
+          </ul>
+
+          <div class="product-footer">
+            <div class="product-price">
+              <span class="price-label">da</span>
+              <span class="price-value">' . $price . '€</span>
+              <span class="price-period">/tour</span>
+            </div>
+            <a href="' . $detailUrl . '" class="product-cta" aria-label="Vedi dettagli ' . $productName . '">
+              Vedi dettagli →
+            </a>
+          </div>
+        </div>
+      </article>';
+}
+
+/**
+ * Genera l'HTML di una card articolo blog.
+ * 
+ * @param array $articolo Dati dell'articolo dal database
+ * @return string HTML della card
+ */
+function buildBlogArticleCard(array $articolo): string {
+    $idArticolo = $articolo['IDArticolo'] ?? '';
+    if ($idArticolo === '') {
+        return '';
+    }
+
+    $imageUrl = resolveImageUrl($articolo['URL_Media'] ?? null);
+    $altText = $articolo['Testo_Alternativo'] ?? 'Immagine articolo non disponibile';
+    $titolo = htmlspecialchars($articolo['Titolo'] ?? 'Articolo SailUP', ENT_QUOTES);
+    $descrizione = htmlspecialchars($articolo['Descrizione_Breve'] ?? 'Nessuna descrizione disponibile.', ENT_QUOTES);
+    $detailUrl = 'blog_articolo.php?id=' . rawurlencode($idArticolo);
+
+    return '<article class="product-card">
+        <img class="product-card-image" src="' . htmlspecialchars($imageUrl, ENT_QUOTES) . '" alt="' . htmlspecialchars($altText, ENT_QUOTES) . '" width="400" height="267" loading="lazy">
+        <div class="product-card-content">
+          <div class="product-header">
+            <h3 class="product-title">
+              ' . $titolo . '
+            </h3>
+          </div>
+
+          <p class="product-description">
+            ' . $descrizione . '
+          </p>
+
+          <div class="product-footer">
+            <a href="' . $detailUrl . '" class="product-cta" aria-label="Leggi l\'articolo: ' . $titolo . '">
+              Leggi tutto →
+            </a>
+          </div>
+        </div>
+      </article>';
+}
+
+/**
+ * Genera l'HTML delle liste di consigli extra per gli articoli del blog.
+ * Gli extra sono raggruppati per titolo.
+ * 
+ * @param array|bool $extras Array di consigli extra dal database
+ * @return string HTML delle liste
+ */
+function buildArticleExtraList($extras): string {
+    if ($extras === false || empty($extras)) {
+        return '<p class="catalog-empty">Non ci sono consigli extra per questo articolo al momento.</p>';
+    }
+
+    $html = '';
+    $currentTitle = '';
+    foreach ($extras as $extra) {
+        $title = $extra['Titolo'] ?? '';
+        $element = $extra['Elemento'] ?? '';
+        if ($title !== $currentTitle) {
+            if ($currentTitle !== '') {
+                $html .= '</ul></div>';
+            }
+            $currentTitle = $title;
+            $html .= '<div class="amenity-box included">';
+            $html .= '<h3>' . htmlspecialchars($title, ENT_QUOTES, 'UTF-8') . '</h3>';
+            $html .= '<ul>';
+        }
+        $html .= '<li>' . htmlspecialchars($element, ENT_QUOTES, 'UTF-8') . '</li>';
+    }
+
+    if ($currentTitle !== '') {
+        $html .= '</ul></div>';
+    }
+
+    return $html ?: '<p class="catalog-empty">Non ci sono consigli extra per questo articolo al momento.</p>';
+}
+
+/**
+ * Genera l'HTML delle checkbox per gli extra (prodotti).
+ * Gli extra obbligatori vengono pre-selezionati e disabilitati, con un hidden input per inviarli.
+ * 
+ * @param array|bool $extras Array degli extra dal database
+ * @return string HTML delle checkbox
+ */
+function buildExtraCheckboxes($extras): string {
+    if ($extras === false || !is_array($extras) || count($extras) === 0) {
+        return '';
+    }
+
+    $html = '';
+    foreach ($extras as $index => $extraItem) {
+        $extraName = htmlspecialchars($extraItem['Nome_Extra'] ?? '', ENT_QUOTES);
+        $extraPrice = $extraItem['Prezzo_Extra'] ?? 0;
+        $extraId = $extraItem['IDExtra'] ?? $index;
+        $isOptional = isset($extraItem['Opzionale']) ? filter_var($extraItem['Opzionale'], FILTER_VALIDATE_BOOLEAN) : true;
+        $formattedPrice = number_format((float) $extraPrice, 0, ',', '.');
+        
+        $checkboxId = 'extra-' . $extraId;
+        $checkedAttr = !$isOptional ? 'checked' : '';
+        $disabledAttr = !$isOptional ? 'disabled' : '';
+        $priceText = $formattedPrice !== '' && $formattedPrice !== '0' ? '+' . htmlspecialchars($formattedPrice, ENT_QUOTES) . ' €' : '';
+        
+        $html .= '<div class="form-check checkbox-highlight">';
+        $html .= '<input type="checkbox" id="' . $checkboxId . '" name="extras[]" value="' . $extraId . '" ' . $checkedAttr . ' ' . $disabledAttr . '>';
+        // Aggiungi hidden input per extra obbligatori (disabled non viene inviato)
+        if (!$isOptional) {
+            $html .= '<input type="hidden" name="extras[]" value="' . $extraId . '">';
+        }
+        $html .= '<label for="' . $checkboxId . '">';
+        $html .= '<span>' . $extraName . '</span>';
+        if ($priceText !== '') {
+            $html .= '<span class="text-accent">' . $priceText . '</span>';
+        }
+        $html .= '</label>';
+        $html .= '</div>' . "\n";
+    }
+
+    return $html;
+}
+
+/**
+ * Genera l'HTML delle checkbox per le tipologie (filtro catalogo noleggio).
+ * 
+ * @param array $tipologieDisponibili Array delle tipologie disponibili
+ * @param array $tipologieSelezionate Array delle tipologie già selezionate
+ * @return string HTML delle checkbox
+ */
+function buildTipologieCheckboxes(array $tipologieDisponibili, array $tipologieSelezionate = []): string {
+    if (empty($tipologieDisponibili)) {
+        return '<p class="filter-empty">Nessuna tipologia disponibile.</p>';
+    }
+
+    $html = '';
+    foreach ($tipologieDisponibili as $index => $tipologia) {
+        $label = htmlspecialchars($tipologia, ENT_QUOTES);
+        $inputId = 'tipo-' . preg_replace('/[^a-z0-9]+/i', '-', strtolower($tipologia));
+        $inputId = trim($inputId, '-');
+        if ($inputId === '') {
+            $inputId = 'tipo-' . $index;
+        }
+        $checked = in_array($tipologia, $tipologieSelezionate, true) ? ' checked' : '';
+        $html .= '<label class="filter-checkbox">
+              <input type="checkbox" id="' . htmlspecialchars($inputId, ENT_QUOTES) . '" name="tipo[]" value="' . $label . '"' . $checked . '>
+              <span>' . $label . '</span>
+            </label>';
+    }
+
+    return $html;
+}
+
+/**
+ * Genera l'HTML delle options per le lingue (filtro catalogo esperienze).
+ * 
+ * @param array $lingueDisponibili Array delle lingue disponibili
+ * @param string $linguaSelezionata Codice della lingua già selezionata
+ * @return string HTML delle options
+ */
+function buildLinguaOptions(array $lingueDisponibili, string $linguaSelezionata = ''): string {
+    $html = '';
+    $indifferenteSelected = $linguaSelezionata === '' ? ' selected' : '';
+    $html .= '<option value=""' . $indifferenteSelected . '>Indifferente</option>';
+    
+    if (empty($lingueDisponibili)) {
+        $html .= '<option value="" disabled>Nessuna lingua disponibile</option>';
+        return $html;
+    }
+
+    foreach ($lingueDisponibili as $lingua) {
+        $codice = htmlspecialchars($lingua['Codice'] ?? '', ENT_QUOTES);
+        $nome = htmlspecialchars($lingua['Nome'] ?? '', ENT_QUOTES);
+        if ($codice === '') {
+            continue;
+        }
+        $selected = ($linguaSelezionata === $lingua['Codice']) ? ' selected' : '';
+        $html .= '<option value="' . $codice . '"' . $selected . '>' . $nome . '</option>';
+    }
+
+    return $html;
+}
+
+/**
+ * Formatta una data in formato italiano (es: "5 Gennaio 2026").
+ * 
+ * @param DateTime $dateTime Oggetto DateTime da formattare
+ * @return string Data formattata in italiano
+ */
+function formatItalianDate(DateTime $dateTime): string {
+    $months = [
+        1 => 'Gennaio',
+        2 => 'Febbraio',
+        3 => 'Marzo',
+        4 => 'Aprile',
+        5 => 'Maggio',
+        6 => 'Giugno',
+        7 => 'Luglio',
+        8 => 'Agosto',
+        9 => 'Settembre',
+        10 => 'Ottobre',
+        11 => 'Novembre',
+        12 => 'Dicembre'
+    ];
+
+    $month = (int) $dateTime->format('n');
+    $day = $dateTime->format('j');
+    $year = $dateTime->format('Y');
+
+    return sprintf('%s %s %s', $day, $months[$month] ?? $dateTime->format('F'), $year);
+}
+
+/**
+ * Formatta il contenuto di un articolo convertendo paragrafi separati da doppie newline in tag <p>.
+ * 
+ * @param string|null $content Contenuto grezzo dell'articolo
+ * @return string HTML del contenuto formattato
+ */
+function formatArticleContent(?string $content): string {
+    $text = trim((string) $content);
+    if ($text === '') {
+        return '<p>Il contenuto dell\'articolo non è ancora disponibile.</p>';
+    }
+
+    $paragraphs = preg_split('/(?:\r?\n){2,}/', $text);
+    $html = '';
+    foreach ($paragraphs as $paragraph) {
+        $paragraph = trim($paragraph);
+        if ($paragraph === '') {
+            continue;
+        }
+        $html .= '<p>' . nl2br(htmlspecialchars($paragraph, ENT_QUOTES, 'UTF-8')) . '</p>';
+    }
+
+    return $html ?: '<p>Il contenuto dell\'articolo non è ancora disponibile.</p>';
+}
 ?>

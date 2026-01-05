@@ -75,35 +75,7 @@ $extraHtml = buildItemsList(
 );
 
 // Genera le checkbox per gli extra nel form
-$extraCheckboxes = '';
-if (is_array($extra) && count($extra) > 0) {
-	foreach ($extra as $index => $extraItem) {
-		$extraName = htmlspecialchars($extraItem['Nome_Extra'] ?? '', ENT_QUOTES);
-		$extraPrice = $extraItem['Prezzo_Extra'] ?? 0;
-		$extraId = $extraItem['IDExtra'] ?? $index;
-		$isOptional = isset($extraItem['Opzionale']) ? filter_var($extraItem['Opzionale'], FILTER_VALIDATE_BOOLEAN) : true;
-		$formattedPrice = number_format((float) $extraPrice, 0, ',', '.');
-		
-		$checkboxId = 'extra-' . $extraId;
-		$checkedAttr = !$isOptional ? 'checked' : '';
-		$disabledAttr = !$isOptional ? 'disabled' : '';
-		$priceText = $formattedPrice !== '' ? '+' . htmlspecialchars($formattedPrice, ENT_QUOTES) . ' €' : '';
-		
-		$extraCheckboxes .= '<div class="form-check checkbox-highlight">';
-		$extraCheckboxes .= '<input type="checkbox" id="' . $checkboxId . '" name="extras[]" value="' . $extraId . '" ' . $checkedAttr . ' ' . $disabledAttr . '>';
-		// Aggiungi hidden input per extra obbligatori (disabled non viene inviato)
-		if (!$isOptional) {
-			$extraCheckboxes .= '<input type="hidden" name="extras[]" value="' . $extraId . '">';
-		}
-		$extraCheckboxes .= '<label for="' . $checkboxId . '">';
-		$extraCheckboxes .= '<span>' . $extraName . '</span>';
-		if ($priceText !== '') {
-			$extraCheckboxes .= '<span class="text-accent">' . $priceText . '</span>';
-		}
-		$extraCheckboxes .= '</label>';
-		$extraCheckboxes .= '</div>' . "\n";
-	}
-}
+$extraCheckboxes = buildExtraCheckboxes($extra);
 
 $html = buildPage('../pages/dettaglio_barca.html', $_SERVER['PHP_SELF']);
 
