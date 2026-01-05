@@ -251,25 +251,34 @@ I file di validazione dedicati (`register_validation.js`, `login_validation.js`,
 == Back-End
 
 === Architettura (PHP)
-Lo sviluppo lato server è stato realizzato con un approccio modulare che simula il pattern architetturale *Model-View-Controller* (MVC). Questa scelta ha permesso di mantenere il codice ordinato e manutenibile.
+Lo sviluppo lato server è stato realizzato con un approccio modulare che simula il pattern architetturale *Model-View-Controller* (MVC).
+Ogni pagina PHP funge da *Controller*: gestisce la logica, verifica i permessi e prepara i dati. La generazione dell'interfaccia (*View*) avviene separando la logica dall'HTML: il codice PHP carica i template statici tramite la funzione helper `buildPage()` e inietta i dati dinamici sostituendo i segnaposto predefiniti.
 
-Ogni pagina PHP funge da *Controller*: gestisce la logica, verifica i permessi dell'utente e interagisce con il database. La generazione dell'interfaccia (*View*) avviene separando la logica dall'HTML: il codice PHP carica i template HTML statici tramite la funzione helper `buildPage()` e inietta i dati dinamici sostituendo dei segnaposto predefiniti (es. `[USER_NOME]`, `[SERVER_MESSAGES]`).
+Per garantire manutenibilità e sicurezza, sono stati adottati i seguenti accorgimenti:
+- *Configurazione*: I parametri di connessione e le costanti globali sono definiti nel file `conf.php`, escluso dal versionamento per evitare l'esposizione accidentale di credenziali sensibili.
+- *Gestione percorsi*: La gestione dei percorsi e delle risorse è centralizzata nel file `pages.php`, che funge da mappa per gli URL del sito.
+
+=== Gestione Sessioni e Autenticazione
+Il mantenimento dello stato utente è gestito tramite un sistema dedicato nel file `session.php`. Sono state implementate funzioni helper per semplificare i controlli di accesso trasversali:
+- `isLogged()` e `isAdmin()`: Verificano rispettivamente se un utente è autenticato e se possiede i privilegi di amministratore.
+- `requireLogin()` e `requireAdmin()`: Queste funzioni sono poste in cima alle pagine protette. Se i requisiti non sono soddisfatti esse interrompono l'esecuzione e reindirizzano forzatamente l'utente alla pagina di login o mostrano un errore di accesso negato.
 
 === Gestione dei Dati (Database)
-L'interazione con i dati è centralizzata e astratta tramite la classe `DBConnection`, grazie ai metodi specifici per le operazioni di lettura e scrittura (es. `getIndirizzoById`, `insertPrenotazione`), separando così la logica applicativa dalla struttura fisica del database, semplificando eventuali modifiche future allo schema.
+L'interazione con il database è incapsulata nella classe `DBConnection`. Ogni metodo implementa blocchi `try-catch` per intercettare eccezioni SQL, restituendo codici di errore specifici o `false` in modo che il controller possa gestire il fallimento senza esporre dettagli tecnici all'utente.
 
-Le entità principali del sistema comprendono:
-- *Utente*: Gestisce sia i clienti che gli amministratori, differenziati da un flag di ruolo.
-- *Prodotto*: Una tabella che gestisce sia le imbarcazioni (Noleggio) che le attività turistiche (Esperienze).
-- *Prenotazione*: Collega utenti e prodotti, tracciando lo stato del servizio e del pagamento.
-- *Articolo_Blog*: Contiene i dati editoriali per la sezione informativa.
+La struttura del database si sviluppa con 12 entità:
+- *Utente e indirizzo*: La gestione delle anagrafiche viene centralizzata. L'indirizzo è separato per normalizzazione, mentre l'utente include il flag di ruolo.
+- *Prodotti*: La tabella `Prodotto` (polimorfica per Noleggio/Esperienze) è il centro di un serie di altre tabelle: `Prodotto_Extra` e `Prodotto_Incluso` per le specifiche, `Lingua` e `Prodotto_Lingua` per le competenze linguistiche degli skipper/guide.
+- *Operatività*: `Prenotazione` traccia lo storico degli ordini e i pagamenti, mentre `Indisponibilita` permette agli admin di bloccare date specifiche sul calendario.
+- *Content management*: `Articolo_Blog` e `Articolo_Blog_Extra` strutturano i contenuti editoriali, supportati dalla tabella `Media` che centralizza i percorsi dei file multimediali collegandoli dinamicamente alle varie entità.
 
-=== Sicurezza
-La protezione dell'applicazione e dei dati utente è stata una priorità trasversale nello sviluppo del backend, implementando diverse contromisure contro le vulnerabilità web più comuni:
+=== Sicurezza lato server
+Per quanto riguarda la sicurezza, oltre alla validazione degli input, sono state implementate lato backend i seguenti controlli:
 
-- *XSS*: Tutti i dati dinamici inseriti nell'HTML vengono trattati con la funzione `htmlspecialchars()` per convertire i caratteri speciali in entità HTML. Questo impedisce l'iniezione di script malevoli (*Cross-Site Scripting*) qualora un utente tentasse di inserire codice JavaScript nei campi di input.
-- *Validazione Input*: I dati in ingresso vengono filtrati e validati rigorosamente lato server. Ad esempio, durante la registrazione, si verifica l'unicità dell'email e del codice fiscale, oltre alla complessità della password, restituendo feedback precisi in caso di errore.
-- *Controllo Accessi*: L'accesso alle aree riservate è protetto, se un utente non autenticato tenta di accedere a pagine protette (es. `profilo.php`), viene reindirizzato forzatamente alla pagina di login.
+- *Prevenzione SQL injection*: Tutti i metodi della classe `DBConnection` utilizzano Prepared Statements. I parametri vengono vincolati alla query e mai concatenati direttamente nelle stringhe SQL, eliminando alla radice il rischio di iniezione.
+- *Hashing delle password*: Le password non sono mai salvate in chiaro. In fase di registrazione viene utilizzato `password_hash()` con l'algoritmo `PASSWORD_DEFAULT` (Bcrypt). Al login, la verifica avviene tramite `password_verify()`, garantendo la sicurezza delle credenziali anche in caso di compromissione del DB.
+- *CSRF*: Per prevenire attacchi *Cross-Site Request Forgery*, tutti i form che modificano lo stato (login, registrazione, pannello admin) sono protetti da un token univoco. `getCsrfToken()` genera un token crittograficamente sicuro usando `bin2hex(random_bytes(32))`, mentre `verifyCsrfToken()` valida la corrispondenza del token inviato via POST con quello in sessione prima di elaborare la richiesta.
+- *XSS*: Ogni dato dinamico stampato a video viene sanitizzato tramite `htmlspecialchars()`, convertendo i caratteri speciali in entità HTML sicure per prevenire l'esecuzione di script malevoli.
 
 
 = Accessibilità
