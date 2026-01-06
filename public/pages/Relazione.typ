@@ -275,15 +275,9 @@ Il mantenimento dello stato utente è gestito tramite un sistema dedicato nel fi
 === Gestione dei Dati (Database)
 L'interazione con il database è incapsulata nella classe `DBConnection`. Ogni metodo implementa blocchi `try-catch` per intercettare eccezioni SQL, restituendo codici di errore specifici o `false` in modo che il controller possa gestire il fallimento senza esporre dettagli tecnici all'utente.
 
-La struttura del database si sviluppa con 12 entità:
-- *Utente e indirizzo*: La gestione delle anagrafiche viene centralizzata. L'indirizzo è separato per normalizzazione, mentre l'utente include il flag di ruolo.
-- *Prodotti*: La tabella `Prodotto` (polimorfica per Noleggio/Esperienze) è il centro di un serie di altre tabelle: `Prodotto_Extra` e `Prodotto_Incluso` per le specifiche, `Lingua` e `Prodotto_Lingua` per le competenze linguistiche degli skipper/guide.
-- *Operatività*: `Prenotazione` traccia lo storico degli ordini e i pagamenti, mentre `Indisponibilita` permette agli admin di bloccare date specifiche sul calendario.
-- *Content management*: `Articolo_Blog` e `Articolo_Blog_Extra` strutturano i contenuti editoriali, supportati dalla tabella `Media` che centralizza i percorsi dei file multimediali collegandoli dinamicamente alle varie entità.
+Le entità implementate sono state schematizzate in #link(<fig-database>)[Figura 2] (per migliorarne la leggibilità non sono stati inclusi gli attributi), e sono: 
 
-Le entità implementate, ed i principali attributi, sono: 
-
-- *Utente*: Contiene le informazioni di tutti gli iscritti. Ogni record ha un `IDUtente`, credenziali e dati anagrafici. Il campo `Is_Admin` serve per distinguere i privilegi di accesso.
+- *Utente*: Contiene le informazioni di tutti gli iscritti, come credenziali e dati anagrafici. Il campo `Is_Admin` serve per definire i privilegi di accesso.
 - *Indirizzo*: Memorizza i dati geografici (Via, Città, CAP) separandoli dall'utente per una migliore normalizzazione.
 - *Prodotto*: Contiene i dati comuni dei prototti, Noleggi ed Esperienze, del catalogo (prezzo, descrizione, posti).
 - *Prodotto_Extra*: Gestisce i servizi opzionali a pagamento (es. Skipper, Champagne).
@@ -296,7 +290,13 @@ Le entità implementate, ed i principali attributi, sono:
 - *Articolo_Blog_Extra*: Struttura i contenuti complessi degli articoli (es. liste puntate, sezioni "Cosa portare").
 - *Media*: centralizza la gestione delle immagini.
 
-=== Sicurezza lato server
+  #figure(
+    image("../img/Schema_relazionale.png", width: 130%), 
+    gap: 2em,
+    caption: [Schema ER del database],
+  ) <fig-database>
+
+=== Sicurezza lato Server
 Per quanto riguarda la sicurezza, oltre alla validazione degli input, sono state implementate lato backend i seguenti controlli:
 
 - *Prevenzione SQL injection*: Tutti i metodi della classe `DBConnection` utilizzano Prepared Statements. I parametri vengono vincolati alla query e mai concatenati direttamente nelle stringhe SQL, eliminando alla radice il rischio di iniezione.
@@ -304,24 +304,7 @@ Per quanto riguarda la sicurezza, oltre alla validazione degli input, sono state
 - *CSRF*: Per prevenire attacchi *Cross-Site Request Forgery*, tutti i form che modificano lo stato (login, registrazione, pannello admin) sono protetti da un token univoco. `getCsrfToken()` genera un token crittograficamente sicuro usando `bin2hex(random_bytes(32))`, mentre `verifyCsrfToken()` valida la corrispondenza del token inviato via POST con quello in sessione prima di elaborare la richiesta.
 - *XSS*: Ogni dato dinamico stampato a video viene sanitizzato tramite `htmlspecialchars()`, convertendo i caratteri speciali in entità HTML sicure per prevenire l'esecuzione di script malevoli.
 
-
 = Accessibilità
-== Validazione HTML5
-...
-== Validazione CSS
-...
-== Contrasti
-...
-== _screen reader_
-...
-
-= Testing e Validazione
-La fase di testing è essenziale per garantire che il prodotto finale sia corretto, performante e conforme ai requisiti. Questa sezione documenta il processo di verifica rigoroso a cui è stato sottoposto il sito SailUP, coprendo la validazione del codice, l'accessibilità, i test funzionali e la compatibilità cross-browser.
-
-== Validazione del Codice
-
-
-== Accessibilità
 L'accessibilità è stata un pilastro del progetto, guidata dai principi studiati durante il corso e dalle linee guida internazionali.
 
 - *Principi WCAG e Struttura Semantica:* Il progetto aderisce ai quattro principi fondamentali delle WCAG (Web Content Accessibility Guidelines), riassunti nell'acronimo PURO: Percepibile, Utilizzabile, Comprensibile e Robusto. L'uso rigoroso di HTML semantico (`<main>`, `<nav>`, `<header>`, `<footer>`) fornisce una struttura chiara e prevedibile, che facilita l'interpretazione dei contenuti da parte delle tecnologie assistive come gli _screen reader_.
@@ -329,11 +312,16 @@ L'accessibilità è stata un pilastro del progetto, guidata dai principi studiat
 
 - *Contrasto Cromatico e Colori:* È stata prestata particolare attenzione al contrasto tra testo e sfondo, verificando che i rapporti cromatici rispettassero almeno il livello AA delle WCAG. Inoltre, l'implementazione di un selettore di tema light/dark offre agli utenti la possibilità di scegliere la modalità di visualizzazione con il contrasto che preferiscono, migliorando ulteriormente la leggibilità.
 
-- *Alternative Testuali:* Ogni immagine portatrice di informazione, quindi non puramente decorativa, è stata dotata di un attributo `alt` descrittivo di modo table da veicolare informazioni grafiche attraverso strumenti di sintesi vocale. Per rafforzare ciò, i form amministrativi per l'aggiunta di prodotti e articoli del blog includono un campo obbligatorio per il "Testo Alternativo", assicurando che questa buona norma venga applicata a tutti i contenuti futuri.
+- *Alternative Testuali:* Ogni immagine con contenuto informativo, quindi non puramente decorativa, è stata dotata di un attributo `alt` descrittivo di modo tale da veicolare informazioni grafiche attraverso strumenti di sintesi vocale. I form amministrativi che consentono l'aggiunta di prodotti e articoli del blog includono un campo per il "Testo Alternativo", assicurando che questa buona norma venga applicata a tutti i contenuti che in futuro verranno inseriti.
 
-- *WAI-ARIA:* Dove necessario, sono stati utilizzati attributi WAI-ARIA (Accessible Rich Internet Applications) come `aria-expanded`, `aria-label` e `aria-required` per arricchire semanticamente i componenti dinamici. Questo permette di rendere il loro stato e la loro funzione pienamente comprensibili per gli _screen reader_, come richiesto dalle linee guida per le Rich Internet Applications.
+- *WAI-ARIA:* Dove necessario, sono stati utilizzati attributi WAI-ARIA (Accessible Rich Internet Applications) come `aria-expanded`, `aria-label` e `aria-required` per arricchire semanticamente i componenti dinamici. Questo permette di rendere il loro stato e la loro funzione pienamente comprensibili per gli _screen reader_.
 
 - *Test con Strumenti:* L'accessibilità è stata verificata attraverso ...
+
+= Testing e Validazione
+La fase di testing è essenziale per garantire che il prodotto finale sia corretto, performante e conforme ai requisiti. Questa sezione documenta il processo di verifica rigoroso a cui è stato sottoposto il sito SailUP, coprendo la validazione del codice, l'accessibilità, i test funzionali e la compatibilità cross-browser.
+
+== Validazione del Codice
 
 == Test Funzionali
 Sono stati condotti test approfonditi sulla validazione degli input utente per garantire la robustezza e la sicurezza dei form. Di seguito le principali regole di validazione implementate lato client:
