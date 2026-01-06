@@ -7,7 +7,7 @@ require_once '../../includes/helpers.php';
 requireAdmin();
 
 $db = new DBConnection();
-$csrfToken = htmlspecialchars(getCsrfToken());
+$csrfToken = getCsrfToken();
 $feedback = '';
 $feedbackClass = '';
 $page = max(1, (int)($_GET['page'] ?? 1));
@@ -118,62 +118,18 @@ if (is_array($prenAll)) {
     $pren = array_slice(array_values($filtered), $offset, $perPage);
 }
 
-$rows = '';
-if (is_array($pren) && !empty($pren)) {
-    foreach ($pren as $p) {
-        $stato = $p['Stato_Prenotazione'] ?? '';
-        $badgeClass = 'pending';
-        if ($stato === 'Confermata') $badgeClass = 'active';
-        if ($stato === 'Cancellata') $badgeClass = 'cancelled';
-        $rows .= '<tr>'
-            . '<td data-label="ID">' . htmlspecialchars($p['IDPrenotazione']) . '</td>'
-            . '<td data-label="Prodotto">' . htmlspecialchars($p['IDProdotto']) . '</td>'
-            . '<td data-label="Cliente">' . htmlspecialchars(($p['Utente_Nome'] ?? '') . ' ' . ($p['Utente_Cognome'] ?? '')) . '</td>'
-            . '<td data-label="Data"><time datetime="' . htmlspecialchars($p['Data_Ora_Inizio'] ?? '') . '">' . htmlspecialchars($p['Data_Ora_Inizio'] ?? '') . '</time></td>'
-            . '<td data-label="Totale">€ ' . htmlspecialchars($p['Prezzo_Totale'] ?? '') . '</td>'
-            . '<td data-label="Stato"><span class="status-badge ' . $badgeClass . '">' . htmlspecialchars($stato) . '</span></td>'
-            . '<td data-label="Azioni" class="actions-cell">'
-            . '<a href="dettaglio_prenotazione.php?id=' . htmlspecialchars($p['IDPrenotazione']) . '" class="btn-text" aria-label="Vedi dettagli prenotazione ' . htmlspecialchars($p['IDPrenotazione']) . '">Dettagli</a>'
-            . '<form method="post" class="inline-form">'
-            . '<input type="hidden" name="csrf_token" value="' . $csrfToken . '">'
-            . '<input type="hidden" name="id_prenotazione" value="' . htmlspecialchars($p['IDPrenotazione']) . '">'
-            . '<input type="hidden" name="action" value="confirm">'
-            . '<button type="submit" class="btn-text" aria-label="Conferma prenotazione ' . htmlspecialchars($p['IDPrenotazione']) . '">Conferma</button>'
-            . '</form>'
-            . '<form method="post" class="inline-form" onsubmit="return confirm(\'Cancellare questa prenotazione?\');">'
-            . '<input type="hidden" name="csrf_token" value="' . $csrfToken . '">'
-            . '<input type="hidden" name="id_prenotazione" value="' . htmlspecialchars($p['IDPrenotazione']) . '">'
-            . '<input type="hidden" name="action" value="cancel">'
-            . '<button type="submit" class="btn-text danger" aria-label="Cancella prenotazione ' . htmlspecialchars($p['IDPrenotazione']) . '">Cancella</button>'
-            . '</form>'
-            . '</td>'
-            . '</tr>';
-    }
-} else {
-    $rows = '<tr><td colspan="7">Nessuna prenotazione trovata.</td></tr>';
-}
+$rows = buildAdminBookingRows($pren, $csrfToken);
 
 $html = buildPage('../pages/admin_prenotazioni.html', $_SERVER['PHP_SELF']);
 $pages = $total > 0 ? (int)ceil($total / $perPage) : 1;
-$pagination = '';
-if ($pages > 1) {
-    $pagination .= '<nav class="pagination" aria-label="Paginazione prenotazioni"><ul>';
-    for ($i = 1; $i <= $pages; $i++) {
-        $currentClass = $i === $page ? ' class="current-page"' : '';
-        $query = http_build_query([
-            'page' => $i,
-            'q' => $search,
-            'stato' => $filterStato,
-        ]);
-        $pagination .= '<li' . $currentClass . '><a href="admin_prenotazioni.php?' . htmlspecialchars($query) . '">' . $i . '</a></li>';
-    }
-    $pagination .= '</ul></nav>';
-}
-
-$feedbackBlock = '';
-if ($feedback !== '' && $feedbackClass !== '') {
-    $feedbackBlock = '<div class="' . $feedbackClass . '" role="status" aria-live="polite">' . htmlspecialchars($feedback) . '</div>';
-}
+$pagination = buildPaginationNav(
+    $page,
+    $pages,
+    'admin_prenotazioni.php',
+    ['q' => $search, 'stato' => $filterStato],
+    'Paginazione prenotazioni'
+);
+$feedbackBlock = buildFeedbackBlock($feedback, $feedbackClass);
 
 $html = str_replace(
     [

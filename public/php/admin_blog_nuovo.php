@@ -275,33 +275,8 @@ if (isset($categorySelections[$old['category']])) {
 $statusDraft = $old['status'] === 'published' ? '' : 'selected';
 $statusPub = $old['status'] === 'published' ? 'selected' : '';
 
-$extrasHtml = '';
-if (!empty($old['extras'])) {
-    foreach ($old['extras'] as $ex) {
-        $extrasHtml .= '<div class="extra-row">'
-            . '<div class="form-group">'
-            . '<label>Titolo Extra</label>'
-            . '<input type="text" name="extra_title[]" value="' . htmlspecialchars($ex['titolo'] ?? '', ENT_QUOTES) . '" placeholder="es. Cosa portare a bordo" />'
-            . '</div>'
-            . '<div class="form-group">'
-            . '<label>Contenuto</label>'
-            . '<textarea name="extra_item[]" rows="2" placeholder="Elenco o testo descrittivo">' . htmlspecialchars($ex['elemento'] ?? '') . '</textarea>'
-            . '</div>'
-            . '</div>';
-    }
-}
-if ($extrasHtml === '') {
-    $extrasHtml = '<div class="extra-row">'
-        . '<div class="form-group">'
-        . '<label>Titolo Extra</label>'
-        . '<input type="text" name="extra_title[]" placeholder="es. Cosa portare a bordo" />'
-        . '</div>'
-        . '<div class="form-group">'
-        . '<label>Contenuto</label>'
-        . '<textarea name="extra_item[]" rows="2" placeholder="Elenco o testo descrittivo"></textarea>'
-        . '</div>'
-        . '</div>';
-}
+$extrasHtml = buildBlogExtraInputs(!empty($old['extras']) && is_array($old['extras']) ? $old['extras'] : []);
+$feedbackBlock = buildFeedbackBlock($feedback, $feedbackClass);
 
 $html = str_replace(
     [
@@ -329,7 +304,7 @@ $html = str_replace(
         '[ADMIN_BLOG_EXTRAS]',
     ],
     [
-        $feedback ? '<div class="' . $feedbackClass . '" role="status" aria-live="polite">' . htmlspecialchars($feedback) . '</div>' : '',
+        $feedbackBlock,
         htmlspecialchars(getCsrfToken()),
         htmlspecialchars($_SERVER['PHP_SELF']),
         $keywords,

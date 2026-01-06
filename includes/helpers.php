@@ -743,4 +743,267 @@ function formatArticleContent(?string $content): string {
 
     return $html ?: '<p>Il contenuto dell\'articolo non è ancora disponibile.</p>';
 }
+
+//per generare messaggi di feedback in seguito ad azioni come inserimenti/modifiche
+function buildFeedbackBlock(string $message, string $class): string {
+    if ($message === '' || $class === '') {
+        return '';
+    }
+
+    return '<div class="' . $class . '" role="status" aria-live="polite">' . htmlspecialchars($message) . '</div>';
+}
+
+//genera l html della barra di paginazione
+function buildPaginationNav(int $currentPage, int $totalPages, string $baseUrl, array $queryParams, string $ariaLabel): string {
+    if ($totalPages <= 1) {
+        return '';
+    }
+
+    $html = '<nav class="pagination" aria-label="' . htmlspecialchars($ariaLabel, ENT_QUOTES) . '"><ul>';
+    for ($i = 1; $i <= $totalPages; $i++) {
+        $currentClass = $i === $currentPage ? ' class="current-page"' : '';
+        $queryParams['page'] = $i;
+        $query = http_build_query($queryParams);
+        $url = $baseUrl . '?' . $query;
+        $html .= '<li' . $currentClass . '><a href="' . htmlspecialchars($url, ENT_QUOTES) . '">' . $i . '</a></li>';
+    }
+    $html .= '</ul></nav>';
+
+    return $html;
+}
+
+//genera la tabella degli utenti visualizzata dagli admin
+function buildAdminUsersRows(array $users): string {
+    if (empty($users)) {
+        return '<tr><td colspan="5">Nessun utente trovato.</td></tr>';
+    }
+
+    $rows = '';
+    foreach ($users as $u) {
+        $ruolo = !empty($u['Is_Admin'])
+            ? '<span class="status-badge active">Admin</span>'
+            : '<span class="status-badge completed">Standard</span>';
+        $rawDate = $u['Data_Registrazione'] ?? '';
+        $dataIscr = $rawDate !== '' ? htmlspecialchars(date('d/m/Y', strtotime($rawDate))) : '—';
+        $rows .= '<tr>'
+            . '<td data-label="ID">' . htmlspecialchars($u['IDUtente']) . '</td>'
+            . '<td data-label="Nome">' . htmlspecialchars(($u['Nome'] ?? '') . ' ' . ($u['Cognome'] ?? '')) . '</td>'
+            . '<td data-label="Email">' . htmlspecialchars($u['Email'] ?? '') . '</td>'
+            . '<td data-label="Data Iscrizione"><time datetime="' . htmlspecialchars($rawDate) . '">' . $dataIscr . '</time></td>'
+            . '<td data-label="Ruolo">' . $ruolo . '</td>'
+            . '</tr>';
+    }
+
+    return $rows;
+}
+
+//builda la tabella dei blog visualizzati dall admin
+function buildAdminBlogRows(array $articoli, string $csrfToken): string {
+    if (empty($articoli)) {
+        return '<tr><td colspan="6">Nessun articolo trovato.</td></tr>';
+    }
+
+    $rows = '';
+    foreach ($articoli as $a) {
+        $statoPub = !empty($a['Pubblicato']);
+        $badge = $statoPub
+            ? '<span class="status-badge active">Pubblicato</span>'
+            : '<span class="status-badge pending">Bozza</span>';
+        $dataPub = !empty($a['Data_Pubblicazione']) ? date('d/m/y', strtotime($a['Data_Pubblicazione'])) : '—';
+        $titolo = htmlspecialchars($a['Titolo'] ?? '');
+        $idArticolo = htmlspecialchars($a['IDArticolo']);
+        $actionValue = $statoPub ? 'draft' : 'publish';
+        $actionLabel = $statoPub ? 'Imposta bozza' : 'Pubblica';
+        $ariaActionLabel = $statoPub ? 'Imposta come bozza' : 'Pubblica';
+        $rows .= '<tr>'
+            . '<td data-label="ID">' . $idArticolo . '</td>'
+            . '<td data-label="Titolo">' . $titolo . '</td>'
+            . '<td data-label="Categoria">—</td>'
+            . '<td data-label="Data">' . htmlspecialchars($dataPub) . '</td>'
+            . '<td data-label="Stato">' . $badge . '</td>'
+            . '<td data-label="Azioni" class="actions-cell">'
+            . '<form method="post" class="inline-form">'
+            . '<input type="hidden" name="csrf_token" value="' . htmlspecialchars($csrfToken) . '">'
+            . '<input type="hidden" name="id_articolo" value="' . $idArticolo . '">'
+            . '<input type="hidden" name="action" value="' . $actionValue . '">'
+            . '<button type="submit" class="btn-text" aria-label="' . $ariaActionLabel . ' ' . $titolo . '">' . $actionLabel . '</button>'
+            . '</form>'
+            . '<form method="post" class="inline-form" onsubmit="return confirm(\'Eliminare questo articolo?\');">'
+            . '<input type="hidden" name="csrf_token" value="' . htmlspecialchars($csrfToken) . '">'
+            . '<input type="hidden" name="id_articolo" value="' . $idArticolo . '">'
+            . '<input type="hidden" name="action" value="delete">'
+            . '<button type="submit" class="btn-text danger" aria-label="Elimina articolo ' . $titolo . '">Elimina</button>'
+            . '</form>'
+            . '</td>'
+            . '</tr>';
+    }
+
+    return $rows;
+}
+
+//builda la tabella prenotazioni visualizzata dall admin
+function buildAdminBookingRows(array $pren, string $csrfToken): string {
+    if (empty($pren)) {
+        return '<tr><td colspan="7">Nessuna prenotazione trovata.</td></tr>';
+    }
+
+    $rows = '';
+    foreach ($pren as $p) {
+        $stato = $p['Stato_Prenotazione'] ?? '';
+        $badgeClass = 'pending';
+        if ($stato === 'Confermata') {
+            $badgeClass = 'active';
+        }
+        if ($stato === 'Cancellata') {
+            $badgeClass = 'cancelled';
+        }
+        $idPren = htmlspecialchars($p['IDPrenotazione']);
+        $rows .= '<tr>'
+            . '<td data-label="ID">' . $idPren . '</td>'
+            . '<td data-label="Prodotto">' . htmlspecialchars($p['IDProdotto']) . '</td>'
+            . '<td data-label="Cliente">' . htmlspecialchars(($p['Utente_Nome'] ?? '') . ' ' . ($p['Utente_Cognome'] ?? '')) . '</td>'
+            . '<td data-label="Data"><time datetime="' . htmlspecialchars($p['Data_Ora_Inizio'] ?? '') . '">' . htmlspecialchars($p['Data_Ora_Inizio'] ?? '') . '</time></td>'
+            . '<td data-label="Totale">€ ' . htmlspecialchars($p['Prezzo_Totale'] ?? '') . '</td>'
+            . '<td data-label="Stato"><span class="status-badge ' . $badgeClass . '">' . htmlspecialchars($stato) . '</span></td>'
+            . '<td data-label="Azioni" class="actions-cell">'
+            . '<a href="dettaglio_prenotazione.php?id=' . $idPren . '" class="btn-text" aria-label="Vedi dettagli prenotazione ' . $idPren . '">Dettagli</a>'
+            . '<form method="post" class="inline-form">'
+            . '<input type="hidden" name="csrf_token" value="' . htmlspecialchars($csrfToken) . '">'
+            . '<input type="hidden" name="id_prenotazione" value="' . $idPren . '">'
+            . '<input type="hidden" name="action" value="confirm">'
+            . '<button type="submit" class="btn-text" aria-label="Conferma prenotazione ' . $idPren . '">Conferma</button>'
+            . '</form>'
+            . '<form method="post" class="inline-form" onsubmit="return confirm(\'Cancellare questa prenotazione?\');">'
+            . '<input type="hidden" name="csrf_token" value="' . htmlspecialchars($csrfToken) . '">'
+            . '<input type="hidden" name="id_prenotazione" value="' . $idPren . '">'
+            . '<input type="hidden" name="action" value="cancel">'
+            . '<button type="submit" class="btn-text danger" aria-label="Cancella prenotazione ' . $idPren . '">Cancella</button>'
+            . '</form>'
+            . '</td>'
+            . '</tr>';
+    }
+
+    return $rows;
+}
+
+//builda la tabella prodotti vista da un admin
+function buildAdminProductRows(array $prodotti, string $csrfToken): string {
+    if (empty($prodotti)) {
+        return '<tr><td colspan="7">Nessun prodotto trovato.</td></tr>';
+    }
+
+    $rows = '';
+    foreach ($prodotti as $p) {
+        $tipo = $p['Tipo_Prodotto'] ?? '';
+        $tipologia = $p['Tipologia_Prodotto'] ?? ($p['Tipologia_Experience'] ?? '');
+        $tipoDisplay = htmlspecialchars($tipo) . ($tipologia ? ' • ' . htmlspecialchars($tipologia) : '');
+        $prezzo = isset($p['Prezzo_Base']) ? '€ ' . number_format((float)$p['Prezzo_Base'], 2, ',', '.') : '—';
+        $stato = !empty($p['Attivo'])
+            ? '<span class="status-badge active">Attivo</span>'
+            : '<span class="status-badge cancelled">Disattivo</span>';
+        $toggleLabel = !empty($p['Attivo']) ? 'Disattiva' : 'Attiva';
+        $toggleClass = !empty($p['Attivo']) ? 'btn-text danger' : 'btn-text';
+        $toggleConfirm = !empty($p['Attivo']) ? ' onsubmit="return confirm(\'Disattivare questo prodotto?\');"' : '';
+        $idProdotto = htmlspecialchars($p['IDProdotto']);
+        $nomeProdotto = htmlspecialchars($p['Nome_Prodotto'] ?? '');
+        $rows .= '<tr>'
+            . '<td data-label="ID">' . $idProdotto . '</td>'
+            . '<td data-label="Nome Prodotto">' . $nomeProdotto . '</td>'
+            . '<td data-label="Tipo">' . $tipoDisplay . '</td>'
+            . '<td data-label="Dettagli">' . htmlspecialchars($p['Descrizione_Breve'] ?? '—') . '</td>'
+            . '<td data-label="Prezzo">' . $prezzo . '</td>'
+            . '<td data-label="Stato">' . $stato . '</td>'
+            . '<td data-label="Azioni" class="actions-cell">'
+            . '<a class="btn-text" href="admin_prodotti_nuovo.php?id=' . $idProdotto . '" aria-label="Modifica ' . $nomeProdotto . '">Modifica</a>'
+            . '<form method="post" class="inline-form"' . $toggleConfirm . '>'
+            . '<input type="hidden" name="csrf_token" value="' . htmlspecialchars($csrfToken) . '">'
+            . '<input type="hidden" name="id_prodotto" value="' . $idProdotto . '">'
+            . '<input type="hidden" name="attivo" value="' . (!empty($p['Attivo']) ? 1 : 0) . '">'
+            . '<input type="hidden" name="action" value="toggle">'
+            . '<button type="submit" class="' . $toggleClass . '" aria-label="' . htmlspecialchars($toggleLabel) . ' prodotto ' . $nomeProdotto . '">' . htmlspecialchars($toggleLabel) . '</button>'
+            . '</form>'
+            . '</td>'
+            . '</tr>';
+    }
+
+    return $rows;
+}
+
+//builda la tabella delle prenotazioni di un utente/anche admin se ha fatto prenotazioni personali
+function buildProfileBookingRows(array $prenotazioni, string $csrfToken): string {
+    if (empty($prenotazioni)) {
+        return '<tr><td colspan="6">Nessuna prenotazione trovata.</td></tr>';
+    }
+
+    $rowsHtml = '';
+    foreach ($prenotazioni as $p) {
+        $stato = $p['Stato_Prenotazione'] ?? '';
+        $statusAttr = 'active';
+        if ($stato === 'Cancellata') {
+            $statusAttr = 'cancelled';
+        }
+        if ($stato === 'Completata' || $stato === 'Conclusa') {
+            $statusAttr = 'completed';
+        }
+
+        $dataInizio = !empty($p['Data_Ora_Inizio']) ? date('d/m/Y', strtotime($p['Data_Ora_Inizio'])) : '—';
+        $dataFine = !empty($p['Data_Ora_Fine']) ? date('d/m/Y', strtotime($p['Data_Ora_Fine'])) : '—';
+        $prezzo = number_format((float)($p['Prezzo_Totale'] ?? 0), 2, ',', '.');
+        $isCancellable = in_array($statusAttr, ['active', 'pending'], true);
+        $idPren = htmlspecialchars($p['IDPrenotazione']);
+
+        $rowsHtml .= '<tr class="booking-row" data-status="' . htmlspecialchars($statusAttr) . '">'
+            . '<td>' . $idPren . '</td>'
+            . '<td>' . htmlspecialchars($p['IDProdotto']) . '</td>'
+            . '<td>' . htmlspecialchars($dataInizio . ' — ' . $dataFine) . '</td>'
+            . '<td>€ ' . htmlspecialchars($prezzo) . '</td>'
+            . '<td>' . htmlspecialchars($stato) . '</td>'
+            . '<td>'
+            . ($isCancellable
+                ? '<form method="post" class="inline-form" onsubmit="return confirm(\'Annullare questa prenotazione?\');">'
+                    . '<input type="hidden" name="csrf_token" value="' . htmlspecialchars($csrfToken) . '">'
+                    . '<input type="hidden" name="action" value="cancel_booking">'
+                    . '<input type="hidden" name="booking_id" value="' . $idPren . '">'
+                    . '<button type="submit" class="btn-text">Annulla</button>'
+                . '</form>'
+                : '—'
+            )
+            . '</td>'
+            . '</tr>';
+    }
+
+    return $rowsHtml;
+}
+
+//builda l extra dei blog
+function buildBlogExtraInputs(array $extras): string {
+    $extrasHtml = '';
+    foreach ($extras as $ex) {
+        $extrasHtml .= '<div class="extra-row">'
+            . '<div class="form-group">'
+            . '<label>Titolo Extra</label>'
+            . '<input type="text" name="extra_title[]" value="' . htmlspecialchars($ex['titolo'] ?? '', ENT_QUOTES) . '" placeholder="es. Cosa portare a bordo" />'
+            . '</div>'
+            . '<div class="form-group">'
+            . '<label>Contenuto</label>'
+            . '<textarea name="extra_item[]" rows="2" placeholder="Elenco o testo descrittivo">' . htmlspecialchars($ex['elemento'] ?? '') . '</textarea>'
+            . '</div>'
+            . '</div>';
+    }
+
+    if ($extrasHtml === '') {
+        $extrasHtml = '<div class="extra-row">'
+            . '<div class="form-group">'
+            . '<label>Titolo Extra</label>'
+            . '<input type="text" name="extra_title[]" placeholder="es. Cosa portare a bordo" />'
+            . '</div>'
+            . '<div class="form-group">'
+            . '<label>Contenuto</label>'
+            . '<textarea name="extra_item[]" rows="2" placeholder="Elenco o testo descrittivo"></textarea>'
+            . '</div>'
+            . '</div>';
+    }
+
+    return $extrasHtml;
+}
 ?>

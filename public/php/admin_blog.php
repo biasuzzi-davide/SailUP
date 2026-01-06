@@ -8,7 +8,7 @@ requireAdmin();
 
 $db = new DBConnection();
 $blogStats = $db->getBlogStats();
-$csrfToken = htmlspecialchars(getCsrfToken());
+$csrfToken = getCsrfToken();
 $feedback = '';
 $feedbackClass = '';
 $page = max(1, (int)($_GET['page'] ?? 1));
@@ -55,57 +55,10 @@ if (is_array($articoliRes)) {
     $total = (int)($articoliRes['total'] ?? 0);
 }
 
-$rows = '';
-if (!empty($articoli)) {
-    foreach ($articoli as $a) {
-        $statoPub = !empty($a['Pubblicato']);
-        $badge = $statoPub ? '<span class="status-badge active">Pubblicato</span>' : '<span class="status-badge pending">Bozza</span>';
-        $dataPub = !empty($a['Data_Pubblicazione']) ? date('d/m/y', strtotime($a['Data_Pubblicazione'])) : '—';
-        $rows .= '<tr>'
-            . '<td data-label="ID">' . htmlspecialchars($a['IDArticolo']) . '</td>'
-            . '<td data-label="Titolo">' . htmlspecialchars($a['Titolo'] ?? '') . '</td>'
-            . '<td data-label="Categoria">—</td>'
-            . '<td data-label="Data">' . htmlspecialchars($dataPub) . '</td>'
-            . '<td data-label="Stato">' . $badge . '</td>'
-            . '<td data-label="Azioni" class="actions-cell">'
-            . '<form method="post" class="inline-form">'
-            . '<input type="hidden" name="csrf_token" value="' . $csrfToken . '">'
-            . '<input type="hidden" name="id_articolo" value="' . htmlspecialchars($a['IDArticolo']) . '">'
-            . '<input type="hidden" name="action" value="' . ($statoPub ? 'draft' : 'publish') . '">'
-            . '<button type="submit" class="btn-text" aria-label="' . ($statoPub ? 'Imposta come bozza' : 'Pubblica') . ' ' . htmlspecialchars($a['Titolo'] ?? '') . '">' . ($statoPub ? 'Imposta bozza' : 'Pubblica') . '</button>'
-            . '</form>'
-            . '<form method="post" class="inline-form" onsubmit="return confirm(\'Eliminare questo articolo?\');">'
-            . '<input type="hidden" name="csrf_token" value="' . $csrfToken . '">'
-            . '<input type="hidden" name="id_articolo" value="' . htmlspecialchars($a['IDArticolo']) . '">'
-            . '<input type="hidden" name="action" value="delete">'
-            . '<button type="submit" class="btn-text danger" aria-label="Elimina articolo ' . htmlspecialchars($a['Titolo'] ?? '') . '">Elimina</button>'
-            . '</form>'
-            . '</td>'
-            . '</tr>';
-    }
-} else {
-    $rows = '<tr><td colspan="6">Nessun articolo trovato.</td></tr>';
-}
-
+$rows = buildAdminBlogRows($articoli, $csrfToken);
 $pages = $total > 0 ? (int)ceil($total / $perPage) : 1;
-$pagination = '';
-if ($pages > 1) {
-    $pagination .= '<nav class="pagination" aria-label="Paginazione articoli"><ul>';
-    for ($i = 1; $i <= $pages; $i++) {
-        $currentClass = $i === $page ? ' class="current-page"' : '';
-        $query = http_build_query([
-            'page' => $i,
-            'q' => $search,
-        ]);
-        $pagination .= '<li' . $currentClass . '><a href="admin_blog.php?' . htmlspecialchars($query) . '">' . $i . '</a></li>';
-    }
-    $pagination .= '</ul></nav>';
-}
-
-$feedbackBlock = '';
-if ($feedback !== '' && $feedbackClass !== '') {
-    $feedbackBlock = '<div class="' . $feedbackClass . '" role="status" aria-live="polite">' . htmlspecialchars($feedback) . '</div>';
-}
+$pagination = buildPaginationNav($page, $pages, 'admin_blog.php', ['q' => $search], 'Paginazione articoli');
+$feedbackBlock = buildFeedbackBlock($feedback, $feedbackClass);
 
 $html = buildPage('../pages/admin_blog.html', $_SERVER['PHP_SELF']);
 $html = str_replace(
