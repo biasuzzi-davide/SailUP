@@ -1533,6 +1533,7 @@ a.product-cta:focus-visible {
   border-radius: 50%;
   overflow: hidden;
   border: 3px solid var(--col-accent);
+  margin: 0 auto;
 }
 
 .profile-avatar img {
@@ -1541,6 +1542,22 @@ a.product-cta:focus-visible {
   object-fit: cover;
 }
 
+.profile-avatar-block {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  row-gap: 0.6em;
+  justify-self: center;
+  text-align: center;
+}
+
+.profile-avatar-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4em;
+  align-items: center;
+  text-align: center;
+}
 .profile-info h1 {
   font-size: var(--fs-lg);
   margin-bottom: 0.3em;

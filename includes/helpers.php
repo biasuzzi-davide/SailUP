@@ -140,6 +140,37 @@ function buildPage($templatePath, $phpSelf) {
 }
 
 /**
+ * Ritorna l'URL dell'avatar utente se presente su disco, altrimenti un placeholder di default.
+ */
+function getProfileImageUrl(array $user = []): string {
+    $default = 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=200&q=80';
+    $userId = (int)($user['IDUtente'] ?? 0);
+    if ($userId <= 0) {
+        return $default;
+    }
+
+    $uploadDir = __DIR__ . '/../public/uploads/avatars';
+
+    // Se in sessione c'è il nome file, prova quello
+    if (!empty($user['AvatarFile'])) {
+        $candidate = $uploadDir . '/' . basename($user['AvatarFile']);
+        if (file_exists($candidate)) {
+            return '../uploads/avatars/' . basename($candidate) . '?v=' . filemtime($candidate);
+        }
+    }
+
+    // Cerca file salvati con pattern user_<id>.<ext>
+    foreach (['webp', 'jpg', 'jpeg', 'png'] as $ext) {
+        $path = $uploadDir . '/user_' . $userId . '.' . $ext;
+        if (file_exists($path)) {
+            return '../uploads/avatars/' . basename($path) . '?v=' . filemtime($path);
+        }
+    }
+
+    return $default;
+}
+
+/**
  * Restituisce un messaggio HTML composto da paragrafi puliti.
  */
 function buildParagraphsFromText(?string $text, string $emptyMessage = 'Contenuto non disponibile.'): string {

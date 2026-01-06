@@ -7,6 +7,7 @@ require_once '../../includes/helpers.php';
 requireLogin();
 
 $user = $_SESSION['user'] ?? [];
+$profileImageUrl = getProfileImageUrl($user);
 $db = new DBConnection();
 
 $addrPlaceholders = [
@@ -40,6 +41,7 @@ $placeholders = [
     '[USER_EMAIL]' => htmlspecialchars($user['Email'] ?? ''),
     '[USER_CF]' => htmlspecialchars($user['CF'] ?? ''),
     '[USER_PATENTE]' => htmlspecialchars($user['Numero_Patente_Nautica'] ?? '—'),
+    '[PROFILE_IMAGE_URL]' => htmlspecialchars($profileImageUrl),
 ];
 
 $statTotPren = '0';

@@ -255,3 +255,29 @@ document.addEventListener('DOMContentLoaded', () => {
     hydrateBookingInput('#start-date', catalogDateKeys.rentalStart);
     hydrateBookingInput('#end-date', catalogDateKeys.rentalEnd);
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const changePhotoBtn = document.getElementById('change-photo-btn');
+    const fileInput = document.getElementById('profile-image-input');
+    const avatarImg = document.getElementById('profile-picture');
+    let previewUrl = null;
+
+    if (!changePhotoBtn || !fileInput || !avatarImg) return;
+
+    changePhotoBtn.addEventListener('click', () => {
+        fileInput.click();
+    });
+
+    fileInput.addEventListener('change', () => {
+        const [file] = fileInput.files;
+        if (!file) return;
+
+        if (previewUrl) {
+            URL.revokeObjectURL(previewUrl);
+        }
+
+        previewUrl = URL.createObjectURL(file);
+        avatarImg.src = previewUrl;
+        avatarImg.alt = 'Nuova immagine profilo selezionata';
+    });
+});
