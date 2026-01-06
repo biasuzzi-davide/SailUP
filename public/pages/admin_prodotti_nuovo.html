@@ -50,10 +50,11 @@
 
           [ADMIN_PRODUCT_FEEDBACK]
 
-          <form id="product-form" action="[ADMIN_PRODUCT_ACTION]" method="POST" novalidate>
+          <form id="product-form" action="[ADMIN_PRODUCT_ACTION]" method="POST" novalidate enctype="multipart/form-data">
             <input type="hidden" name="csrf_token" value="[CSRF_TOKEN]">
             <input type="hidden" name="mode" value="[PROD_MODE]">
             <input type="hidden" name="product-id" value="[PRODUCT_ID_VALUE]">
+            <input type="hidden" name="existing-image-url" id="existing-image-url" value="[IMG_URL]">
 
             <fieldset>
               <legend>Informazioni Base</legend>
@@ -197,10 +198,12 @@
 
               <div class="form-group">
                 <label for="product-image-main">Immagine Principale <abbr title="Campo obbligatorio">*</abbr></label>
-                <input type="url" id="product-image-main" name="product-image-main"
-                  placeholder="https://example.com/image.jpg" value="[IMG_URL]" required aria-required="true" aria-describedby="product-image-hint product-image-main-error">
-                <span id="product-image-hint" class="field-hint">Inserisci l'<abbr title="Uniform Resource Locator" lang="en">URL</abbr>
-                  dell'immagine principale del prodotto</span>
+                <input type="file" id="product-image-main" name="product_image_main" accept="image/jpeg,image/png,image/webp"
+                  aria-describedby="product-image-hint product-image-main-error">
+                <span id="product-image-hint" class="field-hint">
+                  Carica un'immagine JPG/PNG/WebP (max 2MB). Verrà convertita automaticamente in WebP.
+                  <br/>Immagine attuale (se presente): [IMG_URL]
+                </span>
                 <span id="product-image-main-error" class="field-error" role="alert"></span>
               </div>
 

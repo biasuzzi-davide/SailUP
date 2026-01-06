@@ -6,6 +6,7 @@ require_once '../../includes/helpers.php';
 
 requireLogin();
 
+//per cambiare immagine 
 function handleProfileImageUpload(int $userId): array {
     $result = ['url' => null, 'error' => null, 'file' => null];
 
