@@ -6,6 +6,101 @@ require_once '../../includes/db_connection.php';
 
 requireAdmin();
 
+$uploadDirBlog = __DIR__ . '/../uploads/blog';
+
+$functionImageError = 'Impossibile salvare l\'immagine, riprova.';
+/**
+ * Gestisce l'upload dell'immagine di copertina del blog convertendola in WebP.
+ */
+function handleBlogImageUpload(string $uploadDir): array {
+    $result = ['url' => null, 'error' => null, 'file' => null, 'path' => null];
+
+    if (!isset($_FILES['post_image']) || $_FILES['post_image']['error'] === UPLOAD_ERR_NO_FILE) {
+        return $result;
+    }
+
+    $file = $_FILES['post_image'];
+    if ($file['error'] !== UPLOAD_ERR_OK) {
+        $result['error'] = 'Errore durante il caricamento dell\'immagine.';
+        return $result;
+    }
+
+    if ($file['size'] > 2 * 1024 * 1024) {
+        $result['error'] = 'Immagine troppo grande (max 2MB).';
+        return $result;
+    }
+
+    $finfo = finfo_open(FILEINFO_MIME_TYPE);
+    $mime = finfo_file($finfo, $file['tmp_name']);
+    finfo_close($finfo);
+    $allowed = [
+        'image/jpeg' => 'jpg',
+        'image/png' => 'png',
+        'image/webp' => 'webp',
+    ];
+
+    if (!isset($allowed[$mime])) {
+        $result['error'] = 'Formato immagine non supportato. Usa JPG, PNG o WebP.';
+        return $result;
+    }
+
+    if (!function_exists('imagewebp')) {
+        $result['error'] = 'Conversione WebP non disponibile sul server.';
+        return $result;
+    }
+
+    if (!is_dir($uploadDir)) {
+        mkdir($uploadDir, 0775, true);
+    }
+    if (!is_writable($uploadDir)) {
+        @chmod($uploadDir, 0775);
+        if (!is_writable($uploadDir)) {
+            $result['error'] = 'Cartella upload non scrivibile.';
+            return $result;
+        }
+    }
+
+    $srcImage = null;
+    if ($mime === 'image/jpeg') {
+        $srcImage = imagecreatefromjpeg($file['tmp_name']);
+    } elseif ($mime === 'image/png') {
+        $srcImage = imagecreatefrompng($file['tmp_name']);
+        if ($srcImage) {
+            imagepalettetotruecolor($srcImage);
+            imagealphablending($srcImage, true);
+            imagesavealpha($srcImage, true);
+        }
+    } elseif ($mime === 'image/webp') {
+        $srcImage = imagecreatefromwebp($file['tmp_name']);
+    }
+
+    if (!$srcImage) {
+        $result['error'] = 'Impossibile leggere l\'immagine.';
+        return $result;
+    }
+
+    try {
+        $token = bin2hex(random_bytes(4));
+    } catch (Throwable) {
+        $token = (string) time();
+    }
+    $filename = 'article_' . $token . '.webp';
+    $destPath = $uploadDir . '/' . $filename;
+
+    if (!imagewebp($srcImage, $destPath, 85)) {
+        imagedestroy($srcImage);
+        $result['error'] = 'Impossibile salvare l\'immagine, riprova.';
+        return $result;
+    }
+
+    imagedestroy($srcImage);
+
+    $result['file'] = $filename;
+    $result['path'] = $destPath;
+    $result['url'] = '../uploads/blog/' . $filename . '?v=' . filemtime($destPath);
+    return $result;
+}
+
 $db = new DBConnection();
 $feedback = '';
 $feedbackClass = 'hidden';
@@ -46,7 +141,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $contenuto = trim($_POST['post-content'] ?? '');
         $dataPub = $_POST['post-date'] ?? '';
         $status = $_POST['post-status'] ?? 'draft';
-        $urlImg = trim($_POST['post-image'] ?? '');
+        $urlImg = trim($_POST['existing-image-url'] ?? '');
         $altImg = trim($_POST['Testo_Alternativo'] ?? '');
         $categoria = trim($_POST['post-category'] ?? '');
         $tags = trim($_POST['post-tags'] ?? '');
@@ -78,7 +173,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($contenuto === '') $errors[] = 'Inserisci il contenuto';
         if ($dataPub === '') $errors[] = 'Inserisci la data di pubblicazione';
         if ($categoria === '' || !in_array($categoria, $categorieAmmesse, true)) $errors[] = 'Seleziona una categoria';
-        if ($urlImg === '') $errors[] = 'URL immagine obbligatorio';
+        $hasNewImage = isset($_FILES['post_image']) && $_FILES['post_image']['error'] !== UPLOAD_ERR_NO_FILE;
+        if (!$hasNewImage && $urlImg === '') $errors[] = 'Immagine obbligatoria';
         if ($altImg === '') $errors[] = 'Testo alternativo obbligatorio';
 
         $extras = [];
@@ -94,6 +190,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         $old['extras'] = $extras;
 
+        $uploadRes = ['url' => null, 'error' => null, 'file' => null, 'path' => null];
+        if (empty($errors) && $hasNewImage) {
+            $uploadRes = handleBlogImageUpload($uploadDirBlog);
+            if (!empty($uploadRes['error'])) {
+                $errors[] = $uploadRes['error'];
+            }
+        }
+
         if (empty($errors)) {
             $pubblicato = $status === 'published' || ($_POST['action'] ?? '') === 'publish';
             $tempo = stimaTempoLettura($contenuto);
@@ -108,27 +212,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             );
 
             if ($newId) {
-                $db->upsertMediaArticolo((int)$newId, $urlImg, $altImg);
-                if (!empty($extras)) {
-                    $db->setArticoloBlogExtra((int)$newId, $extras);
+                $finalUrl = !empty($uploadRes['url']) ? $uploadRes['url'] : $urlImg;
+                $okMedia = $db->upsertMediaArticolo((int)$newId, $finalUrl, $altImg);
+                if ($okMedia) {
+                    if (!empty($extras)) {
+                        $db->setArticoloBlogExtra((int)$newId, $extras);
+                    }
+                    $feedbackClass = 'alert alert-success';
+                    $feedback = 'Articolo salvato correttamente.';
+                    $old = [
+                        'title' => '',
+                        'excerpt' => '',
+                        'content' => '',
+                        'date' => '',
+                        'category' => '',
+                        'tags' => '',
+                        'image' => '',
+                        'alt' => '',
+                        'meta_title' => '',
+                        'meta_desc' => '',
+                        'status' => 'draft',
+                        'extras' => [],
+                    ];
+                } else {
+                    if (!empty($uploadRes['path']) && file_exists($uploadRes['path'])) {
+                        @unlink($uploadRes['path']);
+                    }
+                    $feedbackClass = 'alert alert-error';
+                    $feedback = 'Errore durante il salvataggio dell\'immagine.';
                 }
-                $feedbackClass = 'alert alert-success';
-                $feedback = 'Articolo salvato correttamente.';
-                $old = [
-                    'title' => '',
-                    'excerpt' => '',
-                    'content' => '',
-                    'date' => '',
-                    'category' => '',
-                    'tags' => '',
-                    'image' => '',
-                    'alt' => '',
-                    'meta_title' => '',
-                    'meta_desc' => '',
-                    'status' => 'draft',
-                    'extras' => [],
-                ];
             } else {
+                if (!empty($uploadRes['path']) && file_exists($uploadRes['path'])) {
+                    @unlink($uploadRes['path']);
+                }
                 $feedbackClass = 'alert alert-error';
                 $feedback = 'Errore durante il salvataggio.';
             }

@@ -41,8 +41,9 @@
 
         [ADMIN_BLOG_NEW_FEEDBACK]
 
-        <form id="blog-form" action="[ADMIN_BLOG_ACTION]" method="post" novalidate>
+        <form id="blog-form" action="[ADMIN_BLOG_ACTION]" method="post" novalidate enctype="multipart/form-data">
           <input type="hidden" name="csrf_token" value="[CSRF_TOKEN]">
+          <input type="hidden" name="existing-image-url" id="existing-image-url" value="[OLD_IMAGE]">
 
           <fieldset>
             <legend>Informazioni Base</legend>
@@ -109,13 +110,16 @@
           <fieldset>
             <legend>Immagine</legend>
 
-            <div class="form-group">
-              <label for="post-image">Immagine di Copertina <abbr title="Campo obbligatorio">*</abbr></label>
-              <input type="text" id="post-image" name="post-image" placeholder="https://example.com/image.jpg oppure /img/copertina.jpg"
-                value="[OLD_IMAGE]" required aria-required="true" aria-describedby="image-hint post-image-error" />
-              <span id="image-hint" class="field-hint">Inserisci l'<abbr title="Uniform Resource Locator" lang="en">URL</abbr> dell'immagine principale dell'articolo</span>
-              <span id="post-image-error" class="field-error" role="alert"></span>
-            </div>
+              <div class="form-group">
+                <label for="post-image">Immagine di Copertina <abbr title="Campo obbligatorio">*</abbr></label>
+                <input type="file" id="post-image" name="post_image" accept="image/jpeg,image/png,image/webp"
+                  aria-describedby="image-hint post-image-error">
+                <span id="image-hint" class="field-hint">
+                  Carica un'immagine JPG/PNG/WebP (max 2MB). Verrà convertita automaticamente in WebP.
+                  <br/>Immagine attuale (se presente): [OLD_IMAGE]
+                </span>
+                <span id="post-image-error" class="field-error" role="alert"></span>
+              </div>
 
             <div class="form-group">
               <label for="Testo_Alternativo">Testo Alternativo Immagine <abbr title="Campo obbligatorio">*</abbr></label>

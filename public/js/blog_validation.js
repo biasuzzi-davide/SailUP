@@ -9,6 +9,7 @@
     const excerptInput = document.getElementById('post-excerpt');
     const contentInput = document.getElementById('post-content');
     const imageInput = document.getElementById('post-image');
+    const existingImageInput = document.getElementById('existing-image-url');
     const altInput = document.getElementById('Testo_Alternativo');
 
     const errorMessageDiv = document.getElementById('error-message');
@@ -17,15 +18,6 @@
     if (!form || !titleInput || !contentInput || !errorMessageDiv || !altInput) {
         console.warn('Blog validation: missing form elements, aborting initialization.');
         return;
-    }
-
-    function validateUrlRegex(url) {
-        try {
-            new URL(url);
-            return true;
-        } catch (_) {
-            return false;
-        }
     }
 
     function showFieldError(input, message) {
@@ -102,9 +94,14 @@
     }
 
     function validateImage() {
-        const val = imageInput.value.trim();
-        if (val === '') { showFieldError(imageInput, 'L\'URL copertina è obbligatorio'); return false; }
-        if (!validateUrlRegex(val)) { showFieldError(imageInput, 'Inserisci un URL valido'); return false; }
+        const hasFile = imageInput && imageInput.files && imageInput.files.length > 0;
+        const existingVal = existingImageInput ? existingImageInput.value.trim() : '';
+
+        if (!hasFile && existingVal === '') {
+            showFieldError(imageInput, 'Carica un\'immagine (JPG/PNG/WebP, max 2MB)');
+            return false;
+        }
+
         clearFieldError(imageInput); return true;
     }
 
