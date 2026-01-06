@@ -2017,6 +2017,62 @@ class DBConnection {
     }
 
     /**
+     * Sostituisce gli extra associati a un articolo di blog.
+     *
+     * @param int   $idArticolo ID dell'articolo
+     * @param array $extras     Array di array con chiavi 'titolo' ed 'elemento'
+     */
+    public function setArticoloBlogExtra(int $idArticolo, array $extras): bool {
+        $this->openConnection();
+        $this->connection->begin_transaction();
+
+        try {
+            $del = $this->connection->prepare("DELETE FROM Articolo_Blog_Extra WHERE IDArticolo = ?");
+            if (!$del) {
+                $this->connection->rollback();
+                $this->closeConnection();
+                return false;
+            }
+            $del->bind_param('i', $idArticolo);
+            $del->execute();
+            $del->close();
+
+            if (!empty($extras)) {
+                $stmt = $this->connection->prepare("
+                    INSERT INTO Articolo_Blog_Extra (IDArticolo, Titolo, Elemento, Ordine)
+                    VALUES (?, ?, ?, ?)
+                ");
+                if (!$stmt) {
+                    $this->connection->rollback();
+                    $this->closeConnection();
+                    return false;
+                }
+
+                $order = 0;
+                foreach ($extras as $ex) {
+                    $titolo = trim((string)($ex['titolo'] ?? ''));
+                    $elemento = trim((string)($ex['elemento'] ?? ''));
+                    if ($titolo === '' && $elemento === '') {
+                        continue;
+                    }
+                    $order++;
+                    $stmt->bind_param('issi', $idArticolo, $titolo, $elemento, $order);
+                    $stmt->execute();
+                }
+                $stmt->close();
+            }
+
+            $this->connection->commit();
+            $this->closeConnection();
+            return true;
+        } catch (Throwable $t) {
+            $this->connection->rollback();
+            $this->closeConnection();
+            return false;
+        }
+    }
+
+    /**
      * recupera articoli area admin
      */
     public function getArticoliAdmin(?string $term = null, int $limit = 20, int $offset = 0): array|bool {
