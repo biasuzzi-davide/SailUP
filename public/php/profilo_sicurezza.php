@@ -6,6 +6,94 @@ require_once '../../includes/helpers.php';
 
 requireLogin();
 
+function handleProfileImageUpload(int $userId): array {
+    $result = ['url' => null, 'error' => null, 'file' => null];
+
+    if (!isset($_FILES['profile_image']) || $_FILES['profile_image']['error'] === UPLOAD_ERR_NO_FILE) {
+        return $result;
+    }
+
+    $file = $_FILES['profile_image'];
+    if ($file['error'] !== UPLOAD_ERR_OK) {
+        $result['error'] = 'Errore durante il caricamento dell\'immagine.';
+        return $result;
+    }
+
+    if ($file['size'] > 2 * 1024 * 1024) {
+        $result['error'] = 'Immagine troppo grande (max 2MB).';
+        return $result;
+    }
+
+    $finfo = finfo_open(FILEINFO_MIME_TYPE);
+    $mime = finfo_file($finfo, $file['tmp_name']);
+    finfo_close($finfo);
+    $allowed = [
+        'image/jpeg' => 'jpg',
+        'image/png' => 'png',
+        'image/webp' => 'webp',
+    ];
+
+    if (!isset($allowed[$mime])) {
+        $result['error'] = 'Formato immagine non supportato. Usa JPG, PNG o WebP.';
+        return $result;
+    }
+
+    if (!function_exists('imagewebp')) {
+        $result['error'] = 'Conversione WebP non disponibile sul server.';
+        return $result;
+    }
+
+    $uploadDir = __DIR__ . '/../uploads/avatars';
+    if (!is_dir($uploadDir)) {
+        mkdir($uploadDir, 0775, true);
+    }
+    if (!is_writable($uploadDir)) {
+        @chmod($uploadDir, 0775);
+        if (!is_writable($uploadDir)) {
+            $result['error'] = 'Cartella upload non scrivibile.';
+            return $result;
+        }
+    }
+
+    foreach (glob($uploadDir . '/user_' . $userId . '.*') as $existing) {
+        @unlink($existing);
+    }
+
+    $srcImage = null;
+    if ($mime === 'image/jpeg') {
+        $srcImage = imagecreatefromjpeg($file['tmp_name']);
+    } elseif ($mime === 'image/png') {
+        $srcImage = imagecreatefrompng($file['tmp_name']);
+        if ($srcImage) {
+            imagepalettetotruecolor($srcImage);
+            imagealphablending($srcImage, true);
+            imagesavealpha($srcImage, true);
+        }
+    } elseif ($mime === 'image/webp') {
+        $srcImage = imagecreatefromwebp($file['tmp_name']);
+    }
+
+    if (!$srcImage) {
+        $result['error'] = 'Impossibile leggere l\'immagine.';
+        return $result;
+    }
+
+    $filename = 'user_' . $userId . '.webp';
+    $destPath = $uploadDir . '/' . $filename;
+
+    if (!imagewebp($srcImage, $destPath, 85)) {
+        imagedestroy($srcImage);
+        $result['error'] = 'Impossibile salvare l\'immagine, riprova.';
+        return $result;
+    }
+
+    imagedestroy($srcImage);
+
+    $result['file'] = $filename;
+    $result['url'] = '../uploads/avatars/' . $filename . '?v=' . filemtime($destPath);
+    return $result;
+}
+
 $user = $_SESSION['user'] ?? [];
 $db = new DBConnection();
 $addrPlaceholders = [
@@ -35,6 +123,7 @@ $profileState = 'hidden';
 $profileMsg = '';
 $pwState = 'hidden';
 $pwMsg = '';
+$profileImageUrl = getProfileImageUrl($user);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $formType = $_POST['form_type'] ?? '';
@@ -129,6 +218,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $user['Email'] = $email;
                     $_SESSION['user'] = $user;
 
+                    $uploadRes = handleProfileImageUpload((int)$user['IDUtente']);
+                    $uploadError = !empty($uploadRes['error']);
+                    if ($uploadError) {
+                        $profileState = 'error';
+                        $profileMsg = htmlspecialchars($uploadRes['error']);
+                    } elseif (!empty($uploadRes['url'])) {
+                        $profileImageUrl = $uploadRes['url'];
+                        $_SESSION['user']['AvatarFile'] = $uploadRes['file'];
+                    }
+
                     $addrPlaceholders = [
                         '[ADDR_VIA]' => htmlspecialchars($via),
                         '[ADDR_CIVICO]' => htmlspecialchars($civico),
@@ -138,8 +237,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         '[ADDR_PAESE]' => htmlspecialchars($paese === '' ? 'IT' : $paese),
                     ];
 
-                    $profileState = 'success';
-                    $profileMsg = 'Profilo aggiornato correttamente.';
+                    if (empty($uploadError)) {
+                        $profileState = 'success';
+                        $profileMsg = 'Profilo aggiornato correttamente.';
+                    }
                 } elseif ($res === -1) {
                     $errors[] = 'Email già utilizzata';
                 } elseif ($res === -2) {
@@ -167,6 +268,7 @@ $placeholders = [
     '[PROFILE_SERVER_MESSAGES]' => htmlspecialchars($profileMsg),
     '[PW_SERVER_STATE]' => $pwState,
     '[PW_SERVER_MESSAGES]' => htmlspecialchars($pwMsg),
+    '[PROFILE_IMAGE_URL]' => htmlspecialchars($profileImageUrl),
 ] + $addrPlaceholders;
 
 // Keywords per SEO

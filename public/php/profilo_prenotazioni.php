@@ -8,6 +8,7 @@ requireLogin();
 
 $db = new DBConnection();
 $userId = (int) ($_SESSION['user']['IDUtente'] ?? 0);
+$profileImageUrl = getProfileImageUrl($_SESSION['user'] ?? []);
 $feedbackState = 'hidden';
 $feedbackMsg = '';
 $csrfToken = htmlspecialchars(getCsrfToken());
@@ -92,6 +93,7 @@ $placeholders = [
     '[USER_NOME]' => htmlspecialchars($_SESSION['user']['Nome'] ?? ''),
     '[USER_COGNOME]' => htmlspecialchars($_SESSION['user']['Cognome'] ?? ''),
     '[USER_EMAIL]' => htmlspecialchars($_SESSION['user']['Email'] ?? ''),
+    '[PROFILE_IMAGE_URL]' => htmlspecialchars($profileImageUrl),
     '[BOOKINGS_SERVER_STATE]' => $feedbackState,
     '[BOOKINGS_SERVER_MESSAGES]' => htmlspecialchars($feedbackMsg),
     '[CSRF_TOKEN]' => $csrfToken,

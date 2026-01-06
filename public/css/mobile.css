@@ -261,6 +261,19 @@ footer .logo p {
     margin: 0 auto;
 }
 
+<<<<<<< ours
+.profile-avatar-block {
+    align-items: center;
+}
+
+.profile-avatar-actions {
+    width: 100%;
+    align-items: center;
+    text-align: center;
+}
+
+=======
+>>>>>>> theirs
 .profile-actions {
     justify-content: center;
 }

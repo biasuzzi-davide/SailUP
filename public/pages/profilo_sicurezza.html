@@ -39,9 +39,18 @@
   <main id="main-content">
     <div class="profile-container section-container">
      <div class="profile-header">
-        <div class="profile-avatar">
-          <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=200&q=80"
-            alt="Avatar di [USER_NOME] [USER_COGNOME]" />
+        <div class="profile-avatar-block">
+          <div class="profile-avatar">
+            <img id="profile-picture" src="[PROFILE_IMAGE_URL]"
+              alt="Avatar di [USER_NOME] [USER_COGNOME]" />
+          </div>
+          <div class="profile-avatar-actions">
+            <input type="file" id="profile-image-input" name="profile_image" accept="image/*" class="sr-only"
+              aria-label="Scegli una nuova immagine profilo" aria-describedby="profile-image-hint" form="edit-profile-form">
+            <button type="button" class="btn-layout-light" id="change-photo-btn"
+              aria-describedby="profile-image-hint">Cambia immagine</button>
+            <p id="profile-image-hint" class="field-hint">Seleziona un'immagine dal tuo dispositivo.</p>
+          </div>
         </div>
         <div class="profile-info">
           <h1>[USER_NOME] [USER_COGNOME]</h1>
@@ -86,7 +95,7 @@
                 <p>[PROFILE_SERVER_MESSAGES]</p>
               </div>
 
-              <form id="edit-profile-form" action="" method="post" novalidate>
+              <form id="edit-profile-form" action="" method="post" novalidate enctype="multipart/form-data">
                 <input type="hidden" name="csrf_token" value="[CSRF_TOKEN]">
                 <input type="hidden" name="form_type" value="profile">
                 <div class="form-group">
