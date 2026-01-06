@@ -291,7 +291,7 @@ Le entità implementate sono state schematizzate in #link(<fig-database>)[Figura
 - *Media*: centralizza la gestione delle immagini.
 
   #figure(
-    image("../img/Schema_relazionale.png", width: 130%), 
+    image("../img/schema_database.png", width: 150%), 
     gap: 2em,
     caption: [Schema ER del database],
   ) <fig-database>
