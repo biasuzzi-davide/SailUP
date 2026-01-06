@@ -7,6 +7,99 @@ require_once '../../includes/utils/validation.php';
 
 requireAdmin();
 
+$uploadDirProducts = __DIR__ . '/../uploads/prodotti';
+
+/**
+ * per l'upload dell'immagine prodotto con conversione in webp
+ */
+function handleProductImageUpload(string $productId, string $uploadDir): array {
+    $result = ['url' => null, 'error' => null, 'file' => null];
+
+    if (!isset($_FILES['product_image_main']) || $_FILES['product_image_main']['error'] === UPLOAD_ERR_NO_FILE) {
+        return $result;
+    }
+
+    $file = $_FILES['product_image_main'];
+    if ($file['error'] !== UPLOAD_ERR_OK) {
+        $result['error'] = 'Errore durante il caricamento dell\'immagine.';
+        return $result;
+    }
+
+    if ($file['size'] > 2 * 1024 * 1024) {
+        $result['error'] = 'Immagine troppo grande (max 2MB).';
+        return $result;
+    }
+
+    $finfo = finfo_open(FILEINFO_MIME_TYPE);
+    $mime = finfo_file($finfo, $file['tmp_name']);
+    finfo_close($finfo);
+    $allowed = [
+        'image/jpeg' => 'jpg',
+        'image/png' => 'png',
+        'image/webp' => 'webp',
+    ];
+
+    if (!isset($allowed[$mime])) {
+        $result['error'] = 'Formato immagine non supportato. Usa JPG, PNG o WebP.';
+        return $result;
+    }
+
+    if (!function_exists('imagewebp')) {
+        $result['error'] = 'Conversione WebP non disponibile sul server.';
+        return $result;
+    }
+
+    if (!is_dir($uploadDir)) {
+        mkdir($uploadDir, 0775, true);
+    }
+    if (!is_writable($uploadDir)) {
+        @chmod($uploadDir, 0775);
+        if (!is_writable($uploadDir)) {
+            $result['error'] = 'Cartella upload non scrivibile.';
+            return $result;
+        }
+    }
+
+    $safeId = preg_replace('/[^A-Za-z0-9_-]/', '-', $productId);
+    foreach (glob($uploadDir . '/prod_' . $safeId . '.*') as $existing) {
+        @unlink($existing);
+    }
+
+    $srcImage = null;
+    if ($mime === 'image/jpeg') {
+        $srcImage = imagecreatefromjpeg($file['tmp_name']);
+    } elseif ($mime === 'image/png') {
+        $srcImage = imagecreatefrompng($file['tmp_name']);
+        if ($srcImage) {
+            imagepalettetotruecolor($srcImage);
+            imagealphablending($srcImage, true);
+            imagesavealpha($srcImage, true);
+        }
+    } elseif ($mime === 'image/webp') {
+        $srcImage = imagecreatefromwebp($file['tmp_name']);
+    }
+
+    if (!$srcImage) {
+        $result['error'] = 'Impossibile leggere l\'immagine.';
+        return $result;
+    }
+
+    $filename = 'prod_' . $safeId . '.webp';
+    $destPath = $uploadDir . '/' . $filename;
+
+    if (!imagewebp($srcImage, $destPath, 85)) {
+        imagedestroy($srcImage);
+        $result['error'] = 'Impossibile salvare l\'immagine, riprova.';
+        return $result;
+    }
+
+    imagedestroy($srcImage);
+
+    $result['file'] = $filename;
+    $result['url'] = '../uploads/prodotti/' . $filename . '?v=' . filemtime($destPath);
+    return $result;
+}
+
 $db = new DBConnection();
 $feedback = '';
 $feedbackClass = 'hidden';
@@ -93,11 +186,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $richiedePatente = !empty($_POST['requires-license']) ? 1 : 0;
         $accessibile = !empty($_POST['is-accessible']) ? 1 : 0;
         $status = $_POST['product-status'] ?? 'available';
-        $urlImg = trim($_POST['product-image-main'] ?? '');
+        $urlImg = trim($_POST['existing-image-url'] ?? '');
         $altImg = trim($_POST['Testo_Alternativo'] ?? '');
         $lingue = $_POST['product-languages'] ?? [];
         $features = trim($_POST['product-features'] ?? '');
         $prodIdPost = trim($_POST['product-id'] ?? '');
+        $uploadRes = ['url' => null, 'error' => null, 'file' => null];
 
         $errors = [];
         if ($nome === '') $errors[] = 'Inserisci il nome del prodotto';
@@ -105,11 +199,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($descrBreve === '') $errors[] = 'Inserisci la descrizione breve';
         if ($prezzo <= 0) $errors[] = 'Prezzo non valido';
         if ($posti <= 0) $errors[] = 'Capacità non valida';
-        //prima accettavamo solo url assoluti, ora ho aggiunto anche la possibilità che un url sia relativo
-        $isAbsUrl = filter_var($urlImg, FILTER_VALIDATE_URL) !== false;
-        // accetta percorsi relativi o semplici nomi file (es. img/foo.jpg o foo.jpg)
-        $isRelPath = preg_match('#^(\\/|\\.\\/|\\.\\.\\/)?[A-Za-z0-9._-]+(\\/[A-Za-z0-9._-]+)*$#', $urlImg) === 1;
-        if ($urlImg === '' || (!$isAbsUrl && !$isRelPath)) $errors[] = 'URL immagine non valido';
+        $hasNewImage = isset($_FILES['product_image_main']) && $_FILES['product_image_main']['error'] !== UPLOAD_ERR_NO_FILE;
+        if (!$hasNewImage && $urlImg === '') {
+            $errors[] = 'Seleziona un\'immagine per il prodotto';
+        }
         if ($altImg === '') $errors[] = 'Testo alternativo obbligatorio';
         if ($tipo === 'experience' && (empty($lingue) || !is_array($lingue))) {
             $errors[] = 'Seleziona almeno una lingua per le esperienze';
@@ -124,6 +217,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $idProdotto = 'PRD-' . time();
                 }
             }
+            $uploadRes = ['url' => null, 'error' => null, 'file' => null];
+            if ($hasNewImage) {
+                $uploadRes = handleProductImageUpload($idProdotto, $uploadDirProducts);
+                if (!empty($uploadRes['error'])) {
+                    $errors[] = $uploadRes['error'];
+                }
+            }
+        }
+
+        if (empty($errors)) {
             $data = [
                 'IDProdotto' => $idProdotto,
                 'Tipo_Prodotto' => $tipo === 'noleggio' ? 'Noleggio' : 'Experience',
@@ -148,13 +251,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
 
             if ($ok) {
-                $normalizedUrl = $urlImg;
-                if (!$isAbsUrl && strpos($urlImg, '/') === false && strpos($urlImg, '\\') === false) {
-                    // se è solo un filename, punta alla cartella immagini prodotti
-                    $normalizedUrl = '../img/prodotti/' . ltrim($urlImg, '/');
-                }
-
-                $db->upsertMediaProdotto($idProdotto, $normalizedUrl, $altImg);
+                $finalUrl = !empty($uploadRes['url']) ? $uploadRes['url'] : $urlImg;
+                $db->upsertMediaProdotto($idProdotto, $finalUrl, $altImg);
                 $db->setLingueProdotto($idProdotto, is_array($lingue) ? $lingue : []);
                 $featLines = $features === '' ? [] : array_filter(array_map('trim', preg_split('/\r\n|\r|\n/', $features)));
                 $db->setInclusiProdotto($idProdotto, $featLines);
@@ -173,7 +271,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     '[PROD_PRICE]' => htmlspecialchars((string)$prezzo),
                     '[PROD_CAPACITY]' => htmlspecialchars((string)$posti),
                     '[PROD_LENGTH]' => htmlspecialchars((string)($lunghezza ?? '')),
-                    '[IMG_URL]' => htmlspecialchars($normalizedUrl),
+                    '[IMG_URL]' => htmlspecialchars($finalUrl),
                     '[IMG_ALT]' => htmlspecialchars($altImg),
                     '[CHECK_PATENTE]' => $richiedePatente ? 'checked' : '',
                     '[CHECK_ACCESS]' => $accessibile ? 'checked' : '',

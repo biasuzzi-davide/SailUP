@@ -9,6 +9,7 @@
     const priceInput = document.getElementById('product-price');
     const capacityInput = document.getElementById('product-capacity');
     const imageInput = document.getElementById('product-image-main');
+    const existingImageInput = document.getElementById('existing-image-url');
     const altInput = document.getElementById('Testo_Alternativo'); 
     const statusInput = document.getElementById('product-status');
     const languageFieldset = document.getElementById('language-fieldset');
@@ -21,15 +22,6 @@
     if (!form || !nameInput || !priceInput || !errorMessageDiv || !altInput) {
         console.warn('Product validation: missing form elements, aborting initialization.');
         return;
-    }
-
-    function validateUrlRegex(url) {
-        try {
-            new URL(url);
-            return true;
-        } catch (_) {
-            return false;
-        }
     }
 
     function showFieldError(input, message) {
@@ -107,10 +99,16 @@
     }
 
     function validateImage() {
-        const val = imageInput.value.trim();
-        if (val === '') { showFieldError(imageInput, 'L\'URL dell\'immagine è obbligatorio'); return false; }
-        if (!validateUrlRegex(val)) { showFieldError(imageInput, 'Inserisci un URL valido (es. https://...)'); return false; }
-        clearFieldError(imageInput); return true;
+        const hasFile = imageInput && imageInput.files && imageInput.files.length > 0;
+        const existingVal = existingImageInput ? existingImageInput.value.trim() : '';
+
+        if (!hasFile && existingVal === '') {
+            showFieldError(imageInput, 'Carica un\'immagine (JPG/PNG/WebP, max 2MB)');
+            return false;
+        }
+
+        clearFieldError(imageInput);
+        return true;
     }
 
     function validateAlt() {
