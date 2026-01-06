@@ -33,28 +33,13 @@ if (is_array($usersRes)) {
     $total = (int)($usersRes['total'] ?? 0);
 }
 
-$rows = '';
-if (is_array($users) && !empty($users)) {
-    foreach ($users as $u) {
-        $ruolo = !empty($u['Is_Admin']) ? '<span class="status-badge active">Admin</span>' : '<span class="status-badge completed">Standard</span>';
-        $dataIscr = !empty($u['Data_Registrazione']) ? htmlspecialchars(date('d/m/Y', strtotime($u['Data_Registrazione']))) : '—';
-        $rows .= '<tr>'
-            . '<td data-label="ID">' . htmlspecialchars($u['IDUtente']) . '</td>'
-            . '<td data-label="Nome">' . htmlspecialchars(($u['Nome'] ?? '') . ' ' . ($u['Cognome'] ?? '')) . '</td>'
-            . '<td data-label="Email">' . htmlspecialchars($u['Email'] ?? '') . '</td>'
-            . '<td data-label="Data Iscrizione"><time datetime="' . htmlspecialchars($u['Data_Registrazione'] ?? '') . '">' . $dataIscr . '</time></td>'
-            . '<td data-label="Ruolo">' . $ruolo . '</td>'
-            . '</tr>';
-    }
-} else {
-    $rows = '<tr><td colspan="5">Nessun utente trovato.</td></tr>';
-}
+$rows = buildAdminUsersRows($users);
 
-$feedbackBlock = '';
+$alertClass = '';
 if ($feedbackState !== 'hidden' && $feedbackMessage !== '') {
     $alertClass = $feedbackState === 'success' ? 'alert alert-success' : 'alert alert-error';
-    $feedbackBlock = '<div class="' . $alertClass . '" role="status" aria-live="polite">' . htmlspecialchars($feedbackMessage) . '</div>';
 }
+$feedbackBlock = buildFeedbackBlock($feedbackMessage, $alertClass);
 
 //builda la pagine ed inserisce le stats dinamche al posto dei placeholdersss
 $html = buildPage('../pages/admin_utenti.html', $_SERVER['PHP_SELF']);
@@ -66,21 +51,13 @@ $statPlaceholders = [
 ];
 
 $pages = $total > 0 ? (int)ceil($total / $perPage) : 1;
-$pagination = '';
-if ($pages > 1) {
-    $pagination .= '<nav class="pagination" aria-label="Paginazione utenti"><ul>';
-    for ($i = 1; $i <= $pages; $i++) {
-        $currentClass = $i === $page ? ' class="current-page"' : '';
-        $query = http_build_query([
-            'page' => $i,
-            'q' => $search,
-            'ruolo' => $filterRole,
-            'stato' => $filterStatus,
-        ]);
-        $pagination .= '<li' . $currentClass . '><a href="admin_utenti.php?' . htmlspecialchars($query) . '">' . $i . '</a></li>';
-    }
-    $pagination .= '</ul></nav>';
-}
+$pagination = buildPaginationNav(
+    $page,
+    $pages,
+    'admin_utenti.php',
+    ['q' => $search, 'ruolo' => $filterRole, 'stato' => $filterStatus],
+    'Paginazione utenti'
+);
 
 $html = str_replace(
     [

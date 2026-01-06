@@ -9,7 +9,7 @@ requireAdmin();
 $db = new DBConnection();
 $feedback = '';
 $feedbackClass = '';
-$csrfToken = htmlspecialchars(getCsrfToken());
+$csrfToken = getCsrfToken();
 $productStats = $db->getProductStats();
 
 $page = max(1, (int)($_GET['page'] ?? 1));
@@ -72,61 +72,18 @@ if (is_array($prodottiRes)) {
     $total = (int)($prodottiRes['total'] ?? 0);
 }
 
-$rows = '';
-if (is_array($prodotti) && !empty($prodotti)) {
-    foreach ($prodotti as $p) {
-        $tipo = $p['Tipo_Prodotto'] ?? '';
-        $tipologia = $p['Tipologia_Prodotto'] ?? ($p['Tipologia_Experience'] ?? '');
-        $tipoDisplay = htmlspecialchars($tipo) . ($tipologia ? ' • ' . htmlspecialchars($tipologia) : '');
-        $prezzo = isset($p['Prezzo_Base']) ? '€ ' . number_format((float)$p['Prezzo_Base'], 2, ',', '.') : '—';
-        $stato = !empty($p['Attivo']) ? '<span class="status-badge active">Attivo</span>' : '<span class="status-badge cancelled">Disattivo</span>';
-        $toggleLabel = !empty($p['Attivo']) ? 'Disattiva' : 'Attiva';
-        $toggleClass = !empty($p['Attivo']) ? 'btn-text danger' : 'btn-text';
-        $toggleConfirm = !empty($p['Attivo']) ? ' onsubmit="return confirm(\'Disattivare questo prodotto?\');"' : '';
-        $rows .= '<tr>'
-            . '<td data-label="ID">' . htmlspecialchars($p['IDProdotto']) . '</td>'
-            . '<td data-label="Nome Prodotto">' . htmlspecialchars($p['Nome_Prodotto'] ?? '') . '</td>'
-            . '<td data-label="Tipo">' . $tipoDisplay . '</td>'
-            . '<td data-label="Dettagli">' . htmlspecialchars($p['Descrizione_Breve'] ?? '—') . '</td>'
-            . '<td data-label="Prezzo">' . $prezzo . '</td>'
-            . '<td data-label="Stato">' . $stato . '</td>'
-            . '<td data-label="Azioni" class="actions-cell">'
-            . '<a class="btn-text" href="admin_prodotti_nuovo.php?id=' . htmlspecialchars($p['IDProdotto']) . '" aria-label="Modifica ' . htmlspecialchars($p['Nome_Prodotto'] ?? '') . '">Modifica</a>'
-            . '<form method="post" class="inline-form"' . $toggleConfirm . '>'
-            . '<input type="hidden" name="csrf_token" value="' . $csrfToken . '">'
-            . '<input type="hidden" name="id_prodotto" value="' . htmlspecialchars($p['IDProdotto']) . '">'
-            . '<input type="hidden" name="attivo" value="' . (!empty($p['Attivo']) ? 1 : 0) . '">'
-            . '<input type="hidden" name="action" value="toggle">'
-            . '<button type="submit" class="' . $toggleClass . '" aria-label="' . htmlspecialchars($toggleLabel) . ' prodotto ' . htmlspecialchars($p['Nome_Prodotto'] ?? '') . '">' . htmlspecialchars($toggleLabel) . '</button>'
-            . '</form>'
-            . '</td>'
-            . '</tr>';
-    }
-} else {
-    $rows = '<tr><td colspan="7">Nessun prodotto trovato.</td></tr>';
-}
+$rows = buildAdminProductRows($prodotti, $csrfToken);
 
 $pages = $total > 0 ? (int)ceil($total / $perPage) : 1;
-$pagination = '';
-if ($pages > 1) {
-    $pagination .= '<nav class="pagination" aria-label="Paginazione prodotti"><ul>';
-    for ($i = 1; $i <= $pages; $i++) {
-        $currentClass = $i === $page ? ' class="current-page"' : '';
-        $query = http_build_query([
-            'page' => $i,
-            'q' => $search,
-            'tipo' => $filterTipo,
-            'stato' => $filterStato
-        ]);
-        $pagination .= '<li' . $currentClass . '><a href="admin_prodotti.php?' . htmlspecialchars($query) . '">' . $i . '</a></li>';
-    }
-    $pagination .= '</ul></nav>';
-}
+$pagination = buildPaginationNav(
+    $page,
+    $pages,
+    'admin_prodotti.php',
+    ['q' => $search, 'tipo' => $filterTipo, 'stato' => $filterStato],
+    'Paginazione prodotti'
+);
 
-$feedbackBlock = '';
-if ($feedback !== '' && $feedbackClass !== '') {
-    $feedbackBlock = '<div class="' . $feedbackClass . '" role="status" aria-live="polite">' . htmlspecialchars($feedback) . '</div>';
-}
+$feedbackBlock = buildFeedbackBlock($feedback, $feedbackClass);
 
 $html = buildPage('../pages/admin_prodotti.html', $_SERVER['PHP_SELF']);
 $html = str_replace('[ADMIN_PRODUCTS_ROWS]', $rows, $html);
