@@ -13,6 +13,8 @@
     const existingImageInput = document.getElementById('existing-image-url');
     const altInput = document.getElementById('Testo_Alternativo'); 
     const statusInput = document.getElementById('product-status');
+    const boatTypeFieldset = document.getElementById('boat-type-fieldset');
+    const boatTypeInput = document.getElementById('product-category');
     const languageFieldset = document.getElementById('language-fieldset');
     const languageCheckboxes = Array.from(document.querySelectorAll('input[name="product-languages[]"]'));
     const languageError = document.getElementById('product-languages-error');
@@ -20,7 +22,7 @@
     const errorMessageDiv = document.getElementById('error-message');
     const successMessageDiv = document.getElementById('success-message');
 
-    if (!form || !nameInput || !priceInput || !errorMessageDiv || !altInput || !longDescriptionInput) {
+    if (!form || !nameInput || !typeInput || !priceInput || !altInput || !longDescriptionInput) {
         console.warn('Product validation: missing form elements, aborting initialization.');
         return;
     }
@@ -49,9 +51,15 @@
         const messageDiv = type === 'error' ? errorMessageDiv : successMessageDiv;
         const otherDiv = type === 'error' ? successMessageDiv : errorMessageDiv;
 
+        if (!messageDiv) {
+            return;
+        }
+
         messageDiv.textContent = message;
         messageDiv.classList.remove('hidden');
-        otherDiv.classList.add('hidden');
+        if (otherDiv) {
+            otherDiv.classList.add('hidden');
+        }
 
         if (!messageDiv.hasAttribute('tabindex')) {
             messageDiv.setAttribute('tabindex', '-1');
@@ -62,8 +70,10 @@
     }
 
     function hideGlobalMessages() {
-        errorMessageDiv.textContent = '';
-        errorMessageDiv.classList.add('hidden');
+        if (errorMessageDiv) {
+            errorMessageDiv.textContent = '';
+            errorMessageDiv.classList.add('hidden');
+        }
         if (successMessageDiv) {
             successMessageDiv.textContent = '';
             successMessageDiv.classList.add('hidden');
@@ -125,6 +135,41 @@
     function validateStatus() {
         if (statusInput.value === '') { showFieldError(statusInput, 'Lo stato è obbligatorio'); return false; }
         clearFieldError(statusInput); return true;
+    }
+
+    function validateBoatType() {
+        if (!boatTypeInput || typeInput.value !== 'noleggio') {
+            if (boatTypeInput) {
+                clearFieldError(boatTypeInput);
+            }
+            return true;
+        }
+        if (boatTypeInput.value === '') { showFieldError(boatTypeInput, 'Seleziona la tipologia della barca per il noleggio'); return false; }
+        clearFieldError(boatTypeInput); return true;
+    }
+
+    function clearBoatTypeSelection() {
+        if (boatTypeInput) {
+            boatTypeInput.value = '';
+        }
+    }
+
+    function updateBoatTypeVisibility() {
+        if (!boatTypeFieldset || !boatTypeInput) {
+            return;
+        }
+
+        if (typeInput.value === 'noleggio') {
+            boatTypeFieldset.classList.remove('hidden');
+            boatTypeInput.setAttribute('required', '');
+            boatTypeInput.setAttribute('aria-required', 'true');
+        } else {
+            boatTypeFieldset.classList.add('hidden');
+            boatTypeInput.removeAttribute('required');
+            boatTypeInput.setAttribute('aria-required', 'false');
+            clearBoatTypeSelection();
+            clearFieldError(boatTypeInput);
+        }
     }
 
     function clearLanguageSelection() {
@@ -190,9 +235,10 @@
         const v7 = validateImage();
         const v8 = validateAlt();
         const v9 = validateStatus();
-        const v10 = validateLanguages();
+        const v10 = validateBoatType();
+        const v11 = validateLanguages();
 
-        return v1 && v2 && v3 && v4 && v5 && v6 && v7 && v8 && v9 && v10;
+        return v1 && v2 && v3 && v4 && v5 && v6 && v7 && v8 && v9 && v10 && v11;
     }
 
     nameInput.addEventListener('blur', validateName);
@@ -204,20 +250,32 @@
     imageInput.addEventListener('blur', validateImage);
     altInput.addEventListener('blur', validateAlt);
     statusInput.addEventListener('blur', validateStatus);
+    if (boatTypeInput) {
+        boatTypeInput.addEventListener('blur', validateBoatType);
+    }
 
     const inputs = [
         nameInput, typeInput, descriptionInput, longDescriptionInput,
-        priceInput, capacityInput, imageInput, altInput, statusInput
-    ];
+        priceInput, capacityInput, imageInput, altInput, statusInput,
+        boatTypeInput
+    ].filter(Boolean);
 
     inputs.forEach(function (input) {
         input.addEventListener('input', hideGlobalMessages);
     });
 
     typeInput.addEventListener('change', function () {
+        updateBoatTypeVisibility();
         updateLanguageFieldsetVisibility();
         hideGlobalMessages();
     });
+
+    if (boatTypeInput) {
+        boatTypeInput.addEventListener('change', function () {
+            hideGlobalMessages();
+            validateBoatType();
+        });
+    }
 
     languageCheckboxes.forEach(function (checkbox) {
         checkbox.addEventListener('change', function () {
@@ -236,6 +294,7 @@
         }
     });
 
+    updateBoatTypeVisibility();
     updateLanguageFieldsetVisibility();
 
 })();
