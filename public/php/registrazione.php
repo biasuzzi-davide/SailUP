@@ -11,11 +11,11 @@ $old = [
     'cognome' => '',
     'cf' => '',
     'email' => '',
-    'via' => 'Via Roma',
-    'civico' => '123',
-    'cap' => '80100',
-    'citta' => 'Napoli',
-    'provincia' => 'NA',
+    'via' => '',
+    'civico' => '',
+    'cap' => '',
+    'citta' => '',
+    'provincia' => '',
     'privacy' => false,
 ];
 
