@@ -664,8 +664,8 @@ CREATE TABLE `Utente` (
 --
 
 INSERT INTO `Utente` (`IDUtente`, `Nome`, `Cognome`, `CF`, `Email`, `PasswordHash`, `Numero_Patente_Nautica`, `IDIndirizzo`, `Is_Admin`, `Data_Registrazione`, `Data_Ultimo_Accesso`, `Attivo`) VALUES
-(1, 'Marco', 'Rossi', 'RSSMRC80A01H501U', 'admin@noleggio-napoli.it', '$2y$10$abcdefghijklmnopqrstuvwxyz123456', 'PAT-NAUT-ADMIN-001', 1, 1, '2025-12-23 12:11:10', NULL, 1),
-(2, 'Lucia', 'De Luca', 'DLCLCU85M41H501L', 'lucia.admin@noleggio-napoli.it', '$2y$10$abcdefghijklmnopqrstuvwxyz123456', 'PAT-NAUT-ADMIN-002', 9, 1, '2025-12-23 12:11:10', NULL, 1),
+(1, 'NomeAdmin', 'CognomeAdmin', 'RSSMRC80A01H501U', 'admin', '$2y$10$NySnCY1CTj.Zke13441SB.KZv4xPIAwyAgBHOxBb8PS7/NSvh/dHO', 'PAT-NAUT-ADMIN-001', 1, 1, '2025-12-23 12:11:10', NULL, 1),
+(2, 'NomeUser', 'NomeUser', 'DLCLCU85M41H501L', 'user', '$2y$10$kdAdPU9/kuLBL7kJ9OCEA.aOxVqTYflPVnXP.0bIVJup/aihIZ2m2', 'PAT-NAUT-ADMIN-002', 9, 0, '2025-12-23 12:11:10', NULL, 1),
 (3, 'Giovanni', 'Ferraro', 'FRRGVN75D15H501K', 'giovanni.ferraro@email.com', '$2y$10$abcdefghijklmnopqrstuvwxyz123456', 'PAT-NAUT-001', 2, 0, '2025-12-23 12:11:10', NULL, 1),
 (4, 'Sofia', 'Esposito', 'ESPSFN92F45H501J', 'sofia.esposito@email.com', '$2y$10$abcdefghijklmnopqrstuvwxyz123456', NULL, 3, 0, '2025-12-23 12:11:10', NULL, 1),
 (5, 'Andrea', 'Moretti', 'MRTAND88H67H501I', 'andrea.moretti@email.com', '$2y$10$abcdefghijklmnopqrstuvwxyz123456', 'PAT-NAUT-002', 4, 0, '2025-12-23 12:11:10', NULL, 1),
