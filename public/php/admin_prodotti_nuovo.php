@@ -282,6 +282,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $db->setLingueProdotto($idProdotto, is_array($lingue) ? $lingue : []);
                 $featLines = $features === '' ? [] : array_filter(array_map('trim', preg_split('/\r\n|\r|\n/', $features)));
                 $db->setInclusiProdotto($idProdotto, $featLines);
+                //indirizzo l admin alla catalago corispondente in base al tipo di prodotto creato
+                if ($prodIdPost === '') {
+                    $redirectTarget = $tipo === 'noleggio' ? 'catalogo_noleggio.php' : 'catalogo_esperienze.php';
+                    header('Location: ' . $redirectTarget);
+                    exit;
+                }
                 $feedbackClass = 'alert alert-success';
                 $feedback = $prodIdPost !== '' ? 'Prodotto aggiornato correttamente.' : 'Prodotto creato correttamente.';
                 $mode = 'edit';
