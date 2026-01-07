@@ -11,7 +11,9 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap"
+        rel="stylesheet">
 
     <link rel="stylesheet" href="../css/style.css" media="screen">
     <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)">
@@ -39,6 +41,12 @@
         <section class="section-container">
             <div class="auth-card">
                 <h1>Completa la Prenotazione</h1>
+
+                <div>
+                    <dt><strong>Totale [PAGATO_O_DA_PAGARE]:</strong></dt>
+                    <dd><strong class="price-value">€ [PREZZO_TOTALE]</strong></dd>
+                </div>
+
                 <p class="auth-subtitle">Inserisci i dati della carta per procedere</p>
 
                 <div id="error-message" class="error-message hidden" role="alert" aria-live="assertive"></div>
@@ -50,26 +58,30 @@
 
                         <div class="form-group">
                             <label for="card-holder">Intestatario Carta</label>
-                            <input type="text" id="card-holder" name="card_holder" required autocomplete="cc-name" placeholder="Mario Rossi">
+                            <input type="text" id="card-holder" name="card_holder" required autocomplete="cc-name"
+                                placeholder="Mario Rossi">
                             <span id="card-holder-error" class="field-error" aria-live="polite"></span>
                         </div>
 
                         <div class="form-group">
                             <label for="card-number">Numero Carta</label>
-                            <input type="text" id="card-number" name="card_number" required autocomplete="cc-number" maxlength="19" inputmode="numeric" placeholder="1234 5678 9012 3456">
+                            <input type="text" id="card-number" name="card_number" required autocomplete="cc-number"
+                                maxlength="19" inputmode="numeric" placeholder="1234 5678 9012 3456">
                             <span id="card-number-error" class="field-error" aria-live="polite"></span>
                         </div>
 
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="expiry-date">Scadenza</label>
-                                <input type="text" id="expiry-date" name="expiry_date" required autocomplete="cc-exp" placeholder="MM/AA" maxlength="5" inputmode="numeric">
+                                <input type="text" id="expiry-date" name="expiry_date" required autocomplete="cc-exp"
+                                    placeholder="MM/AA" maxlength="5" inputmode="numeric">
                                 <span id="expiry-date-error" class="field-error" aria-live="polite"></span>
                             </div>
 
                             <div class="form-group">
                                 <label for="cvv"><abbr title="Card Verification Value" lang="en">CVV</abbr></label>
-                                <input type="text" id="cvv" name="cvv" required autocomplete="cc-csc" maxlength="4" inputmode="numeric" placeholder="123">
+                                <input type="text" id="cvv" name="cvv" required autocomplete="cc-csc" maxlength="4"
+                                    inputmode="numeric" placeholder="123">
                                 <span id="cvv-error" class="field-error" aria-live="polite"></span>
                             </div>
                         </div>
@@ -77,7 +89,8 @@
 
                     <div class="checkbox-group">
                         <input type="checkbox" id="terms" name="terms" required>
-                        <label for="terms">Accetto i <a href="privacy.php" target="_blank" rel="noopener noreferrer">termini e condizioni</a></label>
+                        <label for="terms">Accetto i <a href="privacy.php" target="_blank"
+                                rel="noopener noreferrer">termini e condizioni</a></label>
                     </div>
                     <span id="terms-error" class="field-error" role="alert"></span>
 
@@ -95,4 +108,5 @@
     <script src="../js/script.js"></script>
     <script src="../js/payment_validation.js"></script>
 </body>
+
 </html>
