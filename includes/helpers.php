@@ -107,8 +107,6 @@ function buildFooter($phpSelf) {
     $esperienzeLi = createFooterItem('catalogo_esperienze', 'Esperienze', $current, $relativePath, $pages);
     $blogLi = createFooterItem('blog', 'Blog', $current, $relativePath, $pages, 'en');
     $chiSiamoLi = createFooterItem('chi_siamo', 'Chi Siamo', $current, $relativePath, $pages);
-
-    // Altri item (sempre link)
     $faqLi = createFooterItem('faq', 'Domande Frequenti (<abbr title="Frequently Asked Questions" lang="en">FAQ</abbr>)', $current, $relativePath, $pages);
     $privacyLi = createFooterItem('privacy', 'Privacy Policy', $current, $relativePath, $pages, 'en');
     $cookieLi = createFooterItem('cookie', '<span lang="en">Cookie</span> Policy', $current, $relativePath, $pages);
