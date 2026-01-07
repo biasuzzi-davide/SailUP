@@ -6,6 +6,7 @@
     const nameInput = document.getElementById('product-name');
     const typeInput = document.getElementById('product-type');
     const descriptionInput = document.getElementById('product-description');
+    const longDescriptionInput = document.getElementById('product-long-description');
     const priceInput = document.getElementById('product-price');
     const capacityInput = document.getElementById('product-capacity');
     const imageInput = document.getElementById('product-image-main');
@@ -19,7 +20,7 @@
     const errorMessageDiv = document.getElementById('error-message');
     const successMessageDiv = document.getElementById('success-message');
 
-    if (!form || !nameInput || !priceInput || !errorMessageDiv || !altInput) {
+    if (!form || !nameInput || !priceInput || !errorMessageDiv || !altInput || !longDescriptionInput) {
         console.warn('Product validation: missing form elements, aborting initialization.');
         return;
     }
@@ -82,6 +83,11 @@
     function validateDescription() {
         if (descriptionInput.value.trim() === '') { showFieldError(descriptionInput, 'La descrizione breve è obbligatoria'); return false; }
         clearFieldError(descriptionInput); return true;
+    }
+
+    function validateLongDescription() {
+        if (longDescriptionInput.value.trim() === '') { showFieldError(longDescriptionInput, 'La descrizione dettagliata è obbligatoria'); return false; }
+        clearFieldError(longDescriptionInput); return true;
     }
 
     function validatePrice() {
@@ -178,19 +184,21 @@
         const v1 = validateName();
         const v2 = validateType();
         const v3 = validateDescription();
-        const v4 = validatePrice();
-        const v5 = validateCapacity();
-        const v6 = validateImage();
-        const v7 = validateAlt();
-        const v8 = validateStatus();
-        const v9 = validateLanguages();
+        const v4 = validateLongDescription();
+        const v5 = validatePrice();
+        const v6 = validateCapacity();
+        const v7 = validateImage();
+        const v8 = validateAlt();
+        const v9 = validateStatus();
+        const v10 = validateLanguages();
 
-        return v1 && v2 && v3 && v4 && v5 && v6 && v7 && v8 && v9;
+        return v1 && v2 && v3 && v4 && v5 && v6 && v7 && v8 && v9 && v10;
     }
 
     nameInput.addEventListener('blur', validateName);
     typeInput.addEventListener('blur', validateType);
     descriptionInput.addEventListener('blur', validateDescription);
+    longDescriptionInput.addEventListener('blur', validateLongDescription);
     priceInput.addEventListener('blur', validatePrice);
     capacityInput.addEventListener('blur', validateCapacity);
     imageInput.addEventListener('blur', validateImage);
@@ -198,7 +206,7 @@
     statusInput.addEventListener('blur', validateStatus);
 
     const inputs = [
-        nameInput, typeInput, descriptionInput, 
+        nameInput, typeInput, descriptionInput, longDescriptionInput,
         priceInput, capacityInput, imageInput, altInput, statusInput
     ];
 

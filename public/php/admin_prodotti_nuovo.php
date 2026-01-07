@@ -197,6 +197,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($nome === '') $errors[] = 'Inserisci il nome del prodotto';
         if ($tipo !== 'noleggio' && $tipo !== 'experience') $errors[] = 'Seleziona il tipo di prodotto';
         if ($descrBreve === '') $errors[] = 'Inserisci la descrizione breve';
+        if ($descr === '') $errors[] = 'Inserisci la descrizione dettagliata';
         if ($prezzo <= 0) $errors[] = 'Prezzo non valido';
         if ($posti <= 0) $errors[] = 'Capacità non valida';
         $hasNewImage = isset($_FILES['product_image_main']) && $_FILES['product_image_main']['error'] !== UPLOAD_ERR_NO_FILE;
