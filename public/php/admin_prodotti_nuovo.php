@@ -206,6 +206,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $features = trim($_POST['product-features'] ?? '');
         $prodIdPost = trim($_POST['product-id'] ?? '');
         $uploadRes = ['url' => null, 'error' => null, 'file' => null];
+        if ($tipo !== 'experience') {
+            $durata = '';
+        }
+        if ($tipo !== 'noleggio') {
+            $lunghezza = null;
+        }
         if ($tipo !== 'noleggio') {
             if ($prodIdPost !== '') {
                 $currentProd = $db->getProdottoAdminById($prodIdPost);
@@ -230,8 +236,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($tipo === 'noleggio' && $tipologia === '') {
             $errors[] = 'Seleziona la tipologia di barca per il noleggio';
         }
-        if ($tipo === 'experience' && (empty($lingue) || !is_array($lingue))) {
-            $errors[] = 'Seleziona almeno una lingua per le esperienze';
+        if ($tipo === 'experience') {
+            if ($durata === '' || (int) $durata < 1) {
+                $errors[] = 'Inserisci la durata dell\'esperienza in ore';
+            }
+            if (empty($lingue) || !is_array($lingue)) {
+                $errors[] = 'Seleziona almeno una lingua per le esperienze';
+            }
         }
 
         if (empty($errors)) {

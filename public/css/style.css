@@ -949,6 +949,10 @@ a.product-cta:focus-visible {
   cursor: pointer;
 }
 
+.checkbox-group.hidden {
+  display: none;
+}
+
 .checkbox-highlight {
   display: flex;
   align-items: center;
