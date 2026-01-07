@@ -15,6 +15,13 @@
     const statusInput = document.getElementById('product-status');
     const boatTypeFieldset = document.getElementById('boat-type-fieldset');
     const boatTypeInput = document.getElementById('product-category');
+    const lengthGroup = document.getElementById('length-group');
+    const durationGroup = document.getElementById('duration-group');
+    const durationInput = document.getElementById('product-duration');
+    const licenseOption = document.getElementById('license-option');
+    const accessOption = document.getElementById('access-option');
+    const licenseCheckbox = document.getElementById('requires-license');
+    const accessCheckbox = document.getElementById('is-accessible');
     const languageFieldset = document.getElementById('language-fieldset');
     const languageCheckboxes = Array.from(document.querySelectorAll('input[name="product-languages[]"]'));
     const languageError = document.getElementById('product-languages-error');
@@ -148,6 +155,19 @@
         clearFieldError(statusInput); return true;
     }
 
+    function validateDuration() {
+        if (!durationInput || typeInput.value !== 'experience') {
+            if (durationInput) {
+                clearFieldError(durationInput);
+            }
+            return true;
+        }
+        const val = parseInt(durationInput.value, 10);
+        if (durationInput.value === '') { showFieldError(durationInput, 'La durata è obbligatoria'); return false; }
+        if (isNaN(val) || val < 1) { showFieldError(durationInput, 'Inserisci una durata valida in ore'); return false; }
+        clearFieldError(durationInput); return true;
+    }
+
     function validateBoatType() {
         if (!boatTypeInput || typeInput.value !== 'noleggio') {
             if (boatTypeInput) {
@@ -180,6 +200,67 @@
             boatTypeInput.setAttribute('aria-required', 'false');
             clearBoatTypeSelection();
             clearFieldError(boatTypeInput);
+        }
+    }
+
+    function updateExperienceFieldsVisibility() {
+        if (!lengthGroup || !durationGroup) {
+            return;
+        }
+
+        if (typeInput.value === 'experience') {
+            lengthGroup.classList.add('hidden');
+            durationGroup.classList.remove('hidden');
+            if (durationInput) {
+                durationInput.setAttribute('required', '');
+                durationInput.setAttribute('aria-required', 'true');
+            }
+        } else {
+            durationGroup.classList.add('hidden');
+            lengthGroup.classList.remove('hidden');
+            if (durationInput) {
+                durationInput.removeAttribute('required');
+                durationInput.setAttribute('aria-required', 'false');
+                durationInput.value = '';
+                clearFieldError(durationInput);
+            }
+        }
+    }
+
+    function updateExtraOptionsVisibility() {
+        if (!licenseOption || !accessOption) {
+            return;
+        }
+
+        if (typeInput.value === 'noleggio') {
+            licenseOption.classList.remove('hidden');
+            accessOption.classList.add('hidden');
+            if (accessCheckbox) {
+                accessCheckbox.checked = false;
+                accessCheckbox.disabled = true;
+            }
+            if (licenseCheckbox) {
+                licenseCheckbox.disabled = false;
+            }
+        } else if (typeInput.value === 'experience') {
+            accessOption.classList.remove('hidden');
+            licenseOption.classList.add('hidden');
+            if (licenseCheckbox) {
+                licenseCheckbox.checked = false;
+                licenseCheckbox.disabled = true;
+            }
+            if (accessCheckbox) {
+                accessCheckbox.disabled = false;
+            }
+        } else {
+            licenseOption.classList.add('hidden');
+            accessOption.classList.add('hidden');
+            if (licenseCheckbox) {
+                licenseCheckbox.disabled = true;
+            }
+            if (accessCheckbox) {
+                accessCheckbox.disabled = true;
+            }
         }
     }
 
@@ -246,10 +327,11 @@
         const v7 = validateImage();
         const v8 = validateAlt();
         const v9 = validateStatus();
-        const v10 = validateBoatType();
-        const v11 = validateLanguages();
+        const v10 = validateDuration();
+        const v11 = validateBoatType();
+        const v12 = validateLanguages();
 
-        return v1 && v2 && v3 && v4 && v5 && v6 && v7 && v8 && v9 && v10 && v11;
+        return v1 && v2 && v3 && v4 && v5 && v6 && v7 && v8 && v9 && v10 && v11 && v12;
     }
 
     nameInput.addEventListener('blur', validateName);
@@ -262,6 +344,9 @@
     altInput.addEventListener('blur', validateAlt);
     statusInput.addEventListener('blur', validateStatus);
     statusInput.addEventListener('change', validateStatus);
+    if (durationInput) {
+        durationInput.addEventListener('blur', validateDuration);
+    }
     if (boatTypeInput) {
         boatTypeInput.addEventListener('blur', validateBoatType);
     }
@@ -269,7 +354,7 @@
     const inputs = [
         nameInput, typeInput, descriptionInput, longDescriptionInput,
         priceInput, capacityInput, imageInput, altInput, statusInput,
-        boatTypeInput
+        boatTypeInput, durationInput
     ].filter(Boolean);
 
     inputs.forEach(function (input) {
@@ -277,7 +362,9 @@
     });
 
     typeInput.addEventListener('change', function () {
+        updateExperienceFieldsVisibility();
         updateBoatTypeVisibility();
+        updateExtraOptionsVisibility();
         updateLanguageFieldsetVisibility();
         hideGlobalMessages();
     });
@@ -307,6 +394,8 @@
     });
 
     updateBoatTypeVisibility();
+    updateExtraOptionsVisibility();
+    updateExperienceFieldsVisibility();
     updateLanguageFieldsetVisibility();
 
 })();
