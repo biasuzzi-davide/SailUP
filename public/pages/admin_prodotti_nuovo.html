@@ -120,22 +120,18 @@
                   <input type="number" id="product-length" name="product-length" min="0" step="0.1" placeholder="19.2" value="[PROD_LENGTH]">
                 </div>
 
-                <div class="form-group">
-                  <label for="product-year">Anno di Costruzione</label>
-                  <input type="number" id="product-year" name="product-year" min="1950" max="2025" placeholder="2020">
-                </div>
-              </div>
+               
             </fieldset>
 
             <fieldset>
               <legend>Caratteristiche e Servizi</legend>
 
               <div class="form-group">
-                <label for="product-features">Caratteristiche Principali</label>
+                <label for="product-features">Incluso</label>
                 <textarea id="product-features" name="product-features" rows="4"
                   placeholder="Una caratteristica per riga, ad esempio:&#10;3 cabine doppie&#10;2 bagni completi&#10;Cucina attrezzata&#10;Aria condizionata"
                   aria-describedby="product-features-hint">[PROD_FEATURES]</textarea>
-                <span id="product-features-hint" class="field-hint">Inserisci una caratteristica per riga</span>
+                <span id="product-features-hint" class="field-hint">Inserisci un extra incluso per riga</span>
               </div>
 
               <div class="checkbox-options">
@@ -146,6 +142,20 @@
                   <label for="requires-license">Richiede Patente Nautica</label>
                 </div>
 
+              </div>
+            </fieldset>
+
+            <fieldset id="boat-type-fieldset" class="hidden">
+              <legend>Tipologia Barca (noleggio)</legend>
+              <div class="form-group">
+                <label for="product-category">Tipologia Barca <abbr title="Campo obbligatorio">*</abbr></label>
+                <select id="product-category" name="product-category" aria-describedby="product-category-error">
+                  <option value="">Seleziona tipologia...</option>
+                  <option value="Motore" [PROD_TIPOLOGIA_MOTORE]>Motore</option>
+                  <option value="Vela" [PROD_TIPOLOGIA_VELA]>Vela</option>
+                  <option value="Gommone" [PROD_TIPOLOGIA_GOMMONE]>Gommone</option>
+                </select>
+                <span id="product-category-error" class="field-error" role="alert"></span>
               </div>
             </fieldset>
 
@@ -202,22 +212,16 @@
 
               <div class="form-group">
                 <label for="product-status">Stato Prodotto <abbr title="Campo obbligatorio">*</abbr></label>
-                <select id="product-status" name="product-status" required aria-required="true" aria-describedby="product-status-error">
-                  <option value="available" [SEL_STATUS_AVAILABLE]>Disponibile</option>
-                  <option value="maintenance" [SEL_STATUS_MAINT]>In Manutenzione</option>
-                  <option value="unavailable" [SEL_STATUS_UNAVAIL]>Non Disponibile</option>
-                </select>
+                <div class="checkbox-group">
+                  <input type="checkbox" id="product-status" name="product-status" value="available" [CHECK_STATUS_AVAILABLE]
+                    aria-describedby="product-status-hint product-status-error">
+                  <label for="product-status">Disponibile</label>
+                </div>
+                <span id="product-status-hint" class="field-hint">Se non selezionato: Non Disponibile.</span>
                 <span id="product-status-error" class="field-error" role="alert"></span>
               </div>
 
-              <div class="form-group">
-                <label for="product-season">Stagionalità</label>
-                <select id="product-season" name="product-season">
-                  <option value="all">Tutto l'Anno</option>
-                  <option value="summer">Solo Estate</option>
-                  <option value="winter">Solo Inverno</option>
-                </select>
-              </div>
+              
             </fieldset>
 
             <div class="form-actions">
