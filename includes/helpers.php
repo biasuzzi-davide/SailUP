@@ -287,6 +287,35 @@ function calcolaPrezzoEsperienza(float $prezzoBase, array $extraSelezionati, arr
 }
 
 /**
+ * Genera l'HTML per visualizzare gli extra selezionati in una lista di definizione.
+ */
+function buildExtraRowsHtml(array $extraSelezionati, array $extraDisponibili): string {
+    if (empty($extraSelezionati)) {
+        return '';
+    }
+    
+    $html = '';
+    foreach ($extraSelezionati as $extraId) {
+        // Trova il nome e prezzo dell'extra
+        foreach ($extraDisponibili as $extraItem) {
+            if (isset($extraItem['IDExtra']) && (int)$extraItem['IDExtra'] === (int)$extraId) {
+                $nomeExtra = htmlspecialchars($extraItem['Nome_Extra'] ?? '', ENT_QUOTES);
+                $prezzoExtra = (float) ($extraItem['Prezzo_Extra'] ?? 0);
+                $prezzoExtraFormattato = number_format($prezzoExtra, 2, ',', '.');
+                
+                $html .= '<div>' . "\n";
+                $html .= '    <dt>' . $nomeExtra . ':</dt>' . "\n";
+                $html .= '    <dd>€ ' . $prezzoExtraFormattato . '</dd>' . "\n";
+                $html .= '</div>';
+                break;
+            }
+        }
+    }
+    
+    return $html;
+}
+
+/**
  * Costruisce un elenco HTML da un array di righe.
  */
 function buildItemsList(array $items, string $valueKey, string $emptyMessage, ?callable $formatter = null): string {
