@@ -6,6 +6,7 @@
     const titleInput = document.getElementById('post-title');
     const categoryInput = document.getElementById('post-category');
     const dateInput = document.getElementById('post-date');
+    const readingTimeInput = document.getElementById('post-reading-time');
     const excerptInput = document.getElementById('post-excerpt');
     const contentInput = document.getElementById('post-content');
     const imageInput = document.getElementById('post-image');
@@ -81,6 +82,16 @@
         clearFieldError(dateInput); return true;
     }
 
+    function validateReadingTime() {
+        if (!readingTimeInput) {
+            return true;
+        }
+        const val = parseInt(readingTimeInput.value, 10);
+        if (readingTimeInput.value === '') { showFieldError(readingTimeInput, 'Il tempo di lettura è obbligatorio'); return false; }
+        if (isNaN(val) || val < 1) { showFieldError(readingTimeInput, 'Inserisci minuti validi'); return false; }
+        clearFieldError(readingTimeInput); return true;
+    }
+
     function validateExcerpt() {
         const val = excerptInput.value.trim();
         if (val === '') { showFieldError(excerptInput, 'L\'estratto è obbligatorio'); return false; }
@@ -116,24 +127,28 @@
         const v1 = validateTitle();
         const v2 = validateCategory();
         const v3 = validateDate();
-        const v4 = validateExcerpt();
-        const v5 = validateContent();
-        const v6 = validateImage();
-        const v7 = validateAlt();
+        const v4 = validateReadingTime();
+        const v5 = validateExcerpt();
+        const v6 = validateContent();
+        const v7 = validateImage();
+        const v8 = validateAlt();
 
-        return v1 && v2 && v3 && v4 && v5 && v6 && v7;
+        return v1 && v2 && v3 && v4 && v5 && v6 && v7 && v8;
     }
 
     titleInput.addEventListener('blur', validateTitle);
     categoryInput.addEventListener('blur', validateCategory);
     dateInput.addEventListener('blur', validateDate);
+    if (readingTimeInput) {
+        readingTimeInput.addEventListener('blur', validateReadingTime);
+    }
     excerptInput.addEventListener('blur', validateExcerpt);
     contentInput.addEventListener('blur', validateContent);
     imageInput.addEventListener('blur', validateImage);
     altInput.addEventListener('blur', validateAlt);
 
     const inputs = [
-        titleInput, categoryInput, dateInput,
+        titleInput, categoryInput, dateInput, readingTimeInput,
         excerptInput, contentInput, imageInput, altInput
     ];
 
