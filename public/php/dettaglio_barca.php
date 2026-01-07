@@ -2,9 +2,174 @@
 
 require_once '../../includes/helpers.php';
 require_once '../../includes/db_connection.php';
+require_once '../../includes/session/session.php';
 
 $db = new DBConnection();
 
+// Variabili per i messaggi (usate sia in GET che in POST)
+$serverState = '';
+$serverMessage = '';
+
+// === GESTIONE POST - Elaborazione prenotazione ===
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+	// Prendo l'ID prodotto dal form
+	$productId = trim((string) filter_input(INPUT_POST, 'product_id', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+	
+	// Recupero il prodotto
+	$productDetail = null;
+	if ($productId !== '') {
+		$productDetail = $db->getProdottoWithMediaById($productId);
+	}
+	
+	if (!$productDetail || $productDetail['Tipo_Prodotto'] !== 'Noleggio') {
+		http_response_code(404);
+		echo buildPage('../pages/404.html', $_SERVER['PHP_SELF']);
+		exit;
+	}
+	
+	// Controllo se l'utente è loggato
+	if (!isLogged()) {
+		$serverState = 'visible';
+		$serverMessage = 'Per prenotare devi effettuare il <a href="login.php">login</a> o la <a href="registrazione.php">registrazione</a>.';
+		// Non faccio exit, continuo per mostrare la pagina con l'errore
+	} else {
+		// L'utente è loggato, procedo con la prenotazione
+		$idUtente = $_SESSION['user']['IDUtente'];
+		
+		// Recupero i dati del form
+		$startDate = trim((string) filter_input(INPUT_POST, 'start_date', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+		$endDate = trim((string) filter_input(INPUT_POST, 'end_date', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+		$selectPayment = trim((string) filter_input(INPUT_POST, 'select_payment', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+		$skipperChecked = isset($_POST['skipper']);
+		$extrasSelected = isset($_POST['extras']) && is_array($_POST['extras']) ? $_POST['extras'] : [];
+		
+		// Validazione base
+		if (empty($startDate) || empty($endDate) || empty($selectPayment)) {
+			$serverState = 'visible';
+			$serverMessage = 'Compila tutti i campi obbligatori.';
+		} else {
+			// Converto le date in formato datetime
+			$dataInizio = $startDate . ' 00:00:00';
+			$dataFine = $endDate . ' 23:59:59';
+			
+			// Controllo che le date non siano nel passato
+			$oggi = date('Y-m-d');
+			if ($startDate < $oggi || $endDate < $oggi) {
+				$serverState = 'visible';
+				$serverMessage = 'Non è possibile prenotare date nel passato.';
+			} elseif ($endDate < $startDate) {
+				$serverState = 'visible';
+				$serverMessage = 'La data di check-out deve essere successiva al check-in.';
+			} else {
+				// Controllo disponibilità
+				$isAvailable = $db->checkDateAvailability($productId, $dataInizio, $dataFine);
+				
+				if (!$isAvailable) {
+					$serverState = 'visible';
+					$serverMessage = 'Le date selezionate non sono disponibili. Scegli altre date.';
+				} else {
+					// Calcolo del prezzo
+					$prezzoBase = (float) ($productDetail['Prezzo_Base'] ?? 0);
+					
+					// Carico gli extra
+					$extraDb = $db->getProdottoExtra($productDetail['IDProdotto']);
+					if ($extraDb === false) $extraDb = [];
+					
+					// Utilizzo la funzione helper per calcolare il prezzo totale
+					$prezzoTotale = calcolaPrezzoNoleggio(
+						$prezzoBase,
+						$startDate,
+						$endDate,
+						$extrasSelected,
+						$extraDb,
+						$skipperChecked
+					);
+					
+					// Determino metodo e stato in base alla selezione
+					$metodoPagamento = 'Contanti';
+					$statoPrenotazione = 'In Attesa';
+					
+					if ($selectPayment === 'cc') {
+						$metodoPagamento = 'Carta di Credito';
+					} elseif ($selectPayment === 'bb') {
+						$metodoPagamento = 'Bonifico';
+					} elseif ($selectPayment === 'contanti') {
+						$metodoPagamento = 'Contanti';
+					}
+					
+					// Se il pagamento è con carta, NON inserisco subito la prenotazione
+					if ($selectPayment === 'cc') {
+						// Salvo i dati in sessione senza creare la prenotazione
+						$_SESSION['prenotazione_temp'] = [
+							'id_prenotazione' => null,
+							'id_utente' => $idUtente,
+							'id_prodotto' => $productId,
+							'nome_prodotto' => $productDetail['Nome_Prodotto'],
+							'tipo_prodotto' => 'Noleggio',
+							'data_inizio' => $dataInizio,
+							'data_fine' => $dataFine,
+							'data_inizio_display' => $startDate,
+							'data_fine_display' => $endDate,
+							'skipper' => $skipperChecked,
+							'prezzo_totale' => $prezzoTotale,
+							'metodo_pagamento' => $metodoPagamento,
+							'stato' => 'Confermata',
+							'extras_selezionati' => $extrasSelected,
+							'extras_disponibili' => $extraDb,
+						];
+						
+						// Vai alla pagina di pagamento
+						header('Location: pagamento.php');
+						exit;
+					}
+					
+					// Per altri metodi di pagamento, inserisco la prenotazione normalmente
+					$idPrenotazione = $db->insertPrenotazione(
+						$idUtente,
+						$productId,
+						$dataInizio,
+						$dataFine,
+						$skipperChecked,
+						$prezzoTotale,
+						$metodoPagamento,
+						$statoPrenotazione,
+						null
+					);
+					
+					if (!$idPrenotazione) {
+						$serverState = 'visible';
+						$serverMessage = 'Errore durante la creazione della prenotazione. Riprova.';
+					} else {
+						// Salvo i dati della prenotazione in sessione
+						$_SESSION['prenotazione_temp'] = [
+							'id_prenotazione' => $idPrenotazione,
+							'id_prodotto' => $productId,
+							'nome_prodotto' => $productDetail['Nome_Prodotto'],
+							'tipo_prodotto' => 'Noleggio',
+							'data_inizio' => $dataInizio,
+							'data_fine' => $dataFine,
+							'data_inizio_display' => $startDate,
+							'data_fine_display' => $endDate,
+							'skipper' => $skipperChecked,
+							'prezzo_totale' => $prezzoTotale,
+							'metodo_pagamento' => $metodoPagamento,
+							'stato' => $statoPrenotazione,
+							'extras_selezionati' => $extrasSelected,
+							'extras_disponibili' => $extraDb,
+						];
+						
+						// Vai alla conferma
+						header('Location: conferma_prenotazione.php');
+						exit;
+					}
+				}
+			}
+		}
+	}
+	// Se arrivo qui, c'è stato un errore - continuo per mostrare la pagina con il messaggio
+}
+
+// === GESTIONE GET - Visualizzazione dettaglio ===
 $productId = trim((string) filter_input(INPUT_GET, 'id', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
 $productDetail = null;
 
@@ -105,9 +270,8 @@ $placeholders = [
 	'[EXTRA_CHECKBOXES]' => $extraCheckboxes,
 	'[MIN_DATE]' => date('Y-m-d'),
 	'[KEYWORDS]' => $keywords,
-	//messaggi server nascosti 
-	'[SERVER_STATE]' => 'hidden',
-	'[SERVER_MESSAGES]' => '',
+	'[SERVER_STATE]' => $serverState,
+	'[SERVER_MESSAGES]' => $serverMessage,
 ];
 
 $html = str_replace(array_keys($placeholders), array_values($placeholders), $html);
