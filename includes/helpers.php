@@ -520,6 +520,12 @@ function buildExperienceCatalogCard(array $prodotto, array $lingueDisponibili = 
         $badgeClass = 'badge-aperitivo';
     } elseif (strpos($badgeSlug, 'escursione') !== false) {
         $badgeClass = 'badge-escursione';
+    } elseif (strpos($badgeSlug, 'vela') !== false) {
+        $badgeClass = 'badge-vela';
+    } elseif (strpos($badgeSlug, 'gommone') !== false) {
+        $badgeClass = 'badge-gommone';
+    } elseif (strpos($badgeSlug, 'motore') !== false) {
+        $badgeClass = 'badge-motore';
     } elseif (strpos($badgeSlug, 'tour') !== false) {
         $badgeClass = 'badge-tour';
     } else {
