@@ -202,25 +202,13 @@ $prezzoBase = (float) ($experience['Prezzo_Base'] ?? 0);
 $extra = $db->getProdottoExtra($experience['IDProdotto']);
 if ($extra === false) $extra = [];
 
-// Calcolo extra - cerco per IDExtra
-$prezzoExtra = 0;
-foreach ($extrasSelected as $extraId) {
-    // Trova l'extra nell'array tramite IDExtra
-    foreach ($extra as $extraItem) {
-        if (isset($extraItem['IDExtra']) && (int)$extraItem['IDExtra'] === (int)$extraId) {
-            $prezzoExtra += (float) ($extraItem['Prezzo_Extra'] ?? 0);
-            break;
-        }
-    }
-}
-
-// Calcolo +10% pickup (solo sul prezzo base)
-$prezzoPickup = 0;
-if ($pickupChecked) {
-    $prezzoPickup = $prezzoBase * 0.10;
-}
-
-$prezzoTotale = $prezzoBase + $prezzoExtra + $prezzoPickup;
+// Utilizzo la funzione helper per calcolare il prezzo totale
+$prezzoTotale = calcolaPrezzoEsperienza(
+    $prezzoBase,
+    $extrasSelected,
+    $extra,
+    $pickupChecked
+);
 
 // Determino metodo e stato in base alla selezione (validazione robusta)
 $metodoPagamento = 'Contanti';
