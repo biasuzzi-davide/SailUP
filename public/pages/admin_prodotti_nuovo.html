@@ -212,10 +212,12 @@
 
               <div class="form-group">
                 <label for="product-status">Stato Prodotto <abbr title="Campo obbligatorio">*</abbr></label>
-                <select id="product-status" name="product-status" required aria-required="true" aria-describedby="product-status-error">
-                  <option value="available" [SEL_STATUS_AVAILABLE]>Disponibile</option>
-                  <option value="unavailable" [SEL_STATUS_UNAVAIL]>Non Disponibile</option>
-                </select>
+                <div class="checkbox-group">
+                  <input type="checkbox" id="product-status" name="product-status" value="available" [CHECK_STATUS_AVAILABLE]
+                    aria-describedby="product-status-hint product-status-error">
+                  <label for="product-status">Disponibile</label>
+                </div>
+                <span id="product-status-hint" class="field-hint">Se non selezionato: Non Disponibile.</span>
                 <span id="product-status-error" class="field-error" role="alert"></span>
               </div>
 
