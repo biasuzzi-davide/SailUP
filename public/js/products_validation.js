@@ -133,6 +133,17 @@
     }
 
     function validateStatus() {
+        if (!statusInput) {
+            return true;
+        }
+        if (statusInput.type === 'checkbox') {
+            if (statusInput.hasAttribute('required') && !statusInput.checked) {
+                showFieldError(statusInput, 'Seleziona lo stato del prodotto');
+                return false;
+            }
+            clearFieldError(statusInput);
+            return true;
+        }
         if (statusInput.value === '') { showFieldError(statusInput, 'Lo stato è obbligatorio'); return false; }
         clearFieldError(statusInput); return true;
     }
@@ -250,6 +261,7 @@
     imageInput.addEventListener('blur', validateImage);
     altInput.addEventListener('blur', validateAlt);
     statusInput.addEventListener('blur', validateStatus);
+    statusInput.addEventListener('change', validateStatus);
     if (boatTypeInput) {
         boatTypeInput.addEventListener('blur', validateBoatType);
     }

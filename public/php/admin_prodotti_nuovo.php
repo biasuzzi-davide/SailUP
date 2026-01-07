@@ -133,15 +133,14 @@ $placeholders = [
     '[IMG_ALT]' => '',
     '[CHECK_PATENTE]' => '',
     '[CHECK_ACCESS]' => '',
-    '[SEL_STATUS_AVAILABLE]' => '',
-    '[SEL_STATUS_UNAVAIL]' => '',
+    '[CHECK_STATUS_AVAILABLE]' => '',
     '[LANG_IT]' => '',
     '[LANG_EN]' => '',
     '[LANG_FR]' => '',
     '[LANG_ES]' => '',
     '[LANG_DE]' => '',
 ];
-$placeholders['[SEL_STATUS_AVAILABLE]'] = 'selected';
+$placeholders['[CHECK_STATUS_AVAILABLE]'] = 'checked';
 
 if (isset($_GET['id']) && trim($_GET['id']) !== '') {
     $editingId = trim($_GET['id']);
@@ -166,8 +165,7 @@ if (isset($_GET['id']) && trim($_GET['id']) !== '') {
             '[IMG_ALT]' => htmlspecialchars($prod['Testo_Alternativo'] ?? ''),
             '[CHECK_PATENTE]' => !empty($prod['Richiede_Patente']) ? 'checked' : '',
             '[CHECK_ACCESS]' => !empty($prod['Accessibile_Disabili']) ? 'checked' : '',
-            '[SEL_STATUS_AVAILABLE]' => !empty($prod['Attivo']) ? 'selected' : '',
-            '[SEL_STATUS_UNAVAIL]' => empty($prod['Attivo']) ? 'selected' : '',
+            '[CHECK_STATUS_AVAILABLE]' => !empty($prod['Attivo']) ? 'checked' : '',
             '[PROD_FEATURES]' => htmlspecialchars(implode("\n", array_map(fn($row) => $row['Nome_Incluso'] ?? '', $inclusi))),
         ]);
         $placeholders = array_merge($placeholders, getBoatTypePlaceholders($prod['Tipologia_Prodotto'] ?? ''));
@@ -203,7 +201,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $lunghezza = isset($_POST['product-length']) && $_POST['product-length'] !== '' ? (float)$_POST['product-length'] : null;
         $richiedePatente = !empty($_POST['requires-license']) ? 1 : 0;
         $accessibile = !empty($_POST['is-accessible']) ? 1 : 0;
-        $status = $_POST['product-status'] ?? 'available';
+        $status = isset($_POST['product-status']) ? 'available' : 'unavailable';
         $urlImg = trim($_POST['existing-image-url'] ?? '');
         $altImg = trim($_POST['Testo_Alternativo'] ?? '');
         $lingue = $_POST['product-languages'] ?? [];
@@ -305,8 +303,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     '[IMG_ALT]' => htmlspecialchars($altImg),
                     '[CHECK_PATENTE]' => $richiedePatente ? 'checked' : '',
                     '[CHECK_ACCESS]' => $accessibile ? 'checked' : '',
-                    '[SEL_STATUS_AVAILABLE]' => $status === 'available' ? 'selected' : '',
-                    '[SEL_STATUS_UNAVAIL]' => $status === 'unavailable' ? 'selected' : '',
+                    '[CHECK_STATUS_AVAILABLE]' => $status === 'available' ? 'checked' : '',
                     '[PROD_FEATURES]' => htmlspecialchars($features),
                 ]);
                 $placeholders = array_merge($placeholders, getBoatTypePlaceholders($tipologia));
@@ -341,8 +338,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             '[IMG_ALT]' => htmlspecialchars($altImg),
             '[CHECK_PATENTE]' => $richiedePatente ? 'checked' : '',
             '[CHECK_ACCESS]' => $accessibile ? 'checked' : '',
-            '[SEL_STATUS_AVAILABLE]' => $status === 'available' ? 'selected' : '',
-            '[SEL_STATUS_UNAVAIL]' => $status === 'unavailable' ? 'selected' : '',
+            '[CHECK_STATUS_AVAILABLE]' => $status === 'available' ? 'checked' : '',
             '[PROD_FEATURES]' => htmlspecialchars($features),
         ]);
         $placeholders = array_merge($placeholders, getBoatTypePlaceholders($tipologia));
