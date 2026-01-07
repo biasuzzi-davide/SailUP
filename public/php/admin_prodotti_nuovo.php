@@ -100,6 +100,15 @@ function handleProductImageUpload(string $productId, string $uploadDir): array {
     return $result;
 }
 
+function getBoatTypePlaceholders(?string $tipologia): array {
+    $key = strtolower(trim((string) $tipologia));
+    return [
+        '[PROD_TIPOLOGIA_MOTORE]' => $key === 'motore' ? 'selected' : '',
+        '[PROD_TIPOLOGIA_VELA]' => $key === 'vela' ? 'selected' : '',
+        '[PROD_TIPOLOGIA_GOMMONE]' => $key === 'gommone' ? 'selected' : '',
+    ];
+}
+
 $db = new DBConnection();
 $feedback = '';
 $feedbackClass = 'hidden';
@@ -110,6 +119,9 @@ $placeholders = [
     '[PROD_TYPE_NOLEGGIO]' => '',
     '[PROD_TYPE_EXP]' => '',
     '[PROD_TIPOLOGIA]' => '',
+    '[PROD_TIPOLOGIA_MOTORE]' => '',
+    '[PROD_TIPOLOGIA_VELA]' => '',
+    '[PROD_TIPOLOGIA_GOMMONE]' => '',
     '[PROD_DURATION]' => '',
     '[PROD_DESC]' => '',
     '[PROD_DESC_LONG]' => '',
@@ -121,16 +133,14 @@ $placeholders = [
     '[IMG_ALT]' => '',
     '[CHECK_PATENTE]' => '',
     '[CHECK_ACCESS]' => '',
-    '[SEL_STATUS_AVAILABLE]' => '',
-    '[SEL_STATUS_MAINT]' => '',
-    '[SEL_STATUS_UNAVAIL]' => '',
+    '[CHECK_STATUS_AVAILABLE]' => '',
     '[LANG_IT]' => '',
     '[LANG_EN]' => '',
     '[LANG_FR]' => '',
     '[LANG_ES]' => '',
     '[LANG_DE]' => '',
 ];
-$placeholders['[SEL_STATUS_AVAILABLE]'] = 'selected';
+$placeholders['[CHECK_STATUS_AVAILABLE]'] = 'checked';
 
 if (isset($_GET['id']) && trim($_GET['id']) !== '') {
     $editingId = trim($_GET['id']);
@@ -155,11 +165,10 @@ if (isset($_GET['id']) && trim($_GET['id']) !== '') {
             '[IMG_ALT]' => htmlspecialchars($prod['Testo_Alternativo'] ?? ''),
             '[CHECK_PATENTE]' => !empty($prod['Richiede_Patente']) ? 'checked' : '',
             '[CHECK_ACCESS]' => !empty($prod['Accessibile_Disabili']) ? 'checked' : '',
-            '[SEL_STATUS_AVAILABLE]' => !empty($prod['Attivo']) ? 'selected' : '',
-            '[SEL_STATUS_MAINT]' => '',
-            '[SEL_STATUS_UNAVAIL]' => empty($prod['Attivo']) ? 'selected' : '',
+            '[CHECK_STATUS_AVAILABLE]' => !empty($prod['Attivo']) ? 'checked' : '',
             '[PROD_FEATURES]' => htmlspecialchars(implode("\n", array_map(fn($row) => $row['Nome_Incluso'] ?? '', $inclusi))),
         ]);
+        $placeholders = array_merge($placeholders, getBoatTypePlaceholders($prod['Tipologia_Prodotto'] ?? ''));
         $placeholders['[LANG_IT]'] = in_array('IT', $langsCodes, true) ? 'checked' : '';
         $placeholders['[LANG_EN]'] = in_array('EN', $langsCodes, true) ? 'checked' : '';
         $placeholders['[LANG_FR]'] = in_array('FR', $langsCodes, true) ? 'checked' : '';
@@ -176,7 +185,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         $nome = trim($_POST['product-name'] ?? '');
         $tipo = $_POST['product-type'] ?? '';
-        $tipologia = trim($_POST['product-category'] ?? '');
+        $boatTypeMap = [
+            'motore' => 'Motore',
+            'vela' => 'Vela',
+            'gommone' => 'Gommone',
+        ];
+        $tipologiaRaw = trim($_POST['product-category'] ?? '');
+        $tipologiaKey = strtolower($tipologiaRaw);
+        $tipologia = $boatTypeMap[$tipologiaKey] ?? '';
         $durata = $_POST['product-duration'] ?? '';
         $descrBreve = trim($_POST['product-description'] ?? '');
         $descr = trim($_POST['product-long-description'] ?? '');
@@ -185,13 +201,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $lunghezza = isset($_POST['product-length']) && $_POST['product-length'] !== '' ? (float)$_POST['product-length'] : null;
         $richiedePatente = !empty($_POST['requires-license']) ? 1 : 0;
         $accessibile = !empty($_POST['is-accessible']) ? 1 : 0;
-        $status = $_POST['product-status'] ?? 'available';
+        $status = isset($_POST['product-status']) ? 'available' : 'unavailable';
         $urlImg = trim($_POST['existing-image-url'] ?? '');
         $altImg = trim($_POST['Testo_Alternativo'] ?? '');
         $lingue = $_POST['product-languages'] ?? [];
         $features = trim($_POST['product-features'] ?? '');
         $prodIdPost = trim($_POST['product-id'] ?? '');
         $uploadRes = ['url' => null, 'error' => null, 'file' => null];
+        if ($tipo !== 'noleggio') {
+            if ($prodIdPost !== '') {
+                $currentProd = $db->getProdottoAdminById($prodIdPost);
+                $tipologia = is_array($currentProd) ? trim((string) ($currentProd['Tipologia_Prodotto'] ?? '')) : '';
+            } else {
+                $tipologia = '';
+            }
+        }
 
         $errors = [];
         if ($nome === '') $errors[] = 'Inserisci il nome del prodotto';
@@ -205,6 +229,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errors[] = 'Seleziona un\'immagine per il prodotto';
         }
         if ($altImg === '') $errors[] = 'Testo alternativo obbligatorio';
+        if ($tipo === 'noleggio' && $tipologia === '') {
+            $errors[] = 'Seleziona la tipologia di barca per il noleggio';
+        }
         if ($tipo === 'experience' && (empty($lingue) || !is_array($lingue))) {
             $errors[] = 'Seleziona almeno una lingua per le esperienze';
         }
@@ -276,11 +303,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     '[IMG_ALT]' => htmlspecialchars($altImg),
                     '[CHECK_PATENTE]' => $richiedePatente ? 'checked' : '',
                     '[CHECK_ACCESS]' => $accessibile ? 'checked' : '',
-                    '[SEL_STATUS_AVAILABLE]' => $status === 'available' ? 'selected' : '',
-                    '[SEL_STATUS_MAINT]' => $status === 'maintenance' ? 'selected' : '',
-                    '[SEL_STATUS_UNAVAIL]' => $status === 'unavailable' ? 'selected' : '',
+                    '[CHECK_STATUS_AVAILABLE]' => $status === 'available' ? 'checked' : '',
                     '[PROD_FEATURES]' => htmlspecialchars($features),
                 ]);
+                $placeholders = array_merge($placeholders, getBoatTypePlaceholders($tipologia));
                 $langsCodes = is_array($lingue) ? $lingue : [];
                 $placeholders['[LANG_IT]'] = in_array('IT', $langsCodes, true) ? 'checked' : '';
                 $placeholders['[LANG_EN]'] = in_array('EN', $langsCodes, true) ? 'checked' : '';
@@ -312,11 +338,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             '[IMG_ALT]' => htmlspecialchars($altImg),
             '[CHECK_PATENTE]' => $richiedePatente ? 'checked' : '',
             '[CHECK_ACCESS]' => $accessibile ? 'checked' : '',
-            '[SEL_STATUS_AVAILABLE]' => $status === 'available' ? 'selected' : '',
-            '[SEL_STATUS_MAINT]' => $status === 'maintenance' ? 'selected' : '',
-            '[SEL_STATUS_UNAVAIL]' => $status === 'unavailable' ? 'selected' : '',
+            '[CHECK_STATUS_AVAILABLE]' => $status === 'available' ? 'checked' : '',
             '[PROD_FEATURES]' => htmlspecialchars($features),
         ]);
+        $placeholders = array_merge($placeholders, getBoatTypePlaceholders($tipologia));
         $langsCodes = is_array($lingue) ? $lingue : [];
         $placeholders['[LANG_IT]'] = in_array('IT', $langsCodes, true) ? 'checked' : '';
         $placeholders['[LANG_EN]'] = in_array('EN', $langsCodes, true) ? 'checked' : '';
