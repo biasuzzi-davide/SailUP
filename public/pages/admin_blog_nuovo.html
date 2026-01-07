@@ -77,6 +77,15 @@
               </div>
             </div>
 
+            <div class="form-row">
+              <div class="form-group">
+                <label for="post-reading-time">Tempo Medio di Lettura (minuti) <abbr title="Campo obbligatorio">*</abbr></label>
+                <input type="number" id="post-reading-time" name="post-reading-time" min="1" step="1"
+                  placeholder="5" value="[OLD_READING_TIME]" required aria-required="true" aria-describedby="post-reading-time-error" />
+                <span id="post-reading-time-error" class="field-error" role="alert"></span>
+              </div>
+            </div>
+
             <div class="form-group">
               <label for="post-excerpt">Estratto / Anteprima <abbr title="Campo obbligatorio">*</abbr></label>
               <textarea id="post-excerpt" name="post-excerpt" rows="3" maxlength="200"
@@ -99,12 +108,7 @@
               <span id="post-content-error" class="field-error" role="alert"></span>
             </div>
 
-            <div class="form-group">
-              <label for="post-tags"><span lang="en">Tag</span> (opzionale)</label>
-              <input type="text" id="post-tags" name="post-tags"
-                placeholder="es. noleggio, consigli, estate, sicurezza" value="[OLD_TAGS]" aria-describedby="tags-hint" />
-              <span id="tags-hint" class="field-hint">Separa i tag con virgole</span>
-            </div>
+            
           </fieldset>
 
           <fieldset>
@@ -129,23 +133,7 @@
             </div>
           </fieldset>
 
-          <fieldset>
-            <legend><abbr title="Search Engine Optimization" lang="en">SEO</abbr> e Metadata</legend>
-
-            <div class="form-group">
-              <label for="post-meta-title"><span lang="en">Meta</span> Titolo (opzionale)</label>
-              <input type="text" id="post-meta-title" name="post-meta-title"
-                placeholder="Titolo ottimizzato per i motori di ricerca" value="[OLD_META_TITLE]" aria-describedby="meta-title-hint">
-              <span id="meta-title-hint" class="field-hint">Se lasciato vuoto, verrà usato il titolo dell'articolo</span>
-            </div>
-
-            <div class="form-group">
-              <label for="post-meta-description"><span lang="en">Meta</span> Descrizione (opzionale)</label>
-              <textarea id="post-meta-description" name="post-meta-description" rows="2" maxlength="160"
-                placeholder="Descrizione ottimizzata per i motori di ricerca" aria-describedby="meta-desc-hint">[OLD_META_DESC]</textarea>
-              <span id="meta-desc-hint" class="field-hint">Idealmente tra 120-160 caratteri</span>
-            </div>
-          </fieldset>
+          
 
           <fieldset>
             <legend>Extra Articolo</legend>

@@ -119,6 +119,7 @@ $old = [
     'status' => 'draft',
     'extras' => [],
     'category' => '',
+    'reading_time' => '',
 ];
 
 function stimaTempoLettura(string $contenuto): int {
@@ -147,6 +148,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $tags = trim($_POST['post-tags'] ?? '');
         $metaTitle = trim($_POST['post-meta-title'] ?? '');
         $metaDesc = trim($_POST['post-meta-description'] ?? '');
+        $readingTime = (int)($_POST['post-reading-time'] ?? 0);
         $extraTitles = $_POST['extra_title'] ?? [];
         $extraItems = $_POST['extra_item'] ?? [];
 
@@ -164,6 +166,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'status' => $status,
             'extras' => [],
             'category' => $categoria,
+            'reading_time' => $readingTime,
         ];
 
         $errors = [];
@@ -176,6 +179,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $hasNewImage = isset($_FILES['post_image']) && $_FILES['post_image']['error'] !== UPLOAD_ERR_NO_FILE;
         if (!$hasNewImage && $urlImg === '') $errors[] = 'Immagine obbligatoria';
         if ($altImg === '') $errors[] = 'Testo alternativo obbligatorio';
+        if ($readingTime < 1) $errors[] = 'Inserisci il tempo medio di lettura in minuti';
 
         $extras = [];
         if (is_array($extraTitles) && is_array($extraItems)) {
@@ -200,7 +204,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if (empty($errors)) {
             $pubblicato = $status === 'published' || ($_POST['action'] ?? '') === 'publish';
-            $tempo = stimaTempoLettura($contenuto);
+            $tempo = $readingTime > 0 ? $readingTime : stimaTempoLettura($contenuto);
             $newId = $db->creaArticoloBlog(
                 (int)$userId,
                 $titolo,
@@ -218,6 +222,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     if (!empty($extras)) {
                         $db->setArticoloBlogExtra((int)$newId, $extras);
                     }
+                    header('Location: blog.php');
+                    exit;
                     $feedbackClass = 'alert alert-success';
                     $feedback = 'Articolo salvato correttamente.';
                     $old = [
@@ -233,6 +239,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         'meta_desc' => '',
                         'status' => 'draft',
                         'extras' => [],
+                        'reading_time' => '',
                     ];
                 } else {
                     if (!empty($uploadRes['path']) && file_exists($uploadRes['path'])) {
@@ -299,6 +306,7 @@ $html = str_replace(
         '[OLD_ALT]',
         '[OLD_META_TITLE]',
         '[OLD_META_DESC]',
+        '[OLD_READING_TIME]',
         '[IF_STATUS_DRAFT]',
         '[IF_STATUS_PUB]',
         '[ADMIN_BLOG_EXTRAS]',
@@ -323,6 +331,7 @@ $html = str_replace(
         htmlspecialchars($old['alt']),
         htmlspecialchars($old['meta_title'], ENT_QUOTES),
         htmlspecialchars($old['meta_desc']),
+        htmlspecialchars((string)$old['reading_time']),
         $statusDraft,
         $statusPub,
         $extrasHtml,
