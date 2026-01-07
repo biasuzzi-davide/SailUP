@@ -116,6 +116,12 @@ if ($tipoProdotto === 'Noleggio' && isset($prenotazione['skipper']) && $prenotaz
         </div>';
 }
 
+// Extra selezionati - utilizzo la funzione helper per generare l'HTML
+$extraRows = buildExtraRowsHtml(
+    $prenotazione['extras_selezionati'] ?? [],
+    $prenotazione['extras_disponibili'] ?? []
+);
+
 // Prezzo
 $prezzoTotale = number_format((float) ($prenotazione['prezzo_totale'] ?? 0), 2, ',', '.');
 
@@ -136,6 +142,7 @@ $placeholders = [
     '[DATA_INIZIO_FORMATTATA]' => htmlspecialchars($dataInizioFormattata, ENT_QUOTES),
     '[DATA_FINE_ROW]' => $dataFineRow,
     '[EXTRA_SERVIZIO_ROW]' => $extraServizioRow,
+    '[EXTRA_ROWS]' => $extraRows,
     '[PREZZO_TOTALE]' => htmlspecialchars($prezzoTotale, ENT_QUOTES),
     '[PAGATO_O_DA_PAGARE]' => htmlspecialchars($pagatoODaPagare, ENT_QUOTES),
 ];

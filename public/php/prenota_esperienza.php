@@ -243,6 +243,8 @@ if ($selectPayment === 'cc') {
         'prezzo_totale' => $prezzoTotale,
         'metodo_pagamento' => $metodoPagamento,
         'stato' => 'Confermata', // Sarà confermata dopo il pagamento
+        'extras_selezionati' => $extrasSelected,
+        'extras_disponibili' => $extra,
     ];
     
     // Vai alla pagina di pagamento
@@ -284,6 +286,8 @@ $_SESSION['prenotazione_temp'] = [
     'prezzo_totale' => $prezzoTotale,
     'metodo_pagamento' => $metodoPagamento,
     'stato' => $statoPrenotazione,
+    'extras_selezionati' => $extrasSelected,
+    'extras_disponibili' => $extra,
 ];
 
 // Vai direttamente alla conferma
