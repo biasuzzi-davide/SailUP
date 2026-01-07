@@ -121,10 +121,10 @@ if (is_array($prenAll)) {
 $rows = buildAdminBookingRows($pren, $csrfToken);
 
 $html = buildPage('../pages/admin_prenotazioni.html', $_SERVER['PHP_SELF']);
-$pages = $total > 0 ? (int)ceil($total / $perPage) : 1;
+$totalPages = $total > 0 ? (int)ceil($total / $perPage) : 1;
 $pagination = buildPaginationNav(
     $page,
-    $pages,
+    $totalPages,
     'admin_prenotazioni.php',
     ['q' => $search, 'stato' => $filterStato],
     'Paginazione prenotazioni'

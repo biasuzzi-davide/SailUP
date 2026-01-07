@@ -74,10 +74,10 @@ if (is_array($prodottiRes)) {
 
 $rows = buildAdminProductRows($prodotti, $csrfToken);
 
-$pages = $total > 0 ? (int)ceil($total / $perPage) : 1;
+$totalPages = $total > 0 ? (int)ceil($total / $perPage) : 1;
 $pagination = buildPaginationNav(
     $page,
-    $pages,
+    $totalPages,
     'admin_prodotti.php',
     ['q' => $search, 'tipo' => $filterTipo, 'stato' => $filterStato],
     'Paginazione prodotti'

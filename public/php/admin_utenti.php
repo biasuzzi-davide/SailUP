@@ -50,10 +50,10 @@ $statPlaceholders = [
     '[STAT_USERS_STANDARD]' => htmlspecialchars((string)($userStats['standard_users'] ?? 0)),
 ];
 
-$pages = $total > 0 ? (int)ceil($total / $perPage) : 1;
+$totalPages = $total > 0 ? (int)ceil($total / $perPage) : 1;
 $pagination = buildPaginationNav(
     $page,
-    $pages,
+    $totalPages,
     'admin_utenti.php',
     ['q' => $search, 'ruolo' => $filterRole, 'stato' => $filterStatus],
     'Paginazione utenti'
