@@ -80,10 +80,14 @@ if ($prenotazione['tipo_prodotto'] === 'Noleggio') {
     $linkProdotto = 'dettaglio_esperienza.php?id=' . urlencode($prenotazione['id_prodotto']);
 }
 
+// Formatto il prezzo totale
+$prezzoTotaleFormattato = number_format((float) ($prenotazione['prezzo_totale'] ?? 0), 2, ',', '.');
+
 $placeholders = [
     '[LINK PRODOTTO]' => htmlspecialchars($linkProdotto, ENT_QUOTES),
     '[NOME-PRODOTTO]' => htmlspecialchars($nomeProdotto, ENT_QUOTES),
     '[LINK_INDIETRO]' => htmlspecialchars($linkProdotto, ENT_QUOTES),
+    '[PREZZO_TOTALE]' => htmlspecialchars($prezzoTotaleFormattato, ENT_QUOTES),
 ];
 
 // Keywords per SEO

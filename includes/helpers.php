@@ -232,6 +232,61 @@ function formatCurrencyWithDecimals(?string $value): string {
 }
 
 /**
+ * Calcola il prezzo totale per un noleggio.
+ */
+function calcolaPrezzoNoleggio(float $prezzoBase, string $dataInizio, string $dataFine, array $extraSelezionati, array $extraDisponibili, bool $skipperRichiesto): float {
+    // Calcolo giorni di noleggio
+    $dateStart = new DateTime($dataInizio);
+    $dateEnd = new DateTime($dataFine);
+    $giorni = $dateStart->diff($dateEnd)->days + 1; // +1 perché include entrambi i giorni
+
+    $prezzoBaseGiorni = $prezzoBase * $giorni;
+
+    // Calcolo extra - cerco per IDExtra
+    $prezzoExtra = 0;
+    foreach ($extraSelezionati as $extraId) {
+        foreach ($extraDisponibili as $extraItem) {
+            if (isset($extraItem['IDExtra']) && (int)$extraItem['IDExtra'] === (int)$extraId) {
+                $prezzoExtra += (float) ($extraItem['Prezzo_Extra'] ?? 0);
+                break;
+            }
+        }
+    }
+
+    // Calcolo +10% skipper (solo sul prezzo base)
+    $prezzoSkipper = 0;
+    if ($skipperRichiesto) {
+        $prezzoSkipper = $prezzoBaseGiorni * 0.10;
+    }
+
+    return $prezzoBaseGiorni + $prezzoExtra + $prezzoSkipper;
+}
+
+/**
+ * Calcola il prezzo totale per un'esperienza.
+ */
+function calcolaPrezzoEsperienza(float $prezzoBase, array $extraSelezionati, array $extraDisponibili, bool $pickupRichiesto): float {
+    // Calcolo extra - cerco per IDExtra
+    $prezzoExtra = 0;
+    foreach ($extraSelezionati as $extraId) {
+        foreach ($extraDisponibili as $extraItem) {
+            if (isset($extraItem['IDExtra']) && (int)$extraItem['IDExtra'] === (int)$extraId) {
+                $prezzoExtra += (float) ($extraItem['Prezzo_Extra'] ?? 0);
+                break;
+            }
+        }
+    }
+
+    // Calcolo +10% pickup (solo sul prezzo base)
+    $prezzoPickup = 0;
+    if ($pickupRichiesto) {
+        $prezzoPickup = $prezzoBase * 0.10;
+    }
+
+    return $prezzoBase + $prezzoExtra + $prezzoPickup;
+}
+
+/**
  * Costruisce un elenco HTML da un array di righe.
  */
 function buildItemsList(array $items, string $valueKey, string $emptyMessage, ?callable $formatter = null): string {

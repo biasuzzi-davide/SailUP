@@ -117,7 +117,7 @@ if ($tipoProdotto === 'Noleggio' && isset($prenotazione['skipper']) && $prenotaz
 }
 
 // Prezzo
-$prezzoTotale = number_format((float) ($prenotazione['prezzo_totale'] ?? 0), 0, ',', '.');
+$prezzoTotale = number_format((float) ($prenotazione['prezzo_totale'] ?? 0), 2, ',', '.');
 
 // Label "Pagato" o "Da Pagare"
 $pagatoODaPagare = ($metodoPagamento === 'Carta di Credito' && $statoPrenotazione === 'Confermata') ? 'Pagato' : 'Da Pagare';

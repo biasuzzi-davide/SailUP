@@ -198,32 +198,15 @@ $prezzoBase = (float) ($productDetail['Prezzo_Base'] ?? 0);
 $extra = $db->getProdottoExtra($productDetail['IDProdotto']);
 if ($extra === false) $extra = [];
 
-// Calcolo giorni di noleggio
-$dateStart = new DateTime($startDate);
-$dateEnd = new DateTime($endDate);
-$giorni = $dateStart->diff($dateEnd)->days + 1; // +1 perché include entrambi i giorni
-
-$prezzoBaseGiorni = $prezzoBase * $giorni;
-
-// Calcolo extra - cerco per IDExtra
-$prezzoExtra = 0;
-foreach ($extrasSelected as $extraId) {
-    // Trova l'extra nell'array tramite IDExtra
-    foreach ($extra as $extraItem) {
-        if (isset($extraItem['IDExtra']) && (int)$extraItem['IDExtra'] === (int)$extraId) {
-            $prezzoExtra += (float) ($extraItem['Prezzo_Extra'] ?? 0);
-            break;
-        }
-    }
-}
-
-// Calcolo +10% skipper (solo sul prezzo base)
-$prezzoSkipper = 0;
-if ($skipperChecked) {
-    $prezzoSkipper = $prezzoBaseGiorni * 0.10;
-}
-
-$prezzoTotale = $prezzoBaseGiorni + $prezzoExtra + $prezzoSkipper;
+// Utilizzo la funzione helper per calcolare il prezzo totale
+$prezzoTotale = calcolaPrezzoNoleggio(
+    $prezzoBase,
+    $startDate,
+    $endDate,
+    $extrasSelected,
+    $extra,
+    $skipperChecked
+);
 
 // Determino metodo e stato in base alla selezione (validazione robusta)
 $metodoPagamento = 'Contanti';
