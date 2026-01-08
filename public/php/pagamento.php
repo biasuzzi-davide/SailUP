@@ -91,7 +91,7 @@ $placeholders = [
 ];
 
 // Keywords per SEO
-$keywords = '<meta name="keywords" content="pagamento SailUP, completa prenotazione, pagamento sicuro, checkout">';
+$keywords = '<meta name="keywords" content="pagamento, prenotazione, checkout, sicuro, carta, credito, bonifico, contanti, SailUP">';
 $placeholders['[KEYWORDS]'] = $keywords;
 
 $html = str_replace(array_keys($placeholders), array_values($placeholders), $html);

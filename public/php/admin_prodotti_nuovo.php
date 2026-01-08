@@ -368,7 +368,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $html = buildPage('../pages/admin_prodotti_nuovo.html', $_SERVER['PHP_SELF']);
 
 // Keywords per SEO (pagine admin sono noindex)
-$keywords = '<meta name="keywords" content="nuovo prodotto, aggiungi barca, aggiungi esperienza, admin prodotti SailUP">';
+$keywords = '<meta name="keywords" content="nuovo, prodotto, aggiungi, barca, esperienza, admin, SailUP">';
 
 $isEdit = $mode === 'edit';
 $pageTitle = $isEdit ? 'Modifica Prodotto' : 'Aggiungi Nuovo Prodotto';

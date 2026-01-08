@@ -245,12 +245,16 @@ $extraCheckboxes = buildExtraCheckboxes($extra);
 $html = buildPage('../pages/dettaglio_barca.html', $_SERVER['PHP_SELF']);
 
 // Genera keywords dinamiche basate sui dati della barca
-$keywordsContent = 'noleggio ' . strtolower($productName) . ', ' . strtolower($productType) . ' Napoli, barche ' . strtolower($productType) . ', noleggio barche Golfo di Napoli';
+$keywordParts = ['noleggio', strtolower($productName), strtolower($productType), 'barche', 'Napoli', 'golfo'];
 if ($licenseRaw === false) {
-    $keywordsContent .= ', barche senza patente';
+    $keywordParts[] = 'senza';
+    $keywordParts[] = 'patente';
 } else if ($licenseRaw === true) {
-    $keywordsContent .= ', barche con patente';
+    $keywordParts[] = 'patente';
+    $keywordParts[] = 'richiesta';
 }
+$keywordParts[] = 'mare';
+$keywordsContent = implode(', ', array_unique($keywordParts));
 $keywords = '<meta name="keywords" content="' . htmlspecialchars($keywordsContent, ENT_QUOTES) . '">';
 
 $placeholders = [

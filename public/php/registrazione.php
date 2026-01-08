@@ -104,7 +104,7 @@ if (!empty($errors)) {
 }
 
 // Keywords per SEO
-$keywords = '<meta name="keywords" content="registrazione SailUP, crea account, iscriviti SailUP, nuovo utente, prenotazioni barche Napoli">';
+$keywords = '<meta name="keywords" content="registrazione, crea, account, iscriviti, nuovo, utente, prenotazioni, barche, SailUP">';
 
 $html = str_replace(
     ['[SERVER_STATE]', '[SERVER_MESSAGES]', '[CSRF_TOKEN]',

@@ -6,7 +6,7 @@ require_once '../../includes/db_connection.php';
 $html = buildPage('../pages/blog.html', $_SERVER['PHP_SELF']);
 
 // Keywords per SEO
-$keywords = '<meta name="keywords" content="blog nautico Napoli, guide mare, consigli navigazione, Golfo di Napoli, esperienze barche, diario di bordo, turismo mare Napoli">';
+$keywords = '<meta name="keywords" content="blog, nautico, guide, consigli, navigazione, esperienze, diario, bordo, turismo, mare, Napoli, golfo">';
 $html = str_replace('[KEYWORDS]', $keywords, $html);
 
 $db = new DBConnection();

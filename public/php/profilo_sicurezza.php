@@ -273,7 +273,7 @@ $placeholders = [
 ] + $addrPlaceholders;
 
 // Keywords per SEO
-$keywords = '<meta name="keywords" content="sicurezza account, modifica profilo, cambia password, aggiorna dati personali">';
+$keywords = '<meta name="keywords" content="sicurezza, account, modifica, profilo, password, aggiorna, dati, personali, SailUP">';
 $placeholders['[KEYWORDS]'] = $keywords;
 
 $html = buildPage('../pages/profilo_sicurezza.html', $_SERVER['PHP_SELF']);

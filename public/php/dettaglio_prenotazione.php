@@ -114,7 +114,7 @@ $html = str_replace(
 );
 
 // Keywords per SEO (pagina admin, noindex per privacy)
-$keywords = '<meta name="keywords" content="gestione prenotazione, admin SailUP, dettaglio booking">';
+$keywords = '<meta name="keywords" content="gestione, prenotazione, admin, dettaglio, booking, SailUP">';
 $html = str_replace('[KEYWORDS]', $keywords, $html);
 
 echo $html;

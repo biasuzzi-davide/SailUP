@@ -265,7 +265,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $html = buildPage('../pages/admin_blog_nuovo.html', $_SERVER['PHP_SELF']);
 
 // Keywords per SEO (pagine admin sono noindex)
-$keywords = '<meta name="keywords" content="nuovo articolo blog, crea articolo, admin blog SailUP">';
+$keywords = '<meta name="keywords" content="nuovo, articolo, blog, crea, admin, SailUP">';
 
 $categorySelections = [
     'guide' => '',
