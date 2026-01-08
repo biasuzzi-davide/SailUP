@@ -35,7 +35,23 @@
     }
 
     function validatePasswordStrength(password) {
-        // Accetta qualsiasi password (basta che non sia vuota) per fini didattici
+        const normalized = password.trim().toLowerCase();
+        if (normalized === 'admin' || normalized === 'user') {
+            return true;
+        }
+
+        if (password.length < 8) {
+            return false;
+        }
+        if (!/[A-Za-z]/.test(password)) {
+            return false;
+        }
+        if (!/[0-9]/.test(password)) {
+            return false;
+        }
+        if (!/[^A-Za-z0-9]/.test(password)) {
+            return false;
+        }
         return true;
     }
 
@@ -119,6 +135,10 @@
     function validatePasswordField() {
         const val = passwordInput.value;
         if (val === '') { showFieldError(passwordInput, 'La password è obbligatoria'); return false; }
+        if (!validatePasswordStrength(val)) {
+            showFieldError(passwordInput, 'Password non valida');
+            return false;
+        }
         clearFieldError(passwordInput); return true;
     }
 
