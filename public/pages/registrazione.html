@@ -92,18 +92,51 @@
 
                     <div class="form-group">
                         <label for="password" lang="en">Password</label>
-                        <input type="password" id="password" name="password" required aria-required="true"
-                            aria-describedby="password-hint password-error" autocomplete="new-password" />
-                        <span id="password-hint" class="field-hint">DA DEFINIRE CHE POLITICA UTILIZZIAMO </span>
+                        <div class="password-field">
+                            <input type="password" id="password" name="password" required aria-required="true"
+                                aria-describedby="password-hint password-error" autocomplete="new-password" />
+                            <button type="button" class="password-toggle" data-target="password"
+                                data-label-show="Mostra password" data-label-hide="Nascondi password"
+                                aria-label="Mostra password" aria-pressed="false">
+                                <svg class="icon-eye" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                </svg>
+                                <svg class="icon-eye-off" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M17.94 17.94A10.94 10.94 0 0 1 12 20c-7 0-11-8-11-8a21.86 21.86 0 0 1 5.06-6.06"></path>
+                                    <path d="M1 1l22 22"></path>
+                                    <path d="M9.9 4.24A9 9 0 0 1 12 4c7 0 11 8 11 8a21.85 21.85 0 0 1-4.87 5.8"></path>
+                                    <path d="M14.12 14.12a3 3 0 0 1-4.24-4.24"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        <span id="password-hint" class="field-hint">Lunghezza minima 8, almeno una lettera,almeno un numero, almeno un carattere speciale</span>
                         <!-- deve essere definito -->
                         <span id="password-error" class="field-error" role="alert"></span>
                     </div>
 
                     <div class="form-group print-none">
                         <label for="confirm-password">Conferma <span lang="en">Password</span></label>
-                        <input type="password" id="confirm-password" name="confirm-password" required
-                            aria-required="true" aria-describedby="confirm-password-hint confirm-password-error"
-                            autocomplete="new-password" />
+                        <div class="password-field">
+                            <input type="password" id="confirm-password" name="confirm-password" required
+                                aria-required="true" aria-describedby="confirm-password-hint confirm-password-error"
+                                autocomplete="new-password" />
+                            <button type="button" class="password-toggle" data-target="confirm-password"
+                                data-label-show="Mostra password di conferma"
+                                data-label-hide="Nascondi password di conferma"
+                                aria-label="Mostra password di conferma" aria-pressed="false">
+                                <svg class="icon-eye" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                </svg>
+                                <svg class="icon-eye-off" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M17.94 17.94A10.94 10.94 0 0 1 12 20c-7 0-11-8-11-8a21.86 21.86 0 0 1 5.06-6.06"></path>
+                                    <path d="M1 1l22 22"></path>
+                                    <path d="M9.9 4.24A9 9 0 0 1 12 4c7 0 11 8 11 8a21.85 21.85 0 0 1-4.87 5.8"></path>
+                                    <path d="M14.12 14.12a3 3 0 0 1-4.24-4.24"></path>
+                                </svg>
+                            </button>
+                        </div>
                         <span id="confirm-password-hint" class="field-hint">Ripetere la <span lang="en">password</span>
                             scelta in
                             precedenza </span>
