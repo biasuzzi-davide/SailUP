@@ -147,13 +147,13 @@ function getProfileImageUrl(array $user = []): string {
         return $default;
     }
 
-    $uploadDir = __DIR__ . '/../public/uploads/avatars';
+    $uploadDir = __DIR__ . '/../public/img/avatars';
 
     //se in sessione c'è il nome file, prova quello
     if (!empty($user['AvatarFile'])) {
         $candidate = $uploadDir . '/' . basename($user['AvatarFile']);
         if (file_exists($candidate)) {
-            return '../uploads/avatars/' . basename($candidate) . '?v=' . filemtime($candidate);
+            return '../img/avatars/' . basename($candidate) . '?v=' . filemtime($candidate);
         }
     }
 
@@ -161,7 +161,7 @@ function getProfileImageUrl(array $user = []): string {
     foreach (['webp', 'jpg', 'jpeg', 'png'] as $ext) {
         $path = $uploadDir . '/user_' . $userId . '.' . $ext;
         if (file_exists($path)) {
-            return '../uploads/avatars/' . basename($path) . '?v=' . filemtime($path);
+            return '../img/avatars/' . basename($path) . '?v=' . filemtime($path);
         }
     }
 
@@ -346,11 +346,25 @@ function getPlaceholderImage(): string {
 }
 
 /**
+ * Normalizza URL immagini legacy da /uploads/ a /img/.
+ */
+function normalizeImageUrl(string $url): string {
+    $normalized = $url;
+    $normalized = str_replace('../uploads/', '../img/', $normalized);
+    $normalized = str_replace('/uploads/', '/img/', $normalized);
+    $normalized = str_replace('uploads/', 'img/', $normalized);
+    return $normalized;
+}
+
+/**
  * Risolve un URL immagine, utilizzando il placeholder se necessario.
  */
 function resolveImageUrl(?string $url): string {
     $trimmed = trim((string) $url);
-    return $trimmed !== '' ? $trimmed : getPlaceholderImage();
+    if ($trimmed === '') {
+        return getPlaceholderImage();
+    }
+    return normalizeImageUrl($trimmed);
 }
 
 /**

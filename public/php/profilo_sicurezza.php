@@ -44,7 +44,7 @@ function handleProfileImageUpload(int $userId): array {
         return $result;
     }
 
-    $uploadDir = __DIR__ . '/../uploads/avatars';
+    $uploadDir = __DIR__ . '/../img/avatars';
     if (!is_dir($uploadDir)) {
         mkdir($uploadDir, 0775, true);
     }
@@ -91,7 +91,7 @@ function handleProfileImageUpload(int $userId): array {
     imagedestroy($srcImage);
 
     $result['file'] = $filename;
-    $result['url'] = '../uploads/avatars/' . $filename . '?v=' . filemtime($destPath);
+    $result['url'] = '../img/avatars/' . $filename . '?v=' . filemtime($destPath);
     return $result;
 }
 
