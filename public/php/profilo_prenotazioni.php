@@ -51,7 +51,7 @@ $rowsHtml = buildProfileBookingRows(is_array($prenotazioni) ? $prenotazioni : []
 $html = buildPage('../pages/profilo_prenotazioni.html', $_SERVER['PHP_SELF']);
 
 // Keywords per SEO
-$keywords = '<meta name="keywords" content="prenotazioni SailUP, gestione prenotazioni, storico prenotazioni, annulla prenotazione">';
+$keywords = '<meta name="keywords" content="prenotazioni, gestione, storico, annulla, modifica, utente, SailUP">';
 
 $placeholders = [
     '[BOOKING_ROWS]' => $rowsHtml,

@@ -82,7 +82,7 @@ $html = str_replace(
         htmlspecialchars((string)($blogStats['drafts'] ?? 0)),
         '0',
         '0',
-        '<meta name="keywords" content="gestione blog, admin articoli, dashboard blog SailUP">',
+        '<meta name="keywords" content="gestione, blog, admin, articoli, dashboard, SailUP">',
     ],
     $html
 );

@@ -78,7 +78,7 @@ $syncScript = '<script>(function(){'
 $html = str_replace('</body>', $syncScript . '</body>', $html);
 
 // Keywords per SEO
-$keywords = '<meta name="keywords" content="profilo utente SailUP, account personale, gestione prenotazioni, area riservata">';
+$keywords = '<meta name="keywords" content="profilo, utente, account, personale, gestione, prenotazioni, area, riservata, SailUP">';
 $html = str_replace('[KEYWORDS]', $keywords, $html);
 echo $html;
 ?>

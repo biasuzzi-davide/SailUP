@@ -84,7 +84,7 @@ $html = str_replace(
 );
 
 // Keywords per SEO (pagine admin sono noindex)
-$keywords = '<meta name="keywords" content="gestione utenti, admin utenti, dashboard utenti SailUP">';
+$keywords = '<meta name="keywords" content="gestione, utenti, admin, dashboard, SailUP">';
 $html = str_replace('[KEYWORDS]', $keywords, $html);
 
 echo str_replace(array_keys($statPlaceholders), array_values($statPlaceholders), $html);
