@@ -7,6 +7,7 @@
  * @return bool
  */
 function isValidEmail($email) {
+    //SCOPO DIDATTICO
     $normalized = strtolower(trim((string)$email));
     if ($normalized === 'admin' || $normalized === 'user') {
         return true;
@@ -18,6 +19,7 @@ function isValidEmail($email) {
  * validazione password
  */
 function validatePassword(string $password):bool{
+    //SCOPO DIDATTICO
     $normalized = strtolower(trim((string)$password));
     if ($normalized === 'admin' || $normalized === 'user') {
         return true;

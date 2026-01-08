@@ -62,6 +62,30 @@ document.addEventListener('DOMContentLoaded', () => {
         applyTheme('light');
     }
 
+    document.addEventListener('click', (event) => {
+        const button = event.target.closest('.password-toggle');
+        if (!button) {
+            return;
+        }
+
+        event.preventDefault();
+
+        const targetId = button.getAttribute('data-target');
+        const targetInput = targetId ? document.getElementById(targetId) : null;
+        if (!targetInput) {
+            return;
+        }
+
+        const labelShow = button.getAttribute('data-label-show') || 'Mostra password';
+        const labelHide = button.getAttribute('data-label-hide') || 'Nascondi password';
+
+        const isHidden = targetInput.type === 'password';
+        targetInput.type = isHidden ? 'text' : 'password';
+        button.classList.toggle('is-visible', isHidden);
+        button.setAttribute('aria-pressed', isHidden ? 'true' : 'false');
+        button.setAttribute('aria-label', isHidden ? labelHide : labelShow);
+    });
+
     if (themeToggle) {
         themeToggle.addEventListener('click', () => {
             const currentTheme = htmlElement.getAttribute('data-theme');
