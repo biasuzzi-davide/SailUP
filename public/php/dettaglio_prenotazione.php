@@ -38,7 +38,7 @@ if ($booking === null || $booking === false) {
     exit;
 }
 
-$imgUrl = $booking['URL_Media'] ?? '../img/placeholder.png';
+$imgUrl = resolveImageUrl($booking['URL_Media'] ?? null);
 $imgAlt = $booking['Testo_Alternativo'] ?? 'Immagine prodotto';
 $stato = $booking['Stato_Prenotazione'] ?? 'In Attesa';
 $badgeClass = 'pending';

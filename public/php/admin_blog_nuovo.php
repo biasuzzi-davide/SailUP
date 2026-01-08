@@ -6,7 +6,7 @@ require_once '../../includes/db_connection.php';
 
 requireAdmin();
 
-$uploadDirBlog = __DIR__ . '/../uploads/blog';
+$uploadDirBlog = __DIR__ . '/../img/blog';
 
 $functionImageError = 'Impossibile salvare l\'immagine, riprova.';
 /**
@@ -97,7 +97,7 @@ function handleBlogImageUpload(string $uploadDir): array {
 
     $result['file'] = $filename;
     $result['path'] = $destPath;
-    $result['url'] = '../uploads/blog/' . $filename . '?v=' . filemtime($destPath);
+    $result['url'] = '../img/blog/' . $filename . '?v=' . filemtime($destPath);
     return $result;
 }
 
@@ -142,7 +142,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $contenuto = trim($_POST['post-content'] ?? '');
         $dataPub = $_POST['post-date'] ?? '';
         $status = $_POST['post-status'] ?? 'draft';
-        $urlImg = trim($_POST['existing-image-url'] ?? '');
+        $urlImg = normalizeImageUrl(trim($_POST['existing-image-url'] ?? ''));
         $altImg = trim($_POST['Testo_Alternativo'] ?? '');
         $categoria = trim($_POST['post-category'] ?? '');
         $tags = trim($_POST['post-tags'] ?? '');
