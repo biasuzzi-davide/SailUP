@@ -138,8 +138,10 @@ $placeholders = [
     '[LANG_FR]' => '',
     '[LANG_ES]' => '',
     '[LANG_DE]' => '',
+    '[PROD_EXTRAS]' => '',
 ];
 $placeholders['[CHECK_STATUS_AVAILABLE]'] = 'checked';
+$extrasForForm = [];
 
 if (isset($_GET['id']) && trim($_GET['id']) !== '') {
     $editingId = trim($_GET['id']);
@@ -148,6 +150,15 @@ if (isset($_GET['id']) && trim($_GET['id']) !== '') {
         $mode = 'edit';
         $langs = $db->getLinguePerProdotto($editingId) ?: [];
         $inclusi = $db->getProdottoInclusi($editingId) ?: [];
+        $extrasDb = $db->getProdottoExtra($editingId);
+        if (is_array($extrasDb)) {
+            foreach ($extrasDb as $ex) {
+                $extrasForForm[] = [
+                    'nome' => $ex['Nome_Extra'] ?? '',
+                    'prezzo' => isset($ex['Prezzo_Extra']) ? (int) $ex['Prezzo_Extra'] : '',
+                ];
+            }
+        }
         $langsCodes = array_map(fn($row) => $row['Codice'] ?? '', $langs);
         $placeholders = array_merge($placeholders, [
             '[PROD_NAME]' => htmlspecialchars($prod['Nome_Prodotto'] ?? ''),
@@ -204,6 +215,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $altImg = trim($_POST['Testo_Alternativo'] ?? '');
         $lingue = $_POST['product-languages'] ?? [];
         $features = trim($_POST['product-features'] ?? '');
+        $extraNames = $_POST['extra_name'] ?? [];
+        $extraPrices = $_POST['extra_price'] ?? [];
         $prodIdPost = trim($_POST['product-id'] ?? '');
         $uploadRes = ['url' => null, 'error' => null, 'file' => null];
         if ($tipo !== 'experience') {
@@ -244,6 +257,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $errors[] = 'Seleziona almeno una lingua per le esperienze';
             }
         }
+
+        $extras = [];
+        if (is_array($extraNames) && is_array($extraPrices)) {
+            $len = max(count($extraNames), count($extraPrices));
+            for ($i = 0; $i < $len; $i++) {
+                $nomeExtra = trim($extraNames[$i] ?? '');
+                $prezzoRaw = trim((string)($extraPrices[$i] ?? ''));
+                if ($nomeExtra === '' && $prezzoRaw === '') {
+                    continue;
+                }
+                if ($nomeExtra === '') {
+                    $errors[] = 'Inserisci il nome per ogni extra';
+                    continue;
+                }
+                $prezzoVal = filter_var($prezzoRaw, FILTER_VALIDATE_INT, ['options' => ['min_range' => 1]]);
+                if ($prezzoVal === false) {
+                    $errors[] = 'Prezzo extra non valido';
+                    continue;
+                }
+                $extras[] = [
+                    'nome' => $nomeExtra,
+                    'prezzo' => (int) $prezzoVal,
+                    'descrizione' => '',
+                    'opzionale' => 1,
+                ];
+            }
+        }
+        $extrasForForm = $extras;
 
         if (empty($errors)) {
             $idProdotto = $prodIdPost !== '' ? $prodIdPost : '';
@@ -293,16 +334,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $db->setLingueProdotto($idProdotto, is_array($lingue) ? $lingue : []);
                 $featLines = $features === '' ? [] : array_filter(array_map('trim', preg_split('/\r\n|\r|\n/', $features)));
                 $db->setInclusiProdotto($idProdotto, $featLines);
+                if (!$db->setProdottoExtra($idProdotto, $extras)) {
+                    $feedbackClass = 'alert alert-error';
+                    $feedback = 'Errore durante il salvataggio degli extra.';
+                }
                 //indirizzo l admin alla catalago corispondente in base al tipo di prodotto creato
-                if ($prodIdPost === '') {
+                if ($feedback === '' && $prodIdPost === '') {
                     $redirectTarget = $tipo === 'noleggio' ? 'catalogo_noleggio.php' : 'catalogo_esperienze.php';
                     header('Location: ' . $redirectTarget);
                     exit;
                 }
-                $feedbackClass = 'alert alert-success';
-                $feedback = $prodIdPost !== '' ? 'Prodotto aggiornato correttamente.' : 'Prodotto creato correttamente.';
-                $mode = 'edit';
-                $editingId = $idProdotto;
+                if ($feedback === '') {
+                    $feedbackClass = 'alert alert-success';
+                    $feedback = $prodIdPost !== '' ? 'Prodotto aggiornato correttamente.' : 'Prodotto creato correttamente.';
+                    $mode = 'edit';
+                    $editingId = $idProdotto;
+                }
                 $placeholders = array_merge($placeholders, [
                     '[PROD_NAME]' => htmlspecialchars($nome),
                     '[PROD_TYPE_NOLEGGIO]' => $tipo === 'noleggio' ? 'selected' : '',
@@ -323,11 +370,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $placeholders = array_merge($placeholders, getBoatTypePlaceholders($tipologia));
                 $langsCodes = is_array($lingue) ? $lingue : [];
                 $placeholders['[LANG_IT]'] = in_array('IT', $langsCodes, true) ? 'checked' : '';
-                $placeholders['[LANG_EN]'] = in_array('EN', $langsCodes, true) ? 'checked' : '';
-                $placeholders['[LANG_FR]'] = in_array('FR', $langsCodes, true) ? 'checked' : '';
-                $placeholders['[LANG_ES]'] = in_array('ES', $langsCodes, true) ? 'checked' : '';
-                $placeholders['[LANG_DE]'] = in_array('DE', $langsCodes, true) ? 'checked' : '';
-        } else {
+            $placeholders['[LANG_EN]'] = in_array('EN', $langsCodes, true) ? 'checked' : '';
+            $placeholders['[LANG_FR]'] = in_array('FR', $langsCodes, true) ? 'checked' : '';
+            $placeholders['[LANG_ES]'] = in_array('ES', $langsCodes, true) ? 'checked' : '';
+            $placeholders['[LANG_DE]'] = in_array('DE', $langsCodes, true) ? 'checked' : '';
+    } else {
             $feedbackClass = 'alert alert-error';
             $feedback = 'Errore durante il salvataggio del prodotto.';
         }
@@ -377,6 +424,7 @@ $placeholders['[PROD_TITLE]'] = $pageTitle;
 $placeholders['[PROD_HEADING]'] = $pageTitle;
 $placeholders['[PROD_SUBHEADING]'] = $pageSub;
 $placeholders['[PROD_BREADCRUMB]'] = $isEdit ? 'Modifica Prodotto' : 'Nuovo Prodotto';
+$placeholders['[PROD_EXTRAS]'] = buildProductExtraInputs($extrasForForm);
 
 $html = str_replace(
     ['[ADMIN_PRODUCT_FEEDBACK]', '[CSRF_TOKEN]', '[ADMIN_PRODUCT_ACTION]', '[PROD_MODE]', '[PRODUCT_ID_VALUE]', '[KEYWORDS]'],
