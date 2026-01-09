@@ -4,6 +4,10 @@ require_once '../../includes/session/session.php';
 require_once '../../includes/auth/auth.php';
 require_once '../../includes/helpers.php';
 
+//se un utente prova a fare un traversal path alla pagina di login nonostante sia gia loggato
+requireGuest('../php/profilo.php');
+
+
 $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
