@@ -57,17 +57,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($csrfOk) {
         //validazioni
-        if (!isValidName($nome)) $errors[] = 'Nome non valido';
-        if (!isSurnameValid($cognome)) $errors[] = 'Cognome non valido';
-        if (!isValidCF($cf)) $errors[] = 'Codice fiscale non valido';
-        if (!isValidEmail($email)) $errors[] = 'Email non valida';
-        if (!validatePassword($password)) $errors[] = 'Password non valida';
+        if (!isValidName($nome)) $errors[] = 'Nome non valido: usa solo lettere e spazi';
+        if (!isSurnameValid($cognome)) $errors[] = 'Cognome non valido: usa solo lettere e spazi';
+        if (!isValidCF($cf)) $errors[] = 'Codice fiscale non valido: deve essere 16 caratteri alfanumerici';
+        if (!isValidEmail($email)) $errors[] = 'Email non valida: controlla il formato';
+        if (!validatePassword($password)) $errors[] = 'Password non valida: minimo 8 caratteri, con lettere, numeri e simboli';
         if ($password !== $confirm) $errors[] = 'Le password non coincidono';
-        if (!isValidIndirizzo($via)) $errors[] = 'Via non valida';
-        if (!isValidCivico($civico)) $errors[] = 'Civico non valido';
-        if (!isValidCAP($cap)) $errors[] = 'CAP non valido';
-        if (!isValidCitta($citta)) $errors[] = 'Città non valida';
-        if (!isValidProvincia($provincia)) $errors[] = 'Provincia non valida';
+        if (!isValidIndirizzo($via)) $errors[] = 'Via non valida: massimo 30 caratteri, solo lettere, numeri e caratteri comuni';
+        if (!isValidCivico($civico)) $errors[] = 'Civico non valido: inserisci solo numeri (1-5 cifre)';
+        if (!isValidCAP($cap)) $errors[] = 'CAP non valido: deve essere di 5 cifre';
+        if (!isValidCitta($citta)) $errors[] = 'Città non valida: almeno 2 caratteri, solo lettere, spazi, apostrofi e trattini';
+        if (!isValidProvincia($provincia)) $errors[] = 'Provincia non valida: usa 2 lettere maiuscole (es. NA, RM)';
         if (empty($errors)) {
             $res = registerUserFull([
                 'nome' => $nome,
