@@ -464,7 +464,9 @@ function buildNoleggioCatalogCard(array $prodotto): string {
 
     // Posti totali
     $postiTotali = isset($prodotto['Posti_Totali']) ? (int) $prodotto['Posti_Totali'] : null;
-    $postiDescrizione = $postiTotali !== null ? $postiTotali . ' posti' : '—';
+    $postiDescrizione = $postiTotali !== null 
+        ? ($postiTotali === 1 ? '1 posto' : $postiTotali . ' posti')
+        : '—';
 
     // Patente
     $richiedePatente = filter_var($prodotto['Richiede_Patente'], FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
@@ -554,7 +556,9 @@ function buildExperienceCatalogCard(array $prodotto, array $lingueDisponibili = 
 
     // Posti totali
     $postiTotali = isset($prodotto['Posti_Totali']) ? (int) $prodotto['Posti_Totali'] : null;
-    $postiDescrizione = $postiTotali !== null ? $postiTotali . ' posti' : '—';
+    $postiDescrizione = $postiTotali !== null 
+        ? ($postiTotali === 1 ? '1 posto' : $postiTotali . ' posti')
+        : '—';
 
     // Accessibilità
     $accessibile = filter_var($prodotto['Accessibile_Disabili'], FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
