@@ -311,12 +311,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const addBtn = document.getElementById('add-extra');
     const container = document.getElementById('extras-container');
     const template = document.getElementById('extra-row-template');
-    if (!addBtn || !container || !template || !('content' in template)) return;
-
-    addBtn.addEventListener('click', () => {
-        const fragment = template.content.cloneNode(true);
-        container.appendChild(fragment);
-    });
+    if (!container) return;
 
     container.addEventListener('click', (event) => {
         const target = event.target;
@@ -326,5 +321,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (row) {
             row.remove();
         }
+    });
+
+    if (!addBtn || !template || !('content' in template)) return;
+
+    addBtn.addEventListener('click', () => {
+        const fragment = template.content.cloneNode(true);
+        container.appendChild(fragment);
     });
 });
