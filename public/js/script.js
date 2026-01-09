@@ -330,3 +330,28 @@ document.addEventListener('DOMContentLoaded', () => {
         container.appendChild(fragment);
     });
 });
+
+// extra prodotti admin
+document.addEventListener('DOMContentLoaded', () => {
+    const addBtn = document.getElementById('add-product-extra');
+    const container = document.getElementById('product-extras-container');
+    const template = document.getElementById('product-extra-template');
+    if (!container) return;
+
+    container.addEventListener('click', (event) => {
+        const target = event.target;
+        if (!(target instanceof HTMLElement)) return;
+        if (!target.classList.contains('remove-extra')) return;
+        const row = target.closest('.extra-row');
+        if (row) {
+            row.remove();
+        }
+    });
+
+    if (!addBtn || !template || !('content' in template)) return;
+
+    addBtn.addEventListener('click', () => {
+        const fragment = template.content.cloneNode(true);
+        container.appendChild(fragment);
+    });
+});
