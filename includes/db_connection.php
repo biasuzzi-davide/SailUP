@@ -290,7 +290,7 @@ class DBConnection {
      */
     public function loginUser(string $email, string $password) {
         $this->openConnection();
-        $query = "SELECT * FROM Utente WHERE Email = ? AND Attivo = 1";
+        $query = "SELECT * FROM Utente WHERE Email = ?";
 
         try {
             $stmt = $this->connection->prepare($query);
@@ -330,7 +330,7 @@ class DBConnection {
     public function getUtenteById(int $idUtente): array|null|bool {
         $this->openConnection();
         $query = "
-            SELECT IDUtente, Nome, Cognome, Email, Is_Admin, Attivo, Data_Registrazione
+            SELECT IDUtente, Nome, Cognome, Email, Is_Admin, Data_Registrazione
             FROM Utente
             WHERE IDUtente = ?
             LIMIT 1
@@ -543,37 +543,11 @@ class DBConnection {
     }
 
     /**
-     * Attiva/disattiva un uten
-     */
-    public function setUserStatus(int $idUtente, bool $attivo): bool {
-        $this->openConnection();
-        $query = "UPDATE Utente SET Attivo = ? WHERE IDUtente = ?";
-
-        try {
-            $stmt = $this->connection->prepare($query);
-            if (!$stmt) {
-                $this->closeConnection();
-                return false;
-            }
-
-            $flag = $attivo ? 1 : 0;
-            $stmt->bind_param('ii', $flag, $idUtente);
-            $ok = $stmt->execute();
-            $stmt->close();
-            $this->closeConnection();
-            return $ok;
-        } catch (Throwable $t) {
-            $this->closeConnection();
-            return false;
-        }
-    }
-
-    /**
      * restituisce tutti gli utenti (serve per l admin)
      */
     public function getUtenti(): array|bool {
         $this->openConnection();
-        $query = "SELECT IDUtente, Nome, Cognome, Email, Data_Registrazione, Is_Admin, Attivo FROM Utente ORDER BY Data_Registrazione DESC";
+        $query = "SELECT IDUtente, Nome, Cognome, Email, Data_Registrazione, Is_Admin FROM Utente ORDER BY Data_Registrazione DESC";
 
         try {
             $result = $this->connection->query($query);
@@ -600,7 +574,6 @@ class DBConnection {
     public function searchUtenti(
         ?string $term = null,
         ?string $ruolo = null,
-        ?string $stato = null,
         int $limit = 20,
         int $offset = 0
     ): array|bool {
@@ -625,13 +598,7 @@ class DBConnection {
             $conditions[] = 'Is_Admin = 0';
         }
 
-        if ($stato === 'attivi') {
-            $conditions[] = 'Attivo = 1';
-        } elseif ($stato === 'disattivi') {
-            $conditions[] = 'Attivo = 0';
-        }
-
-        $query = "SELECT SQL_CALC_FOUND_ROWS IDUtente, Nome, Cognome, Email, Data_Registrazione, Is_Admin, Attivo
+        $query = "SELECT SQL_CALC_FOUND_ROWS IDUtente, Nome, Cognome, Email, Data_Registrazione, Is_Admin
                   FROM Utente";
 
         if (!empty($conditions)) {

@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header('Location: ' . $target);
         exit;
     } elseif ($res === -1) {
-        $errors[] = 'Utente non trovato o disattivato';
+        $errors[] = 'Utente non trovato';
     } elseif ($res === 0) {
         $errors[] = 'Password errata';
     } else {

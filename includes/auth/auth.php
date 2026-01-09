@@ -48,7 +48,7 @@ function registerUserFull(array $data): array {
  */
 function loginUserAuth(string $email, string $password) {
     $db = new DBConnection();
-    $user = $db->loginUser($email, $password); // già usa password_verify e attivo=1
+    $user = $db->loginUser($email, $password);
 
     if (is_array($user)) {
         $_SESSION['user'] = $user;
