@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Creato il: Dic 25, 2025 alle 19:03
+-- Creato il: Gen 09, 2026 alle 13:22
 -- Versione del server: 11.8.3-MariaDB-0+deb13u1 from Debian
 -- Versione PHP: 8.4.11
 
@@ -50,20 +50,14 @@ INSERT INTO `Articolo_Blog` (`IDArticolo`, `IDAutore`, `Titolo`, `Descrizione_Br
 (4, 2, 'Lusso in Mare: Yacht e Charter Esclusivi', 'Vivi l\'esperienza di un noleggio di lusso nel golfo di Napoli.', 'Uno yacht privato rappresenta il massimo dell\'esclusività. Questo articolo vi guida alla scoperta degli yacht di lusso disponibili nel nostro catalogo, dalle camere sontuose alle cucine attrezzate, dai sistemi di navigazione avanzati ai servizi premium. Scopri come trasformare una giornata in mare in un\'esperienza indimenticabile di classe e raffinatezza.', '2025-01-08 16:10:00', 7, 1, '2025-12-23 12:11:10'),
 (5, 1, 'Navigazione Tradizionale: Barca a Vela per Crociere', 'L\'arte della vela e il fascino della navigazione classica.', 'Le barche a vela rappresentano l\'essenza della navigazione tradizionale. Questo articolo esplora il fascino della vela, come una crociera a vela unisce sport e relax, e quali sono i vantaggi di scegliere una barca a vela rispetto a un motore. Leggi consigli pratici su come preparare una crociera a vela sulla costiera amalfitana e su come vivere appieno questa esperienza.', '2025-01-05 11:35:00', 9, 1, '2025-12-23 12:11:10'),
 (6, 2, 'Sicurezza in Mare: Protocolli e Attrezzature Obbligatorie', 'Tutto ciò che devi sapere per navigare in sicurezza.', 'La sicurezza è la priorità numero uno quando si naviga. Questo articolo dettagliato copre tutti gli obblighi di legge, le attrezzature di sicurezza necessarie, i protocolli di soccorso, come utilizzare i giubbotti salvagente, i segnali di emergenza e le comunicazioni via radio. Scopri come prepararti per affrontare situazioni di emergenza e come proteggere te stesso e i tuoi compagni.', '2025-01-03 13:50:00', 12, 1, '2025-12-23 12:11:10'),
-(7, 1, 'Positano e Amalfi: Villaggi Storici della Costiera', 'Un viaggio attraverso i villaggi più affascinanti della costiera amalfitana.', 'La costiera amalfitana è famosa per i suoi villaggi incantevoli. Questo articolo porta il lettore alla scoperta dei dettagli storici di Positano, conosciuto per le case colorate e gli hotel esclusivi, e di Amalfi, città ricca di storia medievale e arte. Scopri cosa fare durante una visita a terra e come integrare il viaggio in barca con escursioni nei villaggi costieri.', '2025-12-28 10:15:00', 8, 1, '2025-12-23 12:11:10'),
+(7, 1, 'Positano e Amalfi: Villaggi Storici della Costiera', 'Un viaggio attraverso i villaggi più affascinanti della costiera amalfitana.', 'La costiera amalfitana è famosa per i suoi villaggi incantevoli. Questo articolo porta il lettore alla scoperta dei dettagli storici di Positano, conosciuto per le case colorate e gli hotel esclusivi, e di Amalfi, città ricca di storia medievale e arte. Scopri cosa fare durante una visita a terra e come integrare il viaggio in barca con escursioni nei villaggi costieri.', '2025-12-28 00:00:00', 10, 1, '2025-12-23 12:11:10'),
 (8, 1, 'Fenomeno del Bioluminescenza nel Golfo di Napoli', 'Scopri la magia della luce vivente nei fondali marini.', 'Il golfo di Napoli è uno dei pochi luoghi dove è possibile osservare il fenomeno della bioluminescenza marina. Questo articolo spiega la scienza dietro a questo spettacolo naturale, i periodi migliori per osservarlo, e come organizzare una spedizione notturna in barca per assistere a questo meraviglia della natura. Un\'esperienza che difficilmente dimenticherai.', '2025-12-25 15:40:00', 7, 1, '2025-12-23 12:11:10'),
 (9, 2, 'Ricette di Cucina Marinara: Piatti da Preparare a Bordo', 'Delizie culinarie da gustare durante una crociera in mare.', 'La cucina marinara è basata su ingredienti freschi e semplici. Questo articolo condivide ricette autentiche della costiera che puoi preparare nella cucina della tua barca. Dai piatti di pasta ai frutti di mare, dai pesce al forno alle insalate di mare, scopri come trasformare il noleggio di una barca in un\'esperienza culinaria indimenticabile.', '2025-12-20 09:25:00', 6, 1, '2025-12-23 12:11:10'),
 (10, 1, 'Flora e Fauna Marina della Costiera Sorrentina', 'Un approfondimento sulla biodiversità sottomarina della costa campana.', 'La costiera sorrentina è ricca di vita marina. Questo articolo illustra le specie ittiche che incontrerai durante lo snorkeling, dai dentici alle cernie, dalle murene alle stelle marine, e il loro comportamento naturale. Scopri anche la flora marina come la Posidonia oceanica e come essa contribuisce all\'ecosistema marino e alla qualità dell\'acqua.', '2025-12-18 11:50:00', 10, 1, '2025-12-23 12:11:10'),
-(11, 2, 'Meteo e Stagioni: Quando Navigare nella Costiera', 'Una guida alle condizioni climatiche e ai periodi ideali per salpare.', 'Ogni stagione offre condizioni diverse per la navigazione. Questo articolo analizza i venti, le correnti, e le caratteristiche meteorologiche di primavera, estate, autunno e inverno nel golfo di Napoli. Scopri i periodi ideali per diversi tipi di navigazione e come leggere le previsioni meteo per pianificare la tua gita in mare in sicurezza e comfort.', '2025-12-15 14:20:00', 8, 1, '2025-12-23 12:11:10'),
 (12, 1, 'Sorrento: La Perla della Costiera', 'Alla scoperta della affascinante città di Sorrento.', 'Sorrento è una delle destinazioni più romantiche d\'Italia. Questo articolo esplora la storia di questa affascinante città, i suoi monumenti, le piazze pittoresche e gli hotel di lusso. Scopri cosa fare a terra e come le tue gite in barca possono integrarsi con una visita a Sorrento, includendo tours del centro storico e cene in ristoranti tradizionali.', '2025-12-10 10:05:00', 7, 1, '2025-12-23 12:11:10'),
 (13, 1, 'Fotografia Subacquea: Cattura i Tuoi Momenti Migliori', 'Consigli pratici per fotografare il mondo sottomarino.', 'Vuoi immortalare i tuoi momenti subacquei? Questo articolo fornisce consigli su fotocamere e videocamere subacquee, tecniche di fotografia sottomarina, illuminazione, composizione, e post-produzione. Scopri come catturare la bellezza dei fondali e condividere le tue avventure sui social media con fotografie straordinarie.', '2025-12-08 13:35:00', 9, 1, '2025-12-23 12:11:10'),
 (14, 2, 'Sostenibilità Marina: Come Navigare Responsabilmente', 'Pratiche ecologiche per proteggere l\'ecosistema marino.', 'La navigazione responsabile è essenziale per preservare la bellezza del nostro mare. Questo articolo affrontsa i temi della sostenibilità marina, da come ridurre l\'uso di combustibili fossili a come evitare inquinamento, alla scelta di prodotti eco-friendly a bordo. Scopri come ogni navigatore può contribuire alla protezione dell\'ambiente marino.', '2025-12-05 16:55:00', 8, 1, '2025-12-23 12:11:10'),
-(15, 1, 'Isola di Capri: Leggenda e Realtà', 'Mito, storia e meraviglie dell\'isola più celebre del golfo.', 'Capri è circondata da leggende e fascino. Questo articolo racconta la storia affascinante dell\'isola, dalla Grotta Azzurra ai faraglioni, dai siti archeologici alle celebrità che l\'hanno resa famosa. Scopri come organizzare una giornata perfetta a Capri partendo da una barca noleggiata e quali sono i must-see dell\'isola.', '2025-12-03 11:20:00', 10, 1, '2025-12-23 12:11:10'),
-(16, 2, 'Noleggio Barca: Come Scegliere il Natante Perfetto', 'Guida pratica alla scelta della barca giusta per le tue esigenze.', 'Con così tante opzioni disponibili, come scegliere la giusta barca da noleggiare? Questo articolo guida il lettore attraverso i diversi tipi di barche, le loro caratteristiche, i vantaggi e gli svantaggi. Dalla barca piccola al gommone sportivo, dallo yacht di lusso alla barca a vela, scopri quale è più adatta ai tuoi piani e alle tue competenze.', '2025-11-30 09:45:00', 11, 1, '2025-12-23 12:11:10'),
-(17, 1, 'Ballate di Marinai: Tradizioni Nautiche della Costiera', 'Leggende, canzoni e tradizioni marinare della costiera campana.', 'La costiera sorrentina è ricca di tradizioni marittime millenarie. Questo articolo esplora le leggende locali, le ballate dei marinai, le tradizioni di pesca, e il modo di vivere delle comunità costiere storiche. Scopri come la cultura marina ha plasmato l\'identità della regione e come questi insegnamenti si riflettono nella navigazione moderna.', '2025-11-28 14:10:00', 8, 1, '2025-12-23 12:11:10'),
-(18, 2, 'Wellness in Mare: Relax e Benessere a Bordo', 'Come trasformare una gita in barca in una spa galleggiante.', 'Il mare ha proprietà terapeutiche straordinarie. Questo articolo esplora come integrare pratiche di wellness durante una crociera, dalla meditazione al suono delle onde, ai benefici dello yoga sul mare, ai bagni rinfrescanti in acque cristalline. Scopri come una giornata in barca diventa un\'esperienza di rigenerazione fisica e mentale.', '2025-11-25 10:30:00', 7, 1, '2025-12-23 12:11:10'),
-(19, 1, 'Isola di Ischia: Vulcani, Terme e Bellezze Naturali', 'Esplorando l\'isola più grande del golfo di Napoli.', 'Ischia, l\'isola verde del golfo, offre paesaggi vulcanici unici e sorgenti termali naturali. Questo articolo presenta i principali siti di interesse come il Monte Epomeo, le spiagge di sabbia scura, le terme naturali di Maronti, e i villaggi pittoreschi. Scopri come organizzare un\'escursione in barca a Ischia integrando bagni in sorgenti calde e explore vulcaniche.', '2025-11-22 15:50:00', 9, 1, '2025-12-23 12:11:10'),
-(20, 2, 'Regolamenti Marittimi: Diritti e Doveri del Navigatore', 'Conoscenze legali essenziali per navigare nel Tirreno.', 'Ogni navigatore deve conoscere le leggi e i regolamenti marittimi che disciplinano la navigazione. Questo articolo copre i principali regolamenti, dai limiti di velocità alle aree protette, dalla documentazione necessaria ai doveri verso l\'ambiente. Scopri i tuoi diritti come noleggiatore di barca e le responsabilità che assumi.', '2025-11-20 12:15:00', 10, 1, '2025-12-23 12:11:10');
+(15, 1, 'Isola di Capri: Leggenda e Realtà', 'Mito, storia e meraviglie dell\'isola più celebre del golfo.', 'Capri è circondata da leggende e fascino. Questo articolo racconta la storia affascinante dell\'isola, dalla Grotta Azzurra ai faraglioni, dai siti archeologici alle celebrità che l\'hanno resa famosa. Scopri come organizzare una giornata perfetta a Capri partendo da una barca noleggiata e quali sono i must-see dell\'isola.', '2025-12-03 11:20:00', 10, 1, '2025-12-23 12:11:10');
 
 -- --------------------------------------------------------
 
@@ -128,9 +122,6 @@ INSERT INTO `Articolo_Blog_Extra` (`IDExtra`, `IDArticolo`, `Titolo`, `Elemento`
 (41, 6, '📞 Numeri di Emergenza', 'Capitaneria di Porto: 1530', 1, '2025-12-23 12:11:10'),
 (42, 6, '📞 Numeri di Emergenza', 'Guardia Costiera: VHF Canale 16', 2, '2025-12-23 12:11:10'),
 (43, 6, '📞 Numeri di Emergenza', 'Emergenze Mediche: 118', 3, '2025-12-23 12:11:10'),
-(44, 7, '🏘️ Cosa Vedere', 'Piazza Positano - Centro storico pittoresco', 1, '2025-12-23 12:11:10'),
-(45, 7, '🏘️ Cosa Vedere', 'Spiaggia di Positano - Sabbia e bohemien', 2, '2025-12-23 12:11:10'),
-(46, 7, '🏘️ Cosa Vedere', 'Duomo di Amalfi - Capolavoro architettonico', 3, '2025-12-23 12:11:10'),
 (47, 8, '🌟 Quando Osservare', 'Giugno-Luglio per fenomeno più intenso', 1, '2025-12-23 12:11:10'),
 (48, 8, '🌟 Quando Osservare', 'Notti senza luna per visibilità massima', 2, '2025-12-23 12:11:10'),
 (49, 9, '👨‍🍳 Ricette Semplici', 'Spaghetti alle Vongole Veraci', 1, '2025-12-23 12:11:10'),
@@ -139,9 +130,6 @@ INSERT INTO `Articolo_Blog_Extra` (`IDExtra`, `IDArticolo`, `Titolo`, `Elemento`
 (52, 10, '🐟 Specie Comuni', 'Dentice - Pesce argentato velocissimo', 1, '2025-12-23 12:11:10'),
 (53, 10, '🐟 Specie Comuni', 'Cernia - Pesce grande e territoriale', 2, '2025-12-23 12:11:10'),
 (54, 10, '🌿 Flora Marina', 'Posidonia Oceanica - Pianta marina protetta', 1, '2025-12-23 12:11:10'),
-(55, 11, '🌬️ Venti Principali', 'Maestrale da Nord-Ovest con raffiche forti', 1, '2025-12-23 12:11:10'),
-(56, 11, '🌬️ Venti Principali', 'Scirocco da Sud-Est caldo e umido', 2, '2025-12-23 12:11:10'),
-(57, 11, '🌬️ Venti Principali', 'Grecale da Nord-Est secco', 3, '2025-12-23 12:11:10'),
 (58, 12, '🏛️ Monumenti', 'Duomo di Sorrento - Importante chiesa medievale', 1, '2025-12-23 12:11:10'),
 (59, 12, '🏛️ Monumenti', 'Basilica Sant\'Antonino - Patrono della città', 2, '2025-12-23 12:11:10'),
 (60, 13, '📷 Attrezzatura', 'GoPro Hero 12 - Compatta e versatile', 1, '2025-12-23 12:11:10'),
@@ -154,25 +142,9 @@ INSERT INTO `Articolo_Blog_Extra` (`IDExtra`, `IDArticolo`, `Titolo`, `Elemento`
 (67, 15, '🗿 Faraglioni', 'Tre enormi monoliti di roccia calcarea', 1, '2025-12-23 12:11:10'),
 (68, 15, '🗿 Faraglioni', 'Grotta Azzurra - Fenomeno ottico straordinario', 2, '2025-12-23 12:11:10'),
 (69, 15, '🗿 Faraglioni', 'Villa Jovis di Tiberio - Rovine imperiali', 3, '2025-12-23 12:11:10'),
-(70, 16, '🚤 Barca Piccola', 'Perfetta per principianti e famiglie', 1, '2025-12-23 12:11:10'),
-(71, 16, '🚤 Barca Piccola', 'Gozzo - Tradizionale e stabile', 2, '2025-12-23 12:11:10'),
-(72, 16, '🚤 Barca Piccola', 'Gommone - Veloce e dinamico', 3, '2025-12-23 12:11:10'),
-(73, 16, '⛵ Barca a Vela', 'Per navigatori esperti e romantici', 1, '2025-12-23 12:11:10'),
-(74, 16, '🛥️ Yacht', 'Per lusso e confort massimi', 1, '2025-12-23 12:11:10'),
-(75, 17, '🎵 Ballate Marinare', 'La Leggenda di Parthenope - Mitologia locale', 1, '2025-12-23 12:11:10'),
-(76, 17, '🎵 Ballate Marinare', 'Canzoni dei Pescatori - Tradizione orale', 2, '2025-12-23 12:11:10'),
-(77, 18, '🧘 Yoga a Bordo', 'Pratiche meditative con vista sul mare', 1, '2025-12-23 12:11:10'),
-(78, 18, '🧘 Yoga a Bordo', 'Bagni termici naturali a Ischia', 2, '2025-12-23 12:11:10'),
-(79, 18, '💆 Trattamenti Marini', 'Algoterapia con alghe biologiche', 1, '2025-12-23 12:11:10'),
-(80, 19, '🌋 Vulcano', 'Monte Epomeo - Escursione escursionistica', 1, '2025-12-23 12:11:10'),
-(81, 19, '🌋 Vulcano', 'Crateri Spenti - Geologia affascinante', 2, '2025-12-23 12:11:10'),
-(82, 19, '♨️ Terme', 'Maronti - Sorgenti naturali calde', 1, '2025-12-23 12:11:10'),
-(83, 19, '♨️ Terme', 'Cavascura - Grotta termale naturale', 2, '2025-12-23 12:11:10'),
-(84, 20, '⚖️ Diritti del Navigatore', 'Libertà di navigazione in acque internazionali', 1, '2025-12-23 12:11:10'),
-(85, 20, '⚖️ Diritti del Navigatore', 'Protezione dai danni da maltempo', 2, '2025-12-23 12:11:10'),
-(86, 20, '⚖️ Diritti del Navigatore', 'Accesso ai porti di soccorso', 3, '2025-12-23 12:11:10'),
-(87, 20, '📋 Doveri', 'Rispetto delle zone protette marine', 1, '2025-12-23 12:11:10'),
-(88, 20, '📋 Doveri', 'Comunicazione frequente via radio', 2, '2025-12-23 12:11:10');
+(91, 7, '🏘️ Cosa Vedere', 'Piazza Positano - Centro storico pittoresco', 1, '2026-01-09 11:56:10'),
+(92, 7, '🏘️ Cosa Vedere', 'Spiaggia di Positano - Sabbia e bohemien', 2, '2026-01-09 11:56:10'),
+(93, 7, '🏘️ Cosa Vedere', 'Duomo di Amalfi - Capolavoro architettonico', 3, '2026-01-09 11:56:10');
 
 -- --------------------------------------------------------
 
@@ -210,7 +182,11 @@ INSERT INTO `Indirizzo` (`IDIndirizzo`, `Via`, `N_Civico`, `CAP`, `Citta`, `Prov
 (12, 'Viale Europa', '75', '80062', 'Meta di Sorrento', 'NA', 'IT', '2025-12-23 12:11:10'),
 (13, 'Via Orientale', '120', '80078', 'Anacapri', 'NA', 'IT', '2025-12-23 12:11:10'),
 (14, 'Piazza Municipio', '1', '80133', 'Napoli', 'NA', 'IT', '2025-12-23 12:11:10'),
-(15, 'Via Marina Piccola', '5', '80071', 'Anacapri', 'NA', 'IT', '2025-12-23 12:11:10');
+(15, 'Via Marina Piccola', '5', '80071', 'Anacapri', 'NA', 'IT', '2025-12-23 12:11:10'),
+(16, 'Via Romaaewrewr', '123', '43434', 'Napoli', 'NA', 'IT', '2025-12-26 17:17:32'),
+(17, 'Via Roma', '123', '80100', 'Napoli', 'NA', 'IT', '2026-01-07 09:08:38'),
+(18, 'Via Roma', '123', '80100', 'Napoli', 'NA', 'IT', '2026-01-07 11:39:31'),
+(19, 'Via Roma', '123', '80100', 'Napoli', 'NA', 'IT', '2026-01-08 06:27:28');
 
 -- --------------------------------------------------------
 
@@ -306,12 +282,9 @@ INSERT INTO `Media` (`IDMedia`, `URL_Media`, `Testo_Alternativo`, `Tipo_Media`, 
 (9, '../img/prodotti/gommonelux.jpg', 'Gommone Luxury 300cv cabina interna', 'Immagine', NULL, 'BARCA-GOMMONE-003', NULL, '2025-12-23 12:11:10'),
 (10, '../img/prodotti/azimut55fly.jpeg', 'Azimut 55 Fly lussuoso', 'Immagine', NULL, 'BARCA-YACHT-001', NULL, '2025-12-23 12:11:10'),
 (11, '../img/prodotti/cranchiendu.jpg', 'Cranchi Endurance 41 elegante', 'Immagine', NULL, 'BARCA-YACHT-002', NULL, '2025-12-23 12:11:10'),
-(12, '../img/prodotti/first35.jpeg', 'Beneteau First 35 a vela', 'Immagine', NULL, 'BARCA-VELA-001', NULL, '2025-12-23 12:11:10'),
-(13, '../img/prodotti/odyssey-45.jpg', 'Jeanneau Sun Odyssey 45 in navigazione', 'Immagine', NULL, 'BARCA-VELA-002', NULL, '2025-12-23 12:11:10'),
 (14, '../img/prodotti/aperta6m.jpg', 'Barca Aperta 6m per principianti', 'Immagine', NULL, 'BARCA-PICCOLA-001', NULL, '2025-12-23 12:11:10'),
 (15, '../img/prodotti/aperta8m.jpg', 'Barca Aperta 7.5m gita mezzagiornata', 'Immagine', NULL, 'BARCA-PICCOLA-002', NULL, '2025-12-23 12:11:10'),
 (16, '../img/prodotti/tramontonapoli.jpg', 'Coppia al tramonto con prosecco', 'Immagine', NULL, 'EXP-TRAMONTO-001', NULL, '2025-12-23 12:11:10'),
-(17, '../img/prodotti/snork.jpg', 'Snorkeling a Capri con pesci', 'Immagine', NULL, 'EXP-SNORKEL-001', NULL, '2025-12-23 12:11:10'),
 (18, '../img/prodotti/costieraamalfitana.jpg', 'Costiera Amalfitana vista dal mare', 'Immagine', NULL, 'EXP-ESCURSIONE-001', NULL, '2025-12-23 12:11:10'),
 (64, '../img/blog/cale-costiera-sorrentina.webp', 'Spiagge e cale nascoste della costiera sorrentina', 'Immagine', NULL, NULL, 1, '2025-12-25 18:34:09'),
 (65, '../img/blog/snorkeling-capri.webp', 'Guida allo snorkeling e fauna marina a Capri', 'Immagine', NULL, NULL, 2, '2025-12-25 18:34:09'),
@@ -319,20 +292,17 @@ INSERT INTO `Media` (`IDMedia`, `URL_Media`, `Testo_Alternativo`, `Tipo_Media`, 
 (67, '../img/blog/lusso-yacht-charter.webp', 'Yacht di lusso e charter esclusivi nel golfo', 'Immagine', NULL, NULL, 4, '2025-12-25 18:34:09'),
 (68, '../img/blog/navigazione-vela.webp', 'Barche a vela e crociere tradizionali', 'Immagine', NULL, NULL, 5, '2025-12-25 18:34:09'),
 (69, '../img/blog/sicurezza-mare.webp', 'Protocolli di sicurezza e attrezzature obbligatorie', 'Immagine', NULL, NULL, 6, '2025-12-25 18:34:09'),
-(70, '../img/blog/positano-amalfi.webp', 'Villaggi storici di Positano e Amalfi', 'Immagine', NULL, NULL, 7, '2025-12-25 18:34:09'),
 (71, '../img/blog/bioluminescenza-golfo.webp', 'Fenomeno della bioluminescenza nel golfo di Napoli', 'Immagine', NULL, NULL, 8, '2025-12-25 18:34:09'),
 (72, '../img/blog/ricette-cucina-marinara.webp', 'Ricette di cucina marinara da preparare a bordo', 'Immagine', NULL, NULL, 9, '2025-12-25 18:34:09'),
 (73, '../img/blog/flora-fauna-marinara.webp', 'Flora e fauna marina della costiera sorrentina', 'Immagine', NULL, NULL, 10, '2025-12-25 18:34:09'),
-(74, '../img/blog/meteo-stagioni-navigazione.webp', 'Meteo e stagioni ideali per navigare', 'Immagine', NULL, NULL, 11, '2025-12-25 18:34:09'),
 (75, '../img/blog/sorrento-perla-costiera.webp', 'Sorrento, perla della costiera amalfitana', 'Immagine', NULL, NULL, 12, '2025-12-25 18:34:09'),
 (76, '../img/blog/fotografia-subacquea.webp', 'Fotografia subacquea e cattura di momenti', 'Immagine', NULL, NULL, 13, '2025-12-25 18:34:09'),
 (77, '../img/blog/sostenibilita-marina.webp', 'Navigazione sostenibile e protezione marina', 'Immagine', NULL, NULL, 14, '2025-12-25 18:34:09'),
 (78, '../img/blog/capri-leggenda-realta.webp', 'Isola di Capri: leggenda e realtà', 'Immagine', NULL, NULL, 15, '2025-12-25 18:34:09'),
-(79, '../img/blog/noleggio-barca-scelta.webp', 'Come scegliere la barca perfetta per il noleggio', 'Immagine', NULL, NULL, 16, '2025-12-25 18:34:09'),
-(80, '../img/blog/ballate-marinai-tradizioni.webp', 'Tradizioni nautiche e ballate di marinai', 'Immagine', NULL, NULL, 17, '2025-12-25 18:34:09'),
-(81, '../img/blog/wellness-mare-relax.webp', 'Wellness e relax in mare a bordo', 'Immagine', NULL, NULL, 18, '2025-12-25 18:34:09'),
-(82, '../img/blog/ischia-vulcani-terme.webp', 'Ischia: vulcani, terme e bellezze naturali', 'Immagine', NULL, NULL, 19, '2025-12-25 18:34:09'),
-(83, '../img/blog/regolamenti-marittimi.webp', 'Regolamenti marittimi e doveri del navigatore', 'Immagine', NULL, NULL, 20, '2025-12-25 18:34:09');
+(90, '../img/prodotti/odyssey-45.jpg', 'Jeanneau Sun Odyssey 45 in navigazione', 'Immagine', NULL, 'BARCA-VELA-002', NULL, '2026-01-08 06:20:35'),
+(93, '../img/prodotti/snork.jpg', 'Snorkeling a Capri con pesci', 'Immagine', NULL, 'EXP-SNORKEL-001', NULL, '2026-01-08 08:24:13'),
+(94, '../img/prodotti/prod_BARCA-VELA-001.webp?v=1767862844', 'Beneteau First 35 a vela', 'Immagine', NULL, 'BARCA-VELA-001', NULL, '2026-01-08 09:00:44'),
+(95, '../img/blog/positano-amalfi.webp', 'Villaggi storici di Positano e Amalfi', 'Immagine', NULL, NULL, 7, '2026-01-09 11:56:10');
 
 -- --------------------------------------------------------
 
@@ -382,7 +352,6 @@ INSERT INTO `Prenotazione` (`IDPrenotazione`, `IDUtente`, `IDProdotto`, `Data_Or
 (21, 8, 'BARCA-PICCOLA-002', '2025-09-10 16:00:00', '2025-09-10 19:00:00', 0, 180.00, 'Contanti', 'Confermata', 'Gita tramonto', '2025-12-23 12:11:10'),
 (22, 3, 'BARCA-YACHT-001', '2025-09-20 10:00:00', '2025-09-21 10:00:00', 1, 1200.00, 'Carta di Credito', 'In Attesa', 'Crociera lusso', '2025-12-23 12:11:10'),
 (23, 4, 'BARCA-GOMMONE-002', '2025-07-28 11:00:00', '2025-07-28 17:00:00', 0, 380.00, 'Bonifico', 'Confermata', 'Escursione veloce', '2025-12-23 12:11:10'),
-(24, 5, 'EXP-TRAMONTO-001', '2025-09-12 19:00:00', '2025-09-12 23:00:00', 0, 95.00, 'Contanti', 'Confermata', 'Anniversario', '2025-12-23 12:11:10'),
 (25, 6, 'BARCA-VELA-001', '2025-08-08 10:00:00', '2025-08-08 16:00:00', 1, 400.00, 'Carta di Credito', 'In Attesa', 'Vela sportiva', '2025-12-23 12:11:10'),
 (26, 7, 'BARCA-PICCOLA-001', '2025-07-12 09:00:00', '2025-07-12 12:00:00', 0, 150.00, 'Bonifico', 'Confermata', 'Lezione principianti', '2025-12-23 12:11:10'),
 (27, 8, 'BARCA-GOZZO-001', '2025-08-22 10:00:00', '2025-08-22 18:00:00', 0, 280.00, 'Contanti', 'Confermata', 'Gita classica', '2025-12-23 12:11:10'),
@@ -391,11 +360,14 @@ INSERT INTO `Prenotazione` (`IDPrenotazione`, `IDUtente`, `IDProdotto`, `Data_Or
 (30, 5, 'BARCA-GOMMONE-003', '2025-07-05 14:00:00', '2025-07-05 19:00:00', 1, 550.00, 'Contanti', 'In Attesa', 'Adrenalina max', '2025-12-23 12:11:10'),
 (31, 6, 'EXP-SNORKEL-001', '2025-08-12 09:00:00', '2025-08-12 14:00:00', 0, 75.00, 'Carta di Credito', 'Confermata', 'Snorkeling avanzato', '2025-12-23 12:11:10'),
 (32, 7, 'BARCA-GOZZO-002', '2025-09-03 10:00:00', '2025-09-03 18:00:00', 0, 300.00, 'Bonifico', 'In Attesa', 'Gita con famiglia', '2025-12-23 12:11:10'),
-(33, 8, 'BARCA-VELA-002', '2025-08-02 08:00:00', '2025-08-02 17:00:00', 1, 550.00, 'Contanti', 'Confermata', 'Navigazione vela', '2025-12-23 12:11:10'),
 (34, 3, 'BARCA-PICCOLA-002', '2025-07-02 15:00:00', '2025-07-02 18:00:00', 0, 180.00, 'Carta di Credito', 'In Attesa', 'Tramonto dal mare', '2025-12-23 12:11:10'),
 (35, 4, 'BARCA-GOZZO-001', '2025-06-25 09:00:00', '2025-06-25 18:00:00', 0, 280.00, 'Bonifico', 'Confermata', 'Weekend marino', '2025-12-23 12:11:10'),
 (36, 5, 'EXP-TRAMONTO-001', '2025-08-08 19:30:00', '2025-08-08 23:30:00', 0, 95.00, 'Contanti', 'In Attesa', 'Data speciale', '2025-12-23 12:11:10'),
-(37, 6, 'BARCA-GOMMONE-001', '2025-09-30 14:00:00', '2025-09-30 19:00:00', 1, 450.00, 'Carta di Credito', 'Confermata', 'Avventura', '2025-12-23 12:11:10');
+(37, 6, 'BARCA-GOMMONE-001', '2025-09-30 14:00:00', '2025-09-30 19:00:00', 1, 450.00, 'Carta di Credito', 'Confermata', 'Avventura', '2025-12-23 12:11:10'),
+(84, 9, 'EXP-TRAMONTO-001', '2026-01-15 09:00:00', '2026-01-15 13:00:00', 1, 219.50, 'Carta di Credito', 'Cancellata', NULL, '2026-01-07 10:01:38'),
+(85, 9, 'EXP-ESCURSIONE-001', '2026-01-15 09:00:00', '2026-01-15 17:00:00', 1, 382.00, 'Carta di Credito', 'Cancellata', NULL, '2026-01-07 10:11:25'),
+(87, 9, 'EXP-TRAMONTO-001', '2026-01-08 09:00:00', '2026-01-08 13:00:00', 1, 219.50, 'Carta di Credito', 'Cancellata', NULL, '2026-01-07 18:53:20'),
+(88, 9, 'BARCA-PICCOLA-001', '2026-01-07 00:00:00', '2026-01-10 23:59:59', 1, 680.00, 'Carta di Credito', 'Cancellata', NULL, '2026-01-07 19:06:34');
 
 -- --------------------------------------------------------
 
@@ -429,16 +401,16 @@ INSERT INTO `Prodotto` (`IDProdotto`, `Tipo_Prodotto`, `Tipologia_Prodotto`, `Du
 ('BARCA-GOMMONE-001', 'Noleggio', 'Gommone', NULL, 'Gommone Speed 250cv', 'Adrenalina e velocità. Ideale per chi ama l\'avventura sul mare.', 'Un gommone potente e veloce, ideale per chi cerca adrenalina e avventura in mare. Perfetto per escursioni dinamiche e divertenti.', 450.00, 8, 0, 9.50, 1, '2025-12-23 12:11:10', '2025-12-23 12:11:10', 1),
 ('BARCA-GOMMONE-002', 'Noleggio', 'Gommone', NULL, 'Gommone Comfort 200cv', 'Gommone versatile con cabina confortevole.', 'Un gommone confortevole con cabina spaziosa, ideale per famiglie o gruppi che desiderano esplorare il mare con comodità.', 380.00, 10, 0, 8.80, 1, '2025-12-23 12:11:10', '2025-12-23 12:11:10', 1),
 ('BARCA-GOMMONE-003', 'Noleggio', 'Gommone', NULL, 'Gommone Luxury 300cv', 'Esclusività e potenza. Per chi non vuole compromessi.', 'Un gommone di lusso con prestazioni eccezionali e comfort esclusivo. Perfetto per chi cerca un’esperienza premium in mare.', 550.00, 12, 1, 10.50, 1, '2025-12-23 12:11:10', '2025-12-23 12:11:10', 1),
-('BARCA-GOZZO-001', 'Noleggio', 'Motore', NULL, 'Gozzo Sorrentino Classico', 'Barca tradizionale perfetta per famiglie. Ideale per giornate di relax e snorkeling.', 'Un gozzo tradizionale sorrentino, perfetto per giornate di relax e snorkeling. Ideale per famiglie e piccoli gruppi.', 280.00, 6, 1, 8.50, 0, '2025-12-23 12:11:10', '2025-12-23 12:36:19', 1),
-('BARCA-GOZZO-002', 'Noleggio', 'Motore', NULL, 'Gozzo Blu Marino', 'Comfort e tradizione con motore affidabile. Perfetto per gite lunghe.', 'Un gozzo elegante e affidabile, ideale per lunghe escursioni e giornate di esplorazione costiera.', 300.00, 8, 0, 9.20, 0, '2025-12-23 12:11:10', '2025-12-23 12:36:24', 1),
+('BARCA-GOZZO-001', 'Noleggio', 'Motore', NULL, 'Gozzo Sorrentino Classico', 'Barca tradizionale perfetta per famiglie. Ideale per giornate di relax e snorkeling.', 'Un gozzo tradizionale sorrentino, perfetto per giornate di relax e snorkeling. Ideale per famiglie e piccoli gruppi.', 280.00, 6, 1, 8.50, 0, '2025-12-23 12:11:10', '2025-12-27 07:47:34', 1),
+('BARCA-GOZZO-002', 'Noleggio', 'Motore', NULL, 'Gozzo Blu Marino', 'Comfort e tradizione con motore affidabile. Perfetto per gite lunghe.', 'Un gozzo elegante e affidabile, ideale per lunghe escursioni e giornate di esplorazione costiera.', 300.00, 8, 0, 9.20, 0, '2025-12-23 12:11:10', '2025-12-27 07:47:35', 1),
 ('BARCA-PICCOLA-001', 'Noleggio', 'Motore', NULL, 'Barca Aperta 6m', 'Perfetta per principianti e famiglie con bambini.', 'Una barca aperta compatta, perfetta per principianti e famiglie con bambini. Facile da manovrare e sicura.', 150.00, 4, 1, 6.00, 0, '2025-12-23 12:11:10', '2025-12-23 12:35:51', 1),
 ('BARCA-PICCOLA-002', 'Noleggio', 'Motore', NULL, 'Barca Aperta 7.5m', 'Ideale per gite mezzagiornata. Facile da manovrare.', 'Una barca aperta spaziosa, ideale per gite di mezza giornata. Offre stabilità e facilità di utilizzo.', 180.00, 5, 0, 7.50, 0, '2025-12-23 12:11:10', '2025-12-23 12:35:46', 1),
-('BARCA-VELA-001', 'Noleggio', 'Vela', NULL, 'Beneteau First 35', 'Vela sportiva con prestazioni eccellenti. Per velisti esperti.', 'Una barca a vela sportiva con prestazioni eccellenti, perfetta per velisti esperti che cercano avventura e sfida.', 400.00, 6, 0, 10.65, 1, '2025-12-23 12:11:10', '2025-12-23 12:11:10', 1),
-('BARCA-VELA-002', 'Noleggio', 'Vela', NULL, 'Jeanneau Sun Odyssey 45', 'Vela con comfort abitativo. Ideale per crociere tranquille.', 'Una barca a vela confortevole e spaziosa, ideale per crociere rilassanti e tranquille lungo la costa.', 550.00, 8, 0, 13.80, 1, '2025-12-23 12:11:10', '2025-12-23 12:11:10', 1),
-('BARCA-YACHT-001', 'Noleggio', 'Motore', NULL, 'Azimut 55 Fly', 'Yacht di lusso con salotto interno, cucina e 4 cabine. Esperienza premium.', 'Uno yacht di lusso con interni eleganti, cucina attrezzata e cabine esclusive. Perfetto per un’esperienza premium in mare.', 1200.00, 12, 1, 16.80, 1, '2025-12-23 12:11:10', '2025-12-23 12:36:02', 1),
-('BARCA-YACHT-002', 'Noleggio', 'Motore', NULL, 'Cranchi Endurance 41', 'Eleganza e navigabilità. Perfetto per crociere di una o più giornate.', 'Uno yacht elegante e versatile, ideale per crociere di una o più giornate con massimo comfort.', 950.00, 10, 0, 12.50, 1, '2025-12-23 12:11:10', '2025-12-23 12:36:06', 1),
+('BARCA-VELA-001', 'Noleggio', 'Vela', NULL, 'Beneteau First 350', 'Vela sportiva con prestazioni eccellenti. Per velisti esperti.', 'Una barca a vela sportiva con prestazioni eccellenti, perfetta per velisti esperti che cercano avventura e sfida.', 400.00, 6, 0, 10.65, 1, '2025-12-23 12:11:10', '2026-01-07 19:16:23', 1),
+('BARCA-VELA-002', 'Noleggio', 'Vela', NULL, 'Jeanneau Sun Odyssey 45', 'Vela con comfort abitativo. Ideale per crociere tranquille.', 'Una barca a vela confortevole e spaziosa, ideale per crociere rilassanti e tranquille lungo la costa.', 550.00, 8, 0, 13.80, 1, '2025-12-23 12:11:10', '2026-01-07 19:16:26', 1),
+('BARCA-YACHT-001', 'Noleggio', 'Motore', NULL, 'Azimut 55 Fly', 'Yacht di lusso con salotto interno, cucina e 4 cabine. Esperienza premium.', 'Uno yacht di lusso con interni eleganti, cucina attrezzata e cabine esclusive. Perfetto per un’esperienza premium in mare.', 1200.00, 12, 1, 16.80, 1, '2025-12-23 12:11:10', '2025-12-27 07:47:38', 1),
+('BARCA-YACHT-002', 'Noleggio', 'Motore', NULL, 'Cranchi Endurance 41', 'Eleganza e navigabilità. Perfetto per crociere di una o più giornate.', 'Uno yacht elegante e versatile, ideale per crociere di una o più giornate con massimo comfort.', 950.00, 10, 0, 12.50, 1, '2025-12-23 12:11:10', '2025-12-27 07:47:39', 1),
 ('EXP-ESCURSIONE-001', 'Experience', 'Tour', 8, 'Tour Costiera Amalfitana Completo', 'Giornata intera tra Positano, Amalfi e Praiano. Include pranzo.', 'Un tour completo della Costiera Amalfitana, con visite a Positano, Amalfi e Praiano. Include pranzo e guida esperta.', 120.00, 10, 1, NULL, NULL, '2025-12-23 12:11:10', '2025-12-23 12:34:56', 1),
-('EXP-SNORKEL-001', 'Experience', 'Escursione', 5, 'Escursione Snorkeling Capri e Anacapri', 'Mezza giornata alla scoperta dei fondali cristallini di Capri.', 'Un’escursione di snorkeling a Capri e Anacapri, ideale per esplorare i fondali cristallini e la fauna marina.', 75.00, 8, 0, NULL, NULL, '2025-12-23 12:11:10', '2025-12-23 12:35:02', 1),
+('EXP-SNORKEL-001', 'Experience', 'Escursione', 5, 'Escursione Snorkeling Capri e Anacapri', 'Mezza giornata alla scoperta dei fondali cristallini di Capri.', 'Un’escursione di snorkeling a Capri e Anacapri, ideale per esplorare i fondali cristallini e la fauna marina.', 75.00, 8, 1, NULL, 0, '2025-12-23 12:11:10', '2026-01-08 08:24:13', 1),
 ('EXP-TRAMONTO-001', 'Experience', 'Aperitivo', 4, 'Cena al Tramonto con Prosecco', 'Tour della costa con cena leggera e prosecco. Per coppie romantiche.', 'Un’esperienza romantica al tramonto con cena leggera e prosecco. Perfetta per coppie che cercano un momento speciale.', 95.00, 2, 1, NULL, NULL, '2025-12-23 12:11:10', '2025-12-23 12:34:42', 1);
 
 -- --------------------------------------------------------
@@ -553,16 +525,6 @@ INSERT INTO `Prodotto_Incluso` (`IDIncluso`, `IDProdotto`, `Nome_Incluso`) VALUE
 (36, 'BARCA-YACHT-002', '3 Cabine Confortevoli'),
 (37, 'BARCA-YACHT-002', 'Cucina Attrezzata'),
 (38, 'BARCA-YACHT-002', 'Sala Principale'),
-(39, 'BARCA-VELA-001', 'Assicurazione Responsabilità Civile'),
-(40, 'BARCA-VELA-001', 'Giubbotti Salvagente'),
-(41, 'BARCA-VELA-001', 'Attrezzatura Vela Base'),
-(42, 'BARCA-VELA-001', 'Mappa Nautica'),
-(43, 'BARCA-VELA-002', 'Assicurazione Responsabilità Civile'),
-(44, 'BARCA-VELA-002', 'Giubbotti Salvagente'),
-(45, 'BARCA-VELA-002', 'Attrezzatura Vela Completa'),
-(46, 'BARCA-VELA-002', '2 Cabine'),
-(47, 'BARCA-VELA-002', 'Cucina'),
-(48, 'BARCA-VELA-002', 'Sistema Autopilota'),
 (49, 'BARCA-PICCOLA-001', 'Assicurazione Responsabilità Civile'),
 (50, 'BARCA-PICCOLA-001', 'Giubbotti Salvagente'),
 (51, 'BARCA-PICCOLA-001', 'Mappa Cartacea'),
@@ -575,17 +537,29 @@ INSERT INTO `Prodotto_Incluso` (`IDIncluso`, `IDProdotto`, `Nome_Incluso`) VALUE
 (58, 'EXP-TRAMONTO-001', 'Stuzzichini Gourmet'),
 (59, 'EXP-TRAMONTO-001', 'Giubbotti Salvagente'),
 (60, 'EXP-TRAMONTO-001', 'Coperta Elegante'),
-(61, 'EXP-SNORKEL-001', 'Guida Turistica Specializzata'),
-(62, 'EXP-SNORKEL-001', 'Attrezzatura Snorkeling Completa'),
-(63, 'EXP-SNORKEL-001', 'Giubbotti Salvagente'),
-(64, 'EXP-SNORKEL-001', 'Snack e Bevande Fresche'),
-(65, 'EXP-SNORKEL-001', 'Asciugamani Premium'),
 (66, 'EXP-ESCURSIONE-001', 'Guida Turistica Esperta'),
 (67, 'EXP-ESCURSIONE-001', 'Pranzo Leggero'),
 (68, 'EXP-ESCURSIONE-001', 'Bevande Fresche Illimitate'),
 (69, 'EXP-ESCURSIONE-001', 'Giubbotti Salvagente'),
 (70, 'EXP-ESCURSIONE-001', 'Attrezzatura Snorkeling'),
-(71, 'EXP-ESCURSIONE-001', 'Ombrellone da Sole');
+(71, 'EXP-ESCURSIONE-001', 'Ombrellone da Sole'),
+(97, 'BARCA-VELA-002', '2 Cabine'),
+(98, 'BARCA-VELA-002', 'Assicurazione Responsabilità Civile'),
+(99, 'BARCA-VELA-002', 'Attrezzatura Vela Completa'),
+(100, 'BARCA-VELA-002', 'Cucina'),
+(101, 'BARCA-VELA-002', 'Giubbotti Salvagente'),
+(102, 'BARCA-VELA-002', 'Sistema Autopilota'),
+(103, 'BARCA-VELA-002', 'ABCD'),
+(109, 'EXP-SNORKEL-001', 'Asciugamani Premium'),
+(110, 'EXP-SNORKEL-001', 'Attrezzatura Snorkeling Completa'),
+(111, 'EXP-SNORKEL-001', 'Giubbotti Salvagente'),
+(112, 'EXP-SNORKEL-001', 'Guida Turistica Specializzata'),
+(113, 'EXP-SNORKEL-001', 'Snack e Bevande Fresche'),
+(114, 'BARCA-VELA-001', 'Assicurazione Responsabilità Civile'),
+(115, 'BARCA-VELA-001', 'Attrezzatura Vela Base'),
+(116, 'BARCA-VELA-001', 'Ciao'),
+(117, 'BARCA-VELA-001', 'Giubbotti Salvagente'),
+(118, 'BARCA-VELA-001', 'Mappa Nautica');
 
 -- --------------------------------------------------------
 
@@ -610,12 +584,9 @@ INSERT INTO `Prodotto_Lingua` (`IDProdotto`, `IDLingua`) VALUES
 ('BARCA-GOZZO-002', 1),
 ('BARCA-PICCOLA-001', 1),
 ('BARCA-PICCOLA-002', 1),
-('BARCA-VELA-001', 1),
-('BARCA-VELA-002', 1),
 ('BARCA-YACHT-001', 1),
 ('BARCA-YACHT-002', 1),
 ('EXP-ESCURSIONE-001', 1),
-('EXP-SNORKEL-001', 1),
 ('EXP-TRAMONTO-001', 1),
 ('BARCA-GOMMONE-001', 2),
 ('BARCA-GOMMONE-002', 2),
@@ -624,8 +595,6 @@ INSERT INTO `Prodotto_Lingua` (`IDProdotto`, `IDLingua`) VALUES
 ('BARCA-GOZZO-002', 2),
 ('BARCA-PICCOLA-001', 2),
 ('BARCA-PICCOLA-002', 2),
-('BARCA-VELA-001', 2),
-('BARCA-VELA-002', 2),
 ('BARCA-YACHT-001', 2),
 ('BARCA-YACHT-002', 2),
 ('EXP-ESCURSIONE-001', 2),
@@ -664,14 +633,17 @@ CREATE TABLE `Utente` (
 --
 
 INSERT INTO `Utente` (`IDUtente`, `Nome`, `Cognome`, `CF`, `Email`, `PasswordHash`, `Numero_Patente_Nautica`, `IDIndirizzo`, `Is_Admin`, `Data_Registrazione`, `Data_Ultimo_Accesso`, `Attivo`) VALUES
-(1, 'NomeAdmin', 'CognomeAdmin', 'RSSMRC80A01H501U', 'admin', '$2y$10$NySnCY1CTj.Zke13441SB.KZv4xPIAwyAgBHOxBb8PS7/NSvh/dHO', 'PAT-NAUT-ADMIN-001', 1, 1, '2025-12-23 12:11:10', NULL, 1),
-(2, 'NomeUser', 'NomeUser', 'DLCLCU85M41H501L', 'user', '$2y$10$kdAdPU9/kuLBL7kJ9OCEA.aOxVqTYflPVnXP.0bIVJup/aihIZ2m2', 'PAT-NAUT-ADMIN-002', 9, 0, '2025-12-23 12:11:10', NULL, 1),
+(1, 'Marco', 'Rossi', 'RSSMRC80A01H501U', 'admin@noleggio-napoli.it', '$2y$10$abcdefghijklmnopqrstuvwxyz123456', 'PAT-NAUT-ADMIN-001', 1, 1, '2025-12-23 12:11:10', NULL, 1),
+(2, 'Lucia', 'De Luca', 'DLCLCU85M41H501L', 'lucia.admin@noleggio-napoli.it', '$2y$10$abcdefghijklmnopqrstuvwxyz123456', 'PAT-NAUT-ADMIN-002', 9, 1, '2025-12-23 12:11:10', NULL, 1),
 (3, 'Giovanni', 'Ferraro', 'FRRGVN75D15H501K', 'giovanni.ferraro@email.com', '$2y$10$abcdefghijklmnopqrstuvwxyz123456', 'PAT-NAUT-001', 2, 0, '2025-12-23 12:11:10', NULL, 1),
 (4, 'Sofia', 'Esposito', 'ESPSFN92F45H501J', 'sofia.esposito@email.com', '$2y$10$abcdefghijklmnopqrstuvwxyz123456', NULL, 3, 0, '2025-12-23 12:11:10', NULL, 1),
 (5, 'Andrea', 'Moretti', 'MRTAND88H67H501I', 'andrea.moretti@email.com', '$2y$10$abcdefghijklmnopqrstuvwxyz123456', 'PAT-NAUT-002', 4, 0, '2025-12-23 12:11:10', NULL, 1),
 (6, 'Francesca', 'Marino', 'MRNFRC90S55H501H', 'francesca.marino@email.com', '$2y$10$abcdefghijklmnopqrstuvwxyz123456', NULL, 5, 0, '2025-12-23 12:11:10', NULL, 1),
 (7, 'Riccardo', 'Colombo', 'CLMRCR84L22H501G', 'riccardo.colombo@email.com', '$2y$10$abcdefghijklmnopqrstuvwxyz123456', 'PAT-NAUT-003', 6, 0, '2025-12-23 12:11:10', NULL, 1),
-(8, 'Elena', 'Gallo', 'GLLELM87C35H501F', 'elena.gallo@email.com', '$2y$10$abcdefghijklmnopqrstuvwxyz123456', NULL, 7, 0, '2025-12-23 12:11:10', NULL, 1);
+(8, 'Elena', 'Gallo', 'GLLELM87C35H501F', 'elena.gallo@email.com', '$2y$10$abcdefghijklmnopqrstuvwxyz123456', NULL, 7, 0, '2025-12-23 12:11:10', NULL, 1),
+(9, 'DAVIDE', 'BIASUZZI', 'BSZDVD04D19F443F', 'biasuzzi.davide@gmail.com', '$2y$12$U0SQeTC7WZqgChD6SxVteeIdrVBqf4Q4XPHTnaAacjmEjoRKAUSGG', NULL, 16, 1, '2025-12-26 17:17:32', '2026-01-09 13:09:39', 1),
+(11, 'Francesco', 'Marcon', 'AADOIAHSDOIHAOH4', 'fr@mail.com', '$2y$12$BDpv2N3phQZP7e3bMXHD6.7pfDW2qYi.4GNl4BE7iuh23/7LBm48q', NULL, 18, 0, '2026-01-07 11:39:31', '2026-01-08 09:43:50', 1),
+(12, 'Mario', 'Rossi', 'AAAAAAAAAAAAAAAA', 'fojaw95998@vysolar.com', '$2y$12$MBGMZNJPFIzmw0ox5D1JjenoDLIEYx3dQl//ITw7SioXX9mO5QXh2', NULL, 19, 0, '2026-01-08 06:27:28', '2026-01-08 06:27:35', 1);
 
 --
 -- Indici per le tabelle scaricate
@@ -782,19 +754,19 @@ ALTER TABLE `Utente`
 -- AUTO_INCREMENT per la tabella `Articolo_Blog`
 --
 ALTER TABLE `Articolo_Blog`
-  MODIFY `IDArticolo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `IDArticolo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT per la tabella `Articolo_Blog_Extra`
 --
 ALTER TABLE `Articolo_Blog_Extra`
-  MODIFY `IDExtra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
+  MODIFY `IDExtra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
 
 --
 -- AUTO_INCREMENT per la tabella `Indirizzo`
 --
 ALTER TABLE `Indirizzo`
-  MODIFY `IDIndirizzo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `IDIndirizzo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT per la tabella `Indisponibilita`
@@ -812,13 +784,13 @@ ALTER TABLE `Lingua`
 -- AUTO_INCREMENT per la tabella `Media`
 --
 ALTER TABLE `Media`
-  MODIFY `IDMedia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
+  MODIFY `IDMedia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
 
 --
 -- AUTO_INCREMENT per la tabella `Prenotazione`
 --
 ALTER TABLE `Prenotazione`
-  MODIFY `IDPrenotazione` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `IDPrenotazione` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
 
 --
 -- AUTO_INCREMENT per la tabella `Prodotto_Extra`
@@ -830,13 +802,13 @@ ALTER TABLE `Prodotto_Extra`
 -- AUTO_INCREMENT per la tabella `Prodotto_Incluso`
 --
 ALTER TABLE `Prodotto_Incluso`
-  MODIFY `IDIncluso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `IDIncluso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
 
 --
 -- AUTO_INCREMENT per la tabella `Utente`
 --
 ALTER TABLE `Utente`
-  MODIFY `IDUtente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `IDUtente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Limiti per le tabelle scaricate
