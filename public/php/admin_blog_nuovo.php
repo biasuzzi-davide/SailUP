@@ -104,21 +104,20 @@ function handleBlogImageUpload(string $uploadDir): array {
 $db = new DBConnection();
 $feedback = '';
 $feedbackClass = 'hidden';
+//per distinguire dalla modifica
+$mode = 'create';
+//per distringuere da create(viene preso l id del blog da modificare)
+$editingId = '';
 $userId = $_SESSION['user']['IDUtente'] ?? null;
 $old = [
     'title' => '',
     'excerpt' => '',
     'content' => '',
     'date' => '',
-    'category' => '',
-    'tags' => '',
     'image' => '',
     'alt' => '',
-    'meta_title' => '',
-    'meta_desc' => '',
     'status' => 'draft',
     'extras' => [],
-    'category' => '',
     'reading_time' => '',
 ];
 
@@ -128,6 +127,42 @@ function stimaTempoLettura(string $contenuto): int {
     return max(1, $minuti);
 }
 
+//se trovo id nel get-> è modifica
+if (isset($_GET['id']) && trim($_GET['id']) !== '') {
+    $editingId = (int)$_GET['id'];
+    $article = $db->getArticoloAdminById($editingId);
+    if (is_array($article)) {
+        $mode = 'edit';
+        $extras = $db->getArticoloBlogExtra($editingId);
+        $extrasFormatted = [];
+        if (is_array($extras)) {
+            foreach ($extras as $ex) {
+                $extrasFormatted[] = [
+                    'titolo' => $ex['Titolo'] ?? '',
+                    'elemento' => $ex['Elemento'] ?? '',
+                ];
+            }
+        }
+        $old = [
+            'title' => $article['Titolo'] ?? '',
+            'excerpt' => $article['Descrizione_Breve'] ?? '',
+            'content' => $article['Contenuto'] ?? '',
+            'date' => !empty($article['Data_Pubblicazione']) ? date('Y-m-d', strtotime($article['Data_Pubblicazione'])) : '',
+            'image' => normalizeImageUrl($article['URL_Media'] ?? ''),
+            'alt' => $article['Testo_Alternativo'] ?? '',
+            'status' => !empty($article['Pubblicato']) ? 'published' : 'draft',
+            'extras' => $extrasFormatted,
+            'reading_time' => (int)($article['Tempo_Lettura'] ?? 0),
+        ];
+    } else {
+        $feedbackClass = 'alert alert-error';
+        $feedback = 'Articolo non trovato.';
+        $editingId = '';
+        $mode = 'create';
+    }
+}
+
+//quando invio i dati al server
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $csrf = $_POST['csrf_token'] ?? null;
     if (!verifyCsrfToken($csrf)) {
@@ -144,11 +179,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $status = $_POST['post-status'] ?? 'draft';
         $urlImg = normalizeImageUrl(trim($_POST['existing-image-url'] ?? ''));
         $altImg = trim($_POST['Testo_Alternativo'] ?? '');
-        $categoria = trim($_POST['post-category'] ?? '');
-        $tags = trim($_POST['post-tags'] ?? '');
-        $metaTitle = trim($_POST['post-meta-title'] ?? '');
-        $metaDesc = trim($_POST['post-meta-description'] ?? '');
         $readingTime = (int)($_POST['post-reading-time'] ?? 0);
+        $postId = trim($_POST['post-id'] ?? '');
+        if ($postId !== '') {
+            $editingId = (int)$postId;
+            $mode = 'edit';
+        }
         $extraTitles = $_POST['extra_title'] ?? [];
         $extraItems = $_POST['extra_item'] ?? [];
 
@@ -157,25 +193,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'excerpt' => $excerpt,
             'content' => $contenuto,
             'date' => $dataPub,
-            'category' => $categoria,
-            'tags' => $tags,
             'image' => $urlImg,
             'alt' => $altImg,
-            'meta_title' => $metaTitle,
-            'meta_desc' => $metaDesc,
             'status' => $status,
             'extras' => [],
-            'category' => $categoria,
             'reading_time' => $readingTime,
         ];
 
         $errors = [];
-        $categorieAmmesse = ['guide', 'destinazioni', 'consigli', 'eventi', 'sicurezza', 'manutenzione'];
         if ($titolo === '') $errors[] = 'Inserisci il titolo';
         if ($excerpt === '') $errors[] = 'Inserisci l\'estratto';
         if ($contenuto === '') $errors[] = 'Inserisci il contenuto';
         if ($dataPub === '') $errors[] = 'Inserisci la data di pubblicazione';
-        if ($categoria === '' || !in_array($categoria, $categorieAmmesse, true)) $errors[] = 'Seleziona una categoria';
         $hasNewImage = isset($_FILES['post_image']) && $_FILES['post_image']['error'] !== UPLOAD_ERR_NO_FILE;
         if (!$hasNewImage && $urlImg === '') $errors[] = 'Immagine obbligatoria';
         if ($altImg === '') $errors[] = 'Testo alternativo obbligatorio';
@@ -203,51 +232,55 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         if (empty($errors)) {
-            $pubblicato = $status === 'published' || ($_POST['action'] ?? '') === 'publish';
+            $action = $_POST['action'] ?? '';
+            if ($action === 'publish') {
+                $pubblicato = true;
+            } elseif ($action === 'draft') {
+                $pubblicato = false;
+            } else {
+                $pubblicato = $status === 'published';
+            }
             $tempo = $readingTime > 0 ? $readingTime : stimaTempoLettura($contenuto);
-            $newId = $db->creaArticoloBlog(
-                (int)$userId,
-                $titolo,
-                $excerpt,
-                $contenuto,
-                $dataPub,
-                $pubblicato,
-                $tempo
-            );
+            $targetId = null;
+            $ok = false;
+            if ($postId !== '') {
+                $targetId = (int)$postId;
+                $ok = $db->updateArticoloBlog(
+                    $targetId,
+                    $titolo,
+                    $excerpt,
+                    $contenuto,
+                    $dataPub,
+                    $pubblicato,
+                    $tempo
+                );
+            } else {
+                $targetId = $db->creaArticoloBlog(
+                    (int)$userId,
+                    $titolo,
+                    $excerpt,
+                    $contenuto,
+                    $dataPub,
+                    $pubblicato,
+                    $tempo
+                );
+                $ok = (bool)$targetId;
+            }
 
-            if ($newId) {
+            if ($ok && $targetId) {
                 $finalUrl = !empty($uploadRes['url']) ? $uploadRes['url'] : $urlImg;
-                $okMedia = $db->upsertMediaArticolo((int)$newId, $finalUrl, $altImg);
+                $okMedia = $db->upsertMediaArticolo((int)$targetId, $finalUrl, $altImg);
                 if ($okMedia) {
-                    if (!empty($extras)) {
-                        $db->setArticoloBlogExtra((int)$newId, $extras);
-                    }
-                    header('Location: blog.php');
+                    $db->setArticoloBlogExtra((int)$targetId, $extras);
+                    $redirectTarget = $postId !== '' ? 'admin_blog.php' : 'blog.php';
+                    header('Location: ' . $redirectTarget);
                     exit;
-                    $feedbackClass = 'alert alert-success';
-                    $feedback = 'Articolo salvato correttamente.';
-                    $old = [
-                        'title' => '',
-                        'excerpt' => '',
-                        'content' => '',
-                        'date' => '',
-                        'category' => '',
-                        'tags' => '',
-                        'image' => '',
-                        'alt' => '',
-                        'meta_title' => '',
-                        'meta_desc' => '',
-                        'status' => 'draft',
-                        'extras' => [],
-                        'reading_time' => '',
-                    ];
-                } else {
-                    if (!empty($uploadRes['path']) && file_exists($uploadRes['path'])) {
-                        @unlink($uploadRes['path']);
-                    }
-                    $feedbackClass = 'alert alert-error';
-                    $feedback = 'Errore durante il salvataggio dell\'immagine.';
                 }
+                if (!empty($uploadRes['path']) && file_exists($uploadRes['path'])) {
+                    @unlink($uploadRes['path']);
+                }
+                $feedbackClass = 'alert alert-error';
+                $feedback = 'Errore durante il salvataggio dell\'immagine.';
             } else {
                 if (!empty($uploadRes['path']) && file_exists($uploadRes['path'])) {
                     @unlink($uploadRes['path']);
@@ -267,45 +300,37 @@ $html = buildPage('../pages/admin_blog_nuovo.html', $_SERVER['PHP_SELF']);
 // Keywords per SEO (pagine admin sono noindex)
 $keywords = '<meta name="keywords" content="nuovo, articolo, blog, crea, admin, SailUP">';
 
-$categorySelections = [
-    'guide' => '',
-    'destinazioni' => '',
-    'consigli' => '',
-    'eventi' => '',
-    'sicurezza' => '',
-    'manutenzione' => '',
-];
-if (isset($categorySelections[$old['category']])) {
-    $categorySelections[$old['category']] = 'selected';
-}
-
 $statusDraft = $old['status'] === 'published' ? '' : 'selected';
 $statusPub = $old['status'] === 'published' ? 'selected' : '';
 
 $extrasHtml = buildBlogExtraInputs(!empty($old['extras']) && is_array($old['extras']) ? $old['extras'] : []);
 $feedbackBlock = buildFeedbackBlock($feedback, $feedbackClass);
+$pageTitle = $mode === 'edit' ? 'Modifica Articolo Blog - Dashboard Admin - SailUP' : 'Nuovo Articolo Blog - Dashboard Admin - SailUP';
+$pageDesc = $mode === 'edit'
+    ? 'Form per modificare un articolo del blog SailUP. Aggiorna i dettagli, il contenuto e la pubblicazione.'
+    : 'Form per creare un nuovo articolo del blog SailUP. Compila i dettagli, aggiungi contenuto e pubblica.';
+$pageHeading = $mode === 'edit' ? 'Modifica Articolo Blog' : 'Nuovo Articolo Blog';
+$pageSubtitle = $mode === 'edit' ? 'Aggiorna i contenuti dell\'articolo selezionato.' : 'Crea un nuovo articolo per il blog SailUP';
+$breadcrumb = $mode === 'edit' ? 'Modifica Articolo' : 'Nuovo Articolo';
 
 $html = str_replace(
     [
         '[ADMIN_BLOG_NEW_FEEDBACK]',
         '[CSRF_TOKEN]',
         '[ADMIN_BLOG_ACTION]',
+        '[ADMIN_BLOG_ID]',
         '[KEYWORDS]',
+        '[ADMIN_BLOG_PAGE_TITLE]',
+        '[ADMIN_BLOG_PAGE_DESC]',
+        '[ADMIN_BLOG_HEADING]',
+        '[ADMIN_BLOG_SUBTITLE]',
+        '[ADMIN_BLOG_BREADCRUMB]',
         '[OLD_TITLE]',
-        '[IF_CAT_GUIDE]',
-        '[IF_CAT_DEST]',
-        '[IF_CAT_CONSIGLI]',
-        '[IF_CAT_EVENTI]',
-        '[IF_CAT_SIC]',
-        '[IF_CAT_MAN]',
         '[OLD_DATE]',
         '[OLD_EXCERPT]',
         '[OLD_CONTENT]',
-        '[OLD_TAGS]',
         '[OLD_IMAGE]',
         '[OLD_ALT]',
-        '[OLD_META_TITLE]',
-        '[OLD_META_DESC]',
         '[OLD_READING_TIME]',
         '[IF_STATUS_DRAFT]',
         '[IF_STATUS_PUB]',
@@ -315,22 +340,19 @@ $html = str_replace(
         $feedbackBlock,
         htmlspecialchars(getCsrfToken()),
         htmlspecialchars($_SERVER['PHP_SELF']),
+        htmlspecialchars($editingId),
         $keywords,
+        htmlspecialchars($pageTitle),
+        htmlspecialchars($pageDesc),
+        htmlspecialchars($pageHeading),
+        htmlspecialchars($pageSubtitle),
+        htmlspecialchars($breadcrumb),
         htmlspecialchars($old['title'], ENT_QUOTES),
-        $categorySelections['guide'],
-        $categorySelections['destinazioni'],
-        $categorySelections['consigli'],
-        $categorySelections['eventi'],
-        $categorySelections['sicurezza'],
-        $categorySelections['manutenzione'],
         htmlspecialchars($old['date']),
         htmlspecialchars($old['excerpt']),
         htmlspecialchars($old['content']),
-        htmlspecialchars($old['tags']),
         htmlspecialchars($old['image'], ENT_QUOTES),
         htmlspecialchars($old['alt']),
-        htmlspecialchars($old['meta_title'], ENT_QUOTES),
-        htmlspecialchars($old['meta_desc']),
         htmlspecialchars((string)$old['reading_time']),
         $statusDraft,
         $statusPub,

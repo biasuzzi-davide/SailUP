@@ -4,8 +4,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nuovo Articolo Blog - Dashboard Admin - SailUP</title>
-  <meta name="description" content="Form per creare un nuovo articolo del blog SailUP. Compila i dettagli, aggiungi contenuto e pubblica.">
+  <title>[ADMIN_BLOG_PAGE_TITLE]</title> <!--per rendere dinamica la scritta nuovo blog/modifica blog in base al contesto-->
+  <meta name="description" content="[ADMIN_BLOG_PAGE_DESC]">
   <meta name="robots" content="noindex, nofollow">
   [KEYWORDS]
   <meta name="authors" content="SailUP Team">
@@ -26,14 +26,14 @@
 
   <nav aria-label="Breadcrumb" id="breadcrumb">
     <ol>
-      <li aria-current="page">Nuovo Articolo</li>
+      <li aria-current="page">[ADMIN_BLOG_BREADCRUMB]</li>
     </ol>
   </nav>
 
   <main id="main-content" class="section-container">
       <header>
-        <h1>Nuovo Articolo Blog</h1>
-        <p>Crea un nuovo articolo per il blog SailUP</p>
+        <h1>[ADMIN_BLOG_HEADING]</h1>
+        <p>[ADMIN_BLOG_SUBTITLE]</p>
       </header>
 
       <section aria-labelledby="form-title" class="admin-form">
@@ -43,6 +43,7 @@
 
         <form id="blog-form" action="[ADMIN_BLOG_ACTION]" method="post" novalidate enctype="multipart/form-data">
           <input type="hidden" name="csrf_token" value="[CSRF_TOKEN]">
+          <input type="hidden" name="post-id" value="[ADMIN_BLOG_ID]">
           <input type="hidden" name="existing-image-url" id="existing-image-url" value="[OLD_IMAGE]">
 
           <fieldset>
@@ -56,20 +57,6 @@
             </div>
 
             <div class="form-row">
-              <div class="form-group">
-                <label for="post-category">Categoria <abbr title="Campo obbligatorio">*</abbr></label>
-                <select id="post-category" name="post-category" required aria-required="true" aria-describedby="post-category-error">
-                  <option value="">Seleziona categoria...</option>
-                  <option value="guide" [IF_CAT_GUIDE]>Guide</option>
-                  <option value="destinazioni" [IF_CAT_DEST]>Destinazioni</option>
-                  <option value="consigli" [IF_CAT_CONSIGLI]>Consigli</option>
-                  <option value="eventi" [IF_CAT_EVENTI]>Eventi</option>
-                  <option value="sicurezza" [IF_CAT_SIC]>Sicurezza</option>
-                  <option value="manutenzione" [IF_CAT_MAN]>Manutenzione</option>
-                </select>
-                <span id="post-category-error" class="field-error" role="alert"></span>
-              </div>
-
               <div class="form-group">
                 <label for="post-date">Data Pubblicazione <abbr title="Campo obbligatorio">*</abbr></label>
                 <input type="date" id="post-date" name="post-date" value="[OLD_DATE]" required aria-required="true" aria-describedby="post-date-error" />

@@ -1969,6 +1969,53 @@ class DBConnection {
     }
 
     /**
+     * Recupera un articolo (anche bozza) con media associata per l'area admin.
+     * serve in particolare per la modifica di un articolo
+     */
+    public function getArticoloAdminById(int $idArticolo): array|bool|null {
+        $this->openConnection();
+        $query = "
+            SELECT a.*,
+                   (SELECT URL_Media FROM Media WHERE IDArticolo = a.IDArticolo ORDER BY IDMedia ASC LIMIT 1) AS URL_Media,
+                   (SELECT Testo_Alternativo FROM Media WHERE IDArticolo = a.IDArticolo ORDER BY IDMedia ASC LIMIT 1) AS Testo_Alternativo
+            FROM Articolo_Blog a
+            WHERE a.IDArticolo = ?
+            LIMIT 1
+        ";
+
+        try {
+            $stmt = $this->connection->prepare($query);
+            if (!$stmt) {
+                $this->closeConnection();
+                return false;
+            }
+
+            $stmt->bind_param('i', $idArticolo);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $stmt->close();
+
+            if (!$result) {
+                $this->closeConnection();
+                return false;
+            }
+
+            if ($result->num_rows === 0) {
+                $this->closeConnection();
+                return null;
+            }
+
+            $row = $result->fetch_assoc();
+            $result->free();
+            $this->closeConnection();
+            return $row;
+        } catch (Throwable $t) {
+            $this->closeConnection();
+            return false;
+        }
+    }
+
+    /**
      * Recupera i suggerimenti extra associati a un articolo.
      */
     public function getArticoloBlogExtra(int $idArticolo): array|bool {
@@ -2170,6 +2217,44 @@ class DBConnection {
             $stmt->close();
             $this->closeConnection();
             return $ok ? $newId : false;
+        } catch (Throwable $t) {
+            $this->closeConnection();
+            return false;
+        }
+    }
+
+    /**
+     * aggiorna articolo di blog.
+     */
+    public function updateArticoloBlog(
+        int $idArticolo,
+        string $titolo,
+        string $descrizioneBreve,
+        string $contenuto,
+        string $dataPubblicazione,
+        bool $pubblicato,
+        int $tempoLettura = 0
+    ): bool {
+        $this->openConnection();
+        $query = "
+            UPDATE Articolo_Blog
+            SET Titolo = ?, Descrizione_Breve = ?, Contenuto = ?, Data_Pubblicazione = ?, Tempo_Lettura = ?, Pubblicato = ?
+            WHERE IDArticolo = ?
+        ";
+
+        try {
+            $stmt = $this->connection->prepare($query);
+            if (!$stmt) {
+                $this->closeConnection();
+                return false;
+            }
+
+            $pub = $pubblicato ? 1 : 0;
+            $stmt->bind_param('ssssiii', $titolo, $descrizioneBreve, $contenuto, $dataPubblicazione, $tempoLettura, $pub, $idArticolo);
+            $ok = $stmt->execute();
+            $stmt->close();
+            $this->closeConnection();
+            return $ok;
         } catch (Throwable $t) {
             $this->closeConnection();
             return false;
