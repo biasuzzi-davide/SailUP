@@ -1090,6 +1090,7 @@ function buildBlogExtraInputs(array $extras): string {
             . '<label>Contenuto</label>'
             . '<textarea name="extra_item[]" rows="2" placeholder="Elenco o testo descrittivo">' . htmlspecialchars($ex['elemento'] ?? '') . '</textarea>'
             . '</div>'
+            . '<button type="button" class="btn-layout-light remove-extra" aria-label="Rimuovi extra">Rimuovi</button>'
             . '</div>';
     }
 
@@ -1103,6 +1104,7 @@ function buildBlogExtraInputs(array $extras): string {
             . '<label>Contenuto</label>'
             . '<textarea name="extra_item[]" rows="2" placeholder="Elenco o testo descrittivo"></textarea>'
             . '</div>'
+            . '<button type="button" class="btn-layout-light remove-extra" aria-label="Rimuovi extra">Rimuovi</button>'
             . '</div>';
     }
 

@@ -127,6 +127,19 @@
             <div id="extras-container" class="extras-container">
               [ADMIN_BLOG_EXTRAS]
             </div>
+            <template id="extra-row-template">
+              <div class="extra-row">
+                <div class="form-group">
+                  <label>Titolo Extra</label>
+                  <input type="text" name="extra_title[]" placeholder="es. Suggerimenti finali" />
+                </div>
+                <div class="form-group">
+                  <label>Contenuto</label>
+                  <textarea name="extra_item[]" rows="2" placeholder="Testo o elenco"></textarea>
+                </div>
+                <button type="button" class="btn-layout-light remove-extra" aria-label="Rimuovi extra">Rimuovi</button>
+              </div>
+            </template>
             <button type="button" class="btn-layout-light" id="add-extra">Aggiungi extra</button>
           </fieldset>
 
@@ -161,28 +174,6 @@
 
   <script src="../js/script.js"></script>
   <script src="../js/blog_validation.js"></script>
-  <script>
-    (function() {
-      const addBtn = document.getElementById('add-extra');
-      const container = document.getElementById('extras-container');
-      if (!addBtn || !container) return;
-      addBtn.addEventListener('click', function () {
-        const row = document.createElement('div');
-        row.className = 'extra-row';
-        row.innerHTML = `
-          <div class="form-group">
-            <label>Titolo Extra</label>
-            <input type="text" name="extra_title[]" placeholder="es. Suggerimenti finali" />
-          </div>
-          <div class="form-group">
-            <label>Contenuto</label>
-            <textarea name="extra_item[]" rows="2" placeholder="Testo o elenco"></textarea>
-          </div>
-        `;
-        container.appendChild(row);
-      });
-    })();
-  </script>
 </body>
 
 </html>
