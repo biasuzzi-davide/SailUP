@@ -1,6 +1,7 @@
 <?php
 require_once '../../config/pages.php';
 require_once __DIR__ . '/session/session.php';
+require_once __DIR__ . '/db_connection.php';
 
 function buildHeader($phpSelf) {
     $headerTemplatePath = __DIR__ . '/../public/pages/elementi_semantici/header.html';
@@ -155,6 +156,17 @@ function getProfileImageUrl(array $user = []): string {
         if (file_exists($candidate)) {
             return '../img/avatars/' . basename($candidate) . '?v=' . filemtime($candidate);
         }
+    }
+
+    // prova la media salvata a DB
+    try {
+        $db = new DBConnection();
+        $media = $db->getMediaUtenteById($userId);
+        if (is_array($media) && !empty($media['URL_Media'])) {
+            return normalizeImageUrl($media['URL_Media']);
+        }
+    } catch (Throwable) {
+        // fallback su file system
     }
 
     // cerca file salvati con pattern user_<id>.<ext>
