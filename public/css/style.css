@@ -969,6 +969,16 @@ a.product-cta:focus-visible {
   border-color: #16a34a;
 }
 
+/* Extra blog admin */
+.extra-row .form-group {
+  margin-bottom: 0.9em;
+}
+
+.extra-row .remove-extra {
+  margin-top: -0.4em;
+  align-self: flex-start;
+}
+
 .form-check,
 .checkbox-group,
 .filter-checkbox,
