@@ -5,6 +5,9 @@ require_once '../../includes/auth/auth.php';
 require_once '../../includes/utils/validation.php';
 require_once '../../includes/helpers.php';
 
+//se un utente prova a fare un traversal path alla pagina di registrazione nonostante sia gia loggato
+requireGuest('../php/profilo.php');
+
 $errors = [];
 $old = [
     'nome' => '',

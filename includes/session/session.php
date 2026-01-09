@@ -45,6 +45,17 @@ function requireLogin(string $redirect = '../php/login.php'): void {
 }
 
 /**
+ * reindirizza l'utente se è già loggato
+ * @return void
+ */
+function requireGuest(string $redirect = '../php/index.php'): void {
+    if (isLogged()) {
+        header('Location: ' . $redirect);
+        exit;
+    }
+}
+
+/**
  * controllo se l'utente è admin
  * @return bool
  */
