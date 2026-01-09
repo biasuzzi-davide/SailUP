@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Creato il: Gen 09, 2026 alle 13:22
+-- Creato il: Gen 09, 2026 alle 17:05
 -- Versione del server: 11.8.3-MariaDB-0+deb13u1 from Debian
 -- Versione PHP: 8.4.11
 
@@ -57,7 +57,8 @@ INSERT INTO `Articolo_Blog` (`IDArticolo`, `IDAutore`, `Titolo`, `Descrizione_Br
 (12, 1, 'Sorrento: La Perla della Costiera', 'Alla scoperta della affascinante città di Sorrento.', 'Sorrento è una delle destinazioni più romantiche d\'Italia. Questo articolo esplora la storia di questa affascinante città, i suoi monumenti, le piazze pittoresche e gli hotel di lusso. Scopri cosa fare a terra e come le tue gite in barca possono integrarsi con una visita a Sorrento, includendo tours del centro storico e cene in ristoranti tradizionali.', '2025-12-10 10:05:00', 7, 1, '2025-12-23 12:11:10'),
 (13, 1, 'Fotografia Subacquea: Cattura i Tuoi Momenti Migliori', 'Consigli pratici per fotografare il mondo sottomarino.', 'Vuoi immortalare i tuoi momenti subacquei? Questo articolo fornisce consigli su fotocamere e videocamere subacquee, tecniche di fotografia sottomarina, illuminazione, composizione, e post-produzione. Scopri come catturare la bellezza dei fondali e condividere le tue avventure sui social media con fotografie straordinarie.', '2025-12-08 13:35:00', 9, 1, '2025-12-23 12:11:10'),
 (14, 2, 'Sostenibilità Marina: Come Navigare Responsabilmente', 'Pratiche ecologiche per proteggere l\'ecosistema marino.', 'La navigazione responsabile è essenziale per preservare la bellezza del nostro mare. Questo articolo affrontsa i temi della sostenibilità marina, da come ridurre l\'uso di combustibili fossili a come evitare inquinamento, alla scelta di prodotti eco-friendly a bordo. Scopri come ogni navigatore può contribuire alla protezione dell\'ambiente marino.', '2025-12-05 16:55:00', 8, 1, '2025-12-23 12:11:10'),
-(15, 1, 'Isola di Capri: Leggenda e Realtà', 'Mito, storia e meraviglie dell\'isola più celebre del golfo.', 'Capri è circondata da leggende e fascino. Questo articolo racconta la storia affascinante dell\'isola, dalla Grotta Azzurra ai faraglioni, dai siti archeologici alle celebrità che l\'hanno resa famosa. Scopri come organizzare una giornata perfetta a Capri partendo da una barca noleggiata e quali sono i must-see dell\'isola.', '2025-12-03 11:20:00', 10, 1, '2025-12-23 12:11:10');
+(15, 1, 'Isola di Capri: Leggenda e Realtà', 'Mito, storia e meraviglie dell\'isola più celebre del golfo.', 'Capri è circondata da leggende e fascino. Questo articolo racconta la storia affascinante dell\'isola, dalla Grotta Azzurra ai faraglioni, dai siti archeologici alle celebrità che l\'hanno resa famosa. Scopri come organizzare una giornata perfetta a Capri partendo da una barca noleggiata e quali sono i must-see dell\'isola.', '2025-12-03 11:20:00', 10, 1, '2025-12-23 12:11:10'),
+(23, 9, 'Come scegliere il Davide Biasuzzi perfetto per te', 'Ciao ciao', 'Ciao ciao 2', '2026-01-11 00:00:00', 8, 1, '2026-01-09 16:25:39');
 
 -- --------------------------------------------------------
 
@@ -142,9 +143,12 @@ INSERT INTO `Articolo_Blog_Extra` (`IDExtra`, `IDArticolo`, `Titolo`, `Elemento`
 (67, 15, '🗿 Faraglioni', 'Tre enormi monoliti di roccia calcarea', 1, '2025-12-23 12:11:10'),
 (68, 15, '🗿 Faraglioni', 'Grotta Azzurra - Fenomeno ottico straordinario', 2, '2025-12-23 12:11:10'),
 (69, 15, '🗿 Faraglioni', 'Villa Jovis di Tiberio - Rovine imperiali', 3, '2025-12-23 12:11:10'),
-(91, 7, '🏘️ Cosa Vedere', 'Piazza Positano - Centro storico pittoresco', 1, '2026-01-09 11:56:10'),
-(92, 7, '🏘️ Cosa Vedere', 'Spiaggia di Positano - Sabbia e bohemien', 2, '2026-01-09 11:56:10'),
-(93, 7, '🏘️ Cosa Vedere', 'Duomo di Amalfi - Capolavoro architettonico', 3, '2026-01-09 11:56:10');
+(98, 7, '🏘️ Cosa Vedere', 'Piazza Positano - Centro storico pittoresco', 1, '2026-01-09 16:24:06'),
+(99, 7, '🏘️ Cosa Vedere', 'Spiaggia di Positano - Sabbia e bohemien', 2, '2026-01-09 16:24:06'),
+(100, 7, '🏘️ Cosa Vedere', 'Duomo di Amalfi - Capolavoro architettonico', 3, '2026-01-09 16:24:06'),
+(101, 23, 'Prova', 'Ciao', 1, '2026-01-09 16:25:39'),
+(102, 23, 'Ciao', 'Prova', 2, '2026-01-09 16:25:39'),
+(103, 23, 'Prova', 'Ciao', 3, '2026-01-09 16:25:39');
 
 -- --------------------------------------------------------
 
@@ -186,7 +190,9 @@ INSERT INTO `Indirizzo` (`IDIndirizzo`, `Via`, `N_Civico`, `CAP`, `Citta`, `Prov
 (16, 'Via Romaaewrewr', '123', '43434', 'Napoli', 'NA', 'IT', '2025-12-26 17:17:32'),
 (17, 'Via Roma', '123', '80100', 'Napoli', 'NA', 'IT', '2026-01-07 09:08:38'),
 (18, 'Via Roma', '123', '80100', 'Napoli', 'NA', 'IT', '2026-01-07 11:39:31'),
-(19, 'Via Roma', '123', '80100', 'Napoli', 'NA', 'IT', '2026-01-08 06:27:28');
+(19, 'Via Roma', '123', '80100', 'Napoli', 'NA', 'IT', '2026-01-08 06:27:28'),
+(20, 'Via Frasnelli', '6', '31040', 'Nervesa', 'TV', 'IT', '2026-01-09 16:33:45'),
+(21, 'Via Frasnelli', '6', '31040', 'Nervesa', 'TV', 'IT', '2026-01-09 16:34:28');
 
 -- --------------------------------------------------------
 
@@ -301,8 +307,9 @@ INSERT INTO `Media` (`IDMedia`, `URL_Media`, `Testo_Alternativo`, `Tipo_Media`, 
 (78, '../img/blog/capri-leggenda-realta.webp', 'Isola di Capri: leggenda e realtà', 'Immagine', NULL, NULL, 15, '2025-12-25 18:34:09'),
 (90, '../img/prodotti/odyssey-45.jpg', 'Jeanneau Sun Odyssey 45 in navigazione', 'Immagine', NULL, 'BARCA-VELA-002', NULL, '2026-01-08 06:20:35'),
 (93, '../img/prodotti/snork.jpg', 'Snorkeling a Capri con pesci', 'Immagine', NULL, 'EXP-SNORKEL-001', NULL, '2026-01-08 08:24:13'),
-(94, '../img/prodotti/prod_BARCA-VELA-001.webp?v=1767862844', 'Beneteau First 35 a vela', 'Immagine', NULL, 'BARCA-VELA-001', NULL, '2026-01-08 09:00:44'),
-(95, '../img/blog/positano-amalfi.webp', 'Villaggi storici di Positano e Amalfi', 'Immagine', NULL, NULL, 7, '2026-01-09 11:56:10');
+(96, '../img/prodotti/prod_BARCA-VELA-001.webp?v=1767965207', 'Beneteau First 35 a vela', 'Immagine', NULL, 'BARCA-VELA-001', NULL, '2026-01-09 13:26:47'),
+(98, '../img/blog/positano-amalfi.webp', 'Villaggi storici di Positano e Amalfi', 'Immagine', NULL, NULL, 7, '2026-01-09 16:24:06'),
+(99, '../img/blog/article_a1a4e561.webp?v=1767975939', 'davide & alberto', 'Immagine', NULL, NULL, 23, '2026-01-09 16:25:39');
 
 -- --------------------------------------------------------
 
@@ -555,11 +562,11 @@ INSERT INTO `Prodotto_Incluso` (`IDIncluso`, `IDProdotto`, `Nome_Incluso`) VALUE
 (111, 'EXP-SNORKEL-001', 'Giubbotti Salvagente'),
 (112, 'EXP-SNORKEL-001', 'Guida Turistica Specializzata'),
 (113, 'EXP-SNORKEL-001', 'Snack e Bevande Fresche'),
-(114, 'BARCA-VELA-001', 'Assicurazione Responsabilità Civile'),
-(115, 'BARCA-VELA-001', 'Attrezzatura Vela Base'),
-(116, 'BARCA-VELA-001', 'Ciao'),
-(117, 'BARCA-VELA-001', 'Giubbotti Salvagente'),
-(118, 'BARCA-VELA-001', 'Mappa Nautica');
+(119, 'BARCA-VELA-001', 'Assicurazione Responsabilità Civile'),
+(120, 'BARCA-VELA-001', 'Attrezzatura Vela Base'),
+(121, 'BARCA-VELA-001', 'Ciao'),
+(122, 'BARCA-VELA-001', 'Giubbotti Salvagente'),
+(123, 'BARCA-VELA-001', 'Mappa Nautica');
 
 -- --------------------------------------------------------
 
@@ -620,30 +627,29 @@ CREATE TABLE `Utente` (
   `CF` varchar(16) NOT NULL,
   `Email` varchar(255) NOT NULL,
   `PasswordHash` varchar(255) NOT NULL,
-  `Numero_Patente_Nautica` varchar(50) DEFAULT NULL,
   `IDIndirizzo` int(11) NOT NULL,
   `Is_Admin` tinyint(1) NOT NULL DEFAULT 0,
   `Data_Registrazione` timestamp NULL DEFAULT current_timestamp(),
-  `Data_Ultimo_Accesso` timestamp NULL DEFAULT NULL,
-  `Attivo` tinyint(1) DEFAULT 1
+  `Data_Ultimo_Accesso` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dump dei dati per la tabella `Utente`
 --
 
-INSERT INTO `Utente` (`IDUtente`, `Nome`, `Cognome`, `CF`, `Email`, `PasswordHash`, `Numero_Patente_Nautica`, `IDIndirizzo`, `Is_Admin`, `Data_Registrazione`, `Data_Ultimo_Accesso`, `Attivo`) VALUES
-(1, 'Marco', 'Rossi', 'RSSMRC80A01H501U', 'admin@noleggio-napoli.it', '$2y$10$abcdefghijklmnopqrstuvwxyz123456', 'PAT-NAUT-ADMIN-001', 1, 1, '2025-12-23 12:11:10', NULL, 1),
-(2, 'Lucia', 'De Luca', 'DLCLCU85M41H501L', 'lucia.admin@noleggio-napoli.it', '$2y$10$abcdefghijklmnopqrstuvwxyz123456', 'PAT-NAUT-ADMIN-002', 9, 1, '2025-12-23 12:11:10', NULL, 1),
-(3, 'Giovanni', 'Ferraro', 'FRRGVN75D15H501K', 'giovanni.ferraro@email.com', '$2y$10$abcdefghijklmnopqrstuvwxyz123456', 'PAT-NAUT-001', 2, 0, '2025-12-23 12:11:10', NULL, 1),
-(4, 'Sofia', 'Esposito', 'ESPSFN92F45H501J', 'sofia.esposito@email.com', '$2y$10$abcdefghijklmnopqrstuvwxyz123456', NULL, 3, 0, '2025-12-23 12:11:10', NULL, 1),
-(5, 'Andrea', 'Moretti', 'MRTAND88H67H501I', 'andrea.moretti@email.com', '$2y$10$abcdefghijklmnopqrstuvwxyz123456', 'PAT-NAUT-002', 4, 0, '2025-12-23 12:11:10', NULL, 1),
-(6, 'Francesca', 'Marino', 'MRNFRC90S55H501H', 'francesca.marino@email.com', '$2y$10$abcdefghijklmnopqrstuvwxyz123456', NULL, 5, 0, '2025-12-23 12:11:10', NULL, 1),
-(7, 'Riccardo', 'Colombo', 'CLMRCR84L22H501G', 'riccardo.colombo@email.com', '$2y$10$abcdefghijklmnopqrstuvwxyz123456', 'PAT-NAUT-003', 6, 0, '2025-12-23 12:11:10', NULL, 1),
-(8, 'Elena', 'Gallo', 'GLLELM87C35H501F', 'elena.gallo@email.com', '$2y$10$abcdefghijklmnopqrstuvwxyz123456', NULL, 7, 0, '2025-12-23 12:11:10', NULL, 1),
-(9, 'DAVIDE', 'BIASUZZI', 'BSZDVD04D19F443F', 'biasuzzi.davide@gmail.com', '$2y$12$U0SQeTC7WZqgChD6SxVteeIdrVBqf4Q4XPHTnaAacjmEjoRKAUSGG', NULL, 16, 1, '2025-12-26 17:17:32', '2026-01-09 13:09:39', 1),
-(11, 'Francesco', 'Marcon', 'AADOIAHSDOIHAOH4', 'fr@mail.com', '$2y$12$BDpv2N3phQZP7e3bMXHD6.7pfDW2qYi.4GNl4BE7iuh23/7LBm48q', NULL, 18, 0, '2026-01-07 11:39:31', '2026-01-08 09:43:50', 1),
-(12, 'Mario', 'Rossi', 'AAAAAAAAAAAAAAAA', 'fojaw95998@vysolar.com', '$2y$12$MBGMZNJPFIzmw0ox5D1JjenoDLIEYx3dQl//ITw7SioXX9mO5QXh2', NULL, 19, 0, '2026-01-08 06:27:28', '2026-01-08 06:27:35', 1);
+INSERT INTO `Utente` (`IDUtente`, `Nome`, `Cognome`, `CF`, `Email`, `PasswordHash`, `IDIndirizzo`, `Is_Admin`, `Data_Registrazione`, `Data_Ultimo_Accesso`) VALUES
+(1, 'Marco', 'Rossi', 'RSSMRC80A01H501U', 'admin@noleggio-napoli.it', '$2y$10$abcdefghijklmnopqrstuvwxyz123456', 1, 1, '2025-12-23 12:11:10', NULL),
+(2, 'Lucia', 'De Luca', 'DLCLCU85M41H501L', 'lucia.admin@noleggio-napoli.it', '$2y$10$abcdefghijklmnopqrstuvwxyz123456', 9, 1, '2025-12-23 12:11:10', NULL),
+(3, 'Giovanni', 'Ferraro', 'FRRGVN75D15H501K', 'giovanni.ferraro@email.com', '$2y$10$abcdefghijklmnopqrstuvwxyz123456', 2, 0, '2025-12-23 12:11:10', NULL),
+(4, 'Sofia', 'Esposito', 'ESPSFN92F45H501J', 'sofia.esposito@email.com', '$2y$10$abcdefghijklmnopqrstuvwxyz123456', 3, 0, '2025-12-23 12:11:10', NULL),
+(5, 'Andrea', 'Moretti', 'MRTAND88H67H501I', 'andrea.moretti@email.com', '$2y$10$abcdefghijklmnopqrstuvwxyz123456', 4, 0, '2025-12-23 12:11:10', NULL),
+(6, 'Francesca', 'Marino', 'MRNFRC90S55H501H', 'francesca.marino@email.com', '$2y$10$abcdefghijklmnopqrstuvwxyz123456', 5, 0, '2025-12-23 12:11:10', NULL),
+(7, 'Riccardo', 'Colombo', 'CLMRCR84L22H501G', 'riccardo.colombo@email.com', '$2y$10$abcdefghijklmnopqrstuvwxyz123456', 6, 0, '2025-12-23 12:11:10', NULL),
+(8, 'Elena', 'Gallo', 'GLLELM87C35H501F', 'elena.gallo@email.com', '$2y$10$abcdefghijklmnopqrstuvwxyz123456', 7, 0, '2025-12-23 12:11:10', NULL),
+(9, 'DAVIDE', 'BIASUZZI', 'BSZDVD04D19F443F', 'biasuzzi.davide@gmail.com', '$2y$12$U0SQeTC7WZqgChD6SxVteeIdrVBqf4Q4XPHTnaAacjmEjoRKAUSGG', 16, 1, '2025-12-26 17:17:32', '2026-01-09 16:35:01'),
+(11, 'Francesco', 'Marcon', 'AADOIAHSDOIHAOH4', 'fr@mail.com', '$2y$12$BDpv2N3phQZP7e3bMXHD6.7pfDW2qYi.4GNl4BE7iuh23/7LBm48q', 18, 0, '2026-01-07 11:39:31', '2026-01-08 09:43:50'),
+(12, 'Mario', 'Rossi', 'AAAAAAAAAAAAAAAA', 'fojaw95998@vysolar.com', '$2y$12$MBGMZNJPFIzmw0ox5D1JjenoDLIEYx3dQl//ITw7SioXX9mO5QXh2', 19, 0, '2026-01-08 06:27:28', '2026-01-08 06:27:35'),
+(13, 'Davide', 'Biasuzzi', 'AAAAAAAAAAABAAAA', 'davidinobiasu19@gmail.com', '$2y$12$TCa3ZWfjgYGqadFWA8ffBu3DOCdP3bDk2EYIQ9vRlGn0YelIJPONK', 21, 0, '2026-01-09 16:34:28', '2026-01-09 16:34:38');
 
 --
 -- Indici per le tabelle scaricate
@@ -743,8 +749,7 @@ ALTER TABLE `Utente`
   ADD UNIQUE KEY `CF` (`CF`),
   ADD UNIQUE KEY `Email` (`Email`),
   ADD KEY `IDIndirizzo` (`IDIndirizzo`),
-  ADD KEY `idx_email` (`Email`),
-  ADD KEY `idx_attivo` (`Attivo`);
+  ADD KEY `idx_email` (`Email`);
 
 --
 -- AUTO_INCREMENT per le tabelle scaricate
@@ -754,19 +759,19 @@ ALTER TABLE `Utente`
 -- AUTO_INCREMENT per la tabella `Articolo_Blog`
 --
 ALTER TABLE `Articolo_Blog`
-  MODIFY `IDArticolo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `IDArticolo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT per la tabella `Articolo_Blog_Extra`
 --
 ALTER TABLE `Articolo_Blog_Extra`
-  MODIFY `IDExtra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
+  MODIFY `IDExtra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
 
 --
 -- AUTO_INCREMENT per la tabella `Indirizzo`
 --
 ALTER TABLE `Indirizzo`
-  MODIFY `IDIndirizzo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `IDIndirizzo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT per la tabella `Indisponibilita`
@@ -784,7 +789,7 @@ ALTER TABLE `Lingua`
 -- AUTO_INCREMENT per la tabella `Media`
 --
 ALTER TABLE `Media`
-  MODIFY `IDMedia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
+  MODIFY `IDMedia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
 
 --
 -- AUTO_INCREMENT per la tabella `Prenotazione`
@@ -802,13 +807,13 @@ ALTER TABLE `Prodotto_Extra`
 -- AUTO_INCREMENT per la tabella `Prodotto_Incluso`
 --
 ALTER TABLE `Prodotto_Incluso`
-  MODIFY `IDIncluso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
+  MODIFY `IDIncluso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
 
 --
 -- AUTO_INCREMENT per la tabella `Utente`
 --
 ALTER TABLE `Utente`
-  MODIFY `IDUtente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `IDUtente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Limiti per le tabelle scaricate
