@@ -911,6 +911,8 @@ function buildAdminBlogRows(array $articoli, string $csrfToken): string {
         $actionValue = $statoPub ? 'draft' : 'publish';
         $actionLabel = $statoPub ? 'Imposta bozza' : 'Pubblica';
         $ariaActionLabel = $statoPub ? 'Imposta come bozza' : 'Pubblica';
+        //costruisce l url della pagina di modifica passando l id della articolo in querystring
+        $editUrl = 'admin_blog_nuovo.php?id=' . rawurlencode($a['IDArticolo']);
         $rows .= '<tr>'
             . '<td data-label="ID">' . $idArticolo . '</td>'
             . '<td data-label="Titolo">' . $titolo . '</td>'
@@ -918,16 +920,20 @@ function buildAdminBlogRows(array $articoli, string $csrfToken): string {
             . '<td data-label="Data">' . htmlspecialchars($dataPub) . '</td>'
             . '<td data-label="Stato">' . $badge . '</td>'
             . '<td data-label="Azioni" class="actions-cell">'
+            //button modifica articolo
+            . '<a href="' . htmlspecialchars($editUrl, ENT_QUOTES) . '" class="btn-text" aria-label="Modifica articolo ' . $titolo . '">Modifica</a>'
             . '<form method="post" class="inline-form">'
             . '<input type="hidden" name="csrf_token" value="' . htmlspecialchars($csrfToken) . '">'
             . '<input type="hidden" name="id_articolo" value="' . $idArticolo . '">'
             . '<input type="hidden" name="action" value="' . $actionValue . '">'
+            //button per pubblicare/rendere bozza
             . '<button type="submit" class="btn-text" aria-label="' . $ariaActionLabel . ' ' . $titolo . '">' . $actionLabel . '</button>'
             . '</form>'
             . '<form method="post" class="inline-form" onsubmit="return confirm(\'Eliminare questo articolo?\');">'
             . '<input type="hidden" name="csrf_token" value="' . htmlspecialchars($csrfToken) . '">'
             . '<input type="hidden" name="id_articolo" value="' . $idArticolo . '">'
             . '<input type="hidden" name="action" value="delete">'
+            //button elimina articolo
             . '<button type="submit" class="btn-text danger" aria-label="Elimina articolo ' . $titolo . '">Elimina</button>'
             . '</form>'
             . '</td>'

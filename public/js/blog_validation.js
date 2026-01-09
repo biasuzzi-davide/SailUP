@@ -4,7 +4,6 @@
     const form = document.getElementById('blog-form');
 
     const titleInput = document.getElementById('post-title');
-    const categoryInput = document.getElementById('post-category');
     const dateInput = document.getElementById('post-date');
     const readingTimeInput = document.getElementById('post-reading-time');
     const excerptInput = document.getElementById('post-excerpt');
@@ -72,11 +71,6 @@
         clearFieldError(titleInput); return true;
     }
 
-    function validateCategory() {
-        if (categoryInput.value === '') { showFieldError(categoryInput, 'Seleziona una categoria'); return false; }
-        clearFieldError(categoryInput); return true;
-    }
-
     function validateDate() {
         if (dateInput.value === '') { showFieldError(dateInput, 'La data è obbligatoria'); return false; }
         clearFieldError(dateInput); return true;
@@ -125,19 +119,17 @@
         hideGlobalMessages();
 
         const v1 = validateTitle();
-        const v2 = validateCategory();
-        const v3 = validateDate();
-        const v4 = validateReadingTime();
-        const v5 = validateExcerpt();
-        const v6 = validateContent();
-        const v7 = validateImage();
-        const v8 = validateAlt();
+        const v2 = validateDate();
+        const v3 = validateReadingTime();
+        const v4 = validateExcerpt();
+        const v5 = validateContent();
+        const v6 = validateImage();
+        const v7 = validateAlt();
 
-        return v1 && v2 && v3 && v4 && v5 && v6 && v7 && v8;
+        return v1 && v2 && v3 && v4 && v5 && v6 && v7;
     }
 
     titleInput.addEventListener('blur', validateTitle);
-    categoryInput.addEventListener('blur', validateCategory);
     dateInput.addEventListener('blur', validateDate);
     if (readingTimeInput) {
         readingTimeInput.addEventListener('blur', validateReadingTime);
@@ -148,7 +140,7 @@
     altInput.addEventListener('blur', validateAlt);
 
     const inputs = [
-        titleInput, categoryInput, dateInput, readingTimeInput,
+        titleInput, dateInput, readingTimeInput,
         excerptInput, contentInput, imageInput, altInput
     ];
 
