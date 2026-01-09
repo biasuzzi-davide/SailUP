@@ -189,7 +189,10 @@ $durationRaw = $experience['Durata_Ore'];
 $duration = ($durationRaw !== null && $durationRaw !== '')
 	? ((int) $durationRaw) . ' h'
 	: '—';
-$participants = isset($experience['Posti_Totali']) ? $experience['Posti_Totali'] . ' persone' : '—';
+$postiTotali = isset($experience['Posti_Totali']) ? (int) $experience['Posti_Totali'] : null;
+$participants = $postiTotali !== null 
+	? ($postiTotali === 1 ? '1 persona' : $postiTotali . ' persone')
+	: '—';
 $access = isset($experience['Accessibile_Disabili']) && filter_var($experience['Accessibile_Disabili'], FILTER_VALIDATE_BOOLEAN) ? 'Accessibile' : 'Limitato';
 $descriptionBlock = buildParagraphsFromText($experience['Descrizione'] ?? '', 'Descrizione non disponibile per questa esperienza.');
 $price = formatPriceValue($experience['Prezzo_Base'] ?? null);
