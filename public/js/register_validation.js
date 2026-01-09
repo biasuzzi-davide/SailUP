@@ -173,6 +173,11 @@
     function validateCitta() {
         const val = cittaInput.value.trim();
         if (val === '') { showFieldError(cittaInput, 'Inserisci la città'); return false; }
+        if (val.length < 2) { showFieldError(cittaInput, 'La città deve avere almeno 2 caratteri'); return false; }
+        if (!/^[a-zA-ZÀ-ÿ'\s-]+$/.test(val)) { 
+            showFieldError(cittaInput, 'La città può contenere solo lettere, spazi, apostrofi e trattini'); 
+            return false; 
+        }
         clearFieldError(cittaInput); return true;
     }
 

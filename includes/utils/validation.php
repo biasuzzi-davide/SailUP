@@ -101,10 +101,11 @@ function isValidCAP(string $cap): bool {
     return preg_match('/^[0-9]{5}$/', trim($cap)) === 1;
 }
 
-//citta, lettere/spazi/apostrofi/trattini, 2-20 caratteri
+//citta, lettere/spazi/apostrofi/trattini, 2-inf caratteri
 function isValidCitta(string $citta): bool {
     $citta = trim($citta);
-    return $citta !== '' && preg_match("/^[A-Za-zÀ-ÿ'\\s-]{2,20}$/", $citta) === 1;
+    // Ho cambiato {2,20} in {2,50}
+    return $citta !== '' && preg_match("/^[A-Za-zÀ-ÿ'\\s-]{2,50}$/", $citta);
 }
 
 //provincia, 2 lettere
