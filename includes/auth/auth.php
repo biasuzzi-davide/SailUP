@@ -31,7 +31,6 @@ function registerUserFull(array $data): array {
         $data['cf'],
         $data['email'],
         $data['password_hash'],
-        $data['patente'] ?? null,
         $idIndirizzo,
         $data['is_admin'] ?? false
     );
