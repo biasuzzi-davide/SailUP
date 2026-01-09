@@ -25,6 +25,7 @@
     const languageFieldset = document.getElementById('language-fieldset');
     const languageCheckboxes = Array.from(document.querySelectorAll('input[name="product-languages[]"]'));
     const languageError = document.getElementById('product-languages-error');
+    const extrasContainer = document.getElementById('product-extras-container');
 
     const errorMessageDiv = document.getElementById('error-message');
     const successMessageDiv = document.getElementById('success-message');
@@ -315,6 +316,76 @@
         return true;
     }
 
+    function showExtraError(input, message, errorClass) {
+        const row = input.closest('.extra-row');
+        const errorSpan = row ? row.querySelector(errorClass) : null;
+        if (errorSpan) {
+            errorSpan.textContent = message;
+        }
+        input.classList.add('error');
+        input.classList.remove('valid');
+        input.setAttribute('aria-invalid', 'true');
+    }
+
+    function clearExtraError(input, errorClass) {
+        const row = input.closest('.extra-row');
+        const errorSpan = row ? row.querySelector(errorClass) : null;
+        if (errorSpan) {
+            errorSpan.textContent = '';
+        }
+        input.classList.remove('error');
+        input.classList.add('valid');
+        input.setAttribute('aria-invalid', 'false');
+    }
+
+    function validateExtras() {
+        if (!extrasContainer) {
+            return true;
+        }
+        const nameInputs = extrasContainer.querySelectorAll('input[name="extra_name[]"]');
+        const priceInputs = extrasContainer.querySelectorAll('input[name="extra_price[]"]');
+        const len = Math.max(nameInputs.length, priceInputs.length);
+        let ok = true;
+
+        for (let i = 0; i < len; i++) {
+            const nameInput = nameInputs[i];
+            const priceInput = priceInputs[i];
+            const nameVal = nameInput ? nameInput.value.trim() : '';
+            const priceVal = priceInput ? priceInput.value.trim() : '';
+
+            if (nameVal === '' && priceVal === '') {
+                if (nameInput) {
+                    clearExtraError(nameInput, '.extra-name-error');
+                }
+                if (priceInput) {
+                    clearExtraError(priceInput, '.extra-price-error');
+                }
+                continue;
+            }
+
+            if (!nameInput || nameVal === '') {
+                if (nameInput) {
+                    showExtraError(nameInput, 'Inserisci il nome extra', '.extra-name-error');
+                }
+                ok = false;
+            } else {
+                clearExtraError(nameInput, '.extra-name-error');
+            }
+
+            const priceInt = Number.parseInt(priceVal, 10);
+            if (!priceInput || priceVal === '' || Number.isNaN(priceInt) || priceInt < 1) {
+                if (priceInput) {
+                    showExtraError(priceInput, 'Inserisci un prezzo valido', '.extra-price-error');
+                }
+                ok = false;
+            } else {
+                clearExtraError(priceInput, '.extra-price-error');
+            }
+        }
+
+        return ok;
+    }
+
     function validateForm() {
         hideGlobalMessages();
 
@@ -330,8 +401,9 @@
         const v10 = validateDuration();
         const v11 = validateBoatType();
         const v12 = validateLanguages();
+        const v13 = validateExtras();
 
-        return v1 && v2 && v3 && v4 && v5 && v6 && v7 && v8 && v9 && v10 && v11 && v12;
+        return v1 && v2 && v3 && v4 && v5 && v6 && v7 && v8 && v9 && v10 && v11 && v12 && v13;
     }
 
     nameInput.addEventListener('blur', validateName);
@@ -382,6 +454,22 @@
             validateLanguages();
         });
     });
+
+    if (extrasContainer) {
+        extrasContainer.addEventListener('input', (event) => {
+            const target = event.target;
+            if (!(target instanceof HTMLElement)) {
+                return;
+            }
+            if (target.name === 'extra_name[]') {
+                clearExtraError(target, '.extra-name-error');
+                hideGlobalMessages();
+            } else if (target.name === 'extra_price[]') {
+                clearExtraError(target, '.extra-price-error');
+                hideGlobalMessages();
+            }
+        });
+    }
 
     form.addEventListener('submit', function (e) {
         e.preventDefault();

@@ -227,6 +227,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     } elseif (!empty($uploadRes['url'])) {
                         $profileImageUrl = $uploadRes['url'];
                         $_SESSION['user']['AvatarFile'] = $uploadRes['file'];
+                        $mediaOk = $db->upsertMediaUtente((int)$user['IDUtente'], $uploadRes['url'], 'Avatar utente');
+                        if (!$mediaOk) {
+                            $profileState = 'error';
+                            $profileMsg = 'Errore durante il salvataggio immagine profilo.';
+                        }
                     }
 
                     $addrPlaceholders = [
