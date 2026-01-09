@@ -1923,7 +1923,6 @@ class DBConnection {
             SELECT a.*,
                    u.Nome AS Autore_Nome,
                    u.Cognome AS Autore_Cognome,
-                   u.Numero_Patente_Nautica AS Autore_Patente,
                    u.Data_Registrazione AS Autore_Data_Registrazione,
                    u.Is_Admin AS Autore_Is_Admin,
                    (SELECT URL_Media FROM Media WHERE IDArticolo = a.IDArticolo ORDER BY IDMedia ASC LIMIT 1) AS Articolo_URL,
