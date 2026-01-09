@@ -69,7 +69,7 @@ function isAdmin(): bool {
  *  potrebbe accederci modificando l'url)
  *  @return void
  */
-function requireAdmin(string $redirect = '../php/login.php', string $forbidden = '../pages/403.html'): void {
+function requireAdmin(string $redirect = '../php/login.php', string $forbidden = '../php/403.php'): void {
     requireLogin($redirect);
     if (!isAdmin()) {
         header('Location: ' . $forbidden);

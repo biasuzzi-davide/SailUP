@@ -4,7 +4,7 @@ require_once '../../includes/helpers.php';
 require_once '../../includes/db_connection.php';
 require_once '../../includes/session/session.php';
 
-requireAdmin('../php/login.php', '../pages/403.html');
+requireAdmin();
 
 $db = new DBConnection();
 $feedback = '';
