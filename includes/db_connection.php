@@ -981,6 +981,93 @@ class DBConnection {
     }
 
     /**
+     * update immagine profilo di un utente su db
+     */
+    public function upsertMediaUtente(int $idUtente, string $url, string $alt): bool {
+        $this->openConnection();
+        $this->connection->begin_transaction();
+
+        try {
+            $del = $this->connection->prepare("DELETE FROM Media WHERE IDUtente = ?");
+            if (!$del) {
+                $this->connection->rollback();
+                $this->closeConnection();
+                return false;
+            }
+            $del->bind_param('i', $idUtente);
+            $del->execute();
+            $del->close();
+
+            $stmt = $this->connection->prepare("
+                INSERT INTO Media (URL_Media, Testo_Alternativo, Tipo_Media, IDUtente)
+                VALUES (?, ?, 'Immagine', ?)
+            ");
+            if (!$stmt) {
+                $this->connection->rollback();
+                $this->closeConnection();
+                return false;
+            }
+
+            $stmt->bind_param('ssi', $url, $alt, $idUtente);
+            $ok = $stmt->execute();
+            $stmt->close();
+
+            if ($ok) {
+                $this->connection->commit();
+            } else {
+                $this->connection->rollback();
+            }
+
+            $this->closeConnection();
+            return $ok;
+        } catch (Throwable $t) {
+            $this->connection->rollback();
+            $this->closeConnection();
+            return false;
+        }
+    }
+
+    /**
+     * Recupera la media profilo associata a un utente.
+     */
+    public function getMediaUtenteById(int $idUtente): array|bool {
+        $this->openConnection();
+        $query = "
+            SELECT URL_Media, Testo_Alternativo
+            FROM Media
+            WHERE IDUtente = ?
+            ORDER BY IDMedia ASC
+            LIMIT 1
+        ";
+
+        try {
+            $stmt = $this->connection->prepare($query);
+            if (!$stmt) {
+                $this->closeConnection();
+                return false;
+            }
+
+            $stmt->bind_param('i', $idUtente);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $stmt->close();
+
+            if (!$result) {
+                $this->closeConnection();
+                return false;
+            }
+
+            $row = $result->fetch_assoc();
+            $result->free();
+            $this->closeConnection();
+            return $row ?: [];
+        } catch (Throwable $t) {
+            $this->closeConnection();
+            return false;
+        }
+    }
+
+    /**
      * sostituisce gli inclusi del prodotto
      */
     public function setInclusiProdotto(string $idProdotto, array $inclusi): bool {
