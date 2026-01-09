@@ -1110,4 +1110,42 @@ function buildBlogExtraInputs(array $extras): string {
 
     return $extrasHtml;
 }
+
+// builda gli extra dei prodotti (nome + prezzo)
+function buildProductExtraInputs(array $extras): string {
+    $extrasHtml = '';
+    foreach ($extras as $ex) {
+        $extrasHtml .= '<div class="extra-row">'
+            . '<div class="form-group">'
+            . '<label>Nome Extra</label>'
+            . '<input type="text" name="extra_name[]" value="' . htmlspecialchars($ex['nome'] ?? '', ENT_QUOTES) . '" placeholder="es. Skipper" />'
+            . '<span class="field-error extra-name-error" role="alert"></span>'
+            . '</div>'
+            . '<div class="form-group">'
+            . '<label>Prezzo Extra (€)</label>'
+            . '<input type="number" name="extra_price[]" min="1" step="1" value="' . htmlspecialchars((string)($ex['prezzo'] ?? ''), ENT_QUOTES) . '" placeholder="50" />'
+            . '<span class="field-error extra-price-error" role="alert"></span>'
+            . '</div>'
+            . '<button type="button" class="btn-layout-light remove-extra" aria-label="Rimuovi extra">Rimuovi</button>'
+            . '</div>';
+    }
+
+    if ($extrasHtml === '') {
+        $extrasHtml = '<div class="extra-row">'
+            . '<div class="form-group">'
+            . '<label>Nome Extra</label>'
+            . '<input type="text" name="extra_name[]" placeholder="es. Skipper" />'
+            . '<span class="field-error extra-name-error" role="alert"></span>'
+            . '</div>'
+            . '<div class="form-group">'
+            . '<label>Prezzo Extra (€)</label>'
+            . '<input type="number" name="extra_price[]" min="1" step="1" placeholder="50" />'
+            . '<span class="field-error extra-price-error" role="alert"></span>'
+            . '</div>'
+            . '<button type="button" class="btn-layout-light remove-extra" aria-label="Rimuovi extra">Rimuovi</button>'
+            . '</div>';
+    }
+
+    return $extrasHtml;
+}
 ?>
