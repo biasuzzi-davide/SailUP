@@ -928,7 +928,6 @@ function buildAdminBlogRows(array $articoli, string $csrfToken): string {
         $rows .= '<tr>'
             . '<td data-label="ID">' . $idArticolo . '</td>'
             . '<td data-label="Titolo">' . $titolo . '</td>'
-            . '<td data-label="Categoria">—</td>'
             . '<td data-label="Data">' . htmlspecialchars($dataPub) . '</td>'
             . '<td data-label="Stato">' . $badge . '</td>'
             . '<td data-label="Azioni" class="actions-cell">'
