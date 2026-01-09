@@ -305,3 +305,26 @@ document.addEventListener('DOMContentLoaded', () => {
         avatarImg.alt = 'Nuova immagine profilo selezionata';
     });
 });
+
+// extra blog admin
+document.addEventListener('DOMContentLoaded', () => {
+    const addBtn = document.getElementById('add-extra');
+    const container = document.getElementById('extras-container');
+    const template = document.getElementById('extra-row-template');
+    if (!addBtn || !container || !template || !('content' in template)) return;
+
+    addBtn.addEventListener('click', () => {
+        const fragment = template.content.cloneNode(true);
+        container.appendChild(fragment);
+    });
+
+    container.addEventListener('click', (event) => {
+        const target = event.target;
+        if (!(target instanceof HTMLElement)) return;
+        if (!target.classList.contains('remove-extra')) return;
+        const row = target.closest('.extra-row');
+        if (row) {
+            row.remove();
+        }
+    });
+});
