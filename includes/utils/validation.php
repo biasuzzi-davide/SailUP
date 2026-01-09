@@ -71,20 +71,6 @@ function isSurnameValid(string $cognome):bool{
 }
 
 /**
- * validazione patente nautica
- */
-
-function isValidPatenteNautica(?string $patente){
-    //se è vuota o nulla, va bene perhce nel db si salvera come null oppure ""
-    if (is_null($patente) || trim($patente) === "") {
-        return true;
-    }
-
-    //solo numeri, lunghezza 5-10
-    return preg_match("/^[0-9]{5,10}$/", $patente) === 1;
-}
-
-/**
  * validazione indirizzo
  */
 function isValidIndirizzo(string $indirizzo): bool {

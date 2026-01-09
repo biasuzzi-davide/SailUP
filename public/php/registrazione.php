@@ -36,7 +36,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $cap       = trim($_POST['indirizzo_cap'] ?? '');
     $citta     = trim($_POST['indirizzo_citta'] ?? '');
     $provincia = strtoupper(trim($_POST['indirizzo_provincia'] ?? ''));
-    $patente   = trim($_POST['patente'] ?? '');
     $privacy   = isset($_POST['privacy']);
 
     // conserva i valori inseriti per ripopolare il form
@@ -66,8 +65,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!isValidCAP($cap)) $errors[] = 'CAP non valido';
         if (!isValidCitta($citta)) $errors[] = 'Città non valida';
         if (!isValidProvincia($provincia)) $errors[] = 'Provincia non valida';
-        if (!isValidPatenteNautica($patente)) $errors[] = 'Patente nautica non valida';
-
         if (empty($errors)) {
             $res = registerUserFull([
                 'nome' => $nome,
@@ -75,7 +72,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'cf' => $cf,
                 'email' => $email,
                 'password_hash' => password_hash($password, PASSWORD_DEFAULT),
-                'patente' => $patente === '' ? null : $patente,
                 'via' => $via,
                 'civico' => $civico,
                 'cap' => $cap,

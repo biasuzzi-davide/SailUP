@@ -201,7 +201,6 @@ class DBConnection {
         string $cf,
         string $email,
         string $passwordHash,
-        ?string $numeroPatente,
         int $idIndirizzo,
         bool $isAdmin = false
     ) {
@@ -243,8 +242,8 @@ class DBConnection {
 
             // Insert utente
             $query = "INSERT INTO Utente 
-                        (Nome, Cognome, CF, Email, PasswordHash, Numero_Patente_Nautica, IDIndirizzo, Is_Admin)
-                      VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                        (Nome, Cognome, CF, Email, PasswordHash, IDIndirizzo, Is_Admin)
+                      VALUES (?, ?, ?, ?, ?, ?, ?)";
 
             $stmt = $this->connection->prepare($query);
             if (!$stmt) {
@@ -255,13 +254,12 @@ class DBConnection {
             $isAdminInt = $isAdmin ? 1 : 0;
 
             $stmt->bind_param(
-                "ssssssii",
+                "sssssii", //5 string 2 attributi int
                 $nome,
                 $cognome,
                 $cf,
                 $email,
                 $passwordHash,
-                $numeroPatente,
                 $idIndirizzo,
                 $isAdminInt
             );

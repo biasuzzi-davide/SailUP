@@ -40,7 +40,6 @@ $placeholders = [
     '[USER_COGNOME]' => htmlspecialchars($user['Cognome'] ?? ''),
     '[USER_EMAIL]' => htmlspecialchars($user['Email'] ?? ''),
     '[USER_CF]' => htmlspecialchars($user['CF'] ?? ''),
-    '[USER_PATENTE]' => htmlspecialchars($user['Numero_Patente_Nautica'] ?? '—'),
     '[PROFILE_IMAGE_URL]' => htmlspecialchars($profileImageUrl),
 ];
 
