@@ -15,13 +15,11 @@ $page = max(1, (int)($_GET['page'] ?? 1));
 $perPage = 10;
 $search = trim($_GET['q'] ?? '');
 $filterRole = $_GET['ruolo'] ?? '';
-$filterStatus = $_GET['stato'] ?? '';
 
 $offset = ($page - 1) * $perPage;
 $usersRes = $db->searchUtenti(
     $search === '' ? null : $search,
     $filterRole === '' ? null : $filterRole,
-    $filterStatus === '' ? null : $filterStatus,
     $perPage,
     $offset
 );
@@ -55,7 +53,7 @@ $pagination = buildPaginationNav(
     $page,
     $totalPages,
     'admin_utenti.php',
-    ['q' => $search, 'ruolo' => $filterRole, 'stato' => $filterStatus],
+    ['q' => $search, 'ruolo' => $filterRole],
     'Paginazione utenti'
 );
 
@@ -67,8 +65,6 @@ $html = str_replace(
         '[ADMIN_USERS_SEARCH]',
         '[IF_RUOLO_ADMIN]',
         '[IF_RUOLO_STANDARD]',
-        '[IF_STATO_ATTIVI]',
-        '[IF_STATO_DISATTIVI]',
     ],
     [
         $rows,
@@ -77,8 +73,6 @@ $html = str_replace(
         htmlspecialchars($search),
         $filterRole === 'admin' ? 'selected' : '',
         $filterRole === 'standard' ? 'selected' : '',
-        $filterStatus === 'attivi' ? 'selected' : '',
-        $filterStatus === 'disattivi' ? 'selected' : '',
     ],
     $html
 );
