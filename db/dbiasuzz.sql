@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Creato il: Gen 10, 2026 alle 07:33
+-- Creato il: Gen 10, 2026 alle 08:09
 -- Versione del server: 11.8.3-MariaDB-0+deb13u1 from Debian
 -- Versione PHP: 8.4.11
 
@@ -146,9 +146,9 @@ INSERT INTO `Articolo_Blog_Extra` (`IDExtra`, `IDArticolo`, `Titolo`, `Elemento`
 (98, 7, '🏘️ Cosa Vedere', 'Piazza Positano - Centro storico pittoresco', 1, '2026-01-09 16:24:06'),
 (99, 7, '🏘️ Cosa Vedere', 'Spiaggia di Positano - Sabbia e bohemien', 2, '2026-01-09 16:24:06'),
 (100, 7, '🏘️ Cosa Vedere', 'Duomo di Amalfi - Capolavoro architettonico', 3, '2026-01-09 16:24:06'),
-(101, 23, 'Prova', 'Ciao', 1, '2026-01-09 16:25:39'),
-(102, 23, 'Ciao', 'Prova', 2, '2026-01-09 16:25:39'),
-(103, 23, 'Prova', 'Ciao', 3, '2026-01-09 16:25:39');
+(107, 23, 'Ciao', 'Prova', 1, '2026-01-10 08:02:28'),
+(108, 23, 'Prova', 'Ciao', 2, '2026-01-10 08:02:28'),
+(109, 23, 'Prova', 'Ciao', 3, '2026-01-10 08:02:28');
 
 -- --------------------------------------------------------
 
@@ -309,12 +309,12 @@ INSERT INTO `Media` (`IDMedia`, `URL_Media`, `Testo_Alternativo`, `Tipo_Media`, 
 (77, '../img/blog/sostenibilita-marina.webp', 'Navigazione sostenibile e protezione marina', 'Immagine', NULL, NULL, 14, '2025-12-25 18:34:09'),
 (78, '../img/blog/capri-leggenda-realta.webp', 'Isola di Capri: leggenda e realtà', 'Immagine', NULL, NULL, 15, '2025-12-25 18:34:09'),
 (98, '../img/blog/positano-amalfi.webp', 'Villaggi storici di Positano e Amalfi', 'Immagine', NULL, NULL, 7, '2026-01-09 16:24:06'),
-(99, '../img/blog/article_a1a4e561.webp?v=1767975939', 'davide & alberto', 'Immagine', NULL, NULL, 23, '2026-01-09 16:25:39'),
 (100, '../img/prodotti/prod_BARCA-VELA-001.webp?v=1767965207', 'Beneteau First 35 a vela', 'Immagine', NULL, 'BARCA-VELA-001', NULL, '2026-01-09 17:08:31'),
 (103, '../img/prodotti/odyssey-45.jpg', 'Jeanneau Sun Odyssey 45 in navigazione', 'Immagine', NULL, 'BARCA-VELA-002', NULL, '2026-01-09 17:29:59'),
-(104, '../img/avatars/user_9.webp?v=1767979837', 'Avatar utente', 'Immagine', 9, NULL, NULL, '2026-01-09 17:30:37'),
 (118, '../img/prodotti/snork.jpg', 'Snorkeling a Capri con pesci', 'Immagine', NULL, 'EXP-SNORKEL-001', NULL, '2026-01-09 19:42:03'),
-(123, '../img/prodotti/prod_PRD-DCF570BD.webp?v=1767987857', 'Il grande davide biasuzzi', 'Immagine', NULL, 'PRD-DCF570BD', NULL, '2026-01-10 07:21:28');
+(134, '../img/avatars/user_9.webp?v=1768031809', 'Avatar utente', 'Immagine', 9, NULL, NULL, '2026-01-10 07:56:49'),
+(135, '../img/prodotti/prod_PRD-DCF570BD.webp?v=1768031896', 'Il grande davide biasuzzi', 'Immagine', NULL, 'PRD-DCF570BD', NULL, '2026-01-10 07:58:16'),
+(137, '../img/blog/article_74f1aefb.webp?v=1768032148', 'davide & alberto', 'Immagine', NULL, NULL, 23, '2026-01-10 08:02:28');
 
 -- --------------------------------------------------------
 
@@ -424,7 +424,7 @@ INSERT INTO `Prodotto` (`IDProdotto`, `Tipo_Prodotto`, `Tipologia_Prodotto`, `Du
 ('EXP-ESCURSIONE-001', 'Experience', 'Tour', 8, 'Tour Costiera Amalfitana Completo', 'Giornata intera tra Positano, Amalfi e Praiano. Include pranzo.', 'Un tour completo della Costiera Amalfitana, con visite a Positano, Amalfi e Praiano. Include pranzo e guida esperta.', 120.00, 10, 1, NULL, NULL, '2025-12-23 12:11:10', '2025-12-23 12:34:56', 1),
 ('EXP-SNORKEL-001', 'Experience', 'Escursione', 5, 'Escursione Snorkeling Capri e Anacapri', 'Mezza giornata alla scoperta dei fondali cristallini di Capri.', 'Un’escursione di snorkeling a Capri e Anacapri, ideale per esplorare i fondali cristallini e la fauna marina.', 75.00, 10, 0, NULL, 0, '2025-12-23 12:11:10', '2026-01-09 19:41:55', 1),
 ('EXP-TRAMONTO-001', 'Experience', 'Aperitivo', 4, 'Cena al Tramonto con Prosecco', 'Tour della costa con cena leggera e prosecco. Per coppie romantiche.', 'Un’esperienza romantica al tramonto con cena leggera e prosecco. Perfetta per coppie che cercano un momento speciale.', 95.00, 2, 1, NULL, NULL, '2025-12-23 12:11:10', '2025-12-23 12:34:42', 1),
-('PRD-DCF570BD', 'Experience', NULL, 4, 'Sessione di Programmazione', 'Con o senza sigla, ma con il grande Davide Biasuzzi', 'Buonasera signorina', 200.00, 1, 0, NULL, 0, '2026-01-09 19:44:17', '2026-01-09 19:48:01', 1);
+('PRD-DCF570BD', 'Experience', NULL, 4, 'Sessione di Programmazione', 'Con o senza sigla, ma con il grande Davide Biasuzzi', 'Buonasera signorina', 200.00, 1, 1, NULL, 0, '2026-01-09 19:44:17', '2026-01-10 07:43:33', 1);
 
 -- --------------------------------------------------------
 
@@ -480,9 +480,9 @@ INSERT INTO `Prodotto_Extra` (`IDExtra`, `IDProdotto`, `Nome_Extra`, `Prezzo_Ext
 (44, 'BARCA-VELA-002', 'Skipper Professionista Vela', 150.00),
 (71, 'EXP-SNORKEL-001', 'Fotografia Subacquea Professionale', 65.00),
 (72, 'EXP-SNORKEL-001', 'Snack Gourmet Aggiuntivo', 30.00),
-(87, 'PRD-DCF570BD', 'Con sigla', 100.00),
-(88, 'PRD-DCF570BD', 'Firma su maglietta del grande magno DB (maglietta non inclusa)', 1200.00),
-(89, 'PRD-DCF570BD', 'Senza sigla', 50.00);
+(110, 'PRD-DCF570BD', 'Ciao', 132423.00),
+(111, 'PRD-DCF570BD', 'Con sigla', 100.00),
+(112, 'PRD-DCF570BD', 'Firma su maglietta del grande magno DB (maglietta non inclusa)', 1200.00);
 
 -- --------------------------------------------------------
 
@@ -573,9 +573,9 @@ INSERT INTO `Prodotto_Incluso` (`IDIncluso`, `IDProdotto`, `Nome_Incluso`) VALUE
 (210, 'EXP-SNORKEL-001', 'Giubbotti Salvagente'),
 (211, 'EXP-SNORKEL-001', 'Guida Turistica Specializzata'),
 (212, 'EXP-SNORKEL-001', 'Snack e Bevande Fresche'),
-(225, 'PRD-DCF570BD', 'Mouse da rompere'),
-(226, 'PRD-DCF570BD', 'Quaderno A5 per gli appunti'),
-(227, 'PRD-DCF570BD', 'Tastiera da rompere');
+(249, 'PRD-DCF570BD', 'Mouse da rompere'),
+(250, 'PRD-DCF570BD', 'Quaderno A5 per gli appunti'),
+(251, 'PRD-DCF570BD', 'Tastiera da rompere');
 
 -- --------------------------------------------------------
 
@@ -656,8 +656,8 @@ INSERT INTO `Utente` (`IDUtente`, `Nome`, `Cognome`, `CF`, `Email`, `PasswordHas
 (8, 'Elena', 'Gallo', 'GLLELM87C35H501F', 'elena.gallo@email.com', '$2y$10$abcdefghijklmnopqrstuvwxyz123456', 7, 0, '2025-12-23 12:11:10', NULL),
 (9, 'DAVIDE', 'BIASUZZI', 'BSZDVD04D19F443F', 'biasuzzi.davide@gmail.com', '$2y$12$U0SQeTC7WZqgChD6SxVteeIdrVBqf4Q4XPHTnaAacjmEjoRKAUSGG', 16, 1, '2025-12-26 17:17:32', '2026-01-10 07:20:51'),
 (11, 'Francesco', 'Marcon', 'AADOIAHSDOIHAOH4', 'fr@mail.com', '$2y$12$BDpv2N3phQZP7e3bMXHD6.7pfDW2qYi.4GNl4BE7iuh23/7LBm48q', 18, 0, '2026-01-07 11:39:31', '2026-01-08 09:43:50'),
-(12, 'Mario', 'Rossi', 'AAAAAAAAAAAAAAAA', 'fojaw95998@vysolar.com', '$2y$12$MBGMZNJPFIzmw0ox5D1JjenoDLIEYx3dQl//ITw7SioXX9mO5QXh2', 19, 0, '2026-01-08 06:27:28', '2026-01-08 06:27:35'),
-(14, 'Davide', 'Biasuzzi', 'AAAAAAAAAAAAAAAB', 'davidinobiasu19@gmail.com', '$2y$12$8la3eM3GzADIiqXD8zp.Ke6FP6ujyJUC7bJjBtzWWMIswLydq/wXG', 24, 0, '2026-01-09 19:30:02', '2026-01-09 20:11:48');
+(12, 'Admin', 'Admin', 'CFADMINADMINCFCF', 'admin', '$2y$12$qzLCdFoRZ1EDB02Pd9y8MegjxW.3SQ8SLwibQkYqHmPc01yXsWuxa', 19, 1, '2026-01-08 06:27:28', '2026-01-10 08:08:18'),
+(14, 'User', 'User', 'CFUSERUSERCFUSER', 'user', '$2y$12$nE6ZkeAcGm4zSud34GSWSOLnkbTF8vAy1PmpGQYq2BRBPi.67FxFy', 24, 0, '2026-01-09 19:30:02', '2026-01-10 08:08:26');
 
 --
 -- Indici per le tabelle scaricate
@@ -773,7 +773,7 @@ ALTER TABLE `Articolo_Blog`
 -- AUTO_INCREMENT per la tabella `Articolo_Blog_Extra`
 --
 ALTER TABLE `Articolo_Blog_Extra`
-  MODIFY `IDExtra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
+  MODIFY `IDExtra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
 
 --
 -- AUTO_INCREMENT per la tabella `Indirizzo`
@@ -797,7 +797,7 @@ ALTER TABLE `Lingua`
 -- AUTO_INCREMENT per la tabella `Media`
 --
 ALTER TABLE `Media`
-  MODIFY `IDMedia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
+  MODIFY `IDMedia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=138;
 
 --
 -- AUTO_INCREMENT per la tabella `Prenotazione`
@@ -809,13 +809,13 @@ ALTER TABLE `Prenotazione`
 -- AUTO_INCREMENT per la tabella `Prodotto_Extra`
 --
 ALTER TABLE `Prodotto_Extra`
-  MODIFY `IDExtra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
+  MODIFY `IDExtra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
 
 --
 -- AUTO_INCREMENT per la tabella `Prodotto_Incluso`
 --
 ALTER TABLE `Prodotto_Incluso`
-  MODIFY `IDIncluso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=228;
+  MODIFY `IDIncluso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=252;
 
 --
 -- AUTO_INCREMENT per la tabella `Utente`
