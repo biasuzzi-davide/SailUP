@@ -1484,6 +1484,7 @@ da sistemare  */
   background: var(--col-bg-alt);
   padding: 1.5rem;
   border-radius: var(--radius-card);
+  margin-bottom: 1.5;
 }
 
 .amenity-box h3 {
