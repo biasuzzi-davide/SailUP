@@ -156,6 +156,18 @@ function buildAdminMenuItem(): string {
 }
 
 /**
+ * Genera il breadcrumb item per Amministrazione se l'utente è admin.
+ * Da inserire nelle breadcrumb delle pagine profilo.
+ */
+function buildAdminBreadcrumb(): string {
+    if (!isAdmin()) {
+        return '';
+    }
+    
+    return '<li><a href="admin.php">Amministrazione</a></li>';
+}
+
+/**
  * ritorna l'url dell'avatar utente se presente su disco altrimemti uso placeholder di default
  */
 function getProfileImageUrl(array $user = []): string {

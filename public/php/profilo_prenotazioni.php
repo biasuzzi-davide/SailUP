@@ -50,6 +50,7 @@ $rowsHtml = buildProfileBookingRows(is_array($prenotazioni) ? $prenotazioni : []
 
 $html = buildPage('../pages/profilo_prenotazioni.html', $_SERVER['PHP_SELF']);
 $html = str_replace('[ADMIN_MENU_ITEM]', buildAdminMenuItem(), $html);
+$html = str_replace('[ADMIN_BREADCRUMB]', buildAdminBreadcrumb(), $html);
 
 // Keywords per SEO
 $keywords = '<meta name="keywords" content="prenotazioni, gestione, storico, annulla, modifica, utente, SailUP">';
