@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="it" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>[ARTICLE_TITLE] - Blog - SailUP</title>
+  <meta name="description"
+    content="[ARTICLE_DESCRIPTION]">
+  [KEYWORDS]
+  <meta name="authors" content="SailUP Team">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="../css/style.css" media="screen">
+  <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+</head>
+
+<body>
+  <a href="#main-content" class="skip-to-content">Salta al contenuto principale</a>
+
+  [HEADER]
+
+  <div class="sr-only" id="breadcrumb-label">
+    <span lang="en">breadcrumb</span>
+  </div>
+  <nav aria-labelledby="breadcrumb-label" id="breadcrumb">
+    <ol>
+      <li><a href="index.php" lang="en">Home</a></li>
+      <li><a href="blog.php" lang="en">Blog</a></li>
+      <li aria-current="page">[BREADCRUMB_TITLE]</li>
+    </ol>
+  </nav>
+
+  <main id="main-content" class="section-container">
+      <article aria-labelledby="article-title">
+        <section id="hero">
+          <div>
+            <h1 id="article-title">[ARTICLE_TITLE]</h1>
+            <p>
+              <time datetime="[ARTICLE_DATE_ISO]">[ARTICLE_DATE_FORMATTED]</time> • Lettura [ARTICLE_READING_TIME] <abbr title="minuti">min</abbr>
+            </p>
+          </div>
+          <img src="[ARTICLE_IMAGE_SRC]" alt="[ARTICLE_IMAGE_ALT]" class="hero-image"
+            width="600" height="450">
+        </section>
+
+        <section aria-labelledby="author-title">
+          <h2 id="author-title" class="sr-only">L'Autore</h2>
+
+          <div class="profile-header">
+            <div class="profile-avatar">
+              <img src="[AUTHOR_IMAGE_SRC]" alt="[AUTHOR_IMAGE_ALT]">
+            </div>
+            <div class="profile-info">
+              <h3>[AUTHOR_FULL_NAME]</h3>
+              <p>[AUTHOR_ROLE]</p>
+              <p class="profile-text">[AUTHOR_DESCRIPTION]</p>
+            </div>
+          </div>
+        </section>
+
+        <section aria-labelledby="intro-title">
+          <h2 id="intro-title">Introduzione</h2>
+
+          <p>[ARTICLE_SUMMARY]</p>
+        </section>
+
+        <section aria-labelledby="spiagge-title">
+          <h2 id="spiagge-title">[ARTICLE_BODY_TITLE]</h2>
+
+          <div class="article-body">
+            [ARTICLE_CONTENT]
+          </div>
+        </section>
+
+        <aside aria-labelledby="tips-title">
+          <h2 id="tips-title" class="sr-only">Consigli Pratici</h2>
+          [ARTICLE_EXTRA_LIST]
+        </aside>
+      </article>
+      
+  </main>
+
+  [FOOTER]
+
+  <script src="../js/script.js"></script>
+</body>
+
+</html>

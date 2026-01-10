@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="it" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catalogo Noleggio Barche - SailUP</title>
+  <meta name="description"
+    content="Scopri la nostra flotta di barche a noleggio a Napoli. Scegli tra barche a vela, a motore e gommoni, con o senza patente. Prenota la tua avventura oggi!">
+  [KEYWORDS]
+  <meta name="authors" content="SailUp team">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="../css/style.css" media="screen">
+  <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+</head>
+
+<body>
+  <a href="#main-content" class="skip-to-content">Salta al contenuto</a>
+
+  [HEADER]
+
+  <div class="sr-only" id="breadcrumb-label">
+    <span lang="en">breadcrumb</span>
+  </div>
+  <nav aria-labelledby="breadcrumb-label" id="breadcrumb">
+    <ol>
+      <li>
+        <a href="index.php" lang="en">Home</a>
+      </li>
+      <li aria-current="page">Noleggio</li>
+    </ol>
+  </nav>
+
+  <main id="main-content">
+    <section class="catalog-hero">
+      <h1>La Nostra Flotta a Noleggio</h1>
+      <p>Dalle agili barche a vela ai potenti motoscafi, trova il mezzo perfetto per la tua prossima avventura nel
+        Golfo di Napoli.</p>
+    </section>
+
+    <section class="section-container catalog-layout" aria-labelledby="catalog-title">
+      <aside class="filters-sidebar" aria-labelledby="filters-heading">
+        <header class="filters-header">
+          <h2 id="filters-heading">Filtra</h2>
+          <button type="reset" id="filters-reset" form="noleggio-filters-form" class="btn-text" aria-label="Reimposta filtri">Reset</button>
+        </header>
+
+        <form id="noleggio-filters-form" action="[ACTION_URL]" method="GET">
+          <fieldset class="filter-group">
+            <legend>Tipo di Barca</legend>
+            [TIPOLOGIA_OPTIONS]
+          </fieldset>
+
+          <fieldset class="filter-group">
+            <legend>Patente Nautica</legend>
+            <label class="filter-radio">
+              <input type="radio" id="patente_si" name="patente" value="richiesta" [CHECK_PATENTE_RICHIESTA]>
+              <span>Richiesta</span>
+            </label>
+            <label class="filter-radio">
+              <input type="radio" id="patente_no" name="patente" value="non_richiesta" [CHECK_PATENTE_NON_RICHIESTA]>
+              <span>Non richiesta</span>
+            </label>
+            <label class="filter-radio">
+              <input type="radio" id="patente_ind" name="patente" value="indifferente" [CHECK_PATENTE_IND]>
+              <span>Indifferente</span>
+            </label>
+          </fieldset>
+
+          <fieldset class="filter-group">
+            <legend>Dettagli</legend>
+
+            <div class="filter-input">
+              <label for="posti">Posti minimi</label>
+              <input type="number" id="posti" name="posti" min="1" placeholder="Es. 4" value="[VAL_POSTI]">
+            </div>
+
+            <div class="filter-input">
+              <label for="data_inizio">Data inizio</label>
+              <input type="date" id="data_inizio" name="data_inizio" value="[VAL_DATA_INIZIO]" min="[MIN_DATE]">
+            </div>
+
+            <div class="filter-input">
+              <label for="data_fine">Data fine</label>
+              <input type="date" id="data_fine" name="data_fine" value="[VAL_DATA_FINE]" min="[MIN_DATE]">
+            </div>
+
+            <div class="filter-input">
+              <label for="maxPrice">Prezzo max (€/giorno)</label>
+              <input type="number" id="maxPrice" name="maxPrice" placeholder="Es. 500" min="100" step="50" value="[VAL_MAX_PRICE]">
+            </div>
+          </fieldset>
+          <button type="submit" class="btn-layout filter-submit">Applica Filtri</button>
+        </form>
+      </aside>
+
+      <div class="catalog-results">
+        <header class="results-header">
+          <h2 id="catalog-title">Imbarcazioni disponibili</h2>
+          <div class="results-sort">
+            <label for="sort">Ordina:</label>
+            <select id="sort" name="sort" form="noleggio-filters-form">
+              <option value="price-asc" [SELECTED_PRICE_ASC]>Prezzo crescente</option>
+              <option value="price-desc" [SELECTED_PRICE_DESC]>Prezzo decrescente</option>
+              <option value="size" [SELECTED_SIZE]>Dimensione</option>
+            </select>
+          </div>
+        </header>
+
+        <div class="catalog-grid">
+          [NOLEGGIO_CARDS]
+        </div>
+      </div>
+    </section>
+  </main>
+
+  [FOOTER]
+
+  <script src="../js/script.js"></script>
+</body>
+
+</html>

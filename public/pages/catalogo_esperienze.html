@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="it" data-theme="light">
+
+<head>
+  <meta charset="UTF-8" >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catalogo Esperienze - SailUP</title>
+  <meta name="description"
+    content="Scopri le esperienze organizzate dalle guide SailUp nel golfo di Napoli. Aperitivi al tramonto, esplorazione della costiera amalfitana o tour in mare. Prenota la tua avventura oggi!">
+  [KEYWORDS]
+  <meta name="authors" content="SailUp team">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap"
+    rel="stylesheet"  >
+
+  <link rel="stylesheet" href="../css/style.css" media="screen">
+  <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+</head>
+
+<body>
+  <a href="#main-content" class="skip-to-content">Salta al contenuto</a>
+
+  [HEADER]
+
+  <div class="sr-only" id="breadcrumb-label">
+    <span lang="en">breadcrumb</span>
+  </div>
+  <nav aria-labelledby="breadcrumb-label" id="breadcrumb">
+    <ol>
+      <li>
+        <a href="index.php" lang="en">Home</a>
+      </li>
+      <li aria-current="page">Esperienze</li>
+    </ol>
+  </nav>
+
+  <main id="main-content">
+    <section class="catalog-hero">
+      <h1>Vivi il Mare con Noi</h1>
+      <p>Tour esclusivi, aperitivi al tramonto e giornate da sogno nel Golfo di Napoli. Lasciati guidare dai nostri
+        skipper esperti.</p>
+    </section>
+
+    <section class="section-container catalog-layout" aria-labelledby="catalog-title">
+      <aside class="filters-sidebar" aria-labelledby="filters-heading">
+        <header class="filters-header">
+          <h2 id="filters-heading">Filtra</h2>
+          <button type="reset" id="esperienze-reset" form="esperienze-filters-form" class="btn-text" aria-label="Reimposta filtri">Reset</button>
+        </header>
+
+        <form id="esperienze-filters-form" action="[ACTION_URL]" method="GET">
+          <fieldset class="filter-group">
+            <legend>Dettagli</legend>
+
+            <div class="filter-input">
+              <label for="posti_disponibili">Posti minimi</label>
+              <input type="number" id="posti_disponibili" name="posti_disponibili" min="1" placeholder="Es. 2" value="[VAL_POSTI]">
+            </div>
+
+            <div class="filter-input">
+              <label for="data_esperienza">Data</label>
+              <input type="date" id="data_esperienza" name="data_esperienza" value="[VAL_DATA]" min="[MIN_DATE]">
+            </div>
+
+            <div class="filter-input">
+              <label for="lingua_guida">Lingua Guida</label>
+              <select name="lingua_guida" id="lingua_guida">
+                [LINGUA_OPTIONS]
+              </select>
+            </div>
+
+            <div class="filter-input">
+              <label for="maxPriceExperience">Prezzo max (€/tour)</label>
+              <input type="number" id="maxPriceExperience" name="maxPriceExperience" placeholder="Es. 45" min="25"
+                step="10" value="[VAL_MAX_PRICE]">
+            </div>
+          </fieldset>
+
+          <fieldset class="filter-group">
+            <legend>Accessibilità</legend>
+            <label class="filter-checkbox">
+              <input type="checkbox" id="accessibile" name="accessibile" value="true" [CHECK_ACCESSIBILE]>
+              <span>Adatta a persone con disabilità motorie</span>
+            </label>
+          </fieldset>
+
+          <button type="submit" class="btn-layout filter-submit">Applica Filtri</button>
+        </form>
+      </aside>
+
+        <div class="catalog-results">
+          <header class="results-header">
+            <h2 id="catalog-title">Esperienze disponibili</h2>
+          <div class="results-sort">
+            <label for="sort">Ordina per:</label>
+            <select id="sort" name="sort" form="esperienze-filters-form">
+              <option value="price-asc" [SELECTED_PRICE_ASC]>Prezzo crescente</option>
+              <option value="price-desc" [SELECTED_PRICE_DESC]>Prezzo decrescente</option>
+              <option value="duration" [SELECTED_DURATION]>Durata</option>
+            </select>
+          </div>
+        </header>
+
+        <div class="catalog-grid">
+          [ESPERIENZE_CARDS]
+        </div>
+      </div>
+    </section>
+  </main>
+
+  [FOOTER]
+
+  <script src="../js/script.js"></script>
+</body>
+
+</html>

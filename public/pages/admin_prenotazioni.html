@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="it" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestione Prenotazioni - Dashboard Admin - SailUP</title>
+  <meta name="description" content="Pannello amministrativo per la gestione delle prenotazioni SailUP. Visualizza statistiche e gestisci le prenotazioni.">
+  <meta name="robots" content="noindex, nofollow">
+  [KEYWORDS]
+  <meta name="authors" content="SailUP Team">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../css/style.css" media="screen">
+  <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+</head>
+
+<body>
+  <a href="#main-content" class="skip-to-content">Salta al contenuto principale</a>
+
+  [HEADER]
+
+  <div class="sr-only" id="breadcrumb-label">
+    <span lang="en">breadcrumb</span>
+  </div>
+  <nav aria-labelledby="breadcrumb-label" id="breadcrumb">
+    <ol>
+      <li><a href="index.php"><span lang="en">Home</span></a></li>
+      <li><a href="admin.php">Amministrazione</a></li>
+      <li aria-current="page">Gestione Prenotazioni</li>
+    </ol>
+  </nav>
+
+  <main id="main-content" class="section-container">
+      <header class="profile-header no-avatar">
+        <div class="profile-info">
+          <h1>Gestione Prenotazioni</h1>
+          <p class="profile-text">Visualizza e gestisci le prenotazioni effettuate dagli utenti.</p>
+        </div>
+        <div class="profile-actions">
+          <a href="logout.php" class="btn-layout-light"><span lang="en">Logout</span></a>
+      </div>
+      </header>
+
+      <div class="profile-layout">
+        <nav class="profile-sidebar" aria-label="Menu amministrazione">
+          <ul>
+            <li>
+              <a href="profilo.php">
+                  <span class="nav-icon" aria-hidden="true">🧑🏻‍💻</span>
+                  <span>Profilo Admin</span>
+              </a>
+          </li>
+            <li>
+              <a href="admin_utenti.php">
+                <span class="nav-icon" aria-hidden="true">👥</span>
+                <span>Gestione Utenti</span>
+              </a>
+            </li>
+            <li>
+              <a href="admin_prodotti.php">
+                <span class="nav-icon" aria-hidden="true">⛵</span>
+                <span>Gestione Prodotti</span>
+              </a>
+            </li>
+            <li class="current-tab">
+              <div class="nav-item-active" aria-current="page">
+                <span class="nav-icon" aria-hidden="true">📋</span>
+                <span>Gestione Prenotazioni</span>
+              </div>
+            </li>
+            <li>
+              <a href="admin_blog.php">
+                <span class="nav-icon" aria-hidden="true">✏️</span>
+                <span>Gestione Blog</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <div class="profile-content">
+          
+          <section aria-labelledby="stats-title" class="profile-stats">
+            <h2 id="stats-title">Statistiche Prenotazioni</h2>
+            
+            <dl class="stats-grid">
+              <div class="stat-card">
+                <dt class="stat-label">Confermate</dt>
+                <dd class="stat-number">[STAT_COMPLETATE]</dd>
+              </div>
+              
+              <div class="stat-card">
+                <dt class="stat-label">In Attesa</dt>
+                <dd class="stat-number">[STAT_ATTESA]</dd>
+              </div>
+              
+              <div class="stat-card">
+                <dt class="stat-label">Completate</dt>
+                <dd class="stat-number">[STAT_COMPLETATE]</dd>
+              </div>
+              
+              <div class="stat-card">
+                <dt class="stat-label">Cancellate</dt>
+                <dd class="stat-number">[STAT_CANCELLATE]</dd>
+              </div>
+            </dl>
+          </section>
+
+          <section aria-labelledby="bookings-list-title" class="admin-section">
+            <h2 id="bookings-list-title" class="sr-only">Lista Prenotazioni</h2>
+
+            [ADMIN_BOOKINGS_FEEDBACK]
+        
+            <div class="table-container">
+                <table>
+                    <caption>Elenco Prenotazioni Recenti</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Prodotto / Esperienza</th>
+                            <th scope="col">Cliente</th>
+                            <th scope="col">Data Utilizzo</th>
+                            <th scope="col">Totale</th>
+                            <th scope="col">Stato</th>
+                            <th scope="col">Azioni</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        [ADMIN_BOOKINGS_ROWS]
+                    </tbody>
+                </table>
+            </div>
+
+            [ADMIN_BOOKINGS_PAGINATION]
+        </section>
+
+          <section aria-labelledby="revenue-title" class="profile-stats">
+            <h2 id="revenue-title">Riepilogo Finanziario</h2>
+            
+            <dl class="stats-grid">
+              <div class="stat-card">
+                <dt class="stat-label">Incassi Mese</dt>
+                <dd class="stat-number">€ [STAT_REVENUE_MONTH]</dd>
+              </div>
+              
+              <div class="stat-card">
+                <dt class="stat-label">In Attesa</dt>
+                <dd class="stat-number">€ [STAT_REVENUE_PENDING]</dd>
+              </div>
+              
+              <div class="stat-card">
+                <dt class="stat-label">Totale 2025</dt>
+                <dd class="stat-number">€ [STAT_REVENUE_YEAR]</dd>
+              </div>
+            </dl>
+          </section>
+
+        </div>
+      </div>
+  </main>
+
+  [FOOTER]
+
+  <script src="../js/script.js"></script>
+</body>
+
+</html>

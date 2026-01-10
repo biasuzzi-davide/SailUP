@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="it" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Le Mie Prenotazioni - SailUP</title>
+  <meta name="description" content="Visualizza e gestisci le tue prenotazioni con SailUP">
+  [KEYWORDS]
+  <meta name="authors" content="Alberto Reginato, Francesco Marcon">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="../css/style.css" media="screen">
+  <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+</head>
+
+<body>
+  <a href="#main-content" class="skip-to-content">Salta al contenuto</a>
+
+[HEADER]
+
+  <div class="sr-only" id="breadcrumb-label">
+    <span lang="en">breadcrumb</span>
+  </div>
+  <nav aria-labelledby="breadcrumb-label" id="breadcrumb">
+    <ol>
+      <li><a href="index.php"><span lang="en">Home</span></a></li>
+      [ADMIN_BREADCRUMB]
+      <li><a href="profilo.php">Il Mio Profilo</a></li>
+      <li aria-current="page">Prenotazioni</li>
+    </ol>
+  </nav>
+
+  <main id="main-content">
+    <div class="profile-container section-container">
+      <div class="profile-header">
+        <div class="profile-avatar">
+          <img src="[PROFILE_IMAGE_URL]" alt="Avatar di [USER_NOME] [USER_COGNOME]">
+        </div>
+        <div class="profile-info">
+          <h1>[USER_NOME] [USER_COGNOME]</h1>
+          <p>[USER_EMAIL]</p>
+        </div>
+        <div class="profile-actions">
+          <a href="profilo.php" class="btn-layout">Visualizza Profilo</a>
+          <a href="logout.php" class="btn-layout-light"><span lang="en">Logout</span></a>
+        </div>
+      </div>
+
+      <div class="profile-layout">
+        <nav class="profile-sidebar" aria-label="Menu profilo">
+          <ul>
+            [ADMIN_MENU_ITEM]
+            <li>
+              <a href="profilo.php">
+                <span class="nav-icon" aria-hidden="true">👤</span>
+                <span>Informazioni Personali</span>
+              </a>
+            </li>
+            <li>
+              <a href="profilo_sicurezza.php">
+                <span class="nav-icon" aria-hidden="true">🔒</span>
+                <span>Sicurezza</span>
+              </a>
+            </li>
+            <li class="current-tab">
+              <div class="nav-item-active" aria-current="page">
+                <span class="nav-icon" aria-hidden="true">📋</span>
+                <span>Prenotazioni</span>
+              </div>
+            </li>
+          </ul>
+        </nav>
+
+        <div class="profile-content">
+          <section aria-labelledby="bookings-title">
+            <h2 id="bookings-title">Le Mie Prenotazioni</h2>
+
+            <div class="bookings-filters">
+              <fieldset>
+                <legend class="sr-only">Filtra prenotazioni</legend>
+                <div class="filter-tabs" aria-label="Filtri prenotazioni">
+                  <button type="button" id="tab-all" class="filter-tab active" onclick="filterBookings('all')">
+                    Tutte <span id="badge-all" class="badge">0</span>
+                  </button>
+                  <button type="button" id="tab-active" class="filter-tab" onclick="filterBookings('active')">
+                    Attive <span id="badge-active" class="badge badge-accent">0</span>
+                  </button>
+                  <button type="button" id="tab-completed" class="filter-tab" onclick="filterBookings('completed')">
+                    Completate <span id="badge-completed" class="badge">0</span>
+                  </button>
+                </div>
+              </fieldset>
+            </div>
+
+
+            <div id="bookings-container">
+              <div class="table-container">
+                <table id="bookings-table">
+                  <caption>Elenco delle prenotazioni</caption>
+                  <thead>
+                    <tr>
+                      <th scope="col">Codice</th>
+                      <th scope="col">Prodotto / Esperienza</th>
+                      <th scope="col">Data</th>
+                      <th scope="col">Importo</th>
+                      <th scope="col">Stato</th>
+                      <th scope="col">Annulla prenotazione</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    [BOOKING_ROWS]
+                  </tbody>
+                </table>
+              </div>
+
+              <div id="no-bookings-message" class="bookings-empty hidden">
+                <p>Non ci sono prenotazioni in questa categoria.</p>
+              </div>
+            </div>
+          </section>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+    [FOOTER]
+
+  <script src="../js/script.js"></script>
+</body>
+
+</html>
