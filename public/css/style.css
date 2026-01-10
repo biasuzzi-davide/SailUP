@@ -140,7 +140,7 @@ h3 {
 }
 
 p {
-  margin-bottom: 1em;
+  margin-bottom: 0.5em;
 }
 
 img {
@@ -1646,6 +1646,7 @@ da sistemare  */
   display: flex;
   gap: 1em;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .profile-layout {
