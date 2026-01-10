@@ -50,14 +50,14 @@ function handleProductImageUpload(string $productId, string $uploadDir): array {
     }
 
     if (!is_dir($uploadDir)) {
-        mkdir($uploadDir, 0775, true);
+        mkdir($uploadDir, 0777, true);
     }
+    // Forza sempre i permessi a 777
+    @chmod($uploadDir, 0777);
+    clearstatcache(true, $uploadDir);
     if (!is_writable($uploadDir)) {
-        @chmod($uploadDir, 0775);
-        if (!is_writable($uploadDir)) {
-            $result['error'] = 'Cartella upload non scrivibile.';
-            return $result;
-        }
+        $result['error'] = 'Cartella upload non scrivibile. Verifica i permessi della cartella: ' . basename($uploadDir);
+        return $result;
     }
 
     $safeId = preg_replace('/[^A-Za-z0-9_-]/', '-', $productId);

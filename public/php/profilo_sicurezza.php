@@ -46,14 +46,14 @@ function handleProfileImageUpload(int $userId): array {
 
     $uploadDir = __DIR__ . '/../img/avatars';
     if (!is_dir($uploadDir)) {
-        mkdir($uploadDir, 0775, true);
+        mkdir($uploadDir, 0777, true);
     }
+    // Forza sempre i permessi a 777
+    @chmod($uploadDir, 0777);
+    clearstatcache(true, $uploadDir);
     if (!is_writable($uploadDir)) {
-        @chmod($uploadDir, 0775);
-        if (!is_writable($uploadDir)) {
-            $result['error'] = 'Cartella upload non scrivibile.';
-            return $result;
-        }
+        $result['error'] = 'Cartella upload non scrivibile. Verifica i permessi della cartella: avatars';
+        return $result;
     }
 
     foreach (glob($uploadDir . '/user_' . $userId . '.*') as $existing) {
