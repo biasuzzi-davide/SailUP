@@ -701,10 +701,6 @@ function buildArticleExtraList($extras): string {
 
 /**
  * Genera l'HTML delle checkbox per gli extra (prodotti).
- * Gli extra obbligatori vengono pre-selezionati e disabilitati, con un hidden input per inviarli.
- * 
- * @param array|bool $extras Array degli extra dal database
- * @return string HTML delle checkbox
  */
 function buildExtraCheckboxes($extras): string {
     if ($extras === false || !is_array($extras) || count($extras) === 0) {
@@ -716,20 +712,13 @@ function buildExtraCheckboxes($extras): string {
         $extraName = htmlspecialchars($extraItem['Nome_Extra'] ?? '', ENT_QUOTES);
         $extraPrice = $extraItem['Prezzo_Extra'] ?? 0;
         $extraId = $extraItem['IDExtra'] ?? $index;
-        $isOptional = isset($extraItem['Opzionale']) ? filter_var($extraItem['Opzionale'], FILTER_VALIDATE_BOOLEAN) : true;
         $formattedPrice = number_format((float) $extraPrice, 0, ',', '.');
         
         $checkboxId = 'extra-' . $extraId;
-        $checkedAttr = !$isOptional ? 'checked' : '';
-        $disabledAttr = !$isOptional ? 'disabled' : '';
         $priceText = $formattedPrice !== '' && $formattedPrice !== '0' ? '+' . htmlspecialchars($formattedPrice, ENT_QUOTES) . ' €' : '';
         
         $html .= '<div class="form-check checkbox-highlight">';
-        $html .= '<input type="checkbox" id="' . $checkboxId . '" name="extras[]" value="' . $extraId . '" ' . $checkedAttr . ' ' . $disabledAttr . '>';
-        // Aggiungi hidden input per extra obbligatori (disabled non viene inviato)
-        if (!$isOptional) {
-            $html .= '<input type="hidden" name="extras[]" value="' . $extraId . '">';
-        }
+        $html .= '<input type="checkbox" id="' . $checkboxId . '" name="extras[]" value="' . $extraId . '">';
         $html .= '<label for="' . $checkboxId . '">';
         $html .= '<span>' . $extraName . '</span>';
         if ($priceText !== '') {

@@ -1260,10 +1260,10 @@ class DBConnection {
     public function getProdottoExtra(string $idProdotto): array|bool {
         $this->openConnection();
         $query = "
-            SELECT IDExtra, Nome_Extra, Prezzo_Extra, Descrizione_Extra, Opzionale
+            SELECT IDExtra, Nome_Extra, Prezzo_Extra
             FROM Prodotto_Extra
             WHERE IDProdotto = ?
-            ORDER BY Opzionale DESC, Nome_Extra ASC
+            ORDER BY Nome_Extra ASC
         ";
 
         try {
@@ -1322,8 +1322,8 @@ class DBConnection {
 
             if (!empty($extras)) {
                 $stmt = $this->connection->prepare("
-                    INSERT INTO Prodotto_Extra (IDProdotto, Nome_Extra, Prezzo_Extra, Descrizione_Extra, Opzionale)
-                    VALUES (?, ?, ?, ?, ?)
+                    INSERT INTO Prodotto_Extra (IDProdotto, Nome_Extra, Prezzo_Extra)
+                    VALUES (?, ?, ?)
                 ");
                 if (!$stmt) {
                     $this->connection->rollback();
@@ -1334,10 +1334,8 @@ class DBConnection {
                 foreach ($extras as $ex) {
                     $nome = trim($ex['nome'] ?? '');
                     $prezzo = isset($ex['prezzo']) ? (float)$ex['prezzo'] : 0.0;
-                    $descr = trim($ex['descrizione'] ?? '');
-                    $opzionale = !empty($ex['opzionale']) ? 1 : 0;
                     if ($nome === '') continue;
-                    $stmt->bind_param('ssdsi', $idProdotto, $nome, $prezzo, $descr, $opzionale);
+                    $stmt->bind_param('ssd', $idProdotto, $nome, $prezzo);
                     $stmt->execute();
                 }
                 $stmt->close();

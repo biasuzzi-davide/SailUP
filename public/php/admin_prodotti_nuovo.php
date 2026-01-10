@@ -279,8 +279,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $extras[] = [
                     'nome' => $nomeExtra,
                     'prezzo' => (int) $prezzoVal,
-                    'descrizione' => '',
-                    'opzionale' => 1,
                 ];
             }
         }
