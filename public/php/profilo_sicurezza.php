@@ -282,6 +282,7 @@ $keywords = '<meta name="keywords" content="sicurezza, account, modifica, profil
 $placeholders['[KEYWORDS]'] = $keywords;
 
 $html = buildPage('../pages/profilo_sicurezza.html', $_SERVER['PHP_SELF']);
+$html = str_replace('[ADMIN_MENU_ITEM]', buildAdminMenuItem(), $html);
 $html = str_replace(array_keys($placeholders), array_values($placeholders), $html);
 
 echo $html;
