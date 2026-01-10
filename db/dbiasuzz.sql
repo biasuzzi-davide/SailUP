@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Creato il: Gen 10, 2026 alle 12:28
+-- Creato il: Gen 10, 2026 alle 13:00
 -- Versione del server: 11.8.3-MariaDB-0+deb13u1 from Debian
 -- Versione PHP: 8.4.11
 
@@ -215,20 +215,20 @@ CREATE TABLE `Indisponibilita` (
 --
 
 INSERT INTO `Indisponibilita` (`IDIndisponibilita`, `IDProdotto`, `Data_Inizio`, `Data_Fine`, `Motivo`, `Creato_Da`, `Data_Creazione`) VALUES
-(1, 'BARCA-GOZZO-001', '2025-06-01 00:00:00', '2025-06-05 23:59:59', 'Manutenzione motore e vernice', 1, '2025-12-23 12:11:10'),
-(2, 'BARCA-GOZZO-002', '2025-05-20 00:00:00', '2025-05-25 23:59:59', 'Revisione carburante e filtri', 1, '2025-12-23 12:11:10'),
-(3, 'BARCA-GOMMONE-001', '2025-07-01 00:00:00', '2025-07-03 23:59:59', 'Pulizia cambusa e sanitari', 2, '2025-12-23 12:11:10'),
-(4, 'BARCA-GOMMONE-002', '2025-08-15 00:00:00', '2025-08-18 23:59:59', 'Manutenzione climatizzazione', 1, '2025-12-23 12:11:10'),
-(5, 'BARCA-GOMMONE-003', '2025-06-10 00:00:00', '2025-06-14 23:59:59', 'Revisione completa motori', 2, '2025-12-23 12:11:10'),
-(6, 'BARCA-YACHT-001', '2025-05-01 00:00:00', '2025-05-10 23:59:59', 'Manutenzione navigatore GPS e rotte', 1, '2025-12-23 12:11:10'),
-(7, 'BARCA-YACHT-002', '2025-07-20 00:00:00', '2025-07-25 23:59:59', 'Pulizia interna e cambusa', 2, '2025-12-23 12:11:10'),
-(8, 'BARCA-VELA-001', '2025-06-20 00:00:00', '2025-06-23 23:59:59', 'Ispezione vela e cavi', 1, '2025-12-23 12:11:10'),
-(9, 'BARCA-VELA-002', '2025-08-25 00:00:00', '2025-08-28 23:59:59', 'Manutenzione autopilota', 2, '2025-12-23 12:11:10'),
-(10, 'BARCA-PICCOLA-001', '2025-07-10 00:00:00', '2025-07-12 23:59:59', 'Verifica sicurezza attrezzatura', 1, '2025-12-23 12:11:10'),
-(11, 'BARCA-PICCOLA-002', '2025-09-01 00:00:00', '2025-09-02 23:59:59', 'Pulizia e sanificazione', 2, '2025-12-23 12:11:10'),
-(12, 'EXP-TRAMONTO-001', '2025-06-15 00:00:00', '2025-06-16 23:59:59', 'Preparazione menu e attrezzature', 1, '2025-12-23 12:11:10'),
-(13, 'EXP-SNORKEL-001', '2025-07-05 00:00:00', '2025-07-06 23:59:59', 'Controllo attrezzatura snorkeling', 2, '2025-12-23 12:11:10'),
-(14, 'EXP-ESCURSIONE-001', '2025-08-20 00:00:00', '2025-08-21 23:59:59', 'Preparazione guide turistiche', 1, '2025-12-23 12:11:10');
+(1, 'BARCA-GOZZO-001', '2025-06-01 00:00:00', '2025-06-05 23:59:59', 'Manutenzione motore e vernice', 9, '2025-12-23 12:11:10'),
+(2, 'BARCA-GOZZO-002', '2025-05-20 00:00:00', '2025-05-25 23:59:59', 'Revisione carburante e filtri', 9, '2025-12-23 12:11:10'),
+(3, 'BARCA-GOMMONE-001', '2025-07-01 00:00:00', '2025-07-03 23:59:59', 'Pulizia cambusa e sanitari', 9, '2025-12-23 12:11:10'),
+(4, 'BARCA-GOMMONE-002', '2025-08-15 00:00:00', '2025-08-18 23:59:59', 'Manutenzione climatizzazione', 9, '2025-12-23 12:11:10'),
+(5, 'BARCA-GOMMONE-003', '2025-06-10 00:00:00', '2025-06-14 23:59:59', 'Revisione completa motori', 9, '2025-12-23 12:11:10'),
+(6, 'BARCA-YACHT-001', '2025-05-01 00:00:00', '2025-05-10 23:59:59', 'Manutenzione navigatore GPS e rotte', 9, '2025-12-23 12:11:10'),
+(7, 'BARCA-YACHT-002', '2025-07-20 00:00:00', '2025-07-25 23:59:59', 'Pulizia interna e cambusa', 9, '2025-12-23 12:11:10'),
+(8, 'BARCA-VELA-001', '2025-06-20 00:00:00', '2025-06-23 23:59:59', 'Ispezione vela e cavi', 9, '2025-12-23 12:11:10'),
+(9, 'BARCA-VELA-002', '2025-08-25 00:00:00', '2025-08-28 23:59:59', 'Manutenzione autopilota', 9, '2025-12-23 12:11:10'),
+(10, 'BARCA-PICCOLA-001', '2025-07-10 00:00:00', '2025-07-12 23:59:59', 'Verifica sicurezza attrezzatura', 9, '2025-12-23 12:11:10'),
+(11, 'BARCA-PICCOLA-002', '2025-09-01 00:00:00', '2025-09-02 23:59:59', 'Pulizia e sanificazione', 9, '2025-12-23 12:11:10'),
+(12, 'EXP-TRAMONTO-001', '2025-06-15 00:00:00', '2025-06-16 23:59:59', 'Preparazione menu e attrezzature', 9, '2025-12-23 12:11:10'),
+(13, 'EXP-SNORKEL-001', '2025-07-05 00:00:00', '2025-07-06 23:59:59', 'Controllo attrezzatura snorkeling', 9, '2025-12-23 12:11:10'),
+(14, 'EXP-ESCURSIONE-001', '2025-08-20 00:00:00', '2025-08-21 23:59:59', 'Preparazione guide turistiche', 9, '2025-12-23 12:11:10');
 
 -- --------------------------------------------------------
 
@@ -308,10 +308,10 @@ INSERT INTO `Media` (`IDMedia`, `URL_Media`, `Testo_Alternativo`, `Tipo_Media`, 
 (98, '../img/blog/positano-amalfi.webp', 'Villaggi storici di Positano e Amalfi', 'Immagine', NULL, NULL, 7, '2026-01-09 16:24:06'),
 (103, '../img/prodotti/odyssey-45.jpg', 'Jeanneau Sun Odyssey 45 in navigazione', 'Immagine', NULL, 'BARCA-VELA-002', NULL, '2026-01-09 17:29:59'),
 (118, '../img/prodotti/snork.jpg', 'Snorkeling a Capri con pesci', 'Immagine', NULL, 'EXP-SNORKEL-001', NULL, '2026-01-09 19:42:03'),
-(141, '../img/avatars/user_12.webp?v=1768042580', 'Avatar utente', 'Immagine', 12, NULL, NULL, '2026-01-10 10:56:20'),
-(142, '../img/avatars/user_9.webp?v=1768042619', 'Avatar utente', 'Immagine', 9, NULL, NULL, '2026-01-10 10:56:59'),
 (143, '../img/prodotti/prod_BARCA-VELA-001.webp?v=1768042977', 'Beneteau First 35 a vela', 'Immagine', NULL, 'BARCA-VELA-001', NULL, '2026-01-10 11:02:57'),
-(144, '../img/avatars/user_15.webp?v=1768046239', 'Avatar utente', 'Immagine', 15, NULL, NULL, '2026-01-10 11:57:19');
+(144, '../img/avatars/user_15.webp?v=1768046239', 'Avatar utente', 'Immagine', 15, NULL, NULL, '2026-01-10 11:57:19'),
+(147, '../img/avatars/user_12.webp?v=1768048306', 'Avatar utente', 'Immagine', 12, NULL, NULL, '2026-01-10 12:31:46'),
+(148, '../img/avatars/user_9.webp?v=1768048336', 'Avatar utente', 'Immagine', 9, NULL, NULL, '2026-01-10 12:32:16');
 
 -- --------------------------------------------------------
 
@@ -637,7 +637,7 @@ CREATE TABLE `Utente` (
 --
 
 INSERT INTO `Utente` (`IDUtente`, `Nome`, `Cognome`, `CF`, `Email`, `PasswordHash`, `IDIndirizzo`, `Is_Admin`, `Data_Registrazione`, `Data_Ultimo_Accesso`) VALUES
-(9, 'Davide', 'Biasuzzi', 'BSZDVD04D19F443F', 'biasuzzi.davide@gmail.com', '$2y$12$U0SQeTC7WZqgChD6SxVteeIdrVBqf4Q4XPHTnaAacjmEjoRKAUSGG', 16, 1, '2025-12-26 17:17:32', '2026-01-10 11:09:36'),
+(9, 'Davide', 'Biasuzzi', 'BSZDVD04D19F443F', 'biasuzzi.davide@gmail.com', '$2y$12$U0SQeTC7WZqgChD6SxVteeIdrVBqf4Q4XPHTnaAacjmEjoRKAUSGG', 16, 1, '2025-12-26 17:17:32', '2026-01-10 12:32:07'),
 (12, 'Admin', 'Admin', 'CFADMINADMINCFCF', 'admin', '$2y$12$qzLCdFoRZ1EDB02Pd9y8MegjxW.3SQ8SLwibQkYqHmPc01yXsWuxa', 19, 1, '2026-01-08 06:27:28', '2026-01-10 12:09:49'),
 (14, 'User', 'User', 'CFUSERUSERCFUSER', 'user', '$2y$12$nE6ZkeAcGm4zSud34GSWSOLnkbTF8vAy1PmpGQYq2BRBPi.67FxFy', 24, 0, '2026-01-09 19:30:02', '2026-01-10 12:08:40');
 
@@ -779,7 +779,7 @@ ALTER TABLE `Lingua`
 -- AUTO_INCREMENT per la tabella `Media`
 --
 ALTER TABLE `Media`
-  MODIFY `IDMedia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=147;
+  MODIFY `IDMedia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=149;
 
 --
 -- AUTO_INCREMENT per la tabella `Prenotazione`
