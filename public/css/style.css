@@ -156,7 +156,7 @@ a {
 }
 
 a:hover {
-  color: var(--col-primary);
+  color: var(--col-text-inv);
 }
 
 :focus-visible {
@@ -2316,6 +2316,9 @@ footer address {
 
 footer address p {
   margin-bottom: 0.4em;
+  color: #cbd5e1;
+}
+footer address a {
   color: #cbd5e1;
 }
 
