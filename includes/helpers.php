@@ -1046,6 +1046,12 @@ function buildAdminProductRows(array $prodotti, string $csrfToken): string {
             . '<input type="hidden" name="action" value="toggle">'
             . '<button type="submit" class="' . $toggleClass . '" aria-label="' . htmlspecialchars($toggleLabel) . ' prodotto ' . $nomeProdotto . '">' . htmlspecialchars($toggleLabel) . '</button>'
             . '</form>'
+            . '<form method="post" class="inline-form" onsubmit="return confirm(\'Eliminare definitivamente questo prodotto?\');">'
+            . '<input type="hidden" name="csrf_token" value="' . htmlspecialchars($csrfToken) . '">'
+            . '<input type="hidden" name="id_prodotto" value="' . $idProdotto . '">'
+            . '<input type="hidden" name="action" value="delete">'
+            . '<button type="submit" class="btn-text danger" aria-label="Elimina prodotto ' . $nomeProdotto . '">Elimina</button>'
+            . '</form>'
             . '</td>'
             . '</tr>';
     }
