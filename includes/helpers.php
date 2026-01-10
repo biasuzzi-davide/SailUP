@@ -72,7 +72,7 @@ function buildHeader($phpSelf) {
     // Pulsante unico in base allo stato
     if (isLogged()) {
         if (isAdmin()) {
-            $loginLink = '<a href="' . $relativePath . 'admin.php" class="btn-layout">Admin</a>';
+            $loginLink = '<a href="' . $relativePath . 'admin.php" class="btn-layout" lang="en">Admin</a>';
             $mobileLoginLi = '<li><a href="' . $relativePath . 'admin.php">Admin</a></li>';
         } else {
             $loginLink = '<a href="' . $relativePath . 'profilo.php" class="btn-layout">Profilo</a>';
@@ -80,7 +80,7 @@ function buildHeader($phpSelf) {
         }
     } else {
         if ($current == 'login') {
-            $loginLink = '<span lang="en" class="btn-layout">Login</span>';
+            $loginLink = '<span lang="en" class="btn-layout" lang="en">Login</span>';
         } else {
             $loginLink = '<a href="' . $relativePath . $pages['login'] . '" lang="en" class="btn-layout">Login</a>';
         }
