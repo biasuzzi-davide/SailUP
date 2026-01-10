@@ -252,6 +252,7 @@ a:hover {
   background-color: var(--col-accent);
   transform: translateY(var(--btn-hover-translate));
   box-shadow: var(--shadow-md);
+  color: var(--col-text-inv);
 }
 
 .btn-layout-light {
