@@ -102,16 +102,21 @@ document.addEventListener('DOMContentLoaded', () => {
    document.addEventListener("DOMContentLoaded", function() {
     var btn = document.getElementById("btnTop");
 
+    if(btn){
+        btn.classList.add("hidden");
+        btn.setAttribute("tabindex", "-1");
+    }
+
     window.onscroll = function() {
         scrollFunction();
     };
 
     function scrollFunction() {
         if (document.body.scrollTop > 150 || document.documentElement.scrollTop > 150) {
-            btn.classList.add("show");
+            btn.classList.remove("hidden");
             btn.setAttribute("tabindex", "0");
         } else {
-            btn.classList.remove("show");
+            btn.classList.add("hidden");
             btn.setAttribute("tabindex", "-1");
         }
     }
