@@ -148,7 +148,7 @@ if (isset($_GET['id']) && trim($_GET['id']) !== '') {
             'excerpt' => $article['Descrizione_Breve'] ?? '',
             'content' => $article['Contenuto'] ?? '',
             'date' => !empty($article['Data_Pubblicazione']) ? date('Y-m-d', strtotime($article['Data_Pubblicazione'])) : '',
-            'image' => normalizeImageUrl($article['URL_Media'] ?? ''),
+            'image' => $article['URL_Media'] ?? '',
             'alt' => $article['Testo_Alternativo'] ?? '',
             'status' => !empty($article['Pubblicato']) ? 'published' : 'draft',
             'extras' => $extrasFormatted,
@@ -177,7 +177,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $contenuto = trim($_POST['post-content'] ?? '');
         $dataPub = $_POST['post-date'] ?? '';
         $status = $_POST['post-status'] ?? 'draft';
-        $urlImg = normalizeImageUrl(trim($_POST['existing-image-url'] ?? ''));
+        $urlImg = trim($_POST['existing-image-url'] ?? '');
         $altImg = trim($_POST['Testo_Alternativo'] ?? '');
         $readingTime = (int)($_POST['post-reading-time'] ?? 0);
         $postId = trim($_POST['post-id'] ?? '');
