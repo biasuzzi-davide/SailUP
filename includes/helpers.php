@@ -17,6 +17,13 @@ function buildHeader($phpSelf) {
     // Usa la mappa unica delle pagine
     global $pages;
 
+    // Logo con link condizionale
+    $logoInner = '<picture>
+    <source srcset="../img/logo_light.svg" type="image/svg+xml">
+    <img alt="Logo SailUP" src="../img/logo_light.svg" width="30" height="30">
+    </picture>
+    <span class="logo-text" lang="en">Sail<span class="text-accent">UP</span></span>';
+
     // Funzione per creare item
     function createHeaderItem($key, $label, $current, $relativePath, $pages, $lang = '', $class = '') {
         $langAttr = $lang ? ' lang="' . $lang . '"' : '';
@@ -42,8 +49,16 @@ function buildHeader($phpSelf) {
     $mobileBlogLi = createHeaderItem('blog', 'Blog', $current, $relativePath, $pages, 'en');
     $mobileChiSiamoLi = createHeaderItem('chi_siamo', 'Chi Siamo', $current, $relativePath, $pages);
 
+    if ($current === 'index') {
+    $logoHtml = '<div class="logo">' . $logoInner . '</div>';
+    } else {
+        $homeUrl = $relativePath . $pages['index'];
+        $logoHtml = '<a href="' . $homeUrl . '" class="logo" aria-label="Torna alla Home">' . $logoInner . '</a>';
+    }
+
     // Sostituisci placeholder
-    $header = str_replace('[HOME LI]', $homeLi, $headerTemplate);
+    $header = str_replace('[LOGO]', $logoHtml, $headerTemplate);
+    $header = str_replace('[HOME LI]', $homeLi, $header);
     $header = str_replace('[NOLEGGIO LI]', $noleggioLi, $header);
     $header = str_replace('[ESPERIENZE LI]', $esperienzeLi, $header);
     $header = str_replace('[BLOG LI]', $blogLi, $header);
