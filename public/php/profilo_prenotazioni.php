@@ -49,6 +49,7 @@ $prenotazioni = $db->getPrenotazioniUtente($userId);
 $rowsHtml = buildProfileBookingRows(is_array($prenotazioni) ? $prenotazioni : [], $csrfToken);
 
 $html = buildPage('../pages/profilo_prenotazioni.html', $_SERVER['PHP_SELF']);
+$html = str_replace('[ADMIN_MENU_ITEM]', buildAdminMenuItem(), $html);
 
 // Keywords per SEO
 $keywords = '<meta name="keywords" content="prenotazioni, gestione, storico, annulla, modifica, utente, SailUP">';

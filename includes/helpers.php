@@ -139,6 +139,23 @@ function buildPage($templatePath, $phpSelf) {
 }
 
 /**
+ * Genera il menu item per la Dashboard Admin se l'utente è admin.
+ * Da inserire nel menu laterale delle pagine profilo.
+ */
+function buildAdminMenuItem(): string {
+    if (!isAdmin()) {
+        return '';
+    }
+    
+    return '<li>
+              <a href="admin.php">
+                <span class="nav-icon" aria-hidden="true">⚙️</span>
+                <span><span lang="en">Dashboard</span> Admin</span>
+              </a>
+            </li>';
+}
+
+/**
  * ritorna l'url dell'avatar utente se presente su disco altrimemti uso placeholder di default
  */
 function getProfileImageUrl(array $user = []): string {
