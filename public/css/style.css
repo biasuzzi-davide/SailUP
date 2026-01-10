@@ -2366,20 +2366,20 @@ footer address strong {
   font-size: 1.2em;
   text-decoration: none;
   transition: opacity 0.3s, visibility 0.3s;
-
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto; 
+  z-index: 999;
 }
 
 .scroll-to-top:hover {
   background-color: var(--col-accent-hover);
 }
 
-.scroll-to-top.show {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
+.scroll-to-top.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 /* =========================================
