@@ -55,6 +55,7 @@ $placeholders['[STAT_ATTIVE]'] = $statAttive;
 
 $html = buildPage('../pages/profilo.html', $_SERVER['PHP_SELF']);
 $html = str_replace('[ADMIN_MENU_ITEM]', buildAdminMenuItem(), $html);
+$html = str_replace('[ADMIN_BREADCRUMB]', buildAdminBreadcrumb(), $html);
 $html = str_replace(array_keys($placeholders + $addrPlaceholders), array_values($placeholders + $addrPlaceholders), $html);
 
 // Forza i valori delle statistiche dopo il load per evitare sovrascritture client-side
