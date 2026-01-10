@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Creato il: Gen 09, 2026 alle 17:05
+-- Creato il: Gen 10, 2026 alle 07:33
 -- Versione del server: 11.8.3-MariaDB-0+deb13u1 from Debian
 -- Versione PHP: 8.4.11
 
@@ -192,7 +192,10 @@ INSERT INTO `Indirizzo` (`IDIndirizzo`, `Via`, `N_Civico`, `CAP`, `Citta`, `Prov
 (18, 'Via Roma', '123', '80100', 'Napoli', 'NA', 'IT', '2026-01-07 11:39:31'),
 (19, 'Via Roma', '123', '80100', 'Napoli', 'NA', 'IT', '2026-01-08 06:27:28'),
 (20, 'Via Frasnelli', '6', '31040', 'Nervesa', 'TV', 'IT', '2026-01-09 16:33:45'),
-(21, 'Via Frasnelli', '6', '31040', 'Nervesa', 'TV', 'IT', '2026-01-09 16:34:28');
+(21, 'Via Frasnelli', '6', '31040', 'Nervesa', 'TV', 'IT', '2026-01-09 16:34:28'),
+(22, 'Via Frasnelli', '6', '31040', 'Nervesa della Battaglia', 'TV', 'IT', '2026-01-09 19:29:36'),
+(23, 'Via Frasnelli', '6', '31040', 'Nervesa della Battaglia', 'TV', 'IT', '2026-01-09 19:29:52'),
+(24, 'Via Frasnelli', '6', '31040', 'Nervesa della Battaglia', 'TV', 'IT', '2026-01-09 19:30:02');
 
 -- --------------------------------------------------------
 
@@ -305,11 +308,13 @@ INSERT INTO `Media` (`IDMedia`, `URL_Media`, `Testo_Alternativo`, `Tipo_Media`, 
 (76, '../img/blog/fotografia-subacquea.webp', 'Fotografia subacquea e cattura di momenti', 'Immagine', NULL, NULL, 13, '2025-12-25 18:34:09'),
 (77, '../img/blog/sostenibilita-marina.webp', 'Navigazione sostenibile e protezione marina', 'Immagine', NULL, NULL, 14, '2025-12-25 18:34:09'),
 (78, '../img/blog/capri-leggenda-realta.webp', 'Isola di Capri: leggenda e realtà', 'Immagine', NULL, NULL, 15, '2025-12-25 18:34:09'),
-(90, '../img/prodotti/odyssey-45.jpg', 'Jeanneau Sun Odyssey 45 in navigazione', 'Immagine', NULL, 'BARCA-VELA-002', NULL, '2026-01-08 06:20:35'),
-(93, '../img/prodotti/snork.jpg', 'Snorkeling a Capri con pesci', 'Immagine', NULL, 'EXP-SNORKEL-001', NULL, '2026-01-08 08:24:13'),
-(96, '../img/prodotti/prod_BARCA-VELA-001.webp?v=1767965207', 'Beneteau First 35 a vela', 'Immagine', NULL, 'BARCA-VELA-001', NULL, '2026-01-09 13:26:47'),
 (98, '../img/blog/positano-amalfi.webp', 'Villaggi storici di Positano e Amalfi', 'Immagine', NULL, NULL, 7, '2026-01-09 16:24:06'),
-(99, '../img/blog/article_a1a4e561.webp?v=1767975939', 'davide & alberto', 'Immagine', NULL, NULL, 23, '2026-01-09 16:25:39');
+(99, '../img/blog/article_a1a4e561.webp?v=1767975939', 'davide & alberto', 'Immagine', NULL, NULL, 23, '2026-01-09 16:25:39'),
+(100, '../img/prodotti/prod_BARCA-VELA-001.webp?v=1767965207', 'Beneteau First 35 a vela', 'Immagine', NULL, 'BARCA-VELA-001', NULL, '2026-01-09 17:08:31'),
+(103, '../img/prodotti/odyssey-45.jpg', 'Jeanneau Sun Odyssey 45 in navigazione', 'Immagine', NULL, 'BARCA-VELA-002', NULL, '2026-01-09 17:29:59'),
+(104, '../img/avatars/user_9.webp?v=1767979837', 'Avatar utente', 'Immagine', 9, NULL, NULL, '2026-01-09 17:30:37'),
+(118, '../img/prodotti/snork.jpg', 'Snorkeling a Capri con pesci', 'Immagine', NULL, 'EXP-SNORKEL-001', NULL, '2026-01-09 19:42:03'),
+(123, '../img/prodotti/prod_PRD-DCF570BD.webp?v=1767987857', 'Il grande davide biasuzzi', 'Immagine', NULL, 'PRD-DCF570BD', NULL, '2026-01-10 07:21:28');
 
 -- --------------------------------------------------------
 
@@ -417,8 +422,9 @@ INSERT INTO `Prodotto` (`IDProdotto`, `Tipo_Prodotto`, `Tipologia_Prodotto`, `Du
 ('BARCA-YACHT-001', 'Noleggio', 'Motore', NULL, 'Azimut 55 Fly', 'Yacht di lusso con salotto interno, cucina e 4 cabine. Esperienza premium.', 'Uno yacht di lusso con interni eleganti, cucina attrezzata e cabine esclusive. Perfetto per un’esperienza premium in mare.', 1200.00, 12, 1, 16.80, 1, '2025-12-23 12:11:10', '2025-12-27 07:47:38', 1),
 ('BARCA-YACHT-002', 'Noleggio', 'Motore', NULL, 'Cranchi Endurance 41', 'Eleganza e navigabilità. Perfetto per crociere di una o più giornate.', 'Uno yacht elegante e versatile, ideale per crociere di una o più giornate con massimo comfort.', 950.00, 10, 0, 12.50, 1, '2025-12-23 12:11:10', '2025-12-27 07:47:39', 1),
 ('EXP-ESCURSIONE-001', 'Experience', 'Tour', 8, 'Tour Costiera Amalfitana Completo', 'Giornata intera tra Positano, Amalfi e Praiano. Include pranzo.', 'Un tour completo della Costiera Amalfitana, con visite a Positano, Amalfi e Praiano. Include pranzo e guida esperta.', 120.00, 10, 1, NULL, NULL, '2025-12-23 12:11:10', '2025-12-23 12:34:56', 1),
-('EXP-SNORKEL-001', 'Experience', 'Escursione', 5, 'Escursione Snorkeling Capri e Anacapri', 'Mezza giornata alla scoperta dei fondali cristallini di Capri.', 'Un’escursione di snorkeling a Capri e Anacapri, ideale per esplorare i fondali cristallini e la fauna marina.', 75.00, 8, 1, NULL, 0, '2025-12-23 12:11:10', '2026-01-08 08:24:13', 1),
-('EXP-TRAMONTO-001', 'Experience', 'Aperitivo', 4, 'Cena al Tramonto con Prosecco', 'Tour della costa con cena leggera e prosecco. Per coppie romantiche.', 'Un’esperienza romantica al tramonto con cena leggera e prosecco. Perfetta per coppie che cercano un momento speciale.', 95.00, 2, 1, NULL, NULL, '2025-12-23 12:11:10', '2025-12-23 12:34:42', 1);
+('EXP-SNORKEL-001', 'Experience', 'Escursione', 5, 'Escursione Snorkeling Capri e Anacapri', 'Mezza giornata alla scoperta dei fondali cristallini di Capri.', 'Un’escursione di snorkeling a Capri e Anacapri, ideale per esplorare i fondali cristallini e la fauna marina.', 75.00, 10, 0, NULL, 0, '2025-12-23 12:11:10', '2026-01-09 19:41:55', 1),
+('EXP-TRAMONTO-001', 'Experience', 'Aperitivo', 4, 'Cena al Tramonto con Prosecco', 'Tour della costa con cena leggera e prosecco. Per coppie romantiche.', 'Un’esperienza romantica al tramonto con cena leggera e prosecco. Perfetta per coppie che cercano un momento speciale.', 95.00, 2, 1, NULL, NULL, '2025-12-23 12:11:10', '2025-12-23 12:34:42', 1),
+('PRD-DCF570BD', 'Experience', NULL, 4, 'Sessione di Programmazione', 'Con o senza sigla, ma con il grande Davide Biasuzzi', 'Buonasera signorina', 200.00, 1, 0, NULL, 0, '2026-01-09 19:44:17', '2026-01-09 19:48:01', 1);
 
 -- --------------------------------------------------------
 
@@ -430,52 +436,53 @@ CREATE TABLE `Prodotto_Extra` (
   `IDExtra` int(11) NOT NULL,
   `IDProdotto` varchar(50) NOT NULL,
   `Nome_Extra` varchar(255) NOT NULL,
-  `Descrizione_Extra` text DEFAULT NULL,
-  `Prezzo_Extra` decimal(10,2) NOT NULL,
-  `Opzionale` tinyint(1) NOT NULL DEFAULT 1
+  `Prezzo_Extra` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dump dei dati per la tabella `Prodotto_Extra`
 --
 
-INSERT INTO `Prodotto_Extra` (`IDExtra`, `IDProdotto`, `Nome_Extra`, `Descrizione_Extra`, `Prezzo_Extra`, `Opzionale`) VALUES
-(1, 'BARCA-GOZZO-001', 'Skipper Professionista', 'Skipper esperto per navigazione sicura', 100.00, 1),
-(2, 'BARCA-GOZZO-001', 'Attrezzatura Snorkeling Completa', 'Maschera, pinne, tubo per 6 persone', 45.00, 1),
-(3, 'BARCA-GOZZO-001', 'Assicurazione Danni Aggiuntiva', 'Copertura totale danni alla barca', 60.00, 1),
-(4, 'BARCA-GOZZO-002', 'Skipper Professionista', 'Skipper esperto per navigazione sicura', 120.00, 1),
-(5, 'BARCA-GOZZO-002', 'Cuoco a Bordo', 'Cuoco per preparare pranzo a bordo', 150.00, 1),
-(6, 'BARCA-GOZZO-002', 'Attrezzatura Snorkeling Completa', 'Maschera, pinne, tubo per 8 persone', 60.00, 1),
-(7, 'BARCA-GOMMONE-001', 'Skipper Professionista', 'Skipper esperienza fuori strada', 130.00, 1),
-(8, 'BARCA-GOMMONE-001', 'Ciambella Trainabile', 'Divertimento a velocità in acqua', 50.00, 1),
-(9, 'BARCA-GOMMONE-001', 'GoPro Subacquea Noleggio', 'Registra i tuoi momenti migliori', 25.00, 1),
-(10, 'BARCA-GOMMONE-002', 'Skipper Professionista', 'Skipper esperto per navigazione sicura', 140.00, 1),
-(11, 'BARCA-GOMMONE-002', 'Ciambella Trainabile', 'Divertimento a velocità in acqua', 50.00, 1),
-(12, 'BARCA-GOMMONE-002', 'Attrezzatura Snorkeling', 'Maschera e pinne per 10 persone', 70.00, 1),
-(13, 'BARCA-GOMMONE-003', 'Skipper Professionista Luxury', 'Skipper VIP con esperienza internazionale', 200.00, 1),
-(14, 'BARCA-GOMMONE-003', 'Champagne Dom Pérignon', 'Bottiglia esclusiva a bordo', 120.00, 1),
-(15, 'BARCA-GOMMONE-003', 'Ciambella Trainabile Gold', 'Ciambella premium con comfort massimo', 80.00, 1),
-(16, 'BARCA-YACHT-001', 'Skipper Capitano', 'Capitano con patente internazionale', 250.00, 1),
-(17, 'BARCA-YACHT-001', 'Hostess Bordo', 'Hostess per servizio premium', 200.00, 1),
-(18, 'BARCA-YACHT-001', 'Cena Gourmet Privata', 'Menu personalizzato chef', 400.00, 1),
-(19, 'BARCA-YACHT-001', 'Drone Riprese Aeree', 'Fotografie e video drone professionali', 300.00, 1),
-(20, 'BARCA-YACHT-002', 'Skipper Capitano', 'Capitano con patente internazionale', 200.00, 1),
-(21, 'BARCA-YACHT-002', 'Hostess Bordo', 'Hostess per servizio premium', 180.00, 1),
-(22, 'BARCA-YACHT-002', 'Attrezzatura Snorkeling Luxury', 'Attrezzatura premium per snorkeling', 100.00, 1),
-(23, 'BARCA-VELA-001', 'Skipper Professionista', 'Skipper vela con esperienza', 140.00, 1),
-(24, 'BARCA-VELA-001', 'Attrezzatura Snorkeling', 'Completa per 6 persone', 50.00, 1),
-(25, 'BARCA-VELA-002', 'Skipper Professionista Vela', 'Skipper esperto vela', 150.00, 1),
-(26, 'BARCA-VELA-002', 'Cuoco a Bordo', 'Cuoco per crociera di più giorni', 200.00, 1),
-(27, 'BARCA-VELA-002', 'Attrezzatura Snorkeling Luxury', 'Attrezzatura premium', 80.00, 1),
-(28, 'BARCA-PICCOLA-001', 'Giubbotto Salvagente Bimbi', 'Giubbotto per bambini (4 pezzi)', 20.00, 1),
-(29, 'BARCA-PICCOLA-002', 'Giubbotto Salvagente Bimbi', 'Giubbotto per bambini (5 pezzi)', 25.00, 1),
-(30, 'BARCA-PICCOLA-002', 'Attrezzatura Snorkeling', 'Per 5 persone', 40.00, 1),
-(31, 'EXP-TRAMONTO-001', 'Bottiglia Champagne Premium', 'Bollicine di qualità superiore', 80.00, 1),
-(32, 'EXP-TRAMONTO-001', 'Rose per la Sorpresa', 'Mazzo di rose rosse incluso', 35.00, 1),
-(33, 'EXP-SNORKEL-001', 'Fotografia Subacquea Professionale', 'Foto underwater del vostro momento', 60.00, 1),
-(34, 'EXP-SNORKEL-001', 'Snack Gourmet Aggiuntivo', 'Salatini e formaggi premium', 30.00, 1),
-(35, 'EXP-ESCURSIONE-001', 'Fotografia Professionale Costiera', 'Foto ricordo della giornata', 100.00, 1),
-(36, 'EXP-ESCURSIONE-001', 'Cena Sotto le Stelle Aggiunta', 'Cena a bordo con vista notturna', 150.00, 1);
+INSERT INTO `Prodotto_Extra` (`IDExtra`, `IDProdotto`, `Nome_Extra`, `Prezzo_Extra`) VALUES
+(1, 'BARCA-GOZZO-001', 'Skipper Professionista', 100.00),
+(2, 'BARCA-GOZZO-001', 'Attrezzatura Snorkeling Completa', 45.00),
+(3, 'BARCA-GOZZO-001', 'Assicurazione Danni Aggiuntiva', 60.00),
+(4, 'BARCA-GOZZO-002', 'Skipper Professionista', 120.00),
+(5, 'BARCA-GOZZO-002', 'Cuoco a Bordo', 150.00),
+(6, 'BARCA-GOZZO-002', 'Attrezzatura Snorkeling Completa', 60.00),
+(7, 'BARCA-GOMMONE-001', 'Skipper Professionista', 130.00),
+(8, 'BARCA-GOMMONE-001', 'Ciambella Trainabile', 50.00),
+(9, 'BARCA-GOMMONE-001', 'GoPro Subacquea Noleggio', 25.00),
+(10, 'BARCA-GOMMONE-002', 'Skipper Professionista', 140.00),
+(11, 'BARCA-GOMMONE-002', 'Ciambella Trainabile', 50.00),
+(12, 'BARCA-GOMMONE-002', 'Attrezzatura Snorkeling', 70.00),
+(13, 'BARCA-GOMMONE-003', 'Skipper Professionista Luxury', 200.00),
+(14, 'BARCA-GOMMONE-003', 'Champagne Dom Pérignon', 120.00),
+(15, 'BARCA-GOMMONE-003', 'Ciambella Trainabile Gold', 80.00),
+(16, 'BARCA-YACHT-001', 'Skipper Capitano', 250.00),
+(17, 'BARCA-YACHT-001', 'Hostess Bordo', 200.00),
+(18, 'BARCA-YACHT-001', 'Cena Gourmet Privata', 400.00),
+(19, 'BARCA-YACHT-001', 'Drone Riprese Aeree', 300.00),
+(20, 'BARCA-YACHT-002', 'Skipper Capitano', 200.00),
+(21, 'BARCA-YACHT-002', 'Hostess Bordo', 180.00),
+(22, 'BARCA-YACHT-002', 'Attrezzatura Snorkeling Luxury', 100.00),
+(28, 'BARCA-PICCOLA-001', 'Giubbotto Salvagente Bimbi', 20.00),
+(29, 'BARCA-PICCOLA-002', 'Giubbotto Salvagente Bimbi', 25.00),
+(30, 'BARCA-PICCOLA-002', 'Attrezzatura Snorkeling', 40.00),
+(31, 'EXP-TRAMONTO-001', 'Bottiglia Champagne Premium', 80.00),
+(32, 'EXP-TRAMONTO-001', 'Rose per la Sorpresa', 35.00),
+(35, 'EXP-ESCURSIONE-001', 'Fotografia Professionale Costiera', 100.00),
+(36, 'EXP-ESCURSIONE-001', 'Cena Sotto le Stelle Aggiunta', 150.00),
+(37, 'BARCA-VELA-001', 'Attrezzatura Snorkeling', 60.00),
+(38, 'BARCA-VELA-001', 'Skipper Professionista', 140.00),
+(42, 'BARCA-VELA-002', 'Attrezzatura Snorkeling Luxury', 80.00),
+(43, 'BARCA-VELA-002', 'Cuoco a Bordo', 250.00),
+(44, 'BARCA-VELA-002', 'Skipper Professionista Vela', 150.00),
+(71, 'EXP-SNORKEL-001', 'Fotografia Subacquea Professionale', 65.00),
+(72, 'EXP-SNORKEL-001', 'Snack Gourmet Aggiuntivo', 30.00),
+(87, 'PRD-DCF570BD', 'Con sigla', 100.00),
+(88, 'PRD-DCF570BD', 'Firma su maglietta del grande magno DB (maglietta non inclusa)', 1200.00),
+(89, 'PRD-DCF570BD', 'Senza sigla', 50.00);
 
 -- --------------------------------------------------------
 
@@ -550,23 +557,25 @@ INSERT INTO `Prodotto_Incluso` (`IDIncluso`, `IDProdotto`, `Nome_Incluso`) VALUE
 (69, 'EXP-ESCURSIONE-001', 'Giubbotti Salvagente'),
 (70, 'EXP-ESCURSIONE-001', 'Attrezzatura Snorkeling'),
 (71, 'EXP-ESCURSIONE-001', 'Ombrellone da Sole'),
-(97, 'BARCA-VELA-002', '2 Cabine'),
-(98, 'BARCA-VELA-002', 'Assicurazione Responsabilità Civile'),
-(99, 'BARCA-VELA-002', 'Attrezzatura Vela Completa'),
-(100, 'BARCA-VELA-002', 'Cucina'),
-(101, 'BARCA-VELA-002', 'Giubbotti Salvagente'),
-(102, 'BARCA-VELA-002', 'Sistema Autopilota'),
-(103, 'BARCA-VELA-002', 'ABCD'),
-(109, 'EXP-SNORKEL-001', 'Asciugamani Premium'),
-(110, 'EXP-SNORKEL-001', 'Attrezzatura Snorkeling Completa'),
-(111, 'EXP-SNORKEL-001', 'Giubbotti Salvagente'),
-(112, 'EXP-SNORKEL-001', 'Guida Turistica Specializzata'),
-(113, 'EXP-SNORKEL-001', 'Snack e Bevande Fresche'),
-(119, 'BARCA-VELA-001', 'Assicurazione Responsabilità Civile'),
-(120, 'BARCA-VELA-001', 'Attrezzatura Vela Base'),
-(121, 'BARCA-VELA-001', 'Ciao'),
-(122, 'BARCA-VELA-001', 'Giubbotti Salvagente'),
-(123, 'BARCA-VELA-001', 'Mappa Nautica');
+(124, 'BARCA-VELA-001', 'Assicurazione Responsabilità Civile'),
+(125, 'BARCA-VELA-001', 'Attrezzatura Vela Base'),
+(126, 'BARCA-VELA-001', 'Ciao'),
+(127, 'BARCA-VELA-001', 'Giubbotti Salvagente'),
+(128, 'BARCA-VELA-001', 'Mappa Nautica'),
+(137, 'BARCA-VELA-002', '2 Cabine'),
+(138, 'BARCA-VELA-002', 'Assicurazione Responsabilità Civile'),
+(139, 'BARCA-VELA-002', 'Attrezzatura Vela Completa'),
+(140, 'BARCA-VELA-002', 'Cucina'),
+(141, 'BARCA-VELA-002', 'Giubbotti Salvagente'),
+(142, 'BARCA-VELA-002', 'Sistema Autopilota'),
+(208, 'EXP-SNORKEL-001', 'Asciugamani Premium'),
+(209, 'EXP-SNORKEL-001', 'Attrezzatura Snorkeling Completa'),
+(210, 'EXP-SNORKEL-001', 'Giubbotti Salvagente'),
+(211, 'EXP-SNORKEL-001', 'Guida Turistica Specializzata'),
+(212, 'EXP-SNORKEL-001', 'Snack e Bevande Fresche'),
+(225, 'PRD-DCF570BD', 'Mouse da rompere'),
+(226, 'PRD-DCF570BD', 'Quaderno A5 per gli appunti'),
+(227, 'PRD-DCF570BD', 'Tastiera da rompere');
 
 -- --------------------------------------------------------
 
@@ -595,6 +604,7 @@ INSERT INTO `Prodotto_Lingua` (`IDProdotto`, `IDLingua`) VALUES
 ('BARCA-YACHT-002', 1),
 ('EXP-ESCURSIONE-001', 1),
 ('EXP-TRAMONTO-001', 1),
+('PRD-DCF570BD', 1),
 ('BARCA-GOMMONE-001', 2),
 ('BARCA-GOMMONE-002', 2),
 ('BARCA-GOMMONE-003', 2),
@@ -605,13 +615,11 @@ INSERT INTO `Prodotto_Lingua` (`IDProdotto`, `IDLingua`) VALUES
 ('BARCA-YACHT-001', 2),
 ('BARCA-YACHT-002', 2),
 ('EXP-ESCURSIONE-001', 2),
-('EXP-SNORKEL-001', 2),
 ('EXP-TRAMONTO-001', 2),
 ('EXP-ESCURSIONE-001', 3),
 ('EXP-SNORKEL-001', 3),
 ('EXP-TRAMONTO-001', 3),
 ('EXP-ESCURSIONE-001', 4),
-('EXP-SNORKEL-001', 4),
 ('EXP-TRAMONTO-001', 4);
 
 -- --------------------------------------------------------
@@ -646,10 +654,10 @@ INSERT INTO `Utente` (`IDUtente`, `Nome`, `Cognome`, `CF`, `Email`, `PasswordHas
 (6, 'Francesca', 'Marino', 'MRNFRC90S55H501H', 'francesca.marino@email.com', '$2y$10$abcdefghijklmnopqrstuvwxyz123456', 5, 0, '2025-12-23 12:11:10', NULL),
 (7, 'Riccardo', 'Colombo', 'CLMRCR84L22H501G', 'riccardo.colombo@email.com', '$2y$10$abcdefghijklmnopqrstuvwxyz123456', 6, 0, '2025-12-23 12:11:10', NULL),
 (8, 'Elena', 'Gallo', 'GLLELM87C35H501F', 'elena.gallo@email.com', '$2y$10$abcdefghijklmnopqrstuvwxyz123456', 7, 0, '2025-12-23 12:11:10', NULL),
-(9, 'DAVIDE', 'BIASUZZI', 'BSZDVD04D19F443F', 'biasuzzi.davide@gmail.com', '$2y$12$U0SQeTC7WZqgChD6SxVteeIdrVBqf4Q4XPHTnaAacjmEjoRKAUSGG', 16, 1, '2025-12-26 17:17:32', '2026-01-09 16:35:01'),
+(9, 'DAVIDE', 'BIASUZZI', 'BSZDVD04D19F443F', 'biasuzzi.davide@gmail.com', '$2y$12$U0SQeTC7WZqgChD6SxVteeIdrVBqf4Q4XPHTnaAacjmEjoRKAUSGG', 16, 1, '2025-12-26 17:17:32', '2026-01-10 07:20:51'),
 (11, 'Francesco', 'Marcon', 'AADOIAHSDOIHAOH4', 'fr@mail.com', '$2y$12$BDpv2N3phQZP7e3bMXHD6.7pfDW2qYi.4GNl4BE7iuh23/7LBm48q', 18, 0, '2026-01-07 11:39:31', '2026-01-08 09:43:50'),
 (12, 'Mario', 'Rossi', 'AAAAAAAAAAAAAAAA', 'fojaw95998@vysolar.com', '$2y$12$MBGMZNJPFIzmw0ox5D1JjenoDLIEYx3dQl//ITw7SioXX9mO5QXh2', 19, 0, '2026-01-08 06:27:28', '2026-01-08 06:27:35'),
-(13, 'Davide', 'Biasuzzi', 'AAAAAAAAAAABAAAA', 'davidinobiasu19@gmail.com', '$2y$12$TCa3ZWfjgYGqadFWA8ffBu3DOCdP3bDk2EYIQ9vRlGn0YelIJPONK', 21, 0, '2026-01-09 16:34:28', '2026-01-09 16:34:38');
+(14, 'Davide', 'Biasuzzi', 'AAAAAAAAAAAAAAAB', 'davidinobiasu19@gmail.com', '$2y$12$8la3eM3GzADIiqXD8zp.Ke6FP6ujyJUC7bJjBtzWWMIswLydq/wXG', 24, 0, '2026-01-09 19:30:02', '2026-01-09 20:11:48');
 
 --
 -- Indici per le tabelle scaricate
@@ -771,7 +779,7 @@ ALTER TABLE `Articolo_Blog_Extra`
 -- AUTO_INCREMENT per la tabella `Indirizzo`
 --
 ALTER TABLE `Indirizzo`
-  MODIFY `IDIndirizzo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `IDIndirizzo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT per la tabella `Indisponibilita`
@@ -789,7 +797,7 @@ ALTER TABLE `Lingua`
 -- AUTO_INCREMENT per la tabella `Media`
 --
 ALTER TABLE `Media`
-  MODIFY `IDMedia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
+  MODIFY `IDMedia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
 
 --
 -- AUTO_INCREMENT per la tabella `Prenotazione`
@@ -801,19 +809,19 @@ ALTER TABLE `Prenotazione`
 -- AUTO_INCREMENT per la tabella `Prodotto_Extra`
 --
 ALTER TABLE `Prodotto_Extra`
-  MODIFY `IDExtra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `IDExtra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
 
 --
 -- AUTO_INCREMENT per la tabella `Prodotto_Incluso`
 --
 ALTER TABLE `Prodotto_Incluso`
-  MODIFY `IDIncluso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
+  MODIFY `IDIncluso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=228;
 
 --
 -- AUTO_INCREMENT per la tabella `Utente`
 --
 ALTER TABLE `Utente`
-  MODIFY `IDUtente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `IDUtente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Limiti per le tabelle scaricate
