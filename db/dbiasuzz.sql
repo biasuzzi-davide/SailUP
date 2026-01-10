@@ -274,13 +274,10 @@ CREATE TABLE `Media` (
 
 --
 -- Dump dei dati per la tabella `Media`
+-- NOTA: Rimossi avatar degli utenti eliminati (ID 1, 2, 3, 4, 15)
 --
 
 INSERT INTO `Media` (`IDMedia`, `URL_Media`, `Testo_Alternativo`, `Tipo_Media`, `IDUtente`, `IDProdotto`, `IDArticolo`, `Data_Caricamento`) VALUES
-(1, '../img/Azimut_55_fly_2.webp', 'Avatar Marco Rossi Admin', 'Immagine', 1, NULL, NULL, '2025-12-23 12:11:10'),
-(2, '../img/Azimut_55_fly_2.webp', 'Avatar Lucia De Luca Admin', 'Immagine', 2, NULL, NULL, '2025-12-23 12:11:10'),
-(3, '../img/Azimut_55_fly_2.webp', 'Avatar Giovanni Ferraro', 'Immagine', 3, NULL, NULL, '2025-12-23 12:11:10'),
-(4, '../img/Azimut_55_fly_2.webp', 'Avatar Sofia Esposito', 'Immagine', 4, NULL, NULL, '2025-12-23 12:11:10'),
 (5, '../img/prodotti/gozzo-sorrentino-classico.webp', 'Gozzo Sorrentino Classico in mare', 'Immagine', NULL, 'BARCA-GOZZO-001', NULL, '2025-12-23 12:11:10'),
 (6, '../img/prodotti/gozzoblu.jpg', 'Gozzo Blu Marino', 'Immagine', NULL, 'BARCA-GOZZO-002', NULL, '2025-12-23 12:11:10'),
 (7, '../img/prodotti/gommone250.jpeg', 'Gommone Speed 250cv saltello', 'Immagine', NULL, 'BARCA-GOMMONE-001', NULL, '2025-12-23 12:11:10'),
@@ -309,7 +306,6 @@ INSERT INTO `Media` (`IDMedia`, `URL_Media`, `Testo_Alternativo`, `Tipo_Media`, 
 (103, '../img/prodotti/odyssey-45.jpg', 'Jeanneau Sun Odyssey 45 in navigazione', 'Immagine', NULL, 'BARCA-VELA-002', NULL, '2026-01-09 17:29:59'),
 (118, '../img/prodotti/snork.jpg', 'Snorkeling a Capri con pesci', 'Immagine', NULL, 'EXP-SNORKEL-001', NULL, '2026-01-09 19:42:03'),
 (143, '../img/prodotti/prod_BARCA-VELA-001.webp?v=1768042977', 'Beneteau First 35 a vela', 'Immagine', NULL, 'BARCA-VELA-001', NULL, '2026-01-10 11:02:57'),
-(144, '../img/avatars/user_15.webp?v=1768046239', 'Avatar utente', 'Immagine', 15, NULL, NULL, '2026-01-10 11:57:19'),
 (147, '../img/avatars/user_12.webp?v=1768048306', 'Avatar utente', 'Immagine', 12, NULL, NULL, '2026-01-10 12:31:46'),
 (148, '../img/avatars/user_9.webp?v=1768048336', 'Avatar utente', 'Immagine', 9, NULL, NULL, '2026-01-10 12:32:16');
 
@@ -337,48 +333,12 @@ CREATE TABLE `Prenotazione` (
 -- Dump dei dati per la tabella `Prenotazione`
 --
 
+-- Prenotazioni rimosse: le prenotazioni degli utenti eliminati (ID 3,4,5,6,7,8,15) sono state eliminate per rispettare i vincoli di integrità
 INSERT INTO `Prenotazione` (`IDPrenotazione`, `IDUtente`, `IDProdotto`, `Data_Ora_Inizio`, `Data_Ora_Fine`, `Skipper_Richiesto`, `Prezzo_Totale`, `Metodo_Pagamento`, `Stato_Prenotazione`, `Note_Addizionali`, `Data_Creazione`) VALUES
-(1, 3, 'BARCA-GOZZO-001', '2025-06-15 09:00:00', '2025-06-15 18:00:00', 0, 280.00, 'Bonifico', 'Confermata', 'Prenotazione per gita in famiglia', '2025-12-23 12:11:10'),
-(2, 3, 'BARCA-PICCOLA-001', '2025-07-10 10:00:00', '2025-07-10 13:00:00', 0, 150.00, 'Carta di Credito', 'Confermata', 'Lezione per bambini', '2025-12-23 12:11:10'),
-(3, 4, 'BARCA-GOMMONE-001', '2025-08-20 14:00:00', '2025-08-20 19:00:00', 1, 450.00, 'Contanti', 'In Attesa', 'Chiesta navigazione con Skipper', '2025-12-23 12:11:10'),
-(4, 4, 'EXP-TRAMONTO-001', '2025-07-25 19:00:00', '2025-07-25 23:00:00', 0, 95.00, 'Carta di Credito', 'In Attesa', 'Prenotazione per anniversario', '2025-12-23 12:11:10'),
-(5, 5, 'BARCA-YACHT-001', '2025-09-01 10:00:00', '2025-09-03 10:00:00', 1, 2400.00, 'Bonifico', 'Confermata', 'Crociera di 2 giorni con skipper e hostess', '2025-12-23 12:11:10'),
-(6, 5, 'BARCA-VELA-002', '2025-08-05 08:00:00', '2025-08-05 17:00:00', 1, 550.00, 'Carta di Credito', 'Confermata', 'Navigazione a vela con cuoco', '2025-12-23 12:11:10'),
-(7, 6, 'EXP-SNORKEL-001', '2025-07-15 09:00:00', '2025-07-15 14:00:00', 0, 75.00, 'Contanti', 'In Attesa', 'Escursione snorkeling Capri', '2025-12-23 12:11:10'),
-(8, 6, 'BARCA-PICCOLA-002', '2025-06-20 15:00:00', '2025-06-20 18:00:00', 0, 180.00, 'Carta di Credito', 'In Attesa', 'Gita al tramonto', '2025-12-23 12:11:10'),
-(9, 7, 'BARCA-GOMMONE-002', '2025-07-22 11:00:00', '2025-07-22 17:00:00', 0, 380.00, 'Bonifico', 'Confermata', 'Escursione con amici', '2025-12-23 12:11:10'),
-(10, 7, 'BARCA-YACHT-002', '2025-08-10 09:00:00', '2025-08-10 18:00:00', 1, 950.00, 'Carta di Credito', 'Confermata', 'Giornata di lusso con skipper', '2025-12-23 12:11:10'),
-(11, 8, 'EXP-ESCURSIONE-001', '2025-09-15 08:00:00', '2025-09-15 18:00:00', 0, 120.00, 'Contanti', 'In Attesa', 'Escursione costiera completa', '2025-12-23 12:11:10'),
-(12, 8, 'BARCA-VELA-001', '2025-08-28 10:00:00', '2025-08-28 16:00:00', 1, 400.00, 'Carta di Credito', 'In Attesa', 'Vela sportiva con skipper', '2025-12-23 12:11:10'),
-(13, 3, 'BARCA-GOMMONE-003', '2025-06-08 13:00:00', '2025-06-08 18:00:00', 1, 550.00, 'Bonifico', 'Cancellata', 'Cancellato per maltempo', '2025-12-23 12:11:10'),
-(14, 4, 'BARCA-PICCOLA-001', '2025-09-05 10:00:00', '2025-09-05 14:00:00', 0, 150.00, 'Carta di Credito', 'Confermata', 'Gita pomeridiana', '2025-12-23 12:11:10'),
-(15, 5, 'EXP-TRAMONTO-001', '2025-08-25 19:30:00', '2025-08-25 23:30:00', 0, 95.00, 'Contanti', 'In Attesa', 'Cena romantica al tramonto', '2025-12-23 12:11:10'),
-(16, 3, 'EXP-SNORKEL-001', '2025-07-30 08:30:00', '2025-07-30 13:30:00', 0, 75.00, 'Carta di Credito', 'Confermata', 'Snorkeling con famiglia', '2025-12-23 12:11:10'),
-(17, 4, 'BARCA-VELA-002', '2025-08-15 09:00:00', '2025-08-15 17:00:00', 1, 550.00, 'Bonifico', 'Confermata', 'Navigazione a vela', '2025-12-23 12:11:10'),
-(18, 5, 'BARCA-GOZZO-002', '2025-09-08 10:00:00', '2025-09-08 18:00:00', 0, 300.00, 'Contanti', 'In Attesa', 'Noleggio per amici', '2025-12-23 12:11:10'),
-(19, 6, 'BARCA-GOMMONE-001', '2025-07-18 14:00:00', '2025-07-18 19:00:00', 1, 450.00, 'Carta di Credito', 'Confermata', 'Adrenalina con skipper', '2025-12-23 12:11:10'),
-(20, 7, 'EXP-ESCURSIONE-001', '2025-08-30 08:00:00', '2025-08-30 18:00:00', 0, 120.00, 'Bonifico', 'In Attesa', 'Tour amalfitano', '2025-12-23 12:11:10'),
-(21, 8, 'BARCA-PICCOLA-002', '2025-09-10 16:00:00', '2025-09-10 19:00:00', 0, 180.00, 'Contanti', 'Confermata', 'Gita tramonto', '2025-12-23 12:11:10'),
-(22, 3, 'BARCA-YACHT-001', '2025-09-20 10:00:00', '2025-09-21 10:00:00', 1, 1200.00, 'Carta di Credito', 'In Attesa', 'Crociera lusso', '2025-12-23 12:11:10'),
-(23, 4, 'BARCA-GOMMONE-002', '2025-07-28 11:00:00', '2025-07-28 17:00:00', 0, 380.00, 'Bonifico', 'Confermata', 'Escursione veloce', '2025-12-23 12:11:10'),
-(25, 6, 'BARCA-VELA-001', '2025-08-08 10:00:00', '2025-08-08 16:00:00', 1, 400.00, 'Carta di Credito', 'In Attesa', 'Vela sportiva', '2025-12-23 12:11:10'),
-(26, 7, 'BARCA-PICCOLA-001', '2025-07-12 09:00:00', '2025-07-12 12:00:00', 0, 150.00, 'Bonifico', 'Confermata', 'Lezione principianti', '2025-12-23 12:11:10'),
-(27, 8, 'BARCA-GOZZO-001', '2025-08-22 10:00:00', '2025-08-22 18:00:00', 0, 280.00, 'Contanti', 'Confermata', 'Gita classica', '2025-12-23 12:11:10'),
-(28, 3, 'EXP-ESCURSIONE-001', '2025-09-25 08:00:00', '2025-09-25 18:00:00', 0, 120.00, 'Carta di Credito', 'In Attesa', 'Escursione completa', '2025-12-23 12:11:10'),
-(29, 4, 'BARCA-YACHT-002', '2025-08-18 09:00:00', '2025-08-18 18:00:00', 1, 950.00, 'Bonifico', 'Confermata', 'Lusso giornaliero', '2025-12-23 12:11:10'),
-(30, 5, 'BARCA-GOMMONE-003', '2025-07-05 14:00:00', '2025-07-05 19:00:00', 1, 550.00, 'Contanti', 'In Attesa', 'Adrenalina max', '2025-12-23 12:11:10'),
-(31, 6, 'EXP-SNORKEL-001', '2025-08-12 09:00:00', '2025-08-12 14:00:00', 0, 75.00, 'Carta di Credito', 'Confermata', 'Snorkeling avanzato', '2025-12-23 12:11:10'),
-(32, 7, 'BARCA-GOZZO-002', '2025-09-03 10:00:00', '2025-09-03 18:00:00', 0, 300.00, 'Bonifico', 'In Attesa', 'Gita con famiglia', '2025-12-23 12:11:10'),
-(34, 3, 'BARCA-PICCOLA-002', '2025-07-02 15:00:00', '2025-07-02 18:00:00', 0, 180.00, 'Carta di Credito', 'In Attesa', 'Tramonto dal mare', '2025-12-23 12:11:10'),
-(35, 4, 'BARCA-GOZZO-001', '2025-06-25 09:00:00', '2025-06-25 18:00:00', 0, 280.00, 'Bonifico', 'Confermata', 'Weekend marino', '2025-12-23 12:11:10'),
-(36, 5, 'EXP-TRAMONTO-001', '2025-08-08 19:30:00', '2025-08-08 23:30:00', 0, 95.00, 'Contanti', 'In Attesa', 'Data speciale', '2025-12-23 12:11:10'),
-(37, 6, 'BARCA-GOMMONE-001', '2025-09-30 14:00:00', '2025-09-30 19:00:00', 1, 450.00, 'Carta di Credito', 'Confermata', 'Avventura', '2025-12-23 12:11:10'),
 (84, 9, 'EXP-TRAMONTO-001', '2026-01-15 09:00:00', '2026-01-15 13:00:00', 1, 219.50, 'Carta di Credito', 'Cancellata', NULL, '2026-01-07 10:01:38'),
 (85, 9, 'EXP-ESCURSIONE-001', '2026-01-15 09:00:00', '2026-01-15 17:00:00', 1, 382.00, 'Carta di Credito', 'Cancellata', NULL, '2026-01-07 10:11:25'),
 (87, 9, 'EXP-TRAMONTO-001', '2026-01-08 09:00:00', '2026-01-08 13:00:00', 1, 219.50, 'Carta di Credito', 'Cancellata', NULL, '2026-01-07 18:53:20'),
-(88, 9, 'BARCA-PICCOLA-001', '2026-01-07 00:00:00', '2026-01-10 23:59:59', 1, 680.00, 'Carta di Credito', 'Cancellata', NULL, '2026-01-07 19:06:34'),
-(94, 15, 'BARCA-PICCOLA-002', '2026-01-17 00:00:00', '2026-01-17 23:59:59', 0, 180.00, 'Bonifico', 'Cancellata', NULL, '2026-01-10 11:49:34'),
-(95, 15, 'EXP-ESCURSIONE-001', '2026-01-17 09:00:00', '2026-01-17 17:00:00', 1, 132.00, 'Carta di Credito', 'Cancellata', NULL, '2026-01-10 11:52:26');
+(88, 9, 'BARCA-PICCOLA-001', '2026-01-07 00:00:00', '2026-01-10 23:59:59', 1, 680.00, 'Carta di Credito', 'Cancellata', NULL, '2026-01-07 19:06:34');
 
 -- --------------------------------------------------------
 
@@ -634,6 +594,7 @@ CREATE TABLE `Utente` (
 
 --
 -- Dump dei dati per la tabella `Utente`
+-- NOTA: Alcuni utenti sono stati eliminati. Gli indirizzi orfani rimangono nel database.
 --
 
 INSERT INTO `Utente` (`IDUtente`, `Nome`, `Cognome`, `CF`, `Email`, `PasswordHash`, `IDIndirizzo`, `Is_Admin`, `Data_Registrazione`, `Data_Ultimo_Accesso`) VALUES
