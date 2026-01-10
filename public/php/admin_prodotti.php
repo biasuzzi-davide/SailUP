@@ -41,13 +41,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $feedback = 'Impossibile aggiornare lo stato del prodotto.';
             }
         } elseif ($action === 'delete') {
-            $ok = $db->setProdottoStatus($idProdotto, false);
+            $ok = $db->deleteProdotto($idProdotto);
             if ($ok) {
                 $feedbackClass = 'alert alert-success';
-                $feedback = 'Prodotto disattivato.';
+                $feedback = 'Prodotto eliminato definitivamente.';
             } else {
                 $feedbackClass = 'alert alert-error';
-                $feedback = 'Impossibile disattivare il prodotto.';
+                $feedback = 'Impossibile eliminare il prodotto.';
             }
         } else {
             $feedbackClass = 'alert alert-error';

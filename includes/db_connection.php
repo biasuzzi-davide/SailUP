@@ -805,6 +805,30 @@ class DBConnection {
     }
 
     /**
+     * Elimina definitivamente un prodotto dal database
+     */
+    public function deleteProdotto(string $idProdotto): bool {
+        $this->openConnection();
+        $query = "DELETE FROM Prodotto WHERE IDProdotto = ?";
+
+        try {
+            $stmt = $this->connection->prepare($query);
+            if (!$stmt) {
+                $this->closeConnection();
+                return false;
+            }
+            $stmt->bind_param('s', $idProdotto);
+            $ok = $stmt->execute();
+            $stmt->close();
+            $this->closeConnection();
+            return $ok;
+        } catch (Throwable $t) {
+            $this->closeConnection();
+            return false;
+        }
+    }
+
+    /**
      * recupera prodotti anche non attivi, con filtri base e paginazione
      */
     public function getProdottiAdmin(
