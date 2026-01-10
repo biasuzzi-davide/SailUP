@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="it" data-theme="light">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dettaglio Prenotazione [BOOKING_ID] - SailUP</title>
+    <meta name="description" content="Riepilogo dettagli prenotazione SailUP." />
+    [KEYWORDS]
+    <meta name="authors" content="SailUP Team" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap"
+        rel="stylesheet" />
+
+    <link rel="stylesheet" href="../css/style.css" media="screen" />
+    <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)" />
+    <link rel="stylesheet" href="../css/print.css" media="print" />
+</head>
+
+<body>
+    <a href="#main-content" class="skip-to-content">Salta al contenuto principale</a>
+
+    [HEADER]
+
+    <div class="sr-only" id="breadcrumb-label">
+        <span lang="en">breadcrumb</span>
+    </div>
+    <nav aria-labelledby="breadcrumb-label" id="breadcrumb">
+        <ol>
+            <li><a href="index.php"><span lang="en">Home</span></a></li>
+            <li><a href="admin.php">Amministrazione</a></li>
+            <li><a href="admin_prenotazioni.php">Gestione Prenotazioni</a></li>
+            <li aria-current="page">Riepilogo #[BOOKING_ID]</li>
+        </ol>
+    </nav>
+
+    <main id="main-content" class="section-container">
+
+        <div>
+
+            <header class="section-header">
+                <div>
+                    <h1>Prenotazione #[BOOKING_CODE]</h1>
+                    <p class="text-accent">Effettuata il [BOOKING_CREATED_AT]</p>
+                </div>
+                <div>
+                    [BOOKING_STATUS_BADGE]
+                </div>
+            </header>
+
+            <article class="booking-card">
+
+                <header class="booking-header">
+                    <div class="booking-image">
+                        <img src="[BOOKING_IMG_URL]"
+                            alt="[BOOKING_IMG_ALT]" />
+                    </div>
+                    <div class="booking-info">
+                        <h2>[BOOKING_PRODUCT]</h2>
+                        <p class="booking-type">Cliente: [BOOKING_CLIENTE]</p>
+                        <p class="text-accent">Tipo: [BOOKING_TIPO]</p>
+                    </div>
+                </header>
+
+                <section class="booking-details" aria-labelledby="specs-title">
+                    <h3 id="specs-title" class="sr-only">Specifiche della prenotazione</h3>
+
+                    <dl class="specs-grid">
+                        <div class="spec-card">
+                            <dt class="spec-label"><span aria-hidden="true">📅</span> Inizio</dt>
+                            <dd class="spec-value">[BOOKING_START]</dd>
+                        </div>
+                        <div class="spec-card">
+                            <dt class="spec-label"><span aria-hidden="true">🏁</span> Fine</dt>
+                            <dd class="spec-value">[BOOKING_END]</dd>
+                        </div>
+                        <div class="spec-card">
+                            <dt class="spec-label"><span aria-hidden="true">👥</span> Ospiti</dt>
+                            <dd class="spec-value">[BOOKING_GUESTS]</dd>
+                        </div>
+                        <div class="spec-card">
+                            <dt class="spec-label">Skipper</dt>
+                            <dd class="spec-value">[BOOKING_SKIPPER]</dd>
+                        </div>
+                    </dl>
+                </section>
+
+                <section class="booking-details" aria-labelledby="costs-title">
+                    <h3 id="costs-title">💳 Riepilogo Costi</h3>
+
+                    <table>
+                        <caption class="sr-only">Dettaglio costi per la prenotazione</caption>
+                        <tbody>
+                            <tr>
+                            <th scope="row"><strong>Totale</strong></th>
+                            <td><strong class="text-accent">€ [BOOKING_TOTAL]</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                    <p class="field-hint">Metodo: [BOOKING_PAYMENT]</p>
+                    <p class="field-hint">Email cliente: [BOOKING_EMAIL]</p>
+
+                </section>
+
+                <section class="booking-details" aria-labelledby="update-title">
+                    <h3 id="update-title">Aggiorna Stato e Note</h3>
+                    [BOOKING_FEEDBACK]
+                    <form method="post" action="dettaglio_prenotazione.php?id=[BOOKING_ID]" class="admin-form">
+                        <input type="hidden" name="csrf_token" value="[CSRF_TOKEN]">
+                        <div class="form-group">
+                            <label for="booking-status">Stato prenotazione</label>
+                            <select id="booking-status" name="status">
+                                <option value="In Attesa" [SEL_PENDING]>In Attesa</option>
+                                <option value="Confermata" [SEL_CONF]>Confermata</option>
+                                <option value="Cancellata" [SEL_CANC]>Cancellata</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="booking-note">Note</label>
+                            <textarea id="booking-note" name="note" rows="3" placeholder="Aggiungi note amministrative">[BOOKING_NOTE]</textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn-layout btn-sm">Salva</button>
+                        </div>
+                    </form>
+                </section>
+            </article>
+
+        </div>
+    </main>
+
+    [FOOTER]
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

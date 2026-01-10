@@ -1,0 +1,611 @@
+/* =========================================
+   SAILUP - MOBILE STYLESHEET
+   ========================================= */
+
+/* =========================================
+   1. TIPOGRAFIA FLUIDA MOBILE
+   ========================================= */
+
+@supports (font-size: clamp(1rem, 1vi, 1rem)) {
+    :root {
+        --fs-sm: clamp(0.75rem, 0.15vi + 0.7rem, 0.89rem);
+        --fs-base: clamp(0.95rem, 0.38vi + 0.85rem, 1.19rem);
+        --fs-md: clamp(1.15rem, 0.65vi + 1rem, 1.58rem);
+        --fs-lg: clamp(1.4rem, 1.1vi + 1.15rem, 2.11rem);
+        --fs-xl: clamp(1.75rem, 1.6vi + 1.35rem, 2.81rem);
+        --fs-xxl: clamp(2.15rem, 2.5vi + 1.55rem, 3.75rem);
+    }
+}
+
+@supports not (font-size: clamp(1rem, 1vi, 1rem)) {
+    :root {
+        --fs-sm: 0.75rem;
+        --fs-base: 0.95rem;
+        --fs-md: 1.15rem;
+        --fs-lg: 1.4rem;
+        --fs-xl: 1.75rem;
+        --fs-xxl: 2.15rem;
+    }
+}
+
+/* =========================================
+   2. HEADER & NAVIGAZIONE
+   ========================================= */
+
+#main-menu {
+    display: none;
+}
+
+.header {
+    grid-template-columns: 1fr auto auto;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.header-buttons {
+    display: flex;
+    align-items: center;
+    margin-inline: 0;
+}
+
+.header-buttons .btn-layout,
+.header-buttons .btn-layout-light {
+    display: none;
+}
+
+.theme-toggle {
+    display: inline-flex;
+    font-size: 1.4rem;
+    padding: 0.5em;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+}
+
+#hamburger-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5em;
+    border-radius: 1em;
+    cursor: pointer;
+    min-width: 44px;
+    min-height: 44px;
+}
+
+/* =========================================
+   3. MOBILE MENU
+   ========================================= */
+
+#mobile-menu {
+    display: none;
+    width: 100%;
+    grid-column: 1 / -1;
+    user-select: none;
+}
+
+#mobile-menu.active {
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    margin-top: 1rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--col-border);
+    animation: slideDown 0.3s ease-out;
+}
+
+#mobile-menu.active ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5em;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#mobile-menu.active ul li a,
+#mobile-menu.active ul li[aria-current="page"] {
+    display: block;
+    font-family: var(--font-head);
+    font-size: var(--fs-md);
+    text-align: center;
+    color: var(--col-text);
+    text-decoration: none;
+    padding: 0.2em 0;
+    border-bottom: 3px solid transparent;
+    transition: border-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+#mobile-menu.active ul li a:hover {
+    color: var(--col-primary);
+    border-bottom-color: var(--col-accent);
+}
+
+#mobile-menu.active ul li[aria-current="page"] {
+    font-weight: 700;
+    color: var(--col-primary);
+    border-bottom-color: var(--col-accent);
+}
+
+#mobile-menu ul li a:visited {
+    color: var(--col-visited-link);
+}
+
+#mobile-menu .menu-login {
+    font-weight: 600;
+    color: var(--col-primary);
+}
+
+/* =========================================
+   4. HERO & LAYOUT SEZIONI
+   ========================================= */
+
+#hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 2rem;
+}
+
+#hero .hero-image {
+    max-width: 20em;
+    margin: 0 auto;
+    order: -1;
+}
+
+#hero h1 {
+    font-size: var(--fs-xxl);
+}
+
+#hero p {
+    font-size: var(--fs-md);
+    margin-inline: auto;
+}
+
+.action-buttons {
+    flex-direction: column;
+    width: 100%;
+}
+
+.action-buttons .btn-layout,
+.action-buttons .btn-layout-light,
+.action-buttons .btn-full-width {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* =========================================
+   5. QUOTE SECTION
+   ========================================= */
+
+#quote-section {
+    padding: 1.7em 0.5rem;
+}
+
+#quote-section blockquote {
+    font-size: var(--fs-md);
+}
+
+/* =========================================
+   6. CARDS
+   ========================================= */
+
+.cards-wrapper {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.horizontal-card {
+    text-align: center;
+    padding: 1.5rem;
+}
+
+/* =========================================
+   7. FOOTER
+   ========================================= */
+
+footer .footer-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 2rem;
+}
+
+footer .logo {
+    justify-content: center;
+}
+
+footer .logo p {
+    font-size: var(--fs-md);
+}
+
+/* =========================================
+   8. AUTH PAGES
+   ========================================= */
+
+.auth-card {
+    padding: 1.5em;
+}
+
+.auth-container {
+    padding: 2em 1em;
+}
+
+@media (max-width: 600px) {
+    .address-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .field-via,
+    .field-civico,
+    .field-cap,
+    .field-citta,
+    .field-provincia {
+        grid-column: auto;
+        width: 100%;
+    }
+}
+
+/* =========================================
+   9. PROFILO UTENTE
+   ========================================= */
+
+.profile-header {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 1.5em;
+}
+
+.profile-avatar {
+    margin: 0 auto;
+}
+
+<<<<<<< ours
+.profile-avatar-block {
+    align-items: center;
+}
+
+.profile-avatar-actions {
+    width: 100%;
+    align-items: center;
+    text-align: center;
+}
+
+=======
+>>>>>>> theirs
+.profile-actions {
+    justify-content: center;
+}
+
+.profile-sidebar {
+    padding: 0;
+    border: none;
+    background: transparent;
+}
+
+.profile-sidebar ul {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5em;
+}
+
+.profile-sidebar a,
+.profile-sidebar .nav-item-active {
+    padding: 0.8em 0.5em;
+    font-size: var(--fs-sm);
+    background-color: var(--col-bg-alt);
+    border: 1px solid var(--col-border);
+}
+
+.stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+@media (max-width: 400px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* =========================================
+   10. PRENOTAZIONI
+   ========================================= */
+
+.filter-tabs {
+    flex-direction: column;
+}
+
+.filter-tab {
+    width: 100%;
+}
+
+/* =========================================
+   11. CATALOGO
+   ========================================= */
+
+.page-intro {
+    font-size: var(--fs-base);
+    text-align: left;
+}
+
+.catalog-hero {
+    padding: 2em 0;
+}
+
+.catalog-hero h1 {
+    font-size: var(--fs-xl);
+}
+
+.catalog-hero p {
+    font-size: var(--fs-base);
+}
+
+.catalog-layout {
+    grid-template-columns: 1fr;
+}
+
+.filters-sidebar {
+    position: static;
+    max-height: none;
+    margin-bottom: 2em;
+}
+
+.results-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1em;
+}
+
+.results-sort {
+    width: 100%;
+    justify-content: space-between;
+}
+
+.results-sort select {
+    flex: 1;
+}
+
+.catalog-grid {
+    grid-template-columns: 1fr 1fr;
+}
+
+.product-header {
+    flex-wrap: wrap;
+}
+
+.product-specs {
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+.product-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1em;
+}
+
+/* =========================================
+   12. DETTAGLIO PRODOTTO
+   ========================================= */
+
+.detail-layout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+.detail-hero-img {
+    max-height: 300px;
+    margin-bottom: 1.5rem;
+    border-radius: var(--radius-sm);
+}
+
+.detail-sidebar {
+    position: static;
+    order: 1;
+    margin-top: 2rem;
+}
+
+.price-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 1.5rem;
+    text-align: center;
+}
+
+.price-header .price-label {
+    font-size: var(--fs-sm);
+    margin: 0;
+    width: 100%;
+}
+
+.price-header .price-amount {
+    font-size: var(--fs-xl);
+    margin: 0;
+}
+
+.booking-form {
+    padding: 1rem 1.5rem 1.5rem;
+}
+
+.booking-form .form-group {
+    margin-bottom: 1rem;
+}
+
+.booking-form .divider {
+    margin: 1rem 0;
+}
+
+.booking-form .cta-button {
+    width: 100%;
+    padding: var(--btn-padding-vertical) var(--btn-padding-horizontal);
+    font-size: var(--btn-font-size);
+}
+
+.booking-form .security-note {
+    text-align: center;
+    width: 100%;
+    margin-top: 1rem;
+    display: block;
+}
+
+.specs-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.spec-card {
+    padding: 0.8rem;
+}
+
+.servicies-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+@media (max-width: 600px) {
+    .servicies-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* =========================================
+   13. FAQ
+   ========================================= */
+
+.faq-question {
+    padding: 1em;
+    gap: 0.75em;
+}
+
+.faq-text {
+    font-size: var(--fs-sm);
+}
+
+.faq-answer {
+    padding: 1em;
+    padding-top: 0.5em;
+    font-size: var(--fs-sm);
+}
+
+/* =========================================
+   14. TABELLE RESPONSIVE
+   ========================================= */
+
+.table-container {
+    border: none;
+    box-shadow: none;
+}
+
+.table-container table,
+.table-container thead,
+.table-container tbody,
+.table-container th,
+.table-container td,
+.table-container tr,
+.table-container caption {
+    display: block;
+}
+
+.table-container tr>*:first-child,
+.table-container tr>*:last-child,
+.table-container tr>*:nth-child(3) {
+    width: 100%;
+}
+
+.table-container thead {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+}
+
+.table-container caption {
+    text-align: center;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background-color: var(--col-bg-alt);
+    border: 0.0625rem solid var(--col-border);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-sm);
+    color: var(--col-primary);
+    font-weight: 700;
+    font-family: var(--font-head);
+}
+
+.table-container tr {
+    margin-left: 0;
+    margin-right: 0;
+    border: 1px solid var(--col-border);
+    border-radius: var(--radius-card);
+}
+
+.table-container td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: none;
+    border-bottom: 1px solid var(--col-border);
+    padding: 0.8rem 1rem;
+    min-height: 3.5rem;
+}
+
+.table-container td:last-child {
+    border-bottom: none;
+}
+
+.table-container td::before {
+    content: attr(data-label);
+    font-weight: 700;
+    color: var(--col-primary);
+    text-transform: uppercase;
+    font-size: 0.75em;
+    letter-spacing: 0.03rem;
+    text-align: left;
+    margin-right: 1em;
+    flex: 0 0 40%;
+}
+
+.table-container td.actions-cell {
+    justify-content: flex-end;
+    background-color: var(--col-bg-alt);
+}
+
+.table-container td.actions-cell::before {
+    display: none;
+}
+
+.table-container .btn-icon {
+    min-width: 44px;
+    min-height: 44px;
+    font-size: 1.25rem;
+}
+
+/* =========================================
+   15. ADMIN FORM
+   ========================================= */
+
+.admin-form {
+    padding: 1.5em;
+}
+
+.form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+}
+
+/* =========================================
+   16. ANIMAZIONI
+   ========================================= */
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
