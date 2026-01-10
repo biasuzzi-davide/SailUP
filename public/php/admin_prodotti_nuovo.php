@@ -170,7 +170,7 @@ if (isset($_GET['id']) && trim($_GET['id']) !== '') {
             '[PROD_PRICE]' => htmlspecialchars($prod['Prezzo_Base'] ?? ''),
             '[PROD_CAPACITY]' => htmlspecialchars($prod['Posti_Totali'] ?? ''),
             '[PROD_LENGTH]' => htmlspecialchars($prod['Lunghezza_Barca_Metri'] ?? ''),
-            '[IMG_URL]' => htmlspecialchars(normalizeImageUrl($prod['URL_Media'] ?? '')),
+            '[IMG_URL]' => htmlspecialchars($prod['URL_Media'] ?? ''),
             '[IMG_ALT]' => htmlspecialchars($prod['Testo_Alternativo'] ?? ''),
             '[CHECK_PATENTE]' => !empty($prod['Richiede_Patente']) ? 'checked' : '',
             '[CHECK_ACCESS]' => !empty($prod['Accessibile_Disabili']) ? 'checked' : '',
@@ -211,7 +211,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $richiedePatente = !empty($_POST['requires-license']) ? 1 : 0;
         $accessibile = !empty($_POST['is-accessible']) ? 1 : 0;
         $status = isset($_POST['product-status']) ? 'available' : 'unavailable';
-        $urlImg = normalizeImageUrl(trim($_POST['existing-image-url'] ?? ''));
+        $urlImg = trim($_POST['existing-image-url'] ?? '');
         $altImg = trim($_POST['Testo_Alternativo'] ?? '');
         $lingue = $_POST['product-languages'] ?? [];
         $features = trim($_POST['product-features'] ?? '');

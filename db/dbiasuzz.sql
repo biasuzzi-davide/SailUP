@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Creato il: Gen 10, 2026 alle 08:09
+-- Creato il: Gen 10, 2026 alle 10:57
 -- Versione del server: 11.8.3-MariaDB-0+deb13u1 from Debian
 -- Versione PHP: 8.4.11
 
@@ -146,9 +146,9 @@ INSERT INTO `Articolo_Blog_Extra` (`IDExtra`, `IDArticolo`, `Titolo`, `Elemento`
 (98, 7, '🏘️ Cosa Vedere', 'Piazza Positano - Centro storico pittoresco', 1, '2026-01-09 16:24:06'),
 (99, 7, '🏘️ Cosa Vedere', 'Spiaggia di Positano - Sabbia e bohemien', 2, '2026-01-09 16:24:06'),
 (100, 7, '🏘️ Cosa Vedere', 'Duomo di Amalfi - Capolavoro architettonico', 3, '2026-01-09 16:24:06'),
-(107, 23, 'Ciao', 'Prova', 1, '2026-01-10 08:02:28'),
-(108, 23, 'Prova', 'Ciao', 2, '2026-01-10 08:02:28'),
-(109, 23, 'Prova', 'Ciao', 3, '2026-01-10 08:02:28');
+(110, 23, 'Ciao', 'Prova', 1, '2026-01-10 10:55:56'),
+(111, 23, 'Prova', 'Ciao', 2, '2026-01-10 10:55:56'),
+(112, 23, 'Prova', 'Ciao', 3, '2026-01-10 10:55:56');
 
 -- --------------------------------------------------------
 
@@ -312,9 +312,10 @@ INSERT INTO `Media` (`IDMedia`, `URL_Media`, `Testo_Alternativo`, `Tipo_Media`, 
 (100, '../img/prodotti/prod_BARCA-VELA-001.webp?v=1767965207', 'Beneteau First 35 a vela', 'Immagine', NULL, 'BARCA-VELA-001', NULL, '2026-01-09 17:08:31'),
 (103, '../img/prodotti/odyssey-45.jpg', 'Jeanneau Sun Odyssey 45 in navigazione', 'Immagine', NULL, 'BARCA-VELA-002', NULL, '2026-01-09 17:29:59'),
 (118, '../img/prodotti/snork.jpg', 'Snorkeling a Capri con pesci', 'Immagine', NULL, 'EXP-SNORKEL-001', NULL, '2026-01-09 19:42:03'),
-(134, '../img/avatars/user_9.webp?v=1768031809', 'Avatar utente', 'Immagine', 9, NULL, NULL, '2026-01-10 07:56:49'),
-(135, '../img/prodotti/prod_PRD-DCF570BD.webp?v=1768031896', 'Il grande davide biasuzzi', 'Immagine', NULL, 'PRD-DCF570BD', NULL, '2026-01-10 07:58:16'),
-(137, '../img/blog/article_74f1aefb.webp?v=1768032148', 'davide & alberto', 'Immagine', NULL, NULL, 23, '2026-01-10 08:02:28');
+(139, '../img/prodotti/prod_PRD-DCF570BD.webp?v=1768042525', 'Il grande davide biasuzzi', 'Immagine', NULL, 'PRD-DCF570BD', NULL, '2026-01-10 10:55:25'),
+(140, '../img/blog/article_06755a1f.webp?v=1768042556', 'davide & alberto', 'Immagine', NULL, NULL, 23, '2026-01-10 10:55:56'),
+(141, '../img/avatars/user_12.webp?v=1768042580', 'Avatar utente', 'Immagine', 12, NULL, NULL, '2026-01-10 10:56:20'),
+(142, '../img/avatars/user_9.webp?v=1768042619', 'Avatar utente', 'Immagine', 9, NULL, NULL, '2026-01-10 10:56:59');
 
 -- --------------------------------------------------------
 
@@ -480,9 +481,9 @@ INSERT INTO `Prodotto_Extra` (`IDExtra`, `IDProdotto`, `Nome_Extra`, `Prezzo_Ext
 (44, 'BARCA-VELA-002', 'Skipper Professionista Vela', 150.00),
 (71, 'EXP-SNORKEL-001', 'Fotografia Subacquea Professionale', 65.00),
 (72, 'EXP-SNORKEL-001', 'Snack Gourmet Aggiuntivo', 30.00),
-(110, 'PRD-DCF570BD', 'Ciao', 132423.00),
-(111, 'PRD-DCF570BD', 'Con sigla', 100.00),
-(112, 'PRD-DCF570BD', 'Firma su maglietta del grande magno DB (maglietta non inclusa)', 1200.00);
+(116, 'PRD-DCF570BD', 'Ciao', 132423.00),
+(117, 'PRD-DCF570BD', 'Con sigla', 100.00),
+(118, 'PRD-DCF570BD', 'Firma su maglietta del grande magno DB (maglietta non inclusa)', 1200.00);
 
 -- --------------------------------------------------------
 
@@ -573,9 +574,9 @@ INSERT INTO `Prodotto_Incluso` (`IDIncluso`, `IDProdotto`, `Nome_Incluso`) VALUE
 (210, 'EXP-SNORKEL-001', 'Giubbotti Salvagente'),
 (211, 'EXP-SNORKEL-001', 'Guida Turistica Specializzata'),
 (212, 'EXP-SNORKEL-001', 'Snack e Bevande Fresche'),
-(249, 'PRD-DCF570BD', 'Mouse da rompere'),
-(250, 'PRD-DCF570BD', 'Quaderno A5 per gli appunti'),
-(251, 'PRD-DCF570BD', 'Tastiera da rompere');
+(255, 'PRD-DCF570BD', 'Mouse da rompere'),
+(256, 'PRD-DCF570BD', 'Quaderno A5 per gli appunti'),
+(257, 'PRD-DCF570BD', 'Tastiera da rompere');
 
 -- --------------------------------------------------------
 
@@ -654,9 +655,9 @@ INSERT INTO `Utente` (`IDUtente`, `Nome`, `Cognome`, `CF`, `Email`, `PasswordHas
 (6, 'Francesca', 'Marino', 'MRNFRC90S55H501H', 'francesca.marino@email.com', '$2y$10$abcdefghijklmnopqrstuvwxyz123456', 5, 0, '2025-12-23 12:11:10', NULL),
 (7, 'Riccardo', 'Colombo', 'CLMRCR84L22H501G', 'riccardo.colombo@email.com', '$2y$10$abcdefghijklmnopqrstuvwxyz123456', 6, 0, '2025-12-23 12:11:10', NULL),
 (8, 'Elena', 'Gallo', 'GLLELM87C35H501F', 'elena.gallo@email.com', '$2y$10$abcdefghijklmnopqrstuvwxyz123456', 7, 0, '2025-12-23 12:11:10', NULL),
-(9, 'DAVIDE', 'BIASUZZI', 'BSZDVD04D19F443F', 'biasuzzi.davide@gmail.com', '$2y$12$U0SQeTC7WZqgChD6SxVteeIdrVBqf4Q4XPHTnaAacjmEjoRKAUSGG', 16, 1, '2025-12-26 17:17:32', '2026-01-10 07:20:51'),
+(9, 'DAVIDE', 'BIASUZZI', 'BSZDVD04D19F443F', 'biasuzzi.davide@gmail.com', '$2y$12$U0SQeTC7WZqgChD6SxVteeIdrVBqf4Q4XPHTnaAacjmEjoRKAUSGG', 16, 1, '2025-12-26 17:17:32', '2026-01-10 10:56:47'),
 (11, 'Francesco', 'Marcon', 'AADOIAHSDOIHAOH4', 'fr@mail.com', '$2y$12$BDpv2N3phQZP7e3bMXHD6.7pfDW2qYi.4GNl4BE7iuh23/7LBm48q', 18, 0, '2026-01-07 11:39:31', '2026-01-08 09:43:50'),
-(12, 'Admin', 'Admin', 'CFADMINADMINCFCF', 'admin', '$2y$12$qzLCdFoRZ1EDB02Pd9y8MegjxW.3SQ8SLwibQkYqHmPc01yXsWuxa', 19, 1, '2026-01-08 06:27:28', '2026-01-10 08:08:18'),
+(12, 'Admin', 'Admin', 'CFADMINADMINCFCF', 'admin', '$2y$12$qzLCdFoRZ1EDB02Pd9y8MegjxW.3SQ8SLwibQkYqHmPc01yXsWuxa', 19, 1, '2026-01-08 06:27:28', '2026-01-10 10:54:33'),
 (14, 'User', 'User', 'CFUSERUSERCFUSER', 'user', '$2y$12$nE6ZkeAcGm4zSud34GSWSOLnkbTF8vAy1PmpGQYq2BRBPi.67FxFy', 24, 0, '2026-01-09 19:30:02', '2026-01-10 08:08:26');
 
 --
@@ -773,7 +774,7 @@ ALTER TABLE `Articolo_Blog`
 -- AUTO_INCREMENT per la tabella `Articolo_Blog_Extra`
 --
 ALTER TABLE `Articolo_Blog_Extra`
-  MODIFY `IDExtra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
+  MODIFY `IDExtra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
 
 --
 -- AUTO_INCREMENT per la tabella `Indirizzo`
@@ -797,7 +798,7 @@ ALTER TABLE `Lingua`
 -- AUTO_INCREMENT per la tabella `Media`
 --
 ALTER TABLE `Media`
-  MODIFY `IDMedia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=138;
+  MODIFY `IDMedia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=143;
 
 --
 -- AUTO_INCREMENT per la tabella `Prenotazione`
@@ -809,13 +810,13 @@ ALTER TABLE `Prenotazione`
 -- AUTO_INCREMENT per la tabella `Prodotto_Extra`
 --
 ALTER TABLE `Prodotto_Extra`
-  MODIFY `IDExtra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
+  MODIFY `IDExtra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
 
 --
 -- AUTO_INCREMENT per la tabella `Prodotto_Incluso`
 --
 ALTER TABLE `Prodotto_Incluso`
-  MODIFY `IDIncluso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=252;
+  MODIFY `IDIncluso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=258;
 
 --
 -- AUTO_INCREMENT per la tabella `Utente`

@@ -163,7 +163,7 @@ function getProfileImageUrl(array $user = []): string {
         $db = new DBConnection();
         $media = $db->getMediaUtenteById($userId);
         if (is_array($media) && !empty($media['URL_Media'])) {
-            return normalizeImageUrl($media['URL_Media']);
+            return $media['URL_Media'];
         }
     } catch (Throwable) {
         // fallback su file system
@@ -358,17 +358,6 @@ function getPlaceholderImage(): string {
 }
 
 /**
- * Normalizza URL immagini legacy da /uploads/ a /img/.
- */
-function normalizeImageUrl(string $url): string {
-    $normalized = $url;
-    $normalized = str_replace('../uploads/', '../img/', $normalized);
-    $normalized = str_replace('/uploads/', '/img/', $normalized);
-    $normalized = str_replace('uploads/', 'img/', $normalized);
-    return $normalized;
-}
-
-/**
  * Risolve un URL immagine, utilizzando il placeholder se necessario.
  */
 function resolveImageUrl(?string $url): string {
@@ -376,7 +365,7 @@ function resolveImageUrl(?string $url): string {
     if ($trimmed === '') {
         return getPlaceholderImage();
     }
-    return normalizeImageUrl($trimmed);
+    return $trimmed;
 }
 
 /**
