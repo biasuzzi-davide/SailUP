@@ -1,23 +1,23 @@
 document.addEventListener('DOMContentLoaded', () => {
-    
-/* ---------------------------------------
-   1. GESTIONE MENU MOBILE (Hamburger)
-   --------------------------------------- */
+
+    /* ---------------------------------------
+       1. GESTIONE MENU MOBILE (Hamburger)
+       --------------------------------------- */
 
     const hamburgerBtn = document.getElementById('hamburger-btn');
     const mobileMenu = document.getElementById('mobile-menu');
-    
+
     const openIcon = document.querySelector('.hamburger-icon'); // L'icona "☰"
     const closeIcon = document.querySelector('.close-icon');    // L'icona "✕"
 
     if (hamburgerBtn && mobileMenu) {
         hamburgerBtn.addEventListener('click', () => {
             const isExpanded = hamburgerBtn.getAttribute('aria-expanded') === 'true';
-            
+
             hamburgerBtn.setAttribute('aria-expanded', !isExpanded);
-            
+
             mobileMenu.classList.toggle('active');
-            
+
             if (!isExpanded) {
                 openIcon.classList.add('hidden');
                 closeIcon.classList.remove('hidden');
@@ -28,9 +28,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-/* ---------------------------------------
-    2. GESTIONE TEMA (Chiaro / Scuro)
-   --------------------------------------- */
+    /* ---------------------------------------
+        2. GESTIONE TEMA (Chiaro / Scuro)
+       --------------------------------------- */
     const themeToggle = document.querySelector('.theme-toggle');
     const htmlElement = document.documentElement;
     const sunIcon = document.querySelector('.sun');
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const applyTheme = (theme) => {
         htmlElement.setAttribute('data-theme', theme);
         localStorage.setItem('theme', theme);
-        
+
         if (theme === 'dark') {
             sunIcon.classList.remove('hidden');
             moonIcon.classList.add('hidden');
@@ -99,15 +99,15 @@ document.addEventListener('DOMContentLoaded', () => {
    3. Gestione del bottone top
    --------------------------------------- */
 
-   document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     var btn = document.getElementById("btnTop");
 
-    if(btn){
+    if (btn) {
         btn.classList.add("hidden");
         btn.setAttribute("tabindex", "-1");
     }
 
-    window.onscroll = function() {
+    window.onscroll = function () {
         scrollFunction();
     };
 
@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
 /* ---------------------------------------
    4. GESTIONE FILTRI PRENOTAZIONI
    --------------------------------------- */
-   document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
     // Eseguiamo solo se siamo nella pagina prenotazioni
     const bookingsTable = document.getElementById('bookings-table');
     if (!bookingsTable) return;
@@ -141,20 +141,20 @@ document.addEventListener('DOMContentLoaded', () => {
         const activeCount = Array.from(rows).filter(r => r.getAttribute('data-status') === 'active').length;
         const completedCount = Array.from(rows).filter(r => r.getAttribute('data-status') === 'completed').length;
 
-        if(badgeAll) badgeAll.textContent = total;
-        if(badgeActive) badgeActive.textContent = activeCount;
-        if(badgeCompleted) badgeCompleted.textContent = completedCount;
+        if (badgeAll) badgeAll.textContent = total;
+        if (badgeActive) badgeActive.textContent = activeCount;
+        if (badgeCompleted) badgeCompleted.textContent = completedCount;
     }
 
     // Inizializza i contatori
     updateCounters();
 
-    window.filterBookings = function(status) {
+    window.filterBookings = function (status) {
         let visibleCount = 0;
 
         rows.forEach(row => {
             const rowStatus = row.getAttribute('data-status');
-            
+
             if (status === 'all' || rowStatus === status) {
                 row.style.display = '';
                 visibleCount++;
@@ -175,7 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('.filter-tab').forEach(btn => {
             btn.classList.remove('active');
             btn.setAttribute('aria-selected', 'false');
-            
+
             if (btn.id === `tab-${status}`) {
                 btn.classList.add('active');
                 btn.setAttribute('aria-selected', 'true');
@@ -359,4 +359,114 @@ document.addEventListener('DOMContentLoaded', () => {
         const fragment = template.content.cloneNode(true);
         container.appendChild(fragment);
     });
+});
+
+/* ---------------------------------------
+   7. Calcolo prezzi form prenotazione
+   --------------------------------------- */
+document.addEventListener('DOMContentLoaded', function () {
+
+    const bookingForm = document.querySelector('.booking-form');
+    const allPriceDisplays = document.querySelectorAll('.price-amount');
+
+    if (!bookingForm || allPriceDisplays.length === 0) return;
+
+    let rawBaseText = allPriceDisplays[0].innerText;
+    let cleanBase = rawBaseText.replace(/[^0-9,-]/g, '').replace(',', '.');
+    const BASE_PRICE = parseFloat(cleanBase) || 0;
+
+    function updateBookingPrice() {
+        let duration = 1;
+        const startInput = bookingForm.querySelector('input[name="booking_date"], input[name="start_date"]');
+        const endInput = bookingForm.querySelector('input[name="end_date"]');
+
+        if (startInput && endInput && startInput.value && endInput.value) {
+            const start = new Date(startInput.value);
+            const end = new Date(endInput.value);
+            const diffTime = end - start;
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+            if (diffDays >= 0) {
+                duration = diffDays + 1;
+            }
+        }
+
+        let currentTotal = BASE_PRICE * duration;
+
+        const checkedInputs = bookingForm.querySelectorAll('input[type="checkbox"]:checked');
+        let fixedSum = 0;
+        let percentSum = 0;
+
+        checkedInputs.forEach(input => {
+            if (!input.id) return;
+            const label = bookingForm.querySelector(`label[for="${input.id}"]`);
+            if (!label) return;
+
+            const priceEl = label.querySelector('.text-accent') || label;
+            let text = priceEl.innerText.trim();
+            const isPercent = text.includes('%');
+
+            let cleanNum = text.replace(/[^0-9,-]/g, '');
+            let val = parseFloat(cleanNum.replace(',', '.'));
+
+            if (!isNaN(val) && val > 0) {
+                if (isPercent) {
+                    percentSum += currentTotal * (val / 100);
+                } else {
+                    fixedSum += val;
+                }
+            }
+        });
+
+        let finalPrice = currentTotal + fixedSum + percentSum;
+
+        let formattedPrice = finalPrice.toLocaleString('it-IT', {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 2
+        }) + " €";
+
+        const isChanged = Math.abs(finalPrice - BASE_PRICE) > 0.01;
+
+        allPriceDisplays.forEach(display => {
+            display.innerText = formattedPrice;
+
+            const container = display.closest('.price-label') || display.parentElement;
+
+            if (container) {
+                const prefix = container.querySelector('.price-prefix');
+                const suffix = container.querySelector('.price-suffix');
+
+                if (prefix) {
+                    if (!prefix.hasAttribute('data-original')) {
+                        prefix.setAttribute('data-original', prefix.innerText);
+                    }
+
+                    if (isChanged) {
+                        prefix.innerText = 'Prezzo totale';
+                    } else {
+                        let original = prefix.getAttribute('data-original');
+                        prefix.innerText = original.replace('€', '').trim();
+                    }
+                }
+
+                if (suffix) {
+                    suffix.style.setProperty('display', isChanged ? 'none' : 'inline', 'important');
+                }
+            }
+        });
+    }
+
+    bookingForm.addEventListener('change', updateBookingPrice);
+
+    bookingForm.addEventListener('input', function (e) {
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') {
+            updateBookingPrice();
+        }
+    });
+
+    bookingForm.addEventListener('reset', function () {
+        setTimeout(updateBookingPrice, 10);
+    });
+
+    updateBookingPrice();
 });
