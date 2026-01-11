@@ -72,17 +72,17 @@ function buildHeader($phpSelf) {
     // Pulsante unico in base allo stato
     if (isLogged()) {
         if (isAdmin()) {
-            $loginLink = '<a href="' . $relativePath . 'admin.php" class="btn-layout" lang="en">Admin</a>';
+            $loginLink = '<button type="button" class="btn-layout" lang="en" data-href="' . $relativePath . 'admin.php">Admin</button>';
             $mobileLoginLi = '<li><a href="' . $relativePath . 'admin.php">Admin</a></li>';
         } else {
-            $loginLink = '<a href="' . $relativePath . 'profilo.php" class="btn-layout">Profilo</a>';
+            $loginLink = '<button type="button" class="btn-layout" data-href="' . $relativePath . 'profilo.php">Profilo</button>';
             $mobileLoginLi = '<li><a href="' . $relativePath . 'profilo.php">Profilo</a></li>';
         }
     } else {
         if ($current == 'login') {
             $loginLink = '<span lang="en" class="btn-layout" lang="en">Login</span>';
         } else {
-            $loginLink = '<a href="' . $relativePath . $pages['login'] . '" lang="en" class="btn-layout">Login</a>';
+            $loginLink = '<button type="button" class="btn-layout" lang="en" data-href="' . $relativePath . $pages['login'] . '">Login</button>';
         }
         $mobileLoginLi = createHeaderItem('login', 'Login / Registrati', $current, $relativePath, $pages, 'en', 'menu-login');
     }
