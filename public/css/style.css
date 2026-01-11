@@ -1162,6 +1162,10 @@ a.product-cta:focus-visible {
 }
 
 /* Messages */
+#server-messages ul{
+  list-style: none;
+}
+
 .error-message,
 .success-message,
 .alert {
