@@ -600,6 +600,18 @@ footer .logo p {
     gap: 0;
 }
 
+@media screen and (max-width: 600px) {
+  .extra-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .extra-row .btn-sm {
+    width: 100%;
+    margin-top: 0.5em;
+  }
+}
+
 /* =========================================
    16. ANIMAZIONI
    ========================================= */

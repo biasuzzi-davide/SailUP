@@ -965,20 +965,20 @@ function buildAdminBlogRows(array $articoli, string $csrfToken): string {
             . '<td data-label="Stato">' . $badge . '</td>'
             . '<td data-label="Azioni" class="actions-cell">'
             //button modifica articolo
-            . '<a href="' . htmlspecialchars($editUrl, ENT_QUOTES) . '" class="btn-text" aria-label="Modifica articolo ' . $titolo . '">Modifica</a>'
+            . '<a href="' . htmlspecialchars($editUrl, ENT_QUOTES) . '" class="btn-layout-light btn-sm" aria-label="Modifica articolo ' . $titolo . '">Modifica</a>'
             . '<form method="post" class="inline-form">'
             . '<input type="hidden" name="csrf_token" value="' . htmlspecialchars($csrfToken) . '">'
             . '<input type="hidden" name="id_articolo" value="' . $idArticolo . '">'
             . '<input type="hidden" name="action" value="' . $actionValue . '">'
             //button per pubblicare/rendere bozza
-            . '<button type="submit" class="btn-text" aria-label="' . $ariaActionLabel . ' ' . $titolo . '">' . $actionLabel . '</button>'
+            . '<button type="submit" class="btn-layout btn-sm" aria-label="' . $ariaActionLabel . ' ' . $titolo . '">' . $actionLabel . '</button>'
             . '</form>'
             . '<form method="post" class="inline-form" onsubmit="return confirm(\'Eliminare questo articolo?\');">'
             . '<input type="hidden" name="csrf_token" value="' . htmlspecialchars($csrfToken) . '">'
             . '<input type="hidden" name="id_articolo" value="' . $idArticolo . '">'
             . '<input type="hidden" name="action" value="delete">'
             //button elimina articolo
-            . '<button type="submit" class="btn-text danger" aria-label="Elimina articolo ' . $titolo . '">Elimina</button>'
+            . '<button type="submit" class="btn-danger btn-sm" aria-label="Elimina articolo ' . $titolo . '">Elimina</button>'
             . '</form>'
             . '</td>'
             . '</tr>';
@@ -1146,41 +1146,32 @@ function buildProfileBookingRows(array $prenotazioni, string $csrfToken): string
 }
 
 //builda l extra dei blog
+// builda l extra dei blog
 function buildBlogExtraInputs(array $extras): string {
+    // Se non ci sono extra, creiamo un array con un elemento vuoto per mostrare almeno una riga
+    if (empty($extras)) { $extras = [['titolo' => '', 'elemento' => '']]; }
+
     $extrasHtml = '';
     foreach ($extras as $ex) {
         $extrasHtml .= '<div class="extra-row">'
             . '<div class="form-group">'
             . '<label>Titolo Extra</label>'
-            . '<input type="text" name="extra_title[]" value="' . htmlspecialchars($ex['titolo'] ?? '', ENT_QUOTES) . '" placeholder="es. Cosa portare a bordo" />'
+            . '<input type="text" name="extra_title[]" value="' . htmlspecialchars($ex['titolo'] ?? '', ENT_QUOTES) . '" placeholder="es. Cosa portare" />'
             . '</div>'
             . '<div class="form-group">'
             . '<label>Contenuto</label>'
-            . '<textarea name="extra_item[]" rows="2" placeholder="Elenco o testo descrittivo">' . htmlspecialchars($ex['elemento'] ?? '') . '</textarea>'
+            . '<textarea name="extra_item[]" rows="2" placeholder="Testo...">' . htmlspecialchars($ex['elemento'] ?? '') . '</textarea>'
             . '</div>'
-            . '<button type="button" class="btn-layout-light remove-extra" aria-label="Rimuovi extra">Rimuovi</button>'
+            . '<button type="button" class="btn-danger btn-sm remove-extra" aria-label="Rimuovi extra">Rimuovi</button>'
             . '</div>';
     }
-
-    if ($extrasHtml === '') {
-        $extrasHtml = '<div class="extra-row">'
-            . '<div class="form-group">'
-            . '<label>Titolo Extra</label>'
-            . '<input type="text" name="extra_title[]" placeholder="es. Cosa portare a bordo" />'
-            . '</div>'
-            . '<div class="form-group">'
-            . '<label>Contenuto</label>'
-            . '<textarea name="extra_item[]" rows="2" placeholder="Elenco o testo descrittivo"></textarea>'
-            . '</div>'
-            . '<button type="button" class="btn-layout-light remove-extra" aria-label="Rimuovi extra">Rimuovi</button>'
-            . '</div>';
-    }
-
     return $extrasHtml;
 }
 
 // builda gli extra dei prodotti (nome + prezzo)
 function buildProductExtraInputs(array $extras): string {
+    if (empty($extras)) { $extras = [['nome' => '', 'prezzo' => '']]; }
+
     $extrasHtml = '';
     foreach ($extras as $ex) {
         $extrasHtml .= '<div class="extra-row">'
@@ -1194,26 +1185,8 @@ function buildProductExtraInputs(array $extras): string {
             . '<input type="number" name="extra_price[]" min="1" step="1" value="' . htmlspecialchars((string)($ex['prezzo'] ?? ''), ENT_QUOTES) . '" placeholder="50" />'
             . '<span class="field-error extra-price-error" role="alert"></span>'
             . '</div>'
-            . '<button type="button" class="btn-layout-light remove-extra" aria-label="Rimuovi extra">Rimuovi</button>'
+            . '<button type="button" class="btn-danger btn-sm remove-extra" aria-label="Rimuovi extra">Rimuovi</button>'
             . '</div>';
     }
-
-    if ($extrasHtml === '') {
-        $extrasHtml = '<div class="extra-row">'
-            . '<div class="form-group">'
-            . '<label>Nome Extra</label>'
-            . '<input type="text" name="extra_name[]" placeholder="es. Skipper" />'
-            . '<span class="field-error extra-name-error" role="alert"></span>'
-            . '</div>'
-            . '<div class="form-group">'
-            . '<label>Prezzo Extra (€)</label>'
-            . '<input type="number" name="extra_price[]" min="1" step="1" placeholder="50" />'
-            . '<span class="field-error extra-price-error" role="alert"></span>'
-            . '</div>'
-            . '<button type="button" class="btn-layout-light remove-extra" aria-label="Rimuovi extra">Rimuovi</button>'
-            . '</div>';
-    }
-
     return $extrasHtml;
 }
-?>
