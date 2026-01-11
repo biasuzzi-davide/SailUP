@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Creato il: Gen 11, 2026 alle 14:46
+-- Creato il: Gen 11, 2026 alle 18:14
 -- Versione del server: 11.8.3-MariaDB-0+deb13u1 from Debian
 -- Versione PHP: 8.4.11
 
@@ -193,7 +193,9 @@ INSERT INTO `Indirizzo` (`IDIndirizzo`, `Via`, `N_Civico`, `CAP`, `Citta`, `Prov
 (24, 'Via di utente', '6', '31040', 'Citta di Utente', 'UT', 'IT', '2026-01-09 19:30:02'),
 (25, 'Via Frasnelli', '6', '31040', 'Nervesa della Battaglia', 'TV', 'IT', '2026-01-10 11:48:38'),
 (26, 'sdcsdcs', '12', '23232', 'Napoli', 'NA', 'IT', '2026-01-11 07:37:11'),
-(28, 'Via Frasnelli', '6', '31040', 'Comune', 'DD', 'IT', '2026-01-11 14:25:32');
+(28, 'Via Frasnelli', '6', '31040', 'Comune', 'DD', 'IT', '2026-01-11 14:25:32'),
+(31, 'Via Roma', '43', '80100', 'Napoli', 'NA', 'IT', '2026-01-11 17:37:04'),
+(33, 'Via Roma', '58', '80100', 'Napoli', 'NA', 'IT', '2026-01-11 17:38:16');
 
 -- --------------------------------------------------------
 
@@ -243,16 +245,16 @@ CREATE TABLE `Media` (
 
 INSERT INTO `Media` (`IDMedia`, `URL_Media`, `Testo_Alternativo`, `Tipo_Media`, `IDUtente`, `IDProdotto`, `IDArticolo`, `Data_Caricamento`) VALUES
 (5, '../img/prodotti/gozzo-sorrentino-classico.webp', 'Gozzo Sorrentino Classico in mare', 'Immagine', NULL, 'BARCA-GOZZO-001', NULL, '2025-12-23 12:11:10'),
-(6, '../img/prodotti/gozzoblu.jpg', 'Gozzo Blu Marino', 'Immagine', NULL, 'BARCA-GOZZO-002', NULL, '2025-12-23 12:11:10'),
-(7, '../img/prodotti/gommone250.jpeg', 'Gommone Speed 250cv saltello', 'Immagine', NULL, 'BARCA-GOMMONE-001', NULL, '2025-12-23 12:11:10'),
-(8, '../img/prodotti/gommonecomfort.jpeg', 'Gommone Comfort 200cv in navigazione', 'Immagine', NULL, 'BARCA-GOMMONE-002', NULL, '2025-12-23 12:11:10'),
-(9, '../img/prodotti/gommonelux.jpg', 'Gommone Luxury 300cv cabina interna', 'Immagine', NULL, 'BARCA-GOMMONE-003', NULL, '2025-12-23 12:11:10'),
-(10, '../img/prodotti/azimut55fly.jpeg', 'Azimut 55 Fly lussuoso', 'Immagine', NULL, 'BARCA-YACHT-001', NULL, '2025-12-23 12:11:10'),
-(11, '../img/prodotti/cranchiendu.jpg', 'Cranchi Endurance 41 elegante', 'Immagine', NULL, 'BARCA-YACHT-002', NULL, '2025-12-23 12:11:10'),
-(14, '../img/prodotti/aperta6m.jpg', 'Barca Aperta 6m per principianti', 'Immagine', NULL, 'BARCA-PICCOLA-001', NULL, '2025-12-23 12:11:10'),
-(15, '../img/prodotti/aperta8m.jpg', 'Barca Aperta 7.5m gita mezzagiornata', 'Immagine', NULL, 'BARCA-PICCOLA-002', NULL, '2025-12-23 12:11:10'),
-(16, '../img/prodotti/tramontonapoli.jpg', 'Coppia al tramonto con prosecco', 'Immagine', NULL, 'EXP-TRAMONTO-001', NULL, '2025-12-23 12:11:10'),
-(18, '../img/prodotti/costieraamalfitana.jpg', 'Costiera Amalfitana vista dal mare', 'Immagine', NULL, 'EXP-ESCURSIONE-001', NULL, '2025-12-23 12:11:10'),
+(6, '../img/prodotti/gozzoblu.webp', 'Gozzo Blu Marino', 'Immagine', NULL, 'BARCA-GOZZO-002', NULL, '2025-12-23 12:11:10'),
+(7, '../img/prodotti/gommone250.webp', 'Gommone Speed 250cv saltello', 'Immagine', NULL, 'BARCA-GOMMONE-001', NULL, '2025-12-23 12:11:10'),
+(8, '../img/prodotti/gommonecomfort.webp', 'Gommone Comfort 200cv in navigazione', 'Immagine', NULL, 'BARCA-GOMMONE-002', NULL, '2025-12-23 12:11:10'),
+(9, '../img/prodotti/gommonelux.webp', 'Gommone Luxury 300cv cabina interna', 'Immagine', NULL, 'BARCA-GOMMONE-003', NULL, '2025-12-23 12:11:10'),
+(10, '../img/prodotti/azimut55fly.webp', 'Azimut 55 Fly lussuoso', 'Immagine', NULL, 'BARCA-YACHT-001', NULL, '2025-12-23 12:11:10'),
+(11, '../img/prodotti/cranchiendu.webp', 'Cranchi Endurance 41 elegante', 'Immagine', NULL, 'BARCA-YACHT-002', NULL, '2025-12-23 12:11:10'),
+(14, '../img/prodotti/aperta6m.webp', 'Barca Aperta 6m per principianti', 'Immagine', NULL, 'BARCA-PICCOLA-001', NULL, '2025-12-23 12:11:10'),
+(15, '../img/prodotti/aperta8m.webp', 'Barca Aperta 7.5m gita mezzagiornata', 'Immagine', NULL, 'BARCA-PICCOLA-002', NULL, '2025-12-23 12:11:10'),
+(16, '../img/prodotti/tramontonapoli.webp', 'Coppia al tramonto con prosecco', 'Immagine', NULL, 'EXP-TRAMONTO-001', NULL, '2025-12-23 12:11:10'),
+(18, '../img/prodotti/costieraamalfitana.webp', 'Costiera Amalfitana vista dal mare', 'Immagine', NULL, 'EXP-ESCURSIONE-001', NULL, '2025-12-23 12:11:10'),
 (64, '../img/blog/cale-costiera-sorrentina.webp', 'Spiagge e cale nascoste della costiera sorrentina', 'Immagine', NULL, NULL, 1, '2025-12-25 18:34:09'),
 (65, '../img/blog/snorkeling-capri.webp', 'Guida allo snorkeling e fauna marina a Capri', 'Immagine', NULL, NULL, 2, '2025-12-25 18:34:09'),
 (66, '../img/blog/ormeggio-sicurezza.webp', 'Tecniche di ormeggio sicuro per principianti', 'Immagine', NULL, NULL, 3, '2025-12-25 18:34:09'),
@@ -267,11 +269,11 @@ INSERT INTO `Media` (`IDMedia`, `URL_Media`, `Testo_Alternativo`, `Tipo_Media`, 
 (77, '../img/blog/sostenibilita-marina.webp', 'Navigazione sostenibile e protezione marina', 'Immagine', NULL, NULL, 14, '2025-12-25 18:34:09'),
 (78, '../img/blog/capri-leggenda-realta.webp', 'Isola di Capri: leggenda e realtà', 'Immagine', NULL, NULL, 15, '2025-12-25 18:34:09'),
 (98, '../img/blog/positano-amalfi.webp', 'Villaggi storici di Positano e Amalfi', 'Immagine', NULL, NULL, 7, '2026-01-09 16:24:06'),
-(103, '../img/prodotti/odyssey-45.jpg', 'Jeanneau Sun Odyssey 45 in navigazione', 'Immagine', NULL, 'BARCA-VELA-002', NULL, '2026-01-09 17:29:59'),
-(118, '../img/prodotti/snork.jpg', 'Snorkeling a Capri con pesci', 'Immagine', NULL, 'EXP-SNORKEL-001', NULL, '2026-01-09 19:42:03'),
-(143, '../img/prodotti/prod_BARCA-VELA-001.webp?v=1768042977', 'Beneteau First 35 a vela', 'Immagine', NULL, 'BARCA-VELA-001', NULL, '2026-01-10 11:02:57'),
+(103, '../img/prodotti/odyssey-45.webp', 'Jeanneau Sun Odyssey 45 in navigazione', 'Immagine', NULL, 'BARCA-VELA-002', NULL, '2026-01-09 17:29:59'),
+(118, '../img/prodotti/snork.webp', 'Snorkeling a Capri con pesci', 'Immagine', NULL, 'EXP-SNORKEL-001', NULL, '2026-01-09 19:42:03'),
 (148, '../img/avatars/user_9.webp?v=1768048336', 'Avatar utente', 'Immagine', 9, NULL, NULL, '2026-01-10 12:32:16'),
-(150, '../img/avatars/user_12.webp?v=1768140396', 'Avatar utente', 'Immagine', 12, NULL, NULL, '2026-01-11 14:06:36');
+(150, '../img/avatars/user_12.webp?v=1768140396', 'Avatar utente', 'Immagine', 12, NULL, NULL, '2026-01-11 14:06:36'),
+(155, '../img/prodotti/prod_BARCA-VELA-001.webp?v=1768155062', 'Beneteau First 35 a vela', 'Immagine', NULL, 'BARCA-VELA-001', NULL, '2026-01-11 18:11:02');
 
 -- --------------------------------------------------------
 
@@ -397,8 +399,8 @@ INSERT INTO `Prodotto_Extra` (`IDExtra`, `IDProdotto`, `Nome_Extra`, `Prezzo_Ext
 (44, 'BARCA-VELA-002', 'Skipper Professionista Vela', 150.00),
 (71, 'EXP-SNORKEL-001', 'Fotografia Subacquea Professionale', 65.00),
 (72, 'EXP-SNORKEL-001', 'Snack Gourmet Aggiuntivo', 30.00),
-(119, 'BARCA-VELA-001', 'Attrezzatura Snorkeling', 60.00),
-(120, 'BARCA-VELA-001', 'Skipper Professionista', 140.00);
+(125, 'BARCA-VELA-001', 'Attrezzatura Snorkeling', 60.00),
+(126, 'BARCA-VELA-001', 'Skipper Professionista', 140.00);
 
 -- --------------------------------------------------------
 
@@ -484,11 +486,11 @@ INSERT INTO `Prodotto_Incluso` (`IDIncluso`, `IDProdotto`, `Nome_Incluso`) VALUE
 (210, 'EXP-SNORKEL-001', 'Giubbotti Salvagente'),
 (211, 'EXP-SNORKEL-001', 'Guida Turistica Specializzata'),
 (212, 'EXP-SNORKEL-001', 'Snack e Bevande Fresche'),
-(258, 'BARCA-VELA-001', 'Assicurazione Responsabilità Civile'),
-(259, 'BARCA-VELA-001', 'Attrezzatura Vela Base'),
-(260, 'BARCA-VELA-001', 'Ciao'),
-(261, 'BARCA-VELA-001', 'Giubbotti Salvagente'),
-(262, 'BARCA-VELA-001', 'Mappa Nautica');
+(271, 'BARCA-VELA-001', 'Assicurazione Responsabilità Civile'),
+(272, 'BARCA-VELA-001', 'Attrezzatura Vela Base'),
+(273, 'BARCA-VELA-001', 'Ciao'),
+(274, 'BARCA-VELA-001', 'Giubbotti Salvagente'),
+(275, 'BARCA-VELA-001', 'Mappa Nautica');
 
 -- --------------------------------------------------------
 
@@ -559,7 +561,7 @@ CREATE TABLE `Utente` (
 
 INSERT INTO `Utente` (`IDUtente`, `Nome`, `Cognome`, `CF`, `Email`, `PasswordHash`, `IDIndirizzo`, `Is_Admin`, `Data_Registrazione`, `Data_Ultimo_Accesso`) VALUES
 (9, 'Davide', 'Biasuzzi', 'BSZDVD04D19F443F', 'biasuzzi.davide@gmail.com', '$2y$12$U0SQeTC7WZqgChD6SxVteeIdrVBqf4Q4XPHTnaAacjmEjoRKAUSGG', 16, 1, '2025-12-26 17:17:32', '2026-01-11 14:17:43'),
-(12, 'Admin', 'Admin', 'CFADMINADMINCFCF', 'admin', '$2y$12$qzLCdFoRZ1EDB02Pd9y8MegjxW.3SQ8SLwibQkYqHmPc01yXsWuxa', 19, 1, '2026-01-08 06:27:28', '2026-01-11 14:35:09'),
+(12, 'Admin', 'Admin', 'CFADMINADMINCFCF', 'admin', '$2y$12$qzLCdFoRZ1EDB02Pd9y8MegjxW.3SQ8SLwibQkYqHmPc01yXsWuxa', 19, 1, '2026-01-08 06:27:28', '2026-01-11 17:39:08'),
 (14, 'User', 'User', 'CFUSERUSERCFUSER', 'user', '$2y$12$nE6ZkeAcGm4zSud34GSWSOLnkbTF8vAy1PmpGQYq2BRBPi.67FxFy', 24, 0, '2026-01-09 19:30:02', '2026-01-11 13:30:48'),
 (17, 'Mario', 'Rossi', 'AAAAAAAAAAAAAAAA', 'fojaw95998@vysolar.com', '$2y$12$2KhFRLN7/uVebPitYpAm5etoDZX.joI.uyYtMCLNy0VTnP9WSURUa', 26, 0, '2026-01-11 07:37:11', '2026-01-11 12:05:17'),
 (19, 'User1', 'User1', 'CFUSESUSERCFUSER', 'user1', '$2y$12$nE6ZkeAcGm4zSud34GSWSOLnkbTF8vAy1PmpGQYq2BRBPi.67FxFy', 24, 0, '2026-01-09 19:30:02', '2026-01-11 14:07:55');
@@ -664,7 +666,7 @@ ALTER TABLE `Utente`
 -- AUTO_INCREMENT per la tabella `Articolo_Blog`
 --
 ALTER TABLE `Articolo_Blog`
-  MODIFY `IDArticolo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `IDArticolo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT per la tabella `Articolo_Blog_Extra`
@@ -676,7 +678,7 @@ ALTER TABLE `Articolo_Blog_Extra`
 -- AUTO_INCREMENT per la tabella `Indirizzo`
 --
 ALTER TABLE `Indirizzo`
-  MODIFY `IDIndirizzo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `IDIndirizzo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT per la tabella `Lingua`
@@ -688,7 +690,7 @@ ALTER TABLE `Lingua`
 -- AUTO_INCREMENT per la tabella `Media`
 --
 ALTER TABLE `Media`
-  MODIFY `IDMedia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=152;
+  MODIFY `IDMedia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=156;
 
 --
 -- AUTO_INCREMENT per la tabella `Prenotazione`
@@ -700,19 +702,19 @@ ALTER TABLE `Prenotazione`
 -- AUTO_INCREMENT per la tabella `Prodotto_Extra`
 --
 ALTER TABLE `Prodotto_Extra`
-  MODIFY `IDExtra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=122;
+  MODIFY `IDExtra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=127;
 
 --
 -- AUTO_INCREMENT per la tabella `Prodotto_Incluso`
 --
 ALTER TABLE `Prodotto_Incluso`
-  MODIFY `IDIncluso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=265;
+  MODIFY `IDIncluso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=276;
 
 --
 -- AUTO_INCREMENT per la tabella `Utente`
 --
 ALTER TABLE `Utente`
-  MODIFY `IDUtente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
+  MODIFY `IDUtente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=131;
 
 --
 -- Limiti per le tabelle scaricate
