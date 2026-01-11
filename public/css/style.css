@@ -40,7 +40,7 @@
   --col-text-muted: #52606d; /* Grigio Pietra */
 
   /* Borders & UI */
-  --col-border: #cbd2d9;
+  --col-border: #8e8e8e;
   --col-card: #ffffff;
   --col-visited-link: #4593ff;
 
@@ -1355,8 +1355,9 @@ da sistemare  */
 }
 
 .filter-submit {
+  display: flex;
   width: 80%;
-  margin-top: 1.5em;
+  margin-top: 1.5em auto 0;
 }
 
 .catalog-results {
@@ -2560,5 +2561,6 @@ li[aria-current="page"] {
 
   .filter-submit {
     width: 100%;
+    
   }
 }
