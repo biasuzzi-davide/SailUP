@@ -220,6 +220,7 @@ a:hover {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 0.3em;   /* Per avere lo spazio che continua a non esserci nei pulsanti */
   padding: var(--btn-padding-vertical) var(--btn-padding-horizontal);
   font-family: var(--btn-font-family);
   font-weight: var(--btn-font-weight);
@@ -309,7 +310,7 @@ body>header {
   z-index: 1000;
   background-color: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--col-border);
+  box-shadow: var(--shadow-sm);
   padding: 1em 0;
 }
 
