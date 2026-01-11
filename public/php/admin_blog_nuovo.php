@@ -297,9 +297,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $html = buildPage('../pages/admin_blog_nuovo.html', $_SERVER['PHP_SELF']);
 
-// Keywords per SEO (pagine admin sono noindex)
-$keywords = '<meta name="keywords" content="nuovo, articolo, blog, crea, admin, SailUP">';
-
 $statusDraft = $old['status'] === 'published' ? '' : 'selected';
 $statusPub = $old['status'] === 'published' ? 'selected' : '';
 
@@ -319,7 +316,6 @@ $html = str_replace(
         '[CSRF_TOKEN]',
         '[ADMIN_BLOG_ACTION]',
         '[ADMIN_BLOG_ID]',
-        '[KEYWORDS]',
         '[ADMIN_BLOG_PAGE_TITLE]',
         '[ADMIN_BLOG_PAGE_DESC]',
         '[ADMIN_BLOG_HEADING]',
@@ -341,7 +337,6 @@ $html = str_replace(
         htmlspecialchars(getCsrfToken()),
         htmlspecialchars($_SERVER['PHP_SELF']),
         htmlspecialchars($editingId),
-        $keywords,
         htmlspecialchars($pageTitle),
         htmlspecialchars($pageDesc),
         htmlspecialchars($pageHeading),

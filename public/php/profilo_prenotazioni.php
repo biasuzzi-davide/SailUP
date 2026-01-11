@@ -52,9 +52,6 @@ $html = buildPage('../pages/profilo_prenotazioni.html', $_SERVER['PHP_SELF']);
 $html = str_replace('[ADMIN_MENU_ITEM]', buildAdminMenuItem(), $html);
 $html = str_replace('[ADMIN_BREADCRUMB]', buildAdminBreadcrumb(), $html);
 
-// Keywords per SEO
-$keywords = '<meta name="keywords" content="prenotazioni, gestione, storico, annulla, modifica, utente, SailUP">';
-
 $placeholders = [
     '[BOOKING_ROWS]' => $rowsHtml,
     '[USER_NOME]' => htmlspecialchars($_SESSION['user']['Nome'] ?? ''),
@@ -64,7 +61,6 @@ $placeholders = [
     '[BOOKINGS_SERVER_STATE]' => $feedbackState,
     '[BOOKINGS_SERVER_MESSAGES]' => htmlspecialchars($feedbackMsg),
     '[CSRF_TOKEN]' => $csrfTokenEscaped,
-    '[KEYWORDS]' => $keywords,
 ];
 $html = str_replace(array_keys($placeholders), array_values($placeholders), $html);
 
