@@ -5,10 +5,6 @@ require_once '../../includes/db_connection.php';
 
 $html = buildPage('../pages/index.html', $_SERVER['PHP_SELF']);
 
-// Keywords per SEO
-$keywords = '<meta name="keywords" content="noleggio, barche, vela, motore, gommoni, esperienze, tour, escursioni, Napoli, golfo, mare, skipper">';
-$html = str_replace('[KEYWORDS]', $keywords, $html);
-
 // Recupera dati dal DB
 $db = new DBConnection();
 $fleetProdotti = $db->getProdottiWithMedia('Noleggio', 3);

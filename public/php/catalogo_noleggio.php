@@ -5,10 +5,6 @@ require_once '../../includes/db_connection.php';
 
 $html = buildPage('../pages/catalogo_noleggio.html', $_SERVER['PHP_SELF']);
 
-// Keywords per SEO
-$keywords = '<meta name="keywords" content="noleggio, barche, vela, motore, gommoni, patente, catalogo, flotta, Napoli, golfo">';
-$html = str_replace('[KEYWORDS]', $keywords, $html);
-
 $html = str_replace('[ACTION_URL]', htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES), $html);
 
 $db = new DBConnection();

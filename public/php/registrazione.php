@@ -102,18 +102,15 @@ if (!empty($errors)) {
     $messageText = htmlspecialchars(implode(' | ', $errors));
 }
 
-// Keywords per SEO
-$keywords = '<meta name="keywords" content="registrazione, crea, account, iscriviti, nuovo, utente, prenotazioni, barche, SailUP">';
-
 $html = str_replace(
     ['[SERVER_STATE]', '[SERVER_MESSAGES]', '[CSRF_TOKEN]',
      '[OLD_NOME]', '[OLD_COGNOME]', '[OLD_CF]', '[OLD_EMAIL]',
      '[OLD_VIA]', '[OLD_CIVICO]', '[OLD_CAP]', '[OLD_CITTA]', '[OLD_PROVINCIA]',
-     '[PRIVACY_CHECKED]', '[KEYWORDS]'],
+     '[PRIVACY_CHECKED]'],
     [$state, $messageText, htmlspecialchars(getCsrfToken()),
      htmlspecialchars($old['nome'] ?? ''), htmlspecialchars($old['cognome'] ?? ''), htmlspecialchars($old['cf'] ?? ''), htmlspecialchars($old['email'] ?? ''),
      htmlspecialchars($old['via'] ?? ''), htmlspecialchars($old['civico'] ?? ''), htmlspecialchars($old['cap'] ?? ''), htmlspecialchars($old['citta'] ?? ''), htmlspecialchars($old['provincia'] ?? ''),
-     !empty($old['privacy']) ? 'checked' : '', $keywords],
+     !empty($old['privacy']) ? 'checked' : ''],
     $html
 );
 

@@ -71,7 +71,6 @@ $html = str_replace(
         '[STAT_BLOG_DRAFTS]',
         '[STAT_BLOG_VIEWS]',
         '[STAT_BLOG_COMMENTS]',
-        '[KEYWORDS]',
     ],
     [
         $rows,
@@ -82,7 +81,6 @@ $html = str_replace(
         htmlspecialchars((string)($blogStats['drafts'] ?? 0)),
         '0',
         '0',
-        '<meta name="keywords" content="gestione, blog, admin, articoli, dashboard, SailUP">',
     ],
     $html
 );
