@@ -442,7 +442,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
 
                     if (isChanged) {
-                        prefix.innerText = 'Totale: ';
+                        prefix.innerText = 'Prezzo totale';
                     } else {
                         let original = prefix.getAttribute('data-original');
                         prefix.innerText = original.replace('€', '').trim();
