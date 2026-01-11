@@ -1162,7 +1162,7 @@ function buildBlogExtraInputs(array $extras): string {
             . '<label>Contenuto</label>'
             . '<textarea name="extra_item[]" rows="2" placeholder="Testo...">' . htmlspecialchars($ex['elemento'] ?? '') . '</textarea>'
             . '</div>'
-            . '<button type="button" class="btn-danger btn-sm remove-extra" aria-label="Rimuovi extra">Rimuovi</button>'
+            . '<button type="button" class="btn-danger remove-extra" aria-label="Rimuovi extra">Rimuovi</button>'
             . '</div>';
     }
     return $extrasHtml;
@@ -1185,7 +1185,7 @@ function buildProductExtraInputs(array $extras): string {
             . '<input type="number" name="extra_price[]" min="1" step="1" value="' . htmlspecialchars((string)($ex['prezzo'] ?? ''), ENT_QUOTES) . '" placeholder="50" />'
             . '<span class="field-error extra-price-error" role="alert"></span>'
             . '</div>'
-            . '<button type="button" class="btn-danger btn-sm remove-extra" aria-label="Rimuovi extra">Rimuovi</button>'
+            . '<button type="button" class="btn-danger remove-extra" aria-label="Rimuovi extra">Rimuovi</button>'
             . '</div>';
     }
     return $extrasHtml;
