@@ -261,7 +261,6 @@ footer .logo p {
     margin: 0 auto;
 }
 
-<<<<<<< ours
 .profile-avatar-block {
     align-items: center;
 }
@@ -272,8 +271,11 @@ footer .logo p {
     text-align: center;
 }
 
-=======
->>>>>>> theirs
+.profile-text {
+  margin-left: auto;
+    margin-right: auto;
+}
+
 .profile-actions {
     justify-content: center;
 }
@@ -285,8 +287,10 @@ footer .logo p {
 }
 
 .profile-sidebar ul {
-    grid-template-columns: repeat(2, 1fr);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
     gap: 0.5em;
+    width: 100%;
 }
 
 .profile-sidebar a,
