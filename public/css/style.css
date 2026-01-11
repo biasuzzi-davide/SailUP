@@ -346,6 +346,7 @@ body>header {
 
 header .logo-text {
   color: var(--col-primary);
+  margin-bottom: 0;
 }
 
 #main-menu ul {
@@ -1488,7 +1489,7 @@ da sistemare  */
   background: var(--col-bg-alt);
   padding: 1.5rem;
   border-radius: var(--radius-card);
-  margin-bottom: 1.5;
+  margin-bottom: 1.5em;
 }
 
 .amenity-box h3 {
@@ -1597,6 +1598,9 @@ da sistemare  */
   border-radius: var(--radius-card);
   box-shadow: var(--shadow-sm);
   margin-bottom: 2em;
+}
+.profile-header.no-avatar {
+  grid-template-columns: 1fr auto;
 }
 
 .profile-avatar {
@@ -2145,7 +2149,7 @@ tr>*:first-child {
 
 tr>*:last-child {
   width: 8rem;
-  text-align: right;
+  text-align: center;
   overflow: visible;
 }
 .btn-icon {
@@ -2451,6 +2455,10 @@ li[aria-current="page"] {
 
 .filters-wrapper {
   margin-bottom: 1.5em;
+}
+
+#article-title { 
+  line-height: 1.4;
 }
 
 /* =========================================

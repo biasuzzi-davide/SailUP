@@ -298,7 +298,6 @@ footer .logo p {
     padding: 0.8em 0.5em;
     font-size: var(--fs-sm);
     background-color: var(--col-bg-alt);
-    border: 1px solid var(--col-border);
 }
 
 .stats-grid {
@@ -573,6 +572,9 @@ footer .logo p {
 .table-container td.actions-cell {
     justify-content: flex-end;
     background-color: var(--col-bg-alt);
+    border-bottom-left-radius: var(--radius-card);
+    border-bottom-right-radius: var(--radius-card);
+    gap: 0.3em;
 }
 
 .table-container td.actions-cell::before {
