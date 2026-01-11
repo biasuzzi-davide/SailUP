@@ -20,7 +20,7 @@ function buildHeader($phpSelf) {
     // Logo con link condizionale
     $logoInner = '<picture>
     <source srcset="../img/logo_light.svg" type="image/svg+xml">
-    <img alt="Logo SailUP" src="../img/logo_light.svg" width="30" height="30">
+    <img alt="" src="../img/logo_light.svg" width="30" height="30">
     </picture>
     <span class="logo-text" lang="en">Sail<span class="text-accent">UP</span></span>';
 
@@ -915,15 +915,22 @@ function buildAdminUsersRows(array $users): string {
     $rows = '';
     foreach ($users as $u) {
         $ruolo = !empty($u['Is_Admin'])
-            ? '<span class="status-badge active">Admin</span>'
-            : '<span class="status-badge completed">Standard</span>';
+            ? '<span class="status-badge active" lang="en">Admin</span>'
+            : '<span class="status-badge completed" lang="en">Standard</span>';
         $rawDate = $u['Data_Registrazione'] ?? '';
-        $dataIscr = $rawDate !== '' ? htmlspecialchars(date('d/m/Y', strtotime($rawDate))) : '—';
+        if($rawDate !== ''){
+            $timestamp = strtotime($rawDate);
+            $dataIscr = htmlspecialchars(string: date('d/m/Y', $timestamp));
+            $dataMachine = htmlspecialchars(date('Y-m-d', $timestamp));
+        } else {
+            $dataIscr = '-';
+            $dataMachine = '';
+        }
         $rows .= '<tr>'
             . '<td data-label="ID">' . htmlspecialchars($u['IDUtente']) . '</td>'
             . '<td data-label="Nome">' . htmlspecialchars(($u['Nome'] ?? '') . ' ' . ($u['Cognome'] ?? '')) . '</td>'
             . '<td data-label="Email">' . htmlspecialchars($u['Email'] ?? '') . '</td>'
-            . '<td data-label="Data Iscrizione"><time datetime="' . htmlspecialchars($rawDate) . '">' . $dataIscr . '</time></td>'
+            . '<td data-label="Data Iscrizione"><time datetime="' . $dataMachine . '">' . $dataIscr . '</time></td>'
             . '<td data-label="Ruolo">' . $ruolo . '</td>'
             . '</tr>';
     }

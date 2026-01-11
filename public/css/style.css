@@ -1596,6 +1596,9 @@ da sistemare  */
   box-shadow: var(--shadow-sm);
   margin-bottom: 2em;
 }
+.profile-header.no-avatar {
+  grid-template-columns: 1fr auto;
+}
 
 .profile-avatar {
   width: 100px;
