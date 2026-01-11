@@ -242,7 +242,11 @@
             <div class="auth-card danger-zone">
               <h3>Zona Pericolosa</h3>
               <p>Queste azioni sono permanenti e irreversibili.</p>
-              <button type="button" class="btn-danger">Elimina <span lang="en">Account</span></button>
+              <form id="delete-account-form" method="post">
+                <input type="hidden" name="csrf_token" value="[CSRF_TOKEN]">
+                <input type="hidden" name="form_type" value="delete_account">
+                <button type="submit" class="btn-danger">Elimina <span lang="en">Account</span></button>
+              </form>
             </div>
           </section>
         </div>

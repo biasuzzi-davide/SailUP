@@ -2637,4 +2637,74 @@ class DBConnection {
             return false;
         }
     }
+
+    /**
+     * Elimina un utente e tutti i dati correlati (prenotazioni, media, indirizzo, articoli, indisponibilità).
+     * @param int $idUtente ID dell'utente da eliminare
+     * @return bool True se eliminazione riuscita, false altrimenti
+     */
+    public function deleteUser(int $idUtente): bool {
+        $this->openConnection();
+        
+        try {
+            // Inizia transazione
+            $this->connection->begin_transaction();
+            
+            // Recupera IDIndirizzo prima di eliminare l'utente
+            $stmtAddr = $this->connection->prepare("SELECT IDIndirizzo FROM Utente WHERE IDUtente = ?");
+            $stmtAddr->bind_param("i", $idUtente);
+            $stmtAddr->execute();
+            $result = $stmtAddr->get_result();
+            $row = $result->fetch_assoc();
+            $idIndirizzo = $row['IDIndirizzo'] ?? null;
+            $stmtAddr->close();
+            
+            // Elimina articoli blog (e le relative dipendenze in cascata: extra, media)
+            $stmt1 = $this->connection->prepare("DELETE FROM Articolo_Blog WHERE IDAutore = ?");
+            $stmt1->bind_param("i", $idUtente);
+            $stmt1->execute();
+            $stmt1->close();
+            
+            // Elimina indisponibilità create dall'utente
+            $stmt2 = $this->connection->prepare("DELETE FROM Indisponibilita WHERE Creato_Da = ?");
+            $stmt2->bind_param("i", $idUtente);
+            $stmt2->execute();
+            $stmt2->close();
+            
+            // Elimina prenotazioni
+            $stmt3 = $this->connection->prepare("DELETE FROM Prenotazione WHERE IDUtente = ?");
+            $stmt3->bind_param("i", $idUtente);
+            $stmt3->execute();
+            $stmt3->close();
+            
+            // Elimina media utente (già gestito in cascata, ma per sicurezza)
+            $stmt4 = $this->connection->prepare("DELETE FROM Media WHERE IDUtente = ?");
+            $stmt4->bind_param("i", $idUtente);
+            $stmt4->execute();
+            $stmt4->close();
+            
+            // Elimina utente
+            $stmt5 = $this->connection->prepare("DELETE FROM Utente WHERE IDUtente = ?");
+            $stmt5->bind_param("i", $idUtente);
+            $stmt5->execute();
+            $stmt5->close();
+            
+            // Elimina indirizzo se presente
+            if ($idIndirizzo) {
+                $stmt6 = $this->connection->prepare("DELETE FROM Indirizzo WHERE IDIndirizzo = ?");
+                $stmt6->bind_param("i", $idIndirizzo);
+                $stmt6->execute();
+                $stmt6->close();
+            }
+            
+            // Commit transazione
+            $this->connection->commit();
+            $this->closeConnection();
+            return true;
+        } catch (Throwable $t) {
+            $this->connection->rollback();
+            $this->closeConnection();
+            return false;
+        }
+    }
 }
