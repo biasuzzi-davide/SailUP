@@ -160,11 +160,11 @@ Al fine di migliorare la SEO ed intercettare il target di riferimento, il sito w
 == Linee Guida
 Per la gestione del ciclo di vita del software e il coordinamento del team, si è scelto di utilizzare un repository su GitHub per il versionamento del codice.
 
-L'eterogeneità della clientela (turisti e residenti) ci ha spinti a progettare un design minimale e pulito. Si è scelto di puntare su un branding coerente con l'identità marittima: seppur il bianco sia predominante di modo da garantire leggibilità e chiarezza delle informazioni, è stata adottata una palette cromatica basata su diverse tonalità di blu per richiamare il tema nautico e, sfruttando la psicologia dei colori, trasmettere eleganza, calma, sicurezza e freschezza.
+L'eterogeneità della clientela (turisti e residenti) ci ha spinti a progettare un design minimale e pulito. Si è scelto di puntare su un branding coerente con l'identità marittima: seppur il bianco sia predominante in modo da garantire leggibilità e chiarezza delle informazioni, è stata adottata una palette cromatica basata su diverse tonalità di blu per richiamare il tema nautico e, sfruttando la psicologia dei colori, trasmettere eleganza, calma, sicurezza e freschezza.
 
 È stata mantenuta una rigida separazione tra struttura (HTML), presentazione (CSS) e comportamento (PHP e JavaScript), per garantire modularità e rispetto degli standard web.
 
-Infine, la progettazione del sito è stata condotta cercando garantire l'accessibilità a tutte le categorie di utenti.
+Infine, la progettazione del sito è stata condotta cercando di garantire l'accessibilità a tutte le categorie di utenti.
 
 == Struttura
 La struttura del sito segue il modello gerarchico schematizzato in #link(<fig-sitemap>)[Figura 1]. In questa fase si è pianificata una suddivisione nelle seguenti pagine principali, accessibili tramite un menù di navigazione globale:
@@ -312,7 +312,7 @@ L'accessibilità è stata un pilastro del progetto, guidata dai principi studiat
 
 - *Contrasto Cromatico e Colori:* È stata prestata particolare attenzione al contrasto tra testo e sfondo, verificando che i rapporti cromatici rispettassero almeno il livello AA delle WCAG. Inoltre, l'implementazione di un selettore di tema light/dark offre agli utenti la possibilità di scegliere la modalità di visualizzazione con il contrasto che preferiscono, migliorando ulteriormente la leggibilità.
 
-- *Alternative Testuali:* Ogni immagine con contenuto informativo, quindi non puramente decorativa, è stata dotata di un attributo `alt` descrittivo di modo tale da veicolare informazioni grafiche attraverso strumenti di sintesi vocale. I form amministrativi che consentono l'aggiunta di prodotti e articoli del blog includono un campo per il "Testo Alternativo", assicurando che questa buona norma venga applicata a tutti i contenuti che in futuro verranno inseriti.
+- *Alternative Testuali:* Ogni immagine con contenuto informativo, quindi non puramente decorativa, è stata dotata di un attributo `alt` descrittivo in modo tale da veicolare informazioni grafiche attraverso strumenti di sintesi vocale. I form amministrativi che consentono l'aggiunta di prodotti e articoli del blog includono un campo per il "Testo Alternativo", assicurando che questa buona norma venga applicata a tutti i contenuti che in futuro verranno inseriti.
 
 - *WAI-ARIA:* Dove necessario, sono stati utilizzati attributi WAI-ARIA (Accessible Rich Internet Applications) come `aria-expanded`, `aria-label` e `aria-required` per arricchire semanticamente i componenti dinamici. Questo permette di rendere il loro stato e la loro funzione pienamente comprensibili per gli _screen reader_.
 
