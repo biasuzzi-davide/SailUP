@@ -5,7 +5,6 @@ require_once '../../includes/auth/auth.php';
 require_once '../../includes/utils/validation.php';
 require_once '../../includes/helpers.php';
 
-//se un utente prova a fare un traversal path alla pagina di registrazione nonostante sia gia loggato
 requireGuest('../php/profilo.php');
 
 $errors = [];
@@ -41,7 +40,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $provincia = strtoupper(trim($_POST['indirizzo_provincia'] ?? ''));
     $privacy   = isset($_POST['privacy']);
 
-    // conserva i valori inseriti per ripopolare il form
     $old = [
         'nome' => $nome,
         'cognome' => $cognome,
@@ -56,7 +54,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     ];
 
     if ($csrfOk) {
-        //validazioni
         if (!isValidName($nome)) $errors[] = 'Nome non valido: usa solo lettere e spazi';
         if (!isSurnameValid($cognome)) $errors[] = 'Cognome non valido: usa solo lettere e spazi';
         if (!isValidCF($cf)) $errors[] = 'Codice fiscale non valido: deve essere 16 caratteri alfanumerici';
@@ -68,6 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!isValidCAP($cap)) $errors[] = 'CAP non valido: deve essere di 5 cifre';
         if (!isValidCitta($citta)) $errors[] = 'Città non valida: almeno 2 caratteri, solo lettere, spazi, apostrofi e trattini';
         if (!isValidProvincia($provincia)) $errors[] = 'Provincia non valida: usa 2 lettere maiuscole (es. NA, RM)';
+        
         if (empty($errors)) {
             $res = registerUserFull([
                 'nome' => $nome,
@@ -95,11 +93,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $html = buildPage('../pages/registrazione.html', $_SERVER['PHP_SELF']);
 
-//inserisc stato e messaggi server nel template tramite placeholder
-$state = empty($errors) ? 'hidden' : 'error';
+$state = empty($errors) ? 'hidden' : 'error-message';
 $messageText = '';
+
 if (!empty($errors)) {
-    $messageText = htmlspecialchars(implode(' | ', $errors));
+    $messageText = '<ul>';
+    foreach ($errors as $err) {
+        $messageText .= '<li>' . htmlspecialchars($err) . '</li>';
+    }
+    $messageText .= '</ul>';
 }
 
 $html = str_replace(
