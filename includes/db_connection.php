@@ -1863,17 +1863,6 @@ class DBConnection {
                 $params[] = $dataRichiestaInizio;
                 $types .= 's';
 
-                $conditions[] = 'NOT EXISTS (
-                    SELECT 1
-                    FROM Indisponibilita ind
-                    WHERE ind.IDProdotto = p.IDProdotto
-                      AND ind.Data_Inizio < ?
-                      AND ind.Data_Fine > ?
-                )';
-                $params[] = $dataRichiestaFine;
-                $types .= 's';
-                $params[] = $dataRichiestaInizio;
-                $types .= 's';
             }
 
             $orderClause = 'ORDER BY p.Data_Creazione DESC, p.IDProdotto ASC';
@@ -2498,32 +2487,9 @@ class DBConnection {
             $count = (int) $row['count'];
             
             $stmt->close();
-            
-            // Controlla anche indisponibilità manuali
-            $query2 = "SELECT COUNT(*) as count FROM Indisponibilita 
-                       WHERE IDProdotto = ? 
-                       AND (
-                           (Data_Inizio < ? AND Data_Fine > ?) OR
-                           (Data_Inizio < ? AND Data_Fine > ?) OR
-                           (Data_Inizio >= ? AND Data_Fine <= ?)
-                       )";
-            
-            $stmt2 = $this->connection->prepare($query2);
-            if (!$stmt2) {
-                $this->closeConnection();
-                return false;
-            }
-            
-            $stmt2->bind_param('sssssss', $idProdotto, $dataFine, $dataInizio, $dataFine, $dataInizio, $dataInizio, $dataFine);
-            $stmt2->execute();
-            $result2 = $stmt2->get_result();
-            $row2 = $result2->fetch_assoc();
-            $count2 = (int) $row2['count'];
-            
-            $stmt2->close();
             $this->closeConnection();
             
-            return ($count === 0 && $count2 === 0);
+            return ($count === 0);
         } catch (Throwable $t) {
             $this->closeConnection();
             return false;
@@ -2639,7 +2605,7 @@ class DBConnection {
     }
 
     /**
-     * Elimina un utente e tutti i dati correlati (prenotazioni, media, indirizzo, articoli, indisponibilità).
+     * Elimina un utente e tutti i dati correlati (prenotazioni, media, indirizzo, articoli).
      * @param int $idUtente ID dell'utente da eliminare
      * @return bool True se eliminazione riuscita, false altrimenti
      */
@@ -2664,12 +2630,6 @@ class DBConnection {
             $stmt1->bind_param("i", $idUtente);
             $stmt1->execute();
             $stmt1->close();
-            
-            // Elimina indisponibilità create dall'utente
-            $stmt2 = $this->connection->prepare("DELETE FROM Indisponibilita WHERE Creato_Da = ?");
-            $stmt2->bind_param("i", $idUtente);
-            $stmt2->execute();
-            $stmt2->close();
             
             // Elimina prenotazioni
             $stmt3 = $this->connection->prepare("DELETE FROM Prenotazione WHERE IDUtente = ?");
