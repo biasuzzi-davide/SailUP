@@ -330,7 +330,7 @@ class DBConnection {
     public function getUtenteById(int $idUtente): array|null|bool {
         $this->openConnection();
         $query = "
-            SELECT IDUtente, Nome, Cognome, Email, Is_Admin, Data_Registrazione
+            SELECT IDUtente, Nome, Cognome, Email, CF, Is_Admin, Data_Registrazione
             FROM Utente
             WHERE IDUtente = ?
             LIMIT 1

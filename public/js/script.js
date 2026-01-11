@@ -498,3 +498,31 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
+
+/* ---------------------------------------
+   GESTIONE CONFERME PER AZIONI ADMIN
+   --------------------------------------- */
+document.addEventListener('DOMContentLoaded', function () {
+    // Messaggi di conferma in base al tipo di azione
+    const confirmMessages = {
+        'delete-user': 'Eliminare definitivamente questo utente? Questa azione cancellerà anche tutte le prenotazioni, articoli blog e media associati.',
+        'delete-article': 'Eliminare questo articolo?',
+        'delete-product': 'Eliminare definitivamente questo prodotto?',
+        'toggle-product': 'Disattivare questo prodotto?',
+        'cancel-booking': 'Cancellare questa prenotazione?',
+        'cancel-user-booking': 'Annullare questa prenotazione?'
+    };
+
+    // Gestione submit dei form con data-confirm-type
+    document.addEventListener('submit', function(e) {
+        const form = e.target;
+        const confirmType = form.getAttribute('data-confirm-type');
+        
+        if (confirmType && confirmMessages[confirmType]) {
+            const confirmed = confirm(confirmMessages[confirmType]);
+            if (!confirmed) {
+                e.preventDefault();
+            }
+        }
+    });
+});
