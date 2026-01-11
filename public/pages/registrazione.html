@@ -43,13 +43,13 @@
                     Napoli.</p>
 
                 <div id="server-messages" class="form-messages [SERVER_STATE]" role="status" aria-live="polite">
-                    <p>[SERVER_MESSAGES]</p>
+                    [SERVER_MESSAGES]
                 </div>
+                
                 <div id="error-message" class="error-message hidden" role="alert" aria-live="polite"></div>
                 <div id="success-message" class="success-message hidden" role="alert" aria-live="polite"></div>
 
-                <form id="register-form" action="registrazione.php" method="post" novalidate> <!-- chiamata esplicita al suo file php-->
-                    <input type="hidden" name="csrf_token" value="[CSRF_TOKEN]">
+                <form id="register-form" action="registrazione.php" method="post" novalidate> <input type="hidden" name="csrf_token" value="[CSRF_TOKEN]">
                     <div class="form-group">
                         <label for="nome">Nome</label>
                         <input type="text" id="nome" name="nome" required value="[OLD_NOME]"
@@ -110,8 +110,7 @@
                                 </svg>
                             </button>
                         </div>
-                        <span id="password-hint" class="field-hint">Lunghezza minima 8, almeno una lettera,almeno un numero, almeno un carattere speciale</span>
-                        <!-- deve essere definito -->
+                        <span id="password-hint" class="field-hint">Lunghezza minima 8, almeno una lettera, almeno un numero, almeno un carattere speciale</span>
                         <span id="password-error" class="field-error" role="alert"></span>
                     </div>
 
