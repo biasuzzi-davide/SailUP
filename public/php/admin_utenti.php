@@ -11,10 +11,45 @@ $userStats = $db->getUserStats();
 $feedbackState = 'hidden';
 $feedbackMessage = '';
 $currentUserId = $_SESSION['user']['IDUtente'] ?? null;
+$csrfToken = getCsrfToken();
 $page = max(1, (int)($_GET['page'] ?? 1));
 $perPage = 10;
 $search = trim($_GET['q'] ?? '');
 $filterRole = $_GET['ruolo'] ?? '';
+
+// Gestione POST per eliminazione utente
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $csrf = $_POST['csrf_token'] ?? null;
+    $action = $_POST['action'] ?? '';
+    $idUtente = (int)($_POST['id_utente'] ?? 0);
+
+    if (!verifyCsrfToken($csrf)) {
+        $feedbackState = 'error';
+        $feedbackMessage = 'Sessione scaduta, ricarica la pagina.';
+    } elseif ($idUtente <= 0) {
+        $feedbackState = 'error';
+        $feedbackMessage = 'Utente non valido.';
+    } elseif ($idUtente === $currentUserId) {
+        $feedbackState = 'error';
+        $feedbackMessage = 'Non puoi eliminare te stesso.';
+    } else {
+        if ($action === 'delete') {
+            $ok = $db->deleteUser($idUtente);
+            if ($ok) {
+                $feedbackState = 'success';
+                $feedbackMessage = 'Utente eliminato definitivamente.';
+                // Aggiorna le statistiche dopo l\'eliminazione
+                $userStats = $db->getUserStats();
+            } else {
+                $feedbackState = 'error';
+                $feedbackMessage = 'Impossibile eliminare l\'utente. Riprova.';
+            }
+        } else {
+            $feedbackState = 'error';
+            $feedbackMessage = 'Azione non valida.';
+        }
+    }
+}
 
 $offset = ($page - 1) * $perPage;
 $usersRes = $db->searchUtenti(
@@ -31,7 +66,7 @@ if (is_array($usersRes)) {
     $total = (int)($usersRes['total'] ?? 0);
 }
 
-$rows = buildAdminUsersRows($users);
+$rows = buildAdminUsersRows($users, $csrfToken, $currentUserId);
 
 $alertClass = '';
 if ($feedbackState !== 'hidden' && $feedbackMessage !== '') {

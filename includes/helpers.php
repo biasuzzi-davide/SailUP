@@ -907,9 +907,9 @@ function buildPaginationNav(int $currentPage, int $totalPages, string $baseUrl, 
 }
 
 //genera la tabella degli utenti visualizzata dagli admin
-function buildAdminUsersRows(array $users): string {
+function buildAdminUsersRows(array $users, string $csrfToken, ?int $currentUserId = null): string {
     if (empty($users)) {
-        return '<tr><td colspan="5">Nessun utente trovato.</td></tr>';
+        return '<tr><td colspan="6">Nessun utente trovato.</td></tr>';
     }
 
     $rows = '';
@@ -926,13 +926,32 @@ function buildAdminUsersRows(array $users): string {
             $dataIscr = '-';
             $dataMachine = '';
         }
+        
+        $idUtente = htmlspecialchars($u['IDUtente']);
+        $nomeCompleto = htmlspecialchars(($u['Nome'] ?? '') . ' ' . ($u['Cognome'] ?? ''));
+        $isCurrentUser = $currentUserId !== null && (int)$u['IDUtente'] === $currentUserId;
+        
         $rows .= '<tr>'
-            . '<td data-label="ID">' . htmlspecialchars($u['IDUtente']) . '</td>'
-            . '<td data-label="Nome">' . htmlspecialchars(($u['Nome'] ?? '') . ' ' . ($u['Cognome'] ?? '')) . '</td>'
+            . '<td data-label="ID">' . $idUtente . '</td>'
+            . '<td data-label="Nome">' . $nomeCompleto . '</td>'
             . '<td data-label="Email">' . htmlspecialchars($u['Email'] ?? '') . '</td>'
             . '<td data-label="Data Iscrizione"><time datetime="' . $dataMachine . '">' . $dataIscr . '</time></td>'
             . '<td data-label="Ruolo">' . $ruolo . '</td>'
-            . '</tr>';
+            . '<td data-label="Azioni" class="actions-cell">';
+        
+        // Non permettere di eliminare se stesso
+        if ($isCurrentUser) {
+            $rows .= '<span class="text-muted">Non puoi eliminare te stesso</span>';
+        } else {
+            $rows .= '<form method="post" class="inline-form" data-confirm-type="delete-user">';
+            $rows .= '<input type="hidden" name="csrf_token" value="' . htmlspecialchars($csrfToken) . '">';
+            $rows .= '<input type="hidden" name="id_utente" value="' . $idUtente . '">';
+            $rows .= '<input type="hidden" name="action" value="delete">';
+            $rows .= '<button type="submit" class="btn-danger btn-sm" aria-label="Elimina utente ' . $nomeCompleto . '">Elimina</button>';
+            $rows .= '</form>';
+        }
+        
+        $rows .= '</td></tr>';
     }
 
     return $rows;
@@ -973,7 +992,7 @@ function buildAdminBlogRows(array $articoli, string $csrfToken): string {
             //button per pubblicare/rendere bozza
             . '<button type="submit" class="btn-layout btn-sm" aria-label="' . $ariaActionLabel . ' ' . $titolo . '">' . $actionLabel . '</button>'
             . '</form>'
-            . '<form method="post" class="inline-form" onsubmit="return confirm(\'Eliminare questo articolo?\');">'
+            . '<form method="post" class="inline-form" data-confirm-type="delete-article">'
             . '<input type="hidden" name="csrf_token" value="' . htmlspecialchars($csrfToken) . '">'
             . '<input type="hidden" name="id_articolo" value="' . $idArticolo . '">'
             . '<input type="hidden" name="action" value="delete">'
@@ -1032,7 +1051,7 @@ function buildAdminBookingRows(array $pren, string $csrfToken): string {
                     . '<input type="hidden" name="action" value="confirm">'
                     . '<button type="submit" class="btn-layout btn-sm">Conferma</button>'
                 . '</form>'
-                . '<form method="post" class="inline-form" onsubmit="return confirm(\'Cancellare questa prenotazione?\');">'
+                . '<form method="post" class="inline-form" data-confirm-type="cancel-booking">'
                     . '<input type="hidden" name="csrf_token" value="' . htmlspecialchars($csrfToken) . '">'
                     . '<input type="hidden" name="id_prenotazione" value="' . $idPren . '">'
                     . '<input type="hidden" name="action" value="cancel">'
@@ -1060,7 +1079,7 @@ function buildAdminProductRows(array $prodotti, string $csrfToken): string {
             ? '<span class="status-badge active">Attivo</span>'
             : '<span class="status-badge cancelled">Disattivo</span>';
         $toggleLabel = !empty($p['Attivo']) ? 'Disattiva' : 'Attiva';
-        $toggleConfirm = !empty($p['Attivo']) ? ' onsubmit="return confirm(\'Disattivare questo prodotto?\');"' : '';
+        $toggleConfirmType = !empty($p['Attivo']) ? ' data-confirm-type="toggle-product"' : '';
         $idProdotto = htmlspecialchars($p['IDProdotto']);
         $nomeProdotto = htmlspecialchars($p['Nome_Prodotto'] ?? '');
         $rows .= '<tr>'
@@ -1072,14 +1091,14 @@ function buildAdminProductRows(array $prodotti, string $csrfToken): string {
             . '<td data-label="Stato">' . $stato . '</td>'
             . '<td data-label="Azioni" class="actions-cell">'
             . '<a class="btn-layout-light btn-sm" href="admin_prodotti_nuovo.php?id=' . $idProdotto . '" aria-label="Modifica ' . $nomeProdotto . '">Modifica</a>'
-            . '<form method="post" class="inline-form"' . $toggleConfirm . '>'
+            . '<form method="post" class="inline-form"' . $toggleConfirmType . '>'
             . '<input type="hidden" name="csrf_token" value="' . htmlspecialchars($csrfToken) . '">'
             . '<input type="hidden" name="id_prodotto" value="' . $idProdotto . '">'
             . '<input type="hidden" name="attivo" value="' . (!empty($p['Attivo']) ? 1 : 0) . '">'
             . '<input type="hidden" name="action" value="toggle">'
             . '<button type="submit" class="btn-layout btn-sm" aria-label="' . htmlspecialchars($toggleLabel) . ' prodotto ' . $nomeProdotto . '">' . htmlspecialchars($toggleLabel) . '</button>'
             . '</form>'
-            . '<form method="post" class="inline-form" onsubmit="return confirm(\'Eliminare definitivamente questo prodotto?\');">'
+            . '<form method="post" class="inline-form" data-confirm-type="delete-product">'
             . '<input type="hidden" name="csrf_token" value="' . htmlspecialchars($csrfToken) . '">'
             . '<input type="hidden" name="id_prodotto" value="' . $idProdotto . '">'
             . '<input type="hidden" name="action" value="delete">'
@@ -1131,7 +1150,7 @@ function buildProfileBookingRows(array $prenotazioni, string $csrfToken): string
             . '<td data-label="Stato"><span class="status-badge ' . $badgeClass . '">' . htmlspecialchars($statoRaw) . '</span></td>'
             . '<td data-label="Azioni" class="actions-cell">'
                 . ($isCancellable
-                    ? '<form method="post" class="inline-form" onsubmit="return confirm(\'Annullare questa prenotazione?\');">'
+                    ? '<form method="post" class="inline-form" data-confirm-type="cancel-user-booking">'
                         . '<input type="hidden" name="csrf_token" value="' . htmlspecialchars($csrfToken) . '">'
                         . '<input type="hidden" name="action" value="cancel_booking">'
                         . '<input type="hidden" name="booking_id" value="' . $idPren . '">'
