@@ -11,7 +11,9 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap"
+    rel="stylesheet" />
 
   <link rel="stylesheet" href="../css/style.css" media="screen" />
   <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)" />
@@ -38,32 +40,35 @@
       <div class="auth-card">
         <h2>Accedi al tuo <span lang="en">account</span></h2>
         <p class="auth-subtitle">Benvenuto su SailUP! Accedi per gestire le tue prenotazioni.</p>
-        
+
         <div id="server-messages" class="form-messages [SERVER_STATE]" role="status" aria-live="polite">
           <p>[SERVER_MESSAGES]</p>
         </div>
         <div id="error-message" class="error-message hidden" role="alert" aria-live="polite"></div>
-        
+
         <form id="login-form" action="login.php" method="post" novalidate> <!--chiama esplicitamente il suo file php-->
           <input type="hidden" name="csrf_token" value="[CSRF_TOKEN]">
           <div class="form-group">
             <label for="email" lang="en">Email</label>
-            <input type="email" id="email" name="email" required autocomplete="email"
-                placeholder="mariorossi@mail.com" />
+            <input type="email" id="email" name="email" required aria-describedby="email-hint email-error"
+              autocomplete="email" placeholder="mariorossi@mail.com" />
+            <span id="email-hint" class="field-hint">Inserisci l'email del tuo account SailUP.</span>
             <span id="email-error" class="field-error" role="alert"></span>
           </div>
 
           <div class="form-group">
             <label for="password" lang="en">Password</label>
-            <input type="password" id="password" name="password" required autocomplete="current-password" />
+            <input type="password" id="password" name="password" required
+              aria-describedby="password-hint password-error" autocomplete="current-password" />
+            <span id="password-hint" class="field-hint">Inserisci la tua password personale.</span>
             <span id="password-error" class="field-error" role="alert"></span>
           </div>
-          
+
           <div class="form-actions">
             <button type="submit" class="btn-layout btn-full-width">Accedi</button>
           </div>
         </form>
-        
+
         <div class="auth-footer print-none">
           <p>Non hai un <span lang="en">account</span>? <a href="../php/registrazione.php">Registrati ora</a></p>
         </div>
