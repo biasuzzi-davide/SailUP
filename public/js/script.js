@@ -1,6 +1,19 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     /* ---------------------------------------
+       GESTIONE NAVIGAZIONE BUTTON CON DATA-HREF
+       --------------------------------------- */
+    document.addEventListener('click', (event) => {
+        const button = event.target.closest('button[data-href]');
+        if (button) {
+            const href = button.getAttribute('data-href');
+            if (href) {
+                window.location.href = href;
+            }
+        }
+    });
+
+    /* ---------------------------------------
        1. GESTIONE MENU MOBILE (Hamburger)
        --------------------------------------- */
 
