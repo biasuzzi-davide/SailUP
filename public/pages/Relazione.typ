@@ -49,7 +49,7 @@
 
   #v(2em)
   
-  #align(center, image("../img/logo.svg", width: 25%))
+  #align(center, image("../img/logo_light.svg", width: 25%))
 
   #v(2em)
   
@@ -116,7 +116,7 @@ Gli utenti si suddividono principalmente in due categorie:
 - *Clienti Abituali / Utenti Registrati:*
   Sono coloro che hanno già usufruito dei servizi SailUP o pianificano di farlo regolarmente. La loro priorità è l'efficienza: desiderano accedere rapidamente al sistema, gestire le prenotazioni attive e consultare lo storico.
 - *Nuovi Clienti / Turisti:*
-  Non conoscono il sito o il servizio. È necessario in primo luogo ottimizzare il ranking del sito nelle ricerche, in secondo luogo è altrettanto importante garantire la loro permanenza nel sito, una volta entrati, tramite una grafica accattivante e una struttira intuitiva, che possa accompagnarli fluidamente verso la prenotazione di un'imbarcazione o di un'esperienza.
+  Non conoscono il sito o il servizio. È necessario in primo luogo ottimizzare il ranking del sito nelle ricerche, in secondo luogo è altrettanto importante garantire la loro permanenza nel sito, una volta entrati, tramite una grafica accattivante e una struttura intuitiva, che possa accompagnarli fluidamente verso la prenotazione di un'imbarcazione o di un'esperienza.
 
 == Devices
 Considerando la natura turistica del servizio e l'utilizzo in mobilità, ci si aspetta una netta prevalenza di accessi da smartphone. Per questo motivo, il design e l'interfaccia utente sono stati progettati seguendo rigorosamente l'approccio *mobile-first*.
@@ -228,7 +228,7 @@ Richiamato tramite media query per dispositivi con larghezza inferiore a 768px, 
 
 ==== Print.css (Stampa)
 Per assicurare che i contenuti siano fruibili in maniera ottimale su carta è stato predisposto un foglio di stile dedicato, che modifica la struttura di una pagina come segue:
-- *Rimozione degli elementi sperflui*: Gli elementi interattivi inutili su carta (menu, breadcrumb, pulsanti "prenota", hero images) vengono nascosti tramite la classe `.print-none`, lasciando solamente il contenuto informativo essenziale come ad esempio indirizzo e P.IVA nel footer.
+- *Rimozione degli elementi superflui*: Gli elementi interattivi inutili su carta (menu, breadcrumb, pulsanti "prenota", hero images) vengono nascosti tramite la classe `.print-none`, lasciando solamente il contenuto informativo essenziale come ad esempio indirizzo e P.IVA nel footer.
 - *Ottimizzazioni per la lettura*: Il font viene cambiato globalmente in _Times New Roman_ (serif), più leggibile su supporto cartaceo rispetto ai font sans-serif usati a video. I colori vengono forzati al nero su bianco e i link perdono la sottolineatura per una pulizia visiva maggiore.
 - *Layout adattivo*: La struttura a colonne viene linearizzata, permettendo al contenuto principale di occupare l'intera larghezza del foglio stampato, evitando tagli laterali.
 - *Gestione griglie*: Le sezioni a griglia vengono mantenute ma adattate con l'aggiunta di bordi per delimitare le aree, sostituendo la distinzione cromatica che viene persa in stampa.
@@ -238,7 +238,7 @@ Per assicurare che i contenuti siano fruibili in maniera ottimale su carta è st
 Oltre agli standard web generali, il progetto adotta specifiche convenzioni stilistiche e funzionali per garantire un'esperienza utente coerente e prevedibile:
 
 - *Link*: i collegamenti ipertestuali sono distinguibili dal testo grazie alla sottolineatura presente. I link visitati, poi, assumono una colorazione azzurra, in linea con l'identità del brand.
-- *Pagina corrente e link circolari*: Nei menu di navigazione la voce corrispondente alla pagina attuale è evidenziata visivamente con una sottolineatura blu e resa non cliccabile. In generale tutti i link che normalemte riporterebbero alla pagina corrente, i link circolari, vengono resi non cliccabili evitando ricaricamenti inutili e aiutando l'orientamento dell'utente.
+- *Pagina corrente e link circolari*: Nei menu di navigazione la voce corrispondente alla pagina attuale è evidenziata visivamente con una sottolineatura blu e resa non cliccabile. In generale tutti i link che normalmente riporterebbero alla pagina corrente, i link circolari, vengono resi non cliccabili evitando ricaricamenti inutili e aiutando l'orientamento dell'utente.
 - *Convenzione font*: _Montserrat_ è riservato esclusivamente alle intestazioni (h1-h6) e ai bottoni per impatto visivo, mentre _Open Sans_ è utilizzato per tutto il corpo del testo.
 - *Badge*: Nelle tabelle di riepilogo (es. prenotazioni), lo stato viene esplicitato da etichette colorate in base allo stato dell'elemento.
 - *Divisione contenuti*: I contenuti indipendenti, come i prodotti nei cataloghi, sono sempre incapsulati in card con bordi arrotondati per facilitarne la distinzione.
@@ -260,21 +260,83 @@ I file di validazione dedicati (`register_validation.js`, `login_validation.js`,
 == Back-End
 
 === Architettura (PHP)
-Lo sviluppo lato server è stato realizzato con un approccio modulare che simula il pattern architetturale *Model-View-Controller* (MVC).
-Ogni pagina PHP funge da *Controller*: gestisce la logica, verifica i permessi e prepara i dati. La generazione dell'interfaccia (*View*) avviene separando la logica dall'HTML: il codice PHP carica i template statici tramite la funzione helper `buildPage()` e inietta i dati dinamici sostituendo i segnaposto predefiniti.
+Lo sviluppo lato server è stato realizzato con un approccio modulare che simula il pattern architetturale *Model-View-Controller* (MVC), garantendo una chiara separazione delle responsabilità e facilitando la manutenzione del codice.
 
-Per garantire manutenibilità e sicurezza, sono stati adottati i seguenti accorgimenti:
-- *Configurazione*: I parametri di connessione e le costanti globali sono definiti nel file `conf.php`, escluso dal versionamento per evitare l'esposizione accidentale di credenziali sensibili.
-- *Gestione percorsi*: La gestione dei percorsi e delle risorse è centralizzata nel file `pages.php`, che funge da mappa per gli URL del sito.
+==== Pattern MVC e Separazione delle Responsabilità
+Il sistema è strutturato su tre livelli distinti:
+
+- *Model*: La classe `DBConnection` (file `db_connection.php`) incapsula tutta la logica di accesso ai dati. Con oltre 2500 righe di codice, questa classe centralizza le query al database e implementa metodi specializzati per ogni operazione CRUD (Create, Read, Update, Delete) sulle entità del sistema. Ogni metodo utilizza esclusivamente *Prepared Statements*, garantendo sicurezza contro SQL injection e mantenendo il codice pulito e riutilizzabile.
+
+- *Controller*: Ogni pagina PHP nella directory `public/php/` agisce da controller dedicato. Il controller gestisce il flusso dell'applicazione: verifica i permessi dell'utente tramite le funzioni di sessione, elabora i dati ricevuti via POST/GET, interagisce con il Model per recuperare o modificare i dati, e infine prepara le variabili necessarie per la vista. Questa separazione permette di mantenere la logica di business isolata dalla presentazione.
+
+- *View*: I template HTML statici nella directory `public/pages/` costituiscono le viste. La funzione `buildPage()` carica questi template e inietta dinamicamente header, footer e contenuti tramite un sistema di segnaposto (es. `[HEADER]`, `[FOOTER]`, `[NOME_UTENTE]`). Questo approccio garantisce la separazione tra logica e presentazione, mantenendo il markup pulito e facilmente modificabile.
+
+==== Modularità del Codice
+Il progetto è organizzato in moduli funzionali all'interno della directory `includes/`:
+
+- *helpers.php*: Contiene le funzioni di utilità per la generazione dinamica di header e footer. Le funzioni `buildHeader()` e `buildFooter()` gestiscono automaticamente lo stato dei link (pagina corrente evidenziata e non cliccabile), l'aggiunta di attributi ARIA per l'accessibilità, e la visualizzazione condizionale degli elementi in base allo stato di autenticazione dell'utente.
+
+- *auth/auth.php*: Centralizza le operazioni di registrazione e login. La funzione `registerUserFull()` orchestra l'inserimento coordinato di utente e indirizzo in una transazione logica, mentre `loginUserAuth()` gestisce l'autenticazione verificando le credenziali con `password_verify()`.
+
+- *session/session.php*: Gestisce lo stato della sessione e fornisce funzioni di controllo accesso (`isLogged()`, `isAdmin()`, `requireLogin()`, `requireGuest()`). Questo modulo implementa anche il sistema di protezione CSRF con generazione e validazione dei token.
+
+- *utils/validation.php*: Contiene le funzioni di validazione lato server per tutti i tipi di input (email, password, codice fiscale, nomi, indirizzi). Queste validazioni duplicano e rafforzano quelle client-side, implementando il principio della *doppia validazione* come best practice di sicurezza.
+
+==== Gestione Centralizzata dei Percorsi
+Il file `pages.php` definisce un array associativo che mappa ogni identificatore di pagina al suo filename PHP corrispondente. Questo sistema:
+- Elimina la duplicazione di URL hard-coded nel codice
+- Facilita la manutenzione: modificare un URL richiede la modifica di un solo punto
+- Permette la generazione dinamica dei menu di navigazione
+- Rende il sistema più robusto ai refactoring
 
 === Gestione Sessioni e Autenticazione
-Il mantenimento dello stato utente è gestito tramite un sistema dedicato nel file `session.php`. Sono state implementate funzioni helper per semplificare i controlli di accesso trasversali:
-- `isLogged()` e `isAdmin()`: Verificano rispettivamente se un utente è autenticato e se possiede i privilegi di amministratore.
-- `requireLogin()` e `requireAdmin()`: Queste funzioni sono poste in cima alle pagine protette. Se i requisiti non sono soddisfatti esse interrompono l'esecuzione e reindirizzano forzatamente l'utente alla pagina di login o mostrano un errore di accesso negato.
+Il mantenimento dello stato utente è gestito tramite un sistema dedicato nel file `session.php`. All'avvio, lo script verifica che la sessione non sia già attiva tramite `session_status()` prima di invocare `session_start()`, evitando errori di sessioni duplicate.
+
+==== Sistema di Controllo Accessi
+Sono state implementate funzioni helper per semplificare i controlli di accesso trasversali:
+
+- `isLogged()`: Verifica la presenza della chiave `user` nella sessione, indicando un utente autenticato.
+- `isAdmin()`: Controlla se l'utente corrente possiede il flag di amministratore.
+- `requireLogin()`: Posta all'inizio delle pagine protette, interrompe l'esecuzione e reindirizza alla pagina di login se l'utente non è autenticato.
+- `requireGuest()`: Funzione complementare che reindirizza gli utenti già loggati, utile per pagine come login e registrazione.
+- `requireAdmin()`: Blocca l'accesso alle pagine amministrative agli utenti non privilegiati, mostrando una pagina di errore 403.
+
+Questo approccio permette di proteggere le risorse sensibili con una singola riga di codice all'inizio di ogni controller, mantenendo il sistema sicuro e il codice leggibile.
+
+==== Protezione CSRF
+Per prevenire attacchi *Cross-Site Request Forgery*, ogni form che modifica lo stato del sistema (login, registrazione, creazione/modifica prodotti) è protetto da un token CSRF:
+
+- `getCsrfToken()`: Genera un token crittograficamente sicuro di 64 caratteri esadecimali usando `random_bytes(32)` e lo memorizza in sessione. Se il token esiste già, lo riutilizza.
+- `verifyCsrfToken()`: Valida il token ricevuto via POST confrontandolo con quello in sessione usando `hash_equals()`, una funzione timing-safe che previene attacchi di tipo timing.
+
+Il token viene iniettato come campo nascosto in ogni form e validato nel controller prima di processare qualsiasi operazione, garantendo che la richiesta provenga effettivamente dal sito e non da una fonte malevola.
 
 === Gestione dei Dati (Database)
-L'interazione con il database è incapsulata nella classe `DBConnection`. Ogni metodo implementa blocchi `try-catch` per intercettare eccezioni SQL, restituendo codici di errore specifici o `false` in modo che il controller possa gestire il fallimento senza esporre dettagli tecnici all'utente.
+L'interazione con il database è completamente incapsulata nella classe `DBConnection`. Questa architettura offre numerosi vantaggi:
 
+==== Sicurezza tramite Prepared Statements
+Tutti i metodi della classe utilizzano esclusivamente *Prepared Statements* con parametri vincolati (`bind_param`). Questo approccio:
+- Elimina completamente il rischio di SQL injection
+- Separa la struttura della query dai dati, impedendo l'inserimento di codice SQL malevolo
+- Migliora le performance grazie al piano di esecuzione pre-compilato dal database
+
+==== Gestione Robusta degli Errori
+La classe implementa una gestione sofisticata degli errori attraverso codici di ritorno specifici:
+- `false`: Errore generico nell'operazione
+- `-1`: Violazione di vincolo specifico (es. email duplicata)
+- `-2`: Violazione di vincolo alternativo (es. codice fiscale duplicato)
+- *ID positivo*: Operazione riuscita, con l'ID della risorsa creata
+
+Questo sistema permette al controller di fornire feedback precisi all'utente ("Email già registrata") senza esporre dettagli tecnici del database. I blocchi `try-catch` intercettano le eccezioni MySQL e le trasformano in codici di errore gestibili, prevenendo la visualizzazione di stack trace sensibili.
+
+==== Gestione della Connessione
+La connessione al database segue il pattern di apertura/chiusura esplicita:
+- `openConnection()`: Apre la connessione solo quando necessario, imposta il charset UTF-8 per supportare caratteri internazionali, e gestisce errori di connessione in modo sicuro.
+- `closeConnection()`: Chiude la connessione al termine di ogni operazione, liberando risorse e prevenendo connection leak.
+
+Questo approccio ottimizza l'uso delle risorse del server, evitando connessioni persistenti non necessarie.
+
+==== Entità del Database
 Le entità implementate sono state schematizzate in #link(<fig-database>)[Figura 2] (per migliorarne la leggibilità non sono stati inclusi gli attributi), e sono: 
 
 - *Utente*: Contiene le informazioni di tutti gli iscritti, come credenziali e dati anagrafici. Il campo `Is_Admin` serve per definire i privilegi di accesso.
@@ -296,13 +358,63 @@ Le entità implementate sono state schematizzate in #link(<fig-database>)[Figura
     caption: [Schema ER del database],
   ) <fig-database>
 
-=== Sicurezza lato Server
-Per quanto riguarda la sicurezza, oltre alla validazione degli input, sono state implementate lato backend i seguenti controlli:
+=== Logica di Business e Validazione
 
-- *Prevenzione SQL injection*: Tutti i metodi della classe `DBConnection` utilizzano Prepared Statements. I parametri vengono vincolati alla query e mai concatenati direttamente nelle stringhe SQL, eliminando alla radice il rischio di iniezione.
-- *Hashing delle password*: Le password non sono mai salvate in chiaro. In fase di registrazione viene utilizzato `password_hash()` con l'algoritmo `PASSWORD_DEFAULT` (Bcrypt). Al login, la verifica avviene tramite `password_verify()`, garantendo la sicurezza delle credenziali anche in caso di compromissione del DB.
-- *CSRF*: Per prevenire attacchi *Cross-Site Request Forgery*, tutti i form che modificano lo stato (login, registrazione, pannello admin) sono protetti da un token univoco. `getCsrfToken()` genera un token crittograficamente sicuro usando `bin2hex(random_bytes(32))`, mentre `verifyCsrfToken()` valida la corrispondenza del token inviato via POST con quello in sessione prima di elaborare la richiesta.
-- *XSS*: Ogni dato dinamico stampato a video viene sanitizzato tramite `htmlspecialchars()`, convertendo i caratteri speciali in entità HTML sicure per prevenire l'esecuzione di script malevoli.
+==== Validazione a Due Livelli
+Il sistema implementa il principio della *doppia validazione* come best practice di sicurezza: ogni input viene validato sia lato client (JavaScript) sia lato server (PHP).
+
+*Validazione Client-Side*: Fornisce feedback immediato all'utente durante la compilazione dei form, migliorando l'esperienza d'uso. Gli script JavaScript verificano formati, lunghezze e pattern in tempo reale, mostrando messaggi di errore contestuali e bloccando l'invio del form se i dati non sono validi.
+
+*Validazione Server-Side*: Rappresenta la vera barriera di sicurezza. Ogni dato ricevuto via POST viene rivalidato attraverso le funzioni in `validation.php`, che implementano controlli rigorosi:
+- *Email*: Verifica tramite `filter_var()` con flag `FILTER_VALIDATE_EMAIL` secondo lo standard RFC 822
+- *Password*: Controllo di lunghezza minima (8 caratteri), presenza di maiuscole, minuscole, numeri e caratteri speciali tramite espressioni regolari
+- *Codice Fiscale*: Validazione del formato (16 caratteri alfanumerici) tramite pattern regex
+- *Nomi e Cognomi*: Verifica che contengano solo lettere e spazi, escludendo stringhe vuote o composte solo da spazi
+
+Questo approccio garantisce che anche in caso di JavaScript disabilitato o di richieste manipolate, il server rifiuti sempre dati non conformi.
+
+==== Gestione delle Prenotazioni
+La logica delle prenotazioni rappresenta uno dei componenti più critici del sistema. Il metodo `checkDateAvailability()` implementa un algoritmo di verifica della disponibilità che:
+
+- Controlla tutte le prenotazioni esistenti per il prodotto specificato (barca o esperienza)
+- Esclude le prenotazioni cancellate dal controllo
+- Verifica la sovrapposizione temporale tra la nuova richiesta e le prenotazioni attive usando tre condizioni logiche che coprono tutti i possibili casi di overlap
+- Supporta un parametro opzionale `excludePrenotazioneId` per permettere la modifica di prenotazioni esistenti senza che entrino in conflitto con se stesse
+
+Questa verifica viene eseguita sempre prima di confermare una prenotazione, garantendo che non si verifichino doppie prenotazioni dello stesso prodotto per periodi sovrapposti.
+
+==== Sistema CRUD Amministrativo
+Il pannello amministrativo implementa operazioni complete di Create, Read, Update e Delete per tutte le entità dinamiche:
+
+*Gestione Prodotti (Barche/Esperienze)*: L'amministratore può inserire nuovi prodotti specificando tutte le caratteristiche (nome, tipo, descrizione, prezzo, capacità), gestire i servizi extra a pagamento, i servizi inclusi nel prezzo, e le lingue disponibili per le esperienze guidate. Il sistema supporta l'upload di immagini che vengono memorizzate nella directory `public/img/prodotti/` e referenziate nel database tramite URL.
+
+*Gestione Articoli Blog*: Ogni articolo supporta contenuti strutturati attraverso la tabella `Articolo_Blog_Extra`, che permette di inserire sezioni diverse (paragrafi, liste puntate, consigli) mantenendo l'ordine di visualizzazione. Questo approccio rende gli articoli flessibili e facilmente estensibili.
+
+*Gestione Utenti e Prenotazioni*: L'amministratore ha visibilità completa su tutti gli utenti registrati e può monitorare lo stato di tutte le prenotazioni nel sistema, facilitando la gestione operativa dell'attività.
+
+=== Sicurezza lato Server
+La sicurezza è stata considerata prioritaria in ogni fase dello sviluppo backend. Oltre alla validazione degli input, sono state implementate le seguenti misure di protezione:
+
+- *Prevenzione SQL Injection*: Tutti i metodi della classe `DBConnection` utilizzano esclusivamente Prepared Statements. I parametri vengono vincolati alla query tramite `bind_param()` e mai concatenati direttamente nelle stringhe SQL, eliminando alla radice il rischio di iniezione di codice malevolo. Questo approccio è applicato uniformemente a tutte le query, dalle più semplici SELECT alle operazioni complesse di JOIN multi-tabella.
+
+- *Hashing delle Password*: Le password non vengono mai salvate in chiaro nel database. In fase di registrazione, viene utilizzata la funzione `password_hash()` con l'algoritmo `PASSWORD_DEFAULT` (attualmente Bcrypt), che genera automaticamente un salt casuale e produce un hash sicuro. Al login, la verifica avviene tramite `password_verify()`, che confronta la password fornita con l'hash memorizzato in modo sicuro. Questo garantisce la protezione delle credenziali anche in caso di compromissione del database.
+
+- *Protezione CSRF (Cross-Site Request Forgery)*: Tutti i form che modificano lo stato del sistema (login, registrazione, pannello admin) sono protetti da token CSRF. Il token viene generato usando `bin2hex(random_bytes(32))`, producendo una stringa casuale crittograficamente sicura di 64 caratteri. Prima di elaborare qualsiasi richiesta POST, il sistema verifica la corrispondenza del token tramite `hash_equals()`, una funzione timing-safe che previene attacchi di tipo timing. Se il token non corrisponde o è assente, la richiesta viene rifiutata.
+
+- *Prevenzione XSS (Cross-Site Scripting)*: Ogni dato dinamico stampato nell'HTML viene sanitizzato tramite `htmlspecialchars()`, che converte i caratteri speciali (come `<`, `>`, `"`, `'`, `&`) in entità HTML sicure. Questo impedisce l'esecuzione di script JavaScript malevoli iniettati attraverso input utente, proteggendo sia gli utenti che il sistema da attacchi XSS.
+
+- *Gestione Sicura delle Sessioni*: La sessione viene avviata con controllo preventivo tramite `session_status()` per evitare errori. I dati sensibili in sessione sono ridotti al minimo necessario, e il logout effettua una pulizia completa della sessione con `session_destroy()`.
+
+- *Configurazione Esternalizzata*: Le credenziali del database e altre informazioni sensibili sono definite nel file `conf.php`, che è escluso dal sistema di versionamento Git tramite `.gitignore`. Questo previene l'esposizione accidentale di credenziali in repository pubblici.
+
+=== Pattern Post-Redirect-Get (PRG)
+Il sistema implementa il pattern *Post-Redirect-Get* per tutte le operazioni che modificano lo stato (registrazioni, login, creazione contenuti). Dopo aver processato una richiesta POST, il server:
+1. Elabora i dati e effettua le modifiche necessarie
+2. Memorizza eventuali messaggi di successo/errore in sessione
+3. Esegue un redirect HTTP (header `Location:`) verso una pagina di visualizzazione
+4. La pagina di destinazione mostra il messaggio recuperandolo dalla sessione
+
+Questo approccio previene la ri-sottomissione accidentale del form (tramite refresh o navigazione back), migliora l'esperienza utente e rende il flusso dell'applicazione più robusto e prevedibile.
 
 = Accessibilità
 L'accessibilità è stata un pilastro del progetto, guidata dai principi studiati durante il corso e dalle linee guida internazionali.
@@ -365,12 +477,14 @@ Sebbene il progetto sia stato il risultato di uno sforzo collaborativo e di una 
 )
 
 = Conclusioni e Sviluppi Futuri
-Il progetto *SailUP* ha raggiunto con successo tutti gli obiettivi prefissati, realizzando una piattaforma web completa, funzionale e conforme a tutti i requisiti tecnici e qualitativi del corso. Il risultato è un'applicazione moderna, accessibile e user-friendly, che dimostra una solida comprensione delle tecnologie web e delle best practice di sviluppo.
+Nonostante la complessità e le sfide tecniche affrontate durante lo sviluppo, lavorare a questo progetto si è rivelato un'esperienza estremamente formativa e stimolante. L'implementazione di un sistema completo end-to-end, dalla progettazione del database alla realizzazione dell'interfaccia utente, passando per la gestione della sicurezza e dell'accessibilità, ci ha permesso di consolidare e applicare concretamente le competenze acquisite durante il corso. SailUP rappresenta un lavoro di cui siamo orgogliosi e che consideriamo un'aggiunta significativa al nostro portfolio professionale, in grado di dimostrare la nostra capacità di sviluppare applicazioni web complete, sicure e di qualità.
 
 == Sviluppi Futuri
 La base tecnologica solida e modulare di SailUP si presta a numerose evoluzioni future. Tra le possibili implementazioni, si possono ipotizzare:
 
 - *Sistema di recensioni e valutazioni:* Aggiungere una funzionalità che permetta agli utenti di lasciare recensioni e valutazioni sui prodotti, aumentando la fiducia e fornendo un feedback prezioso.
+
+- *Supporto contenuti video:* La tabella `Media` del database è già predisposta per gestire video oltre alle immagini (campo `Tipo_Media` con valori `Immagine` e `Video`). Sarebbe possibile implementare l'upload e la visualizzazione di video promozionali per barche ed esperienze, tour virtuali e contenuti video per il blog, arricchendo significativamente l'esperienza utente.
 
 - *Notifiche automatiche via email:* Sviluppare un sistema per l'invio automatico di email di conferma, promemoria e aggiornamenti relativi alle prenotazioni effettuate dagli utenti.
 

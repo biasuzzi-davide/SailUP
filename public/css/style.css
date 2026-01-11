@@ -37,6 +37,7 @@
 
   --col-text: #1f2933;
   --col-text-inv: #ffffff;
+  --col-text-footer: #e6f1ff;
   --col-text-muted: #52606d; /* Grigio Pietra */
 
   /* Borders & UI */
@@ -80,6 +81,7 @@
   --col-text: #eef2f5;
   --col-text-inv: #051929;
   --col-text-muted: #9aa5b1;
+  --col-text-footer: #e6f1ff;
 
   --col-border: #1f364d;
   --col-card: #0d2b42;
@@ -2292,7 +2294,7 @@ footer .text-accent {
 }
 
 .footer-links a {
-  color: var(--col-text-inv);
+  color: var(--col-text-footer);
   text-decoration: underline; 
   transition: all 0.3s ease;
   display: inline-block;
@@ -2326,7 +2328,7 @@ footer address a {
 }
 
 footer address strong {
-  color: var(--col-text-inv);
+  color: var(--col-text-footer);
 }
 
 .footer-bottom {
