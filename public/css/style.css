@@ -1611,10 +1611,6 @@ da sistemare  */
   object-fit: cover;
 }
 
-.profile-header.no-avatar {
-  grid-template-columns: 1fr auto;
-}
-
 .profile-avatar-block {
   display: grid;
   justify-items: center;
