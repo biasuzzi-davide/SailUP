@@ -2534,6 +2534,55 @@ class DBConnection {
      * Inserisce una nuova prenotazione
      * @return int|false ID della prenotazione inserita o false in caso di errore
      */
+    /**
+     * Verifica se un prodotto è disponibile per il periodo richiesto.
+     * Ritorna true se disponibile, false se già prenotato.
+     */
+    public function verificaDisponibilitaProdotto(
+        string $idProdotto,
+        string $dataInizio,
+        string $dataFine
+    ): bool {
+        $this->openConnection();
+        
+        // Verifica se esiste una prenotazione attiva (non cancellata) che si sovrappone
+        $query = "SELECT COUNT(*) as count FROM Prenotazione 
+                  WHERE IDProdotto = ? 
+                  AND Stato_Prenotazione != 'Cancellata'
+                  AND (
+                      (Data_Ora_Inizio <= ? AND Data_Ora_Fine >= ?) OR
+                      (Data_Ora_Inizio <= ? AND Data_Ora_Fine >= ?) OR
+                      (Data_Ora_Inizio >= ? AND Data_Ora_Fine <= ?)
+                  )";
+        
+        try {
+            $stmt = $this->connection->prepare($query);
+            if (!$stmt) {
+                $this->closeConnection();
+                return false;
+            }
+            
+            $stmt->bind_param(
+                'sssssss',
+                $idProdotto,
+                $dataInizio, $dataInizio,
+                $dataFine, $dataFine,
+                $dataInizio, $dataFine
+            );
+            
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $row = $result->fetch_assoc();
+            $stmt->close();
+            $this->closeConnection();
+            
+            return $row['count'] == 0;
+        } catch (Throwable $t) {
+            $this->closeConnection();
+            return false;
+        }
+    }
+
     public function insertPrenotazione(
         int $idUtente,
         string $idProdotto,

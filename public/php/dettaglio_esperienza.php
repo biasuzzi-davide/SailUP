@@ -120,25 +120,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 						exit;
 					}
 					
-					// Per altri metodi di pagamento, inserisco la prenotazione normalmente
-					$idPrenotazione = $db->insertPrenotazione(
-						$idUtente,
+					// Per altri metodi di pagamento, verifico disponibilità e inserisco la prenotazione
+					$disponibile = $db->verificaDisponibilitaProdotto(
 						$experienceId,
 						$dataInizio,
-						$dataFine,
-						$pickupChecked,
-						$prezzoTotale,
-						$metodoPagamento,
-						$statoPrenotazione,
-						null
+						$dataFine
 					);
 					
-					if (!$idPrenotazione) {
+					if (!$disponibile) {
 						$serverState = 'visible';
-						$serverMessage = 'Errore durante la creazione della prenotazione. Riprova.';
+						$serverMessage = 'Spiacenti, questa esperienza non è più disponibile per la data selezionata. Un altro utente ha completato la prenotazione prima di te. Seleziona una data alternativa.';
 					} else {
-						// Salvo i dati della prenotazione in sessione
-						$_SESSION['prenotazione_temp'] = [
+						$idPrenotazione = $db->insertPrenotazione(
+							$idUtente,
+							$experienceId,
+							$dataInizio,
+							$dataFine,
+							$pickupChecked,
+							$prezzoTotale,
+							$metodoPagamento,
+							$statoPrenotazione,
+							null
+						);
+						
+						if (!$idPrenotazione) {
+							$serverState = 'visible';
+							$serverMessage = 'Errore durante la creazione della prenotazione. Riprova.';
+						} else {
+							// Salvo i dati della prenotazione in sessione
+							$_SESSION['prenotazione_temp'] = [
 							'id_prenotazione' => $idPrenotazione,
 							'id_prodotto' => $experienceId,
 							'nome_prodotto' => $experience['Nome_Prodotto'],
@@ -158,6 +168,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 						// Vai alla conferma
 						header('Location: conferma_prenotazione.php');
 						exit;
+						}
 					}
 				}
 			}

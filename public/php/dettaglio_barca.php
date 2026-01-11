@@ -123,25 +123,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 						exit;
 					}
 					
-					// Per altri metodi di pagamento, inserisco la prenotazione normalmente
-					$idPrenotazione = $db->insertPrenotazione(
-						$idUtente,
+					// Per altri metodi di pagamento, verifico disponibilità e inserisco la prenotazione
+					$disponibile = $db->verificaDisponibilitaProdotto(
 						$productId,
 						$dataInizio,
-						$dataFine,
-						$skipperChecked,
-						$prezzoTotale,
-						$metodoPagamento,
-						$statoPrenotazione,
-						null
+						$dataFine
 					);
 					
-					if (!$idPrenotazione) {
+					if (!$disponibile) {
 						$serverState = 'visible';
-						$serverMessage = 'Errore durante la creazione della prenotazione. Riprova.';
+						$serverMessage = 'Spiacenti, questa imbarcazione non è più disponibile per il periodo selezionato. Un altro utente ha completato la prenotazione prima di te. Seleziona date alternative.';
 					} else {
-						// Salvo i dati della prenotazione in sessione
-						$_SESSION['prenotazione_temp'] = [
+						$idPrenotazione = $db->insertPrenotazione(
+							$idUtente,
+							$productId,
+							$dataInizio,
+							$dataFine,
+							$skipperChecked,
+							$prezzoTotale,
+							$metodoPagamento,
+							$statoPrenotazione,
+							null
+						);
+						
+						if (!$idPrenotazione) {
+							$serverState = 'visible';
+							$serverMessage = 'Errore durante la creazione della prenotazione. Riprova.';
+						} else {
+							// Salvo i dati della prenotazione in sessione
+							$_SESSION['prenotazione_temp'] = [
 							'id_prenotazione' => $idPrenotazione,
 							'id_prodotto' => $productId,
 							'nome_prodotto' => $productDetail['Nome_Prodotto'],
@@ -161,6 +171,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 						// Vai alla conferma
 						header('Location: conferma_prenotazione.php');
 						exit;
+						}
 					}
 				}
 			}

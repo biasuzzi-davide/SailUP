@@ -19,7 +19,7 @@ $prenotazione = $_SESSION['prenotazione_temp'];
 
 // Gestione POST - Elaborazione pagamento
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Recupero i dati del form (validazione base, in un sistema reale si interfaccerebbero con un gateway)
+    // Recupera i dati del form (validazione base)
     $cardHolder = trim((string) filter_input(INPUT_POST, 'card_holder', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
     $cardNumber = trim((string) filter_input(INPUT_POST, 'card_number', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
     $expiryDate = trim((string) filter_input(INPUT_POST, 'expiry_date', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
@@ -34,9 +34,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo $html;
         exit;
     }
+        
+    // VERIFICA DISPONIBILITÀ: controllo se il prodotto è ancora disponibile
+    $disponibile = $db->verificaDisponibilitaProdotto(
+        $prenotazione['id_prodotto'],
+        $prenotazione['data_inizio'],
+        $prenotazione['data_fine']
+    );
     
-    // Simulo un pagamento riuscito
-    // In un sistema reale qui si chiamerebbe il gateway di pagamento
+    if (!$disponibile) {
+        // Il prodotto non è più disponibile - mostro errore all'utente
+        $_SESSION['errore_prenotazione'] = 'non_disponibile';
+        header('Location: ' . $_SERVER['PHP_SELF']);
+        exit;
+    }
     
     // Creo la prenotazione con stato "Confermata" (solo per pagamenti con carta)
     $idPrenotazione = $db->insertPrenotazione(
@@ -70,6 +81,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // Visualizzazione pagina (GET)
 $html = buildPage('../pages/pagamento.html', $_SERVER['PHP_SELF']);
 
+// Controllo se c'è un errore da mostrare
+$messaggioErrore = '';
+if (isset($_SESSION['errore_prenotazione'])) {
+    $tipoErrore = $_SESSION['errore_prenotazione'];
+    unset($_SESSION['errore_prenotazione']); // Rimuovo l'errore dalla sessione
+    
+    if ($tipoErrore === 'non_disponibile') {
+        $messaggioErrore = '<div class="alert alert-error" role="alert">
+            <p>Attenzione: Ci dispiace, ma il prodotto selezionato non è più disponibile per il periodo richiesto. Un altro utente ha completato la prenotazione prima di te.</p>
+            <p>Ti invitiamo a tornare al catalogo e selezionare una data alternativa.</p>
+        </div>';
+    }
+}
+
 // Creo il link al prodotto
 $linkProdotto = '';
 $nomeProdotto = $prenotazione['nome_prodotto'] ?? 'Prodotto';
@@ -88,6 +113,7 @@ $placeholders = [
     '[NOME-PRODOTTO]' => htmlspecialchars($nomeProdotto, ENT_QUOTES),
     '[LINK_INDIETRO]' => htmlspecialchars($linkProdotto, ENT_QUOTES),
     '[PREZZO_TOTALE]' => htmlspecialchars($prezzoTotaleFormattato, ENT_QUOTES),
+    '[MESSAGGIO_ERRORE]' => $messaggioErrore,
 ];
 
 // Keywords per SEO

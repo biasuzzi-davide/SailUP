@@ -383,6 +383,18 @@ La logica delle prenotazioni rappresenta uno dei componenti più critici del sis
 
 Questa verifica viene eseguita sempre prima di confermare una prenotazione, garantendo che non si verifichino doppie prenotazioni dello stesso prodotto per periodi sovrapposti.
 
+===== Gestione Race Condition
+Per prevenire la *race condition* (condizione di gara) che potrebbe verificarsi quando più utenti tentano di prenotare lo stesso prodotto contemporaneamente, è stato implementato un sistema di controllo della disponibilità che viene eseguito immediatamente prima dell'inserimento della prenotazione nel database.
+
+Il metodo `verificaDisponibilitaProdotto()` effettua un controllo atomico della disponibilità verificando l'esistenza di prenotazioni attive (non cancellate) che si sovrappongono temporalmente con il periodo richiesto. Questo controllo è applicato in tre punti critici del flusso di prenotazione:
+
+- In `pagamento.php`, immediatamente prima di confermare il pagamento con carta di credito
+- In `dettaglio_barca.php` e `dettaglio_esperienza.php`, prima di creare prenotazioni con pagamento in contanti o bonifico
+
+Se il prodotto non è più disponibile, l'utente riceve un messaggio chiaro e comprensibile che lo informa della situazione: _"Ci dispiace, ma il prodotto selezionato non è più disponibile per il periodo richiesto. Un altro utente ha completato la prenotazione prima di te."_ L'utente viene quindi invitato a selezionare una data alternativa, evitando frustrazione e garantendo trasparenza nel processo di prenotazione.
+
+Questa implementazione minimizza le modifiche al codice esistente mantenendo l'integrità dei dati e offrendo un'esperienza utente chiara anche in situazioni di alta concorrenza.
+
 ==== Sistema CRUD Amministrativo
 Il pannello amministrativo implementa operazioni complete di Create, Read, Update e Delete per tutte le entità dinamiche:
 
