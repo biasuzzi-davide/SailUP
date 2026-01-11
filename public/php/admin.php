@@ -23,17 +23,13 @@ if (is_array($stats)) {
 
 $html = buildPage('../pages/admin.html', $_SERVER['PHP_SELF']);
 
-// Keywords per SEO (pagine admin sono noindex)
-$keywords = '<meta name="keywords" content="dashboard, admin, amministrazione, gestione, sito, SailUP">';
-
 $html = str_replace(
-    ['[STAT_USERS]', '[STAT_PRODUCTS]', '[STAT_BOOKINGS]', '[STAT_REVENUE]', '[KEYWORDS]'],
+    ['[STAT_USERS]', '[STAT_PRODUCTS]', '[STAT_BOOKINGS]', '[STAT_REVENUE]'],
     [
         htmlspecialchars((string)$usersCount),
         htmlspecialchars((string)$productsCount),
         htmlspecialchars((string)$bookingsCount),
-        htmlspecialchars($monthlyRevenue),
-        $keywords
+        htmlspecialchars($monthlyRevenue)
     ],
     $html
 );

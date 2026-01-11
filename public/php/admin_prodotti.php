@@ -101,7 +101,6 @@ $html = str_replace(
         '[STAT_PRODUCTS_INACTIVE]',
         '[STAT_PRODUCTS_NOL]',
         '[STAT_PRODUCTS_EXP]',
-        '[KEYWORDS]',
     ],
     [
         $feedbackBlock,
@@ -116,7 +115,6 @@ $html = str_replace(
         htmlspecialchars((string)($productStats['inactive_products'] ?? 0)),
         htmlspecialchars((string)($productStats['rental_products'] ?? 0)),
         htmlspecialchars((string)($productStats['experience_products'] ?? 0)),
-        '<meta name="keywords" content="gestione, prodotti, admin, barche, esperienze, dashboard, SailUP">',
     ],
     $html
 );

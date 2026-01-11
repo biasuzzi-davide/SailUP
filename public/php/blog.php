@@ -5,10 +5,6 @@ require_once '../../includes/db_connection.php';
 
 $html = buildPage('../pages/blog.html', $_SERVER['PHP_SELF']);
 
-// Keywords per SEO
-$keywords = '<meta name="keywords" content="blog, nautico, guide, consigli, navigazione, esperienze, diario, bordo, turismo, mare, Napoli, golfo">';
-$html = str_replace('[KEYWORDS]', $keywords, $html);
-
 $db = new DBConnection();
 $articoli = $db->getArticoliBlogWithMedia(20);
 

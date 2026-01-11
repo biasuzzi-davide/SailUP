@@ -297,9 +297,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $html = buildPage('../pages/admin_blog_nuovo.html', $_SERVER['PHP_SELF']);
 
-// Keywords per SEO (pagine admin sono noindex)
-$keywords = '<meta name="keywords" content="nuovo, articolo, blog, crea, admin, SailUP">';
-
 $statusDraft = $old['status'] === 'published' ? '' : 'selected';
 $statusPub = $old['status'] === 'published' ? 'selected' : '';
 
