@@ -364,8 +364,8 @@ document.addEventListener('DOMContentLoaded', () => {
 /* ---------------------------------------
    7. Calcolo prezzi form prenotazione
    --------------------------------------- */
-   document.addEventListener('DOMContentLoaded', function() {
-    
+document.addEventListener('DOMContentLoaded', function () {
+
     const bookingForm = document.querySelector('.booking-form');
     const allPriceDisplays = document.querySelectorAll('.price-amount');
 
@@ -385,7 +385,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const end = new Date(endInput.value);
             const diffTime = end - start;
             const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-            
+
             if (diffDays >= 0) {
                 duration = diffDays + 1;
             }
@@ -405,8 +405,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const priceEl = label.querySelector('.text-accent') || label;
             let text = priceEl.innerText.trim();
             const isPercent = text.includes('%');
-            
-            let cleanNum = text.replace(/[^0-9,-]/g, ''); 
+
+            let cleanNum = text.replace(/[^0-9,-]/g, '');
             let val = parseFloat(cleanNum.replace(',', '.'));
 
             if (!isNaN(val) && val > 0) {
@@ -419,33 +419,52 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         let finalPrice = currentTotal + fixedSum + percentSum;
-        
+
         let formattedPrice = finalPrice.toLocaleString('it-IT', {
             minimumFractionDigits: 0,
             maximumFractionDigits: 2
-        });
+        }) + " €";
+
+        const isChanged = Math.abs(finalPrice - BASE_PRICE) > 0.01;
 
         allPriceDisplays.forEach(display => {
             display.innerText = formattedPrice;
 
-            if (display.nextElementSibling && display.nextElementSibling.classList.contains('price-suffix')) {
-                const suffix = display.nextElementSibling;
-                const isChanged = Math.abs(finalPrice - BASE_PRICE) > 0.01;
-                
-                suffix.style.setProperty('display', isChanged ? 'none' : 'inline', 'important');
+            const container = display.closest('.price-label') || display.parentElement;
+
+            if (container) {
+                const prefix = container.querySelector('.price-prefix');
+                const suffix = container.querySelector('.price-suffix');
+
+                if (prefix) {
+                    if (!prefix.hasAttribute('data-original')) {
+                        prefix.setAttribute('data-original', prefix.innerText);
+                    }
+
+                    if (isChanged) {
+                        prefix.innerText = 'Totale: ';
+                    } else {
+                        let original = prefix.getAttribute('data-original');
+                        prefix.innerText = original.replace('€', '').trim();
+                    }
+                }
+
+                if (suffix) {
+                    suffix.style.setProperty('display', isChanged ? 'none' : 'inline', 'important');
+                }
             }
         });
     }
 
     bookingForm.addEventListener('change', updateBookingPrice);
-    
-    bookingForm.addEventListener('input', function(e) {
+
+    bookingForm.addEventListener('input', function (e) {
         if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') {
             updateBookingPrice();
         }
     });
 
-    bookingForm.addEventListener('reset', function() {
+    bookingForm.addEventListener('reset', function () {
         setTimeout(updateBookingPrice, 10);
     });
 
