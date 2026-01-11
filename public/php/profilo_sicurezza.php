@@ -134,6 +134,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($formType === 'password') {
             $pwState = 'error';
             $pwMsg = 'Sessione scaduta, ricarica la pagina.';
+        } elseif ($formType === 'delete_account') {
+            $profileState = 'error';
+            $profileMsg = 'Sessione scaduta, ricarica la pagina.';
         } else {
             $profileState = 'error';
             $profileMsg = 'Sessione scaduta, ricarica la pagina.';
@@ -260,6 +263,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!empty($errors)) {
             $profileState = 'error';
             $profileMsg = htmlspecialchars(implode(' | ', $errors));
+        }
+    } elseif ($formType === 'delete_account') {
+        // Elimina l'account
+        $userId = (int)$user['IDUtente'];
+        $deleted = $db->deleteUser($userId);
+        
+        if ($deleted) {
+            // Logout e redirect
+            session_destroy();
+            header('Location: index.php');
+            exit;
+        } else {
+            $profileState = 'error';
+            $profileMsg = 'Errore durante l\'eliminazione dell\'account. Riprova.';
         }
     }
 }

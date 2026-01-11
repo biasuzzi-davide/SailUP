@@ -483,3 +483,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
     updateBookingPrice();
 });
+
+/* ---------------------------------------
+   CONFERMA ELIMINAZIONE ACCOUNT
+   --------------------------------------- */
+document.addEventListener('DOMContentLoaded', function () {
+    const deleteAccountForm = document.getElementById('delete-account-form');
+    if (deleteAccountForm) {
+        deleteAccountForm.addEventListener('submit', (e) => {
+            const confirmed = confirm('Sei sicuro di voler eliminare il tuo account? Questa azione è irreversibile e tutti i tuoi dati saranno cancellati definitivamente.');
+            if (!confirmed) {
+                e.preventDefault();
+            }
+        });
+    }
+});
