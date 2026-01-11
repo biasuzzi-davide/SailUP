@@ -133,7 +133,7 @@ Sono state individuate e realizzate le seguenti funzionalità principali:
   - La prenotazione è caratterizzata dalla scelta di una data, del numero di ospiti e di eventuali servizi accessori (es. skipper).
   - Il sistema deve verificare la disponibilità della risorsa (barca o esperienza) per la data richiesta tramite controlli server-side.
   - Le prenotazioni possono essere effettuate da utenti registrati; gli ospiti vengono invitati a registrarsi o accedere per finalizzare la prenotazione.
-  - In seguito alla richiesta, il sistema fornisce un feedback immediato sull'esito (conferma o errore per indisponibilità).
+  - In seguito alla richiesta, il sistema fornisce un feedback immediato sull'esito (conferma o errore in caso di date non disponibili).
 
 - *Area Personale e Amministrazione:*
   - Sezione *Cliente* per la gestione del profilo e visualizzazione dello storico prenotazioni.
@@ -347,7 +347,6 @@ Le entità implementate sono state schematizzate in #link(<fig-database>)[Figura
 - *Lingua*: Memorizza Le lingue supportate per i servizi guidati (IT, EN, FR, ES).
 - *Prodotto_Lingua*: Relazione che collega Prodotto e Lingua, indicando quali lingue sono parlate nell'esperienza specifica.
 - *Prenotazione*: Necessaria per mantenere lo storico delle transazioni. 
-- *Indisponibilita*: Permette agli amministratori di bloccare date specifiche (es. per manutenzione).
 - *Articolo_Blog*: Necessaria per gestire gli articoli del blog.
 - *Articolo_Blog_Extra*: Struttura i contenuti complessi degli articoli (es. liste puntate, sezioni "Cosa portare").
 - *Media*: centralizza la gestione delle immagini.

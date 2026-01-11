@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Creato il: Gen 10, 2026 alle 13:00
+-- Creato il: Gen 11, 2026 alle 14:46
 -- Versione del server: 11.8.3-MariaDB-0+deb13u1 from Debian
 -- Versione PHP: 8.4.11
 
@@ -176,7 +176,6 @@ INSERT INTO `Indirizzo` (`IDIndirizzo`, `Via`, `N_Civico`, `CAP`, `Citta`, `Prov
 (6, 'Via Marina Grande', '12', '80073', 'Capri', 'NA', 'IT', '2025-12-23 12:11:10'),
 (7, 'Lungolago Salvo d\'Acquisto', '50', '80011', 'Bacoli', 'NA', 'IT', '2025-12-23 12:11:10'),
 (8, 'Via Vittorio Emanuele', '200', '80013', 'Caserta', 'CE', 'IT', '2025-12-23 12:11:10'),
-(9, 'Via Toledo', '334', '80134', 'Napoli', 'NA', 'IT', '2025-12-23 12:11:10'),
 (10, 'Corso Italia', '88', '84010', 'Praiano', 'SA', 'IT', '2025-12-23 12:11:10'),
 (11, 'Via Sant\'Antonio', '19', '80010', 'Pozzuoli', 'NA', 'IT', '2025-12-23 12:11:10'),
 (12, 'Viale Europa', '75', '80062', 'Meta di Sorrento', 'NA', 'IT', '2025-12-23 12:11:10'),
@@ -192,43 +191,9 @@ INSERT INTO `Indirizzo` (`IDIndirizzo`, `Via`, `N_Civico`, `CAP`, `Citta`, `Prov
 (22, 'Via Frasnelli', '6', '31040', 'Nervesa della Battaglia', 'TV', 'IT', '2026-01-09 19:29:36'),
 (23, 'Via Frasnelli', '6', '31040', 'Nervesa della Battaglia', 'TV', 'IT', '2026-01-09 19:29:52'),
 (24, 'Via di utente', '6', '31040', 'Citta di Utente', 'UT', 'IT', '2026-01-09 19:30:02'),
-(25, 'Via Frasnelli', '6', '31040', 'Nervesa della Battaglia', 'TV', 'IT', '2026-01-10 11:48:38');
-
--- --------------------------------------------------------
-
---
--- Struttura della tabella `Indisponibilita`
---
-
-CREATE TABLE `Indisponibilita` (
-  `IDIndisponibilita` int(11) NOT NULL,
-  `IDProdotto` varchar(50) NOT NULL,
-  `Data_Inizio` datetime NOT NULL,
-  `Data_Fine` datetime NOT NULL,
-  `Motivo` varchar(255) DEFAULT NULL,
-  `Creato_Da` int(11) NOT NULL,
-  `Data_Creazione` timestamp NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dump dei dati per la tabella `Indisponibilita`
---
-
-INSERT INTO `Indisponibilita` (`IDIndisponibilita`, `IDProdotto`, `Data_Inizio`, `Data_Fine`, `Motivo`, `Creato_Da`, `Data_Creazione`) VALUES
-(1, 'BARCA-GOZZO-001', '2025-06-01 00:00:00', '2025-06-05 23:59:59', 'Manutenzione motore e vernice', 9, '2025-12-23 12:11:10'),
-(2, 'BARCA-GOZZO-002', '2025-05-20 00:00:00', '2025-05-25 23:59:59', 'Revisione carburante e filtri', 9, '2025-12-23 12:11:10'),
-(3, 'BARCA-GOMMONE-001', '2025-07-01 00:00:00', '2025-07-03 23:59:59', 'Pulizia cambusa e sanitari', 9, '2025-12-23 12:11:10'),
-(4, 'BARCA-GOMMONE-002', '2025-08-15 00:00:00', '2025-08-18 23:59:59', 'Manutenzione climatizzazione', 9, '2025-12-23 12:11:10'),
-(5, 'BARCA-GOMMONE-003', '2025-06-10 00:00:00', '2025-06-14 23:59:59', 'Revisione completa motori', 9, '2025-12-23 12:11:10'),
-(6, 'BARCA-YACHT-001', '2025-05-01 00:00:00', '2025-05-10 23:59:59', 'Manutenzione navigatore GPS e rotte', 9, '2025-12-23 12:11:10'),
-(7, 'BARCA-YACHT-002', '2025-07-20 00:00:00', '2025-07-25 23:59:59', 'Pulizia interna e cambusa', 9, '2025-12-23 12:11:10'),
-(8, 'BARCA-VELA-001', '2025-06-20 00:00:00', '2025-06-23 23:59:59', 'Ispezione vela e cavi', 9, '2025-12-23 12:11:10'),
-(9, 'BARCA-VELA-002', '2025-08-25 00:00:00', '2025-08-28 23:59:59', 'Manutenzione autopilota', 9, '2025-12-23 12:11:10'),
-(10, 'BARCA-PICCOLA-001', '2025-07-10 00:00:00', '2025-07-12 23:59:59', 'Verifica sicurezza attrezzatura', 9, '2025-12-23 12:11:10'),
-(11, 'BARCA-PICCOLA-002', '2025-09-01 00:00:00', '2025-09-02 23:59:59', 'Pulizia e sanificazione', 9, '2025-12-23 12:11:10'),
-(12, 'EXP-TRAMONTO-001', '2025-06-15 00:00:00', '2025-06-16 23:59:59', 'Preparazione menu e attrezzature', 9, '2025-12-23 12:11:10'),
-(13, 'EXP-SNORKEL-001', '2025-07-05 00:00:00', '2025-07-06 23:59:59', 'Controllo attrezzatura snorkeling', 9, '2025-12-23 12:11:10'),
-(14, 'EXP-ESCURSIONE-001', '2025-08-20 00:00:00', '2025-08-21 23:59:59', 'Preparazione guide turistiche', 9, '2025-12-23 12:11:10');
+(25, 'Via Frasnelli', '6', '31040', 'Nervesa della Battaglia', 'TV', 'IT', '2026-01-10 11:48:38'),
+(26, 'sdcsdcs', '12', '23232', 'Napoli', 'NA', 'IT', '2026-01-11 07:37:11'),
+(28, 'Via Frasnelli', '6', '31040', 'Comune', 'DD', 'IT', '2026-01-11 14:25:32');
 
 -- --------------------------------------------------------
 
@@ -274,7 +239,6 @@ CREATE TABLE `Media` (
 
 --
 -- Dump dei dati per la tabella `Media`
--- NOTA: Rimossi avatar degli utenti eliminati (ID 1, 2, 3, 4, 15)
 --
 
 INSERT INTO `Media` (`IDMedia`, `URL_Media`, `Testo_Alternativo`, `Tipo_Media`, `IDUtente`, `IDProdotto`, `IDArticolo`, `Data_Caricamento`) VALUES
@@ -306,8 +270,8 @@ INSERT INTO `Media` (`IDMedia`, `URL_Media`, `Testo_Alternativo`, `Tipo_Media`, 
 (103, '../img/prodotti/odyssey-45.jpg', 'Jeanneau Sun Odyssey 45 in navigazione', 'Immagine', NULL, 'BARCA-VELA-002', NULL, '2026-01-09 17:29:59'),
 (118, '../img/prodotti/snork.jpg', 'Snorkeling a Capri con pesci', 'Immagine', NULL, 'EXP-SNORKEL-001', NULL, '2026-01-09 19:42:03'),
 (143, '../img/prodotti/prod_BARCA-VELA-001.webp?v=1768042977', 'Beneteau First 35 a vela', 'Immagine', NULL, 'BARCA-VELA-001', NULL, '2026-01-10 11:02:57'),
-(147, '../img/avatars/user_12.webp?v=1768048306', 'Avatar utente', 'Immagine', 12, NULL, NULL, '2026-01-10 12:31:46'),
-(148, '../img/avatars/user_9.webp?v=1768048336', 'Avatar utente', 'Immagine', 9, NULL, NULL, '2026-01-10 12:32:16');
+(148, '../img/avatars/user_9.webp?v=1768048336', 'Avatar utente', 'Immagine', 9, NULL, NULL, '2026-01-10 12:32:16'),
+(150, '../img/avatars/user_12.webp?v=1768140396', 'Avatar utente', 'Immagine', 12, NULL, NULL, '2026-01-11 14:06:36');
 
 -- --------------------------------------------------------
 
@@ -333,12 +297,9 @@ CREATE TABLE `Prenotazione` (
 -- Dump dei dati per la tabella `Prenotazione`
 --
 
--- Prenotazioni rimosse: le prenotazioni degli utenti eliminati (ID 3,4,5,6,7,8,15) sono state eliminate per rispettare i vincoli di integrità
 INSERT INTO `Prenotazione` (`IDPrenotazione`, `IDUtente`, `IDProdotto`, `Data_Ora_Inizio`, `Data_Ora_Fine`, `Skipper_Richiesto`, `Prezzo_Totale`, `Metodo_Pagamento`, `Stato_Prenotazione`, `Note_Addizionali`, `Data_Creazione`) VALUES
-(84, 9, 'EXP-TRAMONTO-001', '2026-01-15 09:00:00', '2026-01-15 13:00:00', 1, 219.50, 'Carta di Credito', 'Cancellata', NULL, '2026-01-07 10:01:38'),
-(85, 9, 'EXP-ESCURSIONE-001', '2026-01-15 09:00:00', '2026-01-15 17:00:00', 1, 382.00, 'Carta di Credito', 'Cancellata', NULL, '2026-01-07 10:11:25'),
-(87, 9, 'EXP-TRAMONTO-001', '2026-01-08 09:00:00', '2026-01-08 13:00:00', 1, 219.50, 'Carta di Credito', 'Cancellata', NULL, '2026-01-07 18:53:20'),
-(88, 9, 'BARCA-PICCOLA-001', '2026-01-07 00:00:00', '2026-01-10 23:59:59', 1, 680.00, 'Carta di Credito', 'Cancellata', NULL, '2026-01-07 19:06:34');
+(114, 12, 'EXP-TRAMONTO-001', '2026-01-22 09:00:00', '2026-01-22 13:00:00', 0, 95.00, 'Bonifico', 'Cancellata', NULL, '2026-01-11 14:45:12'),
+(115, 12, 'BARCA-PICCOLA-001', '2026-01-12 00:00:00', '2026-01-15 23:59:59', 1, 680.00, 'Contanti', 'In Attesa', NULL, '2026-01-11 14:46:02');
 
 -- --------------------------------------------------------
 
@@ -594,13 +555,14 @@ CREATE TABLE `Utente` (
 
 --
 -- Dump dei dati per la tabella `Utente`
--- NOTA: Alcuni utenti sono stati eliminati. Gli indirizzi orfani rimangono nel database.
 --
 
 INSERT INTO `Utente` (`IDUtente`, `Nome`, `Cognome`, `CF`, `Email`, `PasswordHash`, `IDIndirizzo`, `Is_Admin`, `Data_Registrazione`, `Data_Ultimo_Accesso`) VALUES
-(9, 'Davide', 'Biasuzzi', 'BSZDVD04D19F443F', 'biasuzzi.davide@gmail.com', '$2y$12$U0SQeTC7WZqgChD6SxVteeIdrVBqf4Q4XPHTnaAacjmEjoRKAUSGG', 16, 1, '2025-12-26 17:17:32', '2026-01-10 12:32:07'),
-(12, 'Admin', 'Admin', 'CFADMINADMINCFCF', 'admin', '$2y$12$qzLCdFoRZ1EDB02Pd9y8MegjxW.3SQ8SLwibQkYqHmPc01yXsWuxa', 19, 1, '2026-01-08 06:27:28', '2026-01-10 12:09:49'),
-(14, 'User', 'User', 'CFUSERUSERCFUSER', 'user', '$2y$12$nE6ZkeAcGm4zSud34GSWSOLnkbTF8vAy1PmpGQYq2BRBPi.67FxFy', 24, 0, '2026-01-09 19:30:02', '2026-01-10 12:08:40');
+(9, 'Davide', 'Biasuzzi', 'BSZDVD04D19F443F', 'biasuzzi.davide@gmail.com', '$2y$12$U0SQeTC7WZqgChD6SxVteeIdrVBqf4Q4XPHTnaAacjmEjoRKAUSGG', 16, 1, '2025-12-26 17:17:32', '2026-01-11 14:17:43'),
+(12, 'Admin', 'Admin', 'CFADMINADMINCFCF', 'admin', '$2y$12$qzLCdFoRZ1EDB02Pd9y8MegjxW.3SQ8SLwibQkYqHmPc01yXsWuxa', 19, 1, '2026-01-08 06:27:28', '2026-01-11 14:35:09'),
+(14, 'User', 'User', 'CFUSERUSERCFUSER', 'user', '$2y$12$nE6ZkeAcGm4zSud34GSWSOLnkbTF8vAy1PmpGQYq2BRBPi.67FxFy', 24, 0, '2026-01-09 19:30:02', '2026-01-11 13:30:48'),
+(17, 'Mario', 'Rossi', 'AAAAAAAAAAAAAAAA', 'fojaw95998@vysolar.com', '$2y$12$2KhFRLN7/uVebPitYpAm5etoDZX.joI.uyYtMCLNy0VTnP9WSURUa', 26, 0, '2026-01-11 07:37:11', '2026-01-11 12:05:17'),
+(19, 'User1', 'User1', 'CFUSESUSERCFUSER', 'user1', '$2y$12$nE6ZkeAcGm4zSud34GSWSOLnkbTF8vAy1PmpGQYq2BRBPi.67FxFy', 24, 0, '2026-01-09 19:30:02', '2026-01-11 14:07:55');
 
 --
 -- Indici per le tabelle scaricate
@@ -627,14 +589,6 @@ ALTER TABLE `Articolo_Blog_Extra`
 ALTER TABLE `Indirizzo`
   ADD PRIMARY KEY (`IDIndirizzo`),
   ADD KEY `idx_citta` (`Citta`);
-
---
--- Indici per le tabelle `Indisponibilita`
---
-ALTER TABLE `Indisponibilita`
-  ADD PRIMARY KEY (`IDIndisponibilita`),
-  ADD KEY `IDProdotto` (`IDProdotto`),
-  ADD KEY `Creato_Da` (`Creato_Da`);
 
 --
 -- Indici per le tabelle `Lingua`
@@ -722,13 +676,7 @@ ALTER TABLE `Articolo_Blog_Extra`
 -- AUTO_INCREMENT per la tabella `Indirizzo`
 --
 ALTER TABLE `Indirizzo`
-  MODIFY `IDIndirizzo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
-
---
--- AUTO_INCREMENT per la tabella `Indisponibilita`
---
-ALTER TABLE `Indisponibilita`
-  MODIFY `IDIndisponibilita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `IDIndirizzo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT per la tabella `Lingua`
@@ -740,13 +688,13 @@ ALTER TABLE `Lingua`
 -- AUTO_INCREMENT per la tabella `Media`
 --
 ALTER TABLE `Media`
-  MODIFY `IDMedia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=149;
+  MODIFY `IDMedia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=152;
 
 --
 -- AUTO_INCREMENT per la tabella `Prenotazione`
 --
 ALTER TABLE `Prenotazione`
-  MODIFY `IDPrenotazione` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
+  MODIFY `IDPrenotazione` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=116;
 
 --
 -- AUTO_INCREMENT per la tabella `Prodotto_Extra`
@@ -764,7 +712,7 @@ ALTER TABLE `Prodotto_Incluso`
 -- AUTO_INCREMENT per la tabella `Utente`
 --
 ALTER TABLE `Utente`
-  MODIFY `IDUtente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `IDUtente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
 
 --
 -- Limiti per le tabelle scaricate
@@ -781,13 +729,6 @@ ALTER TABLE `Articolo_Blog`
 --
 ALTER TABLE `Articolo_Blog_Extra`
   ADD CONSTRAINT `Articolo_Blog_Extra_ibfk_1` FOREIGN KEY (`IDArticolo`) REFERENCES `Articolo_Blog` (`IDArticolo`) ON DELETE CASCADE;
-
---
--- Limiti per la tabella `Indisponibilita`
---
-ALTER TABLE `Indisponibilita`
-  ADD CONSTRAINT `Indisponibilita_ibfk_1` FOREIGN KEY (`IDProdotto`) REFERENCES `Prodotto` (`IDProdotto`) ON DELETE CASCADE,
-  ADD CONSTRAINT `Indisponibilita_ibfk_2` FOREIGN KEY (`Creato_Da`) REFERENCES `Utente` (`IDUtente`);
 
 --
 -- Limiti per la tabella `Media`
