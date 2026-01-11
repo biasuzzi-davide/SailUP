@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $html = buildPage('../pages/login.html', $_SERVER['PHP_SELF']);
 
-$state = empty($errors) ? 'hidden' : 'alert alert-error';
+$state = empty($errors) ? 'hidden' : 'error-message';
 
 $messageText = '';
 if (!empty($errors)) {
