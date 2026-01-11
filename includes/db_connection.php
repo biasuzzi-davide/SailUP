@@ -1863,17 +1863,6 @@ class DBConnection {
                 $params[] = $dataRichiestaInizio;
                 $types .= 's';
 
-                $conditions[] = 'NOT EXISTS (
-                    SELECT 1
-                    FROM Indisponibilita ind
-                    WHERE ind.IDProdotto = p.IDProdotto
-                      AND ind.Data_Inizio < ?
-                      AND ind.Data_Fine > ?
-                )';
-                $params[] = $dataRichiestaFine;
-                $types .= 's';
-                $params[] = $dataRichiestaInizio;
-                $types .= 's';
             }
 
             $orderClause = 'ORDER BY p.Data_Creazione DESC, p.IDProdotto ASC';
@@ -2498,32 +2487,9 @@ class DBConnection {
             $count = (int) $row['count'];
             
             $stmt->close();
-            
-            // Controlla anche indisponibilità manuali
-            $query2 = "SELECT COUNT(*) as count FROM Indisponibilita 
-                       WHERE IDProdotto = ? 
-                       AND (
-                           (Data_Inizio < ? AND Data_Fine > ?) OR
-                           (Data_Inizio < ? AND Data_Fine > ?) OR
-                           (Data_Inizio >= ? AND Data_Fine <= ?)
-                       )";
-            
-            $stmt2 = $this->connection->prepare($query2);
-            if (!$stmt2) {
-                $this->closeConnection();
-                return false;
-            }
-            
-            $stmt2->bind_param('sssssss', $idProdotto, $dataFine, $dataInizio, $dataFine, $dataInizio, $dataInizio, $dataFine);
-            $stmt2->execute();
-            $result2 = $stmt2->get_result();
-            $row2 = $result2->fetch_assoc();
-            $count2 = (int) $row2['count'];
-            
-            $stmt2->close();
             $this->closeConnection();
             
-            return ($count === 0 && $count2 === 0);
+            return ($count === 0);
         } catch (Throwable $t) {
             $this->closeConnection();
             return false;
@@ -2633,6 +2599,70 @@ class DBConnection {
             $this->closeConnection();
             return $id;
         } catch (Throwable $t) {
+            $this->closeConnection();
+            return false;
+        }
+    }
+
+    /**
+     * Elimina un utente e tutti i dati correlati (prenotazioni, media, indirizzo, articoli).
+     * @param int $idUtente ID dell'utente da eliminare
+     * @return bool True se eliminazione riuscita, false altrimenti
+     */
+    public function deleteUser(int $idUtente): bool {
+        $this->openConnection();
+        
+        try {
+            // Inizia transazione
+            $this->connection->begin_transaction();
+            
+            // Recupera IDIndirizzo prima di eliminare l'utente
+            $stmtAddr = $this->connection->prepare("SELECT IDIndirizzo FROM Utente WHERE IDUtente = ?");
+            $stmtAddr->bind_param("i", $idUtente);
+            $stmtAddr->execute();
+            $result = $stmtAddr->get_result();
+            $row = $result->fetch_assoc();
+            $idIndirizzo = $row['IDIndirizzo'] ?? null;
+            $stmtAddr->close();
+            
+            // Elimina articoli blog (e le relative dipendenze in cascata: extra, media)
+            $stmt1 = $this->connection->prepare("DELETE FROM Articolo_Blog WHERE IDAutore = ?");
+            $stmt1->bind_param("i", $idUtente);
+            $stmt1->execute();
+            $stmt1->close();
+            
+            // Elimina prenotazioni
+            $stmt3 = $this->connection->prepare("DELETE FROM Prenotazione WHERE IDUtente = ?");
+            $stmt3->bind_param("i", $idUtente);
+            $stmt3->execute();
+            $stmt3->close();
+            
+            // Elimina media utente (già gestito in cascata, ma per sicurezza)
+            $stmt4 = $this->connection->prepare("DELETE FROM Media WHERE IDUtente = ?");
+            $stmt4->bind_param("i", $idUtente);
+            $stmt4->execute();
+            $stmt4->close();
+            
+            // Elimina utente
+            $stmt5 = $this->connection->prepare("DELETE FROM Utente WHERE IDUtente = ?");
+            $stmt5->bind_param("i", $idUtente);
+            $stmt5->execute();
+            $stmt5->close();
+            
+            // Elimina indirizzo se presente
+            if ($idIndirizzo) {
+                $stmt6 = $this->connection->prepare("DELETE FROM Indirizzo WHERE IDIndirizzo = ?");
+                $stmt6->bind_param("i", $idIndirizzo);
+                $stmt6->execute();
+                $stmt6->close();
+            }
+            
+            // Commit transazione
+            $this->connection->commit();
+            $this->closeConnection();
+            return true;
+        } catch (Throwable $t) {
+            $this->connection->rollback();
             $this->closeConnection();
             return false;
         }
