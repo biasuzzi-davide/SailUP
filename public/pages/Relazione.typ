@@ -265,7 +265,7 @@ Lo sviluppo lato server è stato realizzato con un approccio modulare che simula
 ==== Pattern MVC e Separazione delle Responsabilità
 Il sistema è strutturato su tre livelli distinti:
 
-- *Model*: La classe `DBConnection` (file `db_connection.php`) incapsula tutta la logica di accesso ai dati. Con oltre 2500 righe di codice, questa classe centralizza le query al database e implementa metodi specializzati per ogni operazione CRUD (Create, Read, Update, Delete) sulle entità del sistema. Ogni metodo utilizza esclusivamente *Prepared Statements*, garantendo sicurezza contro SQL injection e mantenendo il codice pulito e riutilizzabile.
+- *Model*: La classe `DBConnection` (file `db_connection.php`) incapsula tutta la logica di accesso ai dati. Questa classe centralizza le query al database e implementa metodi specializzati per ogni operazione CRUD (Create, Read, Update, Delete) sulle entità del sistema. Ogni metodo utilizza esclusivamente *Prepared Statements*, garantendo sicurezza contro SQL injection e mantenendo il codice pulito e riutilizzabile.
 
 - *Controller*: Ogni pagina PHP nella directory `public/php/` agisce da controller dedicato. Il controller gestisce il flusso dell'applicazione: verifica i permessi dell'utente tramite le funzioni di sessione, elabora i dati ricevuti via POST/GET, interagisce con il Model per recuperare o modificare i dati, e infine prepara le variabili necessarie per la vista. Questa separazione permette di mantenere la logica di business isolata dalla presentazione.
 
@@ -274,7 +274,7 @@ Il sistema è strutturato su tre livelli distinti:
 ==== Modularità del Codice
 Il progetto è organizzato in moduli funzionali all'interno della directory `includes/`:
 
-- *helpers.php*: Contiene le funzioni di utilità per la generazione dinamica di header e footer. Le funzioni `buildHeader()` e `buildFooter()` gestiscono automaticamente lo stato dei link (pagina corrente evidenziata e non cliccabile), l'aggiunta di attributi ARIA per l'accessibilità, e la visualizzazione condizionale degli elementi in base allo stato di autenticazione dell'utente.
+- *helpers.php*: Contiene le funzioni di utilità per la generazione dinamica delle componenti principali della pagina, come header, footer e card relative ai prodotti salvati in database. Le funzioni `buildHeader()` e `buildFooter()` gestiscono automaticamente lo stato dei link (pagina corrente evidenziata e non cliccabile), l'aggiunta di attributi ARIA per l'accessibilità, e la visualizzazione condizionale degli elementi in base allo stato di autenticazione dell'utente.
 
 - *auth/auth.php*: Centralizza le operazioni di registrazione e login. La funzione `registerUserFull()` orchestra l'inserimento coordinato di utente e indirizzo in una transazione logica, mentre `loginUserAuth()` gestisce l'autenticazione verificando le credenziali con `password_verify()`.
 
@@ -352,7 +352,7 @@ Le entità implementate sono state schematizzate in #link(<fig-database>)[Figura
 - *Media*: centralizza la gestione delle immagini.
 
   #figure(
-    image("../img/schema_database.png", width: 150%), 
+    image("../img/schema_database.png", width: 130%), 
     gap: 2em,
     caption: [Schema ER del database],
   ) <fig-database>
@@ -375,22 +375,22 @@ Questo approccio garantisce che anche in caso di JavaScript disabilitato o di ri
 ==== Gestione delle Prenotazioni
 La logica delle prenotazioni rappresenta uno dei componenti più critici del sistema. Il metodo `checkDateAvailability()` implementa un algoritmo di verifica della disponibilità che:
 
-- Controlla tutte le prenotazioni esistenti per il prodotto specificato (barca o esperienza)
-- Esclude le prenotazioni cancellate dal controllo
-- Verifica la sovrapposizione temporale tra la nuova richiesta e le prenotazioni attive usando tre condizioni logiche che coprono tutti i possibili casi di overlap
-- Supporta un parametro opzionale `excludePrenotazioneId` per permettere la modifica di prenotazioni esistenti senza che entrino in conflitto con se stesse
+- Controlla tutte le prenotazioni esistenti per il prodotto specificato (barca o esperienza);
+- Esclude le prenotazioni cancellate dal controllo;
+- Verifica la sovrapposizione temporale tra la nuova richiesta e le prenotazioni attive usando tre condizioni logiche che coprono tutti i possibili casi di overlap;
+- Supporta un parametro opzionale `excludePrenotazioneId` per permettere la modifica di prenotazioni esistenti senza che entrino in conflitto con se stesse.
 
 Questa verifica viene eseguita sempre prima di confermare una prenotazione, garantendo che non si verifichino doppie prenotazioni dello stesso prodotto per periodi sovrapposti.
 
 ===== Gestione Race Condition
-Per prevenire la *race condition* (condizione di gara) che potrebbe verificarsi quando più utenti tentano di prenotare lo stesso prodotto contemporaneamente, è stato implementato un sistema di controllo della disponibilità che viene eseguito immediatamente prima dell'inserimento della prenotazione nel database.
+Per prevenire la *race condition* che potrebbe verificarsi quando più utenti tentano di prenotare lo stesso prodotto contemporaneamente è stato implementato il metodo `verificaDisponibilitaProdotto()`, che viene eseguito immediatamente prima dell'inserimento della prenotazione nel database e si occupa di effettuare un controllo atomico della disponibilità, verificando l'esistenza di prenotazioni attive che si sovrappongano temporalmente con il periodo richiesto. 
 
-Il metodo `verificaDisponibilitaProdotto()` effettua un controllo atomico della disponibilità verificando l'esistenza di prenotazioni attive (non cancellate) che si sovrappongono temporalmente con il periodo richiesto. Questo controllo è applicato in tre punti critici del flusso di prenotazione:
+Questo controllo è applicato in tre punti critici del flusso di prenotazione:
 
 - In `pagamento.php`, immediatamente prima di confermare il pagamento con carta di credito
 - In `dettaglio_barca.php` e `dettaglio_esperienza.php`, prima di creare prenotazioni con pagamento in contanti o bonifico
 
-Se il prodotto non è più disponibile, l'utente riceve un messaggio chiaro e comprensibile che lo informa della situazione: _"Ci dispiace, ma il prodotto selezionato non è più disponibile per il periodo richiesto. Un altro utente ha completato la prenotazione prima di te."_ L'utente viene quindi invitato a selezionare una data alternativa, evitando frustrazione e garantendo trasparenza nel processo di prenotazione.
+Se il prodotto non è più disponibile l'utente riceve un messaggio che chiarisce il problema ed invita l'utente a selezionare una data alternativa, garantendo trasparenza nel processo di prenotazione.
 
 Questa implementazione minimizza le modifiche al codice esistente mantenendo l'integrità dei dati e offrendo un'esperienza utente chiara anche in situazioni di alta concorrenza.
 
