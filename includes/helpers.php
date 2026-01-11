@@ -20,9 +20,9 @@ function buildHeader($phpSelf) {
     // Logo con link condizionale
     $logoInner = '<picture>
     <source srcset="../img/logo_light.svg" type="image/svg+xml">
-    <img alt="Logo SailUP" src="../img/logo_light.svg" width="30" height="30">
+    <img alt="" src="../img/logo_light.svg" width="30" height="30">
     </picture>
-    <span class="logo-text" lang="en">Sail<span class="text-accent">UP</span></span>';
+    <h1 class="logo-text" lang="en">Sail<span class="text-accent">UP</span></h1>';
 
     // Funzione per creare item
     function createHeaderItem($key, $label, $current, $relativePath, $pages, $lang = '', $class = '') {
@@ -915,15 +915,22 @@ function buildAdminUsersRows(array $users): string {
     $rows = '';
     foreach ($users as $u) {
         $ruolo = !empty($u['Is_Admin'])
-            ? '<span class="status-badge active">Admin</span>'
-            : '<span class="status-badge completed">Standard</span>';
+            ? '<span class="status-badge active" lang="en">Admin</span>'
+            : '<span class="status-badge completed" lang="en">Standard</span>';
         $rawDate = $u['Data_Registrazione'] ?? '';
-        $dataIscr = $rawDate !== '' ? htmlspecialchars(date('d/m/Y', strtotime($rawDate))) : '—';
+        if($rawDate !== ''){
+            $timestamp = strtotime($rawDate);
+            $dataIscr = htmlspecialchars(string: date('d/m/Y', $timestamp));
+            $dataMachine = htmlspecialchars(date('Y-m-d', $timestamp));
+        } else {
+            $dataIscr = '-';
+            $dataMachine = '';
+        }
         $rows .= '<tr>'
             . '<td data-label="ID">' . htmlspecialchars($u['IDUtente']) . '</td>'
             . '<td data-label="Nome">' . htmlspecialchars(($u['Nome'] ?? '') . ' ' . ($u['Cognome'] ?? '')) . '</td>'
             . '<td data-label="Email">' . htmlspecialchars($u['Email'] ?? '') . '</td>'
-            . '<td data-label="Data Iscrizione"><time datetime="' . htmlspecialchars($rawDate) . '">' . $dataIscr . '</time></td>'
+            . '<td data-label="Data Iscrizione"><time datetime="' . $dataMachine . '">' . $dataIscr . '</time></td>'
             . '<td data-label="Ruolo">' . $ruolo . '</td>'
             . '</tr>';
     }
@@ -988,40 +995,52 @@ function buildAdminBookingRows(array $pren, string $csrfToken): string {
 
     $rows = '';
     foreach ($pren as $p) {
-        $stato = $p['Stato_Prenotazione'] ?? '';
+        $statoRaw = $p['Stato_Prenotazione'] ?? '';
         $badgeClass = 'pending';
-        if ($stato === 'Confermata') {
-            $badgeClass = 'active';
-        }
-        if ($stato === 'Cancellata') {
-            $badgeClass = 'cancelled';
-        }
+        if ($statoRaw === 'Confermata') $badgeClass = 'active';
+        if ($statoRaw === 'Cancellata') $badgeClass = 'cancelled';
+        if (in_array($statoRaw, ['Completata', 'Conclusa'])) $badgeClass = 'completed';
+
+        $startRaw = $p['Data_Ora_Inizio'] ?? '';
+        $endRaw = $p['Data_Ora_Fine'] ?? '';
+        
+        $dataInizio = ($startRaw !== '') ? date('d/m/Y', strtotime($startRaw)) : '—';
+        $dataFine = ($endRaw !== '') ? date('d/m/Y', strtotime($endRaw)) : '—';
+        $machineInizio = ($startRaw !== '') ? date('Y-m-d', strtotime($startRaw)) : '';
+        $machineFine = ($endRaw !== '') ? date('Y-m-d', strtotime($endRaw)) : '';
+
+        $prezzoDisplay = number_format((float)($p['Prezzo_Totale'] ?? 0), 2, ',', '.');
         $idPren = htmlspecialchars($p['IDPrenotazione']);
+        $idProd = htmlspecialchars($p['IDProdotto']);
+        $cliente = htmlspecialchars(($p['Utente_Nome'] ?? '') . ' ' . ($p['Utente_Cognome'] ?? ''));
+
         $rows .= '<tr>'
             . '<td data-label="ID">' . $idPren . '</td>'
-            . '<td data-label="Prodotto">' . htmlspecialchars($p['IDProdotto']) . '</td>'
-            . '<td data-label="Cliente">' . htmlspecialchars(($p['Utente_Nome'] ?? '') . ' ' . ($p['Utente_Cognome'] ?? '')) . '</td>'
-            . '<td data-label="Data"><time datetime="' . htmlspecialchars($p['Data_Ora_Inizio'] ?? '') . '">' . htmlspecialchars($p['Data_Ora_Inizio'] ?? '') . '</time></td>'
-            . '<td data-label="Totale">€ ' . htmlspecialchars($p['Prezzo_Totale'] ?? '') . '</td>'
-            . '<td data-label="Stato"><span class="status-badge ' . $badgeClass . '">' . htmlspecialchars($stato) . '</span></td>'
+            . '<td data-label="Prodotto">' . $idProd . '</td>'
+            . '<td data-label="Cliente">' . $cliente . '</td>'
+            . '<td data-label="Periodo">'
+                . '<time datetime="' . $machineInizio . '">' . $dataInizio . '</time> — '
+                . '<time datetime="' . $machineFine . '">' . $dataFine . '</time>'
+            . '</td>'
+            . '<td data-label="Totale">€ ' . $prezzoDisplay . '</td>'
+            . '<td data-label="Stato"><span class="status-badge ' . $badgeClass . '">' . htmlspecialchars($statoRaw) . '</span></td>'
             . '<td data-label="Azioni" class="actions-cell">'
-            . '<a href="dettaglio_prenotazione.php?id=' . $idPren . '" class="btn-text" aria-label="Vedi dettagli prenotazione ' . $idPren . '">Dettagli</a>'
-            . '<form method="post" class="inline-form">'
-            . '<input type="hidden" name="csrf_token" value="' . htmlspecialchars($csrfToken) . '">'
-            . '<input type="hidden" name="id_prenotazione" value="' . $idPren . '">'
-            . '<input type="hidden" name="action" value="confirm">'
-            . '<button type="submit" class="btn-text" aria-label="Conferma prenotazione ' . $idPren . '">Conferma</button>'
-            . '</form>'
-            . '<form method="post" class="inline-form" onsubmit="return confirm(\'Cancellare questa prenotazione?\');">'
-            . '<input type="hidden" name="csrf_token" value="' . htmlspecialchars($csrfToken) . '">'
-            . '<input type="hidden" name="id_prenotazione" value="' . $idPren . '">'
-            . '<input type="hidden" name="action" value="cancel">'
-            . '<button type="submit" class="btn-text danger" aria-label="Cancella prenotazione ' . $idPren . '">Cancella</button>'
-            . '</form>'
+                . '<a href="dettaglio_prenotazione.php?id=' . $idPren . '" class="btn-layout-light btn-sm">Dettagli</a>'
+                . '<form method="post" class="inline-form">'
+                    . '<input type="hidden" name="csrf_token" value="' . htmlspecialchars($csrfToken) . '">'
+                    . '<input type="hidden" name="id_prenotazione" value="' . $idPren . '">'
+                    . '<input type="hidden" name="action" value="confirm">'
+                    . '<button type="submit" class="btn-layout btn-sm">Conferma</button>'
+                . '</form>'
+                . '<form method="post" class="inline-form" onsubmit="return confirm(\'Cancellare questa prenotazione?\');">'
+                    . '<input type="hidden" name="csrf_token" value="' . htmlspecialchars($csrfToken) . '">'
+                    . '<input type="hidden" name="id_prenotazione" value="' . $idPren . '">'
+                    . '<input type="hidden" name="action" value="cancel">'
+                    . '<button type="submit" class="btn-danger btn-sm">Cancella</button>'
+                . '</form>'
             . '</td>'
             . '</tr>';
     }
-
     return $rows;
 }
 
@@ -1041,7 +1060,6 @@ function buildAdminProductRows(array $prodotti, string $csrfToken): string {
             ? '<span class="status-badge active">Attivo</span>'
             : '<span class="status-badge cancelled">Disattivo</span>';
         $toggleLabel = !empty($p['Attivo']) ? 'Disattiva' : 'Attiva';
-        $toggleClass = !empty($p['Attivo']) ? 'btn-text danger' : 'btn-text';
         $toggleConfirm = !empty($p['Attivo']) ? ' onsubmit="return confirm(\'Disattivare questo prodotto?\');"' : '';
         $idProdotto = htmlspecialchars($p['IDProdotto']);
         $nomeProdotto = htmlspecialchars($p['Nome_Prodotto'] ?? '');
@@ -1053,19 +1071,19 @@ function buildAdminProductRows(array $prodotti, string $csrfToken): string {
             . '<td data-label="Prezzo">' . $prezzo . '</td>'
             . '<td data-label="Stato">' . $stato . '</td>'
             . '<td data-label="Azioni" class="actions-cell">'
-            . '<a class="btn-text" href="admin_prodotti_nuovo.php?id=' . $idProdotto . '" aria-label="Modifica ' . $nomeProdotto . '">Modifica</a>'
+            . '<a class="btn-layout-light btn-sm" href="admin_prodotti_nuovo.php?id=' . $idProdotto . '" aria-label="Modifica ' . $nomeProdotto . '">Modifica</a>'
             . '<form method="post" class="inline-form"' . $toggleConfirm . '>'
             . '<input type="hidden" name="csrf_token" value="' . htmlspecialchars($csrfToken) . '">'
             . '<input type="hidden" name="id_prodotto" value="' . $idProdotto . '">'
             . '<input type="hidden" name="attivo" value="' . (!empty($p['Attivo']) ? 1 : 0) . '">'
             . '<input type="hidden" name="action" value="toggle">'
-            . '<button type="submit" class="' . $toggleClass . '" aria-label="' . htmlspecialchars($toggleLabel) . ' prodotto ' . $nomeProdotto . '">' . htmlspecialchars($toggleLabel) . '</button>'
+            . '<button type="submit" class="btn-layout btn-sm" aria-label="' . htmlspecialchars($toggleLabel) . ' prodotto ' . $nomeProdotto . '">' . htmlspecialchars($toggleLabel) . '</button>'
             . '</form>'
             . '<form method="post" class="inline-form" onsubmit="return confirm(\'Eliminare definitivamente questo prodotto?\');">'
             . '<input type="hidden" name="csrf_token" value="' . htmlspecialchars($csrfToken) . '">'
             . '<input type="hidden" name="id_prodotto" value="' . $idProdotto . '">'
             . '<input type="hidden" name="action" value="delete">'
-            . '<button type="submit" class="btn-text danger" aria-label="Elimina prodotto ' . $nomeProdotto . '">Elimina</button>'
+            . '<button type="submit" class="btn-danger btn-sm" aria-label="Elimina prodotto ' . $nomeProdotto . '">Elimina</button>'
             . '</form>'
             . '</td>'
             . '</tr>';
@@ -1082,41 +1100,48 @@ function buildProfileBookingRows(array $prenotazioni, string $csrfToken): string
 
     $rowsHtml = '';
     foreach ($prenotazioni as $p) {
-        $stato = $p['Stato_Prenotazione'] ?? '';
-        $statusAttr = 'active';
-        if ($stato === 'Cancellata') {
-            $statusAttr = 'cancelled';
-        }
-        if ($stato === 'Completata' || $stato === 'Conclusa') {
-            $statusAttr = 'completed';
-        }
+        $statoRaw = $p['Stato_Prenotazione'] ?? '';
+        $badgeClass = 'pending';
+        if ($statoRaw === 'Confermata') $badgeClass = 'active';
+        if ($statoRaw === 'Cancellata') $badgeClass = 'cancelled';
+        if (in_array($statoRaw, ['Completata', 'Conclusa'])) $badgeClass = 'completed';
 
-        $dataInizio = !empty($p['Data_Ora_Inizio']) ? date('d/m/Y', strtotime($p['Data_Ora_Inizio'])) : '—';
-        $dataFine = !empty($p['Data_Ora_Fine']) ? date('d/m/Y', strtotime($p['Data_Ora_Fine'])) : '—';
-        $prezzo = number_format((float)($p['Prezzo_Totale'] ?? 0), 2, ',', '.');
-        $isCancellable = in_array($statusAttr, ['active', 'pending'], true);
+        $startRaw = $p['Data_Ora_Inizio'] ?? '';
+        $endRaw = $p['Data_Ora_Fine'] ?? '';
+
+        $dataInizio = ($startRaw !== '') ? date('d/m/Y', strtotime($startRaw)) : '—';
+        $dataFine = ($endRaw !== '') ? date('d/m/Y', strtotime($endRaw)) : '—';
+        $machineInizio = ($startRaw !== '') ? date('Y-m-d', strtotime($startRaw)) : '';
+        $machineFine = ($endRaw !== '') ? date('Y-m-d', strtotime($endRaw)) : '';
+
+        $prezzoDisplay = number_format((float)($p['Prezzo_Totale'] ?? 0), 2, ',', '.');
         $idPren = htmlspecialchars($p['IDPrenotazione']);
+        $idProd = htmlspecialchars($p['IDProdotto']);
+        
+        $isCancellable = in_array($badgeClass, ['active', 'pending'], true);
 
-        $rowsHtml .= '<tr class="booking-row" data-status="' . htmlspecialchars($statusAttr) . '">'
-            . '<td>' . $idPren . '</td>'
-            . '<td>' . htmlspecialchars($p['IDProdotto']) . '</td>'
-            . '<td>' . htmlspecialchars($dataInizio . ' — ' . $dataFine) . '</td>'
-            . '<td>€ ' . htmlspecialchars($prezzo) . '</td>'
-            . '<td>' . htmlspecialchars($stato) . '</td>'
-            . '<td>'
-            . ($isCancellable
-                ? '<form method="post" class="inline-form" onsubmit="return confirm(\'Annullare questa prenotazione?\');">'
-                    . '<input type="hidden" name="csrf_token" value="' . htmlspecialchars($csrfToken) . '">'
-                    . '<input type="hidden" name="action" value="cancel_booking">'
-                    . '<input type="hidden" name="booking_id" value="' . $idPren . '">'
-                    . '<button type="submit" class="btn-text">Annulla</button>'
-                . '</form>'
-                : '—'
-            )
+        $rowsHtml .= '<tr>'
+            . '<td data-label="ID">' . $idPren . '</td>'
+            . '<td data-label="Prodotto">' . $idProd . '</td>'
+            . '<td data-label="Periodo">'
+                . '<time datetime="' . $machineInizio . '">' . $dataInizio . '</time> — '
+                . '<time datetime="' . $machineFine . '">' . $dataFine . '</time>'
+            . '</td>'
+            . '<td data-label="Totale">€ ' . $prezzoDisplay . '</td>'
+            . '<td data-label="Stato"><span class="status-badge ' . $badgeClass . '">' . htmlspecialchars($statoRaw) . '</span></td>'
+            . '<td data-label="Azioni" class="actions-cell">'
+                . ($isCancellable
+                    ? '<form method="post" class="inline-form" onsubmit="return confirm(\'Annullare questa prenotazione?\');">'
+                        . '<input type="hidden" name="csrf_token" value="' . htmlspecialchars($csrfToken) . '">'
+                        . '<input type="hidden" name="action" value="cancel_booking">'
+                        . '<input type="hidden" name="booking_id" value="' . $idPren . '">'
+                        . '<button type="submit" class="btn-danger btn-sm">Annulla</button>'
+                    . '</form>'
+                    : '—'
+                )
             . '</td>'
             . '</tr>';
     }
-
     return $rowsHtml;
 }
 
