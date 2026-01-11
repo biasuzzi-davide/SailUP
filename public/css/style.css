@@ -2236,6 +2236,32 @@ tr>*:last-child {
   gap: 1.5em;
 }
 
+.extra-row {
+  display: flex;
+  gap: 1.5em;
+  align-items: flex-start;
+  margin-bottom: 1.5em;
+  padding: 1.2em;
+  background-color: var(--col-bg-alt);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--col-border);
+}
+
+.extra-row .form-group {
+  margin-bottom: 0;
+  flex: 1;
+}
+
+.extra-row .remove-extra {
+  flex-shrink: 0;
+  margin-top: 1.8rem; 
+  margin-bottom: 0;
+}
+
+#add-extra {
+  margin-bottom: 1em;
+}
+
 /* =========================================
      19. FOOTER
    ========================================= */
@@ -2562,26 +2588,4 @@ li[aria-current="page"] {
     width: 100%;
     
   }
-}
-
-.extra-row {
-  display: flex;
-  gap: 1.5em;
-  align-items: flex-start;
-  margin-bottom: 1.5em;
-  padding: 1.2em;
-  background-color: var(--col-bg-alt);
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--col-border);
-}
-
-.extra-row .form-group {
-  margin-bottom: 0;
-  flex: 1;
-}
-
-.extra-row .remove-extra {
-  flex-shrink: 0;
-  margin-top: 1.8rem; 
-  margin-bottom: 0;
 }
