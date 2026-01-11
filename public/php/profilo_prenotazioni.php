@@ -61,7 +61,6 @@ $placeholders = [
     '[BOOKINGS_SERVER_STATE]' => $feedbackState,
     '[BOOKINGS_SERVER_MESSAGES]' => htmlspecialchars($feedbackMsg),
     '[CSRF_TOKEN]' => $csrfTokenEscaped,
-    '[KEYWORDS]' => $keywords,
 ];
 $html = str_replace(array_keys($placeholders), array_values($placeholders), $html);
 

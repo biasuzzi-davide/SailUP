@@ -422,14 +422,13 @@ $placeholders['[PROD_BREADCRUMB]'] = $isEdit ? 'Modifica Prodotto' : 'Nuovo Prod
 $placeholders['[PROD_EXTRAS]'] = buildProductExtraInputs($extrasForForm);
 
 $html = str_replace(
-    ['[ADMIN_PRODUCT_FEEDBACK]', '[CSRF_TOKEN]', '[ADMIN_PRODUCT_ACTION]', '[PROD_MODE]', '[PRODUCT_ID_VALUE]', '[KEYWORDS]'],
+    ['[ADMIN_PRODUCT_FEEDBACK]', '[CSRF_TOKEN]', '[ADMIN_PRODUCT_ACTION]', '[PROD_MODE]', '[PRODUCT_ID_VALUE]'],
     [
         $feedback ? '<div class="' . $feedbackClass . '" role="status" aria-live="polite">' . htmlspecialchars($feedback) . '</div>' : '',
         htmlspecialchars(getCsrfToken()),
         htmlspecialchars($_SERVER['PHP_SELF']),
         htmlspecialchars($mode),
         htmlspecialchars($editingId),
-        $keywords,
     ],
     $html
 );
