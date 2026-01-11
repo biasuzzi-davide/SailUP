@@ -1145,10 +1145,8 @@ function buildProfileBookingRows(array $prenotazioni, string $csrfToken): string
     return $rowsHtml;
 }
 
-//builda l extra dei blog
 // builda l extra dei blog
 function buildBlogExtraInputs(array $extras): string {
-    // Se non ci sono extra, creiamo un array con un elemento vuoto per mostrare almeno una riga
     if (empty($extras)) { $extras = [['titolo' => '', 'elemento' => '']]; }
 
     $extrasHtml = '';
