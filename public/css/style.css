@@ -37,6 +37,7 @@
 
   --col-text: #1f2933;
   --col-text-inv: #ffffff;
+  --col-text-footer: #ffffff;
   --col-text-muted: #52606d; /* Grigio Pietra */
 
   /* Borders & UI */
@@ -2322,7 +2323,7 @@ footer address a {
 }
 
 footer address strong {
-  color: var(--col-text-inv);
+  color: var(--col-text-footer);
 }
 
 .footer-bottom {
