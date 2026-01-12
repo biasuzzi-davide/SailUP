@@ -112,6 +112,7 @@
         const val = parseFloat(priceInput.value);
         if (priceInput.value === '') { showFieldError(priceInput, 'Il prezzo è obbligatorio'); return false; }
         if (isNaN(val) || val < 0) { showFieldError(priceInput, 'Inserisci un prezzo valido (es. 850)'); return false; }
+        if (val > 50000) { showFieldError(priceInput, 'Il prezzo non può superare €50.000'); return false; }
         clearFieldError(priceInput); return true;
     }
 
@@ -376,6 +377,11 @@
             if (!priceInput || priceVal === '' || Number.isNaN(priceInt) || priceInt < 1) {
                 if (priceInput) {
                     showExtraError(priceInput, 'Inserisci un prezzo valido', '.extra-price-error');
+                }
+                ok = false;
+            } else if (priceInt > 10000) {
+                if (priceInput) {
+                    showExtraError(priceInput, 'Il prezzo extra non può superare €10.000', '.extra-price-error');
                 }
                 ok = false;
             } else {

@@ -240,6 +240,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($descrBreve === '') $errors[] = 'Inserisci la descrizione breve';
         if ($descr === '') $errors[] = 'Inserisci la descrizione dettagliata';
         if ($prezzo <= 0) $errors[] = 'Prezzo non valido';
+        if ($prezzo > 50000) $errors[] = 'Il prezzo non può superare €50.000';
         if ($posti <= 0) $errors[] = 'Capacità non valida';
         $hasNewImage = isset($_FILES['product_image_main']) && $_FILES['product_image_main']['error'] !== UPLOAD_ERR_NO_FILE;
         if (!$hasNewImage && $urlImg === '') {
@@ -274,6 +275,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $prezzoVal = filter_var($prezzoRaw, FILTER_VALIDATE_INT, ['options' => ['min_range' => 1]]);
                 if ($prezzoVal === false) {
                     $errors[] = 'Prezzo extra non valido';
+                    continue;
+                }
+                if ($prezzoVal > 10000) {
+                    $errors[] = 'Il prezzo extra non può superare €10.000';
                     continue;
                 }
                 $extras[] = [
