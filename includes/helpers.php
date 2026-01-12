@@ -361,7 +361,7 @@ function buildExtraRowsHtml(array $extraSelezionati, array $extraDisponibili): s
                 
                 $html .= '<div>' . "\n";
                 $html .= '    <dt>' . $nomeExtra . ':</dt>' . "\n";
-                $html .= '    <dd>€ ' . $prezzoExtraFormattato . '</dd>' . "\n";
+                $html .= '    <dd>+ € ' . $prezzoExtraFormattato . '</dd>' . "\n";
                 $html .= '</div>';
                 break;
             }
