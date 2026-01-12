@@ -21,23 +21,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $bookingId = isset($_POST['booking_id']) ? (int) $_POST['booking_id'] : 0;
 
     if (!verifyCsrfToken($csrf)) {
-        $feedbackState = 'error';
+        $feedbackState = 'error-message';
         $feedbackMsg = 'Sessione scaduta, ricarica la pagina.';
     } elseif ($action === 'cancel_booking' && $bookingId > 0) {
         $booking = $db->getPrenotazioneById($bookingId);
         if (!is_array($booking) || (int)($booking['IDUtente'] ?? 0) !== $userId) {
-            $feedbackState = 'error';
+            $feedbackState = 'error-message';
             $feedbackMsg = 'Prenotazione non trovata.';
         } elseif (($booking['Stato_Prenotazione'] ?? '') === 'Cancellata') {
-            $feedbackState = 'success';
+            $feedbackState = 'success-message';
             $feedbackMsg = 'Prenotazione già annullata.';
         } else {
             $ok = $db->updatePrenotazioneStato($bookingId, 'Cancellata', $booking['Note_Addizionali'] ?? null);
             if ($ok) {
-                $feedbackState = 'success';
+                $feedbackState = 'success-message';
                 $feedbackMsg = 'Prenotazione annullata correttamente.';
             } else {
-                $feedbackState = 'error';
+                $feedbackState = 'error-message';
                 $feedbackMsg = 'Impossibile annullare la prenotazione.';
             }
         }

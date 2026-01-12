@@ -144,10 +144,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!bookingsTable) return;
 
     const rows = document.querySelectorAll('.booking-row');
+    const filterTabs = document.querySelectorAll('.filter-tab');
+    
     const badgeAll = document.getElementById('badge-all');
     const badgeActive = document.getElementById('badge-active');
     const badgeCompleted = document.getElementById('badge-completed');
+    
     const noBookingsMsg = document.getElementById('no-bookings-message');
+    const tableContainer = bookingsTable.closest('.table-container') || bookingsTable.parentElement;
 
     function updateCounters() {
         const total = rows.length;
@@ -159,42 +163,50 @@ document.addEventListener('DOMContentLoaded', () => {
         if (badgeCompleted) badgeCompleted.textContent = completedCount;
     }
 
-    // Inizializza i contatori
-    updateCounters();
-
-    window.filterBookings = function (status) {
+    function applyFilter(status) {
         let visibleCount = 0;
 
         rows.forEach(row => {
             const rowStatus = row.getAttribute('data-status');
-
+            
             if (status === 'all' || rowStatus === status) {
-                row.style.display = '';
+                row.style.display = ''; 
                 visibleCount++;
             } else {
-                row.style.display = 'none';
+                row.style.display = 'none'; 
             }
         });
 
-        // Se non ci sono risultati
         if (visibleCount === 0) {
-            bookingsTable.parentElement.classList.add('hidden'); // Nasconde il contenitore tabella e mostra messaggio vuoto
-            noBookingsMsg.classList.remove('hidden');
+            if(tableContainer) tableContainer.classList.add('hidden');
+            if(noBookingsMsg) noBookingsMsg.classList.remove('hidden');
         } else {
-            bookingsTable.parentElement.classList.remove('hidden');
-            noBookingsMsg.classList.add('hidden');
+            if(tableContainer) tableContainer.classList.remove('hidden');
+            if(noBookingsMsg) noBookingsMsg.classList.add('hidden');
         }
 
-        document.querySelectorAll('.filter-tab').forEach(btn => {
+        filterTabs.forEach(btn => {
             btn.classList.remove('active');
             btn.setAttribute('aria-selected', 'false');
 
-            if (btn.id === `tab-${status}`) {
+            if (btn.getAttribute('data-filter') === status) {
                 btn.classList.add('active');
                 btn.setAttribute('aria-selected', 'true');
             }
         });
-    };
+    }
+
+    updateCounters();
+    applyFilter('all');
+
+    filterTabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            const filterValue = this.getAttribute('data-filter');
+            if (filterValue) {
+                applyFilter(filterValue);
+            }
+        });
+    });
 });
 
 /* ---------------------------------------

@@ -82,17 +82,21 @@
           <section aria-labelledby="bookings-title">
             <h2 id="bookings-title">Le Mie Prenotazioni</h2>
 
+            <div id="server-messages" class="form-messages [BOOKINGS_SERVER_STATE]" role="status" aria-live="polite">
+                [BOOKINGS_SERVER_MESSAGES]
+            </div>
+
             <div class="bookings-filters">
               <fieldset>
                 <legend class="sr-only">Filtra prenotazioni</legend>
                 <div class="filter-tabs" aria-label="Filtri prenotazioni">
-                  <button type="button" id="tab-all" class="filter-tab active" onclick="filterBookings('all')">
+                  <button type="button" id="tab-all" class="filter-tab active" data-filter="all">
                     Tutte <span id="badge-all" class="badge">0</span>
                   </button>
-                  <button type="button" id="tab-active" class="filter-tab" onclick="filterBookings('active')">
+                  <button type="button" id="tab-active" class="filter-tab" data-filter="active">
                     Attive <span id="badge-active" class="badge badge-accent">0</span>
                   </button>
-                  <button type="button" id="tab-completed" class="filter-tab" onclick="filterBookings('completed')">
+                  <button type="button" id="tab-completed" class="filter-tab" data-filter="completed">
                     Completate <span id="badge-completed" class="badge">0</span>
                   </button>
                 </div>

@@ -143,8 +143,8 @@
             <span id="product-features-hint" class="field-hint">Inserisci un extra incluso per riga</span>
           </div>
 
-          <div class="checkbox-options">
-            <p class="checkbox-options-title">Opzioni Aggiuntive</p>
+          <div>
+            <p >Opzioni Aggiuntive:</p>
 
             <div class="checkbox-group hidden" id="license-option">
               <input type="checkbox" id="requires-license" name="requires-license" [CHECK_PATENTE] />
@@ -178,10 +178,10 @@
                 <input type="number" name="extra_price[]" min="1" step="1" placeholder="50" />
                 <span class="field-error extra-price-error" role="alert"></span>
               </div>
-              <button type="button" class="btn-danger btn-sm remove-extra" aria-label="Rimuovi extra">Rimuovi</button>
+              <button type="button" class="btn-danger remove-extra" aria-label="Rimuovi extra">Rimuovi</button>
             </div>
           </template>
-          <button type="button" class="btn-layout-light btn-sm" id="add-product-extra">Aggiungi extra</button>
+          <button type="button" class="btn-layout-light" id="add-product-extra">Aggiungi extra</button>
         </fieldset>
 
         <fieldset id="boat-type-fieldset" class="hidden">
@@ -264,7 +264,7 @@
         </fieldset>
 
         <div class="form-actions">
-          <button type="button" class="btn-layout-light" onclick="history.back()">Annulla</button>
+          <a href="admin_prodotti.php" class="btn-layout-light">Annulla</a>
           <button type="submit" class="btn-layout">Salva Prodotto</button>
         </div>
       </form>
