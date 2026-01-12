@@ -361,7 +361,7 @@ function buildExtraRowsHtml(array $extraSelezionati, array $extraDisponibili): s
                 
                 $html .= '<div>' . "\n";
                 $html .= '    <dt>' . $nomeExtra . ':</dt>' . "\n";
-                $html .= '    <dd>€ ' . $prezzoExtraFormattato . '</dd>' . "\n";
+                $html .= '    <dd>+ € ' . $prezzoExtraFormattato . '</dd>' . "\n";
                 $html .= '</div>';
                 break;
             }
@@ -973,8 +973,8 @@ function buildAdminBlogRows(array $articoli, string $csrfToken): string {
         $titolo = htmlspecialchars($a['Titolo'] ?? '');
         $idArticolo = htmlspecialchars($a['IDArticolo']);
         $actionValue = $statoPub ? 'draft' : 'publish';
-        $actionLabel = $statoPub ? 'Imposta bozza' : 'Pubblica';
-        $ariaActionLabel = $statoPub ? 'Imposta come bozza' : 'Pubblica';
+        $actionLabel = $statoPub ? 'Ritira' : 'Pubblica';
+        $ariaActionLabel = $statoPub ? 'Ritira pubblicazione' : 'Pubblica';
         //costruisce l url della pagina di modifica passando l id della articolo in querystring
         $editUrl = 'admin_blog_nuovo.php?id=' . rawurlencode($a['IDArticolo']);
         $rows .= '<tr>'
@@ -1033,6 +1033,29 @@ function buildAdminBookingRows(array $pren, string $csrfToken): string {
         $idProd = htmlspecialchars($p['IDProdotto']);
         $cliente = htmlspecialchars(($p['Utente_Nome'] ?? '') . ' ' . ($p['Utente_Cognome'] ?? ''));
 
+        $confirmBtn = '';
+        $cancelBtn = '';
+        
+        // Mostra il pulsante Conferma solo se lo stato non è già Confermata
+        if ($statoRaw !== 'Confermata') {
+            $confirmBtn = '<form method="post" class="inline-form">'
+                . '<input type="hidden" name="csrf_token" value="' . htmlspecialchars($csrfToken) . '">'
+                . '<input type="hidden" name="id_prenotazione" value="' . $idPren . '">'
+                . '<input type="hidden" name="action" value="confirm">'
+                . '<button type="submit" class="btn-layout btn-sm">Conferma</button>'
+                . '</form>';
+        }
+        
+        // Mostra il pulsante Cancella solo se lo stato non è già Cancellata
+        if ($statoRaw !== 'Cancellata') {
+            $cancelBtn = '<form method="post" class="inline-form" data-confirm-type="cancel-booking">'
+                . '<input type="hidden" name="csrf_token" value="' . htmlspecialchars($csrfToken) . '">'
+                . '<input type="hidden" name="id_prenotazione" value="' . $idPren . '">'
+                . '<input type="hidden" name="action" value="cancel">'
+                . '<button type="submit" class="btn-danger btn-sm">Cancella</button>'
+                . '</form>';
+        }
+
         $rows .= '<tr>'
             . '<td data-label="ID">' . $idPren . '</td>'
             . '<td data-label="Prodotto">' . $idProd . '</td>'
@@ -1045,18 +1068,8 @@ function buildAdminBookingRows(array $pren, string $csrfToken): string {
             . '<td data-label="Stato"><span class="status-badge ' . $badgeClass . '">' . htmlspecialchars($statoRaw) . '</span></td>'
             . '<td data-label="Azioni" class="actions-cell">'
                 . '<a href="dettaglio_prenotazione.php?id=' . $idPren . '" class="btn-layout-light btn-sm">Dettagli</a>'
-                . '<form method="post" class="inline-form">'
-                    . '<input type="hidden" name="csrf_token" value="' . htmlspecialchars($csrfToken) . '">'
-                    . '<input type="hidden" name="id_prenotazione" value="' . $idPren . '">'
-                    . '<input type="hidden" name="action" value="confirm">'
-                    . '<button type="submit" class="btn-layout btn-sm">Conferma</button>'
-                . '</form>'
-                . '<form method="post" class="inline-form" data-confirm-type="cancel-booking">'
-                    . '<input type="hidden" name="csrf_token" value="' . htmlspecialchars($csrfToken) . '">'
-                    . '<input type="hidden" name="id_prenotazione" value="' . $idPren . '">'
-                    . '<input type="hidden" name="action" value="cancel">'
-                    . '<button type="submit" class="btn-danger btn-sm">Cancella</button>'
-                . '</form>'
+                . $confirmBtn
+                . $cancelBtn
             . '</td>'
             . '</tr>';
     }
