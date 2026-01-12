@@ -6,8 +6,9 @@ require_once '../../includes/helpers.php';
 
 requireLogin();
 
-//per cambiare immagine 
-function handleProfileImageUpload(int $userId): array {
+// Funzione per gestire l'upload dell'immagine
+function handleProfileImageUpload(int $userId): array
+{
     $result = ['url' => null, 'error' => null, 'file' => null];
 
     if (!isset($_FILES['profile_image']) || $_FILES['profile_image']['error'] === UPLOAD_ERR_NO_FILE) {
@@ -132,24 +133,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (!verifyCsrfToken($csrf)) {
         if ($formType === 'password') {
-            $pwState = 'error';
+            $pwState = 'error-message';
             $pwMsg = 'Sessione scaduta, ricarica la pagina.';
         } elseif ($formType === 'delete_account') {
-            $profileState = 'error';
+            $profileState = 'error-message';
             $profileMsg = 'Sessione scaduta, ricarica la pagina.';
         } else {
-            $profileState = 'error';
+            $profileState = 'error-message';
             $profileMsg = 'Sessione scaduta, ricarica la pagina.';
         }
     } elseif ($formType === 'password') {
         $current = $_POST['current-password'] ?? '';
-        $new     = $_POST['new-password'] ?? '';
+        $new = $_POST['new-password'] ?? '';
         $confirm = $_POST['confirm-password'] ?? '';
 
         $errors = [];
-        if ($current === '') $errors[] = 'Inserisci la password attuale';
-        if (!validatePassword($new)) $errors[] = 'La nuova password non rispetta i requisiti';
-        if ($new !== $confirm) $errors[] = 'Le password non coincidono';
+        if ($current === '')
+            $errors[] = 'Inserisci la password attuale';
+        if (!validatePassword($new))
+            $errors[] = 'La nuova password non rispetta i requisiti';
+        if ($new !== $confirm)
+            $errors[] = 'Le password non coincidono';
 
         if (empty($errors)) {
             $db = new DBConnection();
@@ -158,8 +162,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $errors[] = 'Password attuale errata';
             } else {
                 $newHash = password_hash($new, PASSWORD_DEFAULT);
-                if ($db->updateUserPassword((int)$user['IDUtente'], $newHash)) {
-                    $pwState = 'success';
+                if ($db->updateUserPassword((int) $user['IDUtente'], $newHash)) {
+                    $pwState = 'success-message';
                     $pwMsg = 'Password aggiornata con successo.';
                     // Aggiorna la sessione
                     $user['PasswordHash'] = $newHash;
@@ -171,37 +175,50 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         if (!empty($errors)) {
-            $pwState = 'error';
-            $pwMsg = htmlspecialchars(implode(' | ', $errors));
+            $pwState = 'error-message';
+            $pwMsg = '<ul>';
+            foreach ($errors as $err) {
+                $pwMsg .= '<li>' . htmlspecialchars($err) . '</li>';
+            }
+            $pwMsg .= '</ul>';
         }
     } elseif ($formType === 'profile') {
-        $nome      = trim($_POST['nome'] ?? '');
-        $cognome   = trim($_POST['cognome'] ?? '');
-        $cf        = strtoupper(trim($_POST['cf'] ?? ''));
-        $email     = trim($_POST['email'] ?? '');
-        $via       = trim($_POST['indirizzo_via'] ?? '');
-        $civico    = trim($_POST['indirizzo_civico'] ?? '');
-        $cap       = trim($_POST['indirizzo_cap'] ?? '');
-        $citta     = trim($_POST['indirizzo_citta'] ?? '');
+        $nome = trim($_POST['nome'] ?? '');
+        $cognome = trim($_POST['cognome'] ?? '');
+        $cf = strtoupper(trim($_POST['cf'] ?? ''));
+        $email = trim($_POST['email'] ?? '');
+        $via = trim($_POST['indirizzo_via'] ?? '');
+        $civico = trim($_POST['indirizzo_civico'] ?? '');
+        $cap = trim($_POST['indirizzo_cap'] ?? '');
+        $citta = trim($_POST['indirizzo_citta'] ?? '');
         $provincia = strtoupper(trim($_POST['indirizzo_provincia'] ?? ''));
-        $paese     = trim($_POST['indirizzo_paese'] ?? 'IT');
+        $paese = trim($_POST['indirizzo_paese'] ?? 'IT');
 
         $errors = [];
-        if (!isValidName($nome)) $errors[] = 'Nome non valido';
-        if (!isSurnameValid($cognome)) $errors[] = 'Cognome non valido';
-        if (!isValidCF($cf)) $errors[] = 'Codice fiscale non valido';
-        if (!isValidEmail($email)) $errors[] = 'Email non valida';
-        if (!isValidIndirizzo($via)) $errors[] = 'Via non valida';
-        if (!isValidCivico($civico)) $errors[] = 'Civico non valido';
-        if (!isValidCAP($cap)) $errors[] = 'CAP non valido';
-        if (!isValidCitta($citta)) $errors[] = 'Città non valida';
-        if (!isValidProvincia($provincia)) $errors[] = 'Provincia non valida';
+        if (!isValidName($nome))
+            $errors[] = 'Nome non valido';
+        if (!isSurnameValid($cognome))
+            $errors[] = 'Cognome non valido';
+        if (!isValidCF($cf))
+            $errors[] = 'Codice fiscale non valido';
+        if (!isValidEmail($email))
+            $errors[] = 'Email non valida';
+        if (!isValidIndirizzo($via))
+            $errors[] = 'Via non valida';
+        if (!isValidCivico($civico))
+            $errors[] = 'Civico non valido';
+        if (!isValidCAP($cap))
+            $errors[] = 'CAP non valido';
+        if (!isValidCitta($citta))
+            $errors[] = 'Città non valida';
+        if (!isValidProvincia($provincia))
+            $errors[] = 'Provincia non valida';
 
         if (empty($errors)) {
             $okAddr = true;
             if (!empty($user['IDIndirizzo'])) {
                 $okAddr = $db->updateIndirizzo(
-                    (int)$user['IDIndirizzo'],
+                    (int) $user['IDIndirizzo'],
                     $via,
                     $civico,
                     $cap,
@@ -214,7 +231,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (!$okAddr) {
                 $errors[] = 'Errore nell\'aggiornamento indirizzo';
             } else {
-                $res = $db->updateUserProfile((int)$user['IDUtente'], $nome, $cognome, $cf, $email);
+                $res = $db->updateUserProfile((int) $user['IDUtente'], $nome, $cognome, $cf, $email);
                 if ($res === true) {
                     $user['Nome'] = $nome;
                     $user['Cognome'] = $cognome;
@@ -222,17 +239,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $user['Email'] = $email;
                     $_SESSION['user'] = $user;
 
-                    $uploadRes = handleProfileImageUpload((int)$user['IDUtente']);
+                    $uploadRes = handleProfileImageUpload((int) $user['IDUtente']);
                     $uploadError = !empty($uploadRes['error']);
                     if ($uploadError) {
-                        $profileState = 'error';
+                        $profileState = 'error-message';
                         $profileMsg = htmlspecialchars($uploadRes['error']);
                     } elseif (!empty($uploadRes['url'])) {
                         $profileImageUrl = $uploadRes['url'];
                         $_SESSION['user']['AvatarFile'] = $uploadRes['file'];
-                        $mediaOk = $db->upsertMediaUtente((int)$user['IDUtente'], $uploadRes['url'], 'Avatar utente');
+                        $mediaOk = $db->upsertMediaUtente((int) $user['IDUtente'], $uploadRes['url'], 'Avatar utente');
                         if (!$mediaOk) {
-                            $profileState = 'error';
+                            $profileState = 'error-message';
                             $profileMsg = 'Errore durante il salvataggio immagine profilo.';
                         }
                     }
@@ -247,7 +264,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     ];
 
                     if (empty($uploadError)) {
-                        $profileState = 'success';
+                        $profileState = 'success-message';
                         $profileMsg = 'Profilo aggiornato correttamente.';
                     }
                 } elseif ($res === -1) {
@@ -261,21 +278,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         if (!empty($errors)) {
-            $profileState = 'error';
-            $profileMsg = htmlspecialchars(implode(' | ', $errors));
+            $profileState = 'error-message';
+            $profileMsg = '<ul>';
+            foreach ($errors as $err) {
+                $profileMsg .= '<li>' . htmlspecialchars($err) . '</li>';
+            }
+            $profileMsg .= '</ul>';
         }
     } elseif ($formType === 'delete_account') {
         // Elimina l'account
-        $userId = (int)$user['IDUtente'];
+        $userId = (int) $user['IDUtente'];
         $deleted = $db->deleteUser($userId);
-        
+
         if ($deleted) {
             // Logout e redirect
             session_destroy();
             header('Location: index.php');
             exit;
         } else {
-            $profileState = 'error';
+            $profileState = 'error-message';
             $profileMsg = 'Errore durante l\'eliminazione dell\'account. Riprova.';
         }
     }
@@ -288,9 +309,9 @@ $placeholders = [
     '[USER_CF]' => htmlspecialchars($user['CF'] ?? ''),
     '[CSRF_TOKEN]' => htmlspecialchars(getCsrfToken()),
     '[PROFILE_SERVER_STATE]' => $profileState,
-    '[PROFILE_SERVER_MESSAGES]' => htmlspecialchars($profileMsg),
+    '[PROFILE_SERVER_MESSAGES]' => $profileMsg,
     '[PW_SERVER_STATE]' => $pwState,
-    '[PW_SERVER_MESSAGES]' => htmlspecialchars($pwMsg),
+    '[PW_SERVER_MESSAGES]' => $pwMsg,
     '[PROFILE_IMAGE_URL]' => htmlspecialchars($profileImageUrl),
 ] + $addrPlaceholders;
 

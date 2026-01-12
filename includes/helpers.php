@@ -1114,16 +1114,21 @@ function buildAdminProductRows(array $prodotti, string $csrfToken): string {
 //builda la tabella delle prenotazioni di un utente/anche admin se ha fatto prenotazioni personali
 function buildProfileBookingRows(array $prenotazioni, string $csrfToken): string {
     if (empty($prenotazioni)) {
-        return '<tr><td colspan="6">Nessuna prenotazione trovata.</td></tr>';
+        return '';
     }
 
     $rowsHtml = '';
     foreach ($prenotazioni as $p) {
         $statoRaw = $p['Stato_Prenotazione'] ?? '';
+        
+        $filterStatus = 'active'; 
+        if ($statoRaw === 'Cancellata' || $statoRaw === 'Completata') {
+            $filterStatus = 'completed';
+        }
+
         $badgeClass = 'pending';
         if ($statoRaw === 'Confermata') $badgeClass = 'active';
         if ($statoRaw === 'Cancellata') $badgeClass = 'cancelled';
-        if (in_array($statoRaw, ['Completata', 'Conclusa'])) $badgeClass = 'completed';
 
         $startRaw = $p['Data_Ora_Inizio'] ?? '';
         $endRaw = $p['Data_Ora_Fine'] ?? '';
@@ -1139,7 +1144,7 @@ function buildProfileBookingRows(array $prenotazioni, string $csrfToken): string
         
         $isCancellable = in_array($badgeClass, ['active', 'pending'], true);
 
-        $rowsHtml .= '<tr>'
+        $rowsHtml .= '<tr class="booking-row" data-status="' . $filterStatus . '">'
             . '<td data-label="ID">' . $idPren . '</td>'
             . '<td data-label="Prodotto">' . $idProd . '</td>'
             . '<td data-label="Periodo">'

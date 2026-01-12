@@ -34,7 +34,11 @@ $state = empty($errors) ? 'hidden' : 'error-message';
 
 $messageText = '';
 if (!empty($errors)) {
-    $messageText = htmlspecialchars(implode(' | ', $errors));
+    $messageText = '<ul>';
+    foreach ($errors as $err) {
+        $messageText .= '<li>' . htmlspecialchars($err) . '</li>';
+    }
+    $messageText .= '</ul>';
 }
 
 $html = str_replace(

@@ -1879,6 +1879,7 @@ a.product-cta:focus-visible {
   align-items: center;
   justify-content: center;
   gap: 0.5em;
+  margin-bottom: 0.5em;
 }
 
 .filter-tab:hover {
