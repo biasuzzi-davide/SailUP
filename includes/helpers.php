@@ -973,8 +973,8 @@ function buildAdminBlogRows(array $articoli, string $csrfToken): string {
         $titolo = htmlspecialchars($a['Titolo'] ?? '');
         $idArticolo = htmlspecialchars($a['IDArticolo']);
         $actionValue = $statoPub ? 'draft' : 'publish';
-        $actionLabel = $statoPub ? 'Imposta bozza' : 'Pubblica';
-        $ariaActionLabel = $statoPub ? 'Imposta come bozza' : 'Pubblica';
+        $actionLabel = $statoPub ? 'Ritira' : 'Pubblica';
+        $ariaActionLabel = $statoPub ? 'Ritira pubblicazione' : 'Pubblica';
         //costruisce l url della pagina di modifica passando l id della articolo in querystring
         $editUrl = 'admin_blog_nuovo.php?id=' . rawurlencode($a['IDArticolo']);
         $rows .= '<tr>'
