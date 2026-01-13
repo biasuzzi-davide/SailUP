@@ -81,8 +81,8 @@ function isValidIndirizzo(string $indirizzo): bool {
         return false;
     }
 
-    // massimo 30 caratteri
-    if (strlen($indirizzo) > 30) {
+    // massimo 80 caratteri
+    if (strlen($indirizzo) > 80) {
         return false;
     }
 
@@ -101,11 +101,10 @@ function isValidCAP(string $cap): bool {
     return preg_match('/^[0-9]{5}$/', trim($cap)) === 1;
 }
 
-//citta, lettere/spazi/apostrofi/trattini, 2-inf caratteri
+//citta, lettere/spazi/apostrofi/trattini, 2-80 caratteri
 function isValidCitta(string $citta): bool {
     $citta = trim($citta);
-    // Ho cambiato {2,20} in {2,50}
-    return $citta !== '' && preg_match("/^[A-Za-zÀ-ÿ'\\s-]{2,50}$/", $citta);
+    return $citta !== '' && preg_match("/^[A-Za-zÀ-ÿ'\\s-]{2,80}$/", $citta);
 }
 
 //provincia, 2 lettere
