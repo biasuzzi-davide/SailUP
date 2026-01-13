@@ -922,7 +922,7 @@ function buildAdminUsersRows(array $users, string $csrfToken, ?int $currentUserI
         
         // Non permettere di eliminare se stesso
         if ($isCurrentUser) {
-            $rows .= '<span class="text-muted">Non puoi eliminare te stesso</span>';
+            $rows .= '<span class="text-muted">Account in uso</span>';
         } else {
             $rows .= '<form method="post" class="inline-form" data-confirm-type="delete-user">';
             $rows .= '<input type="hidden" name="csrf_token" value="' . htmlspecialchars($csrfToken) . '">';

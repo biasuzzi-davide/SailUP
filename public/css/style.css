@@ -1798,35 +1798,33 @@ a.product-cta:focus-visible {
 }
 
 .stats-grid {
-  display: grid;
-  grid-template-columns: repeat(auto, minmax(200px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 1.5em;
   margin-bottom: 1.5em;
 }
 
 .stat-card {
+  flex: 1 1 30%; 
+  min-width: 250px; 
+  min-height: 140px;
+  padding: 1.5em;
   background: var(--col-primary);
   color: var(--col-text-inv);
-  padding: 1.5em;
   border-radius: var(--radius-card);
-  text-align: center;
   box-shadow: var(--shadow-md);
-  word-wrap: normal;
-  overflow: hidden;
-  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .stat-number {
+  font-family: var(--font-head);
   font-size: var(--fs-lg);
   font-weight: 700;
-  font-family: var(--font-head);
   margin-bottom: 0.3em;
-}
-
-.stat-label {
-  font-size: var(--fs-sm);
-  opacity: 0.9;
-  margin: 0;
+  white-space: nowrap;
 }
 
 .admin-section {
