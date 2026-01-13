@@ -1876,8 +1876,17 @@ class DBConnection {
                 case 'duration':
                     $orderClause = 'ORDER BY COALESCE(p.Durata_Ore, 0) ASC, p.IDProdotto ASC';
                     break;
-                case 'size':
+                case 'size-asc':
+                    $orderClause = 'ORDER BY COALESCE(p.Lunghezza_Barca_Metri, 0) ASC, p.IDProdotto ASC';
+                    break;
+                case 'size-desc':
                     $orderClause = 'ORDER BY COALESCE(p.Lunghezza_Barca_Metri, 0) DESC, p.IDProdotto ASC';
+                    break;
+                case 'capacity-asc':
+                    $orderClause = 'ORDER BY COALESCE(p.Posti_Totali, 0) ASC, p.IDProdotto ASC';
+                    break;
+                case 'capacity-desc':
+                    $orderClause = 'ORDER BY COALESCE(p.Posti_Totali, 0) DESC, p.IDProdotto ASC';
                     break;
             }
 
