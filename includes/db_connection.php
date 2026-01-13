@@ -573,9 +573,7 @@ class DBConnection {
      */
     public function searchUtenti(
         ?string $term = null,
-        ?string $ruolo = null,
-        int $limit = 20,
-        int $offset = 0
+        ?string $ruolo = null
     ): array|bool {
         $this->openConnection();
 
@@ -598,17 +596,14 @@ class DBConnection {
             $conditions[] = 'Is_Admin = 0';
         }
 
-        $query = "SELECT SQL_CALC_FOUND_ROWS IDUtente, Nome, Cognome, Email, Data_Registrazione, Is_Admin
+        $query = "SELECT IDUtente, Nome, Cognome, Email, Data_Registrazione, Is_Admin
                   FROM Utente";
 
         if (!empty($conditions)) {
             $query .= ' WHERE ' . implode(' AND ', $conditions);
         }
 
-        $query .= ' ORDER BY Data_Registrazione DESC LIMIT ? OFFSET ?';
-        $params[] = $limit;
-        $params[] = $offset;
-        $types .= 'ii';
+        $query .= ' ORDER BY Data_Registrazione DESC';
 
         try {
             $stmt = $this->connection->prepare($query);
@@ -617,7 +612,9 @@ class DBConnection {
                 return false;
             }
 
-            $stmt->bind_param($types, ...$params);
+            if (!empty($types)) {
+                $stmt->bind_param($types, ...$params);
+            }
             $stmt->execute();
             $result = $stmt->get_result();
 
@@ -628,16 +625,8 @@ class DBConnection {
 
             $stmt->close();
 
-            $countResult = $this->connection->query("SELECT FOUND_ROWS() AS total");
-            $total = 0;
-            if ($countResult) {
-                $totalRow = $countResult->fetch_assoc();
-                $total = (int) ($totalRow['total'] ?? 0);
-                $countResult->free();
-            }
-
             $this->closeConnection();
-            return ['data' => $rows, 'total' => $total];
+            return $rows;
         } catch (Throwable $t) {
             $this->closeConnection();
             return false;
@@ -834,9 +823,7 @@ class DBConnection {
     public function getProdottiAdmin(
         ?string $term = null,
         ?string $tipo = null,
-        ?string $stato = null,
-        int $limit = 20,
-        int $offset = 0
+        ?string $stato = null
     ): array|bool {
         $this->openConnection();
 
@@ -864,17 +851,14 @@ class DBConnection {
             $conditions[] = 'Attivo = 0';
         }
 
-        $query = "SELECT SQL_CALC_FOUND_ROWS *
+        $query = "SELECT *
                   FROM Prodotto";
 
         if (!empty($conditions)) {
             $query .= ' WHERE ' . implode(' AND ', $conditions);
         }
 
-        $query .= ' ORDER BY Data_Creazione DESC LIMIT ? OFFSET ?';
-        $params[] = $limit;
-        $params[] = $offset;
-        $types .= 'ii';
+        $query .= ' ORDER BY Data_Creazione DESC';
 
         try {
             $stmt = $this->connection->prepare($query);
@@ -883,7 +867,9 @@ class DBConnection {
                 return false;
             }
 
-            $stmt->bind_param($types, ...$params);
+            if (!empty($types)) {
+                $stmt->bind_param($types, ...$params);
+            }
             $stmt->execute();
             $result = $stmt->get_result();
 
@@ -893,16 +879,8 @@ class DBConnection {
             }
             $stmt->close();
 
-            $countResult = $this->connection->query("SELECT FOUND_ROWS() AS total");
-            $total = 0;
-            if ($countResult) {
-                $totalRow = $countResult->fetch_assoc();
-                $total = (int) ($totalRow['total'] ?? 0);
-                $countResult->free();
-            }
-
             $this->closeConnection();
-            return ['data' => $rows, 'total' => $total];
+            return $rows;
         } catch (Throwable $t) {
             $this->closeConnection();
             return false;
@@ -2193,7 +2171,7 @@ class DBConnection {
     /**
      * recupera articoli area admin
      */
-    public function getArticoliAdmin(?string $term = null, int $limit = 20, int $offset = 0): array|bool {
+    public function getArticoliAdmin(?string $term = null): array|bool {
         $this->openConnection();
 
         $conditions = [];
@@ -2209,7 +2187,7 @@ class DBConnection {
         }
 
         $query = "
-            SELECT SQL_CALC_FOUND_ROWS a.*, u.Nome AS Autore_Nome, u.Cognome AS Autore_Cognome,
+            SELECT a.*, u.Nome AS Autore_Nome, u.Cognome AS Autore_Cognome,
                    (SELECT URL_Media FROM Media WHERE IDArticolo = a.IDArticolo LIMIT 1) AS URL_Media
             FROM Articolo_Blog a
             JOIN Utente u ON u.IDUtente = a.IDAutore
@@ -2219,10 +2197,7 @@ class DBConnection {
             $query .= ' WHERE ' . implode(' AND ', $conditions);
         }
 
-        $query .= ' ORDER BY a.Data_Pubblicazione DESC, a.IDArticolo DESC LIMIT ? OFFSET ?';
-        $params[] = $limit;
-        $params[] = $offset;
-        $types .= 'ii';
+        $query .= ' ORDER BY a.Data_Pubblicazione DESC, a.IDArticolo DESC';
 
         try {
             $stmt = $this->connection->prepare($query);
@@ -2230,7 +2205,9 @@ class DBConnection {
                 $this->closeConnection();
                 return false;
             }
-            $stmt->bind_param($types, ...$params);
+            if (!empty($types)) {
+                $stmt->bind_param($types, ...$params);
+            }
             $stmt->execute();
             $result = $stmt->get_result();
 
@@ -2240,16 +2217,8 @@ class DBConnection {
             }
             $stmt->close();
 
-            $countResult = $this->connection->query("SELECT FOUND_ROWS() AS total");
-            $total = 0;
-            if ($countResult) {
-                $totalRow = $countResult->fetch_assoc();
-                $total = (int) ($totalRow['total'] ?? 0);
-                $countResult->free();
-            }
-
             $this->closeConnection();
-            return ['data' => $rows, 'total' => $total];
+            return $rows;
         } catch (Throwable $t) {
             $this->closeConnection();
             return false;
