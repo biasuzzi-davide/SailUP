@@ -97,15 +97,15 @@
                 [PROFILE_SERVER_MESSAGES]
               </div>
 
-              <form id="edit-profile-form" method="post" novalidate enctype="multipart/form-data">
+              <form id="edit-profile-form" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="csrf_token" value="[CSRF_TOKEN]">
                 <input type="hidden" name="form_type" value="profile">
                 <div class="form-group">
                   <label for="nome">Nome</label>
                   <input type="text" id="nome" name="nome" value="[USER_NOME]"
                     aria-describedby="nome-hint nome-error" autocomplete="given-name"
-                    placeholder="Es. Mario" pattern="^[A-Za-z\sÀ-ÿ'']{2,50}$">
-                  <span id="nome-hint" class="field-hint">Almeno 2 caratteri, non numeri o caratteri speciali.</span>
+                    placeholder="Es. Mario" pattern="^[A-Za-z\s]{2,50}$" maxlength="50">
+                  <span id="nome-hint" class="field-hint">Almeno 2 caratteri, solo lettere e spazi.</span>
                   <span id="nome-error" class="field-error" role="alert"></span>
                 </div>
 
@@ -113,8 +113,8 @@
                   <label for="cognome">Cognome</label>
                   <input type="text" id="cognome" name="cognome" value="[USER_COGNOME]" required
                     aria-describedby="cognome-hint cognome-error" autocomplete="family-name"
-                    placeholder="Es. Rossi" pattern="^[A-Za-z\sÀ-ÿ'']{2,50}$">
-                  <span id="cognome-hint" class="field-hint">Almeno 2 caratteri, non numeri o caratteri speciali.</span>
+                    placeholder="Es. Rossi" pattern="^[A-Za-z\s]{2,50}$" maxlength="50">
+                  <span id="cognome-hint" class="field-hint">Almeno 2 caratteri, solo lettere e spazi.</span>
                   <span id="cognome-error" class="field-error" role="alert"></span>
                 </div>
 
@@ -143,8 +143,8 @@
                         <label for="indirizzo_via">Via / Piazza</label>
                         <input type="text" id="indirizzo_via" name="indirizzo_via" value="[ADDR_VIA]" required
                         aria-describedby="via-hint indirizzo_via-error" autocomplete="address-line1"
-                        placeholder="Es. Via Caracciolo">
-                        <span id="via-hint" class="field-hint">Inserire il nome della via o della piazza.</span>
+                        placeholder="Es. Via Caracciolo" maxlength="80" pattern="^[A-Za-z0-9\s,\.\-/]+$">
+                        <span id="via-hint" class="field-hint">Lettere, numeri, spazi e caratteri , . - /</span>
                         <span id="indirizzo_via-error" class="field-error" role="alert"></span>
                     </div>
 
@@ -152,8 +152,8 @@
                         <label for="indirizzo_civico"><abbr title="Numero">N.</abbr> Civico</label>
                         <input type="text" id="indirizzo_civico" name="indirizzo_civico" value="[ADDR_CIVICO]" required
                         aria-describedby="civico-hint indirizzo_civico-error" autocomplete="address-line2"
-                        placeholder="10">
-                        <span id="civico-hint" class="field-hint">Inserire il numero civico.</span>
+                        placeholder="10" maxlength="5" pattern="^[0-9]{1,5}$">
+                        <span id="civico-hint" class="field-hint">Inserire il numero civico (1-5 cifre).</span>
                         <span id="indirizzo_civico-error" class="field-error" role="alert"></span>
                     </div>
 
@@ -170,8 +170,8 @@
                         <label for="indirizzo_citta">Città</label>
                         <input type="text" id="indirizzo_citta" name="indirizzo_citta" value="[ADDR_CITTA]" required
                         aria-describedby="citta-hint indirizzo_citta-error" autocomplete="address-level2"
-                        placeholder="Es. Napoli">
-                        <span id="citta-hint" class="field-hint">Inserire il comune di residenza.</span>
+                        placeholder="Es. Napoli" maxlength="80" pattern="^[A-Za-zÀ-ÿ'\s-]{2,80}$">
+                        <span id="citta-hint" class="field-hint">Almeno 2 caratteri: lettere, accenti, apostrofi, spazi e trattini.</span>
                         <span id="indirizzo_citta-error" class="field-error" role="alert"></span>
                     </div>
 
