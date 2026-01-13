@@ -84,19 +84,11 @@ $statPlaceholders = [
 ];
 
 $totalPages = $total > 0 ? (int)ceil($total / $perPage) : 1;
-$pagination = buildPaginationNav(
-    $page,
-    $totalPages,
-    'admin_utenti.php',
-    ['q' => $search, 'ruolo' => $filterRole],
-    'Paginazione utenti'
-);
 
 $html = str_replace(
     [
         '[ADMIN_USERS_ROWS]',
         '[ADMIN_USERS_FEEDBACK]',
-        '[ADMIN_USERS_PAGINATION]',
         '[ADMIN_USERS_SEARCH]',
         '[IF_RUOLO_ADMIN]',
         '[IF_RUOLO_STANDARD]',
@@ -104,7 +96,6 @@ $html = str_replace(
     [
         $rows,
         $feedbackBlock,
-        $pagination,
         htmlspecialchars($search),
         $filterRole === 'admin' ? 'selected' : '',
         $filterRole === 'standard' ? 'selected' : '',
