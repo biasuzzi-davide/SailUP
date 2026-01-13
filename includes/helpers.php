@@ -967,7 +967,7 @@ function buildAdminBlogRows(array $articoli, string $csrfToken): string {
     foreach ($articoli as $a) {
         $statoPub = !empty($a['Pubblicato']);
         $badge = $statoPub
-            ? '<span class="status-badge active">Pubblicato</span>'
+            ? '<span class="status-badge completed">Pubblicato</span>'
             : '<span class="status-badge pending">Bozza</span>';
         $dataPub = !empty($a['Data_Pubblicazione']) ? date('d/m/y', strtotime($a['Data_Pubblicazione'])) : '—';
         $titolo = htmlspecialchars($a['Titolo'] ?? '');
@@ -1016,7 +1016,7 @@ function buildAdminBookingRows(array $pren, string $csrfToken): string {
     foreach ($pren as $p) {
         $statoRaw = $p['Stato_Prenotazione'] ?? '';
         $badgeClass = 'pending';
-        if ($statoRaw === 'Confermata') $badgeClass = 'active';
+        if ($statoRaw === 'Confermata') $badgeClass = 'completed';
         if ($statoRaw === 'Cancellata') $badgeClass = 'cancelled';
         if (in_array($statoRaw, ['Completata', 'Conclusa'])) $badgeClass = 'completed';
 
@@ -1089,7 +1089,7 @@ function buildAdminProductRows(array $prodotti, string $csrfToken): string {
         $tipoDisplay = htmlspecialchars($tipo) . ($tipologia ? ' • ' . htmlspecialchars($tipologia) : '');
         $prezzo = isset($p['Prezzo_Base']) ? '€ ' . number_format((float)$p['Prezzo_Base'], 2, ',', '.') : '—';
         $stato = !empty($p['Attivo'])
-            ? '<span class="status-badge active">Attivo</span>'
+            ? '<span class="status-badge completed">Attivo</span>'
             : '<span class="status-badge cancelled">Disattivo</span>';
         $toggleLabel = !empty($p['Attivo']) ? 'Disattiva' : 'Attiva';
         $toggleConfirmType = !empty($p['Attivo']) ? ' data-confirm-type="toggle-product"' : '';
@@ -1140,7 +1140,7 @@ function buildProfileBookingRows(array $prenotazioni, string $csrfToken): string
         }
 
         $badgeClass = 'pending';
-        if ($statoRaw === 'Confermata') $badgeClass = 'active';
+        if ($statoRaw === 'Confermata') $badgeClass = 'completed';
         if ($statoRaw === 'Cancellata') $badgeClass = 'cancelled';
 
         $startRaw = $p['Data_Ora_Inizio'] ?? '';
