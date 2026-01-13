@@ -12,8 +12,6 @@ $feedbackClass = '';
 $csrfToken = getCsrfToken();
 $productStats = $db->getProductStats();
 
-$page = max(1, (int)($_GET['page'] ?? 1));
-$perPage = 10;
 $search = trim($_GET['q'] ?? '');
 $filterTipo = $_GET['tipo'] ?? '';
 $filterStato = $_GET['stato'] ?? '';
@@ -56,25 +54,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-$offset = ($page - 1) * $perPage;
 $prodottiRes = $db->getProdottiAdmin(
     $search === '' ? null : $search,
     $filterTipo === '' ? null : $filterTipo,
-    $filterStato === '' ? null : $filterStato,
-    $perPage,
-    $offset
+    $filterStato === '' ? null : $filterStato
 );
 
 $prodotti = [];
-$total = 0;
 if (is_array($prodottiRes)) {
-    $prodotti = $prodottiRes['data'] ?? [];
-    $total = (int)($prodottiRes['total'] ?? 0);
+    $prodotti = $prodottiRes;
 }
 
 $rows = buildAdminProductRows($prodotti, $csrfToken);
-
-$totalPages = $total > 0 ? (int)ceil($total / $perPage) : 1;
 
 $feedbackBlock = buildFeedbackBlock($feedback, $feedbackClass);
 

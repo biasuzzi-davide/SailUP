@@ -12,8 +12,6 @@ $feedbackState = 'hidden';
 $feedbackMessage = '';
 $currentUserId = $_SESSION['user']['IDUtente'] ?? null;
 $csrfToken = getCsrfToken();
-$page = max(1, (int)($_GET['page'] ?? 1));
-$perPage = 10;
 $search = trim($_GET['q'] ?? '');
 $filterRole = $_GET['ruolo'] ?? '';
 
@@ -51,19 +49,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-$offset = ($page - 1) * $perPage;
 $usersRes = $db->searchUtenti(
     $search === '' ? null : $search,
-    $filterRole === '' ? null : $filterRole,
-    $perPage,
-    $offset
+    $filterRole === '' ? null : $filterRole
 );
 
 $users = [];
-$total = 0;
 if (is_array($usersRes)) {
-    $users = $usersRes['data'] ?? [];
-    $total = (int)($usersRes['total'] ?? 0);
+    $users = $usersRes;
+} elseif ($usersRes === false) {
+    // Errore database
+    error_log('searchUtenti returned false');
 }
 
 $rows = buildAdminUsersRows($users, $csrfToken, $currentUserId);
@@ -82,8 +78,6 @@ $statPlaceholders = [
     '[STAT_USERS_ADMIN]' => htmlspecialchars((string)($userStats['admin_users'] ?? 0)),
     '[STAT_USERS_STANDARD]' => htmlspecialchars((string)($userStats['standard_users'] ?? 0)),
 ];
-
-$totalPages = $total > 0 ? (int)ceil($total / $perPage) : 1;
 
 $html = str_replace(
     [

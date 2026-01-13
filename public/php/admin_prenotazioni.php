@@ -10,8 +10,6 @@ $db = new DBConnection();
 $csrfToken = getCsrfToken();
 $feedback = '';
 $feedbackClass = '';
-$page = max(1, (int)($_GET['page'] ?? 1));
-$perPage = 10;
 $search = trim($_GET['q'] ?? '');
 $filterStato = $_GET['stato'] ?? '';
 
@@ -114,14 +112,12 @@ if (is_array($prenAll)) {
         }
     }
     $total = count($filtered);
-    $offset = ($page - 1) * $perPage;
-    $pren = array_slice(array_values($filtered), $offset, $perPage);
+    $pren = array_values($filtered);
 }
 
 $rows = buildAdminBookingRows($pren, $csrfToken);
 
 $html = buildPage('../pages/admin_prenotazioni.html', $_SERVER['PHP_SELF']);
-$totalPages = $total > 0 ? (int)ceil($total / $perPage) : 1;
 
 $feedbackBlock = buildFeedbackBlock($feedback, $feedbackClass);
 

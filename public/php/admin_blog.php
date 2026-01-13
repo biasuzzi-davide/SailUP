@@ -11,8 +11,6 @@ $blogStats = $db->getBlogStats();
 $csrfToken = getCsrfToken();
 $feedback = '';
 $feedbackClass = '';
-$page = max(1, (int)($_GET['page'] ?? 1));
-$perPage = 10;
 $search = trim($_GET['q'] ?? '');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -46,17 +44,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-$offset = ($page - 1) * $perPage;
-$articoliRes = $db->getArticoliAdmin($search === '' ? null : $search, $perPage, $offset);
+$articoliRes = $db->getArticoliAdmin($search === '' ? null : $search);
 $articoli = [];
-$total = 0;
 if (is_array($articoliRes)) {
-    $articoli = $articoliRes['data'] ?? [];
-    $total = (int)($articoliRes['total'] ?? 0);
+    $articoli = $articoliRes;
 }
 
 $rows = buildAdminBlogRows($articoli, $csrfToken);
-$totalPages = $total > 0 ? (int)ceil($total / $perPage) : 1;
 $feedbackBlock = buildFeedbackBlock($feedback, $feedbackClass);
 
 $html = buildPage('../pages/admin_blog.html', $_SERVER['PHP_SELF']);
