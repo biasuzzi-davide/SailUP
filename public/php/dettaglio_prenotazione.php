@@ -42,7 +42,7 @@ $imgUrl = resolveImageUrl($booking['URL_Media'] ?? null);
 $imgAlt = $booking['Testo_Alternativo'] ?? 'Immagine prodotto';
 $stato = $booking['Stato_Prenotazione'] ?? 'In Attesa';
 $badgeClass = 'pending';
-if ($stato === 'Confermata') $badgeClass = 'active';
+if ($stato === 'Confermata') $badgeClass = 'completed';
 if ($stato === 'Cancellata') $badgeClass = 'cancelled';
 
 $dataInizio = !empty($booking['Data_Ora_Inizio']) ? date('d M Y H:i', strtotime($booking['Data_Ora_Inizio'])) : '—';
