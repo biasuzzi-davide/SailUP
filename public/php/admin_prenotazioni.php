@@ -122,20 +122,13 @@ $rows = buildAdminBookingRows($pren, $csrfToken);
 
 $html = buildPage('../pages/admin_prenotazioni.html', $_SERVER['PHP_SELF']);
 $totalPages = $total > 0 ? (int)ceil($total / $perPage) : 1;
-$pagination = buildPaginationNav(
-    $page,
-    $totalPages,
-    'admin_prenotazioni.php',
-    ['q' => $search, 'stato' => $filterStato],
-    'Paginazione prenotazioni'
-);
+
 $feedbackBlock = buildFeedbackBlock($feedback, $feedbackClass);
 
 $html = str_replace(
     [
         '[ADMIN_BOOKINGS_ROWS]',
         '[ADMIN_BOOKINGS_FEEDBACK]',
-        '[ADMIN_BOOKINGS_PAGINATION]',
         '[ADMIN_BOOKINGS_SEARCH]',
         '[IF_BOOKING_STATO_ATTESA]',
         '[IF_BOOKING_STATO_CONF]',
@@ -151,7 +144,6 @@ $html = str_replace(
     [
         $rows,
         $feedbackBlock,
-        $pagination,
         htmlspecialchars($search),
         $filterStato === 'In Attesa' ? 'selected' : '',
         $filterStato === 'Confermata' ? 'selected' : '',

@@ -75,13 +75,6 @@ if (is_array($prodottiRes)) {
 $rows = buildAdminProductRows($prodotti, $csrfToken);
 
 $totalPages = $total > 0 ? (int)ceil($total / $perPage) : 1;
-$pagination = buildPaginationNav(
-    $page,
-    $totalPages,
-    'admin_prodotti.php',
-    ['q' => $search, 'tipo' => $filterTipo, 'stato' => $filterStato],
-    'Paginazione prodotti'
-);
 
 $feedbackBlock = buildFeedbackBlock($feedback, $feedbackClass);
 
@@ -90,7 +83,6 @@ $html = str_replace('[ADMIN_PRODUCTS_ROWS]', $rows, $html);
 $html = str_replace(
     [
         '[ADMIN_PRODUCTS_FEEDBACK]',
-        '[ADMIN_PRODUCTS_PAGINATION]',
         '[ADMIN_PRODUCTS_SEARCH]',
         '[IF_TIPO_NOLEGGIO]',
         '[IF_TIPO_EXPERIENCE]',
@@ -104,7 +96,6 @@ $html = str_replace(
     ],
     [
         $feedbackBlock,
-        $pagination,
         htmlspecialchars($search),
         $filterTipo === 'Noleggio' ? 'selected' : '',
         $filterTipo === 'Experience' ? 'selected' : '',

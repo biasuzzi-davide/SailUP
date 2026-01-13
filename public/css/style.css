@@ -1799,7 +1799,7 @@ a.product-cta:focus-visible {
 
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto, minmax(200px, 1fr));
   gap: 1.5em;
   margin-bottom: 1.5em;
 }
@@ -1811,7 +1811,8 @@ a.product-cta:focus-visible {
   border-radius: var(--radius-card);
   text-align: center;
   box-shadow: var(--shadow-md);
-  word-wrap: break-word;
+  word-wrap: normal;
+  overflow: hidden;
   min-width: 0;
 }
 
@@ -2101,7 +2102,7 @@ a.product-cta:focus-visible {
 table {
   width: 100%;
   border-collapse: collapse;
-  table-layout: fixed;
+  table-layout: auto;
 }
 
 caption {

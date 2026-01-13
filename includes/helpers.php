@@ -887,25 +887,6 @@ function buildFeedbackBlock(string $message, string $class): string {
     return '<div class="' . $class . '" role="status" aria-live="polite">' . htmlspecialchars($message) . '</div>';
 }
 
-//genera l html della barra di paginazione
-function buildPaginationNav(int $currentPage, int $totalPages, string $baseUrl, array $queryParams, string $ariaLabel): string {
-    if ($totalPages <= 1) {
-        return '';
-    }
-
-    $html = '<nav class="pagination" aria-label="' . htmlspecialchars($ariaLabel, ENT_QUOTES) . '"><ul>';
-    for ($i = 1; $i <= $totalPages; $i++) {
-        $currentClass = $i === $currentPage ? ' class="current-page"' : '';
-        $queryParams['page'] = $i;
-        $query = http_build_query($queryParams);
-        $url = $baseUrl . '?' . $query;
-        $html .= '<li' . $currentClass . '><a href="' . htmlspecialchars($url, ENT_QUOTES) . '">' . $i . '</a></li>';
-    }
-    $html .= '</ul></nav>';
-
-    return $html;
-}
-
 //genera la tabella degli utenti visualizzata dagli admin
 function buildAdminUsersRows(array $users, string $csrfToken, ?int $currentUserId = null): string {
     if (empty($users)) {

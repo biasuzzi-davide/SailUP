@@ -57,7 +57,6 @@ if (is_array($articoliRes)) {
 
 $rows = buildAdminBlogRows($articoli, $csrfToken);
 $totalPages = $total > 0 ? (int)ceil($total / $perPage) : 1;
-$pagination = buildPaginationNav($page, $totalPages, 'admin_blog.php', ['q' => $search], 'Paginazione articoli');
 $feedbackBlock = buildFeedbackBlock($feedback, $feedbackClass);
 
 $html = buildPage('../pages/admin_blog.html', $_SERVER['PHP_SELF']);
@@ -65,7 +64,6 @@ $html = str_replace(
     [
         '[ADMIN_BLOG_ROWS]',
         '[ADMIN_BLOG_FEEDBACK]',
-        '[ADMIN_BLOG_PAGINATION]',
         '[ADMIN_BLOG_SEARCH]',
         '[STAT_BLOG_PUBLISHED]',
         '[STAT_BLOG_DRAFTS]',
@@ -75,7 +73,6 @@ $html = str_replace(
     [
         $rows,
         $feedbackBlock,
-        $pagination,
         htmlspecialchars($search),
         htmlspecialchars((string)($blogStats['published'] ?? 0)),
         htmlspecialchars((string)($blogStats['drafts'] ?? 0)),
