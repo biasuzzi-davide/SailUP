@@ -60,7 +60,7 @@ if ($dataInizio !== '' && $dataFine !== '') {
 }
 
 $sortParam = $_GET['sort'] ?? 'price-asc';
-$allowedSort = ['price-asc', 'price-desc', 'size'];
+$allowedSort = ['price-asc', 'price-desc', 'size-asc', 'size-desc'];
 $sortChoice = in_array($sortParam, $allowedSort, true) ? $sortParam : 'price-asc';
 
 $filters = [
@@ -101,7 +101,8 @@ $html = str_replace('[MIN_DATE]', date('Y-m-d'), $html);
 
 $html = str_replace('[SELECTED_PRICE_ASC]', $sortChoice === 'price-asc' ? 'selected' : '', $html);
 $html = str_replace('[SELECTED_PRICE_DESC]', $sortChoice === 'price-desc' ? 'selected' : '', $html);
-$html = str_replace('[SELECTED_SIZE]', $sortChoice === 'size' ? 'selected' : '', $html);
+$html = str_replace('[SELECTED_SIZE_ASC]', $sortChoice === 'size-asc' ? 'selected' : '', $html);
+$html = str_replace('[SELECTED_SIZE_DESC]', $sortChoice === 'size-desc' ? 'selected' : '', $html);
 
 $html = str_replace('[NOLEGGIO_CARDS]', $cardsHtml, $html);
 

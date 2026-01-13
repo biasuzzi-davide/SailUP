@@ -56,7 +56,7 @@ if (isset($_GET['accessibile'])) {
 }
 
 $sortParam = $_GET['sort'] ?? 'price-asc';
-$allowedSort = ['price-asc', 'price-desc', 'duration'];
+$allowedSort = ['price-asc', 'price-desc', 'capacity-asc', 'capacity-desc'];
 $sortChoice = in_array($sortParam, $allowedSort, true) ? $sortParam : 'price-asc';
 
 $filters = [
@@ -101,7 +101,8 @@ $html = str_replace('[CHECK_ACCESSIBILE]', $accessibileFiltro ? 'checked' : '', 
 
 $html = str_replace('[SELECTED_PRICE_ASC]', $sortChoice === 'price-asc' ? 'selected' : '', $html);
 $html = str_replace('[SELECTED_PRICE_DESC]', $sortChoice === 'price-desc' ? 'selected' : '', $html);
-$html = str_replace('[SELECTED_DURATION]', $sortChoice === 'duration' ? 'selected' : '', $html);
+$html = str_replace('[SELECTED_CAPACITY_ASC]', $sortChoice === 'capacity-asc' ? 'selected' : '', $html);
+$html = str_replace('[SELECTED_CAPACITY_DESC]', $sortChoice === 'capacity-desc' ? 'selected' : '', $html);
 
 $html = str_replace('[ESPERIENZE_CARDS]', $cardsHtml, $html);
 
