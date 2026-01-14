@@ -53,7 +53,7 @@ function handleProfileImageUpload(int $userId): array
     @chmod($uploadDir, 0777);
     clearstatcache(true, $uploadDir);
     if (!is_writable($uploadDir)) {
-        $result['error'] = 'Cartella upload non scrivibile. Verifica i permessi della cartella: avatars';
+        $result['error'] = 'Si è verificato un problema tecnico durante il caricamento dell\'immagine. Ti preghiamo di contattare l\'assistenza all\'indirizzo it@sailup.it';
         return $result;
     }
 
