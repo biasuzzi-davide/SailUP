@@ -39,7 +39,7 @@ class DBConnection {
             }
         } catch (Throwable $t) {
             // Comportamento: niente dettagli tecnici verso l’utente
-            die("Errore di connessione al database.");
+            die("Si è verificato un problema tecnico. Riprova più tardi o contatta l'assistenza all'indirizzo it@sailup.it");
         }
     }
 

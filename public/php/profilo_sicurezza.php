@@ -41,7 +41,7 @@ function handleProfileImageUpload(int $userId): array
     }
 
     if (!function_exists('imagewebp')) {
-        $result['error'] = 'Conversione WebP non disponibile sul server.';
+        $result['error'] = 'Il sistema non supporta il formato di immagine richiesto. Contatta l\'assistenza all\'indirizzo it@sailup.it';
         return $result;
     }
 
@@ -76,7 +76,7 @@ function handleProfileImageUpload(int $userId): array
     }
 
     if (!$srcImage) {
-        $result['error'] = 'Impossibile leggere l\'immagine.';
+        $result['error'] = 'Il file caricato sembra essere danneggiato. Riprova con un\'altra immagine.';
         return $result;
     }
 
@@ -85,7 +85,7 @@ function handleProfileImageUpload(int $userId): array
 
     if (!imagewebp($srcImage, $destPath, 85)) {
         imagedestroy($srcImage);
-        $result['error'] = 'Impossibile salvare l\'immagine, riprova.';
+        $result['error'] = 'Si è verificato un problema nel salvataggio dell\'immagine. Riprova o contatta l\'assistenza all\'indirizzo it@sailup.it';
         return $result;
     }
 
