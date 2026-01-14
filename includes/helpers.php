@@ -872,7 +872,7 @@ function formatArticleContent(?string $content): string {
         if ($paragraph === '') {
             continue;
         }
-        $html .= '<p>' . nl2br(htmlspecialchars($paragraph, ENT_QUOTES, 'UTF-8')) . '</p>';
+        $html .= '<p>' . htmlspecialchars($paragraph, ENT_QUOTES, 'UTF-8') . '</p>';
     }
 
     return $html ?: '<p>Il contenuto dell\'articolo non è ancora disponibile.</p>';
