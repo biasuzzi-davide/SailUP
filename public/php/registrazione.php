@@ -86,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
             if ($res['error'] === 'email_duplicata') $errors[] = 'Email già registrata';
             elseif ($res['error'] === 'cf_duplicato') $errors[] = 'Codice fiscale già registrato';
-            else $errors[] = 'Errore durante la registrazione, riprova';
+            else $errors[] = 'Si è verificato un problema durante la registrazione. Riprova o contatta l\'assistenza all\'indirizzo it@sailup.it';
         }
     }
 }
