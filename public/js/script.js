@@ -538,3 +538,28 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
+
+/* ---------------------------------------
+   8. SINCRONIZZAZIONE STATISTICHE
+   --------------------------------------- */
+document.addEventListener('DOMContentLoaded', () => {
+    const elTot = document.querySelector('[data-stat="tot"]');
+    const elAtt = document.querySelector('[data-stat="attive"]');
+
+    if (!elTot || !elAtt) return;
+
+    const fixStats = () => {
+        if (elTot.dataset.value) elTot.textContent = elTot.dataset.value;
+        if (elAtt.dataset.value) elAtt.textContent = elAtt.dataset.value;
+    };
+
+    elTot.dataset.value = elTot.textContent;
+    elAtt.dataset.value = elAtt.textContent;
+
+    const observer = new MutationObserver(fixStats);
+    [elTot, elAtt].forEach(el => {
+        observer.observe(el, { childList: true, characterData: true, subtree: true });
+    });
+
+    setTimeout(() => observer.disconnect(), 5000);
+});
