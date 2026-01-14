@@ -22,7 +22,7 @@ function buildHeader($phpSelf) {
     <source srcset="../img/logo_light.svg" type="image/svg+xml">
     <img alt="" src="../img/logo_light.svg" width="30" height="30">
     </picture>
-    <h1 class="logo-text" lang="en">Sail<span class="text-accent">UP</span></h1>';
+    <span class="logo-text" lang="en">Sail<span class="text-accent">UP</span></span>';
 
     // Funzione per creare item
     function createHeaderItem($key, $label, $current, $relativePath, $pages, $lang = '', $class = '') {

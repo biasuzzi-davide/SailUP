@@ -347,7 +347,6 @@ body>header {
 
 header .logo-text {
   color: var(--col-primary);
-  margin-bottom: 0;
 }
 
 #main-menu ul {
