@@ -143,7 +143,7 @@
                         <label for="indirizzo_via">Via / Piazza</label>
                         <input type="text" id="indirizzo_via" name="indirizzo_via" value="[ADDR_VIA]" required
                         aria-describedby="via-hint indirizzo_via-error" autocomplete="address-line1"
-                        placeholder="Es. Via Caracciolo" maxlength="80" pattern="^[A-Za-z0-9\s,\.\-/]+$">
+                        placeholder="Es. Via Caracciolo" maxlength="80" pattern="^[A-Za-z0-9\s,.'\-\/]+$">
                         <span id="via-hint" class="field-hint">Lettere, numeri, spazi e caratteri , . - /</span>
                         <span id="indirizzo_via-error" class="field-error" role="alert"></span>
                     </div>
@@ -170,7 +170,7 @@
                         <label for="indirizzo_citta">Città</label>
                         <input type="text" id="indirizzo_citta" name="indirizzo_citta" value="[ADDR_CITTA]" required
                         aria-describedby="citta-hint indirizzo_citta-error" autocomplete="address-level2"
-                        placeholder="Es. Napoli" maxlength="80" pattern="^[A-Za-zÀ-ÿ'\s-]{2,80}$">
+                        placeholder="Es. Napoli" maxlength="80" pattern="^[A-Za-zÀ-ÿ'\s\-]{2,80}$">
                         <span id="citta-hint" class="field-hint">Almeno 2 caratteri: lettere, accenti, apostrofi, spazi e trattini.</span>
                         <span id="indirizzo_citta-error" class="field-error" role="alert"></span>
                     </div>
