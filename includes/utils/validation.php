@@ -87,7 +87,7 @@ function isValidIndirizzo(string $indirizzo): bool {
     }
 
     //accetto lettere, numeri,spazi e alcuni caratteri comuni negli indirizzi (, . - /)
-    return preg_match("/^[A-Za-z0-9\s,.\-\/]+$/", $indirizzo) === 1;
+    return preg_match("/^[A-Za-z0-9\s,.'\-\/]+$/", $indirizzo) === 1;
 }
 
 //civico, numeri, 1-5 caratteri
@@ -104,7 +104,7 @@ function isValidCAP(string $cap): bool {
 //citta, lettere/spazi/apostrofi/trattini, 2-80 caratteri
 function isValidCitta(string $citta): bool {
     $citta = trim($citta);
-    return $citta !== '' && preg_match("/^[A-Za-zÀ-ÿ'\\s-]{2,80}$/", $citta);
+    return $citta !== '' && preg_match("/^[A-Za-zÀ-ÿ'\s\-]{2,80}$/", $citta);
 }
 
 //provincia, 2 lettere
