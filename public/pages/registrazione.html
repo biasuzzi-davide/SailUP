@@ -54,7 +54,7 @@
                         <label for="nome">Nome</label>
                         <input type="text" id="nome" name="nome" required value="[OLD_NOME]"
                             aria-describedby="nome-hint nome-error" autocomplete="given-name" placeholder="Es. Mario"
-                            pattern="^[A-Za-z\sÀ-ÿ'’]{2,50}$" />
+                            pattern="^[A-Za-z\sÀ-ÿ'’]{2,50}$" >
                         <span id="nome-hint" class="field-hint">Almeno 2 caratteri, non numeri o caratteri speciali.
                         </span>
                         <span id="nome-error" class="field-error" role="alert"></span>
@@ -64,7 +64,7 @@
                         <label for="cognome">Cognome</label>
                         <input type="text" id="cognome" name="cognome" required value="[OLD_COGNOME]"
                             aria-describedby="cognome-hint cognome-error" autocomplete="family-name"
-                            placeholder="Es. Rossi" pattern="^[A-Za-z\sÀ-ÿ'’]{2,50}$" />
+                            placeholder="Es. Rossi" pattern="^[A-Za-z\sÀ-ÿ'’]{2,50}$" >
                         <span id="cognome-hint" class="field-hint">Almeno 2 caratteri, non numeri o caratteri
                             speciali. </span>
                         <span id="cognome-error" class="field-error" role="alert"></span>
@@ -74,7 +74,7 @@
                         <label for="cf">Codice Fiscale</label>
                         <input type="text" id="cf" name="cf" required value="[OLD_CF]"
                             aria-describedby="cf-hint cf-error" autocomplete="off" maxlength="16"
-                            placeholder="Es. RSSMRC90C15H501T" pattern="^[A-Z0-9]{16}$" />
+                            placeholder="Es. RSSMRC90C15H501T" pattern="^[A-Z0-9]{16}$" >
                         <span id="cf-hint" class="field-hint">Deve essere composto da 16 caratteri
                             alfanumerici.</span>
                         <span id="cf-error" class="field-error" role="alert"></span>
@@ -84,7 +84,7 @@
                         <label for="email" lang="en">Email</label>
                         <input type="email" id="email" name="email" required value="[OLD_EMAIL]"
                             aria-describedby="email-hint email-error" autocomplete="email"
-                            placeholder="mariorossi@mail.com" />
+                            placeholder="mariorossi@mail.com" >
                         <span id="email-hint" class="field-hint">Indirizzo personale di posta elettronica per
                             ricevere informazioni sulle prenotazioni effettuate. </span>
                         <span id="email-error" class="field-error" role="alert"></span>
@@ -94,7 +94,7 @@
                         <label for="password" lang="en">Password</label>
                         <div class="password-field">
                             <input type="password" id="password" name="password" required
-                                aria-describedby="password-hint password-error" autocomplete="new-password" />
+                                aria-describedby="password-hint password-error" autocomplete="new-password" >
                             <button type="button" class="password-toggle" data-target="password"
                                 data-label-show="Mostra password" data-label-hide="Nascondi password"
                                 aria-label="Mostra password" aria-pressed="false">
@@ -119,7 +119,7 @@
                         <div class="password-field">
                             <input type="password" id="confirm-password" name="confirm-password" required
                                 aria-describedby="confirm-password-hint confirm-password-error"
-                                autocomplete="new-password" />
+                                autocomplete="new-password" >
                             <button type="button" class="password-toggle" data-target="confirm-password"
                                 data-label-show="Mostra password di conferma"
                                 data-label-hide="Nascondi password di conferma"
@@ -149,7 +149,7 @@
                             <label for="indirizzo_via">Via / Piazza</label>
                             <input type="text" id="indirizzo_via" name="indirizzo_via" value="[OLD_VIA]" required
                                 aria-describedby="via-hint indirizzo_via-error"
-                                autocomplete="address-line1" placeholder="Es. Via Caracciolo" />
+                                autocomplete="address-line1" placeholder="Es. Via Caracciolo" >
                             <span id="via-hint" class="field-hint">Inserire il nome della via o della piazza.</span>
                             <span id="indirizzo_via-error" class="field-error" role="alert"></span>
                         </div>
@@ -158,7 +158,7 @@
                             <label for="indirizzo_civico"><abbr title="Numero">N.</abbr> Civico</label>
                             <input type="text" id="indirizzo_civico" name="indirizzo_civico" value="[OLD_CIVICO]" required
                                 aria-describedby="civico-hint indirizzo_civico-error"
-                                 autocomplete="address-line2" placeholder="10" />
+                                 autocomplete="address-line2" placeholder="10" >
                             <span id="civico-hint" class="field-hint">Inserire il numero civico.</span>
                             <span id="indirizzo_civico-error" class="field-error" role="alert"></span>
                         </div>
@@ -167,7 +167,7 @@
                             <label for="indirizzo_cap"><abbr title="Codice di avviamento postale">CAP</abbr></label>
                             <input type="text" id="indirizzo_cap" name="indirizzo_cap" value="[OLD_CAP]" required
                                 aria-describedby="cap-hint indirizzo_cap-error"
-                                autocomplete="postal-code" pattern="^\d{5}$" placeholder="80122" maxlength="5" />
+                                autocomplete="postal-code" pattern="^\d{5}$" placeholder="80122" maxlength="5" >
                             <span id="cap-hint" class="field-hint">Inserire le 5 cifre del <abbr
                                     title="Codice di avviamento postale">CAP</abbr> <abbr title="esempio">es.</abbr>
                                 00100.</span>
@@ -178,7 +178,7 @@
                             <label for="indirizzo_citta">Città</label>
                             <input type="text" id="indirizzo_citta" name="indirizzo_citta" value="[OLD_CITTA]" required
                                 aria-describedby="citta-hint indirizzo_citta-error"
-                                autocomplete="address-level2" placeholder="Es. Napoli" />
+                                autocomplete="address-level2" placeholder="Es. Napoli" >
                             <span id="citta-hint" class="field-hint">Inserire il comune di residenza.</span>
                             <span id="indirizzo_citta-error" class="field-error" role="alert"></span>
                         </div>
@@ -187,7 +187,7 @@
                             <label for="indirizzo_provincia"><abbr title="Provincia">Prov.</abbr></label>
                             <input type="text" id="indirizzo_provincia" name="indirizzo_provincia" value="[OLD_PROVINCIA]" required
                                 aria-describedby="provincia-hint indirizzo_provincia-error"
-                                autocomplete="address-level1" pattern="^[A-Z]{2}$" placeholder="NA" maxlength="2" />
+                                autocomplete="address-level1" pattern="^[A-Z]{2}$" placeholder="NA" maxlength="2" >
                             <span id="provincia-hint" class="field-hint">Sigla di 2 lettere maiuscole (<abbr
                                     title="esempio">es.</abbr>
                                 <abbr title="Napoli">NA</abbr>).</span>
