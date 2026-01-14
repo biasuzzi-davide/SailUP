@@ -80,7 +80,7 @@ function buildHeader($phpSelf) {
         }
     } else {
         if ($current == 'login') {
-            $loginLink = '<span lang="en" class="btn-layout" lang="en">Login</span>';
+            $loginLink = '<span class="btn-layout" lang="en">Login</span>';
         } else {
             $loginLink = '<button type="button" class="btn-layout" lang="en" data-href="' . $relativePath . $pages['login'] . '">Login</button>';
         }
