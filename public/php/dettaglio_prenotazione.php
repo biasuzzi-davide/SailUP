@@ -45,14 +45,20 @@ $badgeClass = 'pending';
 if ($stato === 'Confermata') $badgeClass = 'completed';
 if ($stato === 'Cancellata') $badgeClass = 'cancelled';
 
-$dataInizio = !empty($booking['Data_Ora_Inizio']) ? date('d M Y H:i', strtotime($booking['Data_Ora_Inizio'])) : '—';
-$dataFine = !empty($booking['Data_Ora_Fine']) ? date('d M Y H:i', strtotime($booking['Data_Ora_Fine'])) : '—';
+$dataInizio = !empty($booking['Data_Ora_Inizio']) ? date('d M Y', strtotime($booking['Data_Ora_Inizio'])) : '—';
+$dataFine = !empty($booking['Data_Ora_Fine']) ? date('d M Y', strtotime($booking['Data_Ora_Fine'])) : '—';
 $creataIl = !empty($booking['Data_Creazione']) ? date('d M Y', strtotime($booking['Data_Creazione'])) : '—';
+
+$dataInizioISO = !empty($booking['Data_Ora_Inizio']) ? date('c', strtotime($booking['Data_Ora_Inizio'])) : '';
+$dataFineISO = !empty($booking['Data_Ora_Fine']) ? date('c', strtotime($booking['Data_Ora_Fine'])) : '';
 
 $prodTitle = trim(($booking['Nome_Prodotto'] ?? '') . ' ' . (($booking['Tipologia_Prodotto'] ?? '') !== '' ? '(' . $booking['Tipologia_Prodotto'] . ')' : ''));
 $cliente = trim(($booking['Utente_Nome'] ?? '') . ' ' . ($booking['Utente_Cognome'] ?? ''));
 $skipper = !empty($booking['Skipper_Richiesto']) ? 'Richiesto' : 'Non richiesto';
 $noteVal = $booking['Note_Addizionali'] ?? '';
+
+$ospitiNum = $booking['Ospiti'] ?? '';
+$totaleNum = number_format((float)($booking['Prezzo_Totale'] ?? 0), 2, '.', '');
 
 $html = buildPage('../pages/dettaglio_prenotazione.html', $_SERVER['PHP_SELF']);
 
@@ -73,9 +79,13 @@ $html = str_replace(
         '[BOOKING_TIPO]',
         '[BOOKING_START]',
         '[BOOKING_END]',
+        '[BOOKING_START_ISO]',
+        '[BOOKING_END_ISO]',
         '[BOOKING_GUESTS]',
+        '[BOOKING_GUESTS_NUM]',
         '[BOOKING_SKIPPER]',
         '[BOOKING_TOTAL]',
+        '[BOOKING_TOTAL_NUM]',
         '[BOOKING_PAYMENT]',
         '[BOOKING_CLIENTE]',
         '[BOOKING_EMAIL]',
@@ -97,9 +107,13 @@ $html = str_replace(
         htmlspecialchars($booking['Tipo_Prodotto'] ?? ''),
         htmlspecialchars($dataInizio),
         htmlspecialchars($dataFine),
+        htmlspecialchars($dataInizioISO),
+        htmlspecialchars($dataFineISO),
         htmlspecialchars($booking['Ospiti'] ?? '—'),
+        htmlspecialchars($ospitiNum),
         htmlspecialchars($skipper),
         htmlspecialchars(number_format((float)($booking['Prezzo_Totale'] ?? 0), 2, ',', '.')),
+        htmlspecialchars($totaleNum),
         htmlspecialchars($booking['Metodo_Pagamento'] ?? '—'),
         htmlspecialchars($cliente !== '' ? $cliente : '—'),
         htmlspecialchars($booking['Utente_Email'] ?? '—'),
