@@ -103,6 +103,7 @@ function handleProductImageUpload(string $productId, string $uploadDir): array {
 function getBoatTypePlaceholders(?string $tipologia): array {
     $key = strtolower(trim((string) $tipologia));
     return [
+        '[PROD_TIPOLOGIA_NONE]' => $key === '' ? 'selected' : '',
         '[PROD_TIPOLOGIA_MOTORE]' => $key === 'motore' ? 'selected' : '',
         '[PROD_TIPOLOGIA_VELA]' => $key === 'vela' ? 'selected' : '',
         '[PROD_TIPOLOGIA_GOMMONE]' => $key === 'gommone' ? 'selected' : '',
@@ -118,6 +119,7 @@ $placeholders = [
     '[PROD_NAME]' => '',
     '[PROD_TYPE_NOLEGGIO]' => '',
     '[PROD_TYPE_EXP]' => '',
+    '[PROD_TIPOLOGIA_NONE]' => '',
     '[PROD_TIPOLOGIA_MOTORE]' => '',
     '[PROD_TIPOLOGIA_VELA]' => '',
     '[PROD_TIPOLOGIA_GOMMONE]' => '',
