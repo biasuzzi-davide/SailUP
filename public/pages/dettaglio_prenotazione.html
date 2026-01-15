@@ -66,20 +66,26 @@
                 </header>
 
                 <section class="booking-details" aria-labelledby="specs-title">
-                    <h3 id="specs-title" class="sr-only">Specifiche della prenotazione</h3>
+                    <h3 id="specs-title">Specifiche della prenotazione</h3>
 
                     <dl class="specs-grid">
                         <div class="spec-card">
                             <dt class="spec-label"><span aria-hidden="true">📅</span> Inizio</dt>
-                            <dd class="spec-value">[BOOKING_START]</dd>
+                            <dd class="spec-value">
+                                <time datetime="[BOOKING_START_ISO]">[BOOKING_START]</time>
+                            </dd>
                         </div>
                         <div class="spec-card">
                             <dt class="spec-label"><span aria-hidden="true">🏁</span> Fine</dt>
-                            <dd class="spec-value">[BOOKING_END]</dd>
+                            <dd class="spec-value">
+                                <time datetime="[BOOKING_END_ISO]">[BOOKING_END]</time>
+                            </dd>
                         </div>
                         <div class="spec-card">
                             <dt class="spec-label"><span aria-hidden="true">👥</span> Ospiti</dt>
-                            <dd class="spec-value">[BOOKING_GUESTS]</dd>
+                            <dd class="spec-value">
+                                <data value="[BOOKING_GUESTS_NUM]">[BOOKING_GUESTS]</data>
+                            </dd>
                         </div>
                         <div class="spec-card">
                             <dt class="spec-label">Skipper</dt>
@@ -89,21 +95,34 @@
                 </section>
 
                 <section class="booking-details" aria-labelledby="costs-title">
-                    <h3 id="costs-title">💳 Riepilogo Costi</h3>
+                    <h3 id="costs-title">
+                        <span aria-hidden="true">💳</span> Riepilogo Prenotazione
+                    </h3>
 
-                    <table>
-                        <caption class="sr-only">Dettaglio costi per la prenotazione</caption>
-                        <tbody>
-                            <tr>
-                            <th scope="row"><strong>Totale</strong></th>
-                            <td><strong class="text-accent">€ [BOOKING_TOTAL]</strong></td>
-                        </tr>
-                    </tbody>
-                </table>
+                    <dl class="order-summary">
+                        <div class="summary-item total-row">
+                            <dt>Totale Ordine</dt>
+                            <dd>
+                                <data value="[BOOKING_TOTAL_NUM]" class="price-value text-accent">
+                                    € [BOOKING_TOTAL]
+                                </data>
+                            </dd>
+                        </div>
 
-                    <p class="field-hint">Metodo: [BOOKING_PAYMENT]</p>
-                    <p class="field-hint">Email cliente: [BOOKING_EMAIL]</p>
+                        <div class="summary-item">
+                            <dt>Metodo di Pagamento</dt>
+                            <dd><strong>[BOOKING_PAYMENT]</strong></dd>
+                        </div>
 
+                        <div class="summary-item">
+                            <dt>Email Cliente</dt>
+                            <dd>
+                                <a href="mailto:[BOOKING_EMAIL]" class="contact-link">
+                                    [BOOKING_EMAIL]
+                                </a>
+                            </dd>
+                        </div>
+                    </dl>
                 </section>
 
                 <section class="booking-details" aria-labelledby="update-title">

@@ -2481,7 +2481,7 @@ li[aria-current="page"] {
 }
 
 /* =========================================
-   PAGAMENTO
+   PAGAMENTO & RIEPILOGO ORDINI
    ========================================= */
 
 .order-summary {
@@ -2497,9 +2497,11 @@ li[aria-current="page"] {
   color: var(--col-primary);
   border-bottom: 2px solid var(--col-border);
   padding-bottom: 0.8em;
+  margin-bottom: 1em;
 }
 
-.order-summary dl > div {
+.order-summary dl > div,
+.summary-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -2507,23 +2509,50 @@ li[aria-current="page"] {
   border-bottom: 1px dashed var(--col-border);
 }
 
-.order-summary dl > div:last-child {
+.order-summary dl > div:last-child,
+.summary-item:last-child {
   border-bottom: none;
 }
 
-.order-summary dd {
+.order-summary dt,
+.summary-item dt {
+  margin: 0;
+  font-weight: 600;
+}
+
+.order-summary dd,
+.summary-item dd {
   text-align: right;
   font-weight: 600;
   color: var(--col-text);
+  margin: 0;
 }
 
-.order-summary dl > div:last-child dt {
+.order-summary dl > div:last-child dt,
+.summary-item.total-row dt {
   font-size: var(--fs-md);
+  font-weight: 700;
 }
 
-.order-summary dl > div:last-child dd .price-value {
+.order-summary dl > div:last-child dd .price-value,
+.summary-item.total-row .price-value {
   font-size: var(--fs-xl);
   color: var(--col-accent);
+}
+
+.summary-item.total-row {
+  border-top: 2px solid var(--col-border);
+  padding-top: 1em;
+  margin-top: 0.5em;
+}
+
+.contact-link {
+  color: var(--col-accent);
+  text-decoration: underline;
+}
+
+.contact-link:hover {
+  color: var(--col-accent-hover);
 }
 
 .checkbox-group input[type="checkbox"] {
