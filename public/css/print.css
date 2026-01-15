@@ -86,7 +86,6 @@
     abbr {
         text-decoration: none;
         border-bottom: none;
-        cursor: text;
     }
 
     /* =========================================
@@ -451,7 +450,7 @@
 
     .faq-section {
         display: block;
-        width: 98;
+        width: 98%;
     }
 
     .faq-item {
