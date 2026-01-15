@@ -1168,15 +1168,18 @@ function buildBlogExtraInputs(array $extras): string {
     if (empty($extras)) { $extras = [['titolo' => '', 'elemento' => '']]; }
 
     $extrasHtml = '';
-    foreach ($extras as $ex) {
+    foreach ($extras as $index => $ex) {
+        $titleId = 'extra-title-' . $index; 
+        $itemId = 'extra-item-' . $index;
+
         $extrasHtml .= '<div class="extra-row">'
             . '<div class="form-group">'
-            . '<label>Titolo Extra</label>'
-            . '<input type="text" name="extra_title[]" value="' . htmlspecialchars($ex['titolo'] ?? '', ENT_QUOTES) . '" placeholder="es. Cosa portare" >'
+            . '<label for="' . $titleId . '">Titolo Extra</label>'
+            . '<input type="text" id="' . $titleId . '" name="extra_title[]" value="' . htmlspecialchars($ex['titolo'] ?? '', ENT_QUOTES) . '" placeholder="es. Cosa portare" >'
             . '</div>'
             . '<div class="form-group">'
-            . '<label>Contenuto</label>'
-            . '<textarea name="extra_item[]" rows="2" placeholder="Testo...">' . htmlspecialchars($ex['elemento'] ?? '') . '</textarea>'
+            . '<label for="' . $itemId . '">Contenuto</label>'
+            . '<textarea id="' . $itemId . '" name="extra_item[]" rows="2" placeholder="Testo...">' . htmlspecialchars($ex['elemento'] ?? '') . '</textarea>'
             . '</div>'
             . '<button type="button" class="btn-danger remove-extra" aria-label="Rimuovi extra">Rimuovi</button>'
             . '</div>';
@@ -1189,17 +1192,22 @@ function buildProductExtraInputs(array $extras): string {
     if (empty($extras)) { $extras = [['nome' => '', 'prezzo' => '']]; }
 
     $extrasHtml = '';
-    foreach ($extras as $ex) {
+    foreach ($extras as $index => $ex) {
+        $nameId = 'extra-name-' . $index; 
+        $priceId = 'extra-price-' . $index;
+        $nameErrorId = 'extra-name-error-' . $index; 
+        $priceErrorId = 'extra-price-error-' . $index;
+
         $extrasHtml .= '<div class="extra-row">'
             . '<div class="form-group">'
-            . '<label>Nome Extra</label>'
-            . '<input type="text" name="extra_name[]" value="' . htmlspecialchars($ex['nome'] ?? '', ENT_QUOTES) . '" placeholder="es. Skipper" >'
-            . '<span class="field-error extra-name-error" role="alert"></span>'
+            . '<label for="' . $nameId . '">Nome Extra</label>'
+            . '<input type="text" id="' . $nameId . '" name="extra_name[]" value="' . htmlspecialchars($ex['nome'] ?? '', ENT_QUOTES) . '" placeholder="es. Skipper" aria-describedby="' . $nameErrorId . '">'
+            . '<span id="' . $nameErrorId . '" class="field-error extra-name-error" role="alert"></span>'
             . '</div>'
             . '<div class="form-group">'
-            . '<label>Prezzo Extra (€)</label>'
-            . '<input type="number" name="extra_price[]" min="1" step="1" value="' . htmlspecialchars((string)($ex['prezzo'] ?? ''), ENT_QUOTES) . '" placeholder="50" >'
-            . '<span class="field-error extra-price-error" role="alert"></span>'
+            . '<label for="' . $priceId . '">Prezzo Extra (€)</label>'
+            . '<input type="number" id="' . $priceId . '" name="extra_price[]" min="1" step="1" value="' . htmlspecialchars((string)($ex['prezzo'] ?? ''), ENT_QUOTES) . '" placeholder="50" aria-describedby="' . $priceErrorId . '">'
+            . '<span id="' . $priceErrorId . '" class="field-error extra-price-error" role="alert"></span>'
             . '</div>'
             . '<button type="button" class="btn-danger remove-extra" aria-label="Rimuovi extra">Rimuovi</button>'
             . '</div>';

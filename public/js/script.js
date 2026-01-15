@@ -336,54 +336,35 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// extra blog admin
+/* ---------------------------------------
+   GESTIONE EXTRA (Blog e Prodotti Admin)
+   --------------------------------------- */
 document.addEventListener('DOMContentLoaded', () => {
-    const addBtn = document.getElementById('add-extra');
-    const container = document.getElementById('extras-container');
-    const template = document.getElementById('extra-row-template');
-    if (!container) return;
+    const setupExtrasManager = (addBtnId, containerId, templateId) => {
+        const addBtn = document.getElementById(addBtnId);
+        const container = document.getElementById(containerId);
+        const template = document.getElementById(templateId);
 
-    container.addEventListener('click', (event) => {
-        const target = event.target;
-        if (!(target instanceof HTMLElement)) return;
-        if (!target.classList.contains('remove-extra')) return;
-        const row = target.closest('.extra-row');
-        if (row) {
-            row.remove();
-        }
-    });
+        if (!container || !addBtn || !template || !('content' in template)) return;
 
-    if (!addBtn || !template || !('content' in template)) return;
+        container.addEventListener('click', (event) => {
+            const target = event.target;
+            if (!(target instanceof HTMLElement)) return;
+            if (!target.classList.contains('remove-extra')) return;
+            const row = target.closest('.extra-row');
+            if (row) {
+                row.remove();
+            }
+        });
 
-    addBtn.addEventListener('click', () => {
-        const fragment = template.content.cloneNode(true);
-        container.appendChild(fragment);
-    });
-});
+        addBtn.addEventListener('click', () => {
+            const fragment = template.content.cloneNode(true);
+            container.appendChild(fragment);
+        });
+    };
 
-// extra prodotti admin
-document.addEventListener('DOMContentLoaded', () => {
-    const addBtn = document.getElementById('add-product-extra');
-    const container = document.getElementById('product-extras-container');
-    const template = document.getElementById('product-extra-template');
-    if (!container) return;
-
-    container.addEventListener('click', (event) => {
-        const target = event.target;
-        if (!(target instanceof HTMLElement)) return;
-        if (!target.classList.contains('remove-extra')) return;
-        const row = target.closest('.extra-row');
-        if (row) {
-            row.remove();
-        }
-    });
-
-    if (!addBtn || !template || !('content' in template)) return;
-
-    addBtn.addEventListener('click', () => {
-        const fragment = template.content.cloneNode(true);
-        container.appendChild(fragment);
-    });
+    setupExtrasManager('add-extra', 'extras-container', 'extra-row-template');
+    setupExtrasManager('add-product-extra', 'product-extras-container', 'product-extra-template');
 });
 
 /* ---------------------------------------
