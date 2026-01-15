@@ -58,6 +58,12 @@
   --badge-tour: #d8b4fe;       /* Lavender */
   --badge-aperitivo: #f9a8d4;  /* Pink Rose */
   --badge-escursione: #67e8f9; /* Cyan */
+
+  /* Danger Zone */
+  --danger-bg: #fee;
+  --danger-border: #ef4444;
+  --danger-heading: #b91c1c;
+  --danger-text: #7f1d1d;
 }
 
 [data-theme="dark"] {
@@ -1835,16 +1841,16 @@ a.product-cta:focus-visible {
 }
 
 .danger-zone {
-  background-color: #fef2f2;
-  border-color: #fecaca;
+  background-color: var(--danger-bg);
+  border: 2px solid var(--danger-border);
 }
 
 .danger-zone h3 {
-  color: #dc2626;
+  color: var(--danger-heading);
 }
 
 .danger-zone p {
-  color: var(--col-text-muted);
+  color: var(--danger-text);
   margin-bottom: 1.5em;
 }
 
