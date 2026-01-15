@@ -11,18 +11,21 @@
     const imageInput = document.getElementById('post-image');
     const existingImageInput = document.getElementById('existing-image-url');
     const altInput = document.getElementById('Testo_Alternativo');
+    const statusInput = document.getElementById('post-status');
+    const extrasContainer = document.getElementById('extras-container');
 
     const errorMessageDiv = document.getElementById('error-message');
     const successMessageDiv = document.getElementById('success-message');
 
-    if (!form || !titleInput || !contentInput || !errorMessageDiv || !altInput) {
+    // Check se ci sono tutti
+    if (!form || !titleInput || !contentInput || !altInput) {
         console.warn('Blog validation: missing form elements, aborting initialization.');
         return;
     }
 
+    // rendo visibile trovando l'id dello span l'errore con il messaggio dedicato
     function showFieldError(input, message) {
         const errorSpan = document.getElementById(input.id + '-error');
-
         if (errorSpan) {
             errorSpan.textContent = message;
         }
@@ -33,7 +36,6 @@
 
     function clearFieldError(input) {
         const errorSpan = document.getElementById(input.id + '-error');
-
         if (errorSpan) {
             errorSpan.textContent = '';
         }
@@ -46,19 +48,29 @@
         const messageDiv = type === 'error' ? errorMessageDiv : successMessageDiv;
         const otherDiv = type === 'error' ? successMessageDiv : errorMessageDiv;
 
+        if (!messageDiv) {
+            return;
+        }
+
         messageDiv.textContent = message;
         messageDiv.classList.remove('hidden');
-        otherDiv.classList.add('hidden');
+        if (otherDiv) {
+            otherDiv.classList.add('hidden');
+        }
 
         if (!messageDiv.hasAttribute('tabindex')) {
             messageDiv.setAttribute('tabindex', '-1');
         }
+
+        messageDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
         messageDiv.focus();
     }
 
     function hideGlobalMessages() {
-        errorMessageDiv.textContent = '';
-        errorMessageDiv.classList.add('hidden');
+        if (errorMessageDiv) {
+            errorMessageDiv.textContent = '';
+            errorMessageDiv.classList.add('hidden');
+        }
         if (successMessageDiv) {
             successMessageDiv.textContent = '';
             successMessageDiv.classList.add('hidden');
@@ -66,8 +78,7 @@
     }
 
     function validateTitle() {
-        const val = titleInput.value.trim();
-        if (val === '') { showFieldError(titleInput, 'Il titolo è obbligatorio'); return false; }
+        if (titleInput.value.trim() === '') { showFieldError(titleInput, 'Il titolo è obbligatorio'); return false; }
         clearFieldError(titleInput); return true;
     }
 
@@ -107,12 +118,90 @@
             return false;
         }
 
-        clearFieldError(imageInput); return true;
+        clearFieldError(imageInput);
+        return true;
     }
 
     function validateAlt() {
         if (altInput.value.trim() === '') { showFieldError(altInput, 'Il testo alternativo è obbligatorio'); return false; }
         clearFieldError(altInput); return true;
+    }
+
+    function validateStatus() {
+        if (!statusInput) {
+            return true;
+        }
+        if (statusInput.value === '') { showFieldError(statusInput, 'Lo stato è obbligatorio'); return false; }
+        clearFieldError(statusInput); return true;
+    }
+
+    function showExtraError(input, message, errorClass) {
+        const row = input.closest('.extra-row');
+        const errorSpan = row ? row.querySelector(errorClass) : null;
+        if (errorSpan) {
+            errorSpan.textContent = message;
+        }
+        input.classList.add('error');
+        input.classList.remove('valid');
+        input.setAttribute('aria-invalid', 'true');
+    }
+
+    function clearExtraError(input, errorClass) {
+        const row = input.closest('.extra-row');
+        const errorSpan = row ? row.querySelector(errorClass) : null;
+        if (errorSpan) {
+            errorSpan.textContent = '';
+        }
+        input.classList.remove('error');
+        input.classList.add('valid');
+        input.setAttribute('aria-invalid', 'false');
+    }
+
+    function validateExtras() {
+        if (!extrasContainer) {
+            return true;
+        }
+        const titleInputs = extrasContainer.querySelectorAll('input[name="extra_title[]"]');
+        const itemInputs = extrasContainer.querySelectorAll('textarea[name="extra_item[]"]');
+        const len = Math.max(titleInputs.length, itemInputs.length);
+        let ok = true;
+
+        for (let i = 0; i < len; i++) {
+            const titleInput = titleInputs[i];
+            const itemInput = itemInputs[i];
+            const titleVal = titleInput ? titleInput.value.trim() : '';
+            const itemVal = itemInput ? itemInput.value.trim() : '';
+
+            if (titleVal === '' && itemVal === '') {
+                if (titleInput) {
+                    clearExtraError(titleInput, '.extra-title-error');
+                }
+                if (itemInput) {
+                    clearExtraError(itemInput, '.extra-item-error');
+                }
+                continue;
+            }
+
+            if (!titleInput || titleVal === '') {
+                if (titleInput) {
+                    showExtraError(titleInput, 'Inserisci il titolo extra', '.extra-title-error');
+                }
+                ok = false;
+            } else {
+                clearExtraError(titleInput, '.extra-title-error');
+            }
+
+            if (!itemInput || itemVal === '') {
+                if (itemInput) {
+                    showExtraError(itemInput, 'Inserisci il contenuto', '.extra-item-error');
+                }
+                ok = false;
+            } else {
+                clearExtraError(itemInput, '.extra-item-error');
+            }
+        }
+
+        return ok;
     }
 
     function validateForm() {
@@ -125,8 +214,10 @@
         const v5 = validateContent();
         const v6 = validateImage();
         const v7 = validateAlt();
+        const v8 = validateStatus();
+        const v9 = validateExtras();
 
-        return v1 && v2 && v3 && v4 && v5 && v6 && v7;
+        return v1 && v2 && v3 && v4 && v5 && v6 && v7 && v8 && v9;
     }
 
     titleInput.addEventListener('blur', validateTitle);
@@ -138,15 +229,35 @@
     contentInput.addEventListener('blur', validateContent);
     imageInput.addEventListener('blur', validateImage);
     altInput.addEventListener('blur', validateAlt);
+    if (statusInput) {
+        statusInput.addEventListener('blur', validateStatus);
+        statusInput.addEventListener('change', validateStatus);
+    }
 
     const inputs = [
         titleInput, dateInput, readingTimeInput,
-        excerptInput, contentInput, imageInput, altInput
-    ];
+        excerptInput, contentInput, imageInput, altInput, statusInput
+    ].filter(Boolean);
 
     inputs.forEach(function (input) {
         input.addEventListener('input', hideGlobalMessages);
     });
+
+    if (extrasContainer) {
+        extrasContainer.addEventListener('input', (event) => {
+            const target = event.target;
+            if (!(target instanceof HTMLElement)) {
+                return;
+            }
+            if (target.name === 'extra_title[]') {
+                clearExtraError(target, '.extra-title-error');
+                hideGlobalMessages();
+            } else if (target.name === 'extra_item[]') {
+                clearExtraError(target, '.extra-item-error');
+                hideGlobalMessages();
+            }
+        });
+    }
 
     form.addEventListener('submit', function (e) {
         e.preventDefault();
@@ -155,12 +266,6 @@
             form.submit();
         } else {
             showGlobalMessage('Il form non è stato compilato correttamente!\n Correggere prima di poter continuare', 'error');
-
-            const firstError = form.querySelector('.error');
-            if (firstError) {
-                firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                firstError.focus();
-            }
         }
     });
 
