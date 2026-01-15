@@ -297,8 +297,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $html = buildPage('../pages/admin_blog_nuovo.html', $_SERVER['PHP_SELF']);
 
-$statusDraft = $old['status'] === 'published' ? '' : 'selected';
+$statusDraft = $old['status'] === 'draft' ? 'selected' : '';
 $statusPub = $old['status'] === 'published' ? 'selected' : '';
+$statusPlaceholder = ($old['status'] === 'draft' || $old['status'] === 'published') ? '' : 'selected';
 
 $extrasHtml = buildBlogExtraInputs(!empty($old['extras']) && is_array($old['extras']) ? $old['extras'] : []);
 $feedbackBlock = buildFeedbackBlock($feedback, $feedbackClass);
@@ -328,6 +329,7 @@ $html = str_replace(
         '[OLD_IMAGE]',
         '[OLD_ALT]',
         '[OLD_READING_TIME]',
+        '[IF_STATUS_PLACEHOLDER]',
         '[IF_STATUS_DRAFT]',
         '[IF_STATUS_PUB]',
         '[ADMIN_BLOG_EXTRAS]',
@@ -349,6 +351,7 @@ $html = str_replace(
         htmlspecialchars($old['image'], ENT_QUOTES),
         htmlspecialchars($old['alt']),
         htmlspecialchars((string)$old['reading_time']),
+        $statusPlaceholder,
         $statusDraft,
         $statusPub,
         $extrasHtml,

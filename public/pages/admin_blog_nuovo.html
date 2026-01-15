@@ -5,7 +5,6 @@
   <meta charset="UTF-8" >
   <meta name="viewport" content="width=device-width, initial-scale=1.0" >
   <title>[ADMIN_BLOG_PAGE_TITLE]</title>
-  <!--per rendere dinamica la scritta nuovo blog/modifica blog in base al contesto-->
   <meta name="description" content="[ADMIN_BLOG_PAGE_DESC]">
   <meta name="robots" content="noindex, nofollow">
   <meta name="keywords" content="nuovo, articolo, blog, admin, scrivi, pubblica, dashboard, SailUP">
@@ -156,10 +155,12 @@
 
           <div class="form-group">
             <label for="post-status">Stato Articolo <abbr title="Campo obbligatorio">*</abbr></label>
-            <select id="post-status" name="post-status" required>
+            <select id="post-status" name="post-status" required aria-describedby="post-status-error">
+              <option value="" disabled [IF_STATUS_PLACEHOLDER]>Seleziona uno stato</option>
               <option value="draft" [IF_STATUS_DRAFT]>Bozza</option>
               <option value="published" [IF_STATUS_PUB]>Pubblicato</option>
             </select>
+            <span id="post-status-error" class="field-error" role="alert"></span>
           </div>
 
         </fieldset>
