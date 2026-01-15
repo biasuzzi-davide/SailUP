@@ -48,8 +48,8 @@
           <p>[USER_EMAIL]</p>
         </div>
         <div class="profile-actions">
-          <button type="button" class="btn-layout" data-href="profilo.php">Visualizza Profilo</button>
-          <button type="button" class="btn-layout-light" data-href="logout.php"><span lang="en">Logout</span></button>
+          <a href="profilo.php" class="btn-layout">Visualizza Profilo</a>
+          <a href="logout.php" class="btn-layout-light"><span lang="en">Logout</span></a>
         </div>
       </div>
 
@@ -89,15 +89,15 @@
             <div class="bookings-filters">
               <fieldset>
                 <legend class="sr-only">Filtra prenotazioni</legend>
-                <div class="filter-tabs" aria-label="Filtri prenotazioni">
-                  <button type="button" id="tab-all" class="filter-tab active" data-filter="all">
-                    Tutte <span id="badge-all" class="badge">0</span>
+                <div class="filter-tabs">
+                  <button type="button" id="tab-all" class="filter-tab active" data-filter="all" aria-controls="bookings-container" aria-pressed="true">
+                    Tutte <span id="badge-all" class="badge"><span class="sr-only">quantità:</span> 0</span>
                   </button>
-                  <button type="button" id="tab-active" class="filter-tab" data-filter="active">
-                    Attive <span id="badge-active" class="badge badge-accent">0</span>
+                  <button type="button" id="tab-active" class="filter-tab" data-filter="active" aria-controls="bookings-container" aria-pressed="false">
+                    Attive <span id="badge-active" class="badge badge-accent"><span class="sr-only">quantità:</span> 0</span>
                   </button>
-                  <button type="button" id="tab-completed" class="filter-tab" data-filter="completed">
-                    Completate <span id="badge-completed" class="badge">0</span>
+                  <button type="button" id="tab-completed" class="filter-tab" data-filter="completed" aria-controls="bookings-container" aria-pressed="false">
+                    Completate <span id="badge-completed" class="badge"><span class="sr-only">quantità:</span> 0</span>
                   </button>
                 </div>
               </fieldset>
