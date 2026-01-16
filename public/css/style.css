@@ -181,8 +181,7 @@ a:hover {
   margin: -1px;
   overflow: hidden;
   clip-path: inset(50%);
-  clip: rect(0, 0, 0, 0);
-  /* Fall back per browser vecchi */
+  clip: rect(0, 0, 0, 0); /* Fall back per browser vecchi */
   white-space: nowrap;
   border-width: 0;
 }
@@ -2396,7 +2395,6 @@ footer address strong {
   transition: opacity 0.3s, visibility 0.3s;
   opacity: 1;
   visibility: visible;
-  pointer-events: auto; 
   z-index: 999;
 }
 
