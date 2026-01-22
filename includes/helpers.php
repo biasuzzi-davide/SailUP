@@ -1263,7 +1263,7 @@ function buildProductExtraInputs(array $extras): string {
             . '</div>'
             . '<div class="form-group">'
             . '<label for="' . $priceId . '">Prezzo Extra (€)</label>'
-            . '<input type="number" id="' . $priceId . '" name="extra_price[]" min="1" step="1" value="' . htmlspecialchars((string)($ex['prezzo'] ?? ''), ENT_QUOTES) . '" placeholder="50" aria-describedby="' . $priceErrorId . '">'
+            . '<input type="number" id="' . $priceId . '" name="extra_price[]" min="1" step="1" value="' . htmlspecialchars((string)($ex['prezzo'] ?? ''), ENT_QUOTES) . '" placeholder="es. 50" aria-describedby="' . $priceErrorId . '">'
             . '<span id="' . $priceErrorId . '" class="field-error extra-price-error" role="alert"></span>'
             . '</div>'
             . '<button type="button" class="btn-danger remove-extra" aria-label="Rimuovi extra">Rimuovi</button>'
