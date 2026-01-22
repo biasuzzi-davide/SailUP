@@ -266,6 +266,51 @@ function formatDecimalNumber(?string $value, int $decimals = 2): string {
 }
 
 /**
+ * Formatta il testo trasformando acronimi e unità di misura in tag <abbr>.
+ * Al momento gestisce: CV, m, GPS, VHF, TV, SPF.
+ */
+function formatTextAbbr(?string $text): string {
+    if ($text === null || $text === '') {
+        return '';
+    }
+
+    $safeText = htmlspecialchars($text, ENT_QUOTES);
+    
+    // CV -> Cavalli Vapore, solo con numero prima
+    $safeText = preg_replace(
+        '/(\d+)\s*(cv)\b/i', 
+        '$1 <abbr title="cavalli vapore">$2</abbr>', 
+        $safeText
+    );
+
+    // m -> Metri, solo con numero prima
+    $safeText = preg_replace(
+        '/(\d+)\s*(m)\b/', 
+        '$1 <abbr title="metri">$2</abbr>', 
+        $safeText
+    );
+
+    // Mappa degli acronimi presenti in DB
+    $acronimi = [
+        'GPS' => 'Global Positioning System',
+        'VHF' => 'Very High Frequency',
+        'TV'  => 'Televisione',
+        'SPF' => 'Fattore di Protezione Solare',
+        'USB' => 'Universal Serial Bus'
+    ];
+
+    foreach ($acronimi as $sigla => $titolo) {
+        $safeText = preg_replace(
+            '/\b(' . $sigla . ')\b/', 
+            '<abbr title="' . $titolo . '">$1</abbr>', 
+            $safeText
+        );
+    }
+
+    return $safeText;
+}
+
+/**
  * Formattta un valore monetario senza decimali (#) per i prezzi "da".
  */
 function formatPriceValue(?string $value): string {
@@ -427,17 +472,20 @@ function buildSimpleProductCard(array $prodotto, string $tipo = 'noleggio'): str
 
     $imageUrl = resolveImageUrl($prodotto['URL_Media'] ?? null);
     $altText = $prodotto['Testo_Alternativo'] ?? 'Immagine non disponibile';
-    $productName = htmlspecialchars($prodotto['Nome_Prodotto'] ?? 'Prodotto', ENT_QUOTES);
+
+    $rawName = $prodotto['Nome_Prodotto'] ?? 'Prodotto';
+    $productNameVisual = formatTextAbbr($rawName);
+    $productNameSafe = htmlspecialchars($rawName, ENT_QUOTES);
 
     // Determina URL di dettaglio e testo CTA in base al tipo
     if ($tipo === 'experience') {
         $detailUrl = 'dettaglio_esperienza.php?id=' . rawurlencode($idProdotto);
         $ctaText = 'Prenota ora &rarr;';
-        $ariaLabel = 'Prenota ' . $productName;
+        $ariaLabel = 'Prenota ' . $productNameSafe;
     } else {
         $detailUrl = 'dettaglio_barca.php?id=' . rawurlencode($idProdotto);
         $ctaText = 'Scopri di più &rarr;';
-        $ariaLabel = 'Vedi dettagli ' . $productName;
+        $ariaLabel = 'Vedi dettagli ' . $productNameSafe;
     }
 
     // Attributo loading per esperienze
@@ -447,7 +495,7 @@ function buildSimpleProductCard(array $prodotto, string $tipo = 'noleggio'): str
           <img class="product-card-image" src="' . htmlspecialchars($imageUrl, ENT_QUOTES) . '" alt="' . htmlspecialchars($altText, ENT_QUOTES) . '"' . $loadingAttr . '>
           <div class="product-card-content">
             <div class="product-header">
-              <h3 class="product-title">' . $productName . '</h3>
+              <h3 class="product-title">' . $productNameVisual . '</h3>
             </div>
             <div class="product-footer">
               <a href="' . htmlspecialchars($detailUrl, ENT_QUOTES) . '" class="product-cta" aria-label="' . htmlspecialchars($ariaLabel, ENT_QUOTES) . '">' . $ctaText . '</a>
@@ -470,7 +518,10 @@ function buildNoleggioCatalogCard(array $prodotto): string {
 
     $imageUrl = resolveImageUrl($prodotto['URL_Media'] ?? null);
     $altText = $prodotto['Testo_Alternativo'] ?? 'Immagine non disponibile';
-    $productName = htmlspecialchars($prodotto['Nome_Prodotto'] ?? 'Prodotto', ENT_QUOTES);
+
+    $rawName = $prodotto['Nome_Prodotto'] ?? 'Prodotto';
+    $productNameVisual = formatTextAbbr($rawName);
+    $productNameSafe = htmlspecialchars($rawName, ENT_QUOTES);    
     $description = htmlspecialchars($prodotto['Descrizione_Breve'] ?? 'Descrizione non disponibile.', ENT_QUOTES);
 
     // Badge tipologia
@@ -492,7 +543,7 @@ function buildNoleggioCatalogCard(array $prodotto): string {
     if ($lengthValue !== null && $lengthValue !== '') {
         $formattedLength = number_format((float) $lengthValue, 2, ',', '.');
         $formattedLength = rtrim(rtrim($formattedLength, '0'), ',');
-        $formattedLength .= 'm';
+        $formattedLength .= ' <abbr title="metri">m</abbr>';
     }
 
     // Posti totali
@@ -517,7 +568,7 @@ function buildNoleggioCatalogCard(array $prodotto): string {
         <div class="product-card-content">
             <div class="product-header">
                 <h3 class="product-title">
-                    ' . $productName . '
+                    ' . $productNameVisual . '
                 </h3>
                 <span class="product-badge ' . $badgeClass . '">' . $badgeText . '</span>
             </div>
@@ -547,7 +598,7 @@ function buildNoleggioCatalogCard(array $prodotto): string {
                     <span class="price-value">' . $prezzoBase . '€</span>
                     <span class="price-period">/giorno</span>
                 </div>
-                <a href="' . $detailUrl . '" class="product-cta" aria-label="Vedi dettagli ' . $productName . '">
+                <a href="' . $detailUrl . '" class="product-cta" aria-label="Vedi dettagli ' . $productNameSafe . '">
                     Vedi dettagli →
                 </a>
             </div>
@@ -722,7 +773,7 @@ function buildArticleExtraList($extras): string {
             $html .= '<h3>' . htmlspecialchars($title, ENT_QUOTES, 'UTF-8') . '</h3>';
             $html .= '<ul>';
         }
-        $html .= '<li>' . htmlspecialchars($element, ENT_QUOTES, 'UTF-8') . '</li>';
+        $html .= '<li>' . formatTextAbbr($element) . '</li>';
     }
 
     if ($currentTitle !== '') {

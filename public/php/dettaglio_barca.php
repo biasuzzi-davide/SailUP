@@ -193,6 +193,8 @@ if ($productDetail === false) {
 }
 
 $productName = $productDetail['Nome_Prodotto'] ?? 'Imbarcazione non trovata';
+$productNameSafe = htmlspecialchars($productName, ENT_QUOTES);
+$productNameVisual = formatTextAbbr($productName);
 if (!$productDetail) {
 	http_response_code(404);
 	echo buildPage('../pages/404.html', $_SERVER['PHP_SELF']);
@@ -205,7 +207,7 @@ $heroAlt = $productDetail ? 'Immagine di ' . $productName : 'Immagine in evidenz
 $briefText = $productDetail['Descrizione_Breve'] ?? 'Descrizione breve in arrivo.';
 $productType = $productDetail['Tipologia_Prodotto'] ?? $productDetail['Tipo_Prodotto'] ?? '—';
 $lengthValue = formatDecimalNumber($productDetail['Lunghezza_Barca_Metri'] ?? null);
-$lengthLabel = $lengthValue !== '—' ? $lengthValue . ' m' : '—';
+$lengthLabel = $lengthValue !== '—' ? $lengthValue . ' <abbr title="metri">m</abbr>' : '—';
 $seatsValue = isset($productDetail['Posti_Totali']) ? (int) $productDetail['Posti_Totali'] : null;
 $seatsLabel = $seatsValue !== null ? (string) $seatsValue : '—';
 $licenseRaw = filter_var($productDetail['Richiede_Patente'] ?? null, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
@@ -230,7 +232,10 @@ if ($productDetail && !empty($productDetail['IDProdotto'])) {
 $inclusiHtml = buildItemsList(
 	is_array($inclusi) ? $inclusi : [],
 	'Nome_Incluso',
-	'Nessuna dotazione inclusa al momento.'
+	'Nessuna dotazione inclusa al momento.',
+	function ($item) {
+        return formatTextAbbr($item['Nome_Incluso'] ?? '');
+    }
 );
 
 $extraHtml = buildItemsList(
@@ -273,9 +278,10 @@ $placeholders = [
 	'[PRODUCT_IMAGE_SRC]' => htmlspecialchars($heroImage, ENT_QUOTES),
 	'[PRODUCT_IMAGE_ALT]' => htmlspecialchars($heroAlt, ENT_QUOTES),
 	'[PRODUCT_NAME]' => htmlspecialchars($productName, ENT_QUOTES),
+	'[PRODUCT_NAME_VISUAL]' => $productNameVisual,
 	'[PRODUCT_BRIEF]' => htmlspecialchars($briefText, ENT_QUOTES),
 	'[PRODUCT_TYPE]' => htmlspecialchars($productType, ENT_QUOTES),
-	'[PRODUCT_LENGTH]' => htmlspecialchars($lengthLabel, ENT_QUOTES),
+	'[PRODUCT_LENGTH]' => $lengthLabel,
 	'[PRODUCT_SEATS]' => htmlspecialchars($seatsLabel, ENT_QUOTES),
 	'[PRODUCT_LICENSE]' => htmlspecialchars($licenseLabel, ENT_QUOTES),
 	'[PRODUCT_DESCRIPTION_BLOCK]' => $descriptionBlock,
