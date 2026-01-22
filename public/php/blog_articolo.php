@@ -44,7 +44,7 @@ if ($authorName === '') {
     $authorName = 'Autore SailUP';
 }
 
-$authorRole = ($article['Autore_Is_Admin'] ?? 0) ? 'Team SailUP' : 'Skipper SailUP';
+$authorRole = ($article['Autore_Is_Admin'] ?? 0) ? 'Team SailUP' : 'Utente SailUP';
 $registrationYear = '';
 if (!empty($article['Autore_Data_Registrazione'])) {
     try {
