@@ -1509,20 +1509,43 @@ a.product-cta:focus-visible {
   font-size: 0.95em;
 }
 
+.amenity-box.included li {
+  list-style: none;
+  position: relative;
+  padding-left: 2rem;
+  margin-bottom: 0.5rem;
+}
+
 .amenity-box.included li::before {
-  content: "✓";
+  content: "";
   position: absolute;
   left: 0;
-  color: #16a34a;
-  font-weight: bold;
+  top: 2px;
+  
+  width: 1.2rem;
+  height: 1.2rem;
+  display: block; 
+  
+  background-image: url('../img/icona-spunta.webp'); 
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 10;
 }
 
 .amenity-box.extra li::before {
-  content: "+";
+  content: "";
   position: absolute;
   left: 0;
-  color: var(--col-accent);
-  font-weight: bold;
+  top: 2px;
+  
+  width: 1.2rem;
+  height: 1.2rem;
+  display: block; 
+  
+  background-image: url('../img/icona-piu.webp'); 
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 10;
 }
 
 .sticky-sidebar {
