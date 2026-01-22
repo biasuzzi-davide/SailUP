@@ -198,7 +198,7 @@ $heroAlt = 'Vista di ' . $experienceName;
 
 $durationRaw = $experience['Durata_Ore'];
 $duration = ($durationRaw !== null && $durationRaw !== '')
-	? ((int) $durationRaw) . ' h'
+	? ((int) $durationRaw) . ' <abbr title="ore">h</abbr>'
 	: '—';
 $postiTotali = isset($experience['Posti_Totali']) ? (int) $experience['Posti_Totali'] : null;
 $participants = $postiTotali !== null 
@@ -277,7 +277,7 @@ $placeholders = [
 	'[EXPERIENCE_IMAGE_SRC]' => htmlspecialchars($heroImage, ENT_QUOTES),
 	'[EXPERIENCE_IMAGE_ALT]' => htmlspecialchars($heroAlt, ENT_QUOTES),
 	'[EXPERIENCE_TAGLINE]' => htmlspecialchars($experienceTagline, ENT_QUOTES),
-	'[EXPERIENCE_DURATION]' => htmlspecialchars($duration, ENT_QUOTES),
+	'[EXPERIENCE_DURATION]' => $duration,
 	'[EXPERIENCE_PARTICIPANTS]' => htmlspecialchars($participants, ENT_QUOTES),
 	'[EXPERIENCE_ACCESS]' => htmlspecialchars($access, ENT_QUOTES),
 	'[EXPERIENCE_DESCRIPTION_BLOCK]' => $descriptionBlock,

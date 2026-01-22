@@ -290,13 +290,19 @@ function formatTextAbbr(?string $text): string {
         $safeText
     );
 
-    // Mappa degli acronimi presenti in DB
+    // h -> ore, solo con numero prima
+    $safeText = preg_replace(
+        '/(\d+)\s*(h)\b/', 
+        '$1 <abbr title="ore">$2</abbr>', 
+        $safeText
+    );
+
+    // Mappa degli acronimi presenti in DB, aggiungere quelli nuovi
     $acronimi = [
         'GPS' => 'Global Positioning System',
         'VHF' => 'Very High Frequency',
         'TV'  => 'Televisione',
         'SPF' => 'Fattore di Protezione Solare',
-        'USB' => 'Universal Serial Bus'
     ];
 
     foreach ($acronimi as $sigla => $titolo) {
