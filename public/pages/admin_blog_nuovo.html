@@ -74,7 +74,7 @@
             <div class="form-group">
               <label for="post-reading-time">Tempo Medio di Lettura (minuti) <abbr
                   title="Campo obbligatorio">*</abbr></label>
-              <input type="number" id="post-reading-time" name="post-reading-time" min="1" step="1" placeholder="5"
+              <input type="number" id="post-reading-time" name="post-reading-time" min="1" step="1" placeholder="es. 5"
                 value="[OLD_READING_TIME]" required aria-describedby="post-reading-time-error" >
               <span id="post-reading-time-error" class="field-error" role="alert"></span>
             </div>
@@ -83,7 +83,7 @@
           <div class="form-group">
             <label for="post-excerpt">Estratto / Anteprima <abbr title="Campo obbligatorio">*</abbr></label>
             <textarea id="post-excerpt" name="post-excerpt" rows="3" maxlength="200"
-              placeholder="Breve descrizione dell'articolo che apparirà nelle card..." required
+              placeholder="Inserire una breve descrizione dell'articolo che apparirà nelle card." required
               aria-describedby="excerpt-hint post-excerpt-error">[OLD_EXCERPT]</textarea>
             <span id="excerpt-hint" class="field-hint">Massimo 200 caratteri</span>
             <span id="post-excerpt-error" class="field-error" role="alert"></span>
@@ -96,7 +96,7 @@
           <div class="form-group">
             <label for="post-content">Contenuto Articolo <abbr title="Campo obbligatorio">*</abbr></label>
             <textarea id="post-content" name="post-content" rows="15"
-              placeholder="Scrivi qui il contenuto completo dell'articolo..." required
+              placeholder="Scrivi qui il contenuto completo dell'articolo." required
               aria-describedby="content-hint post-content-error">[OLD_CONTENT]</textarea>
             <span id="content-hint" class="field-hint">Scrivi il contenuto in testo normale. Per creare un nuovo paragrafo, lascia una riga vuota tra i blocchi di testo.</span>
             <span id="post-content-error" class="field-error" role="alert"></span>
@@ -121,7 +121,7 @@
           <div class="form-group">
             <label for="Testo_Alternativo">Testo Alternativo Immagine <abbr title="Campo obbligatorio">*</abbr></label>
             <input type="text" id="Testo_Alternativo" name="Testo_Alternativo"
-              placeholder="Descrizione dell'immagine per accessibilità" value="[OLD_ALT]" required
+              placeholder="Descrizione dell'immagine per accessibilità, inserire solo se aggiunge informazioni." value="[OLD_ALT]" required
               aria-describedby="Testo_Alternativo-error" >
             <span id="Testo_Alternativo-error" class="field-error" role="alert"></span>
           </div>
