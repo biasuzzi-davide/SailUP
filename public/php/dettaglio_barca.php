@@ -194,7 +194,7 @@ if ($productDetail === false) {
 
 $productName = $productDetail['Nome_Prodotto'] ?? 'Imbarcazione non trovata';
 $productNameSafe = htmlspecialchars($productName, ENT_QUOTES);
-$productNameVisual = formatTextAbbr($productName);
+$productNameVisual = formatText($productName);
 if (!$productDetail) {
 	http_response_code(404);
 	echo buildPage('../pages/404.html', $_SERVER['PHP_SELF']);
@@ -234,7 +234,7 @@ $inclusiHtml = buildItemsList(
 	'Nome_Incluso',
 	'Nessuna dotazione inclusa al momento.',
 	function ($item) {
-        return formatTextAbbr($item['Nome_Incluso'] ?? '');
+        return formatText($item['Nome_Incluso'] ?? '');
     }
 );
 
@@ -243,7 +243,7 @@ $extraHtml = buildItemsList(
 	'Nome_Extra',
 	'Nessun extra disponibile al momento.',
 	function ($item) {
-		$label = htmlspecialchars($item['Nome_Extra'] ?? '', ENT_QUOTES);
+		$label = formatText($item['Nome_Extra'] ?? '');
 		if (!empty($item['Prezzo_Extra'])) {
 			$formattedPrice = number_format((float) $item['Prezzo_Extra'], 0, ',', '.');
 			if ($formattedPrice !== '') {
@@ -279,7 +279,7 @@ $placeholders = [
 	'[PRODUCT_IMAGE_ALT]' => htmlspecialchars($heroAlt, ENT_QUOTES),
 	'[PRODUCT_NAME]' => htmlspecialchars($productName, ENT_QUOTES),
 	'[PRODUCT_NAME_VISUAL]' => $productNameVisual,
-	'[PRODUCT_BRIEF]' => htmlspecialchars($briefText, ENT_QUOTES),
+	'[PRODUCT_BRIEF]' => formatText($briefText),
 	'[PRODUCT_TYPE]' => htmlspecialchars($productType, ENT_QUOTES),
 	'[PRODUCT_LENGTH]' => $lengthLabel,
 	'[PRODUCT_SEATS]' => htmlspecialchars($seatsLabel, ENT_QUOTES),
