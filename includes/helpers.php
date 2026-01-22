@@ -242,7 +242,7 @@ function buildParagraphsFromText(?string $text, string $emptyMessage = 'Contenut
 
     $html = '';
     foreach ($paragraphs as $paragraph) {
-        $html .= '<p>' . htmlspecialchars($paragraph, ENT_QUOTES) . '</p>';
+        $html .= '<p>' . formatTextAbbr($paragraph) . '</p>';
     }
 
     return $html;
@@ -923,7 +923,7 @@ function formatArticleContent(?string $content): string {
         if ($paragraph === '') {
             continue;
         }
-        $html .= '<p>' . htmlspecialchars($paragraph, ENT_QUOTES, 'UTF-8') . '</p>';
+        $html .= '<p>' . formatTextAbbr($paragraph) . '</p>';
     }
 
     return $html ?: '<p>Il contenuto dell\'articolo non è ancora disponibile.</p>';
