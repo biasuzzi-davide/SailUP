@@ -3,7 +3,8 @@ require_once '../../config/pages.php';
 require_once __DIR__ . '/session/session.php';
 require_once __DIR__ . '/db_connection.php';
 
-function buildHeader($phpSelf) {
+function buildHeader($phpSelf)
+{
     $headerTemplatePath = __DIR__ . '/../public/pages/elementi_semantici/header.html';
     $headerTemplate = file_get_contents($headerTemplatePath);
 
@@ -25,7 +26,8 @@ function buildHeader($phpSelf) {
     <span class="logo-text" lang="en">Sail<span class="text-accent">UP</span></span>';
 
     // Funzione per creare item
-    function createHeaderItem($key, $label, $current, $relativePath, $pages, $lang = '', $class = '') {
+    function createHeaderItem($key, $label, $current, $relativePath, $pages, $lang = '', $class = '')
+    {
         $langAttr = $lang ? ' lang="' . $lang . '"' : '';
         $classAttr = $class ? ' class="' . $class . '"' : '';
         if ($current == $key) {
@@ -50,7 +52,7 @@ function buildHeader($phpSelf) {
     $mobileChiSiamoLi = createHeaderItem('chi_siamo', 'Chi Siamo', $current, $relativePath, $pages);
 
     if ($current === 'index') {
-    $logoHtml = '<div class="logo">' . $logoInner . '</div>';
+        $logoHtml = '<div class="logo">' . $logoInner . '</div>';
     } else {
         $homeUrl = $relativePath . $pages['index'];
         $logoHtml = '<a href="' . $homeUrl . '" class="logo" aria-label="Torna alla Home">' . $logoInner . '</a>';
@@ -92,7 +94,8 @@ function buildHeader($phpSelf) {
     return $header;
 }
 
-function buildFooter($phpSelf) {
+function buildFooter($phpSelf)
+{
     $footerTemplatePath = __DIR__ . '/../public/pages/elementi_semantici/footer.html';
     $footerTemplate = file_get_contents($footerTemplatePath);
 
@@ -106,7 +109,8 @@ function buildFooter($phpSelf) {
     global $pages;
 
     // Funzione per creare item
-    function createFooterItem($key, $label, $current, $relativePath, $pages, $lang = '') {
+    function createFooterItem($key, $label, $current, $relativePath, $pages, $lang = '')
+    {
         $langAttr = $lang ? ' lang="' . $lang . '"' : '';
         if ($current == $key) {
             return '<li aria-current="page"' . $langAttr . '>' . $label . '</li>';
@@ -144,7 +148,8 @@ function buildFooter($phpSelf) {
     return $footer;
 }
 
-function buildPage($templatePath, $phpSelf) {
+function buildPage($templatePath, $phpSelf)
+{
     $html = file_get_contents($templatePath);
     $header = buildHeader($phpSelf);
     $footer = buildFooter($phpSelf);
@@ -157,11 +162,12 @@ function buildPage($templatePath, $phpSelf) {
  * Genera il menu item per la Dashboard Admin se l'utente è admin.
  * Da inserire nel menu laterale delle pagine profilo.
  */
-function buildAdminMenuItem(): string {
+function buildAdminMenuItem(): string
+{
     if (!isAdmin()) {
         return '';
     }
-    
+
     return '<li>
               <a href="admin.php">
                 <span class="nav-icon" aria-hidden="true">⚙️</span>
@@ -174,20 +180,22 @@ function buildAdminMenuItem(): string {
  * Genera il breadcrumb item per Amministrazione se l'utente è admin.
  * Da inserire nelle breadcrumb delle pagine profilo.
  */
-function buildAdminBreadcrumb(): string {
+function buildAdminBreadcrumb(): string
+{
     if (!isAdmin()) {
         return '';
     }
-    
+
     return '<li><a href="admin.php">Amministrazione</a></li>';
 }
 
 /**
  * ritorna l'url dell'avatar utente se presente su disco altrimemti uso placeholder di default
  */
-function getProfileImageUrl(array $user = []): string {
+function getProfileImageUrl(array $user = []): string
+{
     $default = 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=200&q=80';
-    $userId = (int)($user['IDUtente'] ?? 0);
+    $userId = (int) ($user['IDUtente'] ?? 0);
     if ($userId <= 0) {
         return $default;
     }
@@ -227,7 +235,8 @@ function getProfileImageUrl(array $user = []): string {
 /**
  * Restituisce un messaggio HTML composto da paragrafi puliti.
  */
-function buildParagraphsFromText(?string $text, string $emptyMessage = 'Contenuto non disponibile.'): string {
+function buildParagraphsFromText(?string $text, string $emptyMessage = 'Contenuto non disponibile.'): string
+{
     $cleaned = trim((string) $text);
     if ($cleaned === '') {
         return '<p>' . htmlspecialchars($emptyMessage, ENT_QUOTES) . '</p>';
@@ -242,7 +251,7 @@ function buildParagraphsFromText(?string $text, string $emptyMessage = 'Contenut
 
     $html = '';
     foreach ($paragraphs as $paragraph) {
-        $html .= '<p>' . formatTextAbbr($paragraph) . '</p>';
+        $html .= '<p>' . formatText($paragraph) . '</p>';
     }
 
     return $html;
@@ -251,7 +260,8 @@ function buildParagraphsFromText(?string $text, string $emptyMessage = 'Contenut
 /**
  * Formatta un numero decimale con la virgola italiana e rimuove gli zeri finali.
  */
-function formatDecimalNumber(?string $value, int $decimals = 2): string {
+function formatDecimalNumber(?string $value, int $decimals = 2): string
+{
     if ($value === null || $value === '') {
         return '—';
     }
@@ -266,60 +276,126 @@ function formatDecimalNumber(?string $value, int $decimals = 2): string {
 }
 
 /**
- * Formatta il testo trasformando acronimi e unità di misura in tag <abbr>.
- * Al momento gestisce: CV, m, GPS, VHF, TV, SPF.
+ * Formatta il testo trasformando acronimi e unità di misura in tag <abbr>. Aggiornare acronym.php aggiungendo nuove definizioni all'occorrenza!
  */
-function formatTextAbbr(?string $text): string {
+function formatTextAbbr(?string $text): string
+{
     if ($text === null || $text === '') {
         return '';
     }
 
     $safeText = htmlspecialchars($text, ENT_QUOTES);
-    
+
     // CV -> Cavalli Vapore, solo con numero prima
     $safeText = preg_replace(
-        '/(\d+)\s*(cv)\b/i', 
-        '$1 <abbr title="cavalli vapore">$2</abbr>', 
+        '/(\d+)\s*(cv)\b/i',
+        '$1 <abbr title="cavalli vapore">$2</abbr>',
         $safeText
     );
 
     // m -> Metri, solo con numero prima
     $safeText = preg_replace(
-        '/(\d+)\s*(m)\b/', 
-        '$1 <abbr title="metri">$2</abbr>', 
+        '/(\d+)\s*(m)\b/',
+        '$1 <abbr title="metri">$2</abbr>',
         $safeText
     );
 
     // h -> ore, solo con numero prima
     $safeText = preg_replace(
-        '/(\d+)\s*(h)\b/', 
-        '$1 <abbr title="ore">$2</abbr>', 
+        '/(\d+)\s*(h)\b/',
+        '$1 <abbr title="ore">$2</abbr>',
         $safeText
     );
 
-    // Mappa degli acronimi presenti in DB, aggiungere quelli nuovi
-    $acronimi = [
-        'GPS' => 'Global Positioning System',
-        'VHF' => 'Very High Frequency',
-        'TV'  => 'Televisione',
-        'SPF' => 'Fattore di Protezione Solare',
-    ];
+    // per acronimi
+    static $acronimi = null;
 
-    foreach ($acronimi as $sigla => $titolo) {
-        $safeText = preg_replace(
-            '/\b(' . $sigla . ')\b/', 
-            '<abbr title="' . $titolo . '">$1</abbr>', 
-            $safeText
-        );
+    if ($acronimi === null) {
+        $configPath = __DIR__ . '/../../config/acronyms.php';
+        
+        if (file_exists($configPath)) {
+            $acronimi = require $configPath;
+        } else {
+            $acronimi = [];
+        }
+    }
+
+    if (!empty($acronimi)) {
+        foreach ($acronimi as $sigla => $titolo) {
+            $safeText = preg_replace(
+                '/\b(' . preg_quote($sigla, '/') . ')\b/',
+                '<abbr title="' . $titolo . '">$1</abbr>',
+                $safeText
+            );
+        }
     }
 
     return $safeText;
 }
 
 /**
+ * Aggiunge il tag <span lang="en"> alle parole straniere. Aggiornare languages.php aggiungendo nuove parole all'occorrenza!
+ */
+function formatTextLang(?string $text): string
+{
+    if ($text === null || $text === '') {
+        return '';
+    }
+
+    static $dictionary = null;
+    if ($dictionary === null) {
+        $configPath = __DIR__ . '../config/languages.php';
+        
+        if (file_exists($configPath)) {
+            $dictionary = require $configPath;
+        } else {
+            $dictionary = [];
+        }
+    }
+
+    $processedText = $text;
+
+    if (empty($dictionary)) {
+        return $processedText;
+    }
+
+    foreach ($dictionary as $lang => $words) {
+        // Ordina per lunghezza decrescente
+        usort($words, fn($a, $b) => strlen($b) - strlen($a));
+
+        $escapedWords = array_map(fn($w) => preg_quote($w, '/'), $words);
+        
+        $pattern = '/(?<=^|[\s\p{P}]|;)(' . implode('|', $escapedWords) . ')(?=$|[\s\p{P}]|&)/iu';
+
+        $processedText = preg_replace(
+            $pattern, 
+            '<span lang="' . $lang . '">$1</span>', 
+            $processedText
+        );
+    }
+
+    return $processedText;
+}
+
+/**
+ * Funzione di formattazione che unisce formatTextAbbr e formatTextLang.
+ */
+function formatText(?string $text): string
+{
+    if ($text === null || $text === '') {
+        return '';
+    }
+
+    $textWithAbbr = formatTextAbbr($text);
+
+    return formatTextLang($textWithAbbr);
+}
+
+/**
  * Formattta un valore monetario senza decimali (#) per i prezzi "da".
  */
-function formatPriceValue(?string $value): string {
+function formatPriceValue(?string $value): string
+{
     if ($value === null || $value === '') {
         return '—';
     }
@@ -330,7 +406,8 @@ function formatPriceValue(?string $value): string {
 /**
  * Rende una stringa numerica con due decimali e virgole italiane.
  */
-function formatCurrencyWithDecimals(?string $value): string {
+function formatCurrencyWithDecimals(?string $value): string
+{
     if ($value === null || $value === '') {
         return '';
     }
@@ -341,7 +418,8 @@ function formatCurrencyWithDecimals(?string $value): string {
 /**
  * Calcola il prezzo totale per un noleggio.
  */
-function calcolaPrezzoNoleggio(float $prezzoBase, string $dataInizio, string $dataFine, array $extraSelezionati, array $extraDisponibili, bool $skipperRichiesto): float {
+function calcolaPrezzoNoleggio(float $prezzoBase, string $dataInizio, string $dataFine, array $extraSelezionati, array $extraDisponibili, bool $skipperRichiesto): float
+{
     // Calcolo giorni di noleggio
     $dateStart = new DateTime($dataInizio);
     $dateEnd = new DateTime($dataFine);
@@ -353,7 +431,7 @@ function calcolaPrezzoNoleggio(float $prezzoBase, string $dataInizio, string $da
     $prezzoExtra = 0;
     foreach ($extraSelezionati as $extraId) {
         foreach ($extraDisponibili as $extraItem) {
-            if (isset($extraItem['IDExtra']) && (int)$extraItem['IDExtra'] === (int)$extraId) {
+            if (isset($extraItem['IDExtra']) && (int) $extraItem['IDExtra'] === (int) $extraId) {
                 $prezzoExtra += (float) ($extraItem['Prezzo_Extra'] ?? 0);
                 break;
             }
@@ -372,12 +450,13 @@ function calcolaPrezzoNoleggio(float $prezzoBase, string $dataInizio, string $da
 /**
  * Calcola il prezzo totale per un'esperienza.
  */
-function calcolaPrezzoEsperienza(float $prezzoBase, array $extraSelezionati, array $extraDisponibili, bool $pickupRichiesto): float {
+function calcolaPrezzoEsperienza(float $prezzoBase, array $extraSelezionati, array $extraDisponibili, bool $pickupRichiesto): float
+{
     // Calcolo extra - cerco per IDExtra
     $prezzoExtra = 0;
     foreach ($extraSelezionati as $extraId) {
         foreach ($extraDisponibili as $extraItem) {
-            if (isset($extraItem['IDExtra']) && (int)$extraItem['IDExtra'] === (int)$extraId) {
+            if (isset($extraItem['IDExtra']) && (int) $extraItem['IDExtra'] === (int) $extraId) {
                 $prezzoExtra += (float) ($extraItem['Prezzo_Extra'] ?? 0);
                 break;
             }
@@ -396,20 +475,21 @@ function calcolaPrezzoEsperienza(float $prezzoBase, array $extraSelezionati, arr
 /**
  * Genera l'HTML per visualizzare gli extra selezionati in una lista di definizione.
  */
-function buildExtraRowsHtml(array $extraSelezionati, array $extraDisponibili): string {
+function buildExtraRowsHtml(array $extraSelezionati, array $extraDisponibili): string
+{
     if (empty($extraSelezionati)) {
         return '';
     }
-    
+
     $html = '';
     foreach ($extraSelezionati as $extraId) {
         // Trova il nome e prezzo dell'extra
         foreach ($extraDisponibili as $extraItem) {
-            if (isset($extraItem['IDExtra']) && (int)$extraItem['IDExtra'] === (int)$extraId) {
-                $nomeExtra = htmlspecialchars($extraItem['Nome_Extra'] ?? '', ENT_QUOTES);
+            if (isset($extraItem['IDExtra']) && (int) $extraItem['IDExtra'] === (int) $extraId) {
+                $nomeExtra = formatText($extraItem['Nome_Extra'] ?? '');
                 $prezzoExtra = (float) ($extraItem['Prezzo_Extra'] ?? 0);
                 $prezzoExtraFormattato = number_format($prezzoExtra, 2, ',', '.');
-                
+
                 $html .= '<div>' . "\n";
                 $html .= '    <dt>' . $nomeExtra . ':</dt>' . "\n";
                 $html .= '    <dd>+ € ' . $prezzoExtraFormattato . '</dd>' . "\n";
@@ -418,14 +498,15 @@ function buildExtraRowsHtml(array $extraSelezionati, array $extraDisponibili): s
             }
         }
     }
-    
+
     return $html;
 }
 
 /**
  * Costruisce un elenco HTML da un array di righe.
  */
-function buildItemsList(array $items, string $valueKey, string $emptyMessage, ?callable $formatter = null): string {
+function buildItemsList(array $items, string $valueKey, string $emptyMessage, ?callable $formatter = null): string
+{
     $filtered = array_filter($items, fn($row) => !empty($row[$valueKey]));
     if (empty($filtered)) {
         return '<li>' . htmlspecialchars($emptyMessage, ENT_QUOTES) . '</li>';
@@ -448,14 +529,16 @@ function buildItemsList(array $items, string $valueKey, string $emptyMessage, ?c
 /**
  * Ritorna il placeholder condiviso dagli articoli nel caso in cui manchi un media.
  */
-function getPlaceholderImage(): string {
+function getPlaceholderImage(): string
+{
     return '../img/placeholder.png';
 }
 
 /**
  * Risolve un URL immagine, utilizzando il placeholder se necessario.
  */
-function resolveImageUrl(?string $url): string {
+function resolveImageUrl(?string $url): string
+{
     $trimmed = trim((string) $url);
     if ($trimmed === '') {
         return getPlaceholderImage();
@@ -470,7 +553,8 @@ function resolveImageUrl(?string $url): string {
  * @param string $tipo Tipo di prodotto: 'noleggio' o 'experience'
  * @return string HTML della card
  */
-function buildSimpleProductCard(array $prodotto, string $tipo = 'noleggio'): string {
+function buildSimpleProductCard(array $prodotto, string $tipo = 'noleggio'): string
+{
     $idProdotto = $prodotto['IDProdotto'] ?? '';
     if ($idProdotto === '') {
         return '';
@@ -480,7 +564,7 @@ function buildSimpleProductCard(array $prodotto, string $tipo = 'noleggio'): str
     $altText = $prodotto['Testo_Alternativo'] ?? 'Immagine non disponibile';
 
     $rawName = $prodotto['Nome_Prodotto'] ?? 'Prodotto';
-    $productNameVisual = formatTextAbbr($rawName);
+    $productNameVisual = formatText($rawName);
     $productNameSafe = htmlspecialchars($rawName, ENT_QUOTES);
 
     // Determina URL di dettaglio e testo CTA in base al tipo
@@ -516,7 +600,8 @@ function buildSimpleProductCard(array $prodotto, string $tipo = 'noleggio'): str
  * @param array $prodotto Dati del prodotto dal database
  * @return string HTML della card
  */
-function buildNoleggioCatalogCard(array $prodotto): string {
+function buildNoleggioCatalogCard(array $prodotto): string
+{
     $idProdotto = $prodotto['IDProdotto'] ?? '';
     if ($idProdotto === '') {
         return '';
@@ -526,13 +611,13 @@ function buildNoleggioCatalogCard(array $prodotto): string {
     $altText = $prodotto['Testo_Alternativo'] ?? 'Immagine non disponibile';
 
     $rawName = $prodotto['Nome_Prodotto'] ?? 'Prodotto';
-    $productNameVisual = formatTextAbbr($rawName);
-    $productNameSafe = htmlspecialchars($rawName, ENT_QUOTES);    
-    $description = htmlspecialchars($prodotto['Descrizione_Breve'] ?? 'Descrizione non disponibile.', ENT_QUOTES);
+    $productNameVisual = formatText($rawName);
+    $productNameSafe = htmlspecialchars($rawName, ENT_QUOTES);
+    $description = formatText($prodotto['Descrizione_Breve'] ?? 'Descrizione non disponibile.');
 
     // Badge tipologia
     $badgeTextRaw = $prodotto['Tipologia_Prodotto'] ?? 'Noleggio';
-    $badgeText = htmlspecialchars($badgeTextRaw, ENT_QUOTES);
+    $badgeText = formatText($badgeTextRaw);
     $badgeKey = strtolower($badgeTextRaw);
     $badgeClass = 'badge-motore';
     if (strpos($badgeKey, 'vela') !== false) {
@@ -554,7 +639,7 @@ function buildNoleggioCatalogCard(array $prodotto): string {
 
     // Posti totali
     $postiTotali = isset($prodotto['Posti_Totali']) ? (int) $prodotto['Posti_Totali'] : null;
-    $postiDescrizione = $postiTotali !== null 
+    $postiDescrizione = $postiTotali !== null
         ? ($postiTotali === 1 ? '1 posto' : $postiTotali . ' posti')
         : '—';
 
@@ -619,7 +704,8 @@ function buildNoleggioCatalogCard(array $prodotto): string {
  * @param array $lingueDisponibili Array con le lingue disponibili per questo prodotto
  * @return string HTML della card
  */
-function buildExperienceCatalogCard(array $prodotto, array $lingueDisponibili = []): string {
+function buildExperienceCatalogCard(array $prodotto, array $lingueDisponibili = []): string
+{
     $idProdotto = $prodotto['IDProdotto'] ?? '';
     if ($idProdotto === '') {
         return '';
@@ -627,12 +713,16 @@ function buildExperienceCatalogCard(array $prodotto, array $lingueDisponibili = 
 
     $imageUrl = resolveImageUrl($prodotto['URL_Media'] ?? null);
     $altText = $prodotto['Testo_Alternativo'] ?? 'Immagine non disponibile';
-    $productName = htmlspecialchars($prodotto['Nome_Prodotto'] ?? 'Esperienza', ENT_QUOTES);
-    $description = htmlspecialchars($prodotto['Descrizione_Breve'] ?? 'Descrizione non disponibile.', ENT_QUOTES);
+
+    $rawName = $prodotto['Nome_Prodotto'] ?? 'Esperienza';
+    $productNameVisual = formatText($rawName);
+    $productNameSafe = htmlspecialchars($rawName, ENT_QUOTES);
+
+    $description = formatText($prodotto['Descrizione_Breve'] ?? 'Descrizione non disponibile.');
 
     // Badge tipologia
     $tipologiaRaw = $prodotto['Tipologia_Prodotto'] ?? 'Tour';
-    $badgeText = htmlspecialchars($tipologiaRaw, ENT_QUOTES);
+    $badgeText = formatText($tipologiaRaw);
     $badgeSlug = strtolower($tipologiaRaw);
     if (strpos($badgeSlug, 'aperitivo') !== false) {
         $badgeClass = 'badge-aperitivo';
@@ -646,7 +736,7 @@ function buildExperienceCatalogCard(array $prodotto, array $lingueDisponibili = 
 
     // Posti totali
     $postiTotali = isset($prodotto['Posti_Totali']) ? (int) $prodotto['Posti_Totali'] : null;
-    $postiDescrizione = $postiTotali !== null 
+    $postiDescrizione = $postiTotali !== null
         ? ($postiTotali === 1 ? '1 posto' : $postiTotali . ' posti')
         : '—';
 
@@ -675,7 +765,7 @@ function buildExperienceCatalogCard(array $prodotto, array $lingueDisponibili = 
         <div class="product-card-content">
           <div class="product-header">
             <h3 class="product-title">
-              ' . $productName . '
+              ' . $productNameVisual . '
             </h3>
             <span class="product-badge ' . $badgeClass . '">' . $badgeText . '</span>
           </div>
@@ -705,7 +795,7 @@ function buildExperienceCatalogCard(array $prodotto, array $lingueDisponibili = 
               <span class="price-value">' . $price . '€</span>
               <span class="price-period">/tour</span>
             </div>
-            <a href="' . $detailUrl . '" class="product-cta" aria-label="Vedi dettagli ' . $productName . '">
+            <a href="' . $detailUrl . '" class="product-cta" aria-label="Vedi dettagli ' . $productNameSafe . '">
               Vedi dettagli →
             </a>
           </div>
@@ -719,7 +809,8 @@ function buildExperienceCatalogCard(array $prodotto, array $lingueDisponibili = 
  * @param array $articolo Dati dell'articolo dal database
  * @return string HTML della card
  */
-function buildBlogArticleCard(array $articolo): string {
+function buildBlogArticleCard(array $articolo): string
+{
     $idArticolo = $articolo['IDArticolo'] ?? '';
     if ($idArticolo === '') {
         return '';
@@ -727,8 +818,8 @@ function buildBlogArticleCard(array $articolo): string {
 
     $imageUrl = resolveImageUrl($articolo['URL_Media'] ?? null);
     $altText = $articolo['Testo_Alternativo'] ?? 'Immagine articolo non disponibile';
-    $titolo = htmlspecialchars($articolo['Titolo'] ?? 'Articolo SailUP', ENT_QUOTES);
-    $descrizione = htmlspecialchars($articolo['Descrizione_Breve'] ?? 'Nessuna descrizione disponibile.', ENT_QUOTES);
+    $titolo = formatText($articolo['Titolo'] ?? 'Articolo SailUP');
+    $descrizione = formatText($articolo['Descrizione_Breve'] ?? 'Nessuna descrizione disponibile.');
     $detailUrl = 'blog_articolo.php?id=' . rawurlencode($idArticolo);
 
     return '<article class="product-card">
@@ -760,7 +851,8 @@ function buildBlogArticleCard(array $articolo): string {
  * @param array|bool $extras Array di consigli extra dal database
  * @return string HTML delle liste
  */
-function buildArticleExtraList($extras): string {
+function buildArticleExtraList($extras): string
+{
     if ($extras === false || empty($extras)) {
         return '<p class="catalog-empty">Non ci sono consigli extra per questo articolo al momento.</p>';
     }
@@ -779,7 +871,7 @@ function buildArticleExtraList($extras): string {
             $html .= '<h3>' . htmlspecialchars($title, ENT_QUOTES, 'UTF-8') . '</h3>';
             $html .= '<ul>';
         }
-        $html .= '<li>' . formatTextAbbr($element) . '</li>';
+        $html .= '<li>' . formatText($element) . '</li>';
     }
 
     if ($currentTitle !== '') {
@@ -792,21 +884,22 @@ function buildArticleExtraList($extras): string {
 /**
  * Genera l'HTML delle checkbox per gli extra (prodotti).
  */
-function buildExtraCheckboxes($extras): string {
+function buildExtraCheckboxes($extras): string
+{
     if ($extras === false || !is_array($extras) || count($extras) === 0) {
         return '';
     }
 
     $html = '';
     foreach ($extras as $index => $extraItem) {
-        $extraName = htmlspecialchars($extraItem['Nome_Extra'] ?? '', ENT_QUOTES);
+        $extraName = formatText($extraItem['Nome_Extra'] ?? '');
         $extraPrice = $extraItem['Prezzo_Extra'] ?? 0;
         $extraId = $extraItem['IDExtra'] ?? $index;
         $formattedPrice = number_format((float) $extraPrice, 0, ',', '.');
-        
+
         $checkboxId = 'extra-' . $extraId;
         $priceText = $formattedPrice !== '' && $formattedPrice !== '0' ? '+' . htmlspecialchars($formattedPrice, ENT_QUOTES) . ' €' : '';
-        
+
         $html .= '<div class="form-check checkbox-highlight">';
         $html .= '<input type="checkbox" id="' . $checkboxId . '" name="extras[]" value="' . $extraId . '">';
         $html .= '<label for="' . $checkboxId . '">';
@@ -828,7 +921,8 @@ function buildExtraCheckboxes($extras): string {
  * @param array $tipologieSelezionate Array delle tipologie già selezionate
  * @return string HTML delle checkbox
  */
-function buildTipologieCheckboxes(array $tipologieDisponibili, array $tipologieSelezionate = []): string {
+function buildTipologieCheckboxes(array $tipologieDisponibili, array $tipologieSelezionate = []): string
+{
     if (empty($tipologieDisponibili)) {
         return '<p class="filter-empty">Nessuna tipologia disponibile.</p>';
     }
@@ -858,11 +952,12 @@ function buildTipologieCheckboxes(array $tipologieDisponibili, array $tipologieS
  * @param string $linguaSelezionata Codice della lingua già selezionata
  * @return string HTML delle options
  */
-function buildLinguaOptions(array $lingueDisponibili, string $linguaSelezionata = ''): string {
+function buildLinguaOptions(array $lingueDisponibili, string $linguaSelezionata = ''): string
+{
     $html = '';
     $indifferenteSelected = $linguaSelezionata === '' ? ' selected' : '';
     $html .= '<option value=""' . $indifferenteSelected . '>Indifferente</option>';
-    
+
     if (empty($lingueDisponibili)) {
         $html .= '<option value="" disabled>Nessuna lingua disponibile</option>';
         return $html;
@@ -887,7 +982,8 @@ function buildLinguaOptions(array $lingueDisponibili, string $linguaSelezionata 
  * @param DateTime $dateTime Oggetto DateTime da formattare
  * @return string Data formattata in italiano
  */
-function formatItalianDate(DateTime $dateTime): string {
+function formatItalianDate(DateTime $dateTime): string
+{
     $months = [
         1 => 'Gennaio',
         2 => 'Febbraio',
@@ -916,7 +1012,8 @@ function formatItalianDate(DateTime $dateTime): string {
  * @param string|null $content Contenuto grezzo dell'articolo
  * @return string HTML del contenuto formattato
  */
-function formatArticleContent(?string $content): string {
+function formatArticleContent(?string $content): string
+{
     $text = trim((string) $content);
     if ($text === '') {
         return '<p>Il contenuto dell\'articolo non è ancora disponibile.</p>';
@@ -929,14 +1026,15 @@ function formatArticleContent(?string $content): string {
         if ($paragraph === '') {
             continue;
         }
-        $html .= '<p>' . formatTextAbbr($paragraph) . '</p>';
+        $html .= '<p>' . formatText($paragraph) . '</p>';
     }
 
     return $html ?: '<p>Il contenuto dell\'articolo non è ancora disponibile.</p>';
 }
 
 //per generare messaggi di feedback in seguito ad azioni come inserimenti/modifiche
-function buildFeedbackBlock(string $message, string $class): string {
+function buildFeedbackBlock(string $message, string $class): string
+{
     if ($message === '' || $class === '') {
         return '';
     }
@@ -945,7 +1043,8 @@ function buildFeedbackBlock(string $message, string $class): string {
 }
 
 //genera la tabella degli utenti visualizzata dagli admin
-function buildAdminUsersRows(array $users, string $csrfToken, ?int $currentUserId = null): string {
+function buildAdminUsersRows(array $users, string $csrfToken, ?int $currentUserId = null): string
+{
     if (empty($users)) {
         return '<tr><td colspan="6">Nessun utente trovato.</td></tr>';
     }
@@ -956,19 +1055,19 @@ function buildAdminUsersRows(array $users, string $csrfToken, ?int $currentUserI
             ? '<span class="status-badge active" lang="en">Admin</span>'
             : '<span class="status-badge completed" lang="en">Standard</span>';
         $rawDate = $u['Data_Registrazione'] ?? '';
-        if($rawDate !== ''){
+        if ($rawDate !== '') {
             $timestamp = strtotime($rawDate);
-            $dataIscr = htmlspecialchars(string: date('d/m/Y', $timestamp));
+            $dataIscr = htmlspecialchars(date('d/m/Y', $timestamp));
             $dataMachine = htmlspecialchars(date('Y-m-d', $timestamp));
         } else {
             $dataIscr = '-';
             $dataMachine = '';
         }
-        
+
         $idUtente = htmlspecialchars($u['IDUtente']);
         $nomeCompleto = htmlspecialchars(($u['Nome'] ?? '') . ' ' . ($u['Cognome'] ?? ''));
-        $isCurrentUser = $currentUserId !== null && (int)$u['IDUtente'] === $currentUserId;
-        
+        $isCurrentUser = $currentUserId !== null && (int) $u['IDUtente'] === $currentUserId;
+
         $rows .= '<tr>'
             . '<td data-label="ID">' . $idUtente . '</td>'
             . '<td data-label="Nome">' . $nomeCompleto . '</td>'
@@ -976,7 +1075,7 @@ function buildAdminUsersRows(array $users, string $csrfToken, ?int $currentUserI
             . '<td data-label="Data Iscrizione"><time datetime="' . $dataMachine . '">' . $dataIscr . '</time></td>'
             . '<td data-label="Ruolo">' . $ruolo . '</td>'
             . '<td data-label="Azioni" class="actions-cell">';
-        
+
         // Non permettere di eliminare se stesso
         if ($isCurrentUser) {
             $rows .= '<span class="text-muted">Account in uso</span>';
@@ -988,7 +1087,7 @@ function buildAdminUsersRows(array $users, string $csrfToken, ?int $currentUserI
             $rows .= '<button type="submit" class="btn-danger btn-sm" aria-label="Elimina utente ' . $nomeCompleto . '">Elimina</button>';
             $rows .= '</form>';
         }
-        
+
         $rows .= '</td></tr>';
     }
 
@@ -996,7 +1095,8 @@ function buildAdminUsersRows(array $users, string $csrfToken, ?int $currentUserI
 }
 
 //builda la tabella dei blog visualizzati dall admin
-function buildAdminBlogRows(array $articoli, string $csrfToken): string {
+function buildAdminBlogRows(array $articoli, string $csrfToken): string
+{
     if (empty($articoli)) {
         return '<tr><td colspan="6">Nessun articolo trovato.</td></tr>';
     }
@@ -1045,7 +1145,8 @@ function buildAdminBlogRows(array $articoli, string $csrfToken): string {
 }
 
 //builda la tabella prenotazioni visualizzata dall admin
-function buildAdminBookingRows(array $pren, string $csrfToken): string {
+function buildAdminBookingRows(array $pren, string $csrfToken): string
+{
     if (empty($pren)) {
         return '<tr><td colspan="7">Nessuna prenotazione trovata.</td></tr>';
     }
@@ -1054,26 +1155,29 @@ function buildAdminBookingRows(array $pren, string $csrfToken): string {
     foreach ($pren as $p) {
         $statoRaw = $p['Stato_Prenotazione'] ?? '';
         $badgeClass = 'pending';
-        if ($statoRaw === 'Confermata') $badgeClass = 'completed';
-        if ($statoRaw === 'Cancellata') $badgeClass = 'cancelled';
-        if (in_array($statoRaw, ['Completata', 'Conclusa'])) $badgeClass = 'completed';
+        if ($statoRaw === 'Confermata')
+            $badgeClass = 'completed';
+        if ($statoRaw === 'Cancellata')
+            $badgeClass = 'cancelled';
+        if (in_array($statoRaw, ['Completata', 'Conclusa']))
+            $badgeClass = 'completed';
 
         $startRaw = $p['Data_Ora_Inizio'] ?? '';
         $endRaw = $p['Data_Ora_Fine'] ?? '';
-        
+
         $dataInizio = ($startRaw !== '') ? date('d/m/Y', strtotime($startRaw)) : '—';
         $dataFine = ($endRaw !== '') ? date('d/m/Y', strtotime($endRaw)) : '—';
         $machineInizio = ($startRaw !== '') ? date('Y-m-d', strtotime($startRaw)) : '';
         $machineFine = ($endRaw !== '') ? date('Y-m-d', strtotime($endRaw)) : '';
 
-        $prezzoDisplay = number_format((float)($p['Prezzo_Totale'] ?? 0), 2, ',', '.');
+        $prezzoDisplay = number_format((float) ($p['Prezzo_Totale'] ?? 0), 2, ',', '.');
         $idPren = htmlspecialchars($p['IDPrenotazione']);
         $idProd = htmlspecialchars($p['IDProdotto']);
         $cliente = htmlspecialchars(($p['Utente_Nome'] ?? '') . ' ' . ($p['Utente_Cognome'] ?? ''));
 
         $confirmBtn = '';
         $cancelBtn = '';
-        
+
         // Mostra il pulsante Conferma solo se lo stato non è già Confermata
         if ($statoRaw !== 'Confermata') {
             $confirmBtn = '<form method="post" class="inline-form">'
@@ -1083,7 +1187,7 @@ function buildAdminBookingRows(array $pren, string $csrfToken): string {
                 . '<button type="submit" class="btn-layout btn-sm">Conferma</button>'
                 . '</form>';
         }
-        
+
         // Mostra il pulsante Cancella solo se lo stato non è già Cancellata
         if ($statoRaw !== 'Cancellata') {
             $cancelBtn = '<form method="post" class="inline-form" data-confirm-type="cancel-booking">'
@@ -1099,15 +1203,15 @@ function buildAdminBookingRows(array $pren, string $csrfToken): string {
             . '<td data-label="Prodotto">' . $idProd . '</td>'
             . '<td data-label="Cliente">' . $cliente . '</td>'
             . '<td data-label="Periodo">'
-                . '<time datetime="' . $machineInizio . '">' . $dataInizio . '</time> — '
-                . '<time datetime="' . $machineFine . '">' . $dataFine . '</time>'
+            . '<time datetime="' . $machineInizio . '">' . $dataInizio . '</time> — '
+            . '<time datetime="' . $machineFine . '">' . $dataFine . '</time>'
             . '</td>'
             . '<td data-label="Totale">€ ' . $prezzoDisplay . '</td>'
             . '<td data-label="Stato"><span class="status-badge ' . $badgeClass . '">' . htmlspecialchars($statoRaw) . '</span></td>'
             . '<td data-label="Azioni" class="actions-cell">'
-                . '<a href="dettaglio_prenotazione.php?id=' . $idPren . '" class="btn-layout-light btn-sm">Dettagli</a>'
-                . $confirmBtn
-                . $cancelBtn
+            . '<a href="dettaglio_prenotazione.php?id=' . $idPren . '" class="btn-layout-light btn-sm">Dettagli</a>'
+            . $confirmBtn
+            . $cancelBtn
             . '</td>'
             . '</tr>';
     }
@@ -1115,7 +1219,8 @@ function buildAdminBookingRows(array $pren, string $csrfToken): string {
 }
 
 //builda la tabella prodotti vista da un admin
-function buildAdminProductRows(array $prodotti, string $csrfToken): string {
+function buildAdminProductRows(array $prodotti, string $csrfToken): string
+{
     if (empty($prodotti)) {
         return '<tr><td colspan="7">Nessun prodotto trovato.</td></tr>';
     }
@@ -1125,7 +1230,7 @@ function buildAdminProductRows(array $prodotti, string $csrfToken): string {
         $tipo = $p['Tipo_Prodotto'] ?? '';
         $tipologia = $p['Tipologia_Prodotto'] ?? ($p['Tipologia_Experience'] ?? '');
         $tipoDisplay = htmlspecialchars($tipo) . ($tipologia ? ' • ' . htmlspecialchars($tipologia) : '');
-        $prezzo = isset($p['Prezzo_Base']) ? '€ ' . number_format((float)$p['Prezzo_Base'], 2, ',', '.') : '—';
+        $prezzo = isset($p['Prezzo_Base']) ? '€ ' . number_format((float) $p['Prezzo_Base'], 2, ',', '.') : '—';
         $stato = !empty($p['Attivo'])
             ? '<span class="status-badge completed">Attivo</span>'
             : '<span class="status-badge cancelled">Disattivo</span>';
@@ -1163,7 +1268,8 @@ function buildAdminProductRows(array $prodotti, string $csrfToken): string {
 }
 
 //builda la tabella delle prenotazioni di un utente/anche admin se ha fatto prenotazioni personali
-function buildProfileBookingRows(array $prenotazioni, string $csrfToken): string {
+function buildProfileBookingRows(array $prenotazioni, string $csrfToken): string
+{
     if (empty($prenotazioni)) {
         return '';
     }
@@ -1171,15 +1277,17 @@ function buildProfileBookingRows(array $prenotazioni, string $csrfToken): string
     $rowsHtml = '';
     foreach ($prenotazioni as $p) {
         $statoRaw = $p['Stato_Prenotazione'] ?? '';
-        
-        $filterStatus = 'active'; 
+
+        $filterStatus = 'active';
         if ($statoRaw === 'Cancellata' || $statoRaw === 'Completata') {
             $filterStatus = 'completed';
         }
 
         $badgeClass = 'pending';
-        if ($statoRaw === 'Confermata') $badgeClass = 'completed';
-        if ($statoRaw === 'Cancellata') $badgeClass = 'cancelled';
+        if ($statoRaw === 'Confermata')
+            $badgeClass = 'completed';
+        if ($statoRaw === 'Cancellata')
+            $badgeClass = 'cancelled';
 
         $startRaw = $p['Data_Ora_Inizio'] ?? '';
         $endRaw = $p['Data_Ora_Fine'] ?? '';
@@ -1189,31 +1297,31 @@ function buildProfileBookingRows(array $prenotazioni, string $csrfToken): string
         $machineInizio = ($startRaw !== '') ? date('Y-m-d', strtotime($startRaw)) : '';
         $machineFine = ($endRaw !== '') ? date('Y-m-d', strtotime($endRaw)) : '';
 
-        $prezzoDisplay = number_format((float)($p['Prezzo_Totale'] ?? 0), 2, ',', '.');
+        $prezzoDisplay = number_format((float) ($p['Prezzo_Totale'] ?? 0), 2, ',', '.');
         $idPren = htmlspecialchars($p['IDPrenotazione']);
         $idProd = htmlspecialchars($p['IDProdotto']);
-        
+
         $isCancellable = in_array($badgeClass, ['active', 'pending'], true);
 
         $rowsHtml .= '<tr class="booking-row" data-status="' . $filterStatus . '">'
             . '<td data-label="ID">' . $idPren . '</td>'
             . '<td data-label="Prodotto">' . $idProd . '</td>'
             . '<td data-label="Periodo">'
-                . '<time datetime="' . $machineInizio . '">' . $dataInizio . '</time> — '
-                . '<time datetime="' . $machineFine . '">' . $dataFine . '</time>'
+            . '<time datetime="' . $machineInizio . '">' . $dataInizio . '</time> — '
+            . '<time datetime="' . $machineFine . '">' . $dataFine . '</time>'
             . '</td>'
             . '<td data-label="Totale">€ ' . $prezzoDisplay . '</td>'
             . '<td data-label="Stato"><span class="status-badge ' . $badgeClass . '">' . htmlspecialchars($statoRaw) . '</span></td>'
             . '<td data-label="Azioni" class="actions-cell">'
-                . ($isCancellable
-                    ? '<form method="post" class="inline-form" data-confirm-type="cancel-user-booking">'
-                        . '<input type="hidden" name="csrf_token" value="' . htmlspecialchars($csrfToken) . '">'
-                        . '<input type="hidden" name="action" value="cancel_booking">'
-                        . '<input type="hidden" name="booking_id" value="' . $idPren . '">'
-                        . '<button type="submit" class="btn-danger btn-sm">Annulla</button>'
-                    . '</form>'
-                    : '—'
-                )
+            . ($isCancellable
+                ? '<form method="post" class="inline-form" data-confirm-type="cancel-user-booking">'
+                . '<input type="hidden" name="csrf_token" value="' . htmlspecialchars($csrfToken) . '">'
+                . '<input type="hidden" name="action" value="cancel_booking">'
+                . '<input type="hidden" name="booking_id" value="' . $idPren . '">'
+                . '<button type="submit" class="btn-danger btn-sm">Annulla</button>'
+                . '</form>'
+                : '—'
+            )
             . '</td>'
             . '</tr>';
     }
@@ -1221,12 +1329,15 @@ function buildProfileBookingRows(array $prenotazioni, string $csrfToken): string
 }
 
 // builda l extra dei blog
-function buildBlogExtraInputs(array $extras): string {
-    if (empty($extras)) { $extras = [['titolo' => '', 'elemento' => '']]; }
+function buildBlogExtraInputs(array $extras): string
+{
+    if (empty($extras)) {
+        $extras = [['titolo' => '', 'elemento' => '']];
+    }
 
     $extrasHtml = '';
     foreach ($extras as $index => $ex) {
-        $titleId = 'extra-title-' . $index; 
+        $titleId = 'extra-title-' . $index;
         $itemId = 'extra-item-' . $index;
 
         $extrasHtml .= '<div class="extra-row">'
@@ -1245,14 +1356,17 @@ function buildBlogExtraInputs(array $extras): string {
 }
 
 // builda gli extra dei prodotti (nome + prezzo)
-function buildProductExtraInputs(array $extras): string {
-    if (empty($extras)) { $extras = [['nome' => '', 'prezzo' => '']]; }
+function buildProductExtraInputs(array $extras): string
+{
+    if (empty($extras)) {
+        $extras = [['nome' => '', 'prezzo' => '']];
+    }
 
     $extrasHtml = '';
     foreach ($extras as $index => $ex) {
-        $nameId = 'extra-name-' . $index; 
+        $nameId = 'extra-name-' . $index;
         $priceId = 'extra-price-' . $index;
-        $nameErrorId = 'extra-name-error-' . $index; 
+        $nameErrorId = 'extra-name-error-' . $index;
         $priceErrorId = 'extra-price-error-' . $index;
 
         $extrasHtml .= '<div class="extra-row">'
@@ -1263,7 +1377,7 @@ function buildProductExtraInputs(array $extras): string {
             . '</div>'
             . '<div class="form-group">'
             . '<label for="' . $priceId . '">Prezzo Extra (€)</label>'
-            . '<input type="number" id="' . $priceId . '" name="extra_price[]" min="1" step="1" value="' . htmlspecialchars((string)($ex['prezzo'] ?? ''), ENT_QUOTES) . '" placeholder="es. 50" aria-describedby="' . $priceErrorId . '">'
+            . '<input type="number" id="' . $priceId . '" name="extra_price[]" min="1" step="1" value="' . htmlspecialchars((string) ($ex['prezzo'] ?? ''), ENT_QUOTES) . '" placeholder="es. 50" aria-describedby="' . $priceErrorId . '">'
             . '<span id="' . $priceErrorId . '" class="field-error extra-price-error" role="alert"></span>'
             . '</div>'
             . '<button type="button" class="btn-danger remove-extra" aria-label="Rimuovi extra">Rimuovi</button>'

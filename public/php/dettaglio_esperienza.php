@@ -192,6 +192,7 @@ if (!$experience || ($experience['Tipo_Prodotto'] ?? '') !== 'Experience') {
 }
 
 $experienceName = $experience['Nome_Prodotto'] ?? 'Esperienza SailUP';
+$experienceNameVisual = formatText($experienceName);
 $experienceTagline = $experience['Descrizione_Breve'] ?? 'Dettagli in arrivo...';
 $heroImage = resolveImageUrl($experience['URL_Media'] ?? null);
 $heroAlt = 'Vista di ' . $experienceName;
@@ -221,7 +222,10 @@ if ($extra === false) {
 $includedHtml = buildItemsList(
 	is_array($inclusi) ? $inclusi : [],
 	'Nome_Incluso',
-	'Non ci sono inclusi al momento.'
+	'Non ci sono inclusi al momento.',
+	function ($item) {
+        return formatText($item['Nome_Incluso'] ?? '');
+    }
 );
 
 $extraHtml = buildItemsList(
@@ -229,16 +233,16 @@ $extraHtml = buildItemsList(
 	'Nome_Extra',
 	'Non ci sono extra al momento.',
 	function ($item) {
-		$label = htmlspecialchars($item['Nome_Extra'] ?? '', ENT_QUOTES);
-		if (!empty($item['Prezzo_Extra'])) {
-			$formattedPrice = number_format((float) $item['Prezzo_Extra'], 0, ',', '.');
-			if ($formattedPrice !== '') {
-				$label .= ' (+ ' . htmlspecialchars($formattedPrice, ENT_QUOTES) . ' €)';
-			}
-		}
-
-		return $label;
-	}
+        $label = formatText($item['Nome_Extra'] ?? '');
+        
+        if (!empty($item['Prezzo_Extra'])) {
+            $formattedPrice = number_format((float) $item['Prezzo_Extra'], 0, ',', '.');
+            if ($formattedPrice !== '') {
+                $label .= ' (+ ' . htmlspecialchars($formattedPrice, ENT_QUOTES) . ' €)';
+            }
+        }
+        return $label;
+    }
 );
 
 // Genera le checkbox per gli extra nel form
@@ -273,7 +277,8 @@ $keywords = '<meta name="keywords" content="' . htmlspecialchars($keywordsConten
 $placeholders = [
 	'[EXPERIENCE_ID]' => htmlspecialchars($experienceId, ENT_QUOTES),
 	'[EXPERIENCE_NAME]' => htmlspecialchars($experienceName, ENT_QUOTES),
-	'[EXPERIENCE_DESCRIPTION_SHORT]' => htmlspecialchars($experienceTagline, ENT_QUOTES),
+	'[EXPERIENCE_NAME_VISUAL]' => $experienceNameVisual,
+	'[EXPERIENCE_DESCRIPTION_SHORT]' => formatText($experienceTagline),
 	'[EXPERIENCE_IMAGE_SRC]' => htmlspecialchars($heroImage, ENT_QUOTES),
 	'[EXPERIENCE_IMAGE_ALT]' => htmlspecialchars($heroAlt, ENT_QUOTES),
 	'[EXPERIENCE_TAGLINE]' => htmlspecialchars($experienceTagline, ENT_QUOTES),
