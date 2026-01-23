@@ -15,6 +15,8 @@
     const statusInput = document.getElementById('product-status');
     const boatTypeFieldset = document.getElementById('boat-type-fieldset');
     const boatTypeInput = document.getElementById('product-category');
+    const experienceTypeFieldset = document.getElementById('experience-type-fieldset');
+    const experienceTypeInput = document.getElementById('experience-type');
     const lengthGroup = document.getElementById('length-group');
     const durationGroup = document.getElementById('duration-group');
     const durationInput = document.getElementById('product-duration');
@@ -181,9 +183,26 @@
         clearFieldError(boatTypeInput); return true;
     }
 
+    function validateExperienceType() {
+        if (!experienceTypeInput || typeInput.value !== 'experience') {
+            if (experienceTypeInput) {
+                clearFieldError(experienceTypeInput);
+            }
+            return true;
+        }
+        if (experienceTypeInput.value === '') { showFieldError(experienceTypeInput, 'Seleziona il tipo di esperienza'); return false; }
+        clearFieldError(experienceTypeInput); return true;
+    }
+
     function clearBoatTypeSelection() {
         if (boatTypeInput) {
             boatTypeInput.value = '';
+        }
+    }
+
+    function clearExperienceTypeSelection() {
+        if (experienceTypeInput) {
+            experienceTypeInput.value = '';
         }
     }
 
@@ -202,6 +221,24 @@
             boatTypeInput.setAttribute('aria-required', 'false');
             clearBoatTypeSelection();
             clearFieldError(boatTypeInput);
+        }
+    }
+
+    function updateExperienceTypeVisibility() {
+        if (!experienceTypeFieldset || !experienceTypeInput) {
+            return;
+        }
+
+        if (typeInput.value === 'experience') {
+            experienceTypeFieldset.classList.remove('hidden');
+            experienceTypeInput.setAttribute('required', '');
+            experienceTypeInput.setAttribute('aria-required', 'true');
+        } else {
+            experienceTypeFieldset.classList.add('hidden');
+            experienceTypeInput.removeAttribute('required');
+            experienceTypeInput.setAttribute('aria-required', 'false');
+            clearExperienceTypeSelection();
+            clearFieldError(experienceTypeInput);
         }
     }
 
@@ -408,8 +445,9 @@
         const v11 = validateBoatType();
         const v12 = validateLanguages();
         const v13 = validateExtras();
+        const v14 = validateExperienceType();
 
-        return v1 && v2 && v3 && v4 && v5 && v6 && v7 && v8 && v9 && v10 && v11 && v12 && v13;
+        return v1 && v2 && v3 && v4 && v5 && v6 && v7 && v8 && v9 && v10 && v11 && v12 && v13 && v14;
     }
 
     nameInput.addEventListener('blur', validateName);
@@ -428,11 +466,14 @@
     if (boatTypeInput) {
         boatTypeInput.addEventListener('blur', validateBoatType);
     }
+    if (experienceTypeInput) {
+        experienceTypeInput.addEventListener('blur', validateExperienceType);
+    }
 
     const inputs = [
         nameInput, typeInput, descriptionInput, longDescriptionInput,
         priceInput, capacityInput, imageInput, altInput, statusInput,
-        boatTypeInput, durationInput
+        boatTypeInput, durationInput, experienceTypeInput
     ].filter(Boolean);
 
     inputs.forEach(function (input) {
@@ -442,6 +483,7 @@
     typeInput.addEventListener('change', function () {
         updateExperienceFieldsVisibility();
         updateBoatTypeVisibility();
+        updateExperienceTypeVisibility();
         updateExtraOptionsVisibility();
         updateLanguageFieldsetVisibility();
         hideGlobalMessages();
@@ -451,6 +493,13 @@
         boatTypeInput.addEventListener('change', function () {
             hideGlobalMessages();
             validateBoatType();
+        });
+    }
+
+    if (experienceTypeInput) {
+        experienceTypeInput.addEventListener('change', function () {
+            hideGlobalMessages();
+            validateExperienceType();
         });
     }
 
@@ -488,6 +537,7 @@
     });
 
     updateBoatTypeVisibility();
+    updateExperienceTypeVisibility();
     updateExtraOptionsVisibility();
     updateExperienceFieldsVisibility();
     updateLanguageFieldsetVisibility();
