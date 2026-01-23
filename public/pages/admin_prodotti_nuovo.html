@@ -224,6 +224,20 @@
           <span id="product-languages-error" class="field-error" role="alert"></span>
         </fieldset>
 
+        <fieldset id="experience-type-fieldset" class="hidden">
+          <legend>Tipo di Esperienza</legend>
+          <div class="form-group">
+            <label for="experience-type">Tipo Esperienza <abbr title="Campo obbligatorio">*</abbr></label>
+            <select id="experience-type" name="experience-type" aria-describedby="experience-type-error">
+              <option value="" disabled [PROD_EXP_TYPE_NONE]>Seleziona tipo esperienza...</option>
+              <option value="Tour" [PROD_EXP_TYPE_TOUR]>Tour</option>
+              <option value="Aperitivo" [PROD_EXP_TYPE_APERITIVO]>Aperitivo</option>
+              <option value="Escursione" [PROD_EXP_TYPE_ESCURSIONE]>Escursione</option>
+            </select>
+            <span id="experience-type-error" class="field-error" role="alert"></span>
+          </div>
+        </fieldset>
+
         <fieldset>
           <legend>Immagine</legend>
 

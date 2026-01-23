@@ -123,6 +123,10 @@ $placeholders = [
     '[PROD_TIPOLOGIA_MOTORE]' => '',
     '[PROD_TIPOLOGIA_VELA]' => '',
     '[PROD_TIPOLOGIA_GOMMONE]' => '',
+    '[PROD_EXP_TYPE_NONE]' => '',
+    '[PROD_EXP_TYPE_TOUR]' => '',
+    '[PROD_EXP_TYPE_APERITIVO]' => '',
+    '[PROD_EXP_TYPE_ESCURSIONE]' => '',
     '[PROD_DURATION]' => '',
     '[PROD_DESC]' => '',
     '[PROD_DESC_LONG]' => '',
@@ -162,10 +166,15 @@ if (isset($_GET['id']) && trim($_GET['id']) !== '') {
             }
         }
         $langsCodes = array_map(fn($row) => $row['Codice'] ?? '', $langs);
+        $tipoExp = trim($prod['Tipologia_Prodotto'] ?? '');
         $placeholders = array_merge($placeholders, [
             '[PROD_NAME]' => htmlspecialchars($prod['Nome_Prodotto'] ?? ''),
             '[PROD_TYPE_NOLEGGIO]' => ($prod['Tipo_Prodotto'] ?? '') === 'Noleggio' ? 'selected' : '',
             '[PROD_TYPE_EXP]' => ($prod['Tipo_Prodotto'] ?? '') === 'Experience' ? 'selected' : '',
+            '[PROD_EXP_TYPE_NONE]' => $tipoExp === '' ? 'selected' : '',
+            '[PROD_EXP_TYPE_TOUR]' => $tipoExp === 'Tour' ? 'selected' : '',
+            '[PROD_EXP_TYPE_APERITIVO]' => $tipoExp === 'Aperitivo' ? 'selected' : '',
+            '[PROD_EXP_TYPE_ESCURSIONE]' => $tipoExp === 'Escursione' ? 'selected' : '',
             '[PROD_DURATION]' => htmlspecialchars($prod['Durata_Ore'] ?? ''),
             '[PROD_DESC]' => htmlspecialchars($prod['Descrizione_Breve'] ?? ''),
             '[PROD_DESC_LONG]' => htmlspecialchars($prod['Descrizione'] ?? ''),
@@ -204,6 +213,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $tipologiaRaw = trim($_POST['product-category'] ?? '');
         $tipologiaKey = strtolower($tipologiaRaw);
         $tipologia = $boatTypeMap[$tipologiaKey] ?? '';
+        $experienceTypeRaw = trim($_POST['experience-type'] ?? '');
+        $experienceType = $experienceTypeRaw;
         $durata = $_POST['product-duration'] ?? '';
         $descrBreve = trim($_POST['product-description'] ?? '');
         $descr = trim($_POST['product-long-description'] ?? '');
@@ -227,7 +238,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($tipo !== 'noleggio') {
             $lunghezza = null;
         }
-        if ($tipo !== 'noleggio') {
+        if ($tipo === 'experience') {
+            $tipologia = $experienceType;
+        } elseif ($tipo !== 'noleggio') {
             if ($prodIdPost !== '') {
                 $currentProd = $db->getProdottoAdminById($prodIdPost);
                 $tipologia = is_array($currentProd) ? trim((string) ($currentProd['Tipologia_Prodotto'] ?? '')) : '';
@@ -258,6 +271,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
             if (empty($lingue) || !is_array($lingue)) {
                 $errors[] = 'Seleziona almeno una lingua per le esperienze';
+            }
+            if (!in_array($experienceType, ['Tour', 'Aperitivo', 'Escursione'], true)) {
+                $errors[] = 'Seleziona il tipo di esperienza';
             }
         }
 
@@ -359,6 +375,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     '[PROD_NAME]' => htmlspecialchars($nome),
                     '[PROD_TYPE_NOLEGGIO]' => $tipo === 'noleggio' ? 'selected' : '',
                     '[PROD_TYPE_EXP]' => $tipo === 'experience' ? 'selected' : '',
+                    '[PROD_EXP_TYPE_NONE]' => $experienceType === '' ? 'selected' : '',
+                    '[PROD_EXP_TYPE_TOUR]' => $experienceType === 'Tour' ? 'selected' : '',
+                    '[PROD_EXP_TYPE_APERITIVO]' => $experienceType === 'Aperitivo' ? 'selected' : '',
+                    '[PROD_EXP_TYPE_ESCURSIONE]' => $experienceType === 'Escursione' ? 'selected' : '',
                     '[PROD_DURATION]' => htmlspecialchars((string)$durata),
                     '[PROD_DESC]' => htmlspecialchars($descrBreve),
                     '[PROD_DESC_LONG]' => htmlspecialchars($descr),
@@ -393,6 +413,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             '[PROD_NAME]' => htmlspecialchars($nome),
             '[PROD_TYPE_NOLEGGIO]' => $tipo === 'noleggio' ? 'selected' : '',
             '[PROD_TYPE_EXP]' => $tipo === 'experience' ? 'selected' : '',
+            '[PROD_EXP_TYPE_NONE]' => $experienceType === '' ? 'selected' : '',
+            '[PROD_EXP_TYPE_TOUR]' => $experienceType === 'Tour' ? 'selected' : '',
+            '[PROD_EXP_TYPE_APERITIVO]' => $experienceType === 'Aperitivo' ? 'selected' : '',
+            '[PROD_EXP_TYPE_ESCURSIONE]' => $experienceType === 'Escursione' ? 'selected' : '',
             '[PROD_DURATION]' => htmlspecialchars((string)$durata),
             '[PROD_DESC]' => htmlspecialchars($descrBreve),
             '[PROD_DESC_LONG]' => htmlspecialchars($descr),
