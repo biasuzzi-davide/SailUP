@@ -604,6 +604,16 @@ header .logo-text {
   box-shadow: var(--shadow-lg);
 }
 
+.error-image {
+  width: 50%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-lg);
+  display: block;
+  margin: 1em auto;
+}
+
 .action-buttons {
   margin-top: 2em;
   display: flex;
