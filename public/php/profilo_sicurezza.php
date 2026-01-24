@@ -21,8 +21,8 @@ function handleProfileImageUpload(int $userId): array
         return $result;
     }
 
-    if ($file['size'] > 2 * 1024 * 1024) {
-        $result['error'] = 'Immagine troppo grande (max 2MB).';
+    if ($file['size'] > 1024 * 1024) {
+        $result['error'] = 'L\'immagine supera il limite massimo di 1MB.';
         return $result;
     }
 
@@ -35,8 +35,9 @@ function handleProfileImageUpload(int $userId): array
         'image/webp' => 'webp',
     ];
 
+    // CONTROLLO FORMATO (Messaggio corretto)
     if (!isset($allowed[$mime])) {
-        $result['error'] = 'Formato immagine non supportato. Usa JPG, PNG o WebP.';
+        $result['error'] = 'Formato non supportato. Usa JPG, PNG o WebP.';
         return $result;
     }
 

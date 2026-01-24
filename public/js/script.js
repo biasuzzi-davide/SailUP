@@ -478,7 +478,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if(!changePhotoBtn || !fileInput || ! avatarImg) return;
 
-    const originalHintText = "Seleziona un'immagine dal tuo dispositivo (max 2MB)"
+    const originalHintText = "Seleziona un'immagine dal tuo dispositivo (max 1MB)"
 
     changePhotoBtn.addEventListener("click", () => {
         fileInput.click()
@@ -489,7 +489,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if(!file) return; 
 
-        const MAX_DIM = 2 * 1024 * 1024; 
+        const MAX_DIM = 1024 * 1024; 
 
         if(hint) {
             hint.textContent = originalHintText; 
