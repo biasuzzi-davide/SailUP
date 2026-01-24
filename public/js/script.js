@@ -118,20 +118,16 @@ document.addEventListener("DOMContentLoaded", function () {
     if (btn) {
         btn.classList.add("hidden");
         btn.setAttribute("tabindex", "-1");
-    }
-
-    window.onscroll = function () {
-        scrollFunction();
-    };
-
-    function scrollFunction() {
-        if (document.body.scrollTop > 150 || document.documentElement.scrollTop > 150) {
-            btn.classList.remove("hidden");
-            btn.setAttribute("tabindex", "0");
-        } else {
-            btn.classList.add("hidden");
-            btn.setAttribute("tabindex", "-1");
-        }
+        
+        window.addEventListener('scroll', function () {
+            if (document.body.scrollTop > 150 || document.documentElement.scrollTop > 150) {
+                btn.classList.remove("hidden");
+                btn.setAttribute("tabindex", "0");
+            } else {
+                btn.classList.add("hidden");
+                btn.setAttribute("tabindex", "-1");
+            }
+        })
     }
 });
 
@@ -170,10 +166,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const rowStatus = row.getAttribute('data-status');
             
             if (status === 'all' || rowStatus === status) {
-                row.style.display = ''; 
+                row.classList.remove('hidden');
                 visibleCount++;
             } else {
-                row.style.display = 'none'; 
+                row.classList.add('hidden');
             }
         });
 
@@ -310,32 +306,6 @@ document.addEventListener('DOMContentLoaded', () => {
     hydrateBookingInput('#end-date', catalogDateKeys.rentalEnd);
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-    const changePhotoBtn = document.getElementById('change-photo-btn');
-    const fileInput = document.getElementById('profile-image-input');
-    const avatarImg = document.getElementById('profile-picture');
-    let previewUrl = null;
-
-    if (!changePhotoBtn || !fileInput || !avatarImg) return;
-
-    changePhotoBtn.addEventListener('click', () => {
-        fileInput.click();
-    });
-
-    fileInput.addEventListener('change', () => {
-        const [file] = fileInput.files;
-        if (!file) return;
-
-        if (previewUrl) {
-            URL.revokeObjectURL(previewUrl);
-        }
-
-        previewUrl = URL.createObjectURL(file);
-        avatarImg.src = previewUrl;
-        avatarImg.alt = 'Nuova immagine profilo selezionata';
-    });
-});
-
 /* ---------------------------------------
    GESTIONE EXTRA (Blog e Prodotti Admin)
    --------------------------------------- */
@@ -456,7 +426,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
 
                 if (suffix) {
-                    suffix.style.setProperty('display', isChanged ? 'none' : 'inline', 'important');
+                    if (isChanged) {
+                        suffix.classList.add('hidden');
+                    } else {
+                        suffix.classList.remove('hidden');
+                    }
                 }
             }
         });
@@ -491,6 +465,74 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
+
+/* ---------------------------------------
+   GESTIONE DIMENSIONE CARICAMENTO IMMAGINI
+   --------------------------------------- */
+document.addEventListener('DOMContentLoaded', function () {
+    const changePhotoBtn = document.getElementById('change-photo-btn');
+    const fileInput = document.getElementById('profile-image-input');
+    const avatarImg = document.getElementById('profile-picture');
+    const hint = document.getElementById('profile-image-hint');
+    let previewUrl = null; 
+
+    if(!changePhotoBtn || !fileInput || ! avatarImg) return;
+
+    const originalHintText = "Seleziona un'immagine dal tuo dispositivo (max 2MB)"
+
+    changePhotoBtn.addEventListener("click", () => {
+        fileInput.click()
+    }); 
+
+    fileInput.addEventListener('change', () => {
+        const [file] = fileInput.files;
+
+        if(!file) return; 
+
+        const MAX_DIM = 2 * 1024 * 1024; 
+
+        if(hint) {
+            hint.textContent = originalHintText; 
+            hint.classList.remove('field-error', 'field-success'); 
+            hint.classList.add('field-hint')
+        }
+
+        if(file.size > MAX_DIM) {
+            if(hint) {
+                hint.textContent = "Errore: l'immagine supera il limite di 2MB"; 
+                hint.classList.remove('field-hint')
+                hint.classList.add('field-error'); 
+            }
+            fileInput.value = ""; // tolgo il valore per evitare l'invio del file
+            return
+        }
+
+        const validTypes = ['image/jpeg', 'image/png', 'image/webp'];
+        if(!validTypes.includes(file.type)) {
+            if(hint) {
+                hint.textContent = "Errore: usa formati JPG, PNG o WebP"; 
+                hint.classList.remove('field-hint')
+                hint.classList.add('field-error'); 
+            }
+            fileInput.value = "";
+            return;
+        }
+
+        if (previewUrl) {
+            URL.revokeObjectURL(previewUrl);
+        }
+        
+        previewUrl = URL.createObjectURL(file);
+        avatarImg.src = previewUrl;
+        avatarImg.alt = "Anteprima nuova immagine selezionata";
+
+        if(hint){
+            hint.textContent = "Immagine valida. Ricorda di salvare le modifiche."
+            hint.classList.remove('field-hint');
+            hint.classList.add('field-success');
+        }
+    });
+})
 
 /* ---------------------------------------
    GESTIONE CONFERME PER AZIONI ADMIN

@@ -979,6 +979,14 @@ a.product-cta:focus-visible {
   font-weight: 600;
 }
 
+.field-success {
+  display: block;
+  margin-top: 0.4em;
+  font-size: var(--fs-sm);
+  color: #16a34a; 
+  font-weight: 600;
+}
+
 .form-group input.error,
 .form-group textarea.error {
   border-color: #dc2626;
@@ -1562,7 +1570,7 @@ a.product-cta:focus-visible {
   position: sticky;
   top: 8rem;
   background: var(--col-bg);
-  border: 1px solid var(--col-border);
+  border: 0.3px solid var(--col-border);
   border-radius: var(--radius-card);
   box-shadow: var(--shadow-lg);
   overflow: hidden;
