@@ -114,7 +114,7 @@
         const existingVal = existingImageInput ? existingImageInput.value.trim() : '';
 
         if (!hasFile && existingVal === '') {
-            showFieldError(imageInput, 'Carica un\'immagine (JPG/PNG/WebP, max 2MB)');
+            showFieldError(imageInput, 'Carica un\'immagine (JPG/PNG/WebP, max 1MB)');
             return false;
         }
 

@@ -25,8 +25,8 @@ function handleProductImageUpload(string $productId, string $uploadDir): array {
         return $result;
     }
 
-    if ($file['size'] > 2 * 1024 * 1024) {
-        $result['error'] = 'Immagine troppo grande (max 2MB).';
+    if ($file['size'] >  1024 * 1024) {
+        $result['error'] = 'Immagine troppo grande (max 1MB).';
         return $result;
     }
 
