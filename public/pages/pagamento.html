@@ -55,6 +55,7 @@
                 <div id="success-message" class="success-message hidden" role="alert" aria-live="polite"></div>
 
                 <form id="payment-form" action="pagamento.php" method="post">
+                    <input type="hidden" name="csrf_token" value="[CSRF_TOKEN]">
                     <fieldset>
                         <legend>Dati Carta di Credito</legend>
 
