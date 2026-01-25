@@ -19,6 +19,13 @@ $prenotazione = $_SESSION['prenotazione_temp'];
 
 // Gestione POST - Elaborazione pagamento
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Verifica CSRF token
+    if (!verifyCsrfToken($_POST['csrf_token'] ?? null)) {
+        $_SESSION['errore_prenotazione'] = 'sessione_scaduta';
+        header('Location: ' . $_SERVER['PHP_SELF']);
+        exit;
+    }
+
     // Recupera i dati del form (validazione base)
     $cardHolder = trim((string) filter_input(INPUT_POST, 'card_holder', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
     $cardNumber = trim((string) filter_input(INPUT_POST, 'card_number', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
@@ -92,6 +99,10 @@ if (isset($_SESSION['errore_prenotazione'])) {
             <p>Attenzione: Ci dispiace, ma il prodotto selezionato non è più disponibile per il periodo richiesto. Un altro utente ha completato la prenotazione prima di te.</p>
             <p>Ti invitiamo a tornare al catalogo e selezionare una data alternativa.</p>
         </div>';
+    } elseif ($tipoErrore === 'sessione_scaduta') {
+        $messaggioErrore = '<div class="alert alert-error" role="alert">
+            <p>Sessione scaduta, ricarica la pagina e riprova.</p>
+        </div>';
     }
 }
 
@@ -114,6 +125,7 @@ $placeholders = [
     '[LINK_INDIETRO]' => htmlspecialchars($linkProdotto, ENT_QUOTES),
     '[PREZZO_TOTALE]' => htmlspecialchars($prezzoTotaleFormattato, ENT_QUOTES),
     '[MESSAGGIO_ERRORE]' => $messaggioErrore,
+    '[CSRF_TOKEN]' => htmlspecialchars(getCsrfToken()),
 ];
 
 $html = str_replace(array_keys($placeholders), array_values($placeholders), $html);
