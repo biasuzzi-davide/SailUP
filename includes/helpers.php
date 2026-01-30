@@ -571,11 +571,11 @@ function buildSimpleProductCard(array $prodotto, string $tipo = 'noleggio'): str
     if ($tipo === 'experience') {
         $detailUrl = 'dettaglio_esperienza.php?id=' . rawurlencode($idProdotto);
         $ctaText = 'Prenota ora &rarr;';
-        $ariaLabel = 'Prenota ' . $productNameSafe;
+        $ariaLabel = 'Prenota ora ' . $productNameSafe;
     } else {
         $detailUrl = 'dettaglio_barca.php?id=' . rawurlencode($idProdotto);
         $ctaText = 'Scopri di più &rarr;';
-        $ariaLabel = 'Vedi dettagli ' . $productNameSafe;
+        $ariaLabel = 'Scopri di più ' . $productNameSafe;
     }
 
     // Attributo loading per esperienze
