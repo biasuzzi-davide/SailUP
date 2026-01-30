@@ -2,8 +2,8 @@
 <html lang="it" data-theme="light">
 
 <head>
-  <meta charset="UTF-8" >
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>[PROD_TITLE] - Dashboard Admin - SailUP</title>
   <meta name="description"
     content="Form amministrativo per aggiungere una nuova barca a noleggio o esperienza al catalogo SailUP.">
@@ -11,15 +11,19 @@
   <meta name="keywords" content="nuovo, prodotto, admin, aggiungi, barca, esperienza, catalogo, SailUP">
   <meta name="authors" content="SailUP Team">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" >
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin >
+  <link rel="icon" href="../img/favicon/favicon.ico" sizes="any">
+  <link rel="icon" href="../img/favicon/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../img/favicon/apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap"
-    rel="stylesheet" >
+    rel="stylesheet">
 
-  <link rel="stylesheet" href="../css/style.css" media="screen" >
-  <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)" >
-  <link rel="stylesheet" href="../css/print.css" media="print" >
+  <link rel="stylesheet" href="../css/style.css" media="screen">
+  <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)">
+  <link rel="stylesheet" href="../css/print.css" media="print">
 </head>
 
 <body>
@@ -102,8 +106,9 @@
           <div class="form-row">
             <div class="form-group">
               <label for="product-price">Prezzo Base (€) <abbr title="Campo obbligatorio">*</abbr></label>
-              <input type="number" id="product-price" name="product-price" min="0" max="50000" step="10" placeholder="es. 850"
-                value="[PROD_PRICE]" required aria-describedby="product-price-hint product-price-error" >
+              <input type="number" id="product-price" name="product-price" min="0" max="50000" step="10"
+                placeholder="es. 850" value="[PROD_PRICE]" required
+                aria-describedby="product-price-hint product-price-error">
               <span id="product-price-hint" class="field-hint">Prezzo al giorno per noleggi, prezzo totale per
                 esperienze</span>
               <span id="product-price-error" class="field-error" role="alert"></span>
@@ -112,7 +117,7 @@
             <div class="form-group">
               <label for="product-capacity">Numero persone<abbr title="Campo obbligatorio">*</abbr></label>
               <input type="number" id="product-capacity" name="product-capacity" min="1" max="50" placeholder="es. 8"
-                value="[PROD_CAPACITY]" required aria-describedby="product-capacity-error" >
+                value="[PROD_CAPACITY]" required aria-describedby="product-capacity-error">
               <span id="product-capacity-error" class="field-error" role="alert"></span>
             </div>
           </div>
@@ -121,12 +126,12 @@
             <div class="form-group" id="length-group">
               <label for="product-length">Lunghezza (metri)</label>
               <input type="number" id="product-length" name="product-length" min="0" step="0.1" placeholder="es. 19.2"
-                value="[PROD_LENGTH]" >
+                value="[PROD_LENGTH]">
             </div>
             <div class="form-group hidden" id="duration-group">
               <label for="product-duration">Durata Esperienza (ore) <abbr title="Campo obbligatorio">*</abbr></label>
               <input type="number" id="product-duration" name="product-duration" min="1" step="1" placeholder="es. 4"
-                value="[PROD_DURATION]" aria-describedby="product-duration-error" >
+                value="[PROD_DURATION]" aria-describedby="product-duration-error">
               <span id="product-duration-error" class="field-error" role="alert"></span>
             </div>
           </div>
@@ -144,15 +149,15 @@
           </div>
 
           <div>
-            <p >Opzioni Aggiuntive:</p>
+            <p>Opzioni Aggiuntive:</p>
 
             <div class="checkbox-group hidden" id="license-option">
-              <input type="checkbox" id="requires-license" name="requires-license" [CHECK_PATENTE] >
+              <input type="checkbox" id="requires-license" name="requires-license" [CHECK_PATENTE]>
               <label for="requires-license">Richiede Patente Nautica</label>
             </div>
 
             <div class="checkbox-group hidden" id="access-option">
-              <input type="checkbox" id="is-accessible" name="is-accessible" [CHECK_ACCESS] >
+              <input type="checkbox" id="is-accessible" name="is-accessible" [CHECK_ACCESS]>
               <label for="is-accessible">Accessibile</label>
             </div>
 
@@ -170,12 +175,12 @@
             <div class="extra-row">
               <div class="form-group">
                 <label>Nome Extra</label>
-                <input type="text" name="extra_name[]" placeholder="es. Skipper" >
+                <input type="text" name="extra_name[]" placeholder="es. Skipper">
                 <span class="field-error extra-name-error" role="alert"></span>
               </div>
               <div class="form-group">
                 <label>Prezzo Extra (€)</label>
-                <input type="number" name="extra_price[]" min="1" step="1" placeholder="es. 50" >
+                <input type="number" name="extra_price[]" min="1" step="1" placeholder="es. 50">
                 <span class="field-error extra-price-error" role="alert"></span>
               </div>
               <button type="button" class="btn-danger remove-extra" aria-label="Rimuovi extra">Rimuovi</button>
@@ -254,8 +259,8 @@
           <div class="form-group">
             <label for="Testo_Alternativo">Testo Alternativo Immagine <abbr title="Campo obbligatorio">*</abbr></label>
             <input type="text" id="Testo_Alternativo" name="Testo_Alternativo"
-              placeholder="Descrizione dell'immagine per accessibilità, inserire solo se aggiunge informazioni." value="[IMG_ALT]" required
-              aria-describedby="Testo_Alternativo-error">
+              placeholder="Descrizione dell'immagine per accessibilità, inserire solo se aggiunge informazioni."
+              value="[IMG_ALT]" required aria-describedby="Testo_Alternativo-error">
             <span id="Testo_Alternativo-error" class="field-error" role="alert"></span>
           </div>
         </fieldset>

@@ -7,7 +7,11 @@
   <title>Le Mie Prenotazioni - SailUP</title>
   <meta name="description" content="Visualizza e gestisci le tue prenotazioni con SailUP">
   <meta name="keywords" content="prenotazioni, storico, ordini, booking, gestione, profilo, utente, SailUP">
-  <meta name="authors" content="Alberto Reginato, Francesco Marcon">
+  <meta name="authors" content="SailUP Team">
+
+  <link rel="icon" href="../img/favicon/favicon.ico" sizes="any">
+  <link rel="icon" href="../img/favicon/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../img/favicon/apple-touch-icon.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,7 +27,7 @@
 <body>
   <a href="#main-content" class="skip-to-content">Salta al contenuto</a>
 
-[HEADER]
+  [HEADER]
 
   <div class="sr-only" id="breadcrumb-label">
     <span>Ti trovi in:</span>
@@ -83,20 +87,24 @@
             <h2 id="bookings-title">Le Mie Prenotazioni</h2>
 
             <div id="server-messages" class="form-messages [BOOKINGS_SERVER_STATE]" role="status" aria-live="polite">
-                [BOOKINGS_SERVER_MESSAGES]
+              [BOOKINGS_SERVER_MESSAGES]
             </div>
 
             <div class="bookings-filters">
               <fieldset>
                 <legend class="sr-only">Filtra prenotazioni</legend>
                 <div class="filter-tabs">
-                  <button type="button" id="tab-all" class="filter-tab active" data-filter="all" aria-controls="bookings-container" aria-pressed="true">
+                  <button type="button" id="tab-all" class="filter-tab active" data-filter="all"
+                    aria-controls="bookings-container" aria-pressed="true">
                     Tutte <span id="badge-all" class="badge"><span class="sr-only">quantità:</span> 0</span>
                   </button>
-                  <button type="button" id="tab-active" class="filter-tab" data-filter="active" aria-controls="bookings-container" aria-pressed="false">
-                    Attive <span id="badge-active" class="badge badge-accent"><span class="sr-only">quantità:</span> 0</span>
+                  <button type="button" id="tab-active" class="filter-tab" data-filter="active"
+                    aria-controls="bookings-container" aria-pressed="false">
+                    Attive <span id="badge-active" class="badge badge-accent"><span class="sr-only">quantità:</span>
+                      0</span>
                   </button>
-                  <button type="button" id="tab-completed" class="filter-tab" data-filter="completed" aria-controls="bookings-container" aria-pressed="false">
+                  <button type="button" id="tab-completed" class="filter-tab" data-filter="completed"
+                    aria-controls="bookings-container" aria-pressed="false">
                     Completate <span id="badge-completed" class="badge"><span class="sr-only">quantità:</span> 0</span>
                   </button>
                 </div>
@@ -135,7 +143,7 @@
     </div>
   </main>
 
-    [FOOTER]
+  [FOOTER]
 
   <script src="../js/script.js"></script>
 </body>

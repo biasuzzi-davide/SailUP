@@ -238,7 +238,7 @@
         if (!validateForm()) {
             e.preventDefault();
 
-            showGlobalMessage('Il modulo contiene errori. Controlla i campi evidenziati in rosso.', 'error');
+            showGlobalMessage("C'è un piccolo intoppo nella rotta. Sistema i campi in rosso per riprendere la navigazione verso l'invio.", 'error');
 
             const firstError = form.querySelector('[aria-invalid="true"]');
             if (firstError) {

@@ -10,6 +10,10 @@
   <meta name="keywords" content="noleggio, barche, vela, motore, gommoni, patente, catalogo, flotta, Napoli, golfo">
   <meta name="authors" content="SailUp team">
 
+  <link rel="icon" href="../img/favicon/favicon.ico" sizes="any">
+  <link rel="icon" href="../img/favicon/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../img/favicon/apple-touch-icon.png">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -49,7 +53,8 @@
       <aside class="filters-sidebar" aria-labelledby="filters-heading">
         <header class="filters-header">
           <h2 id="filters-heading">Filtra</h2>
-          <button type="reset" id="filters-reset" form="noleggio-filters-form" class="btn-text" aria-label="Reimposta filtri">Reset</button>
+          <button type="reset" id="filters-reset" form="noleggio-filters-form" class="btn-text"
+            aria-label="Reimposta filtri">Reset</button>
         </header>
 
         <form id="noleggio-filters-form" action="[ACTION_URL]" method="GET">
@@ -94,7 +99,8 @@
 
             <div class="filter-input">
               <label for="maxPrice">Prezzo max (€/giorno)</label>
-              <input type="number" id="maxPrice" name="maxPrice" placeholder="Es. 500" min="100" step="50" value="[VAL_MAX_PRICE]">
+              <input type="number" id="maxPrice" name="maxPrice" placeholder="Es. 500" min="100" step="50"
+                value="[VAL_MAX_PRICE]">
             </div>
           </fieldset>
           <button type="submit" class="btn-layout filter-submit">Applica Filtri</button>
