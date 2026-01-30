@@ -55,7 +55,7 @@ function buildHeader($phpSelf)
         $logoHtml = '<div class="logo">' . $logoInner . '</div>';
     } else {
         $homeUrl = $relativePath . $pages['index'];
-        $logoHtml = '<a href="' . $homeUrl . '" class="logo" aria-label="Torna alla Home">' . $logoInner . '</a>';
+        $logoHtml = '<a href="' . $homeUrl . '" class="logo" aria-hidden="true" tabindex="-1">' . $logoInner . '</a>';
     }
 
     // Sostituisci placeholder
