@@ -55,7 +55,7 @@
         <header class="filters-header">
           <h2 id="filters-heading">Filtra</h2>
           <button type="reset" id="esperienze-reset" form="esperienze-filters-form" class="btn-text"
-            aria-label="Reimposta filtri">Reset</button>
+            aria-label="Reset filtri" lang="en">Reset</button>
         </header>
 
         <form id="esperienze-filters-form" action="[ACTION_URL]" method="GET">
@@ -65,12 +65,12 @@
             <div class="filter-input">
               <label for="posti_disponibili">Posti minimi</label>
               <input type="number" id="posti_disponibili" name="posti_disponibili" min="1" placeholder="Es. 2"
-                value="[VAL_POSTI]">
+                [ATTR_VAL_POSTI]>
             </div>
 
             <div class="filter-input">
               <label for="data_esperienza">Data</label>
-              <input type="date" id="data_esperienza" name="data_esperienza" value="[VAL_DATA]" min="[MIN_DATE]">
+              <input type="date" id="data_esperienza" name="data_esperienza" [ATTR_VAL_DATA] min="[MIN_DATE]">
             </div>
 
             <div class="filter-input">
@@ -83,7 +83,7 @@
             <div class="filter-input">
               <label for="maxPriceExperience">Prezzo max (€/tour)</label>
               <input type="number" id="maxPriceExperience" name="maxPriceExperience" placeholder="Es. 45" min="25"
-                step="10" value="[VAL_MAX_PRICE]">
+                step="10" [ATTR_VAL_MAX_PRICE]>
             </div>
           </fieldset>
 

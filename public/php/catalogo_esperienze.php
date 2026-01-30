@@ -93,9 +93,9 @@ $linguaOptions = buildLinguaOptions($lingueDisponibili, $linguaSelezionata);
 
 $html = str_replace('[LINGUA_OPTIONS]', $linguaOptions, $html);
 
-$html = str_replace('[VAL_POSTI]', $postiMin !== null ? htmlspecialchars((string) $postiMin, ENT_QUOTES) : '', $html);
-$html = str_replace('[VAL_DATA]', htmlspecialchars($dataEsperienza, ENT_QUOTES), $html);
-$html = str_replace('[VAL_MAX_PRICE]', $maxPrice !== null ? htmlspecialchars((string) $maxPrice, ENT_QUOTES) : '', $html);
+$html = str_replace('[ATTR_VAL_POSTI]', $postiMin !== null ? 'value="' . htmlspecialchars((string) $postiMin, ENT_QUOTES) . '"' : '', $html);
+$html = str_replace('[ATTR_VAL_DATA]', $dataEsperienza !== '' ? 'value="' . htmlspecialchars($dataEsperienza, ENT_QUOTES) . '"' : '', $html);
+$html = str_replace('[ATTR_VAL_MAX_PRICE]', $maxPrice !== null ? 'value="' . htmlspecialchars((string) $maxPrice, ENT_QUOTES) . '"' : '', $html);
 $html = str_replace('[MIN_DATE]', date('Y-m-d'), $html);
 $html = str_replace('[CHECK_ACCESSIBILE]', $accessibileFiltro ? 'checked' : '', $html);
 
