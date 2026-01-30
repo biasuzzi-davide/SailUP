@@ -1073,10 +1073,19 @@ a.product-cta:focus-visible {
   box-shadow: var(--shadow-md);
 }
 
+.auth-card h1 {
+  text-align: center;
+  font-size: var(--fs-xl);
+  margin-bottom: 0.2em;
+  color: var(--col-primary);
+}
+
 .auth-card h2 {
   text-align: center;
   margin-bottom: 0.5em;
-  color: var(--col-primary);
+  font-size: var(--fs-md);
+  font-weight: 400;
+  color: var(--col-text-muted);
 }
 
 .auth-subtitle {
