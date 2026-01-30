@@ -187,6 +187,7 @@ a:hover {
 .text-accent {
   color: var(--col-accent);
   font-style: italic;
+  white-space: nowrap;
 }
 
 .skip-to-content {
@@ -1584,7 +1585,6 @@ a.product-cta:focus-visible {
   font-family: var(--font-head);
   color: var(--col-accent);
   line-height: 1.1;
-  white-space: nowrap;
 }
 
 .booking-form {
