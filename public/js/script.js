@@ -113,7 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
    --------------------------------------- */
 
 document.addEventListener("DOMContentLoaded", function () {
-    var btn = document.getElementById("btnTop");
+    const btn = document.getElementById("btnTop");
 
     if (btn) {
         btn.classList.add("hidden");
@@ -127,7 +127,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 btn.classList.add("hidden");
                 btn.setAttribute("tabindex", "-1");
             }
-        })
+        });
     }
 });
 
@@ -476,43 +476,43 @@ document.addEventListener('DOMContentLoaded', function () {
     const hint = document.getElementById('profile-image-hint');
     let previewUrl = null; 
 
-    if(!changePhotoBtn || !fileInput || ! avatarImg) return;
+    if (!changePhotoBtn || !fileInput || !avatarImg) return;
 
-    const originalHintText = "Seleziona un'immagine dal tuo dispositivo (max 1MB)"
+    const originalHintText = "Seleziona un'immagine dal tuo dispositivo (max 1MB)";
 
     changePhotoBtn.addEventListener("click", () => {
-        fileInput.click()
-    }); 
+        fileInput.click();
+    });
 
     fileInput.addEventListener('change', () => {
         const [file] = fileInput.files;
 
-        if(!file) return; 
+        if (!file) return;
 
-        const MAX_DIM = 1024 * 1024; 
+        const MAX_DIM = 1024 * 1024;
 
-        if(hint) {
-            hint.textContent = originalHintText; 
-            hint.classList.remove('field-error', 'field-success'); 
-            hint.classList.add('field-hint')
+        if (hint) {
+            hint.textContent = originalHintText;
+            hint.classList.remove('field-error', 'field-success');
+            hint.classList.add('field-hint');
         }
 
-        if(file.size > MAX_DIM) {
-            if(hint) {
-                hint.textContent = "Errore: l'immagine supera il limite di 2MB"; 
-                hint.classList.remove('field-hint')
-                hint.classList.add('field-error'); 
+        if (file.size > MAX_DIM) {
+            if (hint) {
+                hint.textContent = "Errore: l'immagine supera il limite di 1MB";
+                hint.classList.remove('field-hint');
+                hint.classList.add('field-error');
             }
-            fileInput.value = ""; // tolgo il valore per evitare l'invio del file
-            return
+            fileInput.value = "";
+            return;
         }
 
         const validTypes = ['image/jpeg', 'image/png', 'image/webp'];
-        if(!validTypes.includes(file.type)) {
-            if(hint) {
-                hint.textContent = "Errore: usa formati JPG, PNG o WebP"; 
-                hint.classList.remove('field-hint')
-                hint.classList.add('field-error'); 
+        if (!validTypes.includes(file.type)) {
+            if (hint) {
+                hint.textContent = "Errore: usa formati JPG, PNG o WebP";
+                hint.classList.remove('field-hint');
+                hint.classList.add('field-error');
             }
             fileInput.value = "";
             return;
@@ -526,13 +526,13 @@ document.addEventListener('DOMContentLoaded', function () {
         avatarImg.src = previewUrl;
         avatarImg.alt = "Anteprima nuova immagine selezionata";
 
-        if(hint){
-            hint.textContent = "Immagine valida. Ricorda di salvare le modifiche."
+        if (hint) {
+            hint.textContent = "Immagine valida. Ricorda di salvare le modifiche.";
             hint.classList.remove('field-hint');
             hint.classList.add('field-success');
         }
     });
-})
+});
 
 /* ---------------------------------------
    GESTIONE CONFERME PER AZIONI ADMIN
