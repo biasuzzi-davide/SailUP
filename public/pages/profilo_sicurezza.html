@@ -2,28 +2,32 @@
 <html lang="it" data-theme="light">
 
 <head>
-  <meta charset="UTF-8" >
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sicurezza e Modifica Profilo - SailUP</title>
-  <meta name="description" content="Modifica i tuoi dati personali e gestisci la sicurezza del tuo account SailUP" >
-  <meta name="keywords" content="sicurezza, password, modifica, dati, profilo, account, gestione, utente, SailUP" >
-  <meta name="authors" content="Sailup Team" >
+  <meta name="description" content="Modifica i tuoi dati personali e gestisci la sicurezza del tuo account SailUP">
+  <meta name="keywords" content="sicurezza, password, modifica, dati, profilo, account, gestione, utente, SailUP">
+  <meta name="authors" content="Sailup Team">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" >
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin >
+  <link rel="icon" href="../img/favicon/favicon.ico" sizes="any">
+  <link rel="icon" href="../img/favicon/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../img/favicon/apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap"
-    rel="stylesheet" >
+    rel="stylesheet">
 
-    <link rel="stylesheet" href="../css/style.css" media="screen" >
-    <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)" >
-    <link rel="stylesheet" href="../css/print.css" media="print" >
+  <link rel="stylesheet" href="../css/style.css" media="screen">
+  <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)">
+  <link rel="stylesheet" href="../css/print.css" media="print">
 </head>
 
 <body>
   <a href="#main-content" class="skip-to-content">Salta al contenuto</a>
 
-[HEADER]
+  [HEADER]
 
   <div class="sr-only" id="breadcrumb-label">
     <span>Ti trovi in:</span>
@@ -39,15 +43,15 @@
 
   <main id="main-content">
     <div class="profile-container section-container">
-     <div class="profile-header">
+      <div class="profile-header">
         <div class="profile-avatar-block">
           <div class="profile-avatar">
-            <img id="profile-picture" src="[PROFILE_IMAGE_URL]"
-              alt="Avatar di [USER_NOME] [USER_COGNOME]" >
+            <img id="profile-picture" src="[PROFILE_IMAGE_URL]" alt="Avatar di [USER_NOME] [USER_COGNOME]">
           </div>
           <div class="profile-avatar-actions">
             <input type="file" id="profile-image-input" name="profile_image" accept="image/*" class="sr-only"
-              aria-label="Scegli una nuova immagine profilo" aria-describedby="profile-image-hint" form="edit-profile-form" tabindex="-1">
+              aria-label="Scegli una nuova immagine profilo" aria-describedby="profile-image-hint"
+              form="edit-profile-form" tabindex="-1">
             <button type="button" class="btn-layout-light" id="change-photo-btn"
               aria-describedby="profile-image-hint">Cambia immagine</button>
             <p id="profile-image-hint" class="field-hint">Seleziona un'immagine dal tuo dispositivo (max 1MB).</p>
@@ -102,9 +106,8 @@
                 <input type="hidden" name="form_type" value="profile">
                 <div class="form-group">
                   <label for="nome">Nome</label>
-                  <input type="text" id="nome" name="nome" value="[USER_NOME]"
-                    aria-describedby="nome-hint nome-error" autocomplete="given-name"
-                    placeholder="Es. Mario" pattern="^[A-Za-z\s]{2,50}$" maxlength="50">
+                  <input type="text" id="nome" name="nome" value="[USER_NOME]" aria-describedby="nome-hint nome-error"
+                    autocomplete="given-name" placeholder="Es. Mario" pattern="^[A-Za-z\s]{2,50}$" maxlength="50">
                   <span id="nome-hint" class="field-hint">Almeno 2 caratteri, solo lettere e spazi.</span>
                   <span id="nome-error" class="field-error" role="alert"></span>
                 </div>
@@ -112,17 +115,16 @@
                 <div class="form-group">
                   <label for="cognome">Cognome</label>
                   <input type="text" id="cognome" name="cognome" value="[USER_COGNOME]" required
-                    aria-describedby="cognome-hint cognome-error" autocomplete="family-name"
-                    placeholder="Es. Rossi" pattern="^[A-Za-z\s]{2,50}$" maxlength="50">
+                    aria-describedby="cognome-hint cognome-error" autocomplete="family-name" placeholder="Es. Rossi"
+                    pattern="^[A-Za-z\s]{2,50}$" maxlength="50">
                   <span id="cognome-hint" class="field-hint">Almeno 2 caratteri, solo lettere e spazi.</span>
                   <span id="cognome-error" class="field-error" role="alert"></span>
                 </div>
 
                 <div class="form-group">
                   <label for="cf">Codice Fiscale</label>
-                  <input type="text" id="cf" name="cf" value="[USER_CF]" required
-                    aria-describedby="cf-hint cf-error" autocomplete="off" maxlength="16"
-                    placeholder="Es. RSSMRC90C15H501T" pattern="^[A-Z0-9]{16}$">
+                  <input type="text" id="cf" name="cf" value="[USER_CF]" required aria-describedby="cf-hint cf-error"
+                    autocomplete="off" maxlength="16" placeholder="Es. RSSMRC90C15H501T" pattern="^[A-Z0-9]{16}$">
                   <span id="cf-hint" class="field-hint">Deve essere composto da 16 caratteri alfanumerici.</span>
                   <span id="cf-error" class="field-error" role="alert"></span>
                 </div>
@@ -130,59 +132,62 @@
                 <div class="form-group">
                   <label for="email">Email</label>
                   <input type="email" id="email" name="email" value="[USER_EMAIL]" required
-                    aria-describedby="email-hint email-error" autocomplete="email"
-                    placeholder="mariorossi@mail.com">
-                  <span id="email-hint" class="field-hint">Indirizzo personale di posta elettronica per ricevere informazioni sulle prenotazioni effettuate.</span>
+                    aria-describedby="email-hint email-error" autocomplete="email" placeholder="mariorossi@mail.com">
+                  <span id="email-hint" class="field-hint">Indirizzo personale di posta elettronica per ricevere
+                    informazioni sulle prenotazioni effettuate.</span>
                   <span id="email-error" class="field-error" role="alert"></span>
                 </div>
 
                 <fieldset class="address-grid">
-                    <legend>Indirizzo di Residenza</legend>
+                  <legend>Indirizzo di Residenza</legend>
 
-                    <div class="form-group field-via">
-                        <label for="indirizzo_via">Via / Piazza</label>
-                        <input type="text" id="indirizzo_via" name="indirizzo_via" value="[ADDR_VIA]" required
-                        aria-describedby="via-hint indirizzo_via-error" autocomplete="address-line1"
-                        placeholder="Es. Via Caracciolo" maxlength="80" pattern="^[A-Za-z0-9\s,.'\-\/]+$">
-                        <span id="via-hint" class="field-hint">Lettere, numeri, spazi e caratteri , . - /</span>
-                        <span id="indirizzo_via-error" class="field-error" role="alert"></span>
-                    </div>
+                  <div class="form-group field-via">
+                    <label for="indirizzo_via">Via / Piazza</label>
+                    <input type="text" id="indirizzo_via" name="indirizzo_via" value="[ADDR_VIA]" required
+                      aria-describedby="via-hint indirizzo_via-error" autocomplete="address-line1"
+                      placeholder="Es. Via Caracciolo" maxlength="80" pattern="^[A-Za-z0-9\s,.'\-\/]+$">
+                    <span id="via-hint" class="field-hint">Lettere, numeri, spazi e caratteri , . - /</span>
+                    <span id="indirizzo_via-error" class="field-error" role="alert"></span>
+                  </div>
 
-                    <div class="form-group field-civico">
-                        <label for="indirizzo_civico"><abbr title="Numero">N.</abbr> Civico</label>
-                        <input type="text" id="indirizzo_civico" name="indirizzo_civico" value="[ADDR_CIVICO]" required
-                        aria-describedby="civico-hint indirizzo_civico-error" autocomplete="address-line2"
-                        placeholder="10" maxlength="5" pattern="^[0-9]{1,5}$">
-                        <span id="civico-hint" class="field-hint">Inserire il numero civico (1-5 cifre).</span>
-                        <span id="indirizzo_civico-error" class="field-error" role="alert"></span>
-                    </div>
+                  <div class="form-group field-civico">
+                    <label for="indirizzo_civico"><abbr title="Numero">N.</abbr> Civico</label>
+                    <input type="text" id="indirizzo_civico" name="indirizzo_civico" value="[ADDR_CIVICO]" required
+                      aria-describedby="civico-hint indirizzo_civico-error" autocomplete="address-line2"
+                      placeholder="10" maxlength="5" pattern="^[0-9]{1,5}$">
+                    <span id="civico-hint" class="field-hint">Inserire il numero civico (1-5 cifre).</span>
+                    <span id="indirizzo_civico-error" class="field-error" role="alert"></span>
+                  </div>
 
-                    <div class="form-group field-cap">
-                        <label for="indirizzo_cap">CAP</label>
-                        <input type="text" id="indirizzo_cap" name="indirizzo_cap" value="[ADDR_CAP]" required
-                        aria-describedby="cap-hint indirizzo_cap-error" autocomplete="postal-code" pattern="^\d{5}$"
-                        placeholder="80122" maxlength="5">
-                        <span id="cap-hint" class="field-hint">Inserire le 5 cifre del <abbr title="Codice di avviamento postale">CAP</abbr> <abbr title="esempio">es.</abbr> 00100).</span>
-                        <span id="indirizzo_cap-error" class="field-error" role="alert"></span>
-                    </div>
+                  <div class="form-group field-cap">
+                    <label for="indirizzo_cap">CAP</label>
+                    <input type="text" id="indirizzo_cap" name="indirizzo_cap" value="[ADDR_CAP]" required
+                      aria-describedby="cap-hint indirizzo_cap-error" autocomplete="postal-code" pattern="^\d{5}$"
+                      placeholder="80122" maxlength="5">
+                    <span id="cap-hint" class="field-hint">Inserire le 5 cifre del <abbr
+                        title="Codice di avviamento postale">CAP</abbr> <abbr title="esempio">es.</abbr> 00100).</span>
+                    <span id="indirizzo_cap-error" class="field-error" role="alert"></span>
+                  </div>
 
-                    <div class="form-group field-citta">
-                        <label for="indirizzo_citta">Città</label>
-                        <input type="text" id="indirizzo_citta" name="indirizzo_citta" value="[ADDR_CITTA]" required
-                        aria-describedby="citta-hint indirizzo_citta-error" autocomplete="address-level2"
-                        placeholder="Es. Napoli" maxlength="80" pattern="^[A-Za-zÀ-ÿ'\s\-]{2,80}$">
-                        <span id="citta-hint" class="field-hint">Almeno 2 caratteri: lettere, accenti, apostrofi, spazi e trattini.</span>
-                        <span id="indirizzo_citta-error" class="field-error" role="alert"></span>
-                    </div>
+                  <div class="form-group field-citta">
+                    <label for="indirizzo_citta">Città</label>
+                    <input type="text" id="indirizzo_citta" name="indirizzo_citta" value="[ADDR_CITTA]" required
+                      aria-describedby="citta-hint indirizzo_citta-error" autocomplete="address-level2"
+                      placeholder="Es. Napoli" maxlength="80" pattern="^[A-Za-zÀ-ÿ'\s\-]{2,80}$">
+                    <span id="citta-hint" class="field-hint">Almeno 2 caratteri: lettere, accenti, apostrofi, spazi e
+                      trattini.</span>
+                    <span id="indirizzo_citta-error" class="field-error" role="alert"></span>
+                  </div>
 
-                    <div class="form-group field-provincia">
-                        <label for="indirizzo_provincia"><abbr title="Provincia">Prov.</abbr></label>
-                        <input type="text" id="indirizzo_provincia" name="indirizzo_provincia" value="[ADDR_PROVINCIA]" required
-                        aria-describedby="provincia-hint indirizzo_provincia-error"
-                        autocomplete="address-level1" pattern="^[A-Z]{2}$" placeholder="NA" maxlength="2">
-                        <span id="provincia-hint" class="field-hint">Sigla di 2 lettere maiuscole <abbr title="esempio">es.</abbr><abbr title="Napoli">NA</abbr>.</span>
-                        <span id="indirizzo_provincia-error" class="field-error" role="alert"></span>
-                    </div>
+                  <div class="form-group field-provincia">
+                    <label for="indirizzo_provincia"><abbr title="Provincia">Prov.</abbr></label>
+                    <input type="text" id="indirizzo_provincia" name="indirizzo_provincia" value="[ADDR_PROVINCIA]"
+                      required aria-describedby="provincia-hint indirizzo_provincia-error" autocomplete="address-level1"
+                      pattern="^[A-Z]{2}$" placeholder="NA" maxlength="2">
+                    <span id="provincia-hint" class="field-hint">Sigla di 2 lettere maiuscole <abbr
+                        title="esempio">es.</abbr><abbr title="Napoli">NA</abbr>.</span>
+                    <span id="indirizzo_provincia-error" class="field-error" role="alert"></span>
+                  </div>
                 </fieldset>
 
                 <div class="form-actions">
@@ -197,20 +202,19 @@
 
             <div class="auth-card">
               <h3>Cambia <span lang="en">Password</span></h3>
-              
+
               <div class="form-messages [PW_SERVER_STATE]" role="status" aria-live="polite">
                 [PW_SERVER_MESSAGES]
               </div>
 
-              <form id="change-password-form"  method="post" novalidate>
+              <form id="change-password-form" method="post" novalidate>
                 <input type="hidden" name="csrf_token" value="[CSRF_TOKEN]">
                 <input type="hidden" name="form_type" value="password">
                 <div class="form-group">
                   <label for="current-password">Password Attuale</label>
                   <div class="password-field">
-                    <input type="password" id="current-password" name="current-password" 
-                      required aria-describedby="current-password-error"
-                      autocomplete="current-password">
+                    <input type="password" id="current-password" name="current-password" required
+                      aria-describedby="current-password-error" autocomplete="current-password">
                     <button type="button" class="password-toggle" data-target="current-password"
                       data-label-show="Mostra password attuale" data-label-hide="Nascondi password attuale"
                       aria-label="Mostra password attuale" aria-pressed="false">
@@ -219,7 +223,8 @@
                         <circle cx="12" cy="12" r="3"></circle>
                       </svg>
                       <svg class="icon-eye-off" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M17.94 17.94A10.94 10.94 0 0 1 12 20c-7 0-11-8-11-8a21.86 21.86 0 0 1 5.06-6.06"></path>
+                        <path d="M17.94 17.94A10.94 10.94 0 0 1 12 20c-7 0-11-8-11-8a21.86 21.86 0 0 1 5.06-6.06">
+                        </path>
                         <path d="M1 1l22 22"></path>
                         <path d="M9.9 4.24A9 9 0 0 1 12 4c7 0 11 8 11 8a21.85 21.85 0 0 1-4.87 5.8"></path>
                         <path d="M14.12 14.12a3 3 0 0 1-4.24-4.24"></path>
@@ -232,9 +237,8 @@
                 <div class="form-group">
                   <label for="new-password">Nuova <span lang="en">Password</span></label>
                   <div class="password-field">
-                    <input type="password" id="new-password" name="new-password" 
-                      required aria-describedby="new-password-hint new-password-error" 
-                      autocomplete="new-password">
+                    <input type="password" id="new-password" name="new-password" required
+                      aria-describedby="new-password-hint new-password-error" autocomplete="new-password">
                     <button type="button" class="password-toggle" data-target="new-password"
                       data-label-show="Mostra nuova password" data-label-hide="Nascondi nuova password"
                       aria-label="Mostra nuova password" aria-pressed="false">
@@ -243,7 +247,8 @@
                         <circle cx="12" cy="12" r="3"></circle>
                       </svg>
                       <svg class="icon-eye-off" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M17.94 17.94A10.94 10.94 0 0 1 12 20c-7 0-11-8-11-8a21.86 21.86 0 0 1 5.06-6.06"></path>
+                        <path d="M17.94 17.94A10.94 10.94 0 0 1 12 20c-7 0-11-8-11-8a21.86 21.86 0 0 1 5.06-6.06">
+                        </path>
                         <path d="M1 1l22 22"></path>
                         <path d="M9.9 4.24A9 9 0 0 1 12 4c7 0 11 8 11 8a21.85 21.85 0 0 1-4.87 5.8"></path>
                         <path d="M14.12 14.12a3 3 0 0 1-4.24-4.24"></path>
@@ -259,31 +264,32 @@
                 <div class="form-group">
                   <label for="confirm-password">Conferma Nuova <span lang="en">Password</span></label>
                   <div class="password-field">
-                    <input type="password" id="confirm-password" name="confirm-password" 
-                      required aria-describedby="confirm-password-hint confirm-password-error"
-                      autocomplete="new-password">
+                    <input type="password" id="confirm-password" name="confirm-password" required
+                      aria-describedby="confirm-password-hint confirm-password-error" autocomplete="new-password">
                     <button type="button" class="password-toggle" data-target="confirm-password"
-                      data-label-show="Mostra password di conferma"
-                      data-label-hide="Nascondi password di conferma"
+                      data-label-show="Mostra password di conferma" data-label-hide="Nascondi password di conferma"
                       aria-label="Mostra password di conferma" aria-pressed="false">
                       <svg class="icon-eye" viewBox="0 0 24 24" aria-hidden="true">
                         <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
                         <circle cx="12" cy="12" r="3"></circle>
                       </svg>
                       <svg class="icon-eye-off" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M17.94 17.94A10.94 10.94 0 0 1 12 20c-7 0-11-8-11-8a21.86 21.86 0 0 1 5.06-6.06"></path>
+                        <path d="M17.94 17.94A10.94 10.94 0 0 1 12 20c-7 0-11-8-11-8a21.86 21.86 0 0 1 5.06-6.06">
+                        </path>
                         <path d="M1 1l22 22"></path>
                         <path d="M9.9 4.24A9 9 0 0 1 12 4c7 0 11 8 11 8a21.85 21.85 0 0 1-4.87 5.8"></path>
                         <path d="M14.12 14.12a3 3 0 0 1-4.24-4.24"></path>
                       </svg>
                     </button>
                   </div>
-                  <span id="confirm-password-hint" class="field-hint">Ripetere la <span lang="en">password</span> scelta in precedenza</span>
+                  <span id="confirm-password-hint" class="field-hint">Ripetere la <span lang="en">password</span> scelta
+                    in precedenza</span>
                   <span id="confirm-password-error" class="field-error" role="alert"></span>
                 </div>
 
                 <div class="form-actions">
-                  <button type="submit" class="btn-layout btn-full-width">Aggiorna <span lang="en">Password</span></button>
+                  <button type="submit" class="btn-layout btn-full-width">Aggiorna <span
+                      lang="en">Password</span></button>
                 </div>
               </form>
             </div>
@@ -303,7 +309,7 @@
     </div>
   </main>
 
-    [FOOTER]
+  [FOOTER]
 
   <script src="../js/script.js"></script>
 </body>

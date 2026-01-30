@@ -2,23 +2,27 @@
 <html lang="it" data-theme="light">
 
 <head>
-  <meta charset="UTF-8" >
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>[ADMIN_BLOG_PAGE_TITLE]</title>
   <meta name="description" content="[ADMIN_BLOG_PAGE_DESC]">
   <meta name="robots" content="noindex, nofollow">
   <meta name="keywords" content="nuovo, articolo, blog, admin, scrivi, pubblica, dashboard, SailUP">
   <meta name="authors" content="SailUP Team">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" >
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin >
+  <link rel="icon" href="../img/favicon/favicon.ico" sizes="any">
+  <link rel="icon" href="../img/favicon/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../img/favicon/apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap"
-    rel="stylesheet" >
+    rel="stylesheet">
 
-  <link rel="stylesheet" href="../css/style.css" media="screen" >
-  <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)" >
-  <link rel="stylesheet" href="../css/print.css" media="print" >
+  <link rel="stylesheet" href="../css/style.css" media="screen">
+  <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)">
+  <link rel="stylesheet" href="../css/print.css" media="print">
 </head>
 
 <body>
@@ -57,7 +61,8 @@
           <div class="form-group">
             <label for="post-title">Titolo Articolo <abbr title="Campo obbligatorio">*</abbr></label>
             <input type="text" id="post-title" name="post-title"
-              placeholder="es. Come scegliere la barca perfetta per te" value="[OLD_TITLE]" required aria-describedby="post-title-error" >
+              placeholder="es. Come scegliere la barca perfetta per te" value="[OLD_TITLE]" required
+              aria-describedby="post-title-error">
             <span id="post-title-error" class="field-error" role="alert"></span>
           </div>
 
@@ -65,7 +70,7 @@
             <div class="form-group">
               <label for="post-date">Data Pubblicazione <abbr title="Campo obbligatorio">*</abbr></label>
               <input type="date" id="post-date" name="post-date" value="[OLD_DATE]" required
-                aria-describedby="post-date-error" >
+                aria-describedby="post-date-error">
               <span id="post-date-error" class="field-error" role="alert"></span>
             </div>
           </div>
@@ -75,7 +80,7 @@
               <label for="post-reading-time">Tempo Medio di Lettura (minuti) <abbr
                   title="Campo obbligatorio">*</abbr></label>
               <input type="number" id="post-reading-time" name="post-reading-time" min="1" step="1" placeholder="es. 5"
-                value="[OLD_READING_TIME]" required aria-describedby="post-reading-time-error" >
+                value="[OLD_READING_TIME]" required aria-describedby="post-reading-time-error">
               <span id="post-reading-time-error" class="field-error" role="alert"></span>
             </div>
           </div>
@@ -98,7 +103,8 @@
             <textarea id="post-content" name="post-content" rows="15"
               placeholder="Scrivi qui il contenuto completo dell'articolo." required
               aria-describedby="content-hint post-content-error">[OLD_CONTENT]</textarea>
-            <span id="content-hint" class="field-hint">Scrivi il contenuto in testo normale. Per creare un nuovo paragrafo, lascia una riga vuota tra i blocchi di testo.</span>
+            <span id="content-hint" class="field-hint">Scrivi il contenuto in testo normale. Per creare un nuovo
+              paragrafo, lascia una riga vuota tra i blocchi di testo.</span>
             <span id="post-content-error" class="field-error" role="alert"></span>
           </div>
 
@@ -121,8 +127,8 @@
           <div class="form-group">
             <label for="Testo_Alternativo">Testo Alternativo Immagine <abbr title="Campo obbligatorio">*</abbr></label>
             <input type="text" id="Testo_Alternativo" name="Testo_Alternativo"
-              placeholder="Descrizione dell'immagine per accessibilità, inserire solo se aggiunge informazioni." value="[OLD_ALT]" required
-              aria-describedby="Testo_Alternativo-error" >
+              placeholder="Descrizione dell'immagine per accessibilità, inserire solo se aggiunge informazioni."
+              value="[OLD_ALT]" required aria-describedby="Testo_Alternativo-error">
             <span id="Testo_Alternativo-error" class="field-error" role="alert"></span>
           </div>
         </fieldset>
@@ -138,7 +144,7 @@
             <div class="extra-row">
               <div class="form-group">
                 <label>Titolo Extra</label>
-                <input type="text" name="extra_title[]" placeholder="es. Suggerimenti" >
+                <input type="text" name="extra_title[]" placeholder="es. Suggerimenti">
               </div>
               <div class="form-group">
                 <label>Contenuto</label>
@@ -171,7 +177,7 @@
         </div>
 
         <div class="form-actions">
-          <a href="admin_blog.php" class="btn-layout-light" >Annulla</a>
+          <a href="admin_blog.php" class="btn-layout-light">Annulla</a>
           <button type="submit" name="action" value="draft" class="btn-layout-light">Salva come Bozza</button>
           <button type="submit" name="action" value="publish" class="btn-layout">Pubblica Articolo</button>
         </div>

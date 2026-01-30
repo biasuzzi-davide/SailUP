@@ -2,19 +2,24 @@
 <html lang="it" data-theme="light">
 
 <head>
-  <meta charset="UTF-8" >
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Catalogo Esperienze - SailUP</title>
   <meta name="description"
     content="Scopri le esperienze organizzate dalle guide SailUp nel golfo di Napoli. Aperitivi al tramonto, esplorazione della costiera amalfitana o tour in mare. Prenota la tua avventura oggi!">
-  <meta name="keywords" content="esperienze, tour, mare, escursioni, nautiche, Capri, Ischia, Procida, tramonto, golfo, Napoli">
+  <meta name="keywords"
+    content="esperienze, tour, mare, escursioni, nautiche, Capri, Ischia, Procida, tramonto, golfo, Napoli">
   <meta name="authors" content="SailUp team">
+
+  <link rel="icon" href="../img/favicon/favicon.ico" sizes="any">
+  <link rel="icon" href="../img/favicon/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../img/favicon/apple-touch-icon.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap"
-    rel="stylesheet"  >
+    rel="stylesheet">
 
   <link rel="stylesheet" href="../css/style.css" media="screen">
   <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)">
@@ -49,7 +54,8 @@
       <aside class="filters-sidebar" aria-labelledby="filters-heading">
         <header class="filters-header">
           <h2 id="filters-heading">Filtra</h2>
-          <button type="reset" id="esperienze-reset" form="esperienze-filters-form" class="btn-text" aria-label="Reimposta filtri">Reset</button>
+          <button type="reset" id="esperienze-reset" form="esperienze-filters-form" class="btn-text"
+            aria-label="Reimposta filtri">Reset</button>
         </header>
 
         <form id="esperienze-filters-form" action="[ACTION_URL]" method="GET">
@@ -58,7 +64,8 @@
 
             <div class="filter-input">
               <label for="posti_disponibili">Posti minimi</label>
-              <input type="number" id="posti_disponibili" name="posti_disponibili" min="1" placeholder="Es. 2" value="[VAL_POSTI]">
+              <input type="number" id="posti_disponibili" name="posti_disponibili" min="1" placeholder="Es. 2"
+                value="[VAL_POSTI]">
             </div>
 
             <div class="filter-input">
@@ -92,9 +99,9 @@
         </form>
       </aside>
 
-        <div class="catalog-results">
-          <header class="results-header">
-            <h2 id="catalog-title">Esperienze disponibili</h2>
+      <div class="catalog-results">
+        <header class="results-header">
+          <h2 id="catalog-title">Esperienze disponibili</h2>
           <div class="results-sort">
             <label for="sort">Ordina per:</label>
             <select id="sort" name="sort" form="esperienze-filters-form">

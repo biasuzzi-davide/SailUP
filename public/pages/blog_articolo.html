@@ -5,10 +5,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>[ARTICLE_TITLE] - Blog - SailUP</title>
-  <meta name="description"
-    content="[ARTICLE_DESCRIPTION]">
+  <meta name="description" content="[ARTICLE_DESCRIPTION]">
   [KEYWORDS]
   <meta name="authors" content="SailUP Team">
+
+  <link rel="icon" href="../img/favicon/favicon.ico" sizes="any">
+  <link rel="icon" href="../img/favicon/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../img/favicon/apple-touch-icon.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -38,53 +41,53 @@
   </nav>
 
   <main id="main-content" class="section-container">
-      <article aria-labelledby="article-title">
-        <section id="hero">
-          <div>
-            <h1 id="article-title">[ARTICLE_TITLE_VISUAL]</h1>
-            <p>
-              <time datetime="[ARTICLE_DATE_ISO]">[ARTICLE_DATE_FORMATTED]</time> • Lettura [ARTICLE_READING_TIME] <abbr title="minuti">min</abbr>
-            </p>
+    <article aria-labelledby="article-title">
+      <section id="hero">
+        <div>
+          <h1 id="article-title">[ARTICLE_TITLE_VISUAL]</h1>
+          <p>
+            <time datetime="[ARTICLE_DATE_ISO]">[ARTICLE_DATE_FORMATTED]</time> • Lettura [ARTICLE_READING_TIME] <abbr
+              title="minuti">min</abbr>
+          </p>
+        </div>
+        <img src="[ARTICLE_IMAGE_SRC]" alt="[ARTICLE_IMAGE_ALT]" class="hero-image" width="600" height="450">
+      </section>
+
+      <section aria-labelledby="author-title">
+        <h2 id="author-title" class="sr-only">L'Autore</h2>
+
+        <div class="profile-header">
+          <div class="profile-avatar">
+            <img src="[AUTHOR_IMAGE_SRC]" alt="[AUTHOR_IMAGE_ALT]">
           </div>
-          <img src="[ARTICLE_IMAGE_SRC]" alt="[ARTICLE_IMAGE_ALT]" class="hero-image"
-            width="600" height="450">
-        </section>
-
-        <section aria-labelledby="author-title">
-          <h2 id="author-title" class="sr-only">L'Autore</h2>
-
-          <div class="profile-header">
-            <div class="profile-avatar">
-              <img src="[AUTHOR_IMAGE_SRC]" alt="[AUTHOR_IMAGE_ALT]">
-            </div>
-            <div class="profile-info">
-              <h3>[AUTHOR_FULL_NAME]</h3>
-              <p>[AUTHOR_ROLE]</p>
-              <p class="profile-text">[AUTHOR_DESCRIPTION]</p>
-            </div>
+          <div class="profile-info">
+            <h3>[AUTHOR_FULL_NAME]</h3>
+            <p>[AUTHOR_ROLE]</p>
+            <p class="profile-text">[AUTHOR_DESCRIPTION]</p>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section aria-labelledby="intro-title">
-          <h2 id="intro-title">Introduzione</h2>
+      <section aria-labelledby="intro-title">
+        <h2 id="intro-title">Introduzione</h2>
 
-          <p>[ARTICLE_SUMMARY]</p>
-        </section>
+        <p>[ARTICLE_SUMMARY]</p>
+      </section>
 
-        <section aria-labelledby="spiagge-title">
-          <h2 id="spiagge-title">[ARTICLE_BODY_TITLE]</h2>
+      <section aria-labelledby="spiagge-title">
+        <h2 id="spiagge-title">[ARTICLE_BODY_TITLE]</h2>
 
-          <div class="article-body">
-            [ARTICLE_CONTENT]
-          </div>
-        </section>
+        <div class="article-body">
+          [ARTICLE_CONTENT]
+        </div>
+      </section>
 
-        <aside aria-labelledby="tips-title">
-          <h2 id="tips-title" class="sr-only">Consigli Pratici</h2>
-          [ARTICLE_EXTRA_LIST]
-        </aside>
-      </article>
-      
+      <aside aria-labelledby="tips-title">
+        <h2 id="tips-title" class="sr-only">Consigli Pratici</h2>
+        [ARTICLE_EXTRA_LIST]
+      </aside>
+    </article>
+
   </main>
 
   [FOOTER]

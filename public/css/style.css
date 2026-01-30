@@ -38,7 +38,7 @@
   --col-text: #1f2933;
   --col-text-inv: #ffffff;
   --col-text-footer: #e6f1ff;
-  --col-text-muted: #52606d; /* Grigio Pietra */
+  --col-text-muted: #52606d;
 
   /* Borders & UI */
   --col-border: #8e8e8e;
@@ -52,12 +52,12 @@
   --btn-hover-translate: -2px;
 
   /* Badges (Palette Pastello) */
-  --badge-motore: #bae6fd;     /* Sky Blue */
-  --badge-vela: #86efac;       /* Soft Green */
-  --badge-gommone: #fde047;    /* Sunny Yellow */
-  --badge-tour: #d8b4fe;       /* Lavender */
-  --badge-aperitivo: #f9a8d4;  /* Pink Rose */
-  --badge-escursione: #67e8f9; /* Cyan */
+  --badge-motore: #bae6fd;
+  --badge-vela: #86efac;
+  --badge-gommone: #fde047;
+  --badge-tour: #d8b4fe;
+  --badge-aperitivo: #f9a8d4;
+  --badge-escursione: #67e8f9;
 
   /* Danger Zone */
   --danger-bg: #fee;
@@ -68,22 +68,16 @@
 
 [data-theme="dark"] {
   /* --- PALETTE DARK MODE --- */
-  
-  /* Primary: Sabbia/Bianco sporco su sfondo scuro */
   --col-primary: #e6f1ff; 
   --col-primary-light: #9aa5b1;
 
-  /* Accent: Azzurro luminoso */
   --col-accent: #60a5fa; 
 
-  /* Backgrounds */
-  --col-bg: #051929;     /* Blu Abisso */
-  --col-bg-alt: #0a253a; /* Blu Scuro */
+  --col-bg: #00182b;
+  --col-bg-alt: #0a253a;
   
-  /* Footer: Nero profondo per dark mode */
   --col-bg-footer: #020d17; 
 
-  /* Text */
   --col-text: #eef2f5;
   --col-text-inv: #051929;
   --col-text-muted: #9aa5b1;
@@ -1590,6 +1584,7 @@ a.product-cta:focus-visible {
   font-family: var(--font-head);
   color: var(--col-accent);
   line-height: 1.1;
+  white-space: nowrap;
 }
 
 .booking-form {
