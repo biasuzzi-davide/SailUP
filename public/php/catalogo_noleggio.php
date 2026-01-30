@@ -93,10 +93,10 @@ $html = str_replace('[CHECK_PATENTE_RICHIESTA]', $patenteParam === 'richiesta' ?
 $html = str_replace('[CHECK_PATENTE_NON_RICHIESTA]', $patenteParam === 'non_richiesta' ? 'checked' : '', $html);
 $html = str_replace('[CHECK_PATENTE_IND]', ($patenteParam === 'indifferente' || $patenteParam === '') ? 'checked' : '', $html);
 
-$html = str_replace('[VAL_POSTI]', $postiMin !== null ? htmlspecialchars((string) $postiMin, ENT_QUOTES) : '', $html);
-$html = str_replace('[VAL_DATA_INIZIO]', htmlspecialchars($dataInizio, ENT_QUOTES), $html);
-$html = str_replace('[VAL_DATA_FINE]', htmlspecialchars($dataFine, ENT_QUOTES), $html);
-$html = str_replace('[VAL_MAX_PRICE]', $maxPrice !== null ? htmlspecialchars((string) $maxPrice, ENT_QUOTES) : '', $html);
+$html = str_replace('[ATTR_VAL_POSTI]', $postiMin !== null ? 'value="' . htmlspecialchars((string) $postiMin, ENT_QUOTES) . '"' : '', $html);
+$html = str_replace('[ATTR_VAL_DATA_INIZIO]', $dataInizio !== '' ? 'value="' . htmlspecialchars($dataInizio, ENT_QUOTES) . '"' : '', $html);
+$html = str_replace('[ATTR_VAL_DATA_FINE]', $dataFine !== '' ? 'value="' . htmlspecialchars($dataFine, ENT_QUOTES) . '"' : '', $html);
+$html = str_replace('[ATTR_VAL_MAX_PRICE]', $maxPrice !== null ? 'value="' . htmlspecialchars((string) $maxPrice, ENT_QUOTES) . '"' : '', $html);
 $html = str_replace('[MIN_DATE]', date('Y-m-d'), $html);
 
 $html = str_replace('[SELECTED_PRICE_ASC]', $sortChoice === 'price-asc' ? 'selected' : '', $html);
