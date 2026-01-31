@@ -55,18 +55,22 @@ function isValidCF(string $cf){
 }
 
 //validazione nome
+// NOTA: validazione poco stringente per scopo didattico del progetto
 function isValidName(string $nome):bool{
-    //controlla che ci siano solo lettere e spazi, inoltre verifico che l 'utente non inserisca un nome composto solo da spazi
-    return preg_match("/^[A-Za-z ]+$/", $nome) === 1
+    // Permette lettere (anche accentate), numeri, spazi, apostrofi e trattini
+    // Verifica che non sia composto solo da spazi
+    return preg_match("/^[A-Za-zÀ-ÿ0-9 '\-]+$/u", $nome) === 1
         && trim($nome) !== "";
 }
 
 /**
  * validazione cognome
+ * NOTA: validazione poco stringente per scopo didattico del progetto
  */
 function isSurnameValid(string $cognome):bool{
-     //controlla che ci siano solo lettere e spazi, inoltre verifico che l 'utente non inserisca un nome composto solo da spazi
-    return preg_match("/^[A-Za-z ]+$/", $cognome) === 1
+    // Permette lettere (anche accentate), numeri, spazi, apostrofi e trattini
+    // Verifica che non sia composto solo da spazi
+    return preg_match("/^[A-Za-zÀ-ÿ0-9 '\-]+$/u", $cognome) === 1
         && trim($cognome) !== "";
 }
 
