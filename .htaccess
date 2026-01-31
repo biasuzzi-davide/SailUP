@@ -1,0 +1,14 @@
+# Gestione errori con pagine personalizzate
+
+ErrorDocument 403 /~dbiasuzz/public/php/403.php
+ErrorDocument 404 /~dbiasuzz/public/php/404.php
+ErrorDocument 500 /~dbiasuzz/public/php/500.php
+
+# Blocco file sensibili per la sicurezza
+
+<FilesMatch "\.(sql|log|ini|md|txt|conf|git|gitignore)$">
+    Require all denied
+</FilesMatch>
+
+# Blocco accesso alle directory sensibili
+RedirectMatch 403 ^/~dbiasuzz/(config|includes|db)/

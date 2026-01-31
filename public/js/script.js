@@ -607,3 +607,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 100);
     }
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const reloadBtn = document.getElementById('reload-page-btn');
+    if (reloadBtn) {
+        reloadBtn.addEventListener('click', () => {
+            location.reload();
+        });
+    }
+});
