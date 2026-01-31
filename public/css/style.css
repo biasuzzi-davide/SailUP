@@ -1183,7 +1183,7 @@ a.product-cta:focus-visible {
   font-weight: 600;
 }
 
-.auth-footer a:hover {
+.auth-footer p a:hover {
   text-decoration: underline;
 }
 
