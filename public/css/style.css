@@ -599,16 +599,6 @@ header .logo-text {
   box-shadow: var(--shadow-lg);
 }
 
-.error-image {
-  width: 50%;
-  aspect-ratio: 4/3;
-  object-fit: cover;
-  border-radius: var(--radius-card);
-  box-shadow: var(--shadow-lg);
-  display: block;
-  margin: 1em auto;
-}
-
 .action-buttons {
   margin-top: 2em;
   display: flex;
@@ -619,15 +609,6 @@ header .logo-text {
 /* =========================================
      7. CARDS (Fleet, Product, Horizontal)
      ========================================= */
-.flex-title {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  margin-bottom: 2em;
-  border-bottom: 2px solid var(--col-border);
-  padding-bottom: 0.5em;
-}
-
 .cards-wrapper {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -815,13 +796,11 @@ a.product-cta:focus-visible {
   margin-top: 0.5em;
 }
 
-.booking-status-active,
 .status-badge.active {
   background-color: rgba(254, 101, 79, 0.1);
   color: var(--col-accent);
 }
 
-.booking-status-completed,
 .status-badge.completed {
   background-color: rgba(22, 163, 74, 0.1);
   color: #003c16;
@@ -1214,12 +1193,6 @@ a.product-cta:focus-visible {
   background-color: #f0fdf4;
   color: #16a34a;
   border: 1px solid #bbf7d0;
-}
-
-.alert-warning {
-  background: #fef3c7;
-  border-color: #f59e0b;
-  color: #92400e;
 }
 
 .alert-info {
@@ -2001,14 +1974,6 @@ a.product-cta:focus-visible {
   box-shadow: var(--shadow-sm);
 }
 
-.booking-card.status-active {
-  border-left: 5px solid var(--col-accent);
-}
-
-.booking-card.status-completed {
-  border-left: 5px solid #16a34a;
-}
-
 .booking-presentation {
   display: flex;
   justify-content: space-between;
@@ -2227,31 +2192,6 @@ tr>*:last-child {
   text-align: center;
   overflow: visible;
 }
-.btn-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.2em;
-  height: 2.2em;
-  border: 1px solid var(--col-border);
-  border-radius: var(--radius-sm);
-  background: var(--col-bg);
-  color: var(--col-text);
-  margin-left: 0.3em;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.btn-icon:hover {
-  border-color: var(--col-accent);
-  color: var(--col-accent);
-}
-
-.btn-icon.danger:hover {
-  border-color: #dc2626;
-  color: #dc2626;
-  background: #fef2f2;
-}
 
 [data-theme="dark"] .table-container {
   background-color: var(--col-bg);
@@ -2269,21 +2209,6 @@ tr>*:last-child {
 
 [data-theme="dark"] tbody tr:hover {
   background-color: rgba(255, 255, 255, 0.05);
-}
-
-[data-theme="dark"] .btn-icon {
-  background-color: var(--col-card);
-  color: var(--col-text);
-  border-color: var(--col-border);
-}
-
-[data-theme="dark"] .btn-icon:hover {
-  background-color: var(--col-border);
-}
-
-[data-theme="dark"] .btn-icon.danger:hover {
-  background-color: #450a0a;
-  border-color: #ef4444;
 }
 
 /* =========================================
@@ -2493,10 +2418,6 @@ footer address strong {
   margin-bottom: 0.5em;
 }
 
-.text-admin {
-  color: var(--col-accent);
-}
-
 .user-subtext {
   font-size: 0.9em;
   opacity: 0.8;
@@ -2521,10 +2442,6 @@ a:visited {
 
 li[aria-current="page"] {
   color: var(--col-visited-link);
-}
-
-.filters-wrapper {
-  margin-bottom: 1.5em;
 }
 
 #article-title { 

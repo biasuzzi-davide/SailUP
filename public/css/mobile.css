@@ -472,10 +472,6 @@ footer .logo p {
     gap: 0.75em;
 }
 
-.faq-text {
-    font-size: var(--fs-sm);
-}
-
 .faq-answer {
     padding: 1em;
     padding-top: 0.5em;
@@ -569,12 +565,6 @@ footer .logo p {
 
 .table-container td.actions-cell::before {
     display: none;
-}
-
-.table-container .btn-icon {
-    min-width: 44px;
-    min-height: 44px;
-    font-size: 1.25rem;
 }
 
 /* =========================================

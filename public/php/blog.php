@@ -14,7 +14,7 @@ if ($articoli && is_array($articoli) && count($articoli) > 0) {
         $cardsHtml .= buildBlogArticleCard($articolo);
     }
 } else {
-    $cardsHtml = '<p class="catalog-empty">Non ci sono articoli da mostrare al momento. Torna presto.</p>';
+    $cardsHtml = '<p>Non ci sono articoli da mostrare al momento. Torna presto.</p>';
 }
 
 $html = str_replace('[BLOG_CARDS]', $cardsHtml, $html);
