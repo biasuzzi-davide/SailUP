@@ -243,7 +243,7 @@ Il file `script.js` contiene le seguenti funzioni:
 - *Modalità scura*: Controlla il cambio del tema visivo (chiaro/scuro) agendo sull'attributo `data-theme` del tag `html` e memorizzando la preferenza dell'utente nel `localStorage` per mantenere la scelta nelle visite successive.
 - *Filtri*: Viene implementato un sistema di filtraggio per lo storico delle prenotazioni. Questo permette di visualizzare istantaneamente le prenotazioni in base al loro stato ("Tutte", "Attive", "Completate") agendo sulla visibilità delle righe della tabella e aggiornando in tempo reale i contatori presenti nelle tab di filtro.
 - *Pulsante torna su:* Gestisce la comparsa del tasto per tornare ad inizio pagina dopo che l'utente scorre la pagina, gestendo attraverso `tabindex` l'attivazione della navigazione da tastiera sul pulsante qualora diventi visibile.
-- *Toggle password:* Gestisce la visualizzazione in chiaro dei campi password, una piccola cortesia per evitare che l'utente debba digitare tre volte una stringa complessa a causa di un banale errore di battitura.
+- *Toggle password:* Gestisce la visualizzazione in chiaro dei campi password, una piccola cortesia per evitare che l'utente debba digitare tre volte una stringa complessa a causa di un errore di battitura.
 - *Persistenza dei dati:* Le date selezionate nei cataloghi vengono riportate automaticamente nel form di prenotazione. 
 - *Calcolo dinamico dei prezzi:* Nei form di prenotazione ogni selezione che modifica il prezzo, come il cambiamento delle date o l'aggiunta di extra, viene monitorata e il totale viene istantaneamente aggiornato in modo da dare sempre contezza all'utente di quanto andrà a pagare se decide di proseguire con la prenotazione. 
 - *Gestione del focus:* In caso di messaggi dal server o errori di validazione lo script forza lo scroll della pagina verso il messaggio e vi sposta il focus, assicurandosi che anche un utente che utilizza uno _screen reader_ (o un utente distratto) non manchi l'avviso.
@@ -257,40 +257,30 @@ I file di validazione (`register_validation.js`, `login_validation.js`, `blog_va
 == Back-End
 
 === Architettura (PHP)
-Lo sviluppo lato server è stato realizzato con un approccio modulare che simula il pattern architetturale *Model-View-Controller* (MVC), garantendo una chiara separazione delle responsabilità e facilitando la manutenzione del codice.
+Lo sviluppo lato server è stato realizzato con un approccio modulare che simula il pattern architetturale *Model-View-Controller* (MVC), garantendo una chiara separazione delle responsabilità e facilitando la manutenzione del codice. La struttura è la seguente:
 
-==== Pattern MVC e Separazione delle Responsabilità
-Il sistema è strutturato su tre livelli distinti:
+- *Model*: La classe `DBConnection` (file `db_connection.php`) incapsula tutta la logica di accesso ai dati. Questa classe centralizza le query al database e implementa metodi specializzati per ogni operazione CRUD (Create, Read, Update, Delete) utilizzando esclusivamente *Prepared Statements*, garantendo sicurezza nativa contro SQL injection.
 
-- *Model*: La classe `DBConnection` (file `db_connection.php`) incapsula tutta la logica di accesso ai dati. Questa classe centralizza le query al database e implementa metodi specializzati per ogni operazione CRUD (Create, Read, Update, Delete) sulle entità del sistema. Ogni metodo utilizza esclusivamente *Prepared Statements*, garantendo sicurezza contro SQL injection e mantenendo il codice pulito e riutilizzabile.
+- *Controller*: Ogni pagina PHP nella directory `public/php/` agisce da controller dedicato. Il controller gestisce il flusso dell'applicazione: verifica i permessi dell'utente tramite le funzioni di sessione, elabora i dati ricevuti via POST/GET, interagisce con il Model per recuperare o modificare i dati, e infine prepara le variabili necessarie per la vista.
 
-- *Controller*: Ogni pagina PHP nella directory `public/php/` agisce da controller dedicato. Il controller gestisce il flusso dell'applicazione: verifica i permessi dell'utente tramite le funzioni di sessione, elabora i dati ricevuti via POST/GET, interagisce con il Model per recuperare o modificare i dati, e infine prepara le variabili necessarie per la vista. Questa separazione permette di mantenere la logica di business isolata dalla presentazione.
+- *View*: I template HTML statici nella directory `public/pages/` costituiscono le viste. La funzione `buildPage()` carica questi template e inietta dinamicamente header, footer e contenuti tramite un sistema di segnaposto (es. `[HEADER]`, `[FOOTER]`). Questo approccio garantisce la separazione tra logica e presentazione, mantenendo il markup pulito e facilmente modificabile.
 
-- *View*: I template HTML statici nella directory `public/pages/` costituiscono le viste. La funzione `buildPage()` carica questi template e inietta dinamicamente header, footer e contenuti tramite un sistema di segnaposto (es. `[HEADER]`, `[FOOTER]`, `[NOME_UTENTE]`). Questo approccio garantisce la separazione tra logica e presentazione, mantenendo il markup pulito e facilmente modificabile.
+==== Modularità del codice
+Il file `pages.php` definisce un array associativo che mappa ogni identificatore di pagina al suo filename PHP corrispondente. Questo sistema elimina la duplicazione di URL hard-coded nel codice, facilita la manutenzione (modificare un URL richiede la modifica di un solo punto) e permette la generazione dinamica dei menu di navigazione. \
 
-==== Modularità del Codice
-Il progetto è organizzato in moduli funzionali all'interno della directory `includes/`:
+All'interno della directory `includes/`, inoltre, sono presenti i seguenti moduli funzionali:
 
-- *helpers.php*: Contiene le funzioni di utilità per la generazione dinamica delle componenti principali della pagina, come header, footer e card relative ai prodotti salvati in database. Le funzioni `buildHeader()` e `buildFooter()` gestiscono automaticamente lo stato dei link (pagina corrente evidenziata e non cliccabile), l'aggiunta di attributi ARIA per l'accessibilità, e la visualizzazione condizionale degli elementi in base allo stato di autenticazione dell'utente.
+- *helpers.php*: Contiene le funzioni di utilità per la generazione dinamica delle componenti principali della pagina come header, footer e card relative ai prodotti salvati in database. Le funzioni `buildHeader()` e `buildFooter()` gestiscono automaticamente lo stato dei link (pagina corrente evidenziata e non cliccabile), l'aggiunta di attributi ARIA per l'accessibilità, e la visualizzazione condizionale degli elementi in base allo stato di autenticazione dell'utente.
 
 - *auth/auth.php*: Centralizza le operazioni di registrazione e login. La funzione `registerUserFull()` orchestra l'inserimento coordinato di utente e indirizzo in una transazione logica, mentre `loginUserAuth()` gestisce l'autenticazione verificando le credenziali con `password_verify()`.
 
-- *session/session.php*: Gestisce lo stato della sessione e fornisce funzioni di controllo accesso (`isLogged()`, `isAdmin()`, `requireLogin()`, `requireGuest()`). Questo modulo implementa anche il sistema di protezione CSRF con generazione e validazione dei token.
+- *session/session.php*: Gestisce lo stato della sessione e fornisce funzioni di controllo accesso.
 
-- *utils/validation.php*: Contiene le funzioni di validazione lato server per tutti i tipi di input (email, password, codice fiscale, nomi, indirizzi). Queste validazioni duplicano e rafforzano quelle client-side, implementando il principio della *doppia validazione* come best practice di sicurezza.
+- *utils/validation.php*: Contiene le funzioni di validazione lato server per tutti i tipi di input (es. password, codice fiscale). Queste validazioni rafforzano quelle client-side, implementando il principio della *doppia validazione* come best practice di sicurezza.
 
-==== Gestione Centralizzata dei Percorsi
-Il file `pages.php` definisce un array associativo che mappa ogni identificatore di pagina al suo filename PHP corrispondente. Questo sistema:
-- Elimina la duplicazione di URL hard-coded nel codice
-- Facilita la manutenzione: modificare un URL richiede la modifica di un solo punto
-- Permette la generazione dinamica dei menu di navigazione
-- Rende il sistema più robusto ai refactoring
-
-=== Gestione Sessioni e Autenticazione
-Il mantenimento dello stato utente è gestito tramite un sistema dedicato nel file `session.php`. All'avvio, lo script verifica che la sessione non sia già attiva tramite `session_status()` prima di invocare `session_start()`, evitando errori di sessioni duplicate.
-
-==== Sistema di Controllo Accessi
-Sono state implementate funzioni helper per semplificare i controlli di accesso trasversali:
+=== Sessioni, Sicurezza e Protezione dei Dati
+Il mantenimento dello stato utente è gestito tramite un sistema dedicato nel file `session.php`. All'avvio lo script verifica che la sessione non sia già attiva tramite evitando errori di sessioni duplicate.
+Sono state poi implementate funzioni helper per semplificare i controlli di accesso trasversali:
 
 - `isLogged()`: Verifica la presenza della chiave `user` nella sessione, indicando un utente autenticato.
 - `isAdmin()`: Controlla se l'utente corrente possiede il flag di amministratore.
@@ -300,41 +290,74 @@ Sono state implementate funzioni helper per semplificare i controlli di accesso 
 
 Questo approccio permette di proteggere le risorse sensibili con una singola riga di codice all'inizio di ogni controller, mantenendo il sistema sicuro e il codice leggibile.
 
-==== Protezione CSRF
-Per prevenire attacchi *Cross-Site Request Forgery*, ogni form che modifica lo stato del sistema (login, registrazione, creazione/modifica prodotti) è protetto da un token CSRF:
+=== Sicurezza lato Server
+La sicurezza è stata considerata prioritaria in ogni fase dello sviluppo backend. Oltre alla validazione degli input, sono state implementate le seguenti misure di protezione:
 
-- `getCsrfToken()`: Genera un token crittograficamente sicuro di 64 caratteri esadecimali usando `random_bytes(32)` e lo memorizza in sessione. Se il token esiste già, lo riutilizza.
-- `verifyCsrfToken()`: Valida il token ricevuto via POST confrontandolo con quello in sessione usando `hash_equals()`, una funzione timing-safe che previene attacchi di tipo timing.
+- *Prevenzione SQL injection*: Tutti i metodi della classe `DBConnection` utilizzano esclusivamente Prepared Statements. I parametri vengono vincolati alla query tramite `bind_param()` e mai concatenati direttamente nelle stringhe SQL, eliminando alla radice il rischio di iniezione di codice malevolo. Questo approccio è applicato uniformemente a tutte le query, dalle più semplici SELECT alle operazioni complesse di JOIN multi-tabella.
 
-Il token viene iniettato come campo nascosto in ogni form e validato nel controller prima di processare qualsiasi operazione, garantendo che la richiesta provenga effettivamente dal sito e non da una fonte malevola.
+- *Hashing delle password*: Le password non vengono mai salvate in chiaro nel database. In fase di registrazione, viene utilizzata la funzione `password_hash()` con l'algoritmo `PASSWORD_DEFAULT` (attualmente Bcrypt), che genera automaticamente un salt casuale e produce un hash sicuro. Al login, la verifica avviene tramite `password_verify()`, che confronta la password fornita con l'hash memorizzato in modo sicuro. Questo garantisce la protezione delle credenziali anche in caso di compromissione del database.
 
-=== Gestione dei Dati (Database)
-L'interazione con il database è completamente incapsulata nella classe `DBConnection`. Questa architettura offre numerosi vantaggi:
+- *Prevenzione Cross-site scripting*: Ogni dato dinamico stampato nell'HTML viene sanitizzato tramite `htmlspecialchars()`, che converte i caratteri speciali (come `<`, `>`, `"`, `'`, `&`) in entità HTML sicure. Questo impedisce l'esecuzione di script JavaScript malevoli iniettati attraverso input utente, proteggendo sia gli utenti che il sistema da attacchi XSS.
 
-==== Sicurezza tramite Prepared Statements
-Tutti i metodi della classe utilizzano esclusivamente *Prepared Statements* con parametri vincolati (`bind_param`). Questo approccio:
-- Elimina completamente il rischio di SQL injection
-- Separa la struttura della query dai dati, impedendo l'inserimento di codice SQL malevolo
-- Migliora le performance grazie al piano di esecuzione pre-compilato dal database
+- *Prevenzione Cross-site request forgery*: ogni form che modifica lo stato del sistema (login, registrazione, creazione/modifica prodotti) è protetto da un token CSRF, generato e memorizzato in sessione. La funzione `verifyCsrfToken()` valida il token ricevuto confrontandolo con quello in sessione usando `hash_equals()`, una funzione timing-safe che previene attacchi di tipo timing. Il token viene iniettato come campo nascosto in ogni form e validato nel controller prima di processare qualsiasi operazione, garantendo che la richiesta provenga effettivamente dal sito e non da una fonte malevola.
 
-==== Gestione Robusta degli Errori
-La classe implementa una gestione sofisticata degli errori attraverso codici di ritorno specifici:
-- `false`: Errore generico nell'operazione
-- `-1`: Violazione di vincolo specifico (es. email duplicata)
-- `-2`: Violazione di vincolo alternativo (es. codice fiscale duplicato)
-- *ID positivo*: Operazione riuscita, con l'ID della risorsa creata
+- *Gestione sicura delle sessioni*: La sessione viene avviata con controllo preventivo tramite `session_status()` per evitare errori. I dati sensibili in sessione sono ridotti al minimo necessario, e il logout effettua una pulizia completa della sessione con `session_destroy()`.
 
-Questo sistema permette al controller di fornire feedback precisi all'utente ("Email già registrata") senza esporre dettagli tecnici del database. I blocchi `try-catch` intercettano le eccezioni MySQL e le trasformano in codici di errore gestibili, prevenendo la visualizzazione di stack trace sensibili.
+- *Configurazione esternalizzata*: Le credenziali del database e altre informazioni sensibili sono definite nel file `conf.php`, che è escluso dal sistema di versionamento Git tramite `.gitignore`. Questo previene l'esposizione accidentale di credenziali in repository pubblici.
 
-==== Gestione della Connessione
-La connessione al database segue il pattern di apertura/chiusura esplicita:
-- `openConnection()`: Apre la connessione solo quando necessario, imposta il charset UTF-8 per supportare caratteri internazionali, e gestisce errori di connessione in modo sicuro.
-- `closeConnection()`: Chiude la connessione al termine di ogni operazione, liberando risorse e prevenendo connection leak.
+- *Prepared statements:* L'interazione con il database si serve di metodi che utilizzano esclusivamente _Prepared Statements_ con parametri vincolati. Questo approccio elimina il rischio di SQL injection impedendo l'inserimento di codice SQL malevolo.
 
-Questo approccio ottimizza l'uso delle risorse del server, evitando connessioni persistenti non necessarie.
+=== Logica di Business
+La logica delle prenotazioni rappresenta uno dei componenti più critici del sistema. Il metodo `checkDateAvailability()` implementa un algoritmo di verifica della disponibilità che controlla tutte le prenotazioni esistenti per il prodotto specificato (barca o esperienza), verificando la sovrapposizione temporale tra la nuova richiesta e le prenotazioni attive usando tre condizioni logiche che coprono tutti i possibili casi di overlap. \
+Questa verifica viene eseguita sempre prima di confermare una prenotazione, garantendo che non si verifichino doppie prenotazioni dello stesso prodotto per periodi sovrapposti.
+
+Il sistema implementa il pattern *Post-Redirect-Get* per tutte le operazioni che modificano lo stato (registrazioni, login, creazione contenuti). Dopo aver processato una richiesta POST, il server:
+1. Elabora i dati e effettua le modifiche necessarie
+2. Memorizza eventuali messaggi di successo/errore in sessione
+3. Esegue un redirect HTTP (header `Location:`) verso una pagina di visualizzazione
+4. La pagina di destinazione mostra il messaggio recuperandolo dalla sessione
+
+Questo approccio previene la ri-sottomissione accidentale del form (tramite refresh o navigazione back), migliora l'esperienza utente e rende il flusso dell'applicazione più robusto e prevedibile.
+
+==== Sistema CRUD Amministrativo
+Il pannello amministrativo implementa operazioni complete di Create, Read, Update e Delete per tutte le entità dinamiche:
+- *Gestione Prodotti (Barche/Esperienze)*: L'amministratore può inserire nuovi prodotti specificando tutte le caratteristiche (nome, tipo, descrizione, prezzo, capacità), gestire i servizi extra a pagamento, i servizi inclusi nel prezzo, e le lingue disponibili per le esperienze guidate. Il sistema supporta l'upload di immagini che vengono memorizzate nella directory `public/img/prodotti/` e referenziate nel database tramite URL.
+
+- *Gestione Articoli Blog*: Ogni articolo supporta contenuti strutturati attraverso la tabella `Articolo_Blog_Extra`, che permette di inserire sezioni diverse (paragrafi, liste puntate, consigli) mantenendo l'ordine di visualizzazione. Questo approccio rende gli articoli flessibili e facilmente estensibili.
+
+- *Gestione Utenti e Prenotazioni*: L'amministratore ha visibilità completa su tutti gli utenti registrati e può monitorare lo stato di tutte le prenotazioni nel sistema, facilitando la gestione operativa dell'attività.
+
+==== Gestione Race Condition
+Per prevenire la *race condition* che potrebbe verificarsi quando più utenti tentano di prenotare lo stesso prodotto contemporaneamente è stato implementato il metodo `verificaDisponibilitaProdotto()`, che viene eseguito immediatamente prima dell'inserimento della prenotazione nel database e si occupa di effettuare un controllo atomico della disponibilità, verificando l'esistenza di prenotazioni attive che si sovrappongano temporalmente con il periodo richiesto. 
+
+Questo controllo è applicato in tre punti critici del flusso di prenotazione:
+
+- In `pagamento.php`, immediatamente prima di confermare il pagamento con carta di credito
+- In `dettaglio_barca.php` e `dettaglio_esperienza.php`, prima di creare prenotazioni con pagamento in contanti o bonifico
+
+Se il prodotto non è più disponibile l'utente riceve un messaggio che chiarisce il problema ed invita l'utente a selezionare una data alternativa, offrendo un'esperienza utente chiara anche in situazioni di alta concorrenza.
+
+==== Validazione
+Il sistema implementa il principio della *doppia validazione* come best practice di sicurezza, controllando ogni input non solo lato client (JavaScript) ma anche lato server (PHP). La validazione _server-side_ rappresenta la principale barriera di sicurezza, garantendo che anche in caso di JavaScript disabilitato, o di richieste manipolate, il server rifiuti sempre dati non conformi. \
+Ogni dato ricevuto via POST request viene ricontrollato:
+- *Email*: Verifica tramite `filter_var()` con flag `FILTER_VALIDATE_EMAIL` secondo lo standard RFC 822
+- *Password*: Controllo di lunghezza minima (8 caratteri), presenza di maiuscole, minuscole, numeri e caratteri speciali tramite espressioni regolari
+- *Codice Fiscale*: Validazione del formato (16 caratteri alfanumerici) tramite pattern regex
+- *Nomi e Cognomi*: Verifica che contengano solo lettere e spazi, escludendo stringhe vuote o composte solo da spazi
+
+=== Database (SQL)
+L'interazione con il database è completamente incapsulata nella classe `DBConnection`. Questa architettura offre le seguenti funzionalità:
+- *Gestione della connessione:* La connessione al database segue il pattern di apertura/chiusura esplicita. `openConnection()`apre la connessione solo quando necessario, imposta il charset UTF-8 per supportare caratteri internazionali e gestisce errori di connessione in modo sicuro. `closeConnection()` chiude la connessione al termine di ogni operazione, liberando risorse e prevenendo connection leak.
+- *Prepared statements:* oltre alla funzione relativa alla sicurezza citata in precedenza, i _Prepared Statements_ separano la struttura della query dai dati e migliorano le performance grazie al piano di esecuzione pre-compilato dal database.
+- *Gestione robusta degli errori:* La classe implementa una gestione sofisticata degli errori attraverso codici di ritorno specifici. Questo sistema permette al controller di fornire feedback precisi all'utente ("Email già registrata") senza esporre dettagli tecnici del database. I blocchi `try-catch` intercettano le eccezioni MySQL e le trasformano in codici di errore gestibili, prevenendo la visualizzazione di stack trace sensibili. Nel dettaglio i codici impiegati sono:
+  - `false`: Errore generico nell'operazione
+  - `-1`: Violazione di vincolo specifico (es. email duplicata)
+  - `-2`: Violazione di vincolo alternativo (es. codice fiscale duplicato)
+  - `ID positivo`: Operazione riuscita, con l'ID della risorsa creata
+
 
 ==== Entità del Database
-Le entità implementate sono state schematizzate in #link(<fig-database>)[Figura 2] (per migliorarne la leggibilità non sono stati inclusi gli attributi), e sono: 
+Le entità implementate nel database sono: 
 
 - *Utente*: Contiene le informazioni di tutti gli iscritti, come credenziali e dati anagrafici. Il campo `Is_Admin` serve per definire i privilegi di accesso.
 - *Indirizzo*: Memorizza i dati geografici (Via, Città, CAP) separandoli dall'utente per una migliore normalizzazione.
@@ -348,82 +371,6 @@ Le entità implementate sono state schematizzate in #link(<fig-database>)[Figura
 - *Articolo_Blog_Extra*: Struttura i contenuti complessi degli articoli (es. liste puntate, sezioni "Cosa portare").
 - *Media*: centralizza la gestione delle immagini.
 
-  #figure(
-    image("../img/schema_database.png", width: 130%), 
-    gap: 2em,
-    caption: [Schema ER del database],
-  ) <fig-database>
-
-=== Logica di Business e Validazione
-
-==== Validazione a Due Livelli
-Il sistema implementa il principio della *doppia validazione* come best practice di sicurezza: ogni input viene validato sia lato client (JavaScript) sia lato server (PHP).
-
-*Validazione Client-Side*: Fornisce feedback immediato all'utente durante la compilazione dei form, migliorando l'esperienza d'uso. Gli script JavaScript verificano formati, lunghezze e pattern in tempo reale, mostrando messaggi di errore contestuali e bloccando l'invio del form se i dati non sono validi.
-
-*Validazione Server-Side*: Rappresenta la vera barriera di sicurezza. Ogni dato ricevuto via POST viene rivalidato attraverso le funzioni in `validation.php`, che implementano controlli rigorosi:
-- *Email*: Verifica tramite `filter_var()` con flag `FILTER_VALIDATE_EMAIL` secondo lo standard RFC 822
-- *Password*: Controllo di lunghezza minima (8 caratteri), presenza di maiuscole, minuscole, numeri e caratteri speciali tramite espressioni regolari
-- *Codice Fiscale*: Validazione del formato (16 caratteri alfanumerici) tramite pattern regex
-- *Nomi e Cognomi*: Verifica che contengano solo lettere e spazi, escludendo stringhe vuote o composte solo da spazi
-
-Questo approccio garantisce che anche in caso di JavaScript disabilitato o di richieste manipolate, il server rifiuti sempre dati non conformi.
-
-==== Gestione delle Prenotazioni
-La logica delle prenotazioni rappresenta uno dei componenti più critici del sistema. Il metodo `checkDateAvailability()` implementa un algoritmo di verifica della disponibilità che:
-
-- Controlla tutte le prenotazioni esistenti per il prodotto specificato (barca o esperienza);
-- Esclude le prenotazioni cancellate dal controllo;
-- Verifica la sovrapposizione temporale tra la nuova richiesta e le prenotazioni attive usando tre condizioni logiche che coprono tutti i possibili casi di overlap;
-- Supporta un parametro opzionale `excludePrenotazioneId` per permettere la modifica di prenotazioni esistenti senza che entrino in conflitto con se stesse.
-
-Questa verifica viene eseguita sempre prima di confermare una prenotazione, garantendo che non si verifichino doppie prenotazioni dello stesso prodotto per periodi sovrapposti.
-
-===== Gestione Race Condition
-Per prevenire la *race condition* che potrebbe verificarsi quando più utenti tentano di prenotare lo stesso prodotto contemporaneamente è stato implementato il metodo `verificaDisponibilitaProdotto()`, che viene eseguito immediatamente prima dell'inserimento della prenotazione nel database e si occupa di effettuare un controllo atomico della disponibilità, verificando l'esistenza di prenotazioni attive che si sovrappongano temporalmente con il periodo richiesto. 
-
-Questo controllo è applicato in tre punti critici del flusso di prenotazione:
-
-- In `pagamento.php`, immediatamente prima di confermare il pagamento con carta di credito
-- In `dettaglio_barca.php` e `dettaglio_esperienza.php`, prima di creare prenotazioni con pagamento in contanti o bonifico
-
-Se il prodotto non è più disponibile l'utente riceve un messaggio che chiarisce il problema ed invita l'utente a selezionare una data alternativa, garantendo trasparenza nel processo di prenotazione.
-
-Questa implementazione minimizza le modifiche al codice esistente mantenendo l'integrità dei dati e offrendo un'esperienza utente chiara anche in situazioni di alta concorrenza.
-
-==== Sistema CRUD Amministrativo
-Il pannello amministrativo implementa operazioni complete di Create, Read, Update e Delete per tutte le entità dinamiche:
-
-*Gestione Prodotti (Barche/Esperienze)*: L'amministratore può inserire nuovi prodotti specificando tutte le caratteristiche (nome, tipo, descrizione, prezzo, capacità), gestire i servizi extra a pagamento, i servizi inclusi nel prezzo, e le lingue disponibili per le esperienze guidate. Il sistema supporta l'upload di immagini che vengono memorizzate nella directory `public/img/prodotti/` e referenziate nel database tramite URL.
-
-*Gestione Articoli Blog*: Ogni articolo supporta contenuti strutturati attraverso la tabella `Articolo_Blog_Extra`, che permette di inserire sezioni diverse (paragrafi, liste puntate, consigli) mantenendo l'ordine di visualizzazione. Questo approccio rende gli articoli flessibili e facilmente estensibili.
-
-*Gestione Utenti e Prenotazioni*: L'amministratore ha visibilità completa su tutti gli utenti registrati e può monitorare lo stato di tutte le prenotazioni nel sistema, facilitando la gestione operativa dell'attività.
-
-=== Sicurezza lato Server
-La sicurezza è stata considerata prioritaria in ogni fase dello sviluppo backend. Oltre alla validazione degli input, sono state implementate le seguenti misure di protezione:
-
-- *Prevenzione SQL Injection*: Tutti i metodi della classe `DBConnection` utilizzano esclusivamente Prepared Statements. I parametri vengono vincolati alla query tramite `bind_param()` e mai concatenati direttamente nelle stringhe SQL, eliminando alla radice il rischio di iniezione di codice malevolo. Questo approccio è applicato uniformemente a tutte le query, dalle più semplici SELECT alle operazioni complesse di JOIN multi-tabella.
-
-- *Hashing delle Password*: Le password non vengono mai salvate in chiaro nel database. In fase di registrazione, viene utilizzata la funzione `password_hash()` con l'algoritmo `PASSWORD_DEFAULT` (attualmente Bcrypt), che genera automaticamente un salt casuale e produce un hash sicuro. Al login, la verifica avviene tramite `password_verify()`, che confronta la password fornita con l'hash memorizzato in modo sicuro. Questo garantisce la protezione delle credenziali anche in caso di compromissione del database.
-
-- *Protezione CSRF (Cross-Site Request Forgery)*: Tutti i form che modificano lo stato del sistema (login, registrazione, pannello admin) sono protetti da token CSRF. Il token viene generato usando `bin2hex(random_bytes(32))`, producendo una stringa casuale crittograficamente sicura di 64 caratteri. Prima di elaborare qualsiasi richiesta POST, il sistema verifica la corrispondenza del token tramite `hash_equals()`, una funzione timing-safe che previene attacchi di tipo timing. Se il token non corrisponde o è assente, la richiesta viene rifiutata.
-
-- *Prevenzione XSS (Cross-Site Scripting)*: Ogni dato dinamico stampato nell'HTML viene sanitizzato tramite `htmlspecialchars()`, che converte i caratteri speciali (come `<`, `>`, `"`, `'`, `&`) in entità HTML sicure. Questo impedisce l'esecuzione di script JavaScript malevoli iniettati attraverso input utente, proteggendo sia gli utenti che il sistema da attacchi XSS.
-
-- *Gestione Sicura delle Sessioni*: La sessione viene avviata con controllo preventivo tramite `session_status()` per evitare errori. I dati sensibili in sessione sono ridotti al minimo necessario, e il logout effettua una pulizia completa della sessione con `session_destroy()`.
-
-- *Configurazione Esternalizzata*: Le credenziali del database e altre informazioni sensibili sono definite nel file `conf.php`, che è escluso dal sistema di versionamento Git tramite `.gitignore`. Questo previene l'esposizione accidentale di credenziali in repository pubblici.
-
-=== Pattern Post-Redirect-Get (PRG)
-Il sistema implementa il pattern *Post-Redirect-Get* per tutte le operazioni che modificano lo stato (registrazioni, login, creazione contenuti). Dopo aver processato una richiesta POST, il server:
-1. Elabora i dati e effettua le modifiche necessarie
-2. Memorizza eventuali messaggi di successo/errore in sessione
-3. Esegue un redirect HTTP (header `Location:`) verso una pagina di visualizzazione
-4. La pagina di destinazione mostra il messaggio recuperandolo dalla sessione
-
-Questo approccio previene la ri-sottomissione accidentale del form (tramite refresh o navigazione back), migliora l'esperienza utente e rende il flusso dell'applicazione più robusto e prevedibile.
-
 = Accessibilità
 L'accessibilità è stata un pilastro del progetto, guidata dai principi studiati durante il corso e dalle linee guida internazionali.
 
@@ -431,7 +378,7 @@ L'accessibilità è stata un pilastro del progetto, guidata dai principi studiat
 - *Navigazione da Tastiera:* Il sito è stato progettato per essere completamente navigabile utilizzando esclusivamente la tastiera. È stato verificato per ogni pagina che l'ordine di focus mediante tabulazione avvenisse correttamente. \ È stata poi implementato il link "Salta al contenuto" per permettere agli utenti di _screen reader_ di bypassare i blocchi di navigazione ripetitivi e a loro superflui.
 
 - *Contrasto Cromatico e Colori:* È stata prestata particolare attenzione ad utilizzare una palette cromatica che mantenesse i rapporti cromatici tali da rispettare almeno il livello AA delle WCAG pur rimanendo esteticamente gradevole, operazione che ci è costata più tempo di quanto vorremmo ammettere. Inoltre, l'implementazione di un selettore di tema light/dark offre agli utenti la possibilità di scegliere la modalità di visualizzazione con il contrasto che preferiscono, migliorando ulteriormente la leggibilità.
-- *Contrasto Cromatico e Colori:* È stata prestata particolare attenzione ad utilizzare una palette cromatica che mantenesseal contrasto tra testo e sfondo, verificando che i rapporti cromatici rispettassero almeno il livello AA delle WCAG, ci è costato più tempo di quanto vorremmo ammettere. Inoltre, l'implementazione di un selettore di tema light/dark offre agli utenti la possibilità di scegliere la modalità di visualizzazione con il contrasto che preferiscono, migliorando ulteriormente la leggibilità.
+- *Contrasto Cromatico e Colori:* È stata prestata particolare attenzione al verificare che i rapporti cromatici tra gli elementi a schermo fossero di almeno 4.5, il rispetto del livello AA delle WCAG ci è costato più tempo di quanto vorremmo ammettere. Inoltre, l'implementazione di un selettore di tema light/dark offre agli utenti la possibilità di scegliere la modalità di visualizzazione con il contrasto che preferiscono, migliorando ulteriormente la leggibilità.
 
 - *Alternative Testuali:* Ogni immagine con contenuto informativo, quindi non puramente decorativa, è stata dotata di un attributo `alt` descrittivo di modo tale da veicolare informazioni grafiche attraverso strumenti di sintesi vocale. I form amministrativi che consentono l'aggiunta di prodotti e articoli del blog includono un campo per il "Testo Alternativo", assicurando che questa buona norma venga applicata a tutti i contenuti che in futuro verranno inseriti.
 
