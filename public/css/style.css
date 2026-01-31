@@ -1252,7 +1252,7 @@ a.product-cta:focus-visible {
 #quote-section {
   display: block;
   max-width: 65%;
-  margin: 0 auto;
+  margin: 2em auto;
   text-align: center;
   font-family: "Times New Roman", serif;
   font-size: var(--fs-lg);
@@ -1261,13 +1261,13 @@ a.product-cta:focus-visible {
   border: none;
 }
 
-#quote-section::before {
+#quote-section p::before {
   content: "“";
   color: var(--col-accent);
   margin-right: 0.2em;
 }
 
-#quote-section::after {
+#quote-section p::after {
   content: "”";
   color: var(--col-accent);
   margin-left: 0.2em;
