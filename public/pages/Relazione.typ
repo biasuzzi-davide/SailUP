@@ -188,7 +188,7 @@ La struttura del sito segue il modello gerarchico schematizzato in #link(<fig-si
   ) <fig-sitemap>
 
 = Realizzazione
-In questa sezione vengono descritte le soluzioni implementative adottate per costruire la piattaforma SailUP. Vengono di seguito analizzati gli aspetti legati al *frontend* ed al *backend*.
+In questa sezione abbandoniamo le astrazioni progettuali per approfondire i dettagli implementativi dello sviluppo di SailUP.
 
 == Front-End
 
@@ -197,16 +197,16 @@ La costruzione delle pagine web sfrutta il markup di HTML5, garantendo una chiar
 
 - *Struttura generale:* La navigazione principale è contenuta nell'`<header>` e si adatta ai dispositivi mobili trasformandosi in un menu a scomparsa gestito tramite un pulsante ad 'hamburger', il cui stato è comunicato alle tecnologie assistive tramite l'attributo `aria-expanded`. \ Per facilitare l'esperienza d'uso via tastiera è stato inserito all'inizio del `<body>` il collegamento nascosto #underline[_Skip Link_], che consente di saltare i menù ripetitivi andando direttamente al contenuto principale della pagina. \ Il corpo centrale della pagina è racchiuso nel tag `<main>`, al cui interno i contenuti sono organizzati logicamente: le schede del singolo prodotto nei cataloghi sono marcate con il tag `<article>`, identificandole come entità indipendenti, mentre le sezioni accessorie, come i filtri di ricerca e i riepiloghi d'ordine, sono delimitate dal tag `<aside>`.
 - *Breadcrumbs:* L'orientamento all'interno delle pagine è agevolato dalle breadcrumbs, presenti in tutte le pagine ad eccezione di quella d'errore.
-- *Attributi:* Particolare attenzione è stata inoltre posta nel definire attributi adeguati per il contenuto e gli elementi funzionali: ai termini in lingua inglese è stato associato l'attributo `lang="en"` (es. _Privacy Policy_, _Login_), alle sigle ed acronimi (es. CAP, NA, S.r.l., FAQ) l'attributo `title` all'interno del tag `<abbr>` per esplicitarne il significato e alle date l'attributo datetime nel tag `<time>` per renderle _machine-readable_ (e quindi interpretabili da motori di ricerca e _screen reader_). 
-- *Ottimizzazioni:* Sono stati infine impiegati attributi specifici per migliorare l'esperienza utente, come `autocomplete` e `pattern` per facilitare la compilazione dei form e `loading="lazy"` per ottimizzare il caricamento delle immagini.
+- *Attributi e semantica:* Particolare attenzione è stata inoltre posta nel definire attributi adeguati per il contenuto e gli elementi funzionali: ai termini in lingua inglese è stato associato l'attributo `lang="en"` (es. _Privacy Policy_, _Login_), alle sigle ed acronimi (es. CAP, NA, S.r.l., FAQ) l'attributo `title` all'interno del tag `<abbr>` per esplicitarne il significato e alle date l'attributo datetime nel tag `<time>` per renderle _machine-readable_ e quindi interpretabili da motori di ricerca e _screen reader_. 
+- *Ottimizzazioni:* Sono stati infine impiegati attributi specifici per migliorare l'esperienza utente, come `autocomplete` e `pattern` per facilitare la compilazione dei form e `loading="lazy"`, una soluzione tanto semplice quanto efficace per non uccidere le prestazioni del sito al primo caricamento.
 
 === Presentazione (CSS)
-La parte grafica è gestita interamente tramite fogli di stile CSS, mantenendo una netta separazione tra struttura e presentazione. Il sistema è stato reso modulare attraverso l'uso di file specifici: `style.css` per il desktop, `mobile.css` per i dispositivi portatili e `print.css` per la stampa.
+La parte grafica è gestita interamente tramite fogli di stile CSS, mantenendo una netta separazione tra struttura e presentazione, una scelta che oltre a rispettare gli standard, ci ha risparmiato diverse emicranie in fase di revisione. Per gestire i ridimensionamenti intermedi (es. tablet), senza frammentare eccessivamente il codice in fogli diversi, abbiamo integrato le media query direttamente nei file principali. Abbiamo preso questa scelta per evitare la proliferazione di file da poche decine di righe che complicherebbero la manutenzione e, contemporaneamente, per ottimizzare le prestazioni riducendo le richieste HTTP al server.
 
 ==== Style.css (Desktop e Base)
 Questo foglio di stile definisce l'identità visiva principale del sito. Le scelte stilistiche includono:
 - *Responsive design*: L'interfaccia adotta un approccio fluido che si adatta alle diverse risoluzioni dello schermo. Per il posizionamento degli elementi sono state impiegate le tecnologie *Flexbox* per header e footer e *CSS Grid* per le griglie dei prodotti e le specifiche tecniche.
-- *Variabili*: L'uso di variabili CSS definite in `:root` ha permesso di centralizzare la gestione del tema. Questo facilita la manutenzione e abilita il supporto alla *Dark Mode* semplicemente modificando i valori delle variabili colore per la modalità scura.
+- *Variabili*: L'uso di variabili CSS definite in `:root` ci ha permesso di centralizzare la gestione del tema. Questo facilita la manutenzione e abilita il supporto alla *Dark Mode* semplicemente modificando i valori delle variabili colore per la modalità scura.
 - *Grid e flexbox*: L'impaginazione sfrutta CSS Grid per le strutture bidimensionali (come le card dei prodotti) e Flexbox per gli allineamenti monodimensionali (header e navbar).
 - *Accessibilità visiva*: I colori scelti rispettano i criteri di contrasto WCAG AA. Inoltre, è stato definito un feedback visivo chiaro per gli stati di interazione (`:hover`, `:focus`), migliorando l'usabilità per chi naviga da tastiera.
 
@@ -214,12 +214,12 @@ Questo foglio di stile definisce l'identità visiva principale del sito. Le scel
 Richiamato tramite media query per dispositivi con larghezza inferiore a 768px, questo foglio di stile ottimizza l'esperienza utente su schermi ridotti:
 - *Navigazione semplificata*: Il menu di navigazione orizzontale viene nascosto e viene introdotto un menù "Hamburger" espandibile, massimizzando lo spazio disponibile per i contenuti.
 - *Linearizzazione del layout*: Le griglie multi-colonna, come le card per i prodotti, vengono riconfigurate in un layout a colonna singola per facilitare la lettura e lo scorrimento verticale.
-- *Tabelle responsive*: Per risolvere il problema della leggibilità delle tabelle su schermi stretti, le righe vengono trasformate visivamente in "card". L'intestazione della colonna viene inserita direttamente nella cella, permettendo all'utente di leggere il dato contestualizzato senza dover scorrere orizzontalmente o zoomare.
+- *Tabelle responsive*: Per risolvere il problema della leggibilità delle tabelle su schermi stretti, le righe vengono trasformate visivamente in "card". Si tratta di una soluzione necessaria per evitare che l'utente debba navigare i dati tramite frustranti scorrimenti orizzontali, un'esperienza inconciliabile con un servizio che promette relax.
 - *Aree interattive*: Le dimensioni dei pulsanti e delle aree interattive sono aumentate per facilitare l'interazione tramite tocco.
 
 ==== Print.css (Stampa)
 Per assicurare che i contenuti siano fruibili in maniera ottimale su carta è stato predisposto un foglio di stile dedicato, che modifica la struttura di una pagina come segue:
-- *Rimozione degli elementi superflui*: Gli elementi interattivi inutili su carta (menu, breadcrumb, pulsanti "prenota", hero images) vengono nascosti tramite la classe `.print-none`, lasciando solamente il contenuto informativo essenziale come ad esempio indirizzo e P.IVA nel footer.
+- *Rimozione degli elementi superflui*: Gli elementi interattivi inutili su carta (menu, breadcrumb, pulsanti "prenota", hero images) vengono nascosti tramite la classe `.print-none`, lasciando solamente il contenuto informativo essenziale. Il footer, ad esempio, viene sfoltito di tutti gli elemnti superflui lasciando solamente dati utili come indirizzo e P.IVA.
 - *Ottimizzazioni per la lettura*: Il font viene cambiato globalmente in _Times New Roman_ (serif), più leggibile su supporto cartaceo rispetto ai font sans-serif usati a video. I colori vengono forzati al nero su bianco e i link perdono la sottolineatura per una pulizia visiva maggiore.
 - *Layout adattivo*: La struttura a colonne viene linearizzata, permettendo al contenuto principale di occupare l'intera larghezza del foglio stampato, evitando tagli laterali.
 - *Gestione griglie*: Le sezioni a griglia vengono mantenute ma adattate con l'aggiunta di bordi per delimitare le aree, sostituendo la distinzione cromatica che viene persa in stampa.
@@ -229,23 +229,29 @@ Per assicurare che i contenuti siano fruibili in maniera ottimale su carta è st
 Oltre agli standard web generali, il progetto adotta specifiche convenzioni stilistiche e funzionali per garantire un'esperienza utente coerente e prevedibile:
 
 - *Link*: i collegamenti ipertestuali sono distinguibili dal testo grazie alla sottolineatura presente. I link visitati, poi, assumono una colorazione azzurra, in linea con l'identità del brand.
-- *Pagina corrente e link circolari*: Nei menu di navigazione la voce corrispondente alla pagina attuale è evidenziata visivamente con una sottolineatura blu e resa non cliccabile. In generale tutti i link che normalmente riporterebbero alla pagina corrente, i link circolari, vengono resi non cliccabili evitando ricaricamenti inutili e aiutando l'orientamento dell'utente.
+- *Pagina corrente e link circolari*: Nei menu di navigazione la voce corrispondente alla pagina attuale è evidenziata visivamente con una sottolineatura blu e resa non cliccabile. In generale tutti i link che normalmente riporterebbero alla pagina corrente, i link circolari, vengono resi non cliccabili per evitare ricaricamenti inutili, un dettaglio tecnico utile per non confondere l'utente e risparmiare traffico inutile al server.
 - *Convenzione font*: _Montserrat_ è riservato esclusivamente alle intestazioni (h1-h6) e ai bottoni per impatto visivo, mentre _Open Sans_ è utilizzato per tutto il corpo del testo.
 - *Badge*: Nelle tabelle di riepilogo (es. prenotazioni), lo stato viene esplicitato da etichette colorate in base allo stato dell'elemento.
 - *Divisione contenuti*: I contenuti indipendenti, come i prodotti nei cataloghi, sono sempre incapsulati in card con bordi arrotondati per facilitarne la distinzione.
 - *Feedback nei Form*: I messaggi di aiuto sono sempre posizionati sotto il campo input in colore grigio, mentre i messaggi di errore appaiono in rosso.
 
 === Comportamento (JavaScript)
-Le funzionalità interattive lato client sono gestite da script modulari che arricchiscono l'esperienza utente secondo il principio del *Progressive Enhancement*, garantendo funzionalità di base anche in assenza di JavaScript.
+Le funzionalità interattive lato client sono gestite da script modulari che arricchiscono l'esperienza utente secondo il principio del *Progressive Enhancement*, un modo elegante per dire che il sito deve restare in piedi anche se l'utente decide di disabilitare gli script.
 
-Il file `script.js` orchestra le seguenti funzioni:
+Il file `script.js` contiene le seguenti funzioni:
 - *Menu mobile*: Gestisce l'apertura e chiusura del menu "hamburger", alternando le icone di stato (aperto/chiuso) e sincronizzando l'attributo ARIA `aria-expanded` per garantire la corretta comunicazione dello stato alle tecnologie assistive.
 - *Modalità scura*: Controlla il cambio del tema visivo (chiaro/scuro) agendo sull'attributo `data-theme` del tag `html` e memorizzando la preferenza dell'utente nel `localStorage` per mantenere la scelta nelle visite successive.
 - *Filtri*: Viene implementato un sistema di filtraggio per lo storico delle prenotazioni. Questo permette di visualizzare istantaneamente le prenotazioni in base al loro stato ("Tutte", "Attive", "Completate") agendo sulla visibilità delle righe della tabella e aggiornando in tempo reale i contatori presenti nelle tab di filtro.
+- *Pulsante torna su:* Gestisce la comparsa del tasto per tornare ad inizio pagina dopo che l'utente scorre la pagina, gestendo attraverso `tabindex` l'attivazione della navigazione da tastiera sul pulsante qualora diventi visibile.
+- *Toggle password:* Gestisce la visualizzazione in chiaro dei campi password, una piccola cortesia per evitare che l'utente debba digitare tre volte una stringa complessa a causa di un banale errore di battitura.
+- *Persistenza dei dati:* Le date selezionate nei cataloghi vengono riportate automaticamente nel form di prenotazione. 
+- *Calcolo dinamico dei prezzi:* Nei form di prenotazione ogni selezione che modifica il prezzo, come il cambiamento delle date o l'aggiunta di extra, viene monitorata e il totale viene istantaneamente aggiornato in modo da dare sempre contezza all'utente di quanto andrà a pagare se decide di proseguire con la prenotazione. 
+- *Gestione del focus:* In caso di messaggi dal server o errori di validazione lo script forza lo scroll della pagina verso il messaggio e vi sposta il focus, assicurandosi che anche un utente che utilizza uno _screen reader_ (o un utente distratto) non manchi l'avviso.
 
-I file di validazione dedicati (`register_validation.js`, `login_validation.js`, `blog_validation.js`, `product_validation.js`, `payment_validation.js`) garantiscono l'integrità dei dati e migliorano l'usabilità dei form:
+I file di validazione (`register_validation.js`, `login_validation.js`, `blog_validation.js`, `product_validation.js`, `payment_validation.js`) garantiscono l'integrità dei dati e migliorano l'usabilità dei form:
 - *Validazione in tempo reale*: Verifica la correttezza del campo alla perdita del focus, controllando formati complessi come il Codice Fiscale, la validità strutturale delle Email o delle URL.
 - *Assistenza all'input*: Include comportamenti come la conversione automatica in maiuscolo dei caratteri durante la digitazione nei campi Codice Fiscale e Provincia.
+- *Validazione dei pagamenti:* Gestisce la formattazione automatica del numero di carta (gruppi di 4 cifre) e della scadenza (MM/AA), oltre a verificare che il CVV non contenga lettere o caratteri speciali.
 - *Invio del modulo*: Lo script intercetta il tentativo di invio del modulo e lo valida. Se la validazione fallisce la richiesta al server viene bloccata e la pagina esegue uno scroll automatico verso il primo campo errato, portandovi il focus per facilitare la correzione immediata.
 
 == Back-End
@@ -424,7 +430,8 @@ L'accessibilità è stata un pilastro del progetto, guidata dai principi studiat
 - *Principi WCAG e Struttura Semantica:* Il progetto aderisce ai quattro principi fondamentali delle WCAG (Web Content Accessibility Guidelines), riassunti nell'acronimo PURO: Percepibile, Utilizzabile, Comprensibile e Robusto. L'uso rigoroso di HTML semantico (`<main>`, `<nav>`, `<header>`, `<footer>`) fornisce una struttura chiara e prevedibile, che facilita l'interpretazione dei contenuti da parte delle tecnologie assistive come gli _screen reader_.
 - *Navigazione da Tastiera:* Il sito è stato progettato per essere completamente navigabile utilizzando esclusivamente la tastiera. È stato verificato per ogni pagina che l'ordine di focus mediante tabulazione avvenisse correttamente. \ È stata poi implementato il link "Salta al contenuto" per permettere agli utenti di _screen reader_ di bypassare i blocchi di navigazione ripetitivi e a loro superflui.
 
-- *Contrasto Cromatico e Colori:* È stata prestata particolare attenzione al contrasto tra testo e sfondo, verificando che i rapporti cromatici rispettassero almeno il livello AA delle WCAG. Inoltre, l'implementazione di un selettore di tema light/dark offre agli utenti la possibilità di scegliere la modalità di visualizzazione con il contrasto che preferiscono, migliorando ulteriormente la leggibilità.
+- *Contrasto Cromatico e Colori:* È stata prestata particolare attenzione ad utilizzare una palette cromatica che mantenesse i rapporti cromatici tali da rispettare almeno il livello AA delle WCAG pur rimanendo esteticamente gradevole, operazione che ci è costata più tempo di quanto vorremmo ammettere. Inoltre, l'implementazione di un selettore di tema light/dark offre agli utenti la possibilità di scegliere la modalità di visualizzazione con il contrasto che preferiscono, migliorando ulteriormente la leggibilità.
+- *Contrasto Cromatico e Colori:* È stata prestata particolare attenzione ad utilizzare una palette cromatica che mantenesseal contrasto tra testo e sfondo, verificando che i rapporti cromatici rispettassero almeno il livello AA delle WCAG, ci è costato più tempo di quanto vorremmo ammettere. Inoltre, l'implementazione di un selettore di tema light/dark offre agli utenti la possibilità di scegliere la modalità di visualizzazione con il contrasto che preferiscono, migliorando ulteriormente la leggibilità.
 
 - *Alternative Testuali:* Ogni immagine con contenuto informativo, quindi non puramente decorativa, è stata dotata di un attributo `alt` descrittivo di modo tale da veicolare informazioni grafiche attraverso strumenti di sintesi vocale. I form amministrativi che consentono l'aggiunta di prodotti e articoli del blog includono un campo per il "Testo Alternativo", assicurando che questa buona norma venga applicata a tutti i contenuti che in futuro verranno inseriti.
 
