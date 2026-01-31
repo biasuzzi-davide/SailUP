@@ -1251,6 +1251,34 @@ a.product-cta:focus-visible {
 }
 
 /* =========================================
+     10.1 ERROR PAGES (403, 404, 500)
+     ========================================= */
+.error-page {
+  text-align: center;
+  margin: 0 auto;
+  max-width: 70%;
+  padding: 2em;
+}
+
+.error-page h1 {
+  font-size: var(--fs-xl);
+}
+
+.error-page h2 {
+  font-size: var(--fs-md);
+}
+
+.error-page img {
+  max-width: 70%;
+  margin: 1.5em auto;
+  border-radius: var(--radius-sm);
+}
+
+.error-page p {
+  margin-bottom: 1em;
+}
+
+/* =========================================
      11. QUOTE
      ========================================= */
 #quote-section {
@@ -2463,25 +2491,6 @@ footer address strong {
 .legal-document ul {
   padding-left: 2em;
   margin-bottom: 0.5em;
-}
-
-.error-card {
-  background-color: var(--col-bg);
-  border: 1px solid var(--col-border);
-  border-radius: var(--radius-card);
-  padding: 2.5em;
-  box-shadow: var(--shadow-md);
-}
-
-.error-card h1,
-.error-card h2 {
-  text-align: center;
-}
-
-.error-card p {
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .text-admin {
