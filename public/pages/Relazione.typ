@@ -61,7 +61,7 @@
         columns: (1fr, auto),
         stroke: none,
         [Davide Biasuzzi], [2111000],
-        [Hossam Ezzemouri], [2079250],
+
         [Francesco Marcon], [2101070],
         [Alberto Reginato], [2110450],
       )
@@ -72,11 +72,11 @@
   
   #align(left)[
     *Referente del gruppo:* \
-    #link("mailto:davide.biasuzzi@studenti.unipd.it")
+    #link("mailto:x@studenti.unipd.it")
     
     #v(0.5em)
     *Indirizzo del sito:* \
-    #link("http://tecweb.studenti.math.unipd.it/dbiasuzz/")[tecweb.studenti.math.unipd.it/dbiasuzz/]
+    #link("http://tecweb.studenti.math.unipd.it/[username]/")[tecweb.studenti.math.unipd.it/[username]/]
     
     #v(0.5em)
     *Informazioni di accesso:* \
@@ -95,23 +95,21 @@
 
 = Abstract
 
-SailUP è la piattaforma web dedicata al noleggio di imbarcazioni e alla prenotazione di esperienze nautiche nel suggestivo scenario del Golfo di Napoli.
-Uno dei maggiori problemi riguardanti la gestione tradizionale delle richieste di noleggio e dei tour turistici è la frammentazione dei servizi tra canali telefonici e fisici, che rischia di generare inefficienze e sovrapposizioni nelle disponibilità. Il progetto nasce proprio dalla volontà di offrire un supporto tecnologico capace di ottimizzare i processi gestionali interni e, contemporaneamente, garantire agli utenti finali un servizio immediato, intuitivo, trasparente e autonomo.
+SailUP è una piattaforma web dedicata al noleggio di imbarcazioni e alla prenotazione di esperienze nautiche nel suggestivo scenario del Golfo di Napoli. Ma siamo onesti, da dove nasce l'idea di sviluppare un sito per il corso di Tecnologie Web su un tema che i più cinici definirebbero 'di nicchia' o peggio, noioso? \ 
+Uno dei maggiori problemi riguardanti la gestione tradizionale delle richieste di noleggio e dei tour turistici è la frammentazione dei servizi tra canali telefonici e fisici, che rischia di generare inefficienze e sovrapposizioni nelle disponibilità. SailUP nasce proprio con l'ambizione di mettere ordine in questo _mare magnum_, offrendo un supporto tecnologico capace di ottimizzare i processi gestionali interni e, contemporaneamente, garantire agli utenti un servizio immediato, intuitivo e finalmente autonomo.
 
 Il sito web desiderato è dunque focalizzato sull'implementazione delle funzionalità di *Noleggio* e *Esperienze*, guidando l'utente dalla consultazione del catalogo fino alla prenotazione. SailUP sfrutta la piattaforma anche come una vetrina virtuale attraverso una sezione *Blog* dedicata, attraverso cui mira a fornire contenuti informativi di valore ai clienti e a supportare l'attività di content marketing per attrarre nuovi utenti, siano essi turisti o residenti locali.
 
-Attraverso la registrazione la piattaforma consente l'accesso ad un'*area personale* per la gestione del profilo e il monitoraggio dello storico prenotazioni. Parallelamente, un pannello di *controllo amministrativo* permette la gestione completa dei contenuti dinamici del sito.
+Per chi decide di salire a bordo la piattaforma offre un'*area personale* per la gestione del profilo e il monitoraggio dello storico prenotazioni. Parallelamente, un pannello di *controllo amministrativo* permette la gestione completa dei contenuti dinamici del sito.
 
-SailUP è stato progettato e sviluppato con l'intenzione di essere utilizzato come un prodotto reale, ponendo come priorità la versione mobile (approccio "mobile-first"), data la natura turistica del servizio, e cercando di ottimizzare l'usabilità, l'accessibilità e la coerenza grafica con l'identità marittima del brand.
-
+Abbiamo progettato e sviluppato SailUP con l'obiettivo di renderlo un prodotto pronto per il mondo reale. Poichè un tour in barca si prenota spesso dal molo, non solo dalla scrivania, la priorità è stata adottare un approccio *mobile-first*, cercando di bilanciare accessibilità tecnica e un'estetica che rispecchiasse l'eleganza dell'identità marittima.
 
 
 
 = Analisi
 
 == Utenza Target
-Il target di riferimento si colloca in una fascia di mercato medio-alta, coerentemente con la natura dei servizi nautici proposti. L'offerta SailUP è strutturata per intercettare un'utenza con una spiccata capacità di spesa, che predilige il comfort e la ricercatezza rispetto alle soluzioni turistiche di massa.
-
+SailUP si pone come punto di riferimento per il turismo nautico nel Golfo di Napoli. L'utenza prevista è eterogenea, spaziando dal turista internazionale al residente locale in cerca di svago.
 Gli utenti si suddividono principalmente in due categorie:
 
 - *Clienti Abituali / Utenti Registrati:*
@@ -174,7 +172,7 @@ La struttura del sito segue il modello gerarchico schematizzato in #link(<fig-si
   La pagina Home funge da punto di snodo principale. Deve contenere informazioni essenziali e presentative di SailUP, utilizzando immagini di impatto per catturare l'attenzione del visitatore e offrire collegamenti rapidi alle funzionalità principali, quindi le sezioni Noleggio ed Esperienze.
 
 - *Cataloghi Noleggio ed Esperienze:*
-  Queste pagine permettono all'utente di visualizzare l'offerta completa. Prevedono sistemi di filtraggio e ordinamento per agevolare la ricerca. Selezionando un elemento, l'utente accede a una pagina di dettaglio dove può consultare le specifiche e procedere alla prenotazione. Il sistema effettuerà un controllo sulla disponibilità delle date scelte restituendo un feedback all'utente.
+  Queste pagine permettono all'utente di visualizzare l'offerta completa. Devono prevedere sistemi di filtraggio (per data, prezzo, tipologia) per agevolare la ricerca. Selezionando un elemento, l'utente accede a una pagina di dettaglio dove può consultare le specifiche e procedere alla prenotazione. Il sistema effettuerà un controllo sulla disponibilità delle date scelte restituendo un feedback all'utente.
 
 - *Blog:*
   La pagina Blog raccoglie articoli informativi e consigli turistici. Ogni articolo è visualizzabile singolarmente. Questa sezione non offre interattività transazionale ma è fondamentale per l'attrattiva del sito.
@@ -253,7 +251,7 @@ Il file `script.js` orchestra le seguenti funzioni:
 - *Modalità scura*: Controlla il cambio del tema visivo (chiaro/scuro) agendo sull'attributo `data-theme` del tag `html` e memorizzando la preferenza dell'utente nel `localStorage` per mantenere la scelta nelle visite successive.
 - *Filtri*: Viene implementato un sistema di filtraggio per lo storico delle prenotazioni. Questo permette di visualizzare istantaneamente le prenotazioni in base al loro stato ("Tutte", "Attive", "Completate") agendo sulla visibilità delle righe della tabella e aggiornando in tempo reale i contatori presenti nelle tab di filtro.
 
-I file di validazione dedicati (`register_validation.js`, `login_validation.js`, `blog_validation.js`, `product_validation.js`, `payment_validation.js`) garantiscono l'integrità dei dati e migliorano l'usabilità dei form:
+I file di validazione dedicati (`register_validation.js`, `login_validation.js`, `blog_validation.js`) garantiscono l'integrità dei dati e migliorano l'usabilità dei form:
 - *Validazione in tempo reale*: Verifica la correttezza del campo alla perdita del focus, controllando formati complessi come il Codice Fiscale, la validità strutturale delle Email o delle URL.
 - *Assistenza all'input*: Include comportamenti come la conversione automatica in maiuscolo dei caratteri durante la digitazione nei campi Codice Fiscale e Provincia.
 - *Invio del modulo*: Lo script intercetta il tentativo di invio del modulo e lo valida. Se la validazione fallisce la richiesta al server viene bloccata e la pagina esegue uno scroll automatico verso il primo campo errato, portandovi il focus per facilitare la correzione immediata.
