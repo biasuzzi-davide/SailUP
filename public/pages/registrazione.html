@@ -101,7 +101,8 @@
                         <label for="password" lang="en">Password</label>
                         <div class="password-field">
                             <input type="password" id="password" name="password" required
-                                aria-describedby="password-hint password-error" autocomplete="new-password">
+                                aria-describedby="password-hint password-error" autocomplete="new-password"
+                                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}">
                             <button type="button" class="password-toggle" data-target="password"
                                 data-label-show="Mostra password" data-label-hide="Nascondi password"
                                 aria-label="Mostra password" aria-pressed="false">
@@ -161,7 +162,7 @@
                             <label for="indirizzo_via">Via / Piazza</label>
                             <input type="text" id="indirizzo_via" name="indirizzo_via" value="[OLD_VIA]" required
                                 aria-describedby="via-hint indirizzo_via-error" autocomplete="address-line1"
-                                placeholder="es. Via Caracciolo">
+                                placeholder="es. Via Caracciolo" pattern="^[A-Za-zÀ-ÿ0-9\s'.,-]{3,100}$">
                             <span id="via-hint" class="field-hint">Inserire il nome della via o della piazza.</span>
                             <span id="indirizzo_via-error" class="field-error" role="alert"></span>
                         </div>
@@ -170,7 +171,7 @@
                             <label for="indirizzo_civico"><abbr title="Numero">N.</abbr> Civico</label>
                             <input type="text" id="indirizzo_civico" name="indirizzo_civico" value="[OLD_CIVICO]"
                                 required aria-describedby="civico-hint indirizzo_civico-error"
-                                autocomplete="address-line2" placeholder="es. 10">
+                                autocomplete="address-line2" placeholder="es. 10" pattern="^(\d+\s?[a-zA-Z]*(\s?\/[0-9]+)?|[sS][nN][cC])$">
                             <span id="civico-hint" class="field-hint">Inserire il numero civico.</span>
                             <span id="indirizzo_civico-error" class="field-error" role="alert"></span>
                         </div>
@@ -190,7 +191,7 @@
                             <label for="indirizzo_citta">Città</label>
                             <input type="text" id="indirizzo_citta" name="indirizzo_citta" value="[OLD_CITTA]" required
                                 aria-describedby="citta-hint indirizzo_citta-error" autocomplete="address-level2"
-                                placeholder="es. Napoli">
+                                placeholder="es. Napoli" pattern="^[A-Za-zÀ-ÿ\s'.,-]{2,50}$">
                             <span id="citta-hint" class="field-hint">Inserire il comune di residenza.</span>
                             <span id="indirizzo_citta-error" class="field-error" role="alert"></span>
                         </div>

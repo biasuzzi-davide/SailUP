@@ -90,25 +90,31 @@
 
     function validateNome() {
         const val = nomeInput.value.trim();
+        const regex = /^[a-zA-ZàèéìòùÀÈÉÌÒÙ\s'\-]+$/;
+        
         if (val === '') { showFieldError(nomeInput, 'Il nome è obbligatorio.'); return false; }
         if (val.length < 2) { showFieldError(nomeInput, 'Il nome deve avere almeno 2 caratteri.'); return false; }
-        if (!/^[a-zA-ZÀ-ÿ\s'-]+$/.test(val)) { showFieldError(nomeInput, 'Il nome contiene caratteri non validi.'); return false; }
+        if (!regex.test(val)) { showFieldError(nomeInput, 'Il nome contiene caratteri non validi.'); return false; }
+        
         clearFieldError(nomeInput); return true;
     }
 
     function validateCognome() {
         const val = cognomeInput.value.trim();
+        const regex = /^[a-zA-ZàèéìòùÀÈÉÌÒÙ\s'\-]+$/;
+
         if (val === '') { showFieldError(cognomeInput, 'Il cognome è obbligatorio.'); return false; }
         if (val.length < 2) { showFieldError(cognomeInput, 'Il cognome deve avere almeno 2 caratteri.'); return false; }
-        if (!/^[a-zA-ZÀ-ÿ\s'-]+$/.test(val)) { showFieldError(cognomeInput, 'Il cognome contiene caratteri non validi.'); return false; }
+        if (!regex.test(val)) { showFieldError(cognomeInput, 'Il cognome contiene caratteri non validi.'); return false; }
+        
         clearFieldError(cognomeInput); return true;
     }
 
     function validateCF() {
         const val = cfInput.value.trim().toUpperCase();
         if (val === '') { showFieldError(cfInput, 'Il Codice Fiscale è obbligatorio.'); return false; }
-        if (!/^[A-Z0-9]{16}$/.test(val)) {
-            showFieldError(cfInput, 'Il Codice Fiscale deve essere di 16 caratteri alfanumerici.');
+        if (!regex.test(val)) {
+            showFieldError(cfInput, 'Formato Codice Fiscale non valido (es. RSSMRA80A01H501U).');
             return false;
         }
         clearFieldError(cfInput); return true;
@@ -116,8 +122,11 @@
 
     function validateEmailField() {
         const val = emailInput.value.trim();
+        const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
         if (val === '') { showFieldError(emailInput, 'L\'email è obbligatoria.'); return false; }
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) { showFieldError(emailInput, 'Formato email non valido.'); return false; }
+        if (!regex.test(val)) { showFieldError(emailInput, 'Formato email non valido.'); return false; }
+        
         clearFieldError(emailInput); return true;
     }
 
@@ -133,7 +142,7 @@
         const val = passwordInput.value;
         if (val === '') { showFieldError(passwordInput, 'La password è obbligatoria.'); return false; }
         if (!validatePasswordStrength(val)) {
-            showFieldError(passwordInput, 'La password deve avere 8 caratteri, 1 lettera, 1 numero e 1 simbolo.');
+            showFieldError(passwordInput, 'La password deve avere 8 caratteri, almeno una lettera, un numero e un simbolo.');
             return false;
         }
         clearFieldError(passwordInput); return true;
@@ -142,42 +151,67 @@
     function validateConfirmPassword() {
         const pass = passwordInput.value;
         const confirm = confirmPasswordInput.value;
+        
         if (confirm === '') { showFieldError(confirmPasswordInput, 'Conferma la password.'); return false; }
         if (pass !== confirm) { showFieldError(confirmPasswordInput, 'Le password non corrispondono.'); return false; }
+        
         clearFieldError(confirmPasswordInput); return true;
     }
 
     function validateVia() {
         const val = viaInput.value.trim();
+        const regex = /^[a-zA-ZàèéìòùÀÈÉÌÒÙ0-9\s'.,\-]+$/;
+
         if (val === '') { showFieldError(viaInput, 'Inserisci via o piazza.'); return false; }
-        if (val.length < 3) { showFieldError(viaInput, 'Indirizzo troppo breve.'); return false; }
+        if (!regex.test(val)) {
+            showFieldError(viaInput, 'L\'indirizzo contiene caratteri non validi.');
+            return false;
+        }
         clearFieldError(viaInput); return true;
     }
 
     function validateCivico() {
         const val = civicoInput.value.trim();
+        const regex = /^(\d+\s?[a-zA-Z]*(\s?[\/-]\s?[a-zA-Z0-9]+)?|snc|SNC)$/;
+
         if (val === '') { showFieldError(civicoInput, 'Il numero civico è richiesto.'); return false; }
+        if (!regex.test(val)) {
+            showFieldError(civicoInput, 'Formato non valido (es. 10, 10B, snc).');
+            return false;
+        }
         clearFieldError(civicoInput); return true;
     }
 
     function validateCap() {
         const val = capInput.value.trim();
+        const regex = /^\d{5}$/;
+
         if (val === '') { showFieldError(capInput, 'Inserisci il CAP.'); return false; }
-        if (!/^\d{5}$/.test(val)) { showFieldError(capInput, 'Il CAP deve essere di 5 cifre.'); return false; }
+        if (!regex.test(val)) { showFieldError(capInput, 'Il CAP deve essere di 5 cifre.'); return false; }
+        
         clearFieldError(capInput); return true;
     }
 
     function validateCitta() {
         const val = cittaInput.value.trim();
+        const regex = /^[a-zA-ZàèéìòùÀÈÉÌÒÙ\s'.,\-]+$/;
+
         if (val === '') { showFieldError(cittaInput, 'Inserisci la città.'); return false; }
         if (val.length < 2) { showFieldError(cittaInput, 'Nome città troppo breve.'); return false; }
+        if (!regex.test(val)) {
+            showFieldError(cittaInput, 'Il nome della città contiene caratteri non validi.');
+            return false;
+        }
         clearFieldError(cittaInput); return true;
     }
 
     function validateProvincia() {
         const val = provinciaInput.value.trim().toUpperCase();
+        const regex = /^[A-Z]{2}$/;
+
         if (val === '') { showFieldError(provinciaInput, 'Inserisci la provincia.'); return false; }
-        if (!/^[A-Z]{2}$/.test(val)) { showFieldError(provinciaInput, 'Usa la sigla di 2 lettere (es. NA).'); return false; }
+        if (!regex.test(val)) { showFieldError(provinciaInput, 'Usa la sigla di 2 lettere (es. NA).'); return false; }
+        
         clearFieldError(provinciaInput); return true;
     }
 
