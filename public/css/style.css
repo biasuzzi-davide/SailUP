@@ -1228,6 +1228,10 @@ a.product-cta:focus-visible {
   color: #1e40af;
 }
 
+.field-error a:hover{
+  color: var(--col-accent);
+}
+
 .alert {
   border-left: 4px solid;
   text-align: left;
