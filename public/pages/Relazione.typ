@@ -94,32 +94,26 @@
 #pagebreak()
 
 = Abstract
-
-SailUP è una piattaforma web dedicata al noleggio di imbarcazioni e alla prenotazione di esperienze nautiche nel suggestivo scenario del Golfo di Napoli. Ma siamo onesti, da dove nasce l'idea di sviluppare un sito per il corso di Tecnologie Web su un tema che i più cinici definirebbero 'di nicchia' o peggio, noioso? \ 
+SailUP è una piattaforma web dedicata al noleggio di imbarcazioni e alla prenotazione di esperienze nautiche nel suggestivo scenario del Golfo di Napoli. Ma siamo onesti, da dove nasce l'idea di sviluppare un sito per il corso di Tecnologie Web su un tema che i più cinici definirebbero 'di nicchia' o, in maniera più indiscreta, noioso? \ 
 Uno dei maggiori problemi riguardanti la gestione tradizionale delle richieste di noleggio e dei tour turistici è la frammentazione dei servizi tra canali telefonici e fisici, che rischia di generare inefficienze e sovrapposizioni nelle disponibilità. SailUP nasce proprio con l'ambizione di mettere ordine in questo _mare magnum_, offrendo un supporto tecnologico capace di ottimizzare i processi gestionali interni e, contemporaneamente, garantire agli utenti un servizio immediato, intuitivo e finalmente autonomo.
-
 Il sito web desiderato è dunque focalizzato sull'implementazione delle funzionalità di *Noleggio* e *Esperienze*, guidando l'utente dalla consultazione del catalogo fino alla prenotazione. SailUP sfrutta la piattaforma anche come una vetrina virtuale attraverso una sezione *Blog* dedicata, attraverso cui mira a fornire contenuti informativi di valore ai clienti e a supportare l'attività di content marketing per attrarre nuovi utenti, siano essi turisti o residenti locali.
-
 Per chi decide di salire a bordo la piattaforma offre un'*area personale* per la gestione del profilo e il monitoraggio dello storico prenotazioni. Parallelamente, un pannello di *controllo amministrativo* permette la gestione completa dei contenuti dinamici del sito.
 
-Abbiamo progettato e sviluppato SailUP con l'obiettivo di renderlo un prodotto pronto per il mondo reale. Poichè un tour in barca si prenota spesso dal molo, non solo dalla scrivania, la priorità è stata adottare un approccio *mobile-first*, cercando di bilanciare accessibilità tecnica e un'estetica che rispecchiasse l'eleganza dell'identità marittima.
-
-
-
 = Analisi
-
 == Utenza Target
-Il target di riferimento si colloca in una fascia di mercato medio-alta, coerentemente con la natura dei servizi nautici proposti. L'offerta SailUP è strutturata per intercettare un'utenza con una spiccata capacità di spesa, che predilige il comfort e la ricercatezza rispetto alle soluzioni turistiche di massa.
 
-Gli utenti si suddividono principalmente in due categorie:
+Per evitare di far naufragare il progetto ancor prima di terminarlo, è fondamentale analizzare l’utenza a cui ci rivolgiamo cercando di capire chi, realisticamente, finirebbe per navigare tra le nostre pagine. Il noleggio nautico, senza girarci intorno, non è esattamente un servizio per le masse. Il target di riferimento si colloca in una fascia di mercato medio-alta, in linea con la natura dei servizi proposti. Ci rivolgiamo quindi ad un’utenza con una spiccata capacità di spesa. Se il servizio è premium, l'interfaccia non può permettersi di essere grossolana.
+
+L'utenza prevista è eterogenea ma, evitando di perderci in astratte profilazioni marketing, possiamo identificare principalmente due categorie di utenti:
 
 - *Clienti Abituali / Utenti Registrati:*
-  Sono coloro che hanno già usufruito dei servizi SailUP o pianificano di farlo regolarmente. La loro priorità è l'efficienza: desiderano accedere rapidamente al sistema, gestire le prenotazioni attive e consultare lo storico.
+  Sono quelli che sanno già cosa vogliono e, probabilmente, hanno poca pazienza. La loro priorità è l'efficienza, vogliono entrare e gestire una prenotazione nel minor tempo possibile. Per loro il sistema deve essere un meccanismo oliato, con accesso rapido ed una semplice gestione del profilo.
 - *Nuovi Clienti / Turisti:*
-  Non conoscono il sito o il servizio. È necessario in primo luogo ottimizzare il ranking del sito nelle ricerche, in secondo luogo è altrettanto importante garantire la loro permanenza nel sito, una volta entrati, tramite una grafica accattivante e una struttura intuitiva, che possa accompagnarli fluidamente verso la prenotazione di un'imbarcazione o di un'esperienza.
+  Spesso approdano sul sito per caso o per una ricerca Google fatta all'ultimo minuto. Non conoscono il brand e, ammettiamolo, la loro attenzione è una risorsa scarsa. In questo caso, la sfida è doppia: dobbiamo prima farci trovare ottimizzando il ranking (la seconda pagina di Google è il posto migliore dove nascondere un cadavere) e poi dobbiamo convincerli a restare. Qui entrano in gioco l'estetica e l'intuitività.
 
 == Devices
-Considerando la natura turistica del servizio e l'utilizzo in mobilità, ci si aspetta una netta prevalenza di accessi da smartphone. Per questo motivo, il design e l'interfaccia utente sono stati progettati seguendo rigorosamente l'approccio *mobile-first*.
+
+Realisticamente, l'utente tipo di SailUP si trova su un molo, sotto il sole, con una connessione ballerina e un pollice solo a disposizione. Per questo motivo la priorità è stata adottare un approccio *mobile-first*: l'interfaccia deve essere leggera, i bottoni facili da cliccare anche con le dita bagnate e le informazioni essenziali subito visibili. Tutto questo garantendo un'ottima fruibilità anche per un classico utilizzo da pc.
 
 == Funzionalità
 Sono state individuate e realizzate le seguenti funzionalità principali:
