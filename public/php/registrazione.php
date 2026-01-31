@@ -54,8 +54,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     ];
 
     if ($csrfOk) {
-        if (!isValidName($nome)) $errors[] = 'Nome non valido: usa solo lettere e spazi';
-        if (!isSurnameValid($cognome)) $errors[] = 'Cognome non valido: usa solo lettere e spazi';
+        if (!isValidName($nome)) $errors[] = 'Nome non valido';
+        if (!isSurnameValid($cognome)) $errors[] = 'Cognome non valido';
         if (!isValidCF($cf)) $errors[] = 'Codice fiscale non valido: deve essere 16 caratteri alfanumerici';
         if (!isValidEmail($email)) $errors[] = 'Email non valida: controlla il formato';
         if (!validatePassword($password)) $errors[] = 'Password non valida: minimo 8 caratteri, con lettere, numeri e simboli';

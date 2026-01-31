@@ -88,9 +88,11 @@
         }
     }
 
+    // NOTA: validazione poco stringente per scopo didattico del progetto
     function validateNome() {
         const val = nomeInput.value.trim();
-        const regex = /^[a-zA-ZàèéìòùÀÈÉÌÒÙ\s'\-]+$/;
+        // Permette lettere (anche accentate), numeri, spazi, apostrofi e trattini
+        const regex = /^[a-zA-ZÀ-ÿ0-9\s'\-]+$/;
         
         if (val === '') { showFieldError(nomeInput, 'Il nome è obbligatorio.'); return false; }
         if (val.length < 2) { showFieldError(nomeInput, 'Il nome deve avere almeno 2 caratteri.'); return false; }
@@ -99,9 +101,11 @@
         clearFieldError(nomeInput); return true;
     }
 
+    // NOTA: validazione poco stringente per scopo didattico del progetto
     function validateCognome() {
         const val = cognomeInput.value.trim();
-        const regex = /^[a-zA-ZàèéìòùÀÈÉÌÒÙ\s'\-]+$/;
+        // Permette lettere (anche accentate), numeri, spazi, apostrofi e trattini
+        const regex = /^[a-zA-ZÀ-ÿ0-9\s'\-]+$/;
 
         if (val === '') { showFieldError(cognomeInput, 'Il cognome è obbligatorio.'); return false; }
         if (val.length < 2) { showFieldError(cognomeInput, 'Il cognome deve avere almeno 2 caratteri.'); return false; }

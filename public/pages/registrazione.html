@@ -61,8 +61,8 @@
                         <label for="nome">Nome</label>
                         <input type="text" id="nome" name="nome" required value="[OLD_NOME]"
                             aria-describedby="nome-hint nome-error" autocomplete="given-name" placeholder="es. Mario"
-                            pattern="^[A-Za-z\sÀ-ÿ'’]{2,50}$">
-                        <span id="nome-hint" class="field-hint">Almeno 2 caratteri, non numeri o caratteri speciali.
+                            pattern="^[A-Za-z\sÀ-ÿ0-9''\-]{2,50}$">
+                        <span id="nome-hint" class="field-hint">Almeno 2 caratteri.
                         </span>
                         <span id="nome-error" class="field-error" role="alert"></span>
                     </div>
@@ -71,9 +71,8 @@
                         <label for="cognome">Cognome</label>
                         <input type="text" id="cognome" name="cognome" required value="[OLD_COGNOME]"
                             aria-describedby="cognome-hint cognome-error" autocomplete="family-name"
-                            placeholder="es. Rossi" pattern="^[A-Za-z\sÀ-ÿ'’]{2,50}$">
-                        <span id="cognome-hint" class="field-hint">Almeno 2 caratteri, non numeri o caratteri
-                            speciali. </span>
+                            placeholder="es. Rossi" pattern="^[A-Za-z\sÀ-ÿ0-9''\-]{2,50}$">
+                        <span id="cognome-hint" class="field-hint">Almeno 2 caratteri.</span>
                         <span id="cognome-error" class="field-error" role="alert"></span>
                     </div>
 
