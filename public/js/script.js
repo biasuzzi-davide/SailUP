@@ -586,3 +586,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setTimeout(() => observer.disconnect(), 5000);
 });
+
+/* ---------------------------------------
+   9. SCROLL AI MESSAGGI DEL SERVER
+   --------------------------------------- */
+document.addEventListener('DOMContentLoaded', () => {
+    const serverMessage = document.getElementById('server-message');
+    if (serverMessage && !serverMessage.classList.contains('hidden') && serverMessage.textContent.trim() !== '') {
+        setTimeout(() => {
+            serverMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            serverMessage.focus();
+        }, 100);
+    }
+
+    const serverMessages = document.getElementById('server-messages');
+    if (serverMessages && !serverMessages.classList.contains('hidden') && serverMessages.textContent.trim() !== '') {
+        setTimeout(() => {
+            serverMessages.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            serverMessages.focus();
+        }, 100);
+    }
+});
