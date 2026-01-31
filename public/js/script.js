@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* ---------------------------------------
-       1. GESTIONE MENU MOBILE (Hamburger)
+       GESTIONE MENU MOBILE (Hamburger)
        --------------------------------------- */
 
     const hamburgerBtn = document.getElementById('hamburger-btn');
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* ---------------------------------------
-        2. GESTIONE TEMA (Chiaro / Scuro)
+        GESTIONE TEMA (Chiaro / Scuro)
        --------------------------------------- */
     const themeToggle = document.querySelector('.theme-toggle');
     const htmlElement = document.documentElement;
@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ---------------------------------------
-   3. Gestione del bottone top
+   Gestione del bottone top
    --------------------------------------- */
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -132,7 +132,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 /* ---------------------------------------
-   4. GESTIONE FILTRI PRENOTAZIONI
+   GESTIONE FILTRI PRENOTAZIONI
    --------------------------------------- */
 document.addEventListener('DOMContentLoaded', () => {
     // Eseguiamo solo se siamo nella pagina prenotazioni
@@ -206,7 +206,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ---------------------------------------
-   5. FILTRI CATALOGO (Noleggio + Esperienze)
+   FILTRI CATALOGO (Noleggio + Esperienze)
    --------------------------------------- */
 document.addEventListener('DOMContentLoaded', () => {
     const setupCatalogFilters = (formId) => {
@@ -244,7 +244,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ---------------------------------------
-   6. Date persistenti dai cataloghi
+   Date persistenti dai cataloghi
    --------------------------------------- */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -563,7 +563,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 /* ---------------------------------------
-   8. SINCRONIZZAZIONE STATISTICHE
+   SINCRONIZZAZIONE STATISTICHE
    --------------------------------------- */
 document.addEventListener('DOMContentLoaded', () => {
     const elTot = document.querySelector('[data-stat="tot"]');
@@ -588,7 +588,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ---------------------------------------
-   9. SCROLL AI MESSAGGI DEL SERVER
+   SCROLL AI MESSAGGI DEL SERVER
    --------------------------------------- */
 document.addEventListener('DOMContentLoaded', () => {
     const serverMessage = document.getElementById('server-message');
