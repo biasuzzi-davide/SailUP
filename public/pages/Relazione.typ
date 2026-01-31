@@ -93,7 +93,7 @@
 )
 #pagebreak()
 
-= Abstract
+#heading(level: 1, numbering: none, outlined: false)[Abstract]
 SailUP è una piattaforma web dedicata al noleggio di imbarcazioni e alla prenotazione di esperienze nautiche nel suggestivo scenario del Golfo di Napoli. Ma siamo onesti, da dove nasce l'idea di sviluppare un sito per il corso di Tecnologie Web su un tema che i più cinici definirebbero 'di nicchia' o, in maniera più indiscreta, noioso? \ 
 Uno dei maggiori problemi riguardanti la gestione tradizionale delle richieste di noleggio e dei tour turistici è la frammentazione dei servizi tra canali telefonici e fisici, che rischia di generare inefficienze e sovrapposizioni nelle disponibilità. SailUP nasce proprio con l'ambizione di mettere ordine in questo _mare magnum_, offrendo un supporto tecnologico capace di ottimizzare i processi gestionali interni e, contemporaneamente, garantire agli utenti un servizio immediato, intuitivo e finalmente autonomo.
 Il sito web desiderato è dunque focalizzato sull'implementazione delle funzionalità di *Noleggio* e *Esperienze*, guidando l'utente dalla consultazione del catalogo fino alla prenotazione. SailUP sfrutta la piattaforma anche come una vetrina virtuale attraverso una sezione *Blog* dedicata, attraverso cui mira a fornire contenuti informativi di valore ai clienti e a supportare l'attività di content marketing per attrarre nuovi utenti, siano essi turisti o residenti locali.
