@@ -82,7 +82,7 @@ if ($prodottiNoleggio && is_array($prodottiNoleggio) && count($prodottiNoleggio)
 		$cardsHtml .= buildNoleggioCatalogCard($prodotto);
 	}
 } else {
-	$cardsHtml = '<p class="catalog-empty">Al momento non ci sono imbarcazioni disponibili in noleggio. Torna più tardi.</p>';
+	$cardsHtml = '<p class="">Al momento non ci sono imbarcazioni disponibili in noleggio. Torna più tardi.</p>';
 }
 
 $tipologiaOptionsHtml = buildTipologieCheckboxes($tipologieDisponibili, $tipologieSelezionate);

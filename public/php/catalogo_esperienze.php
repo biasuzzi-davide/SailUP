@@ -86,7 +86,7 @@ if ($prodottiExperience && is_array($prodottiExperience) && count($prodottiExper
         $cardsHtml .= buildExperienceCatalogCard($prodotto, $lingueAssoc);
     }
 } else {
-    $cardsHtml = '<p class="catalog-empty">Non sono presenti esperienze da mostrare al momento. Torna presto.</p>';
+    $cardsHtml = '<p>Non sono presenti esperienze da mostrare al momento. Torna presto.</p>';
 }
 
 $linguaOptions = buildLinguaOptions($lingueDisponibili, $linguaSelezionata);

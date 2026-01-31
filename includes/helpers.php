@@ -854,7 +854,7 @@ function buildBlogArticleCard(array $articolo): string
 function buildArticleExtraList($extras): string
 {
     if ($extras === false || empty($extras)) {
-        return '<p class="catalog-empty">Non ci sono consigli extra per questo articolo al momento.</p>';
+        return '<p>Non ci sono consigli extra per questo articolo al momento.</p>';
     }
 
     $html = '';
@@ -878,7 +878,7 @@ function buildArticleExtraList($extras): string
         $html .= '</ul></div>';
     }
 
-    return $html ?: '<p class="catalog-empty">Non ci sono consigli extra per questo articolo al momento.</p>';
+    return $html ?: '<p>Non ci sono consigli extra per questo articolo al momento.</p>';
 }
 
 /**
