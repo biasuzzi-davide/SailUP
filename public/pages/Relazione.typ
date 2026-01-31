@@ -94,7 +94,7 @@
 #pagebreak()
 
 #heading(level: 1, numbering: none, outlined: false)[Abstract]
-SailUP è una piattaforma web dedicata al noleggio di imbarcazioni e alla prenotazione di esperienze nautiche nel suggestivo scenario del Golfo di Napoli. Ma siamo onesti, da dove nasce l'idea di sviluppare un sito per il corso di Tecnologie Web su un tema che i più cinici definirebbero 'di nicchia' o, in maniera più indiscreta, noioso? \ 
+SailUP è una piattaforma web dedicata al noleggio di imbarcazioni e alla prenotazione di esperienze nautiche nel suggestivo scenario del Golfo di Napoli. Siamo onesti, a chi verrebbe l'idea di sviluppare un sito per il corso di Tecnologie Web su un tema così 'di nicchia' o, forse qualcuno penserà, così noioso? \ 
 Uno dei maggiori problemi riguardanti la gestione tradizionale delle richieste di noleggio e dei tour turistici è la frammentazione dei servizi tra canali telefonici e fisici, che rischia di generare inefficienze e sovrapposizioni nelle disponibilità. SailUP nasce proprio con l'ambizione di mettere ordine in questo _mare magnum_, offrendo un supporto tecnologico capace di ottimizzare i processi gestionali interni e, contemporaneamente, garantire agli utenti un servizio immediato, intuitivo e finalmente autonomo.
 Il sito web desiderato è dunque focalizzato sull'implementazione delle funzionalità di *Noleggio* e *Esperienze*, guidando l'utente dalla consultazione del catalogo fino alla prenotazione. SailUP sfrutta la piattaforma anche come una vetrina virtuale attraverso una sezione *Blog* dedicata, attraverso cui mira a fornire contenuti informativi di valore ai clienti e a supportare l'attività di content marketing per attrarre nuovi utenti, siano essi turisti o residenti locali.
 Per chi decide di salire a bordo la piattaforma offre un'*area personale* per la gestione del profilo e il monitoraggio dello storico prenotazioni. Parallelamente, un pannello di *controllo amministrativo* permette la gestione completa dei contenuti dinamici del sito.
@@ -102,30 +102,30 @@ Per chi decide di salire a bordo la piattaforma offre un'*area personale* per la
 = Analisi
 == Utenza Target
 
-Per evitare di far naufragare il progetto ancor prima di terminarlo, è fondamentale analizzare l’utenza a cui ci rivolgiamo cercando di capire chi, realisticamente, finirebbe per navigare tra le nostre pagine. Il noleggio nautico, senza girarci intorno, non è esattamente un servizio per le masse. Il target di riferimento si colloca in una fascia di mercato medio-alta, in linea con la natura dei servizi proposti. Ci rivolgiamo quindi ad un’utenza con una spiccata capacità di spesa. Se il servizio è premium, l'interfaccia non può permettersi di essere grossolana.
+Per evitare di far naufragare il progetto ancor prima di terminarlo, è fondamentale analizzare l’utenza a cui ci rivolgiamo cercando di capire chi, realisticamente, finirebbe per navigare tra le nostre pagine. Senza girarci intorno il noleggio nautico non è esattamente un servizio per le masse. Il target di riferimento si colloca in una fascia di mercato medio-alta, in linea con la natura dei servizi proposti. Ci rivolgiamo quindi ad un’utenza con una spiccata capacità di spesa. Se il servizio è premium, l'interfaccia non può permettersi di essere grossolana.
 
 L'utenza prevista è eterogenea ma, evitando di perderci in astratte profilazioni marketing, possiamo identificare principalmente due categorie di utenti:
 
 - *Clienti Abituali / Utenti Registrati:*
   Sono quelli che sanno già cosa vogliono e, probabilmente, hanno poca pazienza. La loro priorità è l'efficienza, vogliono entrare e gestire una prenotazione nel minor tempo possibile. Per loro il sistema deve essere un meccanismo oliato, con accesso rapido ed una semplice gestione del profilo.
 - *Nuovi Clienti / Turisti:*
-  Spesso approdano sul sito per caso o per una ricerca Google fatta all'ultimo minuto. Non conoscono il brand e, ammettiamolo, la loro attenzione è una risorsa scarsa. In questo caso, la sfida è doppia: dobbiamo prima farci trovare ottimizzando il ranking (la seconda pagina di Google è il posto migliore dove nascondere un cadavere) e poi dobbiamo convincerli a restare. Qui entrano in gioco l'estetica e l'intuitività.
+  Spesso approdano sul sito per caso o per una ricerca Google fatta all'ultimo minuto. Non conoscono il brand e, ammettiamolo, la loro attenzione è una risorsa scarsa. In questo caso la sfida è doppia: dobbiamo prima farci trovare ottimizzando il ranking (la seconda pagina di Google è il posto migliore dove nascondere un cadavere) e poi dobbiamo convincerli a restare. Qui entrano in gioco l'estetica e l'intuitività.
 
 == Devices
 
-Realisticamente, l'utente tipo di SailUP si trova su un molo, sotto il sole, con una connessione ballerina e un pollice solo a disposizione. Per questo motivo la priorità è stata adottare un approccio *mobile-first*: l'interfaccia deve essere leggera, i bottoni facili da cliccare anche con le dita bagnate e le informazioni essenziali subito visibili. Tutto questo garantendo un'ottima fruibilità anche per un classico utilizzo da pc.
+Realisticamente, l'utente tipo di SailUP si trova su un molo, sotto il sole, con una connessione instabile e un pollice solo a disposizione. Per questo motivo la priorità è stata adottare un approccio *mobile-first*: l'interfaccia deve essere leggera, i bottoni facili da cliccare anche con le dita bagnate e le informazioni essenziali subito visibili anche con il sole riflesso sullo schermo. Tutto questo garantendo un'ottima fruibilità anche per un classico utilizzo da pc.
 
 == Funzionalità
 Sono state individuate e realizzate le seguenti funzionalità principali:
 
 - *Catalogo noleggio, esperienze e Blog:*
   - La Home e le pagine di catalogo devono presentare le imbarcazioni e le esperienze con immagini accattivanti e dettagli tecnici chiari.
-  - È prevista una sezione Blog per il content marketing, utile ad attrarre traffico organico e fornire consigli utili agli utenti (es. itinerari, guide).
+  - È prevista una sezione Blog per il content marketing, necessario ad attirare traffico organico e a fornire consigli (es. itinerari, guide) che trasformino il visitatore curioso in un cliente pagante.
   - La grafica deve essere coerente con il tema nautico e garantire la massima leggibilità ed intuitività.
 
 - *Prenotazione:*
-  - La prenotazione è caratterizzata dalla scelta di una data, del numero di ospiti e di eventuali servizi accessori (es. skipper).
-  - Il sistema deve verificare la disponibilità della risorsa (barca o esperienza) per la data richiesta tramite controlli server-side.
+  - La prenotazione permette di scegliere date, numero di ospiti e servizi extra (es. skipper, per chi preferisce non finire sugli scogli).
+  - Il sistema deve verificare la disponibilità della risorsa (barca o esperienza) per la data richiesta tramite controlli _server-side_ per evitare _overbooking_.
   - Le prenotazioni possono essere effettuate da utenti registrati; gli ospiti vengono invitati a registrarsi o accedere per finalizzare la prenotazione.
   - In seguito alla richiesta, il sistema fornisce un feedback immediato sull'esito (conferma o errore in caso di date non disponibili).
 
@@ -133,14 +133,11 @@ Sono state individuate e realizzate le seguenti funzionalità principali:
   - Sezione *Cliente* per la gestione del profilo e visualizzazione dello storico prenotazioni.
   - Sezione *Admin* per il controllo completo della piattaforma. L'amministratore necessita di una visione globale su utenti iscritti e prenotazioni effettuate e un sistema CRUD (Create, Read, Update, Delete) per gestire dinamicamente i prodotti, quindi barche, esperienze ed articoli del blog.
 
-- *Ospite:* 
-  - L' utente non autenticato potrà visualizzare i cataloghi di noleggio barche ed esperienze, leggere gli articoli pubblicati sul blog, accedere alle pagine informative statiche (Chi Siamo, FAQ, Privacy/Cookie Policy) e registrarsi al sito.
-
-- *Registrazione:* 
-  - Si prevede un form di compilazione dati per consentire ai nuovi utenti di creare un account, requisito necessario per effettuare una prenotazione e per gestirla.
+- *Ospite e Registrazione:* 
+  - L' utente non autenticato potrà visualizzare i cataloghi di noleggio barche ed esperienze, leggere gli articoli pubblicati sul blog, accedere alle pagine informative statiche (Chi Siamo, FAQ, Privacy/Cookie Policy). La registrazione avviene tramite un form di compilazione dati per consentire ai nuovi utenti di creare un account, requisito necessario per effettuare una prenotazione e per gestirla.
 
 == Ricerche da soddisfare
-Al fine di migliorare la SEO ed intercettare il target di riferimento, il sito web è strutturato per soddisfare le seguenti intenzioni di ricerca:
+Siamo consapevoli che un sito web senza visitatori è solo un esercizio di stile archiviato in un server, o peggio, in un hard-disk. Al fine di migliorare la SEO ed intercettare il target di riferimento abbiamo ottimizzato la struttura per rispondere a intenzioni di ricerca concrete:
 - Noleggio barche Golfo di Napoli
 - Escursioni in barca Capri e Positano
 - Esperienze nautiche Napoli
@@ -154,9 +151,9 @@ Al fine di migliorare la SEO ed intercettare il target di riferimento, il sito w
 == Linee Guida
 Per la gestione del ciclo di vita del software e il coordinamento del team, si è scelto di utilizzare un repository su GitHub per il versionamento del codice.
 
-L'eterogeneità della clientela (turisti e residenti) ci ha spinti a progettare un design minimale e pulito. Si è scelto di puntare su un branding coerente con l'identità marittima: seppur il bianco sia predominante di modo da garantire leggibilità e chiarezza delle informazioni, è stata adottata una palette cromatica basata su diverse tonalità di blu per richiamare il tema nautico e, sfruttando la psicologia dei colori, trasmettere eleganza, calma, sicurezza e freschezza.
+L'eterogeneità della clientela (turisti e residenti) e la volontà di non sovraccaricare cognitivamente l’utente ci hanno spinto a progettare il sito con un design minimale e pulito che non tendesse verso uno stile polarizzante. Si è scelto di puntare su un branding coerente con l'identità marittima: seppur il bianco sia predominante di modo da garantire leggibilità e chiarezza delle informazioni, è stata adottata una palette cromatica basata su diverse tonalità di blu per richiamare il tema nautico e, sfruttando la psicologia dei colori, trasmettere eleganza, calma, sicurezza e freschezza.
 
-È stata mantenuta una rigida separazione tra struttura (HTML), presentazione (CSS) e comportamento (PHP e JavaScript), per garantire modularità e rispetto degli standard web.
+È stata poi mantenuta una rigida separazione tra struttura (HTML), presentazione (CSS) e comportamento (PHP e JavaScript). Sappiamo bene che mescolare questi elementi è il primo passo verso il debito tecnico e un debito formativo nel corso di Tecnologie Web, quindi abbiamo puntato sulla modularità per rispettare gli standard web attuali.
 
 Infine, la progettazione del sito è stata condotta cercando garantire l'accessibilità a tutte le categorie di utenti.
 
@@ -164,16 +161,16 @@ Infine, la progettazione del sito è stata condotta cercando garantire l'accessi
 La struttura del sito segue il modello gerarchico schematizzato in #link(<fig-sitemap>)[Figura 1]. In questa fase si è pianificata una suddivisione nelle seguenti pagine principali, accessibili tramite un menù di navigazione globale:
 
 - *Home:*
-  La pagina Home funge da punto di snodo principale. Deve contenere informazioni essenziali e presentative di SailUP, utilizzando immagini di impatto per catturare l'attenzione del visitatore e offrire collegamenti rapidi alle funzionalità principali, quindi le sezioni Noleggio ed Esperienze.
+  La pagina Home funge da punto di snodo principale. Deve contenere le informazioni essenziali di SailUP, utilizzando immagini di impatto per catturare l'attenzione del visitatore e offrire collegamenti rapidi alle funzionalità principali, quindi le sezioni Noleggio ed Esperienze. Di fondamentale importanza la chiarezza delle informazioni presentate, se l'utente si perde qui il resto del lavoro è inutile.
 
 - *Cataloghi Noleggio ed Esperienze:*
   Queste pagine permettono all'utente di visualizzare l'offerta completa. Prevedono sistemi di filtraggio e ordinamento per agevolare la ricerca. Selezionando un elemento, l'utente accede a una pagina di dettaglio dove può consultare le specifiche e procedere alla prenotazione. Il sistema effettuerà un controllo sulla disponibilità delle date scelte restituendo un feedback all'utente.
 
 - *Blog:*
-  La pagina Blog raccoglie articoli informativi e consigli turistici. Ogni articolo è visualizzabile singolarmente. Questa sezione non offre interattività transazionale ma è fondamentale per l'attrattiva del sito.
+  La pagina Blog raccoglie articoli informativi e consigli turistici. Ogni articolo è visualizzabile singolarmente. Questa sezione è fondamentale per dare spessore al sito e trasformare una semplice piattaforma di noleggio in un riferimento per chi pianifica una giornata in mare.
 
 - *Pagine Informative 'Chi Siamo', 'FAQ', 'Privacy' e 'Cookie':*
-  Queste pagine offrono supporto all'utente, presentando il team di SailUP, rispondendo ai dubbi più comuni per ridurre il carico di assistenza diretta e illustrando in modo trasparente le politiche di privacy e gestione dei cookie adottate dalla piattaforma.
+  Tutto ciò che serve per dare credibilità al sito e per, potenzialmente, ridurre il carico di assistenza diretta. Le 'FAQ' sono necessarie a rispondere ai dubbi più comuni prima che diventino telefonate o email, mentre le informative su 'Privacy' e 'Cookie' garantiscono che il sito non sia solo bello ma anche a norma. La pagina 'Chi Siamo' presenta invece il team di SailUP.
 
 - *Area Riservata:*
   Questa sezione gestisce l'accesso alla piattaforma. La pagina di *Login/Registrazione* permette all'utente di autenticarsi o creare un nuovo profilo. Una volta loggato, il sistema indirizza l'utente alla vista corretta in base al suo ruolo:
