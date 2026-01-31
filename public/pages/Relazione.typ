@@ -72,11 +72,11 @@
   
   #align(left)[
     *Referente del gruppo:* \
-    #link("mailto:x@studenti.unipd.it")
+    #link("mailto:davide.biasuzzi@studenti.unipd.it")
     
     #v(0.5em)
     *Indirizzo del sito:* \
-    #link("http://tecweb.studenti.math.unipd.it/[username]/")[tecweb.studenti.math.unipd.it/[username]/]
+    #link("http://tecweb.studenti.math.unipd.it/dbiasuzz/")[tecweb.studenti.math.unipd.it/dbiasuzz/]
     
     #v(0.5em)
     *Informazioni di accesso:* \
@@ -109,7 +109,8 @@ Abbiamo progettato e sviluppato SailUP con l'obiettivo di renderlo un prodotto p
 = Analisi
 
 == Utenza Target
-SailUP si pone come punto di riferimento per il turismo nautico nel Golfo di Napoli. L'utenza prevista è eterogenea, spaziando dal turista internazionale al residente locale in cerca di svago.
+Il target di riferimento si colloca in una fascia di mercato medio-alta, coerentemente con la natura dei servizi nautici proposti. L'offerta SailUP è strutturata per intercettare un'utenza con una spiccata capacità di spesa, che predilige il comfort e la ricercatezza rispetto alle soluzioni turistiche di massa.
+
 Gli utenti si suddividono principalmente in due categorie:
 
 - *Clienti Abituali / Utenti Registrati:*
@@ -172,7 +173,7 @@ La struttura del sito segue il modello gerarchico schematizzato in #link(<fig-si
   La pagina Home funge da punto di snodo principale. Deve contenere informazioni essenziali e presentative di SailUP, utilizzando immagini di impatto per catturare l'attenzione del visitatore e offrire collegamenti rapidi alle funzionalità principali, quindi le sezioni Noleggio ed Esperienze.
 
 - *Cataloghi Noleggio ed Esperienze:*
-  Queste pagine permettono all'utente di visualizzare l'offerta completa. Devono prevedere sistemi di filtraggio (per data, prezzo, tipologia) per agevolare la ricerca. Selezionando un elemento, l'utente accede a una pagina di dettaglio dove può consultare le specifiche e procedere alla prenotazione. Il sistema effettuerà un controllo sulla disponibilità delle date scelte restituendo un feedback all'utente.
+  Queste pagine permettono all'utente di visualizzare l'offerta completa. Prevedono sistemi di filtraggio e ordinamento per agevolare la ricerca. Selezionando un elemento, l'utente accede a una pagina di dettaglio dove può consultare le specifiche e procedere alla prenotazione. Il sistema effettuerà un controllo sulla disponibilità delle date scelte restituendo un feedback all'utente.
 
 - *Blog:*
   La pagina Blog raccoglie articoli informativi e consigli turistici. Ogni articolo è visualizzabile singolarmente. Questa sezione non offre interattività transazionale ma è fondamentale per l'attrattiva del sito.
@@ -251,7 +252,7 @@ Il file `script.js` orchestra le seguenti funzioni:
 - *Modalità scura*: Controlla il cambio del tema visivo (chiaro/scuro) agendo sull'attributo `data-theme` del tag `html` e memorizzando la preferenza dell'utente nel `localStorage` per mantenere la scelta nelle visite successive.
 - *Filtri*: Viene implementato un sistema di filtraggio per lo storico delle prenotazioni. Questo permette di visualizzare istantaneamente le prenotazioni in base al loro stato ("Tutte", "Attive", "Completate") agendo sulla visibilità delle righe della tabella e aggiornando in tempo reale i contatori presenti nelle tab di filtro.
 
-I file di validazione dedicati (`register_validation.js`, `login_validation.js`, `blog_validation.js`) garantiscono l'integrità dei dati e migliorano l'usabilità dei form:
+I file di validazione dedicati (`register_validation.js`, `login_validation.js`, `blog_validation.js`, `product_validation.js`, `payment_validation.js`) garantiscono l'integrità dei dati e migliorano l'usabilità dei form:
 - *Validazione in tempo reale*: Verifica la correttezza del campo alla perdita del focus, controllando formati complessi come il Codice Fiscale, la validità strutturale delle Email o delle URL.
 - *Assistenza all'input*: Include comportamenti come la conversione automatica in maiuscolo dei caratteri durante la digitazione nei campi Codice Fiscale e Provincia.
 - *Invio del modulo*: Lo script intercetta il tentativo di invio del modulo e lo valida. Se la validazione fallisce la richiesta al server viene bloccata e la pagina esegue uno scroll automatico verso il primo campo errato, portandovi il focus per facilitare la correzione immediata.
