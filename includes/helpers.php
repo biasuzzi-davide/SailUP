@@ -836,8 +836,8 @@ function buildBlogArticleCard(array $articolo): string
           </p>
 
           <div class="product-footer">
-            <a href="' . $detailUrl . '" class="product-cta" aria-label="Leggi l\'articolo: ' . $titolo . '">
-              Leggi tutto →
+            <a href="' . $detailUrl . '" class="product-cta" aria-label="Leggi tutto l\'articolo: ' . $titolo . '">
+              Leggi tutto l\'articolo
             </a>
           </div>
         </div>
