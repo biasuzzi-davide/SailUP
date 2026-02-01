@@ -272,43 +272,14 @@ All'interno della directory `includes/`, inoltre, sono presenti i seguenti modul
 
 - *helpers.php*: Contiene le funzioni di utilità per la generazione dinamica delle componenti principali della pagina come header, footer e card relative ai prodotti salvati in database. Le funzioni `buildHeader()` e `buildFooter()` gestiscono automaticamente lo stato dei link (pagina corrente evidenziata e non cliccabile), l'aggiunta di attributi ARIA per l'accessibilità, e la visualizzazione condizionale degli elementi in base allo stato di autenticazione dell'utente.
 
+- *session/session.php*: Gestisce lo stato della sessione e fornisce funzioni di controllo accesso, lasciandoci abbastanza sereni che l'utente non si risvegli improvvisamente con i privilegi di un amministratore.
+
 - *auth/auth.php*: Centralizza le operazioni di registrazione e login. La funzione `registerUserFull()` orchestra l'inserimento coordinato di utente e indirizzo in una transazione logica, mentre `loginUserAuth()` gestisce l'autenticazione verificando le credenziali con `password_verify()`.
 
-- *session/session.php*: Gestisce lo stato della sessione e fornisce funzioni di controllo accesso.
-
-- *utils/validation.php*: Contiene le funzioni di validazione lato server per tutti i tipi di input (es. password, codice fiscale). Queste validazioni rafforzano quelle client-side, implementando il principio della *doppia validazione* come best practice di sicurezza.
-
-=== Sessioni, Sicurezza e Protezione dei Dati
-Il mantenimento dello stato utente è gestito tramite un sistema dedicato nel file `session.php`. All'avvio lo script verifica che la sessione non sia già attiva tramite evitando errori di sessioni duplicate.
-Sono state poi implementate funzioni helper per semplificare i controlli di accesso trasversali:
-
-- `isLogged()`: Verifica la presenza della chiave `user` nella sessione, indicando un utente autenticato.
-- `isAdmin()`: Controlla se l'utente corrente possiede il flag di amministratore.
-- `requireLogin()`: Posta all'inizio delle pagine protette, interrompe l'esecuzione e reindirizza alla pagina di login se l'utente non è autenticato.
-- `requireGuest()`: Funzione complementare che reindirizza gli utenti già loggati, utile per pagine come login e registrazione.
-- `requireAdmin()`: Blocca l'accesso alle pagine amministrative agli utenti non privilegiati, mostrando una pagina di errore 403.
-
-Questo approccio permette di proteggere le risorse sensibili con una singola riga di codice all'inizio di ogni controller, mantenendo il sistema sicuro e il codice leggibile.
-
-=== Sicurezza lato Server
-La sicurezza è stata considerata prioritaria in ogni fase dello sviluppo backend. Oltre alla validazione degli input, sono state implementate le seguenti misure di protezione:
-
-- *Prevenzione SQL injection*: Tutti i metodi della classe `DBConnection` utilizzano esclusivamente Prepared Statements. I parametri vengono vincolati alla query tramite `bind_param()` e mai concatenati direttamente nelle stringhe SQL, eliminando alla radice il rischio di iniezione di codice malevolo. Questo approccio è applicato uniformemente a tutte le query, dalle più semplici SELECT alle operazioni complesse di JOIN multi-tabella.
-
-- *Hashing delle password*: Le password non vengono mai salvate in chiaro nel database. In fase di registrazione, viene utilizzata la funzione `password_hash()` con l'algoritmo `PASSWORD_DEFAULT` (attualmente Bcrypt), che genera automaticamente un salt casuale e produce un hash sicuro. Al login, la verifica avviene tramite `password_verify()`, che confronta la password fornita con l'hash memorizzato in modo sicuro. Questo garantisce la protezione delle credenziali anche in caso di compromissione del database.
-
-- *Prevenzione Cross-site scripting*: Ogni dato dinamico stampato nell'HTML viene sanitizzato tramite `htmlspecialchars()`, che converte i caratteri speciali (come `<`, `>`, `"`, `'`, `&`) in entità HTML sicure. Questo impedisce l'esecuzione di script JavaScript malevoli iniettati attraverso input utente, proteggendo sia gli utenti che il sistema da attacchi XSS.
-
-- *Prevenzione Cross-site request forgery*: ogni form che modifica lo stato del sistema (login, registrazione, creazione/modifica prodotti) è protetto da un token CSRF, generato e memorizzato in sessione. La funzione `verifyCsrfToken()` valida il token ricevuto confrontandolo con quello in sessione usando `hash_equals()`, una funzione timing-safe che previene attacchi di tipo timing. Il token viene iniettato come campo nascosto in ogni form e validato nel controller prima di processare qualsiasi operazione, garantendo che la richiesta provenga effettivamente dal sito e non da una fonte malevola.
-
-- *Gestione sicura delle sessioni*: La sessione viene avviata con controllo preventivo tramite `session_status()` per evitare errori. I dati sensibili in sessione sono ridotti al minimo necessario, e il logout effettua una pulizia completa della sessione con `session_destroy()`.
-
-- *Configurazione esternalizzata*: Le credenziali del database e altre informazioni sensibili sono definite nel file `conf.php`, che è escluso dal sistema di versionamento Git tramite `.gitignore`. Questo previene l'esposizione accidentale di credenziali in repository pubblici.
-
-- *Prepared statements:* L'interazione con il database si serve di metodi che utilizzano esclusivamente _Prepared Statements_ con parametri vincolati. Questo approccio elimina il rischio di SQL injection impedendo l'inserimento di codice SQL malevolo.
+- *utils/validation.php*: Contiene le funzioni di validazione lato server per tutti i tipi di input (es. password, codice fiscale). Queste validazioni rafforzano quelle client-side, implementando il principio della *doppia validazione* come best practice di sicurezza perché, per quanto l'utente possa sembrare inoffensivo, la fiducia nel client è una pratica su cui non vogliamo far affidamento.
 
 === Logica di Business
-La logica delle prenotazioni rappresenta uno dei componenti più critici del sistema. Il metodo `checkDateAvailability()` implementa un algoritmo di verifica della disponibilità che controlla tutte le prenotazioni esistenti per il prodotto specificato (barca o esperienza), verificando la sovrapposizione temporale tra la nuova richiesta e le prenotazioni attive usando tre condizioni logiche che coprono tutti i possibili casi di overlap. \
+La logica delle prenotazioni rappresenta uno dei componenti più critici del sistema. Il metodo `checkDateAvailability()` implementa un algoritmo di verifica della disponibilità che controlla tutte le prenotazioni esistenti per il prodotto specificato (barca o esperienza), verificando la sovrapposizione temporale tra la nuova richiesta e le prenotazioni attive usando tre condizioni logiche che coprono tutti i possibili casi di overlap, un labirinto di logica booleana necessario ad evitare che la gestione del calendario si trasformi in un’anarchia totale. \
 Questa verifica viene eseguita sempre prima di confermare una prenotazione, garantendo che non si verifichino doppie prenotazioni dello stesso prodotto per periodi sovrapposti.
 
 Il sistema implementa il pattern *Post-Redirect-Get* per tutte le operazioni che modificano lo stato (registrazioni, login, creazione contenuti). Dopo aver processato una richiesta POST, il server:
@@ -317,7 +288,7 @@ Il sistema implementa il pattern *Post-Redirect-Get* per tutte le operazioni che
 3. Esegue un redirect HTTP (header `Location:`) verso una pagina di visualizzazione
 4. La pagina di destinazione mostra il messaggio recuperandolo dalla sessione
 
-Questo approccio previene la ri-sottomissione accidentale del form (tramite refresh o navigazione back), migliora l'esperienza utente e rende il flusso dell'applicazione più robusto e prevedibile.
+Questo approccio previene la ri-sottomissione accidentale del form (tramite refresh o navigazione back), migliora l'esperienza utente e rende il flusso dell'applicazione più robusto e prevedibile, evitandoci di dover gestire l'incubo di dati duplicati generati dall'impazienza di chi clicca ripetutamente sul tasto 'aggiorna'.
 
 ==== Sistema CRUD Amministrativo
 Il pannello amministrativo implementa operazioni complete di Create, Read, Update e Delete per tutte le entità dinamiche:
@@ -338,16 +309,46 @@ Questo controllo è applicato in tre punti critici del flusso di prenotazione:
 Se il prodotto non è più disponibile l'utente riceve un messaggio che chiarisce il problema ed invita l'utente a selezionare una data alternativa, offrendo un'esperienza utente chiara anche in situazioni di alta concorrenza.
 
 ==== Validazione
-Il sistema implementa il principio della *doppia validazione* come best practice di sicurezza, controllando ogni input non solo lato client (JavaScript) ma anche lato server (PHP). La validazione _server-side_ rappresenta la principale barriera di sicurezza, garantendo che anche in caso di JavaScript disabilitato, o di richieste manipolate, il server rifiuti sempre dati non conformi. \
+Il sistema implementa il principio della *doppia validazione* come best practice di sicurezza, controllando ogni input non solo lato client (JavaScript) ma anche lato server (PHP). La validazione _server-side_ rappresenta la principale barriera di sicurezza, garantendo che anche in caso di JavaScript disabilitato, o di richieste manipolate da utenti un po' troppo curiosi, il server rifiuti sempre dati non conformi. \
 Ogni dato ricevuto via POST request viene ricontrollato:
 - *Email*: Verifica tramite `filter_var()` con flag `FILTER_VALIDATE_EMAIL` secondo lo standard RFC 822
 - *Password*: Controllo di lunghezza minima (8 caratteri), presenza di maiuscole, minuscole, numeri e caratteri speciali tramite espressioni regolari
 - *Codice Fiscale*: Validazione del formato (16 caratteri alfanumerici) tramite pattern regex
 - *Nomi e Cognomi*: Verifica che contengano solo lettere e spazi, escludendo stringhe vuote o composte solo da spazi
 
+=== Sessioni, Sicurezza e Protezione dei Dati
+Il mantenimento dello stato utente è gestito tramite un sistema dedicato nel file `session.php`. All'avvio lo script verifica che la sessione non sia già attiva tramite evitando errori di sessioni duplicate.
+Sono state poi implementate funzioni helper per semplificare i controlli di accesso trasversali:
+
+- `isLogged()`: Verifica la presenza della chiave `user` nella sessione, indicando un utente autenticato.
+- `isAdmin()`: Controlla se l'utente corrente possiede il flag di amministratore.
+- `requireLogin()`: Posta all'inizio delle pagine protette, interrompe l'esecuzione e reindirizza alla pagina di login se l'utente non è autenticato.
+- `requireGuest()`: Funzione complementare che reindirizza gli utenti già loggati, utile per pagine come login e registrazione.
+- `requireAdmin()`: Blocca l'accesso alle pagine amministrative agli utenti non privilegiati, mostrando una pagina di errore 403.
+
+Questo approccio permette di proteggere le risorse sensibili con una singola riga di codice all'inizio di ogni controller, mantenendo il sistema sicuro e il codice leggibile.
+
+=== Sicurezza lato Server
+La sicurezza è stata considerata prioritaria in ogni fase dello sviluppo backend. Oltre alla validazione degli input, sono state implementate le seguenti misure di protezione:
+
+- *Prevenzione SQL injection*: Tutti i metodi della classe `DBConnection` utilizzano esclusivamente Prepared Statements. I parametri vengono vincolati alla query tramite `bind_param()` e mai concatenati direttamente nelle stringhe SQL, eliminando alla radice il rischio di iniezione di codice malevolo. Questo approccio è applicato uniformemente a tutte le query, dalle più semplici SELECT alle operazioni complesse di JOIN multi-tabella.
+
+- *Hashing delle password*: Le password non vengono mai salvate in chiaro nel database. In fase di registrazione, viene utilizzata la funzione `password_hash()` con l'algoritmo `PASSWORD_DEFAULT` (attualmente Bcrypt), che genera automaticamente un salt casuale e produce un hash sicuro. Al login, la verifica avviene tramite `password_verify()`, che confronta la password fornita con l'hash memorizzato in modo sicuro. Questo garantisce la protezione delle credenziali anche in caso di compromissione del database, di modo che in caso di _leak_ un malintenzionato possa recuperare qualcosa di utile solo sostenendo lunghe sessioni di _brute force_.
+
+- *Prevenzione Cross-site scripting*: Ogni dato dinamico stampato nell'HTML viene sanitizzato tramite `htmlspecialchars()`, che converte i caratteri speciali (come `<`, `>`, `"`, `'`, `&`) in entità HTML sicure. Questo impedisce l'esecuzione di script JavaScript malevoli iniettati attraverso input utente, proteggendo sia gli utenti che il sistema da attacchi XSS.
+
+- *Prevenzione Cross-site request forgery*: ogni form che modifica lo stato del sistema (login, registrazione, creazione/modifica prodotti) è protetto da un token CSRF, generato e memorizzato in sessione. La funzione `verifyCsrfToken()` valida il token ricevuto confrontandolo con quello in sessione usando `hash_equals()`, una funzione timing-safe che previene attacchi di tipo timing. Il token viene iniettato come campo nascosto in ogni form e validato nel controller prima di processare qualsiasi operazione, garantendo che la richiesta provenga effettivamente dal sito e non da una fonte malevola.
+
+- *Gestione sicura delle sessioni*: La sessione viene avviata con controllo preventivo tramite `session_status()` per evitare errori. I dati sensibili in sessione sono ridotti al minimo necessario, e il logout effettua una pulizia completa della sessione con `session_destroy()`.
+
+- *Configurazione esternalizzata*: Le credenziali del database e altre informazioni sensibili sono definite nel file `conf.php`, che è escluso dal sistema di versionamento Git tramite `.gitignore`. Questo previene l'esposizione accidentale di credenziali in repository pubblici.
+
+- *Prepared statements:* L'interazione con il database si serve di metodi che utilizzano esclusivamente _Prepared Statements_ con parametri vincolati. Questo approccio elimina il rischio di SQL injection impedendo l'inserimento di codice SQL malevolo.
+
+
 === Database (SQL)
 L'interazione con il database è completamente incapsulata nella classe `DBConnection`. Questa architettura offre le seguenti funzionalità:
-- *Gestione della connessione:* La connessione al database segue il pattern di apertura/chiusura esplicita. `openConnection()`apre la connessione solo quando necessario, imposta il charset UTF-8 per supportare caratteri internazionali e gestisce errori di connessione in modo sicuro. `closeConnection()` chiude la connessione al termine di ogni operazione, liberando risorse e prevenendo connection leak.
+- *Gestione della connessione:* La connessione al database segue il pattern di apertura/chiusura esplicita. `openConnection()`apre la connessione solo quando necessario, imposta il charset UTF-8 per supportare caratteri internazionali, di modo da non dover vedere trasformare una "è" in un rombo con il punto interrogativo, e gestisce errori di connessione in modo sicuro. `closeConnection()` chiude la connessione al termine di ogni operazione, liberando risorse e prevenendo connection leak.
 - *Prepared statements:* oltre alla funzione relativa alla sicurezza citata in precedenza, i _Prepared Statements_ separano la struttura della query dai dati e migliorano le performance grazie al piano di esecuzione pre-compilato dal database.
 - *Gestione robusta degli errori:* La classe implementa una gestione sofisticata degli errori attraverso codici di ritorno specifici. Questo sistema permette al controller di fornire feedback precisi all'utente ("Email già registrata") senza esporre dettagli tecnici del database. I blocchi `try-catch` intercettano le eccezioni MySQL e le trasformano in codici di errore gestibili, prevenendo la visualizzazione di stack trace sensibili. Nel dettaglio i codici impiegati sono:
   - `false`: Errore generico nell'operazione
@@ -371,50 +372,60 @@ Le entità implementate nel database sono:
 - *Articolo_Blog_Extra*: Struttura i contenuti complessi degli articoli (es. liste puntate, sezioni "Cosa portare").
 - *Media*: centralizza la gestione delle immagini.
 
-= Accessibilità
-L'accessibilità è stata un pilastro del progetto, guidata dai principi studiati durante il corso e dalle linee guida internazionali.
+= Accessibilità e Testing
+L'accessibilità è stata un pilastro del progetto, guidata dai principi studiati durante il corso e dalle linee guida internazionali. L'obiettivo è stato quello di garantire la fruizione dei contenuti e delle funzionalità, per quanto possibile, a tutte le categorie di utenti indipendentemente da eventuali disabilità fisiche, cognitive o limitazioni tecnologiche, in conformità con le linee guida WCAG 2.1 e i principi PURO (Percepibile, Utilizzabile, Comprensibile, Robusto). Alla fase di sviluppo è seguita poi quella di validazione e _testing_, un vero e proprio bagno di umiltà che ci ha permesso di individuare tutta quella moltitudine di errori e mancanze sfuggiteci.
 
-- *Principi WCAG e Struttura Semantica:* Il progetto aderisce ai quattro principi fondamentali delle WCAG (Web Content Accessibility Guidelines), riassunti nell'acronimo PURO: Percepibile, Utilizzabile, Comprensibile e Robusto. L'uso rigoroso di HTML semantico (`<main>`, `<nav>`, `<header>`, `<footer>`) fornisce una struttura chiara e prevedibile, che facilita l'interpretazione dei contenuti da parte delle tecnologie assistive come gli _screen reader_.
-- *Navigazione da Tastiera:* Il sito è stato progettato per essere completamente navigabile utilizzando esclusivamente la tastiera. È stato verificato per ogni pagina che l'ordine di focus mediante tabulazione avvenisse correttamente. \ È stata poi implementato il link "Salta al contenuto" per permettere agli utenti di _screen reader_ di bypassare i blocchi di navigazione ripetitivi e a loro superflui.
+== Accessibilità
+Il garantire l'accessibilità del sito a tutte le categorie di utente ha richiesto accorgimenti su tutte le componenti del progetto: struttura, presentazione e comportamento. Vengono elencati di seguito tutte le attenzioni riposte, al netto di inevitabili dimenticanze:
 
-- *Contrasto Cromatico e Colori:* È stata prestata particolare attenzione ad utilizzare una palette cromatica che mantenesse i rapporti cromatici tali da rispettare almeno il livello AA delle WCAG pur rimanendo esteticamente gradevole, operazione che ci è costata più tempo di quanto vorremmo ammettere. Inoltre, l'implementazione di un selettore di tema light/dark offre agli utenti la possibilità di scegliere la modalità di visualizzazione con il contrasto che preferiscono, migliorando ulteriormente la leggibilità.
-- *Contrasto Cromatico e Colori:* È stata prestata particolare attenzione al verificare che i rapporti cromatici tra gli elementi a schermo fossero di almeno 4.5, il rispetto del livello AA delle WCAG ci è costato più tempo di quanto vorremmo ammettere. Inoltre, l'implementazione di un selettore di tema light/dark offre agli utenti la possibilità di scegliere la modalità di visualizzazione con il contrasto che preferiscono, migliorando ulteriormente la leggibilità.
+- *Principi WCAG e Struttura Semantica:* Abbiamo utilizzato con rigore i tag semantici HTML (`<main>`, `<nav>`, `<header>`, `<footer>`) per fornire una mappa logica immediata del sito, facilitando l'interpretazione dei contenuti da parte delle tecnologie assistive come gli _screen reader_.
 
-- *Alternative Testuali:* Ogni immagine con contenuto informativo, quindi non puramente decorativa, è stata dotata di un attributo `alt` descrittivo di modo tale da veicolare informazioni grafiche attraverso strumenti di sintesi vocale. I form amministrativi che consentono l'aggiunta di prodotti e articoli del blog includono un campo per il "Testo Alternativo", assicurando che questa buona norma venga applicata a tutti i contenuti che in futuro verranno inseriti.
+- *Navigazione da Tastiera:* Il sito è stato progettato per essere completamente navigabile utilizzando esclusivamente la tastiera. Attraverso l'estensione _Wave_ è stato verificato per ogni pagina che l'ordine di focus mediante tabulazione avvenisse correttamente. 
 
-- *WAI-ARIA:* Dove necessario, sono stati utilizzati attributi WAI-ARIA (Accessible Rich Internet Applications) come `aria-expanded`, `aria-label` e `aria-required` per arricchire semanticamente i componenti dinamici. Questo permette di rendere il loro stato e la loro funzione pienamente comprensibili per gli _screen reader_.
+- *Salta al contenuto:* È stato implementato il link "Salta al contenuto" per permettere agli utenti di _screen reader_ di saltare i blocchi di navigazione ripetitivi e a loro superflui.
 
-- *Test con Strumenti:* L'accessibilità è stata verificata attraverso ...
+- *Dettagli semantici:* Abbiamo riposto attenzione a quegli attributi che rimangono invisibili agli utenti comuni ma che sono fondamentali per _ranking_ e per la corretta sintesi vocale attraverso _screen reader_. L'uso dell'attributo `lang` (principalmente per termini in inglese e in francese) evita una riproduzione maccheronica della sintesi vocale, mentre il tag `<abbr>` e l'attributo `datetime` rendono acronimi e date _machine-readable_. 
 
-= Testing e Validazione
-La fase di testing è essenziale per garantire che il prodotto finale sia corretto, performante e conforme ai requisiti. Questa sezione documenta il processo di verifica rigoroso a cui è stato sottoposto il sito SailUP, coprendo la validazione del codice, l'accessibilità, i test funzionali e la compatibilità cross-browser.
+- *Semantica dinamica:* Gran parte dei contenuti di SailUP è dinamica. Per evitare di inserire manualmente i tag di accessibilità ad ogni occorrenza, abbiamo implementato nel modulo helpers.php una serie di funzioni di formattazione che, consultando dei dizionari presenti nella directory `/config`, automatizzano l'inserimento di attributi e tag. `formatTextAbbr` si occupa di trasformare automaticamente acronimi (es. GPS, TV) ed unità di misura (es. m, h, cv) nel tag `abbr` con il relativo title esplicativo, mentre `formatTextLang` si occupa di identificare i termini stranieri (es. skipper, champagne) assegnandogli il corretto attributo `lang`.
 
-== Validazione del Codice
+- *Alternative Testuali:* Ogni immagine che aggiungesse attraverso il contenuto grafico informazioni aggiuntive rispetto a quelle già presenti nel contesto, quindi che non fosse puramente decorativa, è stata dotata di un attributo `alt` descrittivo. Alle immagini puramente grafiche è stato lasciato l'attributo `alt` vuoto di modo da far capire attraverso lo _screen reader_ che l'attributo è stato lasciato vuoto di proposito e non per una mancanza in fase di sviluppo. I form amministrativi che consentono l'aggiunta di prodotti e articoli del blog includono inoltre un campo opzionale che permette all'occorrenza di riempire questo campo.
 
-== Test Funzionali
-Sono stati condotti test approfonditi sulla validazione degli input utente per garantire la robustezza e la sicurezza dei form. Di seguito le principali regole di validazione implementate lato client:
+- *Contrasto Cromatico e Colori:* È stata prestata particolare attenzione ad utilizzare una palette cromatica che mantenesse i rapporti cromatici tali da rispettare almeno il livello AA delle WCAG pur rimanendo esteticamente gradevole, operazione che ci è costata più tempo di quanto vorremmo ammettere. L'implementazione di un selettore di tema light/dark offre inoltre agli utenti la possibilità di scegliere la modalità di visualizzazione che preferiscono, migliorando ulteriormente la leggibilità.
 
-*Form di Registrazione:*
-- Nome/Cognome: Minimo 2 caratteri, solo lettere.
-- Codice Fiscale: 16 caratteri alfanumerici.
-- Email: Formato valido (es. utente\@dominio.it).
-- Password: Minimo 8 caratteri, deve contenere almeno una lettera maiuscola, una minuscola e un numero.
-- CAP: 5 cifre numeriche.
-- Provincia: 2 lettere maiuscole.
-- Privacy Policy: Accettazione obbligatoria.
+- *WAI-ARIA:* Poiché gran parte di SailUP vive di interazioni in tempo reale, abbiamo sfruttato gli attributi WAI-ARIA per evitare che l'esperienza d'uso si trasformasse in un silenzio assordante per chi usa uno screen reader. Abbiamo utilizzato `aria-required`, `aria-live="polite"` e i ruoli `status/alert` per fare in modo che venissero comunicati i campi obbligatori e i messaggi di feedback. Attraverso l'uso di `aria-describedby` abbiamo collegato ogni campo di input alle proprie istruzioni e ai messaggi d'errore specifici. Nella navigazione abbiamo sfruttato `aria-current="page"` e la coppia `aria-expanded/aria-controls` per comunicare dinamicamente lo stato del menu mobile. Abbiamo cercato di rendere l'interfaccia meno generica delegando al backend la generazione di `aria-label` descrittivi, ad esempio nelle card dei prodotti un link 'Dettagli' avrà associato il nome del prodotto. Per pulire il flusso audio da rumore inutile, infine, abbiamo sfruttato `aria-hidden="true"` per evitare che icone puramente decorative ed emoji venissero lette. Qualora queste icone venissero inserite attraverso foglio di stile CSS abbiamo provveduto a sostituirle con immagini.
 
-*Form di Login:*
-- Email: Campo obbligatorio e in formato valido.
-- Password: Campo obbligatorio, minimo 8 caratteri.
+== Validazione e Testing
+Il codice sorgente è stato passato al setaccio per individuare quegli errori che, inevitabilmente, passano inosservati durante la fase di sviluppo. Inutile negarlo, ottenere un 'bollino verde' da un validator garantisce un rilascio istantaneo di dopamina.
 
-*Form Creazione Prodotto/Blog (Admin):*
-È stata verificata la validazione di tutti i campi obbligatori per garantire la completezza dei dati. Per i prodotti, i campi validati includono nome, tipo, descrizione, prezzo, capacità, URL immagine e testo alternativo. Per gli articoli del blog, i controlli si applicano a titolo, categoria, data, estratto, contenuto, URL immagine e testo alternativo.
+=== Validazione
 
-== Compatibilità e Design Responsivo
-Il sito è stato testato sui principali browser web moderni, tra cui Google Chrome, Mozilla Firefox, Apple Safari e Microsoft Edge, per assicurare una resa grafica e funzionale coerente. Il design responsivo è stato verificato su un'ampia gamma di risoluzioni, simulando dispositivi che vanno dai piccoli smartphone ai tablet, fino ai monitor desktop di grandi dimensioni, per garantire un'esperienza utente ottimale su ogni device.
+- *Validatori W3C HTML e CSS:* Sono stati utilizzati per assicurare che la struttura HTML5 e i fogli di stile siano conformi agli standard internazionali. Al netto di qualche avviso relativo all'uso delle variabili CSS (ces. `var(--colore-primario)`), il codice ha superato i test senza errori critici.
+
+- *Total Validator:* Abbiamo utilizzato questo strumento per una verifica più completa, permettendoci di testare contemporaneamente la validità dell'HTML, la conformità alle linee guida WCAG e l'integrità dei collegamenti ipertestuali. Se da un lato ci ha permesso di scovare diverse sviste sugli attributi ARIA, dall'altro abbiamo dovuto ignorare molti falsi positivi riguardanti lo spell-check.
+
+- *WCAG Contrast Checker:* Questo strumento è stato prezioso per analizzare e correggere i contrasti tra gli elementi presenti all'interno delle pagine. Questo _tool_ ci ha messo di fronte alla dura realtà che quel blu che ci piaceva tanto, purtroppo, non è leggibile per tutti.
+
+- *WAVE:* Oltre a condurre un secondo controllo sui contrasti, abbiamo sffruttato _Wave_ per verificare che l'ordine di navigazione da tastiera fosse corretto. Oltre a questo ci ha permesso di individuare altri errori relativi alle intestazioni. Il _tool_ ha segnalato alcuni warning per '_redundant link_', riferendosi al doppio collegamento alla _Home_ presente sia sul logo che nel menu. In questo caso abbiamo esercitato il nostro diritto di libero arbitrio ignorandolo: rimuovere uno dei due sarebbe stato tecnicamente 'pulito' secondo il _tool_ ma poco intuitivo per un utente reale.
+
+=== Test
+Sono stati condotti test approfonditi sulla validazione degli input utente per garantire la robustezza e la sicurezza dei form. Ecco il resoconto delle principali manovre di verifica effettuate:
+
+- *Form di registrazione:* Abbiamo provato ad immetere nei campi del form di registrazione input errati per verificare che i controlli inseriti funzionassero, come ad esempio nome e cognome di minimo 2 caratteri, codice fiscale di 16 caratteri alfanumerici, email in un un formato valido (utente\@dominio.it), password di minimo 8 caratteri contenente almeno una lettera maiuscola una minuscola e un numero ed accettazione obbligatoria per la Privacy Policy.
+
+- *Form creazione prodotto e blog (Admin):* È stata verificata la validazione di tutti i campi obbligatori per garantire la completezza dei dati. Per i prodotti, i campi validati includono nome, tipo, descrizione, prezzo, capacità e URL immagine. Per gli articoli del blog, i controlli si applicano a titolo, categoria, data, estratto, contenuto, URL immagine e testo alternativo.
+
+- *Controllo degli accessi:* È stata verificata l'efficacia del sistema di controllo accessi tentando di forzare l'URL verso pagine protette (es. la dashboard amministrativa o l'area personale di un altro utente) partendo da uno stato di utente non autenticato o privo di privilegi. Sono stati inoltre testati i percorsi verso risorse inesistenti per verificare la corretta gestione delle pagine di errore 404.
+
+- *Verifica della disponibilità:* La logica di prenotazione è stata testata simulando diverse richieste di noleggio per lo stesso prodotto, effettuando ad esempio prove di prenotazione in date con sovrapposizioni rispetto a prenotazioni già confermate.
+
+- *Tecnologie assistive:* La piattaforma è stata navigata utilizzando screen reader quali VoiceOver e NVDA per assicurarsi che la navigazione fosse comprensibile anche attraverso l'uso di questi strumenti di sintesi vocale. È stato ad esempio controllato che gli elementi interattivi venissero correttamente etichettati, che i cambiamenti di elemnti a schermo venissero comunicati o che elementi non necessari (es. emoji) non venissero letti. Tutto ciò ci ha ricordato che il codice perfetto non esiste, specialmente se deve essere interpretato da uno _screen reader_.
+
+- *Compatibilità e Design Responsivo:* Il sito è stato testato sui principali _browser_ web moderni, tra cui Google Chrome, Opera, Mozilla Firefox, Safari e Microsoft Edge per accertarci che venissero renderizzati correttamente. Il design responsivo è stato verificato a diverse risoluzioni simulando dispositivi che vanno da smartphone ai tablet, fino ai monitor desktop. Non sono state invece prese in considerazione versioni più vecchie dei _browser_, considerato il profilo dell'utenza target del sito orientata all'utilizzo di dispositivi moderni.
 
 = Suddivisione del Lavoro
-Sebbene il progetto sia stato il risultato di uno sforzo collaborativo e di una continua sinergia tra i membri del gruppo, le attività sono state suddivise per aree di competenza principale al fine di ottimizzare il flusso di lavoro.
+L'evoluzione del progetto è stata meno lineare del previsto. Inizialmente composto da un gruppo di quattro persone, il team è andato incontro ad una riorganizzazione procedendo ad un fork del progetto per ultimare il lavoro in tre.
+
+Questa transizione ha reso la suddivisione dei compiti non definibile in maniera netta. Parti del codice non direttamente scritto dagli attuali membri del gruppo è stato oggetto di correzioni e miglioramenti. Nella tabella seguente proveremo a definire nel miglior modo possibile la suddivisione del lavoro: 
 
 #table(
   columns: (30%, 1fr),
@@ -426,17 +437,18 @@ Sebbene il progetto sia stato il risultato di uno sforzo collaborativo e di una 
     text(fill: white)[*Membro del Gruppo*],
     text(fill: white)[*Aree di Contributo Principale*],
   ),
-  [Davide Biasuzzi], [],
-  [Hossam Ezzemouri], [],
-  [Francesco Marcon], [],
-  [Alberto Reginato], []
+  [Davide Biasuzzi], [Principale responsabile della parte backend (PHP e database), ha lavorato in ambito frontend alle pagine di errore e ...(HTML e CSS).],
+  [Francesco Marcon], [Parte frontend delle principali pagine del sito (HTML, CSS e JS), ha alvorato in ambito backend a funzioni quali ...],
+  [Alberto Reginato], [Parte frontend delle principali pagine del sito (HTML, CSS e JS), ha alvorato in ambito backend alle funzioni per la generazione dinamica dei tag e attributi html.],
+  [Hossam Ezzemouri], [Ha creato problemi],
 )
 
 = Conclusioni e Sviluppi Futuri
-Nonostante la complessità e le sfide tecniche affrontate durante lo sviluppo, lavorare a questo progetto si è rivelato un'esperienza estremamente formativa e stimolante. L'implementazione di un sistema completo end-to-end, dalla progettazione del database alla realizzazione dell'interfaccia utente, passando per la gestione della sicurezza e dell'accessibilità, ci ha permesso di consolidare e applicare concretamente le competenze acquisite durante il corso. SailUP rappresenta un lavoro di cui siamo orgogliosi e che consideriamo un'aggiunta significativa al nostro portfolio professionale, in grado di dimostrare la nostra capacità di sviluppare applicazioni web complete, sicure e di qualità.
+Messi di fronte alla complessità delle sfide tecniche (e umane) che a volte si sono rivelate più del previsto, lavorare a questo progetto è stata un'esperienza estremamente formativa. 
+SailUP non è probabilmente l'innovazione che cambierà le sorti del turismo globale ma è un lavoro di cui siamo orgogliosi. Ci ha dato modo di dimostrare la nostra capacità di costruire un'applicazione web che non sia solo funzionante ma anche solida, sicura e navigabile da tutti.
 
 == Sviluppi Futuri
-La base tecnologica solida e modulare di SailUP si presta a numerose evoluzioni future. Tra le possibili implementazioni, si possono ipotizzare:
+La base tecnologica di SailUP è stata pensata per essere modulare quindi potenzialmente, se non avessimo altri esami da preparare, espandibile. Tra le evoluzioni possibili ipotizziamo:
 
 - *Sistema di recensioni e valutazioni:* Aggiungere una funzionalità che permetta agli utenti di lasciare recensioni e valutazioni sui prodotti, aumentando la fiducia e fornendo un feedback prezioso.
 
@@ -444,4 +456,4 @@ La base tecnologica solida e modulare di SailUP si presta a numerose evoluzioni 
 
 - *Notifiche automatiche via email:* Sviluppare un sistema per l'invio automatico di email di conferma, promemoria e aggiornamenti relativi alle prenotazioni effettuate dagli utenti.
 
-- *Localizzazione:* Introdurre supporto alle lingue più diffuse tra i turisti che affollano il Golfo di Napoli, come ad esempio francese, inglese e spagnolo.
+- *Localizzazione:* SailUP parla attualmente italiano e un po' di inglese per i sintetizzatori vocali, ma il mercato turistico potrebbe richiedere un supporto multilingue completo.
