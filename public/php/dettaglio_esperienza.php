@@ -195,7 +195,7 @@ $experienceName = $experience['Nome_Prodotto'] ?? 'Esperienza SailUP';
 $experienceNameVisual = formatText($experienceName);
 $experienceTagline = $experience['Descrizione_Breve'] ?? 'Dettagli in arrivo...';
 $heroImage = resolveImageUrl($experience['URL_Media'] ?? null);
-$heroAlt = 'Vista di ' . $experienceName;
+$heroAlt = $experience['Testo_Alternativo'] ?? '';
 
 $durationRaw = $experience['Durata_Ore'];
 $duration = ($durationRaw !== null && $durationRaw !== '')

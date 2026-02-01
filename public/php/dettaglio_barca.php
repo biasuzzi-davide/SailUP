@@ -202,7 +202,7 @@ if (!$productDetail) {
 }
 
 $heroImage = resolveImageUrl($productDetail['URL_Media'] ?? null);
-$heroAlt = $productDetail ? 'Immagine di ' . $productName : 'Immagine in evidenza';
+$heroAlt = $productDetail['Testo_Alternativo'] ?? '';
 
 $briefText = $productDetail['Descrizione_Breve'] ?? 'Descrizione breve in arrivo.';
 $productType = $productDetail['Tipologia_Prodotto'] ?? $productDetail['Tipo_Prodotto'] ?? '—';

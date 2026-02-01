@@ -37,7 +37,7 @@ $articleDateFormatted = formatItalianDate($articleDate);
 $readingTime = max(1, (int) ($article['Tempo_Lettura'] ?? 0));
 
 $articleImageSrc = resolveImageUrl($article['Articolo_URL'] ?? null);
-$articleImageAlt = $article['Articolo_Alt'] ?: 'Immagine per ' . $articleTitleSafe;
+$articleImageAlt = $article['Articolo_Alt'] ?? '';
 
 $authorName = trim(($article['Autore_Nome'] ?? '') . ' ' . ($article['Autore_Cognome'] ?? ''));
 if ($authorName === '') {
@@ -54,7 +54,7 @@ if (!empty($article['Autore_Data_Registrazione'])) {
 }
 $authorDescription = 'Collabora con SailUP dal ' . ($registrationYear ?: 'primo equipaggio') . ' e condivide rotte curate per chi ama il mare.';
 $authorImageSrc = resolveImageUrl($article['Autore_URL'] ?? null);
-$authorImageAlt = $article['Autore_Alt'] ?: 'Foto profilo di ' . $authorName;
+$authorImageAlt = $article['Autore_Alt'] ?? '';
 
 $html = buildPage('../pages/blog_articolo.html', $_SERVER['PHP_SELF']);
 

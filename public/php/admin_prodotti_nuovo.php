@@ -261,7 +261,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!$hasNewImage && $urlImg === '') {
             $errors[] = 'Seleziona un\'immagine per il prodotto';
         }
-        if ($altImg === '') $errors[] = 'Testo alternativo obbligatorio';
         if ($tipo === 'noleggio' && $tipologia === '') {
             $errors[] = 'Seleziona la tipologia di barca per il noleggio';
         }
