@@ -561,7 +561,7 @@ function buildSimpleProductCard(array $prodotto, string $tipo = 'noleggio'): str
     }
 
     $imageUrl = resolveImageUrl($prodotto['URL_Media'] ?? null);
-    $altText = $prodotto['Testo_Alternativo'] ?? 'Immagine non disponibile';
+    $altText = $prodotto['Testo_Alternativo'] ?? '';
 
     $rawName = $prodotto['Nome_Prodotto'] ?? 'Prodotto';
     $productNameVisual = formatText($rawName);
@@ -608,7 +608,7 @@ function buildNoleggioCatalogCard(array $prodotto): string
     }
 
     $imageUrl = resolveImageUrl($prodotto['URL_Media'] ?? null);
-    $altText = $prodotto['Testo_Alternativo'] ?? 'Immagine non disponibile';
+    $altText = $prodotto['Testo_Alternativo'] ?? '';
 
     $rawName = $prodotto['Nome_Prodotto'] ?? 'Prodotto';
     $productNameVisual = formatText($rawName);
@@ -712,7 +712,7 @@ function buildExperienceCatalogCard(array $prodotto, array $lingueDisponibili = 
     }
 
     $imageUrl = resolveImageUrl($prodotto['URL_Media'] ?? null);
-    $altText = $prodotto['Testo_Alternativo'] ?? 'Immagine non disponibile';
+    $altText = $prodotto['Testo_Alternativo'] ?? '';
 
     $rawName = $prodotto['Nome_Prodotto'] ?? 'Esperienza';
     $productNameVisual = formatText($rawName);
@@ -817,7 +817,7 @@ function buildBlogArticleCard(array $articolo): string
     }
 
     $imageUrl = resolveImageUrl($articolo['URL_Media'] ?? null);
-    $altText = $articolo['Testo_Alternativo'] ?? 'Immagine articolo non disponibile';
+    $altText = $articolo['Testo_Alternativo'] ?? '';
     $titolo = formatText($articolo['Titolo'] ?? 'Articolo SailUP');
     $descrizione = formatText($articolo['Descrizione_Breve'] ?? 'Nessuna descrizione disponibile.');
     $detailUrl = 'blog_articolo.php?id=' . rawurlencode($idArticolo);

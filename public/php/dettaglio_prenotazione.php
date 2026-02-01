@@ -39,7 +39,7 @@ if ($booking === null || $booking === false) {
 }
 
 $imgUrl = resolveImageUrl($booking['URL_Media'] ?? null);
-$imgAlt = $booking['Testo_Alternativo'] ?? 'Immagine prodotto';
+$imgAlt = $booking['Testo_Alternativo'] ?? '';
 $stato = $booking['Stato_Prenotazione'] ?? 'In Attesa';
 $badgeClass = 'pending';
 if ($stato === 'Confermata') $badgeClass = 'completed';

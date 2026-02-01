@@ -123,8 +123,9 @@
     }
 
     function validateAlt() {
-        if (altInput.value.trim() === '') { showFieldError(altInput, 'Il testo alternativo è obbligatorio'); return false; }
-        clearFieldError(altInput); return true;
+        // Campo opzionale, si pulisce solo l'errore se presente
+        clearFieldError(altInput); 
+        return true;
     }
 
     function validateStatus() {

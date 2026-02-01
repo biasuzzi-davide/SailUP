@@ -207,7 +207,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($dataPub === '') $errors[] = 'Inserisci la data di pubblicazione';
         $hasNewImage = isset($_FILES['post_image']) && $_FILES['post_image']['error'] !== UPLOAD_ERR_NO_FILE;
         if (!$hasNewImage && $urlImg === '') $errors[] = 'Immagine obbligatoria';
-        if ($altImg === '') $errors[] = 'Testo alternativo obbligatorio';
         if ($readingTime < 1) $errors[] = 'Inserisci il tempo medio di lettura in minuti';
 
         $extras = [];

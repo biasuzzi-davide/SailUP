@@ -257,10 +257,11 @@
           </div>
 
           <div class="form-group">
-            <label for="Testo_Alternativo">Testo Alternativo Immagine <abbr title="Campo obbligatorio">*</abbr></label>
+            <label for="Testo_Alternativo">Testo Alternativo Immagine</label>
             <input type="text" id="Testo_Alternativo" name="Testo_Alternativo"
-              placeholder="Descrizione dell'immagine per accessibilità, inserire solo se aggiunge informazioni."
-              value="[IMG_ALT]" required aria-describedby="Testo_Alternativo-error">
+              placeholder="es. Barca a vela con tre alberi al tramonto"
+              value="[IMG_ALT]" aria-describedby="Testo_Alternativo-hint Testo_Alternativo-error">
+            <span id="Testo_Alternativo-hint" class="field-hint">Inserire solo se l'immagine trasmette informazioni rilevanti per utenti non vedenti</span>
             <span id="Testo_Alternativo-error" class="field-error" role="alert"></span>
           </div>
         </fieldset>
