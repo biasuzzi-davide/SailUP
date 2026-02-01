@@ -2509,7 +2509,6 @@ li[aria-current="page"] {
 }
 
 .summary-item.total-row {
-  border-top: 2px solid var(--col-border);
   padding-top: 1em;
   margin-top: 0.5em;
 }

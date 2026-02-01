@@ -6,25 +6,23 @@
    1. TIPOGRAFIA FLUIDA MOBILE
    ========================================= */
 
-@supports (font-size: clamp(1rem, 1vi, 1rem)) {
-    :root {
-        --fs-sm: clamp(0.75rem, 0.15vi + 0.7rem, 0.89rem);
-        --fs-base: clamp(0.95rem, 0.38vi + 0.85rem, 1.19rem);
-        --fs-md: clamp(1.15rem, 0.65vi + 1rem, 1.58rem);
-        --fs-lg: clamp(1.4rem, 1.1vi + 1.15rem, 2.11rem);
-        --fs-xl: clamp(1.75rem, 1.6vi + 1.35rem, 2.81rem);
-        --fs-xxl: clamp(2.15rem, 2.5vi + 1.55rem, 3.75rem);
-    }
+:root {
+    --fs-sm: 0.75rem;
+    --fs-base: 0.95rem;
+    --fs-md: 1.15rem;
+    --fs-lg: 1.4rem;
+    --fs-xl: 1.75rem;
+    --fs-xxl: 2.15rem;
 }
 
-@supports not (font-size: clamp(1rem, 1vi, 1rem)) {
+@supports (font-size: clamp(1rem, 1vi, 1rem)) {
     :root {
-        --fs-sm: 0.75rem;
-        --fs-base: 0.95rem;
-        --fs-md: 1.15rem;
-        --fs-lg: 1.4rem;
-        --fs-xl: 1.75rem;
-        --fs-xxl: 2.15rem;
+        --fs-sm: clamp(0.7rem, 0.15vi + 0.65rem, 0.8rem);
+        --fs-base: clamp(0.9rem, 0.3vi + 0.85rem, 1.05rem);
+        --fs-md: clamp(1.05rem, 0.5vi + 0.95rem, 1.35rem);
+        --fs-lg: clamp(1.25rem, 0.8vi + 1.1rem, 1.8rem);
+        --fs-xl: clamp(1.5rem, 1.2vi + 1.3rem, 2.4rem);
+        --fs-xxl: clamp(1.9rem, 2vi + 1.4rem, 3.2rem);
     }
 }
 
@@ -321,10 +319,6 @@ footer .logo p {
     text-align: left;
 }
 
-.catalog-hero {
-    padding: 2em 0;
-}
-
 .catalog-hero h1 {
     font-size: var(--fs-xl);
 }
@@ -359,7 +353,7 @@ footer .logo p {
 }
 
 .catalog-grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
 }
 
 .product-header {
@@ -593,7 +587,47 @@ footer .logo p {
 }
 
 /* =========================================
-   16. ANIMAZIONI
+   16. BREADCRUMB
+   ========================================= */
+
+#breadcrumb {
+    --b-arrow-h: 13px;
+    --b-arrow-w: 16px;
+    --b-pad-l: 25px;
+    --b-pad-y: 5px;
+
+    padding: 0.5em 0.5rem;
+    margin-top: 1em;
+    justify-content: center;
+}
+
+#breadcrumb li a,
+#breadcrumb li[aria-current="page"] {
+    font-size: 0.55rem; 
+    padding: var(--b-pad-y) 8px var(--b-pad-y) var(--b-pad-l);
+    min-height: calc(var(--b-arrow-h) * 2); 
+    display: flex;
+    align-items: center;
+}
+
+#breadcrumb li[aria-current="page"] {
+    padding-right: 15px;
+    background: var(--col-bg-alt);
+}
+
+#breadcrumb li[aria-current="page"]::after {
+    border-left-color: var(--col-bg-alt); 
+}
+
+#breadcrumb li:first-child a,
+#breadcrumb li:first-child[aria-current="page"] {
+    padding-left: 10px;
+    border-top-left-radius: var(--radius-sm);
+    border-bottom-left-radius: var(--radius-sm);
+}
+
+/* =========================================
+   17. ANIMAZIONI
    ========================================= */
 
 @keyframes slideDown {
