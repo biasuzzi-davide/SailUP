@@ -179,7 +179,7 @@ La struttura del sito segue il modello gerarchico schematizzato in #link(<fig-si
     Offre al cliente la possibilità di visualizzare e modificare i propri dati anagrafici. Include una sezione per consultare lo storico delle prenotazioni (attive e passate), permettendo all'utente di avere riscontro immediato sulle proprie attività.
 
   - *Dashboard Amministratore:*
-    Questa sezione, accessibile solo agli utenti con privilegi elevati, funge da centro di controllo. Permette di visualizzare la totalità delle prenotazioni nel sistema, gestire l'anagrafica degli utenti registrati e modificare dinamicamente i contenuti del sito (aggiunta/modifica/rimozione di Barche, Esperienze e Articoli del Blog).
+    Questa sezione funge da centro di controllo. Permette di visualizzare la totalità delle prenotazioni nel sistema, accedere alla pagina profilo personale, gestire l'anagrafica degli utenti registrati e modificare dinamicamente i contenuti del sito (aggiunta/modifica/rimozione di Barche, Esperienze e Articoli del Blog).
 
   #figure(
     image("../img/diagramma_albero.png", width: 100%), 
@@ -212,14 +212,14 @@ Questo foglio di stile definisce l'identità visiva principale del sito. Le scel
 
 ==== Mobile.css (Dispositivi Portatili)
 Richiamato tramite media query per dispositivi con larghezza inferiore a 768px, questo foglio di stile ottimizza l'esperienza utente su schermi ridotti:
-- *Navigazione semplificata*: Il menu di navigazione orizzontale viene nascosto e viene introdotto un menù "Hamburger" espandibile, massimizzando lo spazio disponibile per i contenuti.
+- *Navigazione semplificata*: Il menu di navigazione orizzontale viene nascosto e viene introdotto un menù 'Hamburger' espandibile, massimizzando lo spazio disponibile per i contenuti.
 - *Linearizzazione del layout*: Le griglie multi-colonna, come le card per i prodotti, vengono riconfigurate in un layout a colonna singola per facilitare la lettura e lo scorrimento verticale.
-- *Tabelle responsive*: Per risolvere il problema della leggibilità delle tabelle su schermi stretti, le righe vengono trasformate visivamente in "card". Si tratta di una soluzione necessaria per evitare che l'utente debba navigare i dati tramite frustranti scorrimenti orizzontali, un'esperienza inconciliabile con un servizio che promette relax.
+- *Tabelle responsive*: Per risolvere il problema della leggibilità delle tabelle su schermi stretti, le righe vengono trasformate visivamente in 'card'. Si tratta di una soluzione necessaria per evitare che l'utente debba navigare i dati tramite frustranti scorrimenti orizzontali, un'esperienza inconciliabile con un servizio che promette relax.
 - *Aree interattive*: Le dimensioni dei pulsanti e delle aree interattive sono aumentate per facilitare l'interazione tramite tocco.
 
 ==== Print.css (Stampa)
 Per assicurare che i contenuti siano fruibili in maniera ottimale su carta è stato predisposto un foglio di stile dedicato, che modifica la struttura di una pagina come segue:
-- *Rimozione degli elementi superflui*: Gli elementi interattivi inutili su carta (menu, breadcrumb, pulsanti "prenota", hero images) vengono nascosti tramite la classe `.print-none`, lasciando solamente il contenuto informativo essenziale. Il footer, ad esempio, viene sfoltito di tutti gli elemnti superflui lasciando solamente dati utili come indirizzo e P.IVA.
+- *Rimozione degli elementi superflui*: Gli elementi interattivi inutili su carta (menu, breadcrumb, pulsanti 'prenota', hero images) vengono nascosti tramite la classe `.print-none`, lasciando solamente il contenuto informativo essenziale. Il footer, ad esempio, viene sfoltito di tutti gli elemnti superflui lasciando solamente dati utili come indirizzo e P.IVA.
 - *Ottimizzazioni per la lettura*: Il font viene cambiato globalmente in _Times New Roman_ (serif), più leggibile su supporto cartaceo rispetto ai font sans-serif usati a video. I colori vengono forzati al nero su bianco e i link perdono la sottolineatura per una pulizia visiva maggiore.
 - *Layout adattivo*: La struttura a colonne viene linearizzata, permettendo al contenuto principale di occupare l'intera larghezza del foglio stampato, evitando tagli laterali.
 - *Gestione griglie*: Le sezioni a griglia vengono mantenute ma adattate con l'aggiunta di bordi per delimitare le aree, sostituendo la distinzione cromatica che viene persa in stampa.
@@ -239,9 +239,9 @@ Oltre agli standard web generali, il progetto adotta specifiche convenzioni stil
 Le funzionalità interattive lato client sono gestite da script modulari che arricchiscono l'esperienza utente secondo il principio del *Progressive Enhancement*, un modo elegante per dire che il sito deve restare in piedi anche se l'utente decide di disabilitare gli script.
 
 Il file `script.js` contiene le seguenti funzioni:
-- *Menu mobile*: Gestisce l'apertura e chiusura del menu "hamburger", alternando le icone di stato (aperto/chiuso) e sincronizzando l'attributo ARIA `aria-expanded` per garantire la corretta comunicazione dello stato alle tecnologie assistive.
+- *Menu mobile*: Gestisce l'apertura e chiusura del menu ad 'hamburger', alternando le icone di stato (aperto/chiuso) e sincronizzando l'attributo ARIA `aria-expanded` per garantire la corretta comunicazione dello stato alle tecnologie assistive.
 - *Modalità scura*: Controlla il cambio del tema visivo (chiaro/scuro) agendo sull'attributo `data-theme` del tag `html` e memorizzando la preferenza dell'utente nel `localStorage` per mantenere la scelta nelle visite successive.
-- *Filtri*: Viene implementato un sistema di filtraggio per lo storico delle prenotazioni. Questo permette di visualizzare istantaneamente le prenotazioni in base al loro stato ("Tutte", "Attive", "Completate") agendo sulla visibilità delle righe della tabella e aggiornando in tempo reale i contatori presenti nelle tab di filtro.
+- *Filtri*: Viene implementato un sistema di filtraggio per lo storico delle prenotazioni. Questo permette di visualizzare istantaneamente le prenotazioni in base al loro stato ('Tutte', 'Attive', 'Completate') agendo sulla visibilità delle righe della tabella e aggiornando in tempo reale i contatori presenti nelle tab di filtro.
 - *Pulsante torna su:* Gestisce la comparsa del tasto per tornare ad inizio pagina dopo che l'utente scorre la pagina, gestendo attraverso `tabindex` l'attivazione della navigazione da tastiera sul pulsante qualora diventi visibile.
 - *Toggle password:* Gestisce la visualizzazione in chiaro dei campi password, una piccola cortesia per evitare che l'utente debba digitare tre volte una stringa complessa a causa di un errore di battitura.
 - *Persistenza dei dati:* Le date selezionate nei cataloghi vengono riportate automaticamente nel form di prenotazione. 
@@ -348,9 +348,9 @@ La sicurezza è stata considerata prioritaria in ogni fase dello sviluppo backen
 
 === Database (SQL)
 L'interazione con il database è completamente incapsulata nella classe `DBConnection`. Questa architettura offre le seguenti funzionalità:
-- *Gestione della connessione:* La connessione al database segue il pattern di apertura/chiusura esplicita. `openConnection()`apre la connessione solo quando necessario, imposta il charset UTF-8 per supportare caratteri internazionali, di modo da non dover vedere trasformare una "è" in un rombo con il punto interrogativo, e gestisce errori di connessione in modo sicuro. `closeConnection()` chiude la connessione al termine di ogni operazione, liberando risorse e prevenendo connection leak.
+- *Gestione della connessione:* La connessione al database segue il pattern di apertura/chiusura esplicita. `openConnection()`apre la connessione solo quando necessario, imposta il charset UTF-8 per supportare caratteri internazionali, di modo da non dover vedere trasformare una 'è' in un rombo con il punto interrogativo, e gestisce errori di connessione in modo sicuro. `closeConnection()` chiude la connessione al termine di ogni operazione, liberando risorse e prevenendo connection leak.
 - *Prepared statements:* oltre alla funzione relativa alla sicurezza citata in precedenza, i _Prepared Statements_ separano la struttura della query dai dati e migliorano le performance grazie al piano di esecuzione pre-compilato dal database.
-- *Gestione robusta degli errori:* La classe implementa una gestione sofisticata degli errori attraverso codici di ritorno specifici. Questo sistema permette al controller di fornire feedback precisi all'utente ("Email già registrata") senza esporre dettagli tecnici del database. I blocchi `try-catch` intercettano le eccezioni MySQL e le trasformano in codici di errore gestibili, prevenendo la visualizzazione di stack trace sensibili. Nel dettaglio i codici impiegati sono:
+- *Gestione robusta degli errori:* La classe implementa una gestione sofisticata degli errori attraverso codici di ritorno specifici. Questo sistema permette al controller di fornire feedback precisi all'utente ('Email già registrata') senza esporre dettagli tecnici del database. I blocchi `try-catch` intercettano le eccezioni MySQL e le trasformano in codici di errore gestibili, prevenendo la visualizzazione di stack trace sensibili. Nel dettaglio i codici impiegati sono:
   - `false`: Errore generico nell'operazione
   - `-1`: Violazione di vincolo specifico (es. email duplicata)
   - `-2`: Violazione di vincolo alternativo (es. codice fiscale duplicato)
@@ -369,11 +369,11 @@ Le entità implementate nel database sono:
 - *Prodotto_Lingua*: Relazione che collega Prodotto e Lingua, indicando quali lingue sono parlate nell'esperienza specifica.
 - *Prenotazione*: Necessaria per mantenere lo storico delle transazioni. 
 - *Articolo_Blog*: Necessaria per gestire gli articoli del blog.
-- *Articolo_Blog_Extra*: Struttura i contenuti complessi degli articoli (es. liste puntate, sezioni "Cosa portare").
+- *Articolo_Blog_Extra*: Struttura i contenuti complessi degli articoli (es. liste puntate, sezioni 'Cosa portare').
 - *Media*: centralizza la gestione delle immagini.
 
 = Accessibilità e Testing
-L'accessibilità è stata un pilastro del progetto, guidata dai principi studiati durante il corso e dalle linee guida internazionali. L'obiettivo è stato quello di garantire la fruizione dei contenuti e delle funzionalità, per quanto possibile, a tutte le categorie di utenti indipendentemente da eventuali disabilità fisiche, cognitive o limitazioni tecnologiche, in conformità con le linee guida WCAG 2.1 e i principi PURO (Percepibile, Utilizzabile, Comprensibile, Robusto). Alla fase di sviluppo è seguita poi quella di validazione e _testing_, un vero e proprio bagno di umiltà che ci ha permesso di individuare tutta quella moltitudine di errori e mancanze sfuggiteci.
+L'accessibilità è stata un pilastro del progetto, guidata dai principi studiati durante il corso e dalle linee guida internazionali. L'obiettivo è stato quello di garantire la fruizione dei contenuti e delle funzionalità, per quanto possibile, a tutte le categorie di utenti indipendentemente da eventuali disabilità fisiche, cognitive o limitazioni tecnologiche, in conformità con le linee guida WCAG e i principi PURO (Percepibile, Utilizzabile, Comprensibile, Robusto). Alla fase di sviluppo è seguita poi quella di validazione e _testing_, un vero e proprio bagno di umiltà che ci ha permesso di individuare tutta quella moltitudine di errori e mancanze sfuggiteci.
 
 == Accessibilità
 Il garantire l'accessibilità del sito a tutte le categorie di utente ha richiesto accorgimenti su tutte le componenti del progetto: struttura, presentazione e comportamento. Vengono elencati di seguito tutte le attenzioni riposte, al netto di inevitabili dimenticanze:
@@ -382,20 +382,20 @@ Il garantire l'accessibilità del sito a tutte le categorie di utente ha richies
 
 - *Navigazione da Tastiera:* Il sito è stato progettato per essere completamente navigabile utilizzando esclusivamente la tastiera. Attraverso l'estensione _Wave_ è stato verificato per ogni pagina che l'ordine di focus mediante tabulazione avvenisse correttamente. 
 
-- *Salta al contenuto:* È stato implementato il link "Salta al contenuto" per permettere agli utenti di _screen reader_ di saltare i blocchi di navigazione ripetitivi e a loro superflui.
+- *Salta al contenuto:* È stato implementato il link 'Salta al contenuto' per permettere agli utenti di _screen reader_ di saltare i blocchi di navigazione ripetitivi e a loro superflui.
 
 - *Dettagli semantici:* Abbiamo riposto attenzione a quegli attributi che rimangono invisibili agli utenti comuni ma che sono fondamentali per _ranking_ e per la corretta sintesi vocale attraverso _screen reader_. L'uso dell'attributo `lang` (principalmente per termini in inglese e in francese) evita una riproduzione maccheronica della sintesi vocale, mentre il tag `<abbr>` e l'attributo `datetime` rendono acronimi e date _machine-readable_. 
 
-- *Semantica dinamica:* Gran parte dei contenuti di SailUP è dinamica. Per evitare di inserire manualmente i tag di accessibilità ad ogni occorrenza, abbiamo implementato nel modulo helpers.php una serie di funzioni di formattazione che, consultando dei dizionari presenti nella directory `/config`, automatizzano l'inserimento di attributi e tag. `formatTextAbbr` si occupa di trasformare automaticamente acronimi (es. GPS, TV) ed unità di misura (es. m, h, cv) nel tag `abbr` con il relativo title esplicativo, mentre `formatTextLang` si occupa di identificare i termini stranieri (es. skipper, champagne) assegnandogli il corretto attributo `lang`.
+- *Semantica dinamica:* Gran parte dei contenuti di SailUP è dinamica. Per evitare di inserire manualmente i tag di accessibilità ad ogni occorrenza, abbiamo implementato nel modulo helpers.php una serie di funzioni di formattazione che, consultando dei dizionari presenti nella directory `/config`, automatizzano l'inserimento di attributi e tag. `formatTextAbbr` si occupa di trasformare automaticamente acronimi (es. 'GPS', 'TV') ed unità di misura (es. 'm', 'h', 'cv') nel tag `abbr` con il relativo title esplicativo, mentre `formatTextLang` si occupa di identificare i termini stranieri (es. 'skipper', 'champagne') assegnandogli il corretto attributo `lang`.
 
-- *Alternative Testuali:* Ogni immagine che aggiungesse attraverso il contenuto grafico informazioni aggiuntive rispetto a quelle già presenti nel contesto, quindi che non fosse puramente decorativa, è stata dotata di un attributo `alt` descrittivo. Alle immagini puramente grafiche è stato lasciato l'attributo `alt` vuoto di modo da far capire attraverso lo _screen reader_ che l'attributo è stato lasciato vuoto di proposito e non per una mancanza in fase di sviluppo. I form amministrativi che consentono l'aggiunta di prodotti e articoli del blog includono inoltre un campo opzionale che permette all'occorrenza di riempire questo campo.
+- *Alternative Testuali:* Ogni immagine che fornisce informazioni aggiuntive rispetto al contesto, ovvero non puramente decorativa, è stata dotata di un attributo alt descrittivo. Per le immagini puramente grafiche tale attributo è stato lasciato vuoto anziché rimosso per permette allo _screen reader_ di interpretare la scelta come intenzionale e non come una svista in fase di sviluppo. I form amministrativi che consentono l'aggiunta di prodotti e articoli del blog includono inoltre un campo opzionale che permette all'occorrenza di riempire questo campo.
 
 - *Contrasto Cromatico e Colori:* È stata prestata particolare attenzione ad utilizzare una palette cromatica che mantenesse i rapporti cromatici tali da rispettare almeno il livello AA delle WCAG pur rimanendo esteticamente gradevole, operazione che ci è costata più tempo di quanto vorremmo ammettere. L'implementazione di un selettore di tema light/dark offre inoltre agli utenti la possibilità di scegliere la modalità di visualizzazione che preferiscono, migliorando ulteriormente la leggibilità.
 
-- *WAI-ARIA:* Poiché gran parte di SailUP vive di interazioni in tempo reale, abbiamo sfruttato gli attributi WAI-ARIA per evitare che l'esperienza d'uso si trasformasse in un silenzio assordante per chi usa uno screen reader. Abbiamo utilizzato `aria-required`, `aria-live="polite"` e i ruoli `status/alert` per fare in modo che venissero comunicati i campi obbligatori e i messaggi di feedback. Attraverso l'uso di `aria-describedby` abbiamo collegato ogni campo di input alle proprie istruzioni e ai messaggi d'errore specifici. Nella navigazione abbiamo sfruttato `aria-current="page"` e la coppia `aria-expanded/aria-controls` per comunicare dinamicamente lo stato del menu mobile. Abbiamo cercato di rendere l'interfaccia meno generica delegando al backend la generazione di `aria-label` descrittivi, ad esempio nelle card dei prodotti un link 'Dettagli' avrà associato il nome del prodotto. Per pulire il flusso audio da rumore inutile, infine, abbiamo sfruttato `aria-hidden="true"` per evitare che icone puramente decorative ed emoji venissero lette. Qualora queste icone venissero inserite attraverso foglio di stile CSS abbiamo provveduto a sostituirle con immagini.
+- *WAI-ARIA:* Poiché gran parte di SailUP vive di interazioni in tempo reale, abbiamo sfruttato gli attributi WAI-ARIA per evitare che l'esperienza d'uso si trasformasse in un silenzio assordante per chi usa uno _screen reader_. Abbiamo utilizzato `aria-required`, `aria-live="polite"` e i ruoli `status/alert` per fare in modo che venissero comunicati i campi obbligatori e i messaggi di feedback. Attraverso l'uso di `aria-describedby` abbiamo collegato ogni campo di input alle proprie istruzioni e ai messaggi d'errore specifici. Nella navigazione abbiamo sfruttato `aria-current="page"` e la coppia `aria-expanded/aria-controls` per comunicare dinamicamente lo stato del menu mobile. Abbiamo cercato di rendere l'interfaccia meno generica delegando al backend la generazione di `aria-label` descrittivi, ad esempio nelle card dei prodotti un link 'Dettagli' avrà associato il nome del prodotto. Per pulire il flusso audio da rumore inutile, infine, abbiamo sfruttato `aria-hidden="true"` per evitare che icone puramente decorative ed emoji venissero lette. Qualora queste icone venissero inserite attraverso foglio di stile CSS abbiamo provveduto a sostituirle con immagini.
 
 == Validazione e Testing
-Il codice sorgente è stato passato al setaccio per individuare quegli errori che, inevitabilmente, passano inosservati durante la fase di sviluppo. Inutile negarlo, ottenere un 'bollino verde' da un validator garantisce un rilascio istantaneo di dopamina.
+Il codice è stato esaminato per individuare quegli errori che, inevitabilmente, passano inosservati durante la fase di sviluppo. Inutile negarlo, ottenere un 'bollino verde' da un validator garantisce un rilascio istantaneo di dopamina.
 
 === Validazione
 
@@ -403,9 +403,9 @@ Il codice sorgente è stato passato al setaccio per individuare quegli errori ch
 
 - *Total Validator:* Abbiamo utilizzato questo strumento per una verifica più completa, permettendoci di testare contemporaneamente la validità dell'HTML, la conformità alle linee guida WCAG e l'integrità dei collegamenti ipertestuali. Se da un lato ci ha permesso di scovare diverse sviste sugli attributi ARIA, dall'altro abbiamo dovuto ignorare molti falsi positivi riguardanti lo spell-check.
 
-- *WCAG Contrast Checker:* Questo strumento è stato prezioso per analizzare e correggere i contrasti tra gli elementi presenti all'interno delle pagine. Questo _tool_ ci ha messo di fronte alla dura realtà che quel blu che ci piaceva tanto, purtroppo, non è leggibile per tutti.
+- *WCAG Contrast Checker:* Questo strumento è stato prezioso per analizzare e correggere i contrasti tra gli elementi presenti all'interno delle pagine. Questo _tool_ ci ha messo di fronte alla dura realtà che quel blu che ci piaceva tanto, purtroppo, non è per tutti facilmente leggibile.
 
-- *WAVE:* Oltre a condurre un secondo controllo sui contrasti, abbiamo sffruttato _Wave_ per verificare che l'ordine di navigazione da tastiera fosse corretto. Oltre a questo ci ha permesso di individuare altri errori relativi alle intestazioni. Il _tool_ ha segnalato alcuni warning per '_redundant link_', riferendosi al doppio collegamento alla _Home_ presente sia sul logo che nel menu. In questo caso abbiamo esercitato il nostro diritto di libero arbitrio ignorandolo: rimuovere uno dei due sarebbe stato tecnicamente 'pulito' secondo il _tool_ ma poco intuitivo per un utente reale.
+- *WAVE:* Oltre a condurre un secondo controllo sui contrasti, abbiamo sffruttato _Wave_ per verificare che l'ordine di navigazione da tastiera fosse corretto. Oltre a questo ci ha permesso di individuare altri errori relativi alle intestazioni. Il _tool_ ha segnalato alcuni warning per '_redundant link_', riferendosi al doppio collegamento alla _Home_ presente sia sul logo che nel menu. In questo caso abbiamo esercitato il nostro diritto di libero arbitrio ignorandolo: rimuovere uno dei due sarebbe stato tecnicamente 'pulito' secondo il _tool_, ma poco intuitivo per un utente reale.
 
 === Test
 Sono stati condotti test approfonditi sulla validazione degli input utente per garantire la robustezza e la sicurezza dei form. Ecco il resoconto delle principali manovre di verifica effettuate:
@@ -418,7 +418,7 @@ Sono stati condotti test approfonditi sulla validazione degli input utente per g
 
 - *Verifica della disponibilità:* La logica di prenotazione è stata testata simulando diverse richieste di noleggio per lo stesso prodotto, effettuando ad esempio prove di prenotazione in date con sovrapposizioni rispetto a prenotazioni già confermate.
 
-- *Tecnologie assistive:* La piattaforma è stata navigata utilizzando screen reader quali VoiceOver e NVDA per assicurarsi che la navigazione fosse comprensibile anche attraverso l'uso di questi strumenti di sintesi vocale. È stato ad esempio controllato che gli elementi interattivi venissero correttamente etichettati, che i cambiamenti di elemnti a schermo venissero comunicati o che elementi non necessari (es. emoji) non venissero letti. Tutto ciò ci ha ricordato che il codice perfetto non esiste, specialmente se deve essere interpretato da uno _screen reader_.
+- *Tecnologie assistive:* La piattaforma è stata navigata utilizzando screen reader quali VoiceOver e NVDA per assicurarsi che la navigazione fosse comprensibile anche attraverso l'uso di questi strumenti di sintesi vocale. È stato ad esempio controllato che gli elementi interattivi venissero correttamente etichettati, che i cambiamenti di elementi a schermo venissero comunicati o che elementi non necessari (es. emoji) non venissero letti. Tutto ciò ci ha ricordato che il codice perfetto non esiste, specialmente se deve essere interpretato da uno _screen reader_.
 
 - *Compatibilità e Design Responsivo:* Il sito è stato testato sui principali _browser_ web moderni, tra cui Google Chrome, Opera, Mozilla Firefox, Safari e Microsoft Edge per accertarci che venissero renderizzati correttamente. Il design responsivo è stato verificato a diverse risoluzioni simulando dispositivi che vanno da smartphone ai tablet, fino ai monitor desktop. Non sono state invece prese in considerazione versioni più vecchie dei _browser_, considerato il profilo dell'utenza target del sito orientata all'utilizzo di dispositivi moderni.
 
@@ -433,19 +433,18 @@ Questa transizione ha reso la suddivisione dei compiti non definibile in maniera
   align: (center, left),
   fill: (col, row) => if row == 0 {rgb("#0033ff")} else { none },
   table.header(
-    // Applichi il colore bianco manualmente a ogni cella dell'intestazione
     text(fill: white)[*Membro del Gruppo*],
     text(fill: white)[*Aree di Contributo Principale*],
   ),
   [Davide Biasuzzi], [Principale responsabile della parte backend (PHP e database), ha lavorato in ambito frontend alle pagine di errore e ...(HTML e CSS).],
-  [Francesco Marcon], [Parte frontend delle principali pagine del sito (HTML, CSS e JS), ha alvorato in ambito backend a funzioni quali ...],
-  [Alberto Reginato], [Parte frontend delle principali pagine del sito (HTML, CSS e JS), ha alvorato in ambito backend alle funzioni per la generazione dinamica dei tag e attributi html.],
+  [Francesco Marcon], [Parte frontend delle principali pagine del sito (HTML, CSS e JS), ha lavorato in ambito backend a funzioni quali ...],
+  [Alberto Reginato], [Parte frontend delle principali pagine del sito (HTML, CSS e JS), ha lavorato in ambito backend alle funzioni per la generazione dinamica dei tag e attributi html.],
   [Hossam Ezzemouri], [Ha creato problemi],
 )
 
 = Conclusioni e Sviluppi Futuri
-Messi di fronte alla complessità delle sfide tecniche (e umane) che a volte si sono rivelate più del previsto, lavorare a questo progetto è stata un'esperienza estremamente formativa. 
-SailUP non è probabilmente l'innovazione che cambierà le sorti del turismo globale ma è un lavoro di cui siamo orgogliosi. Ci ha dato modo di dimostrare la nostra capacità di costruire un'applicazione web che non sia solo funzionante ma anche solida, sicura e navigabile da tutti.
+Messi di fronte alla complessità delle sfide tecniche (ed interpersonali) che a volte si sono rivelate più difficili del previsto, lavorare a questo progetto è stata un'esperienza estremamente formativa. 
+SailUP non è probabilmente l'innovazione che cambierà le sorti del turismo globale ma è un lavoro di cui siamo orgogliosi e che saremmo fieri di esporre in un possibile portfolio personale. Ci ha dato modo di dimostrare la nostra capacità di costruire un'applicazione web che non sia solo funzionante ma anche solida, sicura e navigabile da tutti.
 
 == Sviluppi Futuri
 La base tecnologica di SailUP è stata pensata per essere modulare quindi potenzialmente, se non avessimo altri esami da preparare, espandibile. Tra le evoluzioni possibili ipotizziamo:
