@@ -300,9 +300,10 @@ a:hover {
 }
 
 .btn-sm {
-  padding: 0.25em 0.6em;
+  padding: 0.5em 0.8em;
   font-size: 0.85em;
-  margin-bottom: 1rem;
+  min-height: 44px;
+  min-width: 44px;
 }
 
 /* =========================================
@@ -2223,6 +2224,14 @@ tr>*:last-child {
   background-color: rgba(255, 255, 255, 0.05);
 }
 
+.actions-cell {
+  display: flex;
+  gap: 0.8em;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
 /* =========================================
      17. ADMIN FORM
      ========================================= */
@@ -2444,6 +2453,7 @@ footer address strong {
   display: flex;
   gap: 0.5em;
   justify-content: flex-end;
+  margin-bottom: 1em;
 }
 
 .item-actions a {
