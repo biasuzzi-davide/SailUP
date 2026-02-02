@@ -1115,18 +1115,24 @@ function buildAdminBlogRows(array $articoli, string $csrfToken): string
             //button modifica articolo
             . '<a href="' . htmlspecialchars($editUrl, ENT_QUOTES) . '" class="btn-layout-light btn-sm" aria-label="Modifica articolo ' . $titolo . '">Modifica</a>'
             . '<form method="post" class="inline-form">'
+            . '<fieldset>'
+            . '<legend class="sr-only">' . $ariaActionLabel . ' articolo ' . $titolo . '</legend>'
             . '<input type="hidden" name="csrf_token" value="' . htmlspecialchars($csrfToken) . '">'
             . '<input type="hidden" name="id_articolo" value="' . $idArticolo . '">'
             . '<input type="hidden" name="action" value="' . $actionValue . '">'
             //button per pubblicare/rendere bozza
             . '<button type="submit" class="btn-layout btn-sm" aria-label="' . $ariaActionLabel . ' ' . $titolo . '">' . $actionLabel . '</button>'
+            . '</fieldset>'
             . '</form>'
             . '<form method="post" class="inline-form" data-confirm-type="delete-article">'
+            . '<fieldset>'
+            . '<legend class="sr-only">Eliminazione definitiva per ' . $titolo . '</legend>'
             . '<input type="hidden" name="csrf_token" value="' . htmlspecialchars($csrfToken) . '">'
             . '<input type="hidden" name="id_articolo" value="' . $idArticolo . '">'
             . '<input type="hidden" name="action" value="delete">'
             //button elimina articolo
             . '<button type="submit" class="btn-danger btn-sm" aria-label="Elimina articolo ' . $titolo . '">Elimina</button>'
+            . '</fieldset>'
             . '</form>'
             . '</td>'
             . '</tr>';
