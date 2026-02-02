@@ -262,8 +262,15 @@ $languageList = $languageNames !== [] ? implode(', ', $languageNames) : '—';
 
 $html = buildPage('../pages/dettaglio_esperienza.html', $_SERVER['PHP_SELF']);
 
-// Genera keywords dinamiche basate sui dati dell'esperienza
-$keywordParts = array_filter([strtolower($experienceName)]);
+// Genera keywords dinamiche basate sui dati dell'esperienza (singole parole, no frasi)
+$keywordParts = [];
+// Aggiungo le singole parole del nome esperienza
+$nameWords = preg_split('/\s+/', strtolower($experienceName));
+foreach ($nameWords as $word) {
+    if (strlen($word) > 3) { // Ignoro parole troppo corte
+        $keywordParts[] = $word;
+    }
+}
 if (!empty($languageNames)) {
     $keywordParts[] = 'guida';
     $languageParts = array_slice($languageNames, 0, 2);
