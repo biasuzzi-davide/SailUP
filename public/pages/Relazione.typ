@@ -4,13 +4,13 @@
   numbering: "1",
 )
 
-#show heading.where(level: 1): set text(size: 24pt, weight: "bold")
+#show heading.where(level: 1): set text(size: 20pt, weight: "bold")
 
-#show heading.where(level: 2): set text(size: 22pt, weight: "bold")
+#show heading.where(level: 2): set text(size: 18pt, weight: "bold")
 
-#show heading.where(level: 3): set text(size: 18pt, weight: "bold")
+#show heading.where(level: 3): set text(size: 16pt, weight: "bold")
 
-#show heading.where(level: 4): set text(size: 14pt, weight: "bold")
+#show heading.where(level: 4): set text(size: 13.5pt, weight: "bold")
 
 
 #set text(
