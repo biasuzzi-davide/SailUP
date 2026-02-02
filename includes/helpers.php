@@ -3,6 +3,12 @@ require_once '../../config/pages.php';
 require_once __DIR__ . '/session/session.php';
 require_once __DIR__ . '/db_connection.php';
 
+function optionalValueAttr($value): string
+{
+    $val = (string) $value;
+    return $val !== '' ? 'value="' . htmlspecialchars($val, ENT_QUOTES) . '"' : '';
+}
+
 function buildHeader($phpSelf)
 {
     $headerTemplatePath = __DIR__ . '/../public/pages/elementi_semantici/header.html';
@@ -1349,19 +1355,22 @@ function buildBlogExtraInputs(array $extras): string
 
     $extrasHtml = '';
     foreach ($extras as $index => $ex) {
+        $num = $index + 1;
         $titleId = 'extra-title-' . $index;
         $itemId = 'extra-item-' . $index;
+        $titleValue = htmlspecialchars($ex['titolo'] ?? '', ENT_QUOTES);
+        $titleValueAttr = $titleValue !== '' ? ' value="' . $titleValue . '"' : '';
 
         $extrasHtml .= '<div class="extra-row">'
             . '<div class="form-group">'
-            . '<label for="' . $titleId . '">Titolo Extra</label>'
-            . '<input type="text" id="' . $titleId . '" name="extra_title[]" value="' . htmlspecialchars($ex['titolo'] ?? '', ENT_QUOTES) . '" placeholder="es. Cosa portare" >'
+            . '<label for="' . $titleId . '">Titolo Extra ' . $num . '</label>'
+            . '<input type="text" id="' . $titleId . '" name="extra_title[]"' . $titleValueAttr . ' placeholder="es. Cosa portare">'
             . '</div>'
             . '<div class="form-group">'
-            . '<label for="' . $itemId . '">Contenuto</label>'
+            . '<label for="' . $itemId . '">Contenuto Extra ' . $num . '</label>'
             . '<textarea id="' . $itemId . '" name="extra_item[]" rows="2" placeholder="Testo...">' . htmlspecialchars($ex['elemento'] ?? '') . '</textarea>'
             . '</div>'
-            . '<button type="button" class="btn-danger remove-extra" aria-label="Rimuovi extra">Rimuovi</button>'
+            . '<button type="button" class="btn-danger remove-extra" aria-label="Rimuovi extra ' . $num . '">Rimuovi</button>'
             . '</div>';
     }
     return $extrasHtml;
@@ -1376,23 +1385,28 @@ function buildProductExtraInputs(array $extras): string
 
     $extrasHtml = '';
     foreach ($extras as $index => $ex) {
+        $num = $index + 1;
         $nameId = 'extra-name-' . $index;
         $priceId = 'extra-price-' . $index;
         $nameErrorId = 'extra-name-error-' . $index;
         $priceErrorId = 'extra-price-error-' . $index;
+        $nameValueAttr = optionalValueAttr($ex['nome'] ?? '');
+        $nameValueAttr = $nameValueAttr !== '' ? ' ' . $nameValueAttr : '';
+        $priceValueAttr = optionalValueAttr((string) ($ex['prezzo'] ?? ''));
+        $priceValueAttr = $priceValueAttr !== '' ? ' ' . $priceValueAttr : '';
 
         $extrasHtml .= '<div class="extra-row">'
             . '<div class="form-group">'
-            . '<label for="' . $nameId . '">Nome Extra</label>'
-            . '<input type="text" id="' . $nameId . '" name="extra_name[]" value="' . htmlspecialchars($ex['nome'] ?? '', ENT_QUOTES) . '" placeholder="es. Skipper" aria-describedby="' . $nameErrorId . '">'
+            . '<label for="' . $nameId . '">Nome Extra ' . $num . '</label>'
+            . '<input type="text" id="' . $nameId . '" name="extra_name[]"' . $nameValueAttr . ' placeholder="es. Skipper" aria-describedby="' . $nameErrorId . '">'
             . '<span id="' . $nameErrorId . '" class="field-error extra-name-error" role="alert"></span>'
             . '</div>'
             . '<div class="form-group">'
-            . '<label for="' . $priceId . '">Prezzo Extra (€)</label>'
-            . '<input type="number" id="' . $priceId . '" name="extra_price[]" min="1" step="1" value="' . htmlspecialchars((string) ($ex['prezzo'] ?? ''), ENT_QUOTES) . '" placeholder="es. 50" aria-describedby="' . $priceErrorId . '">'
+            . '<label for="' . $priceId . '">Prezzo Extra ' . $num . ' (€)</label>'
+            . '<input type="number" id="' . $priceId . '" name="extra_price[]" min="1" step="1"' . $priceValueAttr . ' placeholder="es. 50" aria-describedby="' . $priceErrorId . '">'
             . '<span id="' . $priceErrorId . '" class="field-error extra-price-error" role="alert"></span>'
             . '</div>'
-            . '<button type="button" class="btn-danger remove-extra" aria-label="Rimuovi extra">Rimuovi</button>'
+            . '<button type="button" class="btn-danger remove-extra" aria-label="Rimuovi extra ' . $num . '">Rimuovi</button>'
             . '</div>';
     }
     return $extrasHtml;

@@ -54,8 +54,8 @@
       <form id="product-form" action="[ADMIN_PRODUCT_ACTION]" method="POST" novalidate enctype="multipart/form-data">
         <input type="hidden" name="csrf_token" value="[CSRF_TOKEN]">
         <input type="hidden" name="mode" value="[PROD_MODE]">
-        <input type="hidden" name="product-id" value="[PRODUCT_ID_VALUE]">
-        <input type="hidden" name="existing-image-url" id="existing-image-url" value="[IMG_URL]">
+        <input type="hidden" name="product-id" [PRODUCT_ID_VALUE]>
+        <input type="hidden" name="existing-image-url" id="existing-image-url" [IMG_URL]>
 
         <fieldset>
           <legend>Informazioni Base</legend>
@@ -64,7 +64,7 @@
             <div class="form-group">
               <label for="product-name">Nome Prodotto <abbr title="Campo obbligatorio">*</abbr></label>
               <input type="text" id="product-name" name="product-name" placeholder="es. Sunseeker Predator 62"
-                value="[PROD_NAME]" required aria-describedby="product-name-error">
+                [PROD_NAME] required aria-describedby="product-name-error">
               <span id="product-name-error" class="field-error" role="alert"></span>
             </div>
 
@@ -104,7 +104,7 @@
             <div class="form-group">
               <label for="product-price">Prezzo Base (€) <abbr title="Campo obbligatorio">*</abbr></label>
               <input type="number" id="product-price" name="product-price" min="0" max="50000" step="10"
-                placeholder="es. 850" value="[PROD_PRICE]" required
+                placeholder="es. 850" [PROD_PRICE] required
                 aria-describedby="product-price-hint product-price-error">
               <span id="product-price-hint" class="field-hint">Prezzo al giorno per noleggi, prezzo totale per
                 esperienze</span>
@@ -114,7 +114,7 @@
             <div class="form-group">
               <label for="product-capacity">Numero persone<abbr title="Campo obbligatorio">*</abbr></label>
               <input type="number" id="product-capacity" name="product-capacity" min="1" max="50" placeholder="es. 8"
-                value="[PROD_CAPACITY]" required aria-describedby="product-capacity-error">
+                [PROD_CAPACITY] required aria-describedby="product-capacity-error">
               <span id="product-capacity-error" class="field-error" role="alert"></span>
             </div>
           </div>
@@ -123,12 +123,12 @@
             <div class="form-group" id="length-group">
               <label for="product-length">Lunghezza (metri)</label>
               <input type="number" id="product-length" name="product-length" min="0" step="0.1" placeholder="es. 19.2"
-                value="[PROD_LENGTH]">
+                [PROD_LENGTH]>
             </div>
             <div class="form-group hidden" id="duration-group">
               <label for="product-duration">Durata Esperienza (ore) <abbr title="Campo obbligatorio">*</abbr></label>
               <input type="number" id="product-duration" name="product-duration" min="1" step="1" placeholder="es. 4"
-                value="[PROD_DURATION]" aria-describedby="product-duration-error">
+                [PROD_DURATION] aria-describedby="product-duration-error">
               <span id="product-duration-error" class="field-error" role="alert"></span>
             </div>
           </div>
@@ -149,12 +149,12 @@
             <p>Opzioni Aggiuntive:</p>
 
             <div class="checkbox-group hidden" id="license-option">
-              <input type="checkbox" id="requires-license" name="requires-license" [CHECK_PATENTE]>
+              <input type="checkbox" id="requires-license" name="requires-license" value="1" [CHECK_PATENTE]>
               <label for="requires-license">Richiede Patente Nautica</label>
             </div>
 
             <div class="checkbox-group hidden" id="access-option">
-              <input type="checkbox" id="is-accessible" name="is-accessible" [CHECK_ACCESS]>
+              <input type="checkbox" id="is-accessible" name="is-accessible" value="1" [CHECK_ACCESS]>
               <label for="is-accessible">Accessibile</label>
             </div>
 
@@ -171,13 +171,15 @@
           <template id="product-extra-template">
             <div class="extra-row">
               <div class="form-group">
-                <label>Nome Extra</label>
-                <input type="text" name="extra_name[]" placeholder="es. Skipper">
+                <label>Nome Extra
+                  <input type="text" name="extra_name[]" placeholder="es. Skipper">
+                </label>
                 <span class="field-error extra-name-error" role="alert"></span>
               </div>
               <div class="form-group">
-                <label>Prezzo Extra (€)</label>
-                <input type="number" name="extra_price[]" min="1" step="1" placeholder="es. 50">
+                <label>Prezzo Extra (€)
+                  <input type="number" name="extra_price[]" min="1" step="1" placeholder="es. 50">
+                </label>
                 <span class="field-error extra-price-error" role="alert"></span>
               </div>
               <button type="button" class="btn-danger remove-extra" aria-label="Rimuovi extra">Rimuovi</button>
@@ -257,7 +259,7 @@
             <label for="Testo_Alternativo">Testo Alternativo Immagine</label>
             <input type="text" id="Testo_Alternativo" name="Testo_Alternativo"
               placeholder="es. Barca a vela con tre alberi al tramonto"
-              value="[IMG_ALT]" aria-describedby="Testo_Alternativo-hint Testo_Alternativo-error">
+              [IMG_ALT] aria-describedby="Testo_Alternativo-hint Testo_Alternativo-error">
             <span id="Testo_Alternativo-hint" class="field-hint">Inserire solo se l'immagine trasmette informazioni rilevanti per utenti non vedenti</span>
             <span id="Testo_Alternativo-error" class="field-error" role="alert"></span>
           </div>
@@ -267,11 +269,11 @@
           <legend>Disponibilità</legend>
 
           <div class="form-group">
-            <label for="product-status">Stato Prodotto <abbr title="Campo obbligatorio">*</abbr></label>
+            <span class="label-text">Stato Prodotto <abbr title="Campo obbligatorio">*</abbr></span>
             <div class="checkbox-group">
               <input type="checkbox" id="product-status" name="product-status" value="available"
                 [CHECK_STATUS_AVAILABLE] aria-describedby="product-status-hint product-status-error">
-              <label>Disponibile</label>
+              <label for="product-status">Disponibile</label>
             </div>
             <span id="product-status-hint" class="field-hint">Se non selezionato: Non Disponibile.</span>
             <span id="product-status-error" class="field-error" role="alert"></span>
