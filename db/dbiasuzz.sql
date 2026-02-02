@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Creato il: Gen 31, 2026 alle 20:05
+-- Creato il: Feb 02, 2026 alle 10:24
 -- Versione del server: 11.8.3-MariaDB-0+deb13u1 from Debian
 -- Versione PHP: 8.4.16
 
@@ -254,11 +254,12 @@ INSERT INTO `Media` (`IDMedia`, `URL_Media`, `Testo_Alternativo`, `Tipo_Media`, 
 (191, '../img/avatars/user_132.webp?v=1768414006', '', 'Immagine', 132, NULL, NULL, '2026-01-14 18:06:46'),
 (192, '../img/prodotti/costieraamalfitana.webp', 'Suggestivo borgo della Costiera Amalfitana con case colorate arroccate sulla scogliera e barche nel porto.', 'Immagine', NULL, 'EXP-ESCURSIONE-001', NULL, '2026-01-14 20:07:38'),
 (193, '../img/prodotti/tramontonapoli.webp', 'Veduta panoramica del Golfo di Napoli al tramonto con il profilo della città illuminata.', 'Immagine', NULL, 'EXP-TRAMONTO-001', NULL, '2026-01-14 20:08:09'),
-(194, '../img/prodotti/snork.webp', 'Acque cristalline all''interno di una grotta marina illuminata da riflessi azzurri naturali.', 'Immagine', NULL, 'EXP-SNORKEL-001', NULL, '2026-01-14 20:08:26'),
+(194, '../img/prodotti/snork.webp', 'Acque cristalline all\'interno di una grotta marina illuminata da riflessi azzurri naturali.', 'Immagine', NULL, 'EXP-SNORKEL-001', NULL, '2026-01-14 20:08:26'),
 (197, '../img/prodotti/prod_PRD-86AB070D.webp?v=1768422395', 'Gruppo di persone che assaggia cibo di strada tipico servito in cartocci di carta nel centro storico.', 'Immagine', NULL, 'PRD-86AB070D', NULL, '2026-01-14 20:26:35'),
 (206, '../img/prodotti/prod_BARCA-VELA-001.webp?v=1768155062', 'Barca a vela con ponte in teak antiscivolo libero da ostacoli e sedute incassate nel pozzetto.', 'Immagine', NULL, 'BARCA-VELA-001', NULL, '2026-01-23 16:25:55'),
 (208, '../img/prodotti/prod_PRD-F86512E8.webp?v=1768421611', 'Pescatori al lavoro su una barca di legno mentre estraggono una rete colma di pesci freschi.', 'Immagine', NULL, 'PRD-F86512E8', NULL, '2026-01-23 16:31:02'),
-(211, '../img/prodotti/prod_PRD-4417612E.webp?v=1768422553', 'Scorcio della stretta via di Spaccanapoli con folla di passanti, architetture storiche e panni stesi.', 'Immagine', NULL, 'PRD-4417612E', NULL, '2026-01-23 16:48:47');
+(211, '../img/prodotti/prod_PRD-4417612E.webp?v=1768422553', 'Scorcio della stretta via di Spaccanapoli con folla di passanti, architetture storiche e panni stesi.', 'Immagine', NULL, 'PRD-4417612E', NULL, '2026-01-23 16:48:47'),
+(212, '../img/avatars/user_133.webp?v=1770027482', '', 'Immagine', 133, NULL, NULL, '2026-01-14 18:06:46');
 
 -- --------------------------------------------------------
 
@@ -586,7 +587,7 @@ INSERT INTO `Utente` (`IDUtente`, `Nome`, `Cognome`, `CF`, `Email`, `PasswordHas
 (14, 'User', 'User', 'CFUSERUSERCFUSER', 'user', '$2y$12$nE6ZkeAcGm4zSud34GSWSOLnkbTF8vAy1PmpGQYq2BRBPi.67FxFy', 24, 0, '2026-01-09 19:30:02', '2026-01-25 14:05:22'),
 (131, 'Davide', 'Biasuzzi', 'DDDDDDDDDDDDDDDD', 'davidebiasuzzi@mail.com', '$2y$12$tje07cGBBancFO7PSnfS7OtdH2b8ZMelitdB88NcwuQci0ByVPaLO', 39, 0, '2026-01-11 18:20:44', '2026-01-13 17:08:46'),
 (132, 'Alberto', 'Reginato', 'AAAAAAAAAAAAAAAA', 'albertor@mail.com', '$2y$12$1l1aMeS28ne76ypCBK/eHuQN9u9/V0qjRW6YJmAvRTzM1JH9Ad/IK', 42, 0, '2026-01-13 17:02:43', '2026-01-14 18:05:24'),
-(133, 'Francesco', 'Marcon', 'FFFFFFFFFFFFFFFF', 'francescom@mail.com', '$2y$12$1CrdOMoHgmF9BiMQgBv9DuX4VNA5S5ELuzqDUTvg28FETi3R2Gxoi', 43, 0, '2026-01-13 17:04:12', '2026-01-13 17:04:21');
+(133, 'Francesco', 'Marcon', 'FFFFFFFFFFFFFFFF', 'francescom@mail.com', '$2y$12$1CrdOMoHgmF9BiMQgBv9DuX4VNA5S5ELuzqDUTvg28FETi3R2Gxoi', 43, 0, '2026-01-13 17:04:12', '2026-02-02 10:19:19');
 
 --
 -- Indici per le tabelle scaricate
@@ -700,7 +701,7 @@ ALTER TABLE `Articolo_Blog_Extra`
 -- AUTO_INCREMENT per la tabella `Indirizzo`
 --
 ALTER TABLE `Indirizzo`
-  MODIFY `IDIndirizzo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `IDIndirizzo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT per la tabella `Lingua`
@@ -712,7 +713,7 @@ ALTER TABLE `Lingua`
 -- AUTO_INCREMENT per la tabella `Media`
 --
 ALTER TABLE `Media`
-  MODIFY `IDMedia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=212;
+  MODIFY `IDMedia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=214;
 
 --
 -- AUTO_INCREMENT per la tabella `Prenotazione`
@@ -736,7 +737,7 @@ ALTER TABLE `Prodotto_Incluso`
 -- AUTO_INCREMENT per la tabella `Utente`
 --
 ALTER TABLE `Utente`
-  MODIFY `IDUtente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=135;
+  MODIFY `IDUtente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=136;
 
 --
 -- Limiti per le tabelle scaricate
