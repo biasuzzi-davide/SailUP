@@ -215,11 +215,9 @@
         if (typeInput.value === 'noleggio') {
             boatTypeFieldset.classList.remove('hidden');
             boatTypeInput.setAttribute('required', '');
-            boatTypeInput.setAttribute('aria-required', 'true');
         } else {
             boatTypeFieldset.classList.add('hidden');
             boatTypeInput.removeAttribute('required');
-            boatTypeInput.setAttribute('aria-required', 'false');
             clearBoatTypeSelection();
             clearFieldError(boatTypeInput);
         }
@@ -233,11 +231,9 @@
         if (typeInput.value === 'experience') {
             experienceTypeFieldset.classList.remove('hidden');
             experienceTypeInput.setAttribute('required', '');
-            experienceTypeInput.setAttribute('aria-required', 'true');
         } else {
             experienceTypeFieldset.classList.add('hidden');
             experienceTypeInput.removeAttribute('required');
-            experienceTypeInput.setAttribute('aria-required', 'false');
             clearExperienceTypeSelection();
             clearFieldError(experienceTypeInput);
         }
@@ -253,14 +249,12 @@
             durationGroup.classList.remove('hidden');
             if (durationInput) {
                 durationInput.setAttribute('required', '');
-                durationInput.setAttribute('aria-required', 'true');
             }
         } else {
             durationGroup.classList.add('hidden');
             lengthGroup.classList.remove('hidden');
             if (durationInput) {
                 durationInput.removeAttribute('required');
-                durationInput.setAttribute('aria-required', 'false');
                 durationInput.value = '';
                 clearFieldError(durationInput);
             }
