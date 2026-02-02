@@ -87,6 +87,10 @@
   --col-card: #0d2b42;
 }
 
+[data-theme="dark"] input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
 /* =========================================
      2. RESET & BASE
      ========================================= */
