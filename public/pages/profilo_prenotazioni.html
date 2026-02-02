@@ -29,7 +29,7 @@
 
   [HEADER]
 
-<nav aria-label="Ti trovi in:" id="breadcrumb">
+  <nav aria-label="Ti trovi in:" id="breadcrumb">
     <ol>
       <li><a href="index.php"><span lang="en">Home</span></a></li>
       [ADMIN_BREADCRUMB]
@@ -88,9 +88,7 @@
             </div>
 
             <div class="bookings-filters">
-              <fieldset>
-                <legend class="sr-only">Filtra prenotazioni</legend>
-                <div class="filter-tabs">
+                <div class="filter-tabs" role="group" aria-label="Filtra prenotazioni">
                   <button type="button" id="tab-all" class="filter-tab active" data-filter="all"
                     aria-controls="bookings-container" aria-pressed="true">
                     Tutte <span id="badge-all"><span class="sr-only">quantità:</span> 0</span>
@@ -105,14 +103,14 @@
                     Completate <span id="badge-completed"><span class="sr-only">quantità:</span> 0</span>
                   </button>
                 </div>
-              </fieldset>
             </div>
 
 
             <div id="bookings-container">
               <div class="table-container">
-                <table id="bookings-table">
-                  <caption>Elenco delle prenotazioni</caption>
+                <p id="bookings-table-desc" class="sr-only">Questa tabella elenca le prenotazioni effettuate. Ogni riga mostra codice, prodotto o esperienza, periodo, importo, stato e un'eventuale azione di annullamento.</p>
+                <table id="bookings-table" aria-describedby="bookings-table-desc">
+                  <caption>Storico Prenotazioni Personali</caption>
                   <thead>
                     <tr>
                       <th scope="col">Codice</th>

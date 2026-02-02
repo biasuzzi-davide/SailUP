@@ -52,8 +52,8 @@
 
       <form id="blog-form" action="[ADMIN_BLOG_ACTION]" method="post" novalidate enctype="multipart/form-data">
         <input type="hidden" name="csrf_token" value="[CSRF_TOKEN]">
-        <input type="hidden" name="post-id" value="[ADMIN_BLOG_ID]">
-        <input type="hidden" name="existing-image-url" id="existing-image-url" value="[OLD_IMAGE]">
+        <input type="hidden" name="post-id" [ADMIN_BLOG_ID]>
+        <input type="hidden" name="existing-image-url" id="existing-image-url" [OLD_IMAGE]>
 
         <fieldset>
           <legend>Informazioni Base</legend>
@@ -61,7 +61,7 @@
           <div class="form-group">
             <label for="post-title">Titolo Articolo <abbr title="Campo obbligatorio">*</abbr></label>
             <input type="text" id="post-title" name="post-title"
-              placeholder="es. Come scegliere la barca perfetta per te" value="[OLD_TITLE]" required
+              placeholder="es. Come scegliere la barca perfetta per te" [OLD_TITLE] required
               aria-describedby="post-title-error">
             <span id="post-title-error" class="field-error" role="alert"></span>
           </div>
@@ -69,7 +69,7 @@
           <div class="form-row">
             <div class="form-group">
               <label for="post-date">Data Pubblicazione <abbr title="Campo obbligatorio">*</abbr></label>
-              <input type="date" id="post-date" name="post-date" value="[OLD_DATE]" required
+              <input type="date" id="post-date" name="post-date" [OLD_DATE] required
                 aria-describedby="post-date-error">
               <span id="post-date-error" class="field-error" role="alert"></span>
             </div>
@@ -80,7 +80,7 @@
               <label for="post-reading-time">Tempo Medio di Lettura (minuti) <abbr
                   title="Campo obbligatorio">*</abbr></label>
               <input type="number" id="post-reading-time" name="post-reading-time" min="1" step="1" placeholder="es. 5"
-                value="[OLD_READING_TIME]" required aria-describedby="post-reading-time-error">
+                [OLD_READING_TIME] required aria-describedby="post-reading-time-error">
               <span id="post-reading-time-error" class="field-error" role="alert"></span>
             </div>
           </div>
@@ -128,7 +128,7 @@
             <label for="Testo_Alternativo">Testo Alternativo Immagine</label>
             <input type="text" id="Testo_Alternativo" name="Testo_Alternativo"
               placeholder="es. Vista panoramica del porto al tramonto"
-              value="[OLD_ALT]" aria-describedby="Testo_Alternativo-hint Testo_Alternativo-error">
+              [OLD_ALT] aria-describedby="Testo_Alternativo-hint Testo_Alternativo-error">
             <span id="Testo_Alternativo-hint" class="field-hint">Inserire solo se l'immagine trasmette informazioni rilevanti per utenti non vedenti</span>
             <span id="Testo_Alternativo-error" class="field-error" role="alert"></span>
           </div>
