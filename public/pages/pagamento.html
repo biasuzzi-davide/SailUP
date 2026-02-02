@@ -6,8 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pagamento - SailUP</title>
     <meta name="description" content="Completa il pagamento per confermare la tua prenotazione su SailUP.">
-    <meta name="keywords"
-        content="pagamento, prenotazione, checkout, sicuro, carta, credito, bonifico, contanti, SailUP">
     <meta name="author" content="SailUp team">
 
     <link rel="icon" href="../img/favicon/favicon.ico" sizes="any">
@@ -20,7 +18,7 @@
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="../css/style.css" media="screen">
+    <link rel="stylesheet " href="../css/style.css" media="screen">
     <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)">
     <link rel="stylesheet" href="../css/print.css" media="print">
 </head>
@@ -44,14 +42,12 @@
         <section class="section-container">
             <div class="auth-card">
                 <h1>Completa la Prenotazione</h1>
+                <h2>Ci sei quasi, completa con i dati mancanti per confermare la prenotazione</h2>
                 [MESSAGGIO_ERRORE]
 
-                <div>
-                    <dt><strong>Totale da Pagare:</strong></dt>
-                    <dd><strong class="price-value">€ [PREZZO_TOTALE]</strong></dd>
-                </div>
-
+                <p class="auth-subtitle">Totale da Pagare: <span class="price-value">€ [PREZZO_TOTALE]</span></p>
                 <p class="auth-subtitle">Inserisci i dati della carta per procedere</p>
+
 
                 <div id="error-message" class="error-message hidden" role="alert" aria-live="assertive"></div>
                 <div id="success-message" class="success-message hidden" role="alert" aria-live="polite"></div>
