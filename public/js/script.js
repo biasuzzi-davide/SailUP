@@ -183,11 +183,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         filterTabs.forEach(btn => {
             btn.classList.remove('active');
-            btn.setAttribute('aria-selected', 'false');
+            btn.setAttribute('aria-pressed', 'false');
 
             if (btn.getAttribute('data-filter') === status) {
                 btn.classList.add('active');
-                btn.setAttribute('aria-selected', 'true');
+                btn.setAttribute('aria-pressed', 'true');
             }
         });
     }
