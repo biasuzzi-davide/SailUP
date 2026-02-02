@@ -60,7 +60,7 @@ $html = buildPage('../pages/blog_articolo.html', $_SERVER['PHP_SELF']);
 
 // Genera keywords dinamiche basate sull'articolo del blog
 $titleWords = array_filter(array_map('trim', explode(' ', strtolower($articleTitleSafe))));
-$keywordParts = array_merge(['blog', 'nautico'], array_slice($titleWords, 0, 5), ['Napoli', 'golfo', 'mare', 'consigli']);
+$keywordParts = array_merge(['blog'], array_slice($titleWords, 0, 5));
 $keywordsContent = implode(', ', array_unique($keywordParts));
 $keywords = '<meta name="keywords" content="' . htmlspecialchars($keywordsContent, ENT_QUOTES, 'UTF-8') . '">';
 
