@@ -804,7 +804,9 @@ function buildBlogArticleCard(array $articolo): string
 
     $imageUrl = resolveImageUrl($articolo['URL_Media'] ?? null);
     $altText = $articolo['Testo_Alternativo'] ?? '';
-    $titolo = formatText($articolo['Titolo'] ?? 'Articolo SailUP');
+    $rawTitolo = $articolo['Titolo'] ?? 'Articolo SailUP';
+    $titolo = formatText($rawTitolo);
+    $titoloSafe = htmlspecialchars($rawTitolo, ENT_QUOTES);
     $descrizione = formatText($articolo['Descrizione_Breve'] ?? 'Nessuna descrizione disponibile.');
     $detailUrl = 'blog_articolo.php?id=' . rawurlencode($idArticolo);
 
@@ -822,7 +824,7 @@ function buildBlogArticleCard(array $articolo): string
           </p>
 
           <div class="product-footer">
-            <a href="' . $detailUrl . '" class="product-cta" aria-label="Leggi tutto l\'articolo: ' . $titolo . '">
+            <a href="' . $detailUrl . '" class="product-cta" aria-label="Leggi tutto l\'articolo: ' . $titoloSafe . '">
               Leggi tutto l\'articolo
             </a>
           </div>
