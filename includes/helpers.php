@@ -1172,20 +1172,26 @@ function buildAdminBookingRows(array $pren, string $csrfToken): string
         // Mostra il pulsante Conferma solo se lo stato non è già Confermata
         if ($statoRaw !== 'Confermata') {
             $confirmBtn = '<form method="post" class="inline-form">'
+                . '<fieldset>'
+                . '<legend class="sr-only">Conferma prenotazione ' . $idPren . ' di ' . $cliente . '</legend>'
                 . '<input type="hidden" name="csrf_token" value="' . htmlspecialchars($csrfToken) . '">'
                 . '<input type="hidden" name="id_prenotazione" value="' . $idPren . '">'
                 . '<input type="hidden" name="action" value="confirm">'
-                . '<button type="submit" class="btn-layout btn-sm">Conferma</button>'
+                . '<button type="submit" class="btn-layout btn-sm" aria-label="Conferma prenotazione ' . $idPren . '">Conferma</button>'
+                . '</fieldset>'
                 . '</form>';
         }
 
         // Mostra il pulsante Cancella solo se lo stato non è già Cancellata
         if ($statoRaw !== 'Cancellata') {
             $cancelBtn = '<form method="post" class="inline-form" data-confirm-type="cancel-booking">'
+                . '<fieldset>'
+                . '<legend class="sr-only">Cancella prenotazione ' . $idPren . ' di ' . $cliente . '</legend>'
                 . '<input type="hidden" name="csrf_token" value="' . htmlspecialchars($csrfToken) . '">'
                 . '<input type="hidden" name="id_prenotazione" value="' . $idPren . '">'
                 . '<input type="hidden" name="action" value="cancel">'
-                . '<button type="submit" class="btn-danger btn-sm">Cancella</button>'
+                . '<button type="submit" class="btn-danger btn-sm" aria-label="Cancella prenotazione ' . $idPren . '">Cancella</button>'
+                . '</fieldset>'
                 . '</form>';
         }
 
