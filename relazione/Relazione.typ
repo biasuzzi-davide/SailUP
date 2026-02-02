@@ -76,12 +76,13 @@
     
     #v(0.5em)
     *Indirizzo del sito:* \
-    #link("http://tecweb.studenti.math.unipd.it/~dbiasuzz/public/php/index.php")[tecweb.studenti.math.unipd.it/~dbiasuzz/public/php/index.php]
+    #link("http://tecweb.studenti.math.unipd.it/~dbiasuzz/public/php/index.php")[tecweb.studenti.math.unipd.it/dbiasuzz/public/php/index.php]
     
     #v(0.5em)
     *Informazioni di accesso:* \
     - *Amministratore:* username `admin`, password `admin`
     - *Utente Semplice:* username `user`, password `user`
+    *Disclaimer*: Gli account di test (user, admin), avendo credenziali semplificate per agevolare la fase di revisione, non soddisfano i requisiti della logica di validazione interna che impone l'uso di indirizzi email standard. Di conseguenza, sebbene le funzionalità di autenticazione siano garantite per questi profili, le operazioni di modifica dei dati utente non sono possibili a causa del fallimento della validazione sintattica sui campi. La corretta funzionalità del modulo di gestione profilo è assicurata non appena viene associata una stringa conforme al pattern email previsto dal sistema.
   ]
 ]
 
@@ -155,7 +156,7 @@ L'eterogeneità della clientela (turisti e residenti) e la volontà di non sovra
 
 È stata poi mantenuta una rigida separazione tra struttura (HTML), presentazione (CSS) e comportamento (PHP e JavaScript). Sappiamo bene che mescolare questi elementi è il primo passo verso il debito tecnico e un debito formativo nel corso di Tecnologie Web, quindi abbiamo puntato sulla modularità per rispettare gli standard web attuali.
 
-Infine, la progettazione del sito è stata condotta cercando garantire l'accessibilità a tutte le categorie di utenti.
+Infine, la progettazione del sito è stata condotta cercando di garantire l'accessibilità a tutte le categorie di utenti.
 
 == Struttura
 La struttura del sito segue il modello gerarchico schematizzato in #link(<fig-sitemap>)[Figura 1]. In questa fase si è pianificata una suddivisione nelle seguenti pagine principali, accessibili tramite un menù di navigazione globale:
@@ -199,7 +200,7 @@ La costruzione delle pagine web sfrutta il markup di HTML5, garantendo una chiar
 - *Breadcrumbs:* L'orientamento all'interno delle pagine è agevolato dalle breadcrumbs, presenti in tutte le pagine ad eccezione di quelle d'errore.
 - *Attributi e semantica:* Particolare attenzione è stata inoltre posta nel definire attributi adeguati per il contenuto e gli elementi funzionali: ai termini in lingua inglese è stato associato l'attributo `lang="en"` (es. _Privacy Policy_, _Login_), alle sigle ed acronimi (es. CAP, NA, S.r.l., FAQ) l'attributo `title` all'interno del tag `<abbr>` per esplicitarne il significato e alle date l'attributo datetime nel tag `<time>` per renderle _machine-readable_ e quindi interpretabili da motori di ricerca e _screen reader_. 
 - *Ottimizzazioni:* Sono stati infine impiegati attributi specifici per migliorare l'esperienza utente, come `autocomplete` e `pattern` per facilitare la compilazione dei form e `loading="lazy"`, una soluzione tanto semplice quanto efficace per non uccidere le prestazioni del sito al primo caricamento.
-- *Contenuti e asset multimediali:* La totalità dei testi e delle immagini presenti all'interno del sito è stata prodotta utilizzando AI Generativa, in particolare Gemini 3. Questa scelta ci ha consentito da un lato di sopperire alla nostra mancanza di competenze nel settore nautico, garantendo descrizioni e articoli tecnicamente corretti e verosimili, e dall'altro di popolare la piattaforma con materiale visivo di buona qualità e privo di vincoli di copyright. Per assicure tempi di caricamento rapidi tutti gli asset così ottenuti sono stati poi convertiti nel formato .webp.
+- *Contenuti e asset multimediali:* La totalità dei testi e delle immagini presenti all'interno del sito è stata prodotta utilizzando AI Generativa, in particolare Gemini 3. Questa scelta ci ha consentito da un lato di sopperire alla nostra mancanza di competenze nel settore nautico, garantendo descrizioni e articoli tecnicamente corretti e verosimili, e dall'altro di popolare la piattaforma con materiale visivo di buona qualità e privo di vincoli di copyright. Per assicurare tempi di caricamento rapidi tutti gli asset così ottenuti sono stati poi convertiti nel formato .webp.
 
 === Presentazione (CSS)
 La parte grafica è gestita interamente tramite fogli di stile CSS, mantenendo una netta separazione tra struttura e presentazione, una scelta che oltre a rispettare gli standard, ci ha risparmiato diverse emicranie in fase di revisione. Per gestire i ridimensionamenti intermedi (es. tablet), senza frammentare eccessivamente il codice in fogli diversi, abbiamo integrato le media query direttamente nei file principali. Abbiamo preso questa scelta per evitare la proliferazione di file da poche decine di righe che complicherebbero la manutenzione e, contemporaneamente, per ottimizzare le prestazioni riducendo le richieste HTTP al server.
@@ -314,7 +315,7 @@ Il sistema implementa il principio della *doppia validazione* come best practice
 Ogni dato ricevuto via POST request viene ricontrollato.
 
 === Sessioni, Sicurezza e Protezione dei Dati
-Il mantenimento dello stato utente è gestito tramite un sistema dedicato nel file `session.php`. All'avvio lo script verifica che la sessione non sia già attiva tramite evitando errori di sessioni duplicate.
+Il mantenimento dello stato utente è gestito tramite un sistema dedicato nel file `session.php`. All'avvio lo script verifica che la sessione non sia già attiva evitando cosi errori di sessioni duplicate.
 Sono state poi implementate funzioni helper per semplificare i controlli di accesso trasversali:
 
 - `isLogged()`: Verifica la presenza della chiave `user` nella sessione, indicando un utente autenticato.
@@ -400,14 +401,14 @@ Il codice è stato esaminato per individuare quegli errori che, inevitabilmente,
 
 - *WCAG Contrast Checker:* Questo strumento è stato prezioso per analizzare e correggere i contrasti tra gli elementi presenti all'interno delle pagine. Questo _tool_ ci ha messo di fronte alla dura realtà che quel blu che ci piaceva tanto, purtroppo, non è per tutti facilmente leggibile.
 
-- *w3ba11y:* Abbiamo utilizzato questo strumento per verificare che le _kywords_ inserite fossero effettivamente presenti nella pagina.
+- *w3ba11y:* Abbiamo utilizzato questo strumento per verificare che le _keywords_ inserite fossero effettivamente presenti nella pagina.
 
-- *WAVE e SilkTide:* Oltre a condurre un secondo controllo sui contrasti, abbiamo sffruttato questi _tool_ per verificare che l'ordine di navigazione da tastiera fosse corretto. Oltre a questo ci hanno permesso di individuare altri errori relativi alle intestazioni. _WAVE_ ha segnalato alcuni warning per '_redundant link_', riferendosi al doppio collegamento alla _Home_ presente sia sul logo che nel menu. In questo caso abbiamo esercitato il nostro diritto di libero arbitrio ignorandolo: rimuovere uno dei due sarebbe stato tecnicamente 'pulito' secondo il _tool_, ma poco intuitivo per un utente reale.
+- *WAVE e SilkTide:* Oltre a condurre un secondo controllo sui contrasti, abbiamo sfruttato questi _tool_ per verificare che l'ordine di navigazione da tastiera fosse corretto. Oltre a questo ci hanno permesso di individuare altri errori relativi alle intestazioni. _WAVE_ ha segnalato alcuni warning per '_redundant link_', riferendosi al doppio collegamento alla _Home_ presente sia sul logo che nel menu. In questo caso abbiamo esercitato il nostro diritto di libero arbitrio ignorandolo: rimuovere uno dei due sarebbe stato tecnicamente 'pulito' secondo il _tool_, ma poco intuitivo per un utente reale.
 
 === Test
 Sono stati condotti test approfonditi sulla validazione degli input utente per garantire la robustezza e la sicurezza dei form. Ecco il resoconto delle principali manovre di verifica effettuate:
 
-- *Form di registrazione:* Abbiamo provato ad immetere nei campi del form di registrazione input errati per verificare che i controlli inseriti funzionassero, come ad esempio nome e cognome di minimo 2 caratteri, codice fiscale di 16 caratteri alfanumerici, email in un un formato valido (utente\@dominio.it), password di minimo 8 caratteri contenente almeno una lettera maiuscola una minuscola e un numero ed accettazione obbligatoria per la Privacy Policy.
+- *Form di registrazione:* Abbiamo provato ad immettere nei campi del form di registrazione input errati per verificare che i controlli inseriti funzionassero, come ad esempio nome e cognome di minimo 2 caratteri, codice fiscale di 16 caratteri alfanumerici, email in un formato valido (utente\@dominio.it), password di minimo 8 caratteri contenente almeno una lettera maiuscola una minuscola e un numero ed accettazione obbligatoria per la Privacy Policy.
 
 - *Form creazione prodotto e blog (Admin):* È stata verificata la validazione di tutti i campi obbligatori per garantire la completezza dei dati. Per i prodotti, i campi validati includono nome, tipo, descrizione, prezzo, capacità, URL immagine e testo alternativo associato. Per gli articoli del blog, i controlli si applicano a titolo, categoria, data, estratto, contenuto, URL immagine e testo alternativo.
 
@@ -426,7 +427,7 @@ Sono stati condotti test approfonditi sulla validazione degli input utente per g
 = Suddivisione del Lavoro
 L'evoluzione del progetto è stata meno lineare del previsto. Inizialmente composto da un gruppo di quattro persone, il team è andato incontro ad una riorganizzazione procedendo ad un fork del progetto per ultimare il lavoro in tre.
 
-Questa transizione ha reso la suddivisione dei compiti non definibile in maniera netta. Parti del codice non direttamente scritto dagli attuali membri del gruppo è stato oggetto di correzioni e miglioramenti. Proveremo di seguito a definire nel miglior modo possibile, memoria assistendoci, la suddivisione del lavoro.
+Questa transizione ha reso la suddivisione dei compiti non definibile in maniera netta. Parti del codice non direttamente scritte dagli attuali membri del gruppo sono state oggetto di correzioni e miglioramenti. Proveremo di seguito a definire nel miglior modo possibile, memoria assistendoci, la suddivisione del lavoro.
 
 - *Davide Biasuzzi:* Progettazione e creazione del database (SQL), pagina db_connection.php (PHP) per la gestione della connessione al database e delle query CRUD, implementazione della logica di business per la gestione delle prenotazioni (PHP), backend della parte non amministrativa del sito, revisione design pagine catalogo e di dettaglio dei prodotti, parte frontend della pagine di errore, scrittura della relazione parte backend.
 
@@ -443,7 +444,7 @@ Questa transizione ha reso la suddivisione dei compiti non definibile in maniera
     - Corretta logica breadcrumbs per la parte admin->profilo admin
     - Aggiunta funzionalità profilo utente per l'admin
     - Revisione funzione di reperimento immagini dal DB,
-    - Revisione politica di accesso alle paggine admin per utenti non admin
+    - Revisione politica di accesso alle pagine admin per utenti non admin
     - Varie migliorie grafiche minori
     - Revisione della validazione dati utente (indirizzo, nome e cognome)
     - Revisione sintassi HTML5 e accessibilità generale
