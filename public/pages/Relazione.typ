@@ -434,7 +434,8 @@ Questa transizione ha reso la suddivisione dei compiti non definibile in maniera
 
 - *Alberto Reginato:* Parte frontend delle principali pagine del sito (HTML, CSS), foglio di stile per la stampa (CSS), aggiunta bottone 'Torna su' e calcolo prezzi in tempo reale (JS), funzioni per la generazione dinamica dei tag e attributi html (PHP), popolamento delle pagine, testing e validazione, scrittura della relazione.
 
-- *Hossam Ezzemouri:*
+- *Hossam Ezzemouri:* Sezioni login e registrazione del sito
+  - *Correzioni effettuate sulla parte:*
 
 
 = Conclusioni e Sviluppi Futuri
