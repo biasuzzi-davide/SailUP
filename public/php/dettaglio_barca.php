@@ -260,10 +260,23 @@ $extraCheckboxes = buildExtraCheckboxes($extra);
 
 $html = buildPage('../pages/dettaglio_barca.html', $_SERVER['PHP_SELF']);
 
-// Genera keywords dinamiche basate sui dati della barca
-$keywordParts = ['noleggio', strtolower($productName), strtolower($productType)];
+// Genera keywords dinamiche basate sui dati della barca (singole parole, no frasi)
+$keywordParts = ['noleggio'];
+// Aggiungo le singole parole del nome prodotto
+$nameWords = preg_split('/\s+/', strtolower($productName));
+foreach ($nameWords as $word) {
+    if (strlen($word) > 3) { // Ignoro parole troppo corte
+        $keywordParts[] = $word;
+    }
+}
+// Aggiungo le singole parole del tipo prodotto
+$typeWords = preg_split('/\s+/', strtolower($productType));
+foreach ($typeWords as $word) {
+    if (strlen($word) > 3) { // Ignoro parole troppo corte
+        $keywordParts[] = $word;
+    }
+}
 if ($licenseRaw === false) {
-    $keywordParts[] = 'senza';
     $keywordParts[] = 'patente';
 } else if ($licenseRaw === true) {
     $keywordParts[] = 'patente';

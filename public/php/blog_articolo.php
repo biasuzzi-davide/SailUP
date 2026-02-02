@@ -58,9 +58,15 @@ $authorImageAlt = $article['Autore_Alt'] ?? '';
 
 $html = buildPage('../pages/blog_articolo.html', $_SERVER['PHP_SELF']);
 
-// Genera keywords dinamiche basate sull'articolo del blog
-$titleWords = array_filter(array_map('trim', explode(' ', strtolower($articleTitleSafe))));
-$keywordParts = array_merge(['blog'], array_slice($titleWords, 0, 5));
+// Genera keywords dinamiche basate sull'articolo del blog (singole parole, no frasi)
+$keywordParts = ['blog'];
+$titleWords = preg_split('/\s+/', strtolower($articleTitleSafe));
+foreach ($titleWords as $word) {
+    if (strlen($word) > 3) { // Ignoro parole troppo corte
+        $keywordParts[] = $word;
+    }
+}
+$keywordParts = array_slice($keywordParts, 0, 6); // Limito a 6 keywords totali
 $keywordsContent = implode(', ', array_unique($keywordParts));
 $keywords = '<meta name="keywords" content="' . htmlspecialchars($keywordsContent, ENT_QUOTES, 'UTF-8') . '">';
 
