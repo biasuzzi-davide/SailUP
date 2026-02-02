@@ -1069,10 +1069,13 @@ function buildAdminUsersRows(array $users, string $csrfToken, ?int $currentUserI
             $rows .= '<span class="text-muted">Account in uso</span>';
         } else {
             $rows .= '<form method="post" class="inline-form" data-confirm-type="delete-user">';
+            $rows .= '<fieldset>';
+            $rows .= '<legend class="sr-only">Azioni per l\'utente ' . $nomeCompleto . '</legend>';
             $rows .= '<input type="hidden" name="csrf_token" value="' . htmlspecialchars($csrfToken) . '">';
             $rows .= '<input type="hidden" name="id_utente" value="' . $idUtente . '">';
             $rows .= '<input type="hidden" name="action" value="delete">';
             $rows .= '<button type="submit" class="btn-danger btn-sm" aria-label="Elimina utente ' . $nomeCompleto . '">Elimina</button>';
+            $rows .= '</fieldset>';
             $rows .= '</form>';
         }
 
@@ -1303,10 +1306,13 @@ function buildProfileBookingRows(array $prenotazioni, string $csrfToken): string
             . '<td data-label="Azioni" class="actions-cell">'
             . ($isCancellable
                 ? '<form method="post" class="inline-form" data-confirm-type="cancel-user-booking">'
+                . '<fieldset>'
+                . '<legend class="sr-only">Annulla prenotazione ' . $idPren . '</legend>'
                 . '<input type="hidden" name="csrf_token" value="' . htmlspecialchars($csrfToken) . '">'
                 . '<input type="hidden" name="action" value="cancel_booking">'
                 . '<input type="hidden" name="booking_id" value="' . $idPren . '">'
-                . '<button type="submit" class="btn-danger btn-sm">Annulla</button>'
+                . '<button type="submit" class="btn-danger btn-sm" aria-label="Annulla prenotazione ' . $idPren . '">Annulla</button>'
+                . '</fieldset>'
                 . '</form>'
                 : '—'
             )

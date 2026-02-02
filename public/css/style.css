@@ -1619,7 +1619,8 @@ a.product-cta:focus-visible {
   padding: 1.5rem;
 }
 
-.booking-form fieldset {
+.booking-form fieldset,
+.inline-form fieldset {
   border: none;
   padding: 0;
   margin: 0;
