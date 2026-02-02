@@ -430,7 +430,7 @@ Questa transizione ha reso la suddivisione dei compiti non definibile in maniera
 
 - *Davide Biasuzzi:* Principale responsabile della parte backend (PHP e database), ha lavorato in ambito frontend alle pagine di errore e ...(HTML e CSS).
 
-- *Francesco Marcon:* Parte frontend delle principali pagine del sito (HTML, CSS e JS), ha lavorato in ambito backend a funzioni quali ...
+- *Francesco Marcon:* Sviluppo frontend delle principali pagine (HTML), definizione stile mobile e desktop (CSS), validazione client-side per login, registrazione, pagamenti, inserimento prodotti e blog (JS), correzione di funzioni per il popolamento dinamico da DB, correzione errori grafici e adeguamento standard WCAG (PHP).
 
 - *Alberto Reginato:* Parte frontend delle principali pagine del sito (HTML, CSS), foglio di stile per la stampa (CSS), aggiunta bottone 'Torna su' e calcolo prezzi in tempo reale (JS), funzioni per la generazione dinamica dei tag e attributi html (PHP), popolamento delle pagine, testing e validazione, scrittura della relazione.
 
