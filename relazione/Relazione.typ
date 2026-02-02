@@ -76,7 +76,7 @@
     
     #v(0.5em)
     *Indirizzo del sito:* \
-    #link("http://tecweb.studenti.math.unipd.it/dbiasuzz/")[tecweb.studenti.math.unipd.it/dbiasuzz/]
+    #link("http://tecweb.studenti.math.unipd.it/~dbiasuzz/public/php/index.php")[tecweb.studenti.math.unipd.it/~dbiasuzz/public/php/index.php]
     
     #v(0.5em)
     *Informazioni di accesso:* \
