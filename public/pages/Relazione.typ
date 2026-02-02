@@ -433,29 +433,31 @@ Questa transizione ha reso la suddivisione dei compiti non definibile in maniera
 - *Alberto Reginato:* Parte frontend delle principali pagine del sito (HTML, CSS), foglio di stile per la stampa (CSS), aggiunta bottone 'Torna su' e calcolo prezzi in tempo reale (JS), funzioni per la generazione dinamica dei tag e attributi html (PHP), popolamento delle pagine e del DB, testing e validazione, scrittura della relazione parte frontend.
 
 - *Hossam Ezzemouri:* Parte backend della parte amministrativa del sito (PHP), implementazione del sistema CRUD per la gestione di prodotti e articoli del blog, funzioni di autenticazione e gestione sessioni (PHP), revisione design pagine create e update di prodotti e blog.
-  - *Correzioni effettuate sulla parte: (le parte indicate con \* sono state modificate prima della fork del progetto)*
-    - Revisione su parte legata alla visualizzazione delle psw nel login
-    - Revisione della validazione dati utente (indirizzo, nome e cognome) \*
+  - *Correzioni effettuate sulla parte prima del fork:*
+    - Collegati pulsanti non funzionanti
+    - Prevenzione traversal-path a login per utente gia loggato
+    - Aggiunta funzionalità di elimina utente per l'admin
+    - Aggiunta funzionalità di eliminazione prodotto
+    - Corretta logica breadcrumbs per la parte admin->profilo admin
+    - Aggiunta funzionalità profilo utente per l'admin
+    - Revisione funzione di reperimento immagini dal DB,
+    - Revisione politica di accesso alle paggine admin per utenti non admin
+    - Varie migliorie grafiche minori
+    - Revisione della validazione dati utente (indirizzo, nome e cognome)
+    - Revisione sintassi HTML5 e accessibilità generale
+    - Esplicitati e disambiguati errori per gli utenti generici
+    - Implementata funzione elimina account utente
+    - Validazione registrazione
+
+  - *Correzioni effettuate sulla parte dopo il fork:*
+    - Rimossa paginazione mal funzionante nella sezione amministrativa
     - Revisione funzionalità create/update di blog
-    - Revisione sintassi HTML5 e accessibilità generale \*
     - Revisione funzionalità create/update di prodotti
     - Revisione separazione tra contenuto e comportamento js
-    - Esplicitati e disambiguati errori per gli utenti generici \*
-    - Implementata funzione elimina account utente \*
-    - Rimossa paginazione mal funzionante nella sezione amministrativa
     - Revisionata validazione dei form lato client (errori su REGEX e messaggi)
-    - Validazione registrazione \*
     - Rimozione classi CSS inesistenti
     - Revisionata logica pulsanti su admin prenotazioni
-    - Collegati pulsanti non funzionanti \*
-    - Prevenzione traversal-path a login per utente gia loggato \*
-    - Aggiunta funzionalità di elimina utente per l'admin \*
-    - Aggiunta funzionalità di eliminazione prodotto \*
-    - Corretta logica breadcrumbs per la parte admin->profilo admin \*
-    - Aggiunta funzionalità profilo utente per l'admin \*
-    - Revisione funzione di reperimento immagini dal DB \*,
-    - Revisione politica di accesso alle paggine admin per utenti non admin \*
-    - Varie migliorie grafiche minori \*
+    - Revisione su parte legata alla visualizzazione delle psw nel login
 
 
 = Conclusioni e Sviluppi Futuri
