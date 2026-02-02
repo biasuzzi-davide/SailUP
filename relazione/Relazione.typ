@@ -49,7 +49,7 @@
 
   #v(2em)
   
-  #align(center, image("../img/logo_light.svg", width: 25%))
+  #align(center, image("../public/img/logo_light.svg", width: 25%))
 
   #v(2em)
   
@@ -182,7 +182,7 @@ La struttura del sito segue il modello gerarchico schematizzato in #link(<fig-si
     Questa sezione funge da centro di controllo. Permette di visualizzare la totalità delle prenotazioni nel sistema, accedere alla pagina profilo personale, gestire l'anagrafica degli utenti registrati e modificare dinamicamente i contenuti del sito (aggiunta/modifica/rimozione di Barche, Esperienze e Articoli del Blog).
 
   #figure(
-    image("../img/diagramma_albero.png", width: 70%), 
+    image("../public/img/diagramma_albero.png", width: 70%), 
     gap: 2em,
     caption: [Mappa gerarchica della piattaforma SailUP],
   ) <fig-sitemap>
