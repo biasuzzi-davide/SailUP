@@ -1,0 +1,483 @@
+/* =========================================
+       1. GENERALI
+    ========================================= */
+*,
+*::before,
+*::after {
+    background: transparent;
+    box-shadow: none;
+    text-shadow: none;
+}
+
+html {
+    background-color: #fff;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin-top: 15px;
+    background-color: #fff;
+    color: #000;
+    font-family: "Times New Roman", Times, Georgia, serif;
+    font-size: 12pt;
+    line-height: 1.4;
+
+    width: 100%;
+    box-sizing: border-box;
+}
+
+a {
+    color: #000;
+    text-decoration: none;
+}
+
+/* mostra l'indirizzo solo per link esterni, al momento non ce ne sono nel sito ma attivabile
+
+    main a[href^="http"]::after {
+        content: " (" attr(href) ")";
+    }
+
+    */
+
+header,
+#breadcrumb,
+.hero,
+.hero-bg,
+.filters-sidebar,
+.action-buttons,
+.theme-toggle,
+.scroll-to-top,
+.skip-to-content,
+.section-header a,
+#mobile-menu,
+#hamburger-btn,
+.footer-col,
+.valid-logos,
+.sr-only,
+.footer-links,
+.results-sort,
+.product-cta,
+.print-none,
+.booking-form,
+.footer-heading,
+.btn-layout,
+.btn-layout-light,
+.hero-image,
+.profile-sidebar,
+.profile-avatar,
+button {
+    display: none;
+}
+
+main,
+.section-container {
+    margin: 0;
+    padding: 0;
+    display: block;
+    width: 99%;
+}
+
+abbr[title],
+abbr {
+    text-decoration: none;
+    border-bottom: none;
+}
+
+/* =========================================
+       2. TIPOGRAFIA
+    ========================================= */
+
+h1,
+h2,
+h3 {
+    color: #000;
+    page-break-after: avoid;
+    text-align: left;
+}
+
+h1 {
+    font-size: 22pt;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: #000;
+}
+
+h2 {
+    font-size: 18pt;
+    margin-top: 30px;
+
+}
+
+/* =========================================
+       3. HERO
+    ========================================= */
+
+.layout-full-width {
+    background: transparent;
+    height: auto;
+    position: static;
+    margin-bottom: 30px;
+}
+
+#hero {
+    display: block;
+    padding: 0;
+    min-height: auto;
+    color: #000;
+}
+
+#hero-content {
+    position: static;
+    color: #000;
+    text-align: left;
+}
+
+#hero-content h1 {
+    border: none;
+    font-size: 26pt;
+    margin-bottom: 10px;
+}
+
+#hero-content p {
+    font-size: 14pt;
+    font-style: italic;
+}
+
+.catalog-hero {
+    display: block;
+    border-bottom: 2px solid #000;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    text-align: left;
+}
+
+/* =========================================
+        4. CARD
+    ========================================= */
+
+.cards-wrapper,
+.catalog-layout,
+.catalog-results,
+.catalog-grid {
+    display: block;
+    width: 100%;
+}
+
+.product-card {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    border: 1px solid #878787;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+    page-break-inside: avoid;
+    background-color: #fff;
+    gap: 20px;
+}
+
+.product-card-image {
+    width: 150px;
+    height: 100px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 4px;
+    margin: 0;
+    flex-shrink: 0;
+}
+
+.product-card-content {
+    flex: 1;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.product-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 8px;
+    padding-bottom: 5px;
+}
+
+.product-title {
+    font-size: 14pt;
+    font-weight: bold;
+    margin: 0;
+    color: #000;
+}
+
+.product-badge {
+    font-size: 9pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 2px 6px;
+    border: 1px solid #000;
+    border-radius: 4px;
+    color: #000;
+    margin-left: 10px;
+    white-space: nowrap;
+}
+
+.product-description {
+    font-size: 11pt;
+    color: #282828;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.product-specs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    list-style: none;
+    padding: 0;
+    margin: 5px 0 10px 0;
+    font-size: 10pt;
+    color: #444;
+}
+
+.spec-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.product-footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: auto;
+    border-top: 1px dotted #ccc;
+    padding-top: 5px;
+}
+
+.product-price {
+    font-size: 13pt;
+    font-weight: bold;
+    color: #000;
+}
+
+.price-label,
+.price-period {
+    font-size: 9pt;
+    font-weight: normal;
+    color: #555;
+    margin: 0 3px;
+}
+
+/* =========================================
+        5. DETTAGLIO PRODOTTI
+    ========================================= */
+.detail-hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 4px;
+    width: 98%;
+}
+
+.detail-header {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #f2f2f2;
+    padding-bottom: 10px;
+}
+
+.detail-header h1 {
+    font-size: 20pt;
+    margin-bottom: 5px;
+    color: #000;
+}
+
+.detail-header .subtitle {
+    font-size: 12pt;
+    font-style: italic;
+    color: #333;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.specs-grid {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #cacaca;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 20px;
+    width: 95%;
+}
+
+.spec-card {
+    flex: 1;
+    text-align: center;
+    border-right: 1px solid #cbcbcb;
+    padding: 0 10px;
+}
+
+.spec-card:last-child {
+    border-right: none;
+}
+
+.spec-label {
+    display: block;
+    font-size: 9pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #424242;
+    margin-bottom: 3px;
+}
+
+.spec-value {
+    font-size: 11pt;
+    font-weight: bold;
+    color: #000;
+}
+
+.servicies-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    page-break-inside: avoid;
+    margin-bottom: 20px;
+    width: 98%;
+}
+
+.amenity-box {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 15px;
+    background-color: #fff;
+}
+
+.amenity-box h3 {
+    margin-top: 0;
+    font-size: 12pt;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+    color: #000;
+}
+
+.amenity-box ul {
+    padding-left: 20px;
+    margin: 0;
+    list-style-type: disc;
+}
+
+.amenity-box li {
+    margin-bottom: 5px;
+    font-size: 10pt;
+    color: #333;
+}
+
+.sticky-sidebar,
+.detail-sidebar {
+    position: static;
+    width: 95%;
+    margin-top: 20px;
+    border: 2px solid #000;
+    border-radius: 8px;
+    padding: 15px;
+}
+
+.price-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding-bottom: 0;
+}
+
+.price-amount {
+    font-size: 18pt;
+    font-weight: bold;
+    color: #000;
+}
+
+/* =========================================
+       6. ACCOUNT
+       ========================================= */
+
+.profile-stats {
+    display: block;
+    margin-bottom: 30px;
+}
+
+.stats-grid {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+}
+
+.stat-card {
+    display: inline-block;
+    width: 45%;
+    margin: 0 5px 15px 5px;
+    padding: 10px 0;
+    border: 1px solid #000;
+    background-color: #fff;
+    page-break-inside: avoid;
+}
+
+.stat-card .stat-number {
+    font-size: 2em;
+    font-weight: 700;
+    margin: 0;
+}
+
+
+/* =========================================
+       7. FAQ
+       ========================================= */
+
+.faq-section {
+    display: block;
+    width: 98%;
+}
+
+.faq-item {
+    display: block;
+    margin-bottom: 20px;
+    page-break-inside: avoid;
+    border: 1px solid #c8c8c8;
+    border-radius: 8px;
+    padding: 15px;
+    background-color: #fff;
+}
+
+.faq-question {
+    font-weight: bold;
+    font-size: 12pt;
+    margin-bottom: 10px;
+    list-style: none;
+}
+
+.faq-answer {
+    display: block;
+    padding-left: 0;
+    border-left: none;
+    border-top: 1px solid #e6e6e6;
+    padding-top: 10px;
+    font-size: 11pt;
+    line-height: 1.5;
+    color: #3a3a3a;
+    margin-top: 0;
+}
+
+/* =========================================
+       8. FOOTER
+       ========================================= */
+
+footer {
+    margin-top: 50px;
+    margin-right: 10px;
+    border: 1px solid #878787;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+    page-break-inside: avoid;
+}

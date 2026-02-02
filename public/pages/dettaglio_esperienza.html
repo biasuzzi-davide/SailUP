@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="it" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[EXPERIENCE_NAME] - Esperienze - SailUP</title>
+    <meta name="description" content="[EXPERIENCE_DESCRIPTION_SHORT]">
+    [KEYWORDS]
+    <meta name="author" content="SailUp team">
+
+    <link rel="icon" href="../img/favicon/favicon.ico" sizes="any">
+    <link rel="icon" href="../img/favicon/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../img/favicon/apple-touch-icon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/style.css" media="screen">
+    <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)">
+    <link rel="stylesheet" href="../css/print.css" media="print">
+</head>
+
+<body>
+    <a href="#main-content" class="skip-to-content">Salta al contenuto principale</a>
+
+    [HEADER]
+
+    <nav aria-label="Ti trovi in:" id="breadcrumb">
+        <ol>
+            <li><a href="index.php" lang="en">Home</a></li>
+            <li><a href="catalogo_esperienze.php">Esperienze</a></li>
+            <li aria-current="page">[EXPERIENCE_NAME]</li>
+        </ol>
+    </nav>
+
+    <main id="main-content" class="section-container">
+        <img class="detail-hero-img" src="[EXPERIENCE_IMAGE_SRC]" alt="[EXPERIENCE_IMAGE_ALT]">
+
+        <div class="detail-layout">
+            <article>
+                <header class="detail-header">
+                    <h1>[EXPERIENCE_NAME_VISUAL]</h1>
+                    <p>[EXPERIENCE_TAGLINE]</p>
+                </header>
+
+                <section aria-labelledby="specs-title">
+                    <h2 id="specs-title" class="sr-only">Dettagli Tour</h2>
+
+                    <dl class="specs-grid">
+                        <div class="spec-card">
+                            <dt class="spec-label"><span aria-hidden="true">⏳</span> Durata</dt>
+                            <dd class="spec-value">[EXPERIENCE_DURATION]</dd>
+                        </div>
+                        <div class="spec-card">
+                            <dt class="spec-label"><span aria-hidden="true">👥</span> Ospiti</dt>
+                            <dd class="spec-value">[EXPERIENCE_PARTICIPANTS]</dd>
+                        </div>
+                        <div class="spec-card">
+                            <dt class="spec-label"><span aria-hidden="true">👨‍✈️</span> Guida</dt>
+                            <dd class="spec-value">[EXPERIENCE_LANGUAGES]</dd>
+                        </div>
+                        <div class="spec-card">
+                            <dt class="spec-label"><span aria-hidden="true">♿</span> Accesso</dt>
+                            <dd class="spec-value">[EXPERIENCE_ACCESS]</dd>
+                        </div>
+                    </dl>
+                </section>
+
+                <section aria-labelledby="description-title">
+                    <h2 id="description-title">Descrizione</h2>
+                    [EXPERIENCE_DESCRIPTION_BLOCK]
+                </section>
+
+                <section aria-labelledby="amenities-title">
+                    <h2 id="amenities-title">Inclusi ed extra</h2>
+                    <div class="servicies-grid">
+                        <div class="amenity-box included">
+                            <h3><span aria-hidden="true">✅</span> Nel prezzo</h3>
+                            <ul>
+                                [INCLUDED_ITEMS]
+                            </ul>
+                        </div>
+
+                        <div class="amenity-box extra">
+                            <h3><span aria-hidden="true">ℹ️</span> Info & <span lang="en">Extra</span></h3>
+                            <ul>
+                                [EXTRA_ITEMS]
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </article>
+
+            <aside class="detail-sidebar sticky-sidebar" aria-labelledby="booking-title">
+                <h2 id="booking-title" class="sr-only">Modulo di prenotazione</h2>
+
+                <div class="price-header">
+                    <p class="price-label">
+                        <span class="price-prefix">Prezzo totale<span aria-hidden="true">€</span></span>
+                        <span class="price-amount">[EXPERIENCE_PRICE]</span>
+                        <span class="price-suffix">/<span lang="en">tour</span></span>
+                    </p>
+                </div>
+
+                <form method="post" action="dettaglio_esperienza.php?id=[EXPERIENCE_ID]" class="booking-form">
+                    <input type="hidden" name="experience_id" value="[EXPERIENCE_ID]">
+                    <fieldset>
+                        <legend class="sr-only">Prenota esperienza</legend>
+
+                        <div class="form-group">
+                            <label for="booking-date">Data <span lang="en">Tour</span></label>
+                            <input type="date" id="booking-date" name="booking_date" required min="[MIN_DATE]">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="select-payment">Seleziona Pagamento</label>
+                            <select id="select-payment" name="select_payment">
+                                <option value="cc">Carta di Credito</option>
+                                <option value="bb">Bonifico Bancario</option>
+                                <option value="contanti">Contanti</option>
+                            </select>
+                        </div>
+
+                        <hr class="divider">
+
+                        <div class="form-check checkbox-highlight">
+                            <input type="checkbox" id="pickup" name="pickup" data-percent="10">
+                            <label for="pickup">
+                                <span>Prelievo <span lang="en">Hotel</span></span>
+                                <span class="text-accent">+10%</span>
+                            </label>
+                        </div>
+
+                        [EXTRA_CHECKBOXES]
+
+                        <button type="submit" class="btn-layout btn-full-width cta-button">Prenota Ora</button>
+
+                        <div id="server-message" class="field-error [SERVER_STATE]">
+                            [SERVER_MESSAGES]
+                        </div>
+
+                        <p class="security-note">
+                            <span aria-hidden="true">ℹ️</span> Prenotazione esclusiva: l'intera esperienza per tutti
+                        </p>
+                    </fieldset>
+                </form>
+            </aside>
+        </div>
+    </main>
+
+    [FOOTER]
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

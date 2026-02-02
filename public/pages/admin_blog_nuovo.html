@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="it" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>[ADMIN_BLOG_PAGE_TITLE]</title>
+  <meta name="description" content="[ADMIN_BLOG_PAGE_DESC]">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="author" content="SailUP Team">
+
+  <link rel="icon" href="../img/favicon/favicon.ico" sizes="any">
+  <link rel="icon" href="../img/favicon/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../img/favicon/apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="../css/style.css" media="screen">
+  <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+</head>
+
+<body>
+  <a href="#main-content" class="skip-to-content">Salta al contenuto principale</a>
+
+  [HEADER]
+
+  <nav aria-label="Ti trovi in:" id="breadcrumb">
+    <ol>
+      <li><a href="index.php"><span lang="en">Home</span></a></li>
+      <li><a href="admin.php">Amministrazione</a></li>
+      <li><a href="admin_prodotti.php">Gestione Blog</a></li>
+      <li aria-current="page">[ADMIN_BLOG_BREADCRUMB]</li>
+    </ol>
+  </nav>
+
+  <main id="main-content" class="section-container">
+    <header>
+      <h1>[ADMIN_BLOG_HEADING]</h1>
+      <p>[ADMIN_BLOG_SUBTITLE]</p>
+    </header>
+
+    <section aria-labelledby="form-title" class="admin-form">
+      <h2 id="form-title">Dettagli Articolo</h2>
+
+      [ADMIN_BLOG_NEW_FEEDBACK]
+
+      <form id="blog-form" action="[ADMIN_BLOG_ACTION]" method="post" novalidate enctype="multipart/form-data">
+        <input type="hidden" name="csrf_token" value="[CSRF_TOKEN]">
+        <input type="hidden" name="post-id" [ADMIN_BLOG_ID]>
+        <input type="hidden" name="existing-image-url" id="existing-image-url" [OLD_IMAGE]>
+
+        <fieldset>
+          <legend>Informazioni Base</legend>
+
+          <div class="form-group">
+            <label for="post-title">Titolo Articolo <abbr title="Campo obbligatorio">*</abbr></label>
+            <input type="text" id="post-title" name="post-title"
+              placeholder="es. Come scegliere la barca perfetta per te" [OLD_TITLE] required
+              aria-describedby="post-title-error">
+            <span id="post-title-error" class="field-error" role="alert"></span>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="post-date">Data Pubblicazione <abbr title="Campo obbligatorio">*</abbr></label>
+              <input type="date" id="post-date" name="post-date" [OLD_DATE] required
+                aria-describedby="post-date-error">
+              <span id="post-date-error" class="field-error" role="alert"></span>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="post-reading-time">Tempo Medio di Lettura (minuti) <abbr
+                  title="Campo obbligatorio">*</abbr></label>
+              <input type="number" id="post-reading-time" name="post-reading-time" min="1" step="1" placeholder="es. 5"
+                [OLD_READING_TIME] required aria-describedby="post-reading-time-error">
+              <span id="post-reading-time-error" class="field-error" role="alert"></span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="post-excerpt">Estratto / Anteprima <abbr title="Campo obbligatorio">*</abbr></label>
+            <textarea id="post-excerpt" name="post-excerpt" rows="3" maxlength="200"
+              placeholder="Inserire una breve descrizione dell'articolo che apparirà nelle card." required
+              aria-describedby="excerpt-hint post-excerpt-error">[OLD_EXCERPT]</textarea>
+            <span id="excerpt-hint" class="field-hint">Massimo 200 caratteri</span>
+            <span id="post-excerpt-error" class="field-error" role="alert"></span>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Contenuto</legend>
+
+          <div class="form-group">
+            <label for="post-content">Contenuto Articolo <abbr title="Campo obbligatorio">*</abbr></label>
+            <textarea id="post-content" name="post-content" rows="15"
+              placeholder="Scrivi qui il contenuto completo dell'articolo." required
+              aria-describedby="content-hint post-content-error">[OLD_CONTENT]</textarea>
+            <span id="content-hint" class="field-hint">Scrivi il contenuto in testo normale. Per creare un nuovo
+              paragrafo, lascia una riga vuota tra i blocchi di testo.</span>
+            <span id="post-content-error" class="field-error" role="alert"></span>
+          </div>
+
+
+        </fieldset>
+
+        <fieldset>
+          <legend>Immagine</legend>
+
+          <div class="form-group">
+            <label for="post-image">Immagine di Copertina <abbr title="Campo obbligatorio">*</abbr></label>
+            <input type="file" id="post-image" name="post_image" accept="image/jpeg,image/png,image/webp"
+              aria-describedby="image-hint post-image-error">
+            <span id="image-hint" class="field-hint">
+              Carica un'immagine JPG/PNG/WebP (max 1MB). Verrà convertita automaticamente in WebP.
+            </span>
+            <span id="post-image-error" class="field-error" role="alert"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="Testo_Alternativo">Testo Alternativo Immagine</label>
+            <input type="text" id="Testo_Alternativo" name="Testo_Alternativo"
+              placeholder="es. Vista panoramica del porto al tramonto"
+              [OLD_ALT] aria-describedby="Testo_Alternativo-hint Testo_Alternativo-error">
+            <span id="Testo_Alternativo-hint" class="field-hint">Inserire solo se l'immagine trasmette informazioni rilevanti per utenti non vedenti</span>
+            <span id="Testo_Alternativo-error" class="field-error" role="alert"></span>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Extra Articolo</legend>
+          <p class="field-hint">Aggiungi riquadri extra (Titolo + contenuto) che verranno mostrati come suggerimenti.
+          </p>
+          <div id="extras-container" class="extras-container">
+            [ADMIN_BLOG_EXTRAS]
+          </div>
+          <template id="extra-row-template">
+            <fieldset class="extra-row">
+              <legend>Extra</legend>
+              <div class="form-group">
+                <label>Titolo Extra
+                  <input type="text" name="extra_title[]" placeholder="es. Suggerimenti">
+                </label>
+              </div>
+              <div class="form-group">
+                <label>Contenuto Extra
+                  <textarea name="extra_item[]" rows="2" placeholder="Testo..."></textarea>
+                </label>
+              </div>
+              <button type="button" class="btn-danger remove-extra" aria-label="Rimuovi extra">Rimuovi</button>
+            </fieldset>
+          </template>
+          <button type="button" class="btn-layout-light" id="add-extra">Aggiungi extra</button>
+        </fieldset>
+
+        <fieldset>
+          <legend>Opzioni Pubblicazione:</legend>
+
+          <div class="form-group">
+            <label for="post-status">Stato Articolo <abbr title="Campo obbligatorio">*</abbr></label>
+            <select id="post-status" name="post-status" required aria-describedby="post-status-error">
+              <option value="" disabled [IF_STATUS_PLACEHOLDER]>Seleziona uno stato</option>
+              <option value="draft" [IF_STATUS_DRAFT]>Bozza</option>
+              <option value="published" [IF_STATUS_PUB]>Pubblicato</option>
+            </select>
+            <span id="post-status-error" class="field-error" role="alert"></span>
+          </div>
+
+        </fieldset>
+
+        <div class="alert alert-info">
+          <strong>Nota:</strong> Gli articoli salvati come "Bozza" non saranno visibili agli utenti fino alla
+          pubblicazione.
+        </div>
+
+        <div class="form-actions">
+          <a href="admin_blog.php" class="btn-layout-light">Annulla</a>
+          <button type="submit" class="btn-layout">Salva Articolo</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  [FOOTER]
+
+  <script src="../js/script.js"></script>
+  <script src="../js/blog_validation.js"></script>
+</body>
+
+</html>

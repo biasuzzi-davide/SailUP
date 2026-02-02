@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="it" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>[PROD_TITLE] - Dashboard Admin - SailUP</title>
+  <meta name="description"
+    content="Form amministrativo per aggiungere una nuova barca a noleggio o esperienza al catalogo SailUP.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="author" content="SailUP Team">
+
+  <link rel="icon" href="../img/favicon/favicon.ico" sizes="any">
+  <link rel="icon" href="../img/favicon/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../img/favicon/apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="../css/style.css" media="screen">
+  <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+</head>
+
+<body>
+  <a href="#main-content" class="skip-to-content">Salta al contenuto principale</a>
+
+  [HEADER]
+
+<nav aria-label="Ti trovi in:" id="breadcrumb">
+    <ol>
+      <li><a href="index.php"><span lang="en">Home</span></a></li>
+      <li><a href="admin.php">Amministrazione</a></li>
+      <li><a href="admin_prodotti.php">Gestione Prodotti</a></li>
+      <li aria-current="page">[PROD_BREADCRUMB]</li>
+    </ol>
+  </nav>
+
+  <main id="main-content" class="section-container">
+    <header>
+      <h1>[PROD_HEADING]</h1>
+      <p>[PROD_SUBHEADING]</p>
+    </header>
+
+    <section aria-labelledby="form-title" class="admin-form">
+      <h2 id="form-title">Dettagli Prodotto</h2>
+
+      [ADMIN_PRODUCT_FEEDBACK]
+
+      <form id="product-form" action="[ADMIN_PRODUCT_ACTION]" method="POST" novalidate enctype="multipart/form-data">
+        <input type="hidden" name="csrf_token" value="[CSRF_TOKEN]">
+        <input type="hidden" name="mode" value="[PROD_MODE]">
+        <input type="hidden" name="product-id" [PRODUCT_ID_VALUE]>
+        <input type="hidden" name="existing-image-url" id="existing-image-url" [IMG_URL]>
+
+        <fieldset>
+          <legend>Informazioni Base</legend>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="product-name">Nome Prodotto <abbr title="Campo obbligatorio">*</abbr></label>
+              <input type="text" id="product-name" name="product-name" placeholder="es. Sunseeker Predator 62"
+                [PROD_NAME] required aria-describedby="product-name-error">
+              <span id="product-name-error" class="field-error" role="alert"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="product-type">Tipo Prodotto <abbr title="Campo obbligatorio">*</abbr></label>
+              <select id="product-type" name="product-type" required aria-describedby="product-type-error">
+                <option value="">Seleziona tipo...</option>
+                <option value="noleggio" [PROD_TYPE_NOLEGGIO]>Barca a Noleggio</option>
+                <option value="experience" [PROD_TYPE_EXP]>Esperienza</option>
+              </select>
+              <span id="product-type-error" class="field-error" role="alert"></span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="product-description">Descrizione Breve <abbr title="Campo obbligatorio">*</abbr></label>
+            <textarea id="product-description" name="product-description" rows="3"
+              placeholder="Inserire una descrizione che apparirà nelle card del catalogo." required
+              aria-describedby="product-description-error">[PROD_DESC]</textarea>
+            <span id="product-description-error" class="field-error" role="alert"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="product-long-description">Descrizione Dettagliata <abbr
+                title="Campo obbligatorio">*</abbr></label>
+            <textarea id="product-long-description" name="product-long-description" rows="6"
+              placeholder="Inserire una descrizione completa che apparirà nella pagina del prodotto." required
+              aria-describedby="product-long-description-error">[PROD_DESC_LONG]</textarea>
+            <span id="product-long-description-error" class="field-error" role="alert"></span>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Prezzi e Capacità</legend>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="product-price">Prezzo Base (€) <abbr title="Campo obbligatorio">*</abbr></label>
+              <input type="number" id="product-price" name="product-price" min="0" max="50000" step="10"
+                placeholder="es. 850" [PROD_PRICE] required
+                aria-describedby="product-price-hint product-price-error">
+              <span id="product-price-hint" class="field-hint">Prezzo al giorno per noleggi, prezzo totale per
+                esperienze</span>
+              <span id="product-price-error" class="field-error" role="alert"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="product-capacity">Numero persone<abbr title="Campo obbligatorio">*</abbr></label>
+              <input type="number" id="product-capacity" name="product-capacity" min="1" max="50" placeholder="es. 8"
+                [PROD_CAPACITY] required aria-describedby="product-capacity-error">
+              <span id="product-capacity-error" class="field-error" role="alert"></span>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group" id="length-group">
+              <label for="product-length">Lunghezza (metri)</label>
+              <input type="number" id="product-length" name="product-length" min="0" step="0.1" placeholder="es. 19.2"
+                [PROD_LENGTH]>
+            </div>
+            <div class="form-group hidden" id="duration-group">
+              <label for="product-duration">Durata Esperienza (ore) <abbr title="Campo obbligatorio">*</abbr></label>
+              <input type="number" id="product-duration" name="product-duration" min="1" step="1" placeholder="es. 4"
+                [PROD_DURATION] aria-describedby="product-duration-error">
+              <span id="product-duration-error" class="field-error" role="alert"></span>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Caratteristiche e Servizi</legend>
+
+          <div class="form-group">
+            <label for="product-features">Incluso</label>
+            <textarea id="product-features" name="product-features" rows="4"
+              placeholder="Una caratteristica per riga, ad esempio:&#10;3 cabine doppie&#10;2 bagni completi&#10;Cucina attrezzata&#10;Aria condizionata"
+              aria-describedby="product-features-hint">[PROD_FEATURES]</textarea>
+            <span id="product-features-hint" class="field-hint">Inserisci un extra incluso per riga</span>
+          </div>
+
+          <div>
+            <p>Opzioni Aggiuntive:</p>
+
+            <div class="checkbox-group hidden" id="license-option">
+              <input type="checkbox" id="requires-license" name="requires-license" value="1" [CHECK_PATENTE]>
+              <label for="requires-license">Richiede Patente Nautica</label>
+            </div>
+
+            <div class="checkbox-group hidden" id="access-option">
+              <input type="checkbox" id="is-accessible" name="is-accessible" value="1" [CHECK_ACCESS]>
+              <label for="is-accessible">Accessibile</label>
+            </div>
+
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Extra Opzionali</legend>
+          <p class="field-hint">Aggiungi extra opzionali con nome e prezzo. Verranno mostrati in fase di prenotazione.
+          </p>
+          <div id="product-extras-container" class="extras-container">
+            [PROD_EXTRAS]
+          </div>
+          <template id="product-extra-template">
+            <fieldset class="extra-row">
+              <legend>Extra</legend>
+              <div class="form-group">
+                <label>Nome Extra
+                  <input type="text" name="extra_name[]" placeholder="es. Skipper">
+                </label>
+                <span class="field-error extra-name-error" role="alert"></span>
+              </div>
+              <div class="form-group">
+                <label>Prezzo Extra (€)
+                  <input type="number" name="extra_price[]" min="1" step="1" placeholder="es. 50">
+                </label>
+                <span class="field-error extra-price-error" role="alert"></span>
+              </div>
+              <button type="button" class="btn-danger remove-extra" aria-label="Rimuovi extra">Rimuovi</button>
+            </fieldset>
+          </template>
+          <button type="button" class="btn-layout-light" id="add-product-extra">Aggiungi extra</button>
+        </fieldset>
+
+        <fieldset id="boat-type-fieldset" class="hidden">
+          <legend>Tipologia Barca (noleggio)</legend>
+          <div class="form-group">
+            <label for="product-category">Tipologia Barca <abbr title="Campo obbligatorio">*</abbr></label>
+            <select id="product-category" name="product-category" aria-describedby="product-category-error">
+              <option value="" disabled [PROD_TIPOLOGIA_NONE]>Seleziona tipologia...</option>
+              <option value="Motore" [PROD_TIPOLOGIA_MOTORE]>Motore</option>
+              <option value="Vela" [PROD_TIPOLOGIA_VELA]>Vela</option>
+              <option value="Gommone" [PROD_TIPOLOGIA_GOMMONE]>Gommone</option>
+            </select>
+            <span id="product-category-error" class="field-error" role="alert"></span>
+          </div>
+        </fieldset>
+
+        <fieldset id="language-fieldset" class="hidden">
+          <legend>Lingue parlate nell'esperienza</legend>
+          <p class="field-hint">Seleziona almeno una lingua per garantire la copertura linguistica del tour.</p>
+          <div class="checkbox-group">
+            <input type="checkbox" id="language-it" name="product-languages[]" value="IT"
+              aria-describedby="product-languages-error" [LANG_IT]>
+            <label for="language-it">Italiano</label>
+          </div>
+          <div class="checkbox-group">
+            <input type="checkbox" id="language-en" name="product-languages[]" value="EN"
+              aria-describedby="product-languages-error" [LANG_EN]>
+            <label for="language-en">Inglese</label>
+          </div>
+          <div class="checkbox-group">
+            <input type="checkbox" id="language-fr" name="product-languages[]" value="FR"
+              aria-describedby="product-languages-error" [LANG_FR]>
+            <label for="language-fr">Francese</label>
+          </div>
+          <div class="checkbox-group">
+            <input type="checkbox" id="language-es" name="product-languages[]" value="ES"
+              aria-describedby="product-languages-error" [LANG_ES]>
+            <label for="language-es">Spagnolo</label>
+          </div>
+          <span id="product-languages-error" class="field-error" role="alert"></span>
+        </fieldset>
+
+        <fieldset id="experience-type-fieldset" class="hidden">
+          <legend>Tipo di Esperienza</legend>
+          <div class="form-group">
+            <label for="experience-type">Tipo Esperienza <abbr title="Campo obbligatorio">*</abbr></label>
+            <select id="experience-type" name="experience-type" aria-describedby="experience-type-error">
+              <option value="" disabled [PROD_EXP_TYPE_NONE]>Seleziona tipo esperienza...</option>
+              <option value="Tour" [PROD_EXP_TYPE_TOUR]>Tour</option>
+              <option value="Aperitivo" [PROD_EXP_TYPE_APERITIVO]>Aperitivo</option>
+              <option value="Escursione" [PROD_EXP_TYPE_ESCURSIONE]>Escursione</option>
+            </select>
+            <span id="experience-type-error" class="field-error" role="alert"></span>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Immagine</legend>
+
+          <div class="form-group">
+            <label for="product-image-main">Immagine Principale <abbr title="Campo obbligatorio">*</abbr></label>
+            <input type="file" id="product-image-main" name="product_image_main"
+              accept="image/jpeg,image/png,image/webp" aria-describedby="product-image-hint product-image-main-error">
+            <span id="product-image-hint" class="field-hint">
+              Carica un'immagine JPG/PNG/WebP (max 1MB). Verrà convertita automaticamente in WebP.
+            </span>
+            <span id="product-image-main-error" class="field-error" role="alert"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="Testo_Alternativo">Testo Alternativo Immagine</label>
+            <input type="text" id="Testo_Alternativo" name="Testo_Alternativo"
+              placeholder="es. Barca a vela con tre alberi al tramonto"
+              [IMG_ALT] aria-describedby="Testo_Alternativo-hint Testo_Alternativo-error">
+            <span id="Testo_Alternativo-hint" class="field-hint">Inserire solo se l'immagine trasmette informazioni rilevanti per utenti non vedenti</span>
+            <span id="Testo_Alternativo-error" class="field-error" role="alert"></span>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Disponibilità</legend>
+
+          <div class="form-group">
+            <span class="label-text">Stato Prodotto <abbr title="Campo obbligatorio">*</abbr></span>
+            <div class="checkbox-group">
+              <input type="checkbox" id="product-status" name="product-status" value="available"
+                [CHECK_STATUS_AVAILABLE] aria-describedby="product-status-hint product-status-error">
+              <label for="product-status">Disponibile</label>
+            </div>
+            <span id="product-status-hint" class="field-hint">Se non selezionato: Non Disponibile.</span>
+            <span id="product-status-error" class="field-error" role="alert"></span>
+          </div>
+
+
+        </fieldset>
+
+        <div class="form-actions">
+          <a href="admin_prodotti.php" class="btn-layout-light">Annulla</a>
+          <button type="submit" class="btn-layout">Salva Prodotto</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  [FOOTER]
+
+  <script src="../js/script.js"></script>
+  <script src="../js/products_validation.js"></script>
+</body>
+
+</html>

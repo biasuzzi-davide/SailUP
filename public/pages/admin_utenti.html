@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="it" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestione Utenti - Dashboard Admin - SailUP</title>
+    <meta name="description" content="Gestione utenti registrati su SailUP">
+    <meta name="author" content="SailUP Team">
+    <meta name="robots" content="noindex, nofollow">
+
+    <link rel="icon" href="../img/favicon/favicon.ico" sizes="any">
+    <link rel="icon" href="../img/favicon/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../img/favicon/apple-touch-icon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/style.css" media="screen">
+    <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)">
+    <link rel="stylesheet" href="../css/print.css" media="print">
+</head>
+
+<body>
+    <a href="#main-content" class="skip-to-content">Salta al contenuto principale</a>
+
+    [HEADER]
+
+    <nav aria-label="Ti trovi in:" id="breadcrumb">
+        <ol>
+            <li><a href="index.php"><span lang="en">Home</span></a></li>
+            <li><a href="admin.php">Amministrazione</a></li>
+            <li aria-current="page">Gestione Utenti</li>
+        </ol>
+    </nav>
+
+    <main id="main-content" class="section-container">
+        <header class="profile-header no-avatar">
+            <div class="profile-info">
+                <h1>Gestione Utenti</h1>
+                <p class="profile-text">Visualizza e gestisci gli utenti registrati su SailUP</p>
+            </div>
+            <div class="profile-actions">
+                <button type="button" class="btn-layout-light" data-href="logout.php"><span
+                        lang="en">Logout</span></button>
+            </div>
+        </header>
+
+        <div class="profile-layout">
+            <nav class="profile-sidebar" aria-label="Menu amministrazione">
+                <ul>
+                    <li>
+                        <a href="profilo.php">
+                            <span class="nav-icon" aria-hidden="true">💻</span>
+                            <span>Profilo Admin</span>
+                        </a>
+                    </li>
+                    <li class="current-tab">
+                        <span class="nav-item-active" aria-current="page">
+                            <span class="nav-icon" aria-hidden="true">👥</span>
+                            <span>Gestione Utenti</span>
+                        </span>
+                    </li>
+                    <li>
+                        <a href="admin_prodotti.php">
+                            <span class="nav-icon" aria-hidden="true">⛵</span>
+                            <span>Gestione Prodotti</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="admin_prenotazioni.php">
+                            <span class="nav-icon" aria-hidden="true">📋</span>
+                            <span>Gestione Prenotazioni</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="admin_blog.php">
+                            <span class="nav-icon" aria-hidden="true">✍️</span>
+                            <span>Gestione Blog</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="profile-content">
+                <section aria-labelledby="stats-title">
+                    <h2 id="stats-title">Statistiche Utenti</h2>
+
+                    <dl class="stats-grid">
+                        <div class="stat-card">
+                            <dt class="stat-label">Nuovi questo mese</dt>
+                            <dd class="stat-number">[STAT_USERS_MONTH]</dd>
+                        </div>
+                        <div class="stat-card">
+                            <dt class="stat-label">Admin</dt>
+                            <dd class="stat-number">[STAT_USERS_ADMIN]</dd>
+                        </div>
+                        <div class="stat-card">
+                            <dt class="stat-label">Standard</dt>
+                            <dd class="stat-number">[STAT_USERS_STANDARD]</dd>
+                        </div>
+                        <div class="stat-card">
+                            <dt class="stat-label">Utenti Totali</dt>
+                            <dd class="stat-number">[STAT_USERS_TOTAL]</dd>
+                        </div>
+                    </dl>
+                </section>
+
+                <section aria-labelledby="users-table-title">
+                    <h2 id="users-table-title" class="sr-only">Tabella utenti</h2>
+
+                    [ADMIN_USERS_FEEDBACK]
+
+                    <div class="table-container">
+                        <p id="users-table-desc" class="sr-only">Questa tabella elenca gli utenti registrati. Ogni riga mostra l'ID, il nome, l'email, la data di iscrizione, il ruolo e contiene un pulsante per eliminare l'account specifico.</p>
+                        <table class="table-users" aria-describedby="users-table-desc">
+                            <caption>Utenti Registrati su SailUP</caption>
+                            <thead>
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Nome</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Data Iscrizione</th>
+                                    <th scope="col">Ruolo</th>
+                                    <th scope="col">Azioni</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                [ADMIN_USERS_ROWS]
+                            </tbody>
+                        </table>
+                    </div>
+
+                </section>
+            </div>
+        </div>
+    </main>
+
+    [FOOTER]
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

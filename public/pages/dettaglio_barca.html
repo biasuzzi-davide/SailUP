@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="it" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dettaglio Barca - Noleggio Barche - SailUP</title>
+    <meta name="description"
+        content="Noleggia [PRODUCT_NAME] per una giornata di lusso e velocità nel Golfo di Napoli. Scopri le specifiche e prenota ora.">
+    [KEYWORDS]
+    <meta name="author" content="SailUp team">
+
+    <link rel="icon" href="../img/favicon/favicon.ico" sizes="any">
+    <link rel="icon" href="../img/favicon/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../img/favicon/apple-touch-icon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/style.css" media="screen">
+    <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)">
+    <link rel="stylesheet" href="../css/print.css" media="print">
+</head>
+
+<body>
+    <a href="#main-content" class="skip-to-content">Salta al contenuto principale</a>
+
+    [HEADER]
+
+    <nav aria-label="Ti trovi in:" id="breadcrumb">
+        <ol>
+            <li><a href="index.php" lang="en">Home</a></li>
+            <li><a href="catalogo_noleggio.php">Noleggio</a></li>
+            <li aria-current="page">[PRODUCT_NAME]</li>
+        </ol>
+    </nav>
+
+    <main id="main-content" class="section-container">
+        <img class="detail-hero-img" src="[PRODUCT_IMAGE_SRC]" alt="[PRODUCT_IMAGE_ALT]">
+
+        <div class="detail-layout">
+            <article>
+                <header class="detail-header">
+                    <h1>[PRODUCT_NAME_VISUAL]</h1>
+                    <p>[PRODUCT_BRIEF]</p>
+                </header>
+
+                <section aria-labelledby="specs-title">
+                    <h2 id="specs-title" class="sr-only">Specifiche Tecniche</h2>
+
+                    <dl class="specs-grid">
+                        <div class="spec-card">
+                            <dt class="spec-label"><span aria-hidden="true">⚓</span> Tipo</dt>
+                            <dd class="spec-value">[PRODUCT_TYPE]</dd>
+                        </div>
+                        <div class="spec-card">
+                            <dt class="spec-label"><span aria-hidden="true">📏</span> Lunghezza</dt>
+                            <dd class="spec-value">[PRODUCT_LENGTH]</dd>
+                        </div>
+                        <div class="spec-card">
+                            <dt class="spec-label"><span aria-hidden="true">👥</span> Posti</dt>
+                            <dd class="spec-value">[PRODUCT_SEATS]</dd>
+                        </div>
+                        <div class="spec-card">
+                            <dt class="spec-label"><span aria-hidden="true">🎫</span> Patente</dt>
+                            <dd class="spec-value">[PRODUCT_LICENSE]</dd>
+                        </div>
+                    </dl>
+                </section>
+
+                <section aria-labelledby="description-title">
+                    <h2 id="description-title">Descrizione</h2>
+                    [PRODUCT_DESCRIPTION_BLOCK]
+                </section>
+
+                <section aria-labelledby="amenities-title">
+                    <h2 id="amenities-title">Dotazioni ed extra</h2>
+                    <div class="servicies-grid">
+                        <div class="amenity-box included">
+                            <h3><span aria-hidden="true">✅</span> Incluso</h3>
+                            <ul>
+                                [INCLUDED_ITEMS]
+                            </ul>
+                        </div>
+
+                        <div class="amenity-box extra">
+                            <h3><span aria-hidden="true">💎</span> <span lang="en">Extra</span></h3>
+                            <ul>
+                                [EXTRA_ITEMS]
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </article>
+
+            <aside class="detail-sidebar sticky-sidebar" aria-labelledby="booking-title">
+                <h2 id="booking-title" class="sr-only">Modulo di prenotazione</h2>
+
+                <div class="price-header">
+                    <p class="price-label">
+                        <span class="price-prefix">A partire da<span aria-hidden="true">€</span></span>
+                        <span class="price-amount">[PRODUCT_PRICE]</span>
+                        <span class="price-suffix">/giorno</span>
+                    </p>
+                </div>
+
+                <form method="post" action="dettaglio_barca.php?id=[PRODUCT_ID]" class="booking-form">
+                    <input type="hidden" name="product_id" value="[PRODUCT_ID]">
+                    <fieldset>
+                        <legend class="sr-only">Prenotazione</legend>
+
+                        <div class="form-group">
+                            <label for="start-date"><span lang="en">Check-in</span></label>
+                            <input type="date" id="start-date" name="start_date" required min="[MIN_DATE]">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="end-date"><span lang="en">Check-out</span></label>
+                            <input type="date" id="end-date" name="end_date" required min="[MIN_DATE]">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="select-payment">Seleziona Pagamento</label>
+                            <select id="select-payment" name="select_payment">
+                                <option value="cc">Carta di Credito</option>
+                                <option value="bb">Bonifico Bancario</option>
+                                <option value="contanti">Contanti</option>
+                            </select>
+                        </div>
+
+                        <hr class="divider">
+
+                        <div class="form-check checkbox-highlight">
+                            <input type="checkbox" id="skipper" name="skipper" data-percent="10">
+                            <label for="skipper">
+                                <span>Aggiungi <span lang="en">Skipper</span></span>
+                                <span class="text-accent">+10%</span>
+                            </label>
+                        </div>
+
+                        [EXTRA_CHECKBOXES]
+
+                        <button type="submit" class="btn-layout btn-full-width cta-button">Prenota Ora</button>
+
+                        <div id="server-message" class="field-error [SERVER_STATE]">
+                            [SERVER_MESSAGES]
+                        </div>
+
+                        <p class="security-note">
+                            <span aria-hidden="true">ℹ️</span> Prenotazione esclusiva: l'intera barca con
+                            [PRODUCT_SEATS] posti
+                        </p>
+
+                    </fieldset>
+                </form>
+            </aside>
+        </div>
+    </main>
+
+    [FOOTER]
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

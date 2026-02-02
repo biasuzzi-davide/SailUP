@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="it" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - SailUP</title>
+  <meta name="description" content="Accedi al tuo account SailUP per gestire prenotazioni e preferenze.">
+  <meta name="keywords" content="login, accedi, accesso, area riservata, utente, prenotazioni, profilo, SailUP">
+  <meta name="author" content="SailUP team">
+
+  <link rel="icon" href="../img/favicon/favicon.ico" sizes="any">
+  <link rel="icon" href="../img/favicon/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../img/favicon/apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="../css/style.css" media="screen">
+  <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+</head>
+
+<body>
+  <a href="#main-content" class="skip-to-content">Salta al contenuto</a>
+
+  [HEADER]
+
+<nav aria-label="Ti trovi in:" id="breadcrumb">
+    <ol>
+      <li><a href="index.php" lang="en">Home</a></li>
+      <li aria-current="page" lang="en">Login</li>
+    </ol>
+  </nav>
+
+  <main id="main-content">
+    <section class="section-container auth-container">
+      <div class="auth-card">
+        <h1>Bentornato in SailUP! </h1>
+        <h2>Accedi al tuo <span lang="en">account</span></h2>
+        <p class="auth-subtitle">Accedi per gestire le tue prenotazioni.</p>
+
+        <div id="server-messages" class="form-messages [SERVER_STATE]" role="status" aria-live="polite">
+          [SERVER_MESSAGES]
+        </div>
+        <div id="error-message" class="error-message hidden" role="alert" aria-live="polite"></div>
+
+        <form id="login-form" action="login.php" method="post" novalidate> <!--chiama esplicitamente il suo file php-->
+          <input type="hidden" name="csrf_token" value="[CSRF_TOKEN]">
+          <div class="form-group">
+            <label for="email" lang="en">Email</label>
+            <input type="email" id="email" name="email" required aria-describedby="email-hint email-error"
+              autocomplete="email" placeholder="es. mariorossi@mail.com">
+            <span id="email-hint" class="field-hint">Inserisci l'email del tuo account SailUP.</span>
+            <span id="email-error" class="field-error" role="alert"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="password" lang="en">Password</label>
+            <div class="password-field">
+              <input type="password" id="password" name="password" required
+                aria-describedby="password-hint password-error" autocomplete="current-password">
+              <button type="button" class="password-toggle" data-target="password" data-label-show="Mostra password"
+                data-label-hide="Nascondi password" aria-label="Mostra password" aria-pressed="false">
+                <svg class="icon-eye" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+                <svg class="icon-eye-off" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M17.94 17.94A10.94 10.94 0 0 1 12 20c-7 0-11-8-11-8a21.86 21.86 0 0 1 5.06-6.06"></path>
+                  <path d="M1 1l22 22"></path>
+                  <path d="M9.9 4.24A9 9 0 0 1 12 4c7 0 11 8 11 8a21.85 21.85 0 0 1-4.87 5.8"></path>
+                  <path d="M14.12 14.12a3 3 0 0 1-4.24-4.24"></path>
+                </svg>
+              </button>
+            </div>
+            <span id="password-hint" class="field-hint">Inserisci la tua password personale.</span>
+            <span id="password-error" class="field-error" role="alert"></span>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn-layout btn-full-width">Accedi</button>
+          </div>
+        </form>
+
+        <div class="auth-footer print-none">
+          <p>Non hai un <span lang="en">account</span>? <a href="../php/registrazione.php">Registrati ora</a></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  [FOOTER]
+
+  <script src="../js/script.js"></script>
+  <script src="../js/login_validation.js"></script>
+</body>
+
+</html>

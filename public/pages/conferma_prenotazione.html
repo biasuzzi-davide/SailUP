@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="it" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conferma Ordine - SailUP</title>
+    <meta name="description" content="Conferma della tua prenotazione su SailUP.">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="author" content="SailUP Team">
+
+    <link rel="icon" href="../img/favicon/favicon.ico" sizes="any">
+    <link rel="icon" href="../img/favicon/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../img/favicon/apple-touch-icon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/style.css" media="screen">
+    <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)">
+    <link rel="stylesheet" href="../css/print.css" media="print">
+</head>
+
+<body>
+    <a href="#main-content" class="skip-to-content">Salta al contenuto principale</a>
+
+    [HEADER]
+
+    <main id="main-content">
+        <section class="section-container">
+            <div class="auth-card">
+                <div>
+                    <h1>[TITOLO_CONFERMA]</h1>
+                    <p class="auth-subtitle">[SOTTOTITOLO_CONFERMA]</p>
+                </div>
+
+                [ISTRUZIONI_PAGAMENTO]
+
+                <div class="order-summary">
+                    <h2>Riepilogo Ordine</h2>
+                    <dl>
+                        <div>
+                            <dt>[TIPO_PRODOTTO_LABEL]:</dt>
+                            <dd><strong>[NOME_PRODOTTO]</strong></dd>
+                        </div>
+                        <div>
+                            <dt>[DATA_LABEL]:</dt>
+                            <dd><time datetime="[DATA_INIZIO_ISO]">[DATA_INIZIO_FORMATTATA]</time></dd>
+                        </div>
+                        [DATA_FINE_ROW]
+                        [EXTRA_SERVIZIO_ROW]
+                        [EXTRA_ROWS]
+                        <div>
+                            <dt><strong>Totale [PAGATO_O_DA_PAGARE]:</strong></dt>
+                            <dd><strong class="price-value">€ [PREZZO_TOTALE]</strong></dd>
+                        </div>
+                    </dl>
+                </div>
+
+                <div class="form-actions">
+                    <a href="index.php" class="btn-layout">Torna alla <span lang="en">Home</span></a>
+                    <a href="profilo_prenotazioni.php" class="btn-layout-light">Le mie Prenotazioni</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    [FOOTER]
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

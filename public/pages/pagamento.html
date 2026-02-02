@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="it" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagamento - SailUP</title>
+    <meta name="description" content="Completa il pagamento per confermare la tua prenotazione su SailUP.">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="author" content="SailUp team">
+    <meta name="robots" content="noindex, nofollow">
+
+    <link rel="icon" href="../img/favicon/favicon.ico" sizes="any">
+    <link rel="icon" href="../img/favicon/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../img/favicon/apple-touch-icon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet " href="../css/style.css" media="screen">
+    <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)">
+    <link rel="stylesheet" href="../css/print.css" media="print">
+</head>
+
+<body>
+    <a href="#main-content" class="skip-to-content">Salta al contenuto principale</a>
+
+    [HEADER]
+
+    <nav aria-label="Ti trovi in:" id="breadcrumb">
+        <ol>
+            <li><a href="index.php" lang="en">Home</a></li>
+            <li><a href="catalogo_noleggio.php">Noleggio</a></li>
+            <li><a href="[LINK PRODOTTO]">[NOME-PRODOTTO]</a></li>
+            <li aria-current="page">Pagamento</li>
+        </ol>
+    </nav>
+
+    <main id="main-content">
+
+        <section class="section-container">
+            <div class="auth-card">
+                <h1>Completa la Prenotazione</h1>
+                <h2>Ci sei quasi, completa con i dati mancanti per confermare la prenotazione</h2>
+                [MESSAGGIO_ERRORE]
+
+                <p class="auth-subtitle">Totale da Pagare: <span class="price-value">€ [PREZZO_TOTALE]</span></p>
+                <p class="auth-subtitle">Inserisci i dati della carta per procedere</p>
+
+
+                <div id="error-message" class="error-message hidden" role="alert" aria-live="assertive"></div>
+                <div id="success-message" class="success-message hidden" role="alert" aria-live="polite"></div>
+
+                <form id="payment-form" action="pagamento.php" method="post">
+                    <input type="hidden" name="csrf_token" value="[CSRF_TOKEN]">
+                    <fieldset>
+                        <legend>Dati Carta di Credito</legend>
+
+                        <div class="form-group">
+                            <label for="card-holder">Intestatario Carta</label>
+                            <input type="text" id="card-holder" name="card_holder" required autocomplete="cc-name"
+                                placeholder="Mario Rossi">
+                            <span id="card-holder-error" class="field-error" aria-live="polite"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="card-number">Numero Carta</label>
+                            <input type="text" id="card-number" name="card_number" required autocomplete="cc-number"
+                                maxlength="19" inputmode="numeric" placeholder="1234 5678 9012 3456">
+                            <span id="card-number-error" class="field-error" aria-live="polite"></span>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="expiry-date">Scadenza</label>
+                                <input type="text" id="expiry-date" name="expiry_date" required autocomplete="cc-exp"
+                                    placeholder="MM/AA" maxlength="5" inputmode="numeric">
+                                <span id="expiry-date-error" class="field-error" aria-live="polite"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="cvv"><abbr title="Card Verification Value" lang="en">CVV</abbr></label>
+                                <input type="text" id="cvv" name="cvv" required autocomplete="cc-csc" maxlength="4"
+                                    inputmode="numeric" placeholder="123">
+                                <span id="cvv-error" class="field-error" aria-live="polite"></span>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="terms" name="terms" required>
+                        <label for="terms">Accetto i <a href="privacy.php" target="_blank"
+                                rel="noopener noreferrer">termini e condizioni</a></label>
+                    </div>
+                    <span id="terms-error" class="field-error" role="alert"></span>
+
+                    <div class="form-actions">
+                        <a href="[LINK_INDIETRO]" class="btn-layout-light">Indietro</a>
+                        <button type="submit" class="btn-layout">Paga Ora</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    [FOOTER]
+
+    <script src="../js/script.js"></script>
+    <script src="../js/payment_validation.js"></script>
+</body>
+
+</html>
