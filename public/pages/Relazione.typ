@@ -417,14 +417,14 @@ Sono stati condotti test approfonditi sulla validazione degli input utente per g
 
 - *Test automatizzati di accessibilità:* Per verificare sistematicamente l'accessibilità di tutte le pagine PHP del sito è stato utilizzato lo strumento _pa11y_ per l'esecuzione di test automatizzati. Questo _tool_ ci ha permesso di analizzare l'intero sito in modo efficiente, identificando eventuali problemi di accessibilità su tutte le pagine dinamiche.
 
-- *Audit automatizzato con Unlighthouse:* Per ottenere una valutazione completa delle performance, dell'accessibilità, delle best practices e della SEO del sito, è stato utilizzato Unlighthouse v0.17.4. I risultati ottenuti sono stati particolarmente soddisfacenti: *100% su SEO*, *100% su Best Practices*, *100% su Accessibility* e *67% su Performance*. Il punteggio relativo alle performance, seppur non perfetto, è comunque accettabile considerando la natura dinamica del sito e la quantità di contenuti multimediali presenti.
+- *Audit automatizzato con Unlighthouse:* Per ottenere una valutazione completa delle performance, dell'accessibilità, delle best practices e della SEO del sito, è stato utilizzato Unlighthouse v0.17.4. I risultati ottenuti sono stati particolarmente soddisfacenti: *100% su SEO*, *100% su Best Practices*, *100% su Accessibility* e *67% su Performance*. Il punteggio relativo alle performance, seppur non perfetto, è comunque accettabile considerando la natura dinamica del sito, i limiti dell'hosting e la quantità di contenuti multimediali presenti.
 
 - *Compatibilità e design responsivo:* Il sito è stato testato sui principali _browser_ web moderni, tra cui Google Chrome, Opera, Mozilla Firefox, Safari e Microsoft Edge per accertarci che venissero renderizzati correttamente. Il design responsivo è stato verificato a diverse risoluzioni simulando dispositivi che vanno da smartphone ai tablet, fino ai monitor desktop. Non sono state invece prese in considerazione versioni più vecchie dei _browser_, considerato il profilo dell'utenza target del sito orientata all'utilizzo di dispositivi moderni.
 
 = Suddivisione del Lavoro
 L'evoluzione del progetto è stata meno lineare del previsto. Inizialmente composto da un gruppo di quattro persone, il team è andato incontro ad una riorganizzazione procedendo ad un fork del progetto per ultimare il lavoro in tre.
 
-Questa transizione ha reso la suddivisione dei compiti non definibile in maniera netta. Parti del codice non direttamente scritto dagli attuali membri del gruppo è stato oggetto di correzioni e miglioramenti. Proveremo di seguito a definire nel miglior modo possibile la suddivisione del lavoro.
+Questa transizione ha reso la suddivisione dei compiti non definibile in maniera netta. Parti del codice non direttamente scritto dagli attuali membri del gruppo è stato oggetto di correzioni e miglioramenti. Proveremo di seguito a definire nel miglior modo possibile, memoria assistendoci, la suddivisione del lavoro.
 
 - *Davide Biasuzzi:* Progettazione e creazione del database (SQL), pagina db_connection.php (PHP) per la gestione della connessione al database e delle query CRUD, implementazione della logica di business per la gestione delle prenotazioni (PHP), backend della parte non amministrativa del sito, revisione design pagine catalogo e di dettaglio dei prodotti, parte frontend della pagine di errore, scrittura della relazione parte backend.
 
@@ -433,7 +433,7 @@ Questa transizione ha reso la suddivisione dei compiti non definibile in maniera
 - *Alberto Reginato:* Parte frontend delle principali pagine del sito (HTML, CSS), foglio di stile per la stampa (CSS), aggiunta bottone 'Torna su' e calcolo prezzi in tempo reale (JS), funzioni per la generazione dinamica dei tag e attributi html (PHP), popolamento delle pagine e del DB, testing e validazione, scrittura della relazione parte frontend.
 
 - *Hossam Ezzemouri:* Parte backend della parte amministrativa del sito (PHP), implementazione del sistema CRUD per la gestione di prodotti e articoli del blog, funzioni di autenticazione e gestione sessioni (PHP), revisione design pagine create e update di prodotti e blog.
-  - *Correzioni effettuate sulla parte prima del fork:*
+  - *Correzioni effettuate dal team sulla parte prima del fork:*
     - Collegati pulsanti non funzionanti
     - Prevenzione traversal-path a login per utente gia loggato
     - Aggiunta funzionalità di elimina utente per l'admin
@@ -449,7 +449,7 @@ Questa transizione ha reso la suddivisione dei compiti non definibile in maniera
     - Implementata funzione elimina account utente
     - Validazione registrazione
 
-  - *Correzioni effettuate sulla parte dopo il fork:*
+  - *Correzioni effettuate dal team sulla parte dopo il fork:*
     - Rimossa paginazione mal funzionante nella sezione amministrativa
     - Revisione funzionalità create/update di blog
     - Revisione funzionalità create/update di prodotti
