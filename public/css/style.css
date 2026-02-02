@@ -91,6 +91,10 @@
   filter: invert(1);
 }
 
+[data-theme="dark"] .logo img {
+  filter: brightness(0) invert(1);
+}
+
 /* =========================================
      2. RESET & BASE
      ========================================= */
