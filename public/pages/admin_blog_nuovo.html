@@ -142,17 +142,20 @@
             [ADMIN_BLOG_EXTRAS]
           </div>
           <template id="extra-row-template">
-            <div class="extra-row">
+            <fieldset class="extra-row">
+              <legend>Extra</legend>
               <div class="form-group">
-                <label>Titolo Extra</label>
-                <input type="text" name="extra_title[]" placeholder="es. Suggerimenti">
+                <label>Titolo Extra
+                  <input type="text" name="extra_title[]" placeholder="es. Suggerimenti">
+                </label>
               </div>
               <div class="form-group">
-                <label>Contenuto</label>
-                <textarea name="extra_item[]" rows="2" placeholder="Testo..."></textarea>
+                <label>Contenuto Extra
+                  <textarea name="extra_item[]" rows="2" placeholder="Testo..."></textarea>
+                </label>
               </div>
               <button type="button" class="btn-danger remove-extra" aria-label="Rimuovi extra">Rimuovi</button>
-            </div>
+            </fieldset>
           </template>
           <button type="button" class="btn-layout-light" id="add-extra">Aggiungi extra</button>
         </fieldset>

@@ -1361,17 +1361,18 @@ function buildBlogExtraInputs(array $extras): string
         $titleValue = htmlspecialchars($ex['titolo'] ?? '', ENT_QUOTES);
         $titleValueAttr = $titleValue !== '' ? ' value="' . $titleValue . '"' : '';
 
-        $extrasHtml .= '<div class="extra-row">'
+        $extrasHtml .= '<fieldset class="extra-row">'
+            . '<legend>Extra ' . $num . '</legend>'
             . '<div class="form-group">'
-            . '<label for="' . $titleId . '">Titolo Extra ' . $num . '</label>'
+            . '<label for="' . $titleId . '">Titolo Extra</label>'
             . '<input type="text" id="' . $titleId . '" name="extra_title[]"' . $titleValueAttr . ' placeholder="es. Cosa portare">'
             . '</div>'
             . '<div class="form-group">'
-            . '<label for="' . $itemId . '">Contenuto Extra ' . $num . '</label>'
+            . '<label for="' . $itemId . '">Contenuto Extra</label>'
             . '<textarea id="' . $itemId . '" name="extra_item[]" rows="2" placeholder="Testo...">' . htmlspecialchars($ex['elemento'] ?? '') . '</textarea>'
             . '</div>'
             . '<button type="button" class="btn-danger remove-extra" aria-label="Rimuovi extra ' . $num . '">Rimuovi</button>'
-            . '</div>';
+            . '</fieldset>';
     }
     return $extrasHtml;
 }
@@ -1395,19 +1396,20 @@ function buildProductExtraInputs(array $extras): string
         $priceValueAttr = optionalValueAttr((string) ($ex['prezzo'] ?? ''));
         $priceValueAttr = $priceValueAttr !== '' ? ' ' . $priceValueAttr : '';
 
-        $extrasHtml .= '<div class="extra-row">'
+        $extrasHtml .= '<fieldset class="extra-row">'
+            . '<legend>Extra ' . $num . '</legend>'
             . '<div class="form-group">'
-            . '<label for="' . $nameId . '">Nome Extra ' . $num . '</label>'
+            . '<label for="' . $nameId . '">Nome Extra</label>'
             . '<input type="text" id="' . $nameId . '" name="extra_name[]"' . $nameValueAttr . ' placeholder="es. Skipper" aria-describedby="' . $nameErrorId . '">'
             . '<span id="' . $nameErrorId . '" class="field-error extra-name-error" role="alert"></span>'
             . '</div>'
             . '<div class="form-group">'
-            . '<label for="' . $priceId . '">Prezzo Extra ' . $num . ' (€)</label>'
+            . '<label for="' . $priceId . '">Prezzo Extra (€)</label>'
             . '<input type="number" id="' . $priceId . '" name="extra_price[]" min="1" step="1"' . $priceValueAttr . ' placeholder="es. 50" aria-describedby="' . $priceErrorId . '">'
             . '<span id="' . $priceErrorId . '" class="field-error extra-price-error" role="alert"></span>'
             . '</div>'
             . '<button type="button" class="btn-danger remove-extra" aria-label="Rimuovi extra ' . $num . '">Rimuovi</button>'
-            . '</div>';
+            . '</fieldset>';
     }
     return $extrasHtml;
 }

@@ -310,6 +310,21 @@ document.addEventListener('DOMContentLoaded', () => {
    GESTIONE EXTRA (Blog e Prodotti Admin)
    --------------------------------------- */
 document.addEventListener('DOMContentLoaded', () => {
+    const renumberExtras = (container) => {
+        const rows = container.querySelectorAll('.extra-row');
+        rows.forEach((row, i) => {
+            const num = i + 1;
+            const legend = row.querySelector('legend');
+            if (legend) {
+                legend.textContent = 'Extra ' + num;
+            }
+            const removeBtn = row.querySelector('.remove-extra');
+            if (removeBtn) {
+                removeBtn.setAttribute('aria-label', 'Rimuovi extra ' + num);
+            }
+        });
+    };
+
     const setupExtrasManager = (addBtnId, containerId, templateId) => {
         const addBtn = document.getElementById(addBtnId);
         const container = document.getElementById(containerId);
@@ -324,12 +339,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const row = target.closest('.extra-row');
             if (row) {
                 row.remove();
+                renumberExtras(container);
             }
         });
 
         addBtn.addEventListener('click', () => {
             const fragment = template.content.cloneNode(true);
             container.appendChild(fragment);
+            renumberExtras(container);
         });
     };
 

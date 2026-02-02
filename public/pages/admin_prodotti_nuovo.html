@@ -169,7 +169,8 @@
             [PROD_EXTRAS]
           </div>
           <template id="product-extra-template">
-            <div class="extra-row">
+            <fieldset class="extra-row">
+              <legend>Extra</legend>
               <div class="form-group">
                 <label>Nome Extra
                   <input type="text" name="extra_name[]" placeholder="es. Skipper">
@@ -183,7 +184,7 @@
                 <span class="field-error extra-price-error" role="alert"></span>
               </div>
               <button type="button" class="btn-danger remove-extra" aria-label="Rimuovi extra">Rimuovi</button>
-            </div>
+            </fieldset>
           </template>
           <button type="button" class="btn-layout-light" id="add-product-extra">Aggiungi extra</button>
         </fieldset>
