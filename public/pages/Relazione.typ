@@ -182,7 +182,7 @@ La struttura del sito segue il modello gerarchico schematizzato in #link(<fig-si
     Questa sezione funge da centro di controllo. Permette di visualizzare la totalità delle prenotazioni nel sistema, accedere alla pagina profilo personale, gestire l'anagrafica degli utenti registrati e modificare dinamicamente i contenuti del sito (aggiunta/modifica/rimozione di Barche, Esperienze e Articoli del Blog).
 
   #figure(
-    image("../img/diagramma_albero.png", width: 100%), 
+    image("../img/diagramma_albero.png", width: 60%), 
     gap: 2em,
     caption: [Mappa gerarchica della piattaforma SailUP],
   ) <fig-sitemap>
@@ -289,7 +289,7 @@ Il sistema implementa il pattern *Post-Redirect-Get* per tutte le operazioni che
 3. Esegue un redirect HTTP (header `Location:`) verso una pagina di visualizzazione
 4. La pagina di destinazione mostra il messaggio recuperandolo dalla sessione
 
-Questo approccio previene la ri-sottomissione accidentale del form (tramite refresh o navigazione back), migliora l'esperienza utente e rende il flusso dell'applicazione più robusto e prevedibile, evitandoci di dover gestire l'incubo di dati duplicati generati dall'impazienza di chi clicca ripetutamente sul tasto 'aggiorna'.
+Questo approccio previene la ri-sottomissione accidentale del form (tramite refresh o navigazione back), migliora l'esperienza utente e rende il flusso dell'applicazione più robusto e prevedibile, evitandoci di dover gestire dati duplicati.
 
 ==== Sistema CRUD Amministrativo
 Il pannello amministrativo implementa operazioni complete di Create, Read, Update e Delete per tutte le entità dinamiche:
@@ -311,11 +311,7 @@ Se il prodotto non è più disponibile l'utente riceve un messaggio che chiarisc
 
 ==== Validazione
 Il sistema implementa il principio della *doppia validazione* come best practice di sicurezza, controllando ogni input non solo lato client (JavaScript) ma anche lato server (PHP). La validazione _server-side_ rappresenta la principale barriera di sicurezza, garantendo che anche in caso di JavaScript disabilitato, o di richieste manipolate da utenti un po' troppo curiosi, il server rifiuti sempre dati non conformi. \
-Ogni dato ricevuto via POST request viene ricontrollato:
-- *Email*: Verifica tramite `filter_var()` con flag `FILTER_VALIDATE_EMAIL` secondo lo standard RFC 822
-- *Password*: Controllo di lunghezza minima (8 caratteri), presenza di maiuscole, minuscole, numeri e caratteri speciali tramite espressioni regolari
-- *Codice Fiscale*: Validazione del formato (16 caratteri alfanumerici) tramite pattern regex
-- *Nomi e Cognomi*: Verifica che contengano solo lettere e spazi, escludendo stringhe vuote o composte solo da spazi
+Ogni dato ricevuto via POST request viene ricontrollato.
 
 === Sessioni, Sicurezza e Protezione dei Dati
 Il mantenimento dello stato utente è gestito tramite un sistema dedicato nel file `session.php`. All'avvio lo script verifica che la sessione non sia già attiva tramite evitando errori di sessioni duplicate.
@@ -351,11 +347,7 @@ La sicurezza è stata considerata prioritaria in ogni fase dello sviluppo backen
 L'interazione con il database è completamente incapsulata nella classe `DBConnection`. Questa architettura offre le seguenti funzionalità:
 - *Gestione della connessione:* La connessione al database segue il pattern di apertura/chiusura esplicita. `openConnection()`apre la connessione solo quando necessario, imposta il charset UTF-8 per supportare caratteri internazionali, di modo da non dover vedere trasformare una 'è' in un rombo con il punto interrogativo, e gestisce errori di connessione in modo sicuro. `closeConnection()` chiude la connessione al termine di ogni operazione, liberando risorse e prevenendo connection leak.
 - *Prepared statements:* oltre alla funzione relativa alla sicurezza citata in precedenza, i _Prepared Statements_ separano la struttura della query dai dati e migliorano le performance grazie al piano di esecuzione pre-compilato dal database.
-- *Gestione robusta degli errori:* La classe implementa una gestione sofisticata degli errori attraverso codici di ritorno specifici. Questo sistema permette al controller di fornire feedback precisi all'utente ('Email già registrata') senza esporre dettagli tecnici del database. I blocchi `try-catch` intercettano le eccezioni MySQL e le trasformano in codici di errore gestibili, prevenendo la visualizzazione di stack trace sensibili. Nel dettaglio i codici impiegati sono:
-  - `false`: Errore generico nell'operazione
-  - `-1`: Violazione di vincolo specifico (es. email duplicata)
-  - `-2`: Violazione di vincolo alternativo (es. codice fiscale duplicato)
-  - `ID positivo`: Operazione riuscita, con l'ID della risorsa creata
+- *Gestione robusta degli errori:* La classe implementa una gestione degli errori attraverso codici di ritorno specifici dove necessario. Questo sistema permette al controller di fornire feedback precisi all'utente (E.g.: 'Email già registrata') senza esporre dettagli tecnici del database.
 
 
 ==== Entità del Database
@@ -421,21 +413,55 @@ Sono stati condotti test approfonditi sulla validazione degli input utente per g
 
 - *Tecnologie assistive:* La piattaforma è stata navigata utilizzando screen reader quali VoiceOver e NVDA per assicurarsi che la navigazione fosse comprensibile anche attraverso l'uso di questi strumenti di sintesi vocale. È stato ad esempio controllato che gli elementi interattivi venissero correttamente etichettati, che i cambiamenti di elementi a schermo venissero comunicati o che elementi non necessari (es. emoji) non venissero letti. Tutto ciò ci ha ricordato che il codice perfetto non esiste, specialmente se deve essere interpretato da uno _screen reader_.
 
+- *Test automatizzati di accessibilità:* Per verificare sistematicamente l'accessibilità di tutte le pagine PHP del sito, è stato utilizzato lo strumento _pa11y_, eseguendo test automatizzati tramite il comando: 
+  ```bash
+  find . -name "*.php" -not -path "*/.*" | sed "s|^\./|http://localhost:8080/~dbiasuzz/public/php/|" | xargs -I {} pa11y {}
+  ```
+  Questo approccio ha permesso di analizzare l'intero sito in modo efficiente, identificando eventuali problemi di accessibilità su tutte le pagine dinamiche.
+
+- *Audit automatizzato con Unlighthouse:* Per ottenere una valutazione completa delle performance, dell'accessibilità, delle best practices e della SEO del sito, è stato utilizzato Unlighthouse v0.17.4 tramite il comando:
+  ```bash
+  npx unlighthouse --site http://localhost:8080/~dbiasuzz/public/php/
+  ```
+  I risultati ottenuti sono stati particolarmente soddisfacenti: *100% su SEO*, *100% su Best Practices*, *100% su Accessibility* e *67% su Performance*. Il punteggio relativo alle performance, seppur non perfetto, è comunque accettabile considerando la natura dinamica del sito e la quantità di contenuti multimediali presenti.
+
 - *Compatibilità e design responsivo:* Il sito è stato testato sui principali _browser_ web moderni, tra cui Google Chrome, Opera, Mozilla Firefox, Safari e Microsoft Edge per accertarci che venissero renderizzati correttamente. Il design responsivo è stato verificato a diverse risoluzioni simulando dispositivi che vanno da smartphone ai tablet, fino ai monitor desktop. Non sono state invece prese in considerazione versioni più vecchie dei _browser_, considerato il profilo dell'utenza target del sito orientata all'utilizzo di dispositivi moderni.
 
 = Suddivisione del Lavoro
 L'evoluzione del progetto è stata meno lineare del previsto. Inizialmente composto da un gruppo di quattro persone, il team è andato incontro ad una riorganizzazione procedendo ad un fork del progetto per ultimare il lavoro in tre.
 
-Questa transizione ha reso la suddivisione dei compiti non definibile in maniera netta. Parti del codice non direttamente scritto dagli attuali membri del gruppo è stato oggetto di correzioni e miglioramenti. Proveremo di seguito a definire nel miglior modo possibile la suddivisione del lavoro. 
+Questa transizione ha reso la suddivisione dei compiti non definibile in maniera netta. Parti del codice non direttamente scritto dagli attuali membri del gruppo è stato oggetto di correzioni e miglioramenti. Proveremo di seguito a definire nel miglior modo possibile la suddivisione del lavoro.
 
-- *Davide Biasuzzi:* Principale responsabile della parte backend (PHP e database), ha lavorato in ambito frontend alle pagine di errore e ...(HTML e CSS).
+- *Davide Biasuzzi:* Progettazione e creazione del database (SQL), pagina db_connection.php (PHP) per la gestione della connessione al database e delle query CRUD, implementazione della logica di business per la gestione delle prenotazioni (PHP), backend della parte non amministrativa del sito, revisione design pagine catalogo e di dettaglio dei prodotti, parte frontend della pagine di errore, scrittura della relazione parte backend.
 
-- *Francesco Marcon:* Sviluppo frontend delle principali pagine (HTML), definizione stile mobile e desktop (CSS), validazione client-side per login, registrazione, pagamenti, inserimento prodotti e blog (JS), correzione di funzioni per il popolamento dinamico da DB, correzione errori grafici e adeguamento standard WCAG (PHP).
+- *Francesco Marcon:* Sviluppo frontend delle principali pagine (HTML), definizione stile mobile e desktop (CSS), validazione client-side per login, registrazione, pagamenti, inserimento prodotti e blog (JS), correzione di funzioni per il popolamento dinamico da DB, correzione errori grafici e adeguamento standard WCAG (PHP), scrittura relazione parte frontend.
 
-- *Alberto Reginato:* Parte frontend delle principali pagine del sito (HTML, CSS), foglio di stile per la stampa (CSS), aggiunta bottone 'Torna su' e calcolo prezzi in tempo reale (JS), funzioni per la generazione dinamica dei tag e attributi html (PHP), popolamento delle pagine, testing e validazione, scrittura della relazione.
+- *Alberto Reginato:* Parte frontend delle principali pagine del sito (HTML, CSS), foglio di stile per la stampa (CSS), aggiunta bottone 'Torna su' e calcolo prezzi in tempo reale (JS), funzioni per la generazione dinamica dei tag e attributi html (PHP), popolamento delle pagine e del DB, testing e validazione, scrittura della relazione parte frontend.
 
-- *Hossam Ezzemouri:* Sezioni login e registrazione del sito
-  - *Correzioni effettuate sulla parte:*
+- *Hossam Ezzemouri:* Parte backend della parte amministrativa del sito (PHP), implementazione del sistema CRUD per la gestione di prodotti e articoli del blog, funzioni di autenticazione e gestione sessioni (PHP), revisione design pagine create e update di prodotti e blog.
+  - *Correzioni effettuate sulla parte: (le parte indicate con \* sono state modificate prima della fork del progetto)*
+    - Revisione su parte legata alla visualizzazione delle psw nel login
+    - Revisione della validazione dati utente (indirizzo, nome e cognome) \*
+    - Revisione funzionalità create/update di blog
+    - Revisione sintassi HTML5 e accessibilità generale \*
+    - Revisione funzionalità create/update di prodotti
+    - Revisione separazione tra contenuto e comportamento js
+    - Esplicitati e disambiguati errori per gli utenti generici \*
+    - Implementata funzione elimina account utente \*
+    - Rimossa paginazione mal funzionante nella sezione amministrativa
+    - Revisionata validazione dei form lato client (errori su REGEX e messaggi)
+      - Validazione registrazione \*
+    - Rimozione classi CSS inesistenti
+    - Revisionata logica pulsanti su admin prenotazioni
+    - Collegati pulsanti non funzionanti \*
+    - Prevenzione traversal-path a login per utente gia loggato \*
+    - Aggiunta funzionalità di elimina utente per l'admin \*
+    - Aggiunta funzionalità di eliminazione prodotto \*
+    - Corretta logica breadcrumbs per la parte admin->profilo admin \*
+    - Aggiunta funzionalità profilo utente per l'admin \*
+    - Revisione funzione di reperimento immagini dal DB \*,
+    - Revisione politica di accesso alle paggine admin per utenti non admin \*
+    - Varie migliorie grafiche minori \*
 
 
 = Conclusioni e Sviluppi Futuri
