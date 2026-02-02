@@ -585,8 +585,8 @@ INSERT INTO `Utente` (`IDUtente`, `Nome`, `Cognome`, `CF`, `Email`, `PasswordHas
 (12, 'Admin', 'Admin', 'CFADMINADMINCFCF', 'admin', '$2y$12$8zAg6nl3GiiNgQUZ6dvvp.7z78MciHKCpwqW7b0TI.c.ZlzlWh/7i', 19, 1, '2026-01-08 06:27:28', '2026-01-30 18:10:54'),
 (14, 'User', 'User', 'CFUSERUSERCFUSER', 'user', '$2y$12$nE6ZkeAcGm4zSud34GSWSOLnkbTF8vAy1PmpGQYq2BRBPi.67FxFy', 24, 0, '2026-01-09 19:30:02', '2026-01-25 14:05:22'),
 (131, 'Davide', 'Biasuzzi', 'DDDDDDDDDDDDDDDD', 'davidebiasuzzi@mail.com', '$2y$12$tje07cGBBancFO7PSnfS7OtdH2b8ZMelitdB88NcwuQci0ByVPaLO', 39, 0, '2026-01-11 18:20:44', '2026-01-13 17:08:46'),
-(132, 'Alberto', 'Reginato', 'AAAAAAAAAAAAAAAA', 'albertoreginato@mail.com', '$2y$12$1l1aMeS28ne76ypCBK/eHuQN9u9/V0qjRW6YJmAvRTzM1JH9Ad/IK', 42, 0, '2026-01-13 17:02:43', '2026-01-14 18:05:24'),
-(133, 'Francesco', 'Marcon', 'FFFFFFFFFFFFFFFF', 'francescomarcon@mail.com', '$2y$12$1CrdOMoHgmF9BiMQgBv9DuX4VNA5S5ELuzqDUTvg28FETi3R2Gxoi', 43, 0, '2026-01-13 17:04:12', '2026-01-13 17:04:21');
+(132, 'Alberto', 'Reginato', 'AAAAAAAAAAAAAAAA', 'albertor@mail.com', '$2y$12$1l1aMeS28ne76ypCBK/eHuQN9u9/V0qjRW6YJmAvRTzM1JH9Ad/IK', 42, 0, '2026-01-13 17:02:43', '2026-01-14 18:05:24'),
+(133, 'Francesco', 'Marcon', 'FFFFFFFFFFFFFFFF', 'francescom@mail.com', '$2y$12$1CrdOMoHgmF9BiMQgBv9DuX4VNA5S5ELuzqDUTvg28FETi3R2Gxoi', 43, 0, '2026-01-13 17:04:12', '2026-01-13 17:04:21');
 
 --
 -- Indici per le tabelle scaricate
