@@ -402,7 +402,7 @@ Il codice è stato esaminato per individuare quegli errori che, inevitabilmente,
 
 - *Validatori W3C HTML e CSS:* Sono stati utilizzati per assicurare che la struttura HTML5 e i fogli di stile siano conformi agli standard internazionali. Al netto di qualche avviso relativo all'uso delle variabili CSS (ces. `var(--colore-primario)`), il codice ha superato i test senza errori critici.
 
-- *Total Validator:* Abbiamo utilizzato questo strumento per una verifica più completa, permettendoci di testare contemporaneamente la validità dell'HTML, la conformità alle linee guida WCAG e l'integrità dei collegamenti ipertestuali. Se da un lato ci ha permesso di scovare diverse sviste sugli attributi ARIA, dall'altro abbiamo dovuto ignorare molti falsi positivi riguardanti lo spell-check.
+- *Total Validator:* Abbiamo utilizzato questo strumento per una verifica più completa, testando contemporaneamente la validità dell'HTML, la conformità alle linee guida WCAG e l'integrità dei collegamenti ipertestuali. Se da un lato ci ha permesso di scovare diverse sviste sugli attributi ARIA, dall'altro abbiamo dovuto ignorare molti falsi positivi riguardanti lo spell-check. Il test delle pagine private, accessibili solo in seguto a login, sono stati eseguiti inviando il codice sorgente perchè altrimenti inaccessibili.
 
 - *WCAG Contrast Checker:* Questo strumento è stato prezioso per analizzare e correggere i contrasti tra gli elementi presenti all'interno delle pagine. Questo _tool_ ci ha messo di fronte alla dura realtà che quel blu che ci piaceva tanto, purtroppo, non è per tutti facilmente leggibile.
 
@@ -421,27 +421,21 @@ Sono stati condotti test approfonditi sulla validazione degli input utente per g
 
 - *Tecnologie assistive:* La piattaforma è stata navigata utilizzando screen reader quali VoiceOver e NVDA per assicurarsi che la navigazione fosse comprensibile anche attraverso l'uso di questi strumenti di sintesi vocale. È stato ad esempio controllato che gli elementi interattivi venissero correttamente etichettati, che i cambiamenti di elementi a schermo venissero comunicati o che elementi non necessari (es. emoji) non venissero letti. Tutto ciò ci ha ricordato che il codice perfetto non esiste, specialmente se deve essere interpretato da uno _screen reader_.
 
-- *Compatibilità e Design Responsivo:* Il sito è stato testato sui principali _browser_ web moderni, tra cui Google Chrome, Opera, Mozilla Firefox, Safari e Microsoft Edge per accertarci che venissero renderizzati correttamente. Il design responsivo è stato verificato a diverse risoluzioni simulando dispositivi che vanno da smartphone ai tablet, fino ai monitor desktop. Non sono state invece prese in considerazione versioni più vecchie dei _browser_, considerato il profilo dell'utenza target del sito orientata all'utilizzo di dispositivi moderni.
+- *Compatibilità e design responsivo:* Il sito è stato testato sui principali _browser_ web moderni, tra cui Google Chrome, Opera, Mozilla Firefox, Safari e Microsoft Edge per accertarci che venissero renderizzati correttamente. Il design responsivo è stato verificato a diverse risoluzioni simulando dispositivi che vanno da smartphone ai tablet, fino ai monitor desktop. Non sono state invece prese in considerazione versioni più vecchie dei _browser_, considerato il profilo dell'utenza target del sito orientata all'utilizzo di dispositivi moderni.
 
 = Suddivisione del Lavoro
 L'evoluzione del progetto è stata meno lineare del previsto. Inizialmente composto da un gruppo di quattro persone, il team è andato incontro ad una riorganizzazione procedendo ad un fork del progetto per ultimare il lavoro in tre.
 
-Questa transizione ha reso la suddivisione dei compiti non definibile in maniera netta. Parti del codice non direttamente scritto dagli attuali membri del gruppo è stato oggetto di correzioni e miglioramenti. Nella tabella seguente proveremo a definire nel miglior modo possibile la suddivisione del lavoro: 
+Questa transizione ha reso la suddivisione dei compiti non definibile in maniera netta. Parti del codice non direttamente scritto dagli attuali membri del gruppo è stato oggetto di correzioni e miglioramenti. Proveremo di seguito a definire nel miglior modo possibile la suddivisione del lavoro. 
 
-#table(
-  columns: (30%, 1fr),
-  inset: 10pt,
-  align: (center, left),
-  fill: (col, row) => if row == 0 {rgb("#0033ff")} else { none },
-  table.header(
-    text(fill: white)[*Membro del Gruppo*],
-    text(fill: white)[*Aree di Contributo Principale*],
-  ),
-  [Davide Biasuzzi], [Principale responsabile della parte backend (PHP e database), ha lavorato in ambito frontend alle pagine di errore e ...(HTML e CSS).],
-  [Francesco Marcon], [Parte frontend delle principali pagine del sito (HTML, CSS e JS), ha lavorato in ambito backend a funzioni quali ...],
-  [Alberto Reginato], [Parte frontend delle principali pagine del sito (HTML, CSS e JS), ha lavorato in ambito backend alle funzioni per la generazione dinamica dei tag e attributi html.],
-  [Hossam Ezzemouri], [Ha creato problemi],
-)
+- *Davide Biasuzzi:* Principale responsabile della parte backend (PHP e database), ha lavorato in ambito frontend alle pagine di errore e ...(HTML e CSS).
+
+- *Francesco Marcon:* Parte frontend delle principali pagine del sito (HTML, CSS e JS), ha lavorato in ambito backend a funzioni quali ...
+
+- *Alberto Reginato:* Parte frontend delle principali pagine del sito (HTML, CSS), foglio di stile per la stampa (CSS), aggiunta bottone 'Torna su' e calcolo prezzi in tempo reale (JS), funzioni per la generazione dinamica dei tag e attributi html (PHP), popolamento delle pagine, testing e validazione, scrittura della relazione.
+
+- *Hossam Ezzemouri:*
+
 
 = Conclusioni e Sviluppi Futuri
 Messi di fronte alla complessità delle sfide tecniche (ed interpersonali) che a volte si sono rivelate più difficili del previsto, lavorare a questo progetto è stata un'esperienza estremamente formativa. 
