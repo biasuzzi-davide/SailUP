@@ -2377,8 +2377,18 @@ footer address strong {
 
 .footer-bottom {
   padding: 1.5em;
-  margin: 0.5em auto;
-  text-align: center;
+  font-size: 0.85em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  max-width: 75em;
+  margin: 0 auto;
+}
+
+.valid-logos {
+  display: flex;
+  gap: 10px;
 }
 
 /* =========================================
