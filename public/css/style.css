@@ -536,6 +536,10 @@ header .logo-text {
   border-left-color: var(--col-accent);
 }
 
+[data-theme="dark"] #breadcrumb li a:hover {
+  color: #002642;
+}
+
 /* =========================================
      6. LAYOUT & SEZIONI PRINCIPALI
      ========================================= */
@@ -1029,6 +1033,10 @@ a.product-cta:focus-visible {
   display: flex;
   justify-content: flex-end;
   gap: 1em;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
 }
 
 /* =========================================
@@ -2351,6 +2359,9 @@ footer address p {
 }
 footer address a {
   color: #cbd5e1;
+}
+[data-theme="dark"] footer address a:hover {
+  color: #81b6ff;
 }
 
 footer address strong {
