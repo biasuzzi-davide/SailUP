@@ -182,7 +182,7 @@ La struttura del sito segue il modello gerarchico schematizzato in #link(<fig-si
     Questa sezione funge da centro di controllo. Permette di visualizzare la totalità delle prenotazioni nel sistema, accedere alla pagina profilo personale, gestire l'anagrafica degli utenti registrati e modificare dinamicamente i contenuti del sito (aggiunta/modifica/rimozione di Barche, Esperienze e Articoli del Blog).
 
   #figure(
-    image("../img/diagramma_albero.png", width: 60%), 
+    image("../img/diagramma_albero.png", width: 70%), 
     gap: 2em,
     caption: [Mappa gerarchica della piattaforma SailUP],
   ) <fig-sitemap>
@@ -398,6 +398,8 @@ Il codice è stato esaminato per individuare quegli errori che, inevitabilmente,
 
 - *WCAG Contrast Checker:* Questo strumento è stato prezioso per analizzare e correggere i contrasti tra gli elementi presenti all'interno delle pagine. Questo _tool_ ci ha messo di fronte alla dura realtà che quel blu che ci piaceva tanto, purtroppo, non è per tutti facilmente leggibile.
 
+- *w3ba11y:* Abbiamo utilizzato questo strumento per verificare che le _kywords_ inserite fossero effettivamente presenti nella pagina.
+
 - *WAVE:* Oltre a condurre un secondo controllo sui contrasti, abbiamo sffruttato _Wave_ per verificare che l'ordine di navigazione da tastiera fosse corretto. Oltre a questo ci ha permesso di individuare altri errori relativi alle intestazioni. Il _tool_ ha segnalato alcuni warning per '_redundant link_', riferendosi al doppio collegamento alla _Home_ presente sia sul logo che nel menu. In questo caso abbiamo esercitato il nostro diritto di libero arbitrio ignorandolo: rimuovere uno dei due sarebbe stato tecnicamente 'pulito' secondo il _tool_, ma poco intuitivo per un utente reale.
 
 === Test
@@ -413,17 +415,9 @@ Sono stati condotti test approfonditi sulla validazione degli input utente per g
 
 - *Tecnologie assistive:* La piattaforma è stata navigata utilizzando screen reader quali VoiceOver e NVDA per assicurarsi che la navigazione fosse comprensibile anche attraverso l'uso di questi strumenti di sintesi vocale. È stato ad esempio controllato che gli elementi interattivi venissero correttamente etichettati, che i cambiamenti di elementi a schermo venissero comunicati o che elementi non necessari (es. emoji) non venissero letti. Tutto ciò ci ha ricordato che il codice perfetto non esiste, specialmente se deve essere interpretato da uno _screen reader_.
 
-- *Test automatizzati di accessibilità:* Per verificare sistematicamente l'accessibilità di tutte le pagine PHP del sito, è stato utilizzato lo strumento _pa11y_, eseguendo test automatizzati tramite il comando: 
-  ```bash
-  find . -name "*.php" -not -path "*/.*" | sed "s|^\./|http://localhost:8080/~dbiasuzz/public/php/|" | xargs -I {} pa11y {}
-  ```
-  Questo approccio ha permesso di analizzare l'intero sito in modo efficiente, identificando eventuali problemi di accessibilità su tutte le pagine dinamiche.
+- *Test automatizzati di accessibilità:* Per verificare sistematicamente l'accessibilità di tutte le pagine PHP del sito è stato utilizzato lo strumento _pa11y_ per l'esecuzione di test automatizzati. Questo _tool_ ci ha permesso di analizzare l'intero sito in modo efficiente, identificando eventuali problemi di accessibilità su tutte le pagine dinamiche.
 
-- *Audit automatizzato con Unlighthouse:* Per ottenere una valutazione completa delle performance, dell'accessibilità, delle best practices e della SEO del sito, è stato utilizzato Unlighthouse v0.17.4 tramite il comando:
-  ```bash
-  npx unlighthouse --site http://localhost:8080/~dbiasuzz/public/php/
-  ```
-  I risultati ottenuti sono stati particolarmente soddisfacenti: *100% su SEO*, *100% su Best Practices*, *100% su Accessibility* e *67% su Performance*. Il punteggio relativo alle performance, seppur non perfetto, è comunque accettabile considerando la natura dinamica del sito e la quantità di contenuti multimediali presenti.
+- *Audit automatizzato con Unlighthouse:* Per ottenere una valutazione completa delle performance, dell'accessibilità, delle best practices e della SEO del sito, è stato utilizzato Unlighthouse v0.17.4. I risultati ottenuti sono stati particolarmente soddisfacenti: *100% su SEO*, *100% su Best Practices*, *100% su Accessibility* e *67% su Performance*. Il punteggio relativo alle performance, seppur non perfetto, è comunque accettabile considerando la natura dinamica del sito e la quantità di contenuti multimediali presenti.
 
 - *Compatibilità e design responsivo:* Il sito è stato testato sui principali _browser_ web moderni, tra cui Google Chrome, Opera, Mozilla Firefox, Safari e Microsoft Edge per accertarci che venissero renderizzati correttamente. Il design responsivo è stato verificato a diverse risoluzioni simulando dispositivi che vanno da smartphone ai tablet, fino ai monitor desktop. Non sono state invece prese in considerazione versioni più vecchie dei _browser_, considerato il profilo dell'utenza target del sito orientata all'utilizzo di dispositivi moderni.
 
@@ -450,7 +444,7 @@ Questa transizione ha reso la suddivisione dei compiti non definibile in maniera
     - Implementata funzione elimina account utente \*
     - Rimossa paginazione mal funzionante nella sezione amministrativa
     - Revisionata validazione dei form lato client (errori su REGEX e messaggi)
-      - Validazione registrazione \*
+    - Validazione registrazione \*
     - Rimozione classi CSS inesistenti
     - Revisionata logica pulsanti su admin prenotazioni
     - Collegati pulsanti non funzionanti \*
@@ -468,7 +462,7 @@ Questa transizione ha reso la suddivisione dei compiti non definibile in maniera
 Messi di fronte alla complessità delle sfide tecniche (ed interpersonali) che a volte si sono rivelate più difficili del previsto, lavorare a questo progetto è stata un'esperienza estremamente formativa. 
 SailUP non è probabilmente l'innovazione che cambierà le sorti del turismo globale ma è un lavoro di cui siamo orgogliosi e che saremmo fieri di esporre in un possibile portfolio personale. Ci ha dato modo di dimostrare la nostra capacità di costruire un'applicazione web che non sia solo funzionante ma anche solida, sicura e navigabile da tutti.
 
-== Sviluppi Futuri
+== Possibili Sviluppi Futuri
 La base tecnologica di SailUP è stata pensata per essere modulare quindi potenzialmente, se non avessimo altri esami da preparare, espandibile. Tra le evoluzioni possibili ipotizziamo:
 
 - *Sistema di recensioni e valutazioni:* Aggiungere una funzionalità che permetta agli utenti di lasciare recensioni e valutazioni sui prodotti, aumentando la fiducia e fornendo un feedback prezioso.
