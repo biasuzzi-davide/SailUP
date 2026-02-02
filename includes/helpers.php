@@ -309,22 +309,16 @@ function formatTextAbbr(?string $text): string
 
     // per acronimi
     static $acronimi = null;
-
     if ($acronimi === null) {
-        $configPath = __DIR__ . '/../../config/acronyms.php';
-        
-        if (file_exists($configPath)) {
-            $acronimi = require $configPath;
-        } else {
-            $acronimi = [];
-        }
+        $configPath = __DIR__ . '/../config/acronyms.php'; 
+        $acronimi = file_exists($configPath) ? require $configPath : [];
     }
 
     if (!empty($acronimi)) {
         foreach ($acronimi as $sigla => $titolo) {
             $safeText = preg_replace(
-                '/\b(' . preg_quote($sigla, '/') . ')\b/',
-                '<abbr title="' . $titolo . '">$1</abbr>',
+                '/\b(' . preg_quote($sigla, '/') . ')\b/i', 
+                '<abbr title="' . htmlspecialchars($titolo, ENT_QUOTES) . '">$1</abbr>',
                 $safeText
             );
         }
@@ -344,28 +338,20 @@ function formatTextLang(?string $text): string
 
     static $dictionary = null;
     if ($dictionary === null) {
-        $configPath = __DIR__ . '../config/languages.php';
-        
-        if (file_exists($configPath)) {
-            $dictionary = require $configPath;
-        } else {
-            $dictionary = [];
-        }
+        $configPath = __DIR__ . '/../config/languages.php';
+        $dictionary = file_exists($configPath) ? require $configPath : [];
     }
+
+    if (empty($dictionary)) return $text;
 
     $processedText = $text;
-
-    if (empty($dictionary)) {
-        return $processedText;
-    }
-
     foreach ($dictionary as $lang => $words) {
         // Ordina per lunghezza decrescente
         usort($words, fn($a, $b) => strlen($b) - strlen($a));
-
+        
         $escapedWords = array_map(fn($w) => preg_quote($w, '/'), $words);
         
-        $pattern = '/(?<=^|[\s\p{P}]|;)(' . implode('|', $escapedWords) . ')(?=$|[\s\p{P}]|&)/iu';
+        $pattern = '/(?![^<]*>)\b(' . implode('|', $escapedWords) . ')\b/iu';
 
         $processedText = preg_replace(
             $pattern, 
