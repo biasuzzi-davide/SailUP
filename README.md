@@ -1,303 +1,132 @@
-# ⛵ SailUP - Piattaforma di Prenotazione Barche ed Esperienze Nautiche
+# ⛵ SailUP - Vivi il mare, senza pensieri.
 
 <div align="center">
 
-[![Status](https://img.shields.io/badge/status-inactive-red.svg)](https://github.com)
+🏆 **Progetto Vincitore del Concorso "Accattivante Accessibile" (Quinta Edizione - 2026)** 🏆  
+*Indetto dall'Università degli Studi di Padova (Dipartimento di Matematica "Tullio Levi-Civita")*  
+[Scopri di più sul concorso](https://web.math.unipd.it/CAA/)
+
+[![Status](https://img.shields.io/badge/status-active-success.svg)](https://github.com)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![PHP Version](https://img.shields.io/badge/PHP-7.4%2B-blue.svg)](https://www.php.net/)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com)
 
-Un'applicazione web moderna e intuitiva per scoprire, prenotare e noleggiare barche e vivere indimenticabili esperienze nautiche.
+**Piattaforma web moderna e accessibile per la prenotazione di imbarcazioni e la scoperta di esperienze nautiche nel suggestivo scenario del Golfo di Napoli.**
 
-[Caratteristiche](#-caratteristiche) • [Installazione](#-installazione) • [Utilizzo](#-utilizzo) • [Struttura](#-struttura-del-progetto) • [Tecnologie](#-tecnologie)
+[Caratteristiche](#-caratteristiche) • [Il Progetto](#-il-progetto) • [Installazione](#-installazione) • [Accessibilità & Design](#%EF%B8%8F-accessibilit%C3%A0--design) • [Tecnologie](#-tecnologie)
 
 </div>
 
 ---
 
+## 🌊 Il Progetto
+
+**SailUP** nasce con l'obiettivo di semplificare e modernizzare la frammentaria offerta di servizi nautici nel Golfo di Napoli, unendo le funzionalità di prenotazione e consultazione in un'unica piattaforma intuitiva e accessibile a tutti.
+
+Il nostro target si colloca in un segmento medio-alto, richiedendo quindi un'esperienza utente _premium_, veloce e senza attriti, perfetta sia per il cliente abituale che per il turista dell'ultimo minuto.
+
+### Obiettivi chiave:
+- **Gestione integrata**: Un unico sistema per barche, esperienze e gestione utenti.
+- **Usabilità in mobilità**: Approccio rigoroso *"Mobile-first"*, pensato per chi prenota sotto il sole cocente con uno smartphone.
+- **Accessibilità globale**: Strutturata e certificata per garantire l'accessibilità a tutte le categorie di utenti (Screen Readers, navigazione da tastiera, contrasto colore ottimizzato), rendendo la navigazione del sito piacevole per chiunque.
+- **Inbound Marketing**: Integrazione di un Blog nautico dedicato al content marketing (SEO) per intercettare curiosi e convertirli in esploratori.
+
+---
+
 ## 🌟 Caratteristiche
 
-### Per gli Utenti
-- 🔐 **Autenticazione Sicura** - Registrazione e login con gestione sessioni avanzate
-- 🏄 **Catalogo Esperienze** - Scopri emozionanti esperienze nautiche e lezioni di vela
-- ⛵ **Noleggio Barche** - Sfoglia un'ampia selezione di imbarcazioni disponibili
-- 📅 **Prenotazioni Intelligenti** - Sistema di prenotazione intuitivo e veloce
-- 💳 **Pagamenti Sicuri** - Gateway di pagamento integrato e validato
-- 👤 **Profilo Utente** - Gestisci i tuoi dati, prenotazioni e preferenze di sicurezza
-- 📚 **Blog Interattivo** - Leggi articoli su vela, nautica e avventure marine
+<details>
+<summary>👤 <b>Navigazione e Funzioni Utente</b></summary>
 
-### Per gli Amministratori
-- 🎛️ **Dashboard Amministrativa** - Pannello di controllo completo
-- 📝 **Gestione Blog** - Crea, modifica e elimina articoli
-- ⛴️ **Gestione Prodotti** - Amministra barche e esperienze
-- 👥 **Gestione Utenti** - Monitora e gestisci gli utenti del sistema
-- 📊 **Prenotazioni** - Visualizza e gestisci tutte le prenotazioni
+- **Esplorazione Cataloghi**: Scopri facilmente barche disponibili ed emozionanti escursioni, accompagnate da filtri e descrizioni dettagliate.
+- **Prenotazioni Intelligenti**: Prendi il mare con pochi clic, verificando istantaneamente la disponibilità delle risorse ed evitando l'overbooking tramite rigidi controlli server-side.
+- **Area Personale (Clienti)**: Monitora e gestisci le tue avventure nautiche e l'anagrafica, aggiornando le tue preferenze e le norme di sicurezza.
+- **Magazine Nautico**: Un blog informativo per orientarti e trovare ispirazione fin dalla terraferma.
+</details>
 
----
+<details>
+<summary>🎛️ <b>Pannello di Controllo Amministratore (Admin)</b></summary>
 
-## 🚀 Installazione
-
-### Prerequisiti
-- PHP 7.4 o superiore
-- MySQL 5.7+
-- Server web (Apache/Nginx)
-- Composer (opzionale)
-
-### Passaggi di Installazione
-
-1. **Clona il repository**
-```bash
-git clone https://github.com/tuousername/SailUP.git
-cd SailUP
-```
-
-2. **Configura il database**
-```bash
-# Importa il database dal file SQL
-mysql -u root -p < db/dbiasuzz.sql
-```
-
-3. **Configura la connessione al database**
-Modifica il file `config/conf.php` con le tue credenziali:
-```php
-define('DB_HOST', 'localhost');
-define('DB_USER', 'tuo_utente');
-define('DB_PASS', 'tua_password');
-define('DB_NAME', 'sailup_db');
-```
-
-4. **Configura le pagine**
-Modifica `config/pages.php` se necessario con i percorsi del tuo server
-
-5. **Imposta i permessi**
-```bash
-chmod 755 public/
-chmod 755 public/img/
-chmod 755 public/img/avatars/
-chmod 755 public/img/prodotti/
-```
-
-6. **Avvia il server**
-```bash
-# Se usi PHP built-in
-php -S localhost:8000
-
-# Oppure usa il tuo server web configurato
-```
-
-7. **Accedi all'applicazione**
-Visita `http://localhost:8000` nel tuo browser
-
----
-
-## 💻 Utilizzo
-
-### Account di Prova
-Per testare l'applicazione, puoi creare un nuovo account tramite la pagina di registrazione o contattare gli amministratori.
-
-### Navigazione Principale
-
-- **Home** - Pagina principale con panoramica
-- **Chi Siamo** - Informazioni sull'azienda
-- **Catalogo Noleggio** - Sfoglia le barche disponibili
-- **Catalogo Esperienze** - Scopri le esperienze nautiche
-- **Blog** - Leggi articoli interessanti
-- **FAQ** - Domande frequenti
-- **Area Personale** - Accedi al tuo profilo
-
-### Area Amministrativa
-Accedi all'area admin (solo per utenti autorizzati):
-- Gestisci blog, prodotti e utenti
-- Visualizza e gestisci le prenotazioni
-- Monitora il sistema
-
----
-
-## 📁 Struttura del Progetto
-
-```
-SailUP/
-├── config/
-│   ├── conf.php              # Configurazione del database
-│   └── pages.php             # Configurazione percorsi pagine
-│
-├── db/
-│   └── dbiasuzz.sql          # Schema e dati del database
-│
-├── includes/
-│   ├── db_connection.php     # Connessione al database
-│   ├── helpers.php           # Funzioni helper
-│   ├── auth/
-│   │   └── auth.php          # Logica autenticazione
-│   ├── session/
-│   │   └── session.php       # Gestione sessioni
-│   └── utils/
-│       └── validation.php    # Validazione input
-│
-├── public/
-│   ├── css/                  # Fogli di stile
-│   │   ├── style.css         # Stile principale
-│   │   ├── mobile.css        # Responsive mobile
-│   │   └── print.css         # Stile stampa
-│   │
-│   ├── js/                   # Script JavaScript
-│   │   ├── script.js         # Script principale
-│   │   ├── login_validation.js
-│   │   ├── register_validation.js
-│   │   ├── blog_validation.js
-│   │   ├── products_validation.js
-│   │   └── payment_validation.js
-│   │
-│   ├── img/                  # Risorse grafiche
-│   │   ├── avatars/          # Avatar utenti
-│   │   ├── blog/             # Immagini blog
-│   │   ├── prodotti/         # Foto barche/esperienze
-│   │   └── utenti/           # Immagini utenti
-│   │
-│   ├── pages/                # Template HTML
-│   │   ├── index.html
-│   │   ├── login.html
-│   │   ├── registrazione.html
-│   │   ├── chi_siamo.html
-│   │   ├── blog.html
-│   │   ├── catalogo_noleggio.html
-│   │   ├── catalogo_esperienze.html
-│   │   ├── profilo.html
-│   │   ├── admin.html
-│   │   └── ... altre pagine
-│   │
-│   └── php/                  # File PHP (logica backend)
-│       ├── index.php         # Homepage
-│       ├── login.php
-│       ├── registrazione.php
-│       ├── logout.php
-│       ├── admin.php
-│       ├── blog_articolo.php
-│       ├── dettaglio_barca.php
-│       ├── conferma_prenotazione.php
-│       ├── pagamento.php
-│       └── ... altre pagine
-│
-└── README.md                 # Questo file
-```
+- **Dashboard Unificata**: Una panoramica essenziale sulle operazioni della piattaforma.
+- **Gestione CRUD Completa**: Controllo totale su prodotti (barche/esperienze), post del blog per la SEO e utenti.
+- **Tracking Prenotazioni**: Un cruscotto per monitorare in modo globale le prenotazioni del portale.
+</details>
 
 ---
 
 ## 🛠️ Tecnologie Utilizzate
 
-### Backend
-- **PHP 7.4+** - Linguaggio di programmazione server-side
-- **MySQL** - Database relazionale
-- **Sessions PHP** - Gestione utenti e autenticazione
+L'applicativo rispetta i più recenti standard web, mantenendo una netta separazione tra struttura, presentazione e comportamento:
 
-### Frontend
-- **HTML5** - Markup semantico
-- **CSS3** - Styling responsivo (Mobile First)
-- **JavaScript** - Interattività e validazione lato client
-
-### Funzionalità Speciali
-- Validazione form lato client e server
-- Protezione CSRF
-- Gestione sessioni sicura
-- Responsive design mobile-first
-- Supporto per stampa
+*   **Front-End**: HTML5 (semantico e strutturato), CSS3 (Mobile First, stile pulito nautico con palette sfumature di blu e bianco), JavaScript Vanilla (validazione asincrona e interazione DOM).
+*   **Back-End**: PHP 7.4+ per una gestione veloce, sicura e affidabile delle sessioni, dei CSRF checker e della logica server.
+*   **Database**: Schema relazionale in MySQL.
+*   **Sicurezza e Prestazioni**: Forte validazione input (prevenzione XSS e SQL Injection in PDO ready style), password hashing sicura.
 
 ---
 
-## 🔐 Sicurezza
+## ⚙️ Accessibilità & Design (Il Cuore del Progetto)
 
-### Misure di Sicurezza Implementate
-- ✅ Validazione input lato client e server
-- ✅ Protezione dagli attacchi XSS
-- ✅ Protezione dagli attacchi SQL Injection
-- ✅ Sessioni autenticate
-- ✅ Crittografia password (password_hash)
-- ✅ HTTPS ready
+> *"Sfatare il mito del brutto anatroccolo del sito accessibile dimostrando che è un castello di carta basato su preconcetti e pigrizia".*
 
-### Best Practices
-Assicurati di:
-- Usare HTTPS in produzione
-- Configurare correttamente i permessi dei file
-- Mantenere PHP aggiornato
-- Disabilitare display_errors in produzione
-- Usare un environment file per le credenziali sensibili
+Progettato per l'eccellenza, SailUP incarna gli standard del concorso **"Accattivante Accessibile"**, combinando un'esperienza utente visivamente magnifica (UX funzionale) con un'accessibilità inflessibile:
+- **Markup Semantico** e architettura ad albero ottimizzata.
+- Utilizzo integrato di `aria-attributes` dinamici.
+- Introduzione di _Skip Links_ nel payload per scorrere rapidamente le info.
 
 ---
 
-## 📝 Guida agli Sviluppatori
+## 🚀 Installazione e Utilizzo
 
-### Aggiungere una Nuova Pagina
+### Prerequisiti
+- PHP 7.4+
+- MySQL 5.7+
+- Server web (Apache/Nginx/ecc.)
 
-1. Crea un file HTML in `public/pages/`
-2. Crea il corrispondente file PHP in `public/php/`
-3. Registra la pagina in `config/pages.php`
-4. Importa gli helper necessari
+### Procedura Rapida
 
-Esempio:
-```php
-<?php
-include '../../includes/db_connection.php';
-include '../../includes/auth/auth.php';
+1. **Clona la Repository:**
+   ```bash
+   git clone https://github.com/tuousername/SailUP.git
+   cd SailUP
+   ```
 
-// La tua logica qui
-?>
-```
+2. **Setup Database:** (Utilizza il _dump_ situato sotto `db/dbiasuzz.sql`)
+   ```bash
+   mysql -u root -p < db/dbiasuzz.sql
+   ```
 
-### Validazione
-Usa le funzioni in `includes/utils/validation.php`:
-```php
-if (validateEmail($email)) {
-    // Email valida
-}
-```
+3. **Configurazione Connection Strings:**
+   Modifica i puntamenti nel file `config/conf.php`:
+   ```php
+   define('DB_HOST', 'localhost');
+   define('DB_USER', 'tuo_utente');
+   define('DB_PASS', 'tua_password');
+   define('DB_NAME', 'dbiasuzz');
+   ```
 
-### Database
-Usa la connessione globale:
-```php
-$result = mysqli_query($conn, $query);
-```
-
----
-
-## 📄 Licenza
-
-Questo progetto è licenziato sotto la Licenza MIT - vedi il file [LICENSE](LICENSE) per i dettagli.
-
-```
-MIT License
-
-Copyright (c) 2026 SailUP
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and subject to the following conditions:
-...
-```
+4. **Start & Naviga:**
+   Avvia un locale development server:
+   ```bash
+   php -S localhost:8000
+   ```
+   **Account Dimostrativi (per Reviewer)**:
+   - *Amministratore:* `admin` | `admin`
+   - *Cliente Semplice:* `user` | `user`
 
 ---
 
 ## 👥 Autori
 
-- **Davide Biasuzzi** - Sviluppatore Backend
-- **Francesco Marcon** - Sviluppatore Frontend
-- **Alberto Reginato** - Sviluppatore Frontend
+- 👨‍💻 **Davide Biasuzzi** (Backend Dev)
+- 👨‍💻 **Francesco Marcon** (Frontend Dev)
+- 👨‍💻 **Alberto Reginato** (Frontend Dev)
 
----
-
-## 🙏 Ringraziamenti
-
-- Grazie a tutti i contributori
-- Icone da [Font Awesome](https://fontawesome.com/)
-- Ispirazione dalle migliori pratiche web
-
----
+Iniziativa ideata e valutata in seno al corso di **Tecnologie Web (2025/2026)** dell'Università degli Studi di Padova.
 
 <div align="center">
 
-**Fatto con ❤️ da Alberto, Davide, Francesco**
-
+**⚓ Fatto con il cuore... e tanto codice.**
 ⭐ Se ti è piaciuto il progetto, lascia una stella! ⭐
 
 </div>
